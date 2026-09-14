@@ -54,7 +54,18 @@ Results are filled from the first successful execution of this workflow on the i
 
 | Python | Result | Evidence |
 | --- | --- | --- |
-| 3.6 | pending | pending |
-| 3.8 | pending | pending |
-| 3.11 | pending | pending |
-| 3.13 | pending | pending |
+| 3.6 | PASS — 11 passed | [run](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/34830382303) |
+| 3.8 | PASS — 11 passed | [run](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/34830382303) |
+| 3.11 | PASS — 11 passed, 1 pytest deprecation warning | [run](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/34830382303) |
+| 3.13 | PASS — 11 passed, 1 pytest deprecation warning | [run](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/34830382303) |
+
+## Resolved runtime details
+
+| Candidate | Resolved Python | pip | pytest | Container digest |
+| --- | --- | --- | --- | --- |
+| 3.6 | 3.6.15 | 21.2.4 | 7.0.1 | `sha256:2cfebc27956e6a55f78606864d91fe527696f9e32a724e6f9702b5f9602d0474` |
+| 3.8 | 3.8.20 | 23.0.1 | 8.3.5 | `sha256:1d52838af602b4b5a831beb13a0e4d073280665ea7be7f69ce2382f29c5a613f` |
+| 3.11 | 3.11.16 | 24.0 | 9.1.1 | `sha256:9534e5a8e315485d4061ed659af0fd78a284c015f9b73661b41d6bab25604534` |
+| 3.13 | 3.13.15 | 26.2.1 | 9.1.1 | `sha256:9d2e5553305c7c7b0097999bb17187c69b921ccd6bc9d40e4bb5ebe652c00285` |
+
+The Python 3.11 and 3.13 runs expose a pytest deprecation warning for the class-scoped fixture implemented as an instance method in the historical tests. This does not fail the legacy suite, but it is recorded as test-infrastructure debt rather than hidden.
