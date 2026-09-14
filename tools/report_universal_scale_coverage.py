@@ -69,6 +69,8 @@ def BuildWeakIntervals(pointRecords, weakThreshold):
     startRecord = None
     pointCount = 0
 
+    previousRecord = None
+
     for record in pointRecords:
         isWeak = record["maximum_membership"] < weakThreshold
 
@@ -83,12 +85,14 @@ def BuildWeakIntervals(pointRecords, weakThreshold):
             intervals.append(
                 {
                     "start": startRecord["real_value"],
-                    "end": pointRecords[pointRecords.index(record) - 1]["real_value"],
+                    "end": previousRecord["real_value"],
                     "point_count": pointCount,
                 }
             )
             startRecord = None
             pointCount = 0
+
+        previousRecord = record
 
     if startRecord is not None:
         intervals.append(
