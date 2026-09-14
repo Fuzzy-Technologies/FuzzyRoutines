@@ -1,6 +1,6 @@
 # ADR-0003: Membership-Function Parameter Conventions and Validation
 
-- Status: Proposed
+- Status: Accepted on merge
 - Date: 2026-09-14
 - Related planning task: #10
 - Related Feature: #18
