@@ -38,50 +38,76 @@ jobs:
           python -m pip install --disable-pip-version-check --upgrade build
           python -m build --outdir dist
 
-      - name: Clean-install wheel and smoke legacy imports
+      - name: Record artifact hashes and source revision
         shell: bash
         run: |
           set -euo pipefail
 
-          wheel_path="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.whl' -print -quit)"
-          test -n "$wheel_path"
+          git rev-parse HEAD > dist/source-revision.txt
+          sha256sum dist/* > dist/SHA256SUMS
+          sha256sum --check dist/SHA256SUMS
+          cat dist/source-revision.txt
+          cat dist/SHA256SUMS
 
-          venv_path="$RUNNER_TEMP/fuzzyroutines-wheel-${{ matrix.python-version }}"
-          python -m venv "$venv_path"
-          "$venv_path/bin/python" -m pip install --disable-pip-version-check --no-deps "$wheel_path"
+      - name: Clean-install wheel and verify installed package
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          wheelPath="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.whl' -print -quit)"
+          test -n "$wheelPath"
+
+          venvPath="$RUNNER_TEMP/fuzzyroutines-wheel-${{ matrix.python-version }}"
+          python -m venv "$venvPath"
+          "$venvPath/bin/python" -m pip install --disable-pip-version-check pytest
+          "$venvPath/bin/python" -m pip install --disable-pip-version-check --no-deps "$wheelPath"
 
           cd "$RUNNER_TEMP"
-          "$venv_path/bin/python" - <<'PY'
+          "$venvPath/bin/python" -m pytest -q "$GITHUB_WORKSPACE/tests/test_legacy_public_api.py"
+          "$venvPath/bin/python" - <<'PY'
           from importlib.metadata import version
 
+          import fuzzyroutines
           from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
           assert version("fuzzyroutines") == "2.0.0.dev0"
+          assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzySet is not None
-          print("wheel clean-install legacy import smoke: PASS")
+          print("wheel root-package and legacy import smoke: PASS")
           PY
 
-      - name: Clean-install source distribution and smoke legacy imports
+      - name: Clean-install source distribution and verify installed package
         shell: bash
         run: |
           set -euo pipefail
 
-          sdist_path="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.tar.gz' -print -quit)"
-          test -n "$sdist_path"
+          sdistPath="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.tar.gz' -print -quit)"
+          test -n "$sdistPath"
 
-          venv_path="$RUNNER_TEMP/fuzzyroutines-sdist-${{ matrix.python-version }}"
-          python -m venv "$venv_path"
-          "$venv_path/bin/python" -m pip install --disable-pip-version-check --no-deps "$sdist_path"
+          venvPath="$RUNNER_TEMP/fuzzyroutines-sdist-${{ matrix.python-version }}"
+          python -m venv "$venvPath"
+          "$venvPath/bin/python" -m pip install --disable-pip-version-check pytest
+          "$venvPath/bin/python" -m pip install --disable-pip-version-check --no-deps "$sdistPath"
 
           cd "$RUNNER_TEMP"
-          "$venv_path/bin/python" - <<'PY'
+          "$venvPath/bin/python" -m pytest -q "$GITHUB_WORKSPACE/tests/test_legacy_public_api.py"
+          "$venvPath/bin/python" - <<'PY'
           from importlib.metadata import version
 
+          import fuzzyroutines
           from fuzzyroutines.FuzzyRoutines import FuzzyScale, MFunction
 
           assert version("fuzzyroutines") == "2.0.0.dev0"
+          assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzyScale is not None
-          print("sdist clean-install legacy import smoke: PASS")
+          print("sdist root-package and legacy import smoke: PASS")
           PY
+
+      - name: Upload reproducible artifact evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-artifacts-python-${{ matrix.python-version }}
+          path: dist
+          if-no-files-found: error
