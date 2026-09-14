@@ -31,9 +31,10 @@ document does not implement validation.
 
 ## Reference naming
 
-The standard parameterized generalized bell used in neuro-fuzzy literature is
-not the same formula as the legacy flat-top quadratic `bell` implementation;
-see [Jang (1993), official IEEE record](https://doi.org/10.1109/21.256541).
+The standard parameterized generalized bell has three parameters for width,
+slope, and centre. It is not the same formula as the legacy flat-top quadratic
+`bell` implementation; see the [Indian Institute of Technology Kharagpur
+course notes](https://cse.iitkgp.ac.in/~dsamanta/courses/archive/sca/Archives/Chapter%203%20Fuzzy%20Membership%20Functions.pdf).
 The legacy `exponential` formula is exactly Gaussian-shaped, while legacy
 `parabolic` is an increasing quadratic shoulder rather than a Gaussian.
 
