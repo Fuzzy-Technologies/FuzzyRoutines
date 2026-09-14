@@ -90,7 +90,7 @@ jobs:
               continue
             fi
 
-            comment="$(jq -nc --arg body "Implemented by merged PR #$PR_NUMBER ($PR_URL). Automatically marked completed after successful merge into $BASE_REF." '{body:$body}')"
+            comment="$(jq -nc --arg body "Implemented by merged [PR #$PR_NUMBER]($PR_URL). Automatically marked completed after successful merge into $BASE_REF." '{body:$body}')"
 
             printf '%s' "$comment" | gh api \
               --method POST \
