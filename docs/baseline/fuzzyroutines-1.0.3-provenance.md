@@ -12,10 +12,10 @@ https://github.com/Fuzzy-Technologies/FuzzyRoutines
 
 Historical baseline recorded during the 2026-09-12 audit:
 
-| Ref | Commit |
-| --- | --- |
-| `master` | `ceb9403d44c19ba73fd351e1b05091d337280864` |
-| `develop` | `db335f3661402c2300676fd9131dc1bba8e4d675` |
+| Ref         | Commit                                     |
+|-------------|--------------------------------------------|
+| `master`    | `ceb9403d44c19ba73fd351e1b05091d337280864` |
+| `develop`   | `db335f3661402c2300676fd9131dc1bba8e4d675` |
 | tag `1.0.3` | `ceb9403d44c19ba73fd351e1b05091d337280864` |
 
 At that baseline, `master` was two commits ahead of `develop`.
