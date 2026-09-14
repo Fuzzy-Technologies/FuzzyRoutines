@@ -1,7 +1,6 @@
 # FuzzyRoutines
 Library contains some routines for work with fuzzy logic operators, fuzzy datasets and fuzzy scales.
 
-[![FuzzyRoutines build status](https://travis-ci.org/devopshq/FuzzyRoutines.svg?branch=master)](https://travis-ci.org/devopshq/FuzzyRoutines) [![FuzzyRoutines on PyPI](https://img.shields.io/pypi/v/FuzzyRoutines.svg)](https://pypi.python.org/pypi/FuzzyRoutines) [![FuzzyRoutines license](https://img.shields.io/pypi/l/FuzzyRoutines.svg)](https://github.com/devopshq/FuzzyRoutines/blob/master/LICENSE)
 
 *Index:*
 - [Install](#Chapter_1)
