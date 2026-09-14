@@ -1,0 +1,69 @@
+# ADR-0003: Membership-Function Parameter Conventions and Validation
+
+- Status: Proposed
+- Date: 2026-09-14
+- Related planning task: #10
+- Related Feature: #18
+
+## Context
+
+The legacy `MFunction` factory uses concise historical identifiers and parameter
+names. In particular, `Triangle` and `Trapezium` use an ordering different
+from the common left-to-right convention. A modernization that silently adopts
+a textbook ordering would produce valid-looking but incorrect results for
+existing callers.
+
+## Decision
+
+Historical identifiers, keyword names, and meanings remain protected by
+ADR-0001. The following table records the legacy contract implemented by
+`fuzzyroutines.FuzzyRoutines.MFunction`.
+
+| Identifier | Historical parameters | Meaning |
+|---|---|---|
+| `hyperbolic` | `a, b, c` | `c` is the left shoulder cutoff; for `x > c`, `a` is the scale and `b` the exponent in `1 / (1 + (a(x-c))^b)`. |
+| `bell` | `a, b, c` | `a` is the left foot, `b` the plateau start, `c` the plateau end; the right foot is derived as `c + b - a`. |
+| `parabolic` | `a, b` | `a` is the left foot and `b` the right plateau boundary. |
+| `triangle` | `a, b, c` | `a` is the left foot, **`c` is the apex**, and `b` is the right foot. The legacy ordering is therefore `a <= c <= b`. |
+| `trapezium` | `a, b, c, d` | `a` is the left foot, `c` the plateau start, `d` the plateau end, and `b` the right foot. The legacy geometric ordering is `a <= c <= d <= b`. |
+| `exponential` | `a, b` | `a` is the centre and `b` is the non-zero scale in the Gaussian-shaped expression. |
+| `sigmoidal` | `a, b` | `a` is the slope and `b` is the midpoint. |
+| `desirability` | none | Harrington desirability uses the input `y` and no stored parameters. |
+
+The implementation Tasks must explicitly decide whether strict inequalities are
+needed for non-degenerate shapes. Degenerate parameter combinations must never
+be silently converted into plausible membership values.
+
+## Validation policy
+
+Future validation accepts only finite real inputs and parameters that satisfy
+the family contract. Invalid configurations must raise a clear domain error;
+they must not be swallowed and converted to a membership value of zero.
+
+The decision does not change the historical parameter ordering. Modern
+left-to-right aliases may be added only under different, explicit names and
+only after the legacy behavior is covered by regression tests.
+
+## Implementation matrix
+
+- Task #50 owns publication of the user-facing reference table.
+- Task #51 owns strict validation implementation.
+- Task #52 owns reference and property tests.
+- Task #53 removes Bell's evaluation-time parameter mutation.
+- Task #54 may introduce additive modern aliases.
+
+This ADR defines their contract; it does not itself change the membership
+implementation or add executable mathematical tests.
+
+## Consequences
+
+A common `(left, peak, right)` or
+`(left, plateau_start, plateau_end, right)` API must not be passed through to
+the legacy `triangle` or `trapezium` identifiers. It requires a separate
+modern alias with an unambiguous name.
+
+## Acceptance and supersession
+
+This ADR is **Proposed** until review and merge. A future family added to
+`MFunction`, or a change to a recorded convention, requires an amendment or
+a new ADR and compatibility evidence.
