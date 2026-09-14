@@ -1,0 +1,128 @@
+name: Close linked Tasks after merge
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+    branches:
+      - develop
+      - master
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: read
+
+jobs:
+  parser-tests:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install pytest
+        run: python -m pip install pytest
+
+      - name: Test linked Task parser
+        run: python -m pytest -q tests/test_pr_merge_links.py
+
+  close-linked-tasks:
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      PR_BODY: ${{ github.event.pull_request.body }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+      BASE_REF: ${{ github.event.pull_request.base.ref }}
+
+    steps:
+      - name: Check out merged base branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Close explicitly linked Task issues
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t linked_issues < <(python tools/pr_merge_links.py)
+
+          if [ "${#linked_issues[@]}" -eq 0 ]; then
+            echo "No explicit closing Task references found in PR body."
+            exit 0
+          fi
+
+          for issue_number in "${linked_issues[@]}"; do
+            issue="$(gh api "repos/$GH_REPO/issues/$issue_number")"
+
+            if [ "$(printf '%s' "$issue" | jq -r 'has("pull_request")')" = "true" ]; then
+              echo "Skipping #$issue_number: reference points to a pull request."
+              continue
+            fi
+
+            issue_type="$(printf '%s' "$issue" | jq -r '.type.name // ""')"
+            issue_state="$(printf '%s' "$issue" | jq -r '.state')"
+
+            if [ "$issue_type" != "Task" ]; then
+              echo "Skipping #$issue_number: native Type is '$issue_type', not Task."
+              continue
+            fi
+
+            if [ "$issue_state" = "closed" ]; then
+              echo "Skipping #$issue_number: already closed."
+              continue
+            fi
+
+            comment="$(jq -nc --arg body "Implemented by merged PR #$PR_NUMBER ($PR_URL). Automatically marked completed after successful merge into $BASE_REF." '{body:$body}')"
+
+            printf '%s' "$comment" | gh api \
+              --method POST \
+              "repos/$GH_REPO/issues/$issue_number/comments" \
+              --input - >/dev/null
+
+            printf '%s' '{"state":"closed","state_reason":"completed"}' | gh api \
+              --method PATCH \
+              "repos/$GH_REPO/issues/$issue_number" \
+              --input - >/dev/null
+
+            echo "[OK] Closed Task #$issue_number"
+          done
+
+      - name: Remove merged same-repository head branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "$HEAD_REPO" != "$GH_REPO" ]; then
+            echo "Skipping branch deletion for fork PR."
+            exit 0
+          fi
+
+          if [ "$HEAD_REF" = "$BASE_REF" ] || [ "$HEAD_REF" = "develop" ] || [ "$HEAD_REF" = "master" ]; then
+            echo "Skipping protected/base branch '$HEAD_REF'."
+            exit 0
+          fi
+
+          if gh api --method DELETE "repos/$GH_REPO/git/refs/heads/$HEAD_REF"; then
+            echo "[OK] Deleted merged branch '$HEAD_REF'."
+          else
+            echo "Branch '$HEAD_REF' was already deleted or cannot be deleted; issue completion is unaffected."
+          fi
