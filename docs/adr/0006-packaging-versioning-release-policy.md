@@ -1,6 +1,6 @@
 # ADR-0006: Packaging, Versioning, and Release Policy
 
-- Status: Proposed
+- Status: Accepted on merge
 - Date: 2026-09-14
 - Related planning task: #13
 - Release execution milestone: M6
