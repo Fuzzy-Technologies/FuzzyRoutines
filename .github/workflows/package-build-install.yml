@@ -1,0 +1,87 @@
+name: Package build and clean-install
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - develop
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-install:
+    name: Python ${{ matrix.python-version }} package smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Build wheel and source distribution
+        run: |
+          python -m pip install --disable-pip-version-check --upgrade build
+          python -m build --outdir dist
+
+      - name: Clean-install wheel and smoke legacy imports
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          wheel_path="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.whl' -print -quit)"
+          test -n "$wheel_path"
+
+          venv_path="$RUNNER_TEMP/fuzzyroutines-wheel-${{ matrix.python-version }}"
+          python -m venv "$venv_path"
+          "$venv_path/bin/python" -m pip install --disable-pip-version-check --no-deps "$wheel_path"
+
+          cd "$RUNNER_TEMP"
+          "$venv_path/bin/python" - <<'PY'
+          from importlib.metadata import version
+
+          from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
+
+          assert version("fuzzyroutines") == "2.0.0.dev0"
+          assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
+          assert FuzzySet is not None
+          print("wheel clean-install legacy import smoke: PASS")
+          PY
+
+      - name: Clean-install source distribution and smoke legacy imports
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sdist_path="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.tar.gz' -print -quit)"
+          test -n "$sdist_path"
+
+          venv_path="$RUNNER_TEMP/fuzzyroutines-sdist-${{ matrix.python-version }}"
+          python -m venv "$venv_path"
+          "$venv_path/bin/python" -m pip install --disable-pip-version-check --no-deps "$sdist_path"
+
+          cd "$RUNNER_TEMP"
+          "$venv_path/bin/python" - <<'PY'
+          from importlib.metadata import version
+
+          from fuzzyroutines.FuzzyRoutines import FuzzyScale, MFunction
+
+          assert version("fuzzyroutines") == "2.0.0.dev0"
+          assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
+          assert FuzzyScale is not None
+          print("sdist clean-install legacy import smoke: PASS")
+          PY
