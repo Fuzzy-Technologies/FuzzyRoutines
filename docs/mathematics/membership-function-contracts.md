@@ -12,7 +12,7 @@ standard mathematical name. It does not silently redefine an existing
 parameter convention.
 
 A membership function maps an input to a grade in `[0, 1]`, following the
-fuzzy-set formulation introduced by [Zadeh (1965)](https://people.eecs.berkeley.edu/~zadeh/papers/Fuzzy%20Sets-Information%20and%20Control-1965.pdf).
+fuzzy-set formulation introduced by [Zadeh (1965)](https://doi.org/10.1016/S0019-9958(65)90241-X).
 All non-degenerate domain constraints below are the target for Task #51; this
 document does not implement validation.
 
@@ -27,20 +27,20 @@ document does not implement validation.
 | `trapezium`           | Trapezoidal membership function with legacy parameter order                | `a` is left foot, `c` plateau start, `d` plateau end, `b` right foot. The geometric order is `a < c <= d < b`.                              | Finite `a, b, c, d`; `a < c <= d < b`.                                                            | Preserve `trapezium(a, b, c, d)`; a conventional-order alias must use a different explicit name. |
 | `exponential`         | Gaussian membership function                                               | `exp(-0.5 * ((x - a) / b)**2)`. `a` is the centre and `b` is the scale.                                                                     | Finite `x, a, b`; canonical scale `b > 0`. The legacy formula is sign-invariant for non-zero `b`. | A `gaussian` alias is permitted only after Tasks #51 and #52 verify this contract.               |
 | `sigmoidal`           | Logistic sigmoid                                                           | `1 / (1 + exp(-a * (x - b)))`. `a` is slope and `b` is midpoint. Positive `a` rises; negative `a` falls.                                    | Finite `x, a, b`; `a != 0`.                                                                       | Keep `sigmoidal`; a future `logistic` alias is semantically exact.                               |
-| `desirability`        | Harrington one-sided desirability / Gumbel CDF transform                   | `exp(-exp(-y))`. It accepts direct input `y` and stores no parameters.                                                                      | Finite `y`.                                                                                       | Keep `desirability`; `harringtonDesirability` is a semantically exact future alias.              |
+| `desirability`        | Harrington one-sided desirability / Gumbel CDF transform                   | `exp(-exp(-y))`. It accepts direct input `y` and stores no parameters.                                                                      | Finite `y`.                                                                                         | Keep `desirability`; `harringtonDesirability` is a semantically exact future alias.              |
 
 ## Reference naming
 
 The standard parameterized generalized bell used in neuro-fuzzy literature is
 not the same formula as the legacy flat-top quadratic `bell` implementation;
-see [Jang (1993)](https://doi.org/10.1109/21.256541). The legacy `exponential`
-formula is exactly Gaussian-shaped, while legacy `parabolic` is an increasing
-quadratic shoulder rather than a Gaussian.
+see [Jang (1993), official IEEE record](https://doi.org/10.1109/21.256541).
+The legacy `exponential` formula is exactly Gaussian-shaped, while legacy
+`parabolic` is an increasing quadratic shoulder rather than a Gaussian.
 
 The desirability transform is attributed to E. C. Harrington, *The
-Desirability Function*, *Industrial Quality Control* 21(10), 494–498 (1965);
-a later peer-reviewed discussion records that provenance
-[here](https://ais.khpi.edu.ua/article/view/284553).
+Desirability Function*, *Industrial Quality Control* 21(10), 494–498 (1965).
+That provenance is documented by the peer-reviewed journal *Metrika* in
+[Trautmann and Weihs (2006)](https://doi.org/10.1007/s00184-005-0012-0).
 
 ## Compatibility rule
 
