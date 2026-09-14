@@ -10,10 +10,10 @@ from typing import Iterable
 
 
 _CLOSING_CLAUSE = re.compile(
-    r"\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|implement(?:s|ed)?)\\b(?P<tail>[^\\n]*)",
+    r"\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|implement(?:s|ed)?)\b(?P<tail>[^\n]*)",
     re.IGNORECASE,
 )
-_ISSUE_REF = re.compile(r"#(?P<number>[1-9][0-9]*)\\b")
+_ISSUE_REF = re.compile(r"#(?P<number>[1-9][0-9]*)\b")
 
 
 def extract_issue_numbers(text: str) -> list[int]:
@@ -33,7 +33,7 @@ def extract_issue_numbers(text: str) -> list[int]:
 
 
 def _lines(numbers: Iterable[int]) -> str:
-    return "\\n".join(str(number) for number in numbers)
+    return "\n".join(str(number) for number in numbers)
 
 
 def main() -> int:
@@ -41,7 +41,7 @@ def main() -> int:
     numbers = extract_issue_numbers(body)
     sys.stdout.write(_lines(numbers))
     if numbers:
-        sys.stdout.write("\\n")
+        sys.stdout.write("\n")
     return 0
 
 
