@@ -144,6 +144,30 @@ Every approximate assertion must have a reason for its tolerance.
 
 Do not create one global epsilon for unrelated algorithms merely for convenience.
 
+### Python implementation and quality standard
+
+- Repository code, comments, docstrings, tests, internal documentation, ADRs, and
+  technical Issue/PR content are written in English; identifiers, APIs, and
+  contracts use English names.
+- The declared CPython support policy controls usable language features and
+  dependencies. Type public APIs and non-trivial internal boundaries. Introduce
+  dataclasses, protocols/ABCs, enums, explicit exceptions, or immutable value
+  objects only when they make a contract clearer; avoid speculative abstractions
+  and framework-style complexity.
+- Formatting and linting are deterministic developer-gate checks. Keep imports
+  explicit, structured, and audited; new production code must not use wildcard
+  imports or obsolete Python idioms. Historical wildcard-import behavior remains
+  compatibility evidence, not a pattern for new code.
+- Validate inputs at meaningful boundaries and fail with specific errors. Do not
+  use broad exception handling or silently convert a failed calculation into
+  zero, `None`, or another plausible result; preserve the underlying cause where
+  appropriate.
+- Run focused checks first. The deterministic developer gate includes
+  formatting/linting, unit tests, property tests, and import/package smoke; the
+  full gate may add typing, coverage, build/clean-install, benchmark-regression,
+  and supported-CPython checks. No CI test may depend on an external online
+  service.
+
 ## 5. ADR gate
 
 An ADR is required when changing a durable cross-cutting contract, including:
