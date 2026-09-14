@@ -6,13 +6,15 @@ The build baseline is intentionally separate from the mathematical
 modernisation work. It adopts the PEP 517/518 build interface and stores the
 canonical development version, `2.0.0.dev0`, in `pyproject.toml`.
 
-- The package supports Python 3.9 and later.
+- The package supports CPython 3.13 and 3.14.
 - `setuptools.build_meta` is the build backend.
 - `setup.py` remains only as a legacy command-line compatibility shim; it owns
   neither package metadata nor versioning.
 - Routine CI must build and install artifacts but cannot publish a release.
 - The former Travis deployment configuration is retained until its replacement
   is verified and Task #46 retires it.
+- Any future numerical dependency must support the declared CPython matrix;
+  legacy interpreter compatibility is not a dependency-selection constraint.
 
 ### Local verification
 

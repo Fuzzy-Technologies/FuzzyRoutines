@@ -43,10 +43,25 @@ A release artifact and Git tag must carry the same normalized version.
 
 ### Supported Python policy
 
-FuzzyRoutines 2.x will require Python 3.9 or later. The release matrix must
-verify Python 3.9, 3.11, and the newest supported CPython version available in
-CI. The historical Python 3.6 claim remains provenance, not a 2.x support
-promise.
+FuzzyRoutines 2.x requires **CPython 3.13 or later**. Mandatory CI verifies
+each supported stable release: Python 3.13 and 3.14.
+
+Python 3.12 and earlier are historical-baseline evidence only, not supported
+v2 runtimes. The historical Python 3.6 claim remains provenance and is not a
+2.x support promise. This is an intentional v2 compatibility boundary.
+
+A future CPython prerelease (currently 3.15) may be exercised by a separate
+non-blocking canary only after it is available in CI. It is not a release
+promise before its final upstream release.
+
+Free-threaded CPython is also outside the initial compatibility promise. It
+must receive its own mathematical-concurrency tests and performance evidence
+before it becomes a supported execution mode.
+
+New numerical dependencies must be maintained releases that support the
+required CPython matrix. The project will not constrain them for end-of-life
+runtimes; the selection of a numerical backend remains a separate,
+source-backed mathematical implementation decision.
 
 Raising the floor later is an intentional compatibility change and requires
 release-note and version-policy review.
@@ -76,14 +91,15 @@ Tasks #44 and #45; Task #46 then removes or disables it safely.
 - Task #44 implements the packaging baseline on a fresh branch from
   `develop`; the existing exploratory packaging branch is evidence only and
   must be reconciled, not merged blindly.
-- Task #45 adds artifact build and clean-install verification without
-  publication.
+- Task #45 verifies wheel and sdist clean installation under CPython 3.13 and
+  3.14 without publication.
 - Task #46 retires the old Travis deployment path only after replacement
   evidence exists.
 - M6 owns actual release execution, GitHub release, and PyPI publication.
 
 ## Acceptance and supersession
 
-This ADR is **Proposed** until the review PR is approved and merged. Any
-different build backend, version source, supported-Python floor, or publication
-mechanism must amend or supersede this ADR before implementation.
+This amendment becomes effective only when its review PR is approved and
+merged. Any different build backend, version source, supported-Python floor,
+or publication mechanism must amend or supersede this ADR before
+implementation.
