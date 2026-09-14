@@ -144,29 +144,91 @@ Every approximate assertion must have a reason for its tolerance.
 
 Do not create one global epsilon for unrelated algorithms merely for convenience.
 
-### Python implementation and quality standard
+### Python code style and quality standard
 
-- Repository code, comments, docstrings, tests, internal documentation, ADRs, and
-  technical Issue/PR content are written in English; identifiers, APIs, and
-  contracts use English names.
+These rules apply to every Python file, including tests. They govern newly
+written code and modified code paths; existing public names remain subject to
+the compatibility policy.
+
+#### Naming and compatibility
+
+- Functions, methods, and classes use `PascalCase`, including `Main()`.
+- Variables, parameters, and instance attributes use `lowerCamelCase`.
+- Constants use unseparated `UPPERCASE` names, without underscores.
+- Do not introduce `snake_case` in project-owned identifiers.
+- Required Python dunder names, external API/SDK/protobuf/library names, and
+  test-discovery names are exceptions. Test files retain the `test_*.py`
+  convention; names after the mandatory `test_` prefix use `PascalCase`.
+- Do not rename historical public identifiers, import paths, signatures, or
+  parameter conventions merely to conform to this style. Such a change requires
+  explicit compatibility classification and, where breaking, a migration plan.
+
+#### Documentation and comments
+
+- Source code, docstrings, comments, tests, ADRs, and technical Issue/PR content
+  are written in English.
+- Every production module, class, function, and method has a concise docstring
+  that explains its responsibility and contract. A docstring is the first
+  statement, followed by one blank line before the implementation.
+- Comments explain a reason, limitation, mathematical assumption, or
+  architectural decision; they do not narrate obvious code.
+
+#### Layout and formatting
+
+- Separate logical blocks with intentional blank lines.
+- Do not put a blank line immediately after the header of `def`, `class`,
+  `try`, `if`, `elif`, `else`, `except`, `finally`, `for`,
+  `while`, `with`, `match`, or `case`.
+- Put one blank line before `elif`, `else`, `except`, and `finally`.
+- Use two blank lines between module-level functions and one blank line between
+  class methods. Put one blank line before `if __name__ == "__main__":`.
+- Do not run `ruff format`: it removes intentional sparse formatting. Use
+  `ruff check` where configured, and preserve this layout when applying any
+  automated fix.
+
+#### Implementation and validation
+
 - The declared CPython support policy controls usable language features and
   dependencies. Type public APIs and non-trivial internal boundaries. Introduce
   dataclasses, protocols/ABCs, enums, explicit exceptions, or immutable value
-  objects only when they make a contract clearer; avoid speculative abstractions
-  and framework-style complexity.
-- Formatting and linting are deterministic developer-gate checks. Keep imports
-  explicit, structured, and audited; new production code must not use wildcard
-  imports or obsolete Python idioms. Historical wildcard-import behavior remains
-  compatibility evidence, not a pattern for new code.
+  objects only when they clarify a contract; avoid speculative abstractions and
+  framework-style complexity.
+- Keep imports explicit, structured, and auditable. New production code must not
+  use wildcard imports or obsolete Python idioms. Historical wildcard-import
+  behavior is compatibility evidence, not a pattern for new code.
 - Validate inputs at meaningful boundaries and fail with specific errors. Do not
-  use broad exception handling or silently convert a failed calculation into
-  zero, `None`, or another plausible result; preserve the underlying cause where
+  use broad exception handling or silently turn a failed calculation into zero,
+  `None`, or another plausible result; preserve the original cause where
   appropriate.
-- Run focused checks first. The deterministic developer gate includes
-  formatting/linting, unit tests, property tests, and import/package smoke; the
-  full gate may add typing, coverage, build/clean-install, benchmark-regression,
-  and supported-CPython checks. No CI test may depend on an external online
-  service.
+- Assertion messages state the violated invariant and the likely reason for the
+  failure. Use branch coverage. Critical resource-management, rollback, cleanup,
+  and error-handling branches require tests.
+- For mathematical changes, these rules supplement—not replace—the analytical,
+  property, boundary, and tolerance evidence required above.
+
+#### Infrastructure-like changes and gates
+
+For a change to CI, Python IaC, cloud-init, TOML configuration profiles, network
+rules, or hardening, first run and record the full relevant test baseline. After
+the change, repeat the checks. Such changes require invariant and failure-path
+tests without contacting a real external service.
+
+Run focused checks first. The deterministic developer gate includes
+formatting/linting, unit tests, property tests, and import/package smoke; the
+full gate may add typing, branch coverage, build/clean-install,
+benchmark-regression, and supported-CPython checks. After applicable
+infrastructure-like changes, run tests, `ruff check`, `compileall`, and CLI
+`--help` when the package exposes a CLI. No CI test may depend on an external
+online service.
+
+#### Git discipline
+
+Commit messages are brief, imperative English sentences, for example
+`Add analytical centroid tests`, `Fix Gaussian parameter validation`, or
+`Update package installation gate`.
+
+**Prefer explicitness over magic, evidence over assumption, tests over manual
+checks, and stability over cosmetic refactoring.**
 
 ## 5. ADR gate
 
