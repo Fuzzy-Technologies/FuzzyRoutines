@@ -1,6 +1,6 @@
 # ADR-0001: Backward-Compatibility Contract for Historical Public API Names
 
-- Status: Proposed
+- Status: Accepted on merge
 - Date: 2026-09-14
 - Related planning task: #8
 - Related Feature: #17
