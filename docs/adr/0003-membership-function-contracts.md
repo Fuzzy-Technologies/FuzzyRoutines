@@ -19,16 +19,16 @@ Historical identifiers, keyword names, and meanings remain protected by
 ADR-0001. The following table records the legacy contract implemented by
 `fuzzyroutines.FuzzyRoutines.MFunction`.
 
-| Identifier | Historical parameters | Meaning |
-|---|---|---|
-| `hyperbolic` | `a, b, c` | `c` is the left shoulder cutoff; for `x > c`, `a` is the scale and `b` the exponent in `1 / (1 + (a(x-c))^b)`. |
-| `bell` | `a, b, c` | `a` is the left foot, `b` the plateau start, `c` the plateau end; the right foot is derived as `c + b - a`. |
-| `parabolic` | `a, b` | `a` is the left foot and `b` the right plateau boundary. |
-| `triangle` | `a, b, c` | `a` is the left foot, **`c` is the apex**, and `b` is the right foot. The legacy ordering is therefore `a <= c <= b`. |
-| `trapezium` | `a, b, c, d` | `a` is the left foot, `c` the plateau start, `d` the plateau end, and `b` the right foot. The legacy geometric ordering is `a <= c <= d <= b`. |
-| `exponential` | `a, b` | `a` is the centre and `b` is the non-zero scale in the Gaussian-shaped expression. |
-| `sigmoidal` | `a, b` | `a` is the slope and `b` is the midpoint. |
-| `desirability` | none | Harrington desirability uses the input `y` and no stored parameters. |
+| Identifier     | Historical parameters | Meaning                                                                                                                                        |
+|----------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| `hyperbolic`   | `a, b, c`             | `c` is the left shoulder cutoff; for `x > c`, `a` is the scale and `b` the exponent in `1 / (1 + (a(x-c))^b)`.                                 |
+| `bell`         | `a, b, c`             | `a` is the left foot, `b` the plateau start, `c` the plateau end; the right foot is derived as `c + b - a`.                                    |
+| `parabolic`    | `a, b`                | `a` is the left foot and `b` the right plateau boundary.                                                                                       |
+| `triangle`     | `a, b, c`             | `a` is the left foot, **`c` is the apex**, and `b` is the right foot. The legacy ordering is therefore `a <= c <= b`.                          |
+| `trapezium`    | `a, b, c, d`          | `a` is the left foot, `c` the plateau start, `d` the plateau end, and `b` the right foot. The legacy geometric ordering is `a <= c <= d <= b`. |
+| `exponential`  | `a, b`                | `a` is the centre and `b` is the non-zero scale in the Gaussian-shaped expression.                                                             |
+| `sigmoidal`    | `a, b`                | `a` is the slope and `b` is the midpoint.                                                                                                      |
+| `desirability` | none                  | Harrington desirability uses the input `y` and no stored parameters.                                                                           |
 
 The implementation Tasks must explicitly decide whether strict inequalities are
 needed for non-degenerate shapes. Degenerate parameter combinations must never
