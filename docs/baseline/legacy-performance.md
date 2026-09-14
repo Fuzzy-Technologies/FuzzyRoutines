@@ -6,15 +6,15 @@ mathematics or applying an optimization.
 
 ## Baseline identity
 
-| Item | Value |
-|---|---|
-| Source branch | `develop` |
-| Source commit | `6282544f269c15490dd2c5874463367f4f708432` |
+| Item                             | Value                                                    |
+|----------------------------------|----------------------------------------------------------|
+| Source branch                    | `develop`                                                |
+| Source commit                    | `6282544f269c15490dd2c5874463367f4f708432`               |
 | Historical mathematical baseline | `ceb9403d44c19ba73fd351e1b05091d337280864` / tag `1.0.3` |
-| Measurement tool | `tools/benchmark_legacy_baseline.py` |
-| Timing clock | `time.perf_counter()` |
-| Samples per benchmark | 7 |
-| Statistic | median microseconds per operation |
+| Measurement tool                 | `tools/benchmark_legacy_baseline.py`                     |
+| Timing clock                     | `time.perf_counter()`                                    |
+| Samples per benchmark            | 7                                                        |
+| Statistic                        | median microseconds per operation                        |
 
 The source diff between the historical baseline and this `develop` revision
 contains baseline/documentation/CI work only; this Task does not claim a
@@ -36,21 +36,21 @@ the reported baseline; min/max show local run variability.
 
 ## Measurement environment
 
-| Item | Value |
-|---|---|
-| Python | CPython 3.12.14 |
-| Platform | Linux 6.18.44, x86_64, glibc 2.39 |
-| Processor | x86_64 |
+| Item       | Value                                                   |
+|------------|---------------------------------------------------------|
+| Python     | CPython 3.12.14                                         |
+| Platform   | Linux 6.18.44, x86_64, glibc 2.39                       |
+| Processor  | x86_64                                                  |
 | Test suite | PASS — 23 passed, 1 recorded pytest deprecation warning |
 
 ## Results
 
-| Operation | Iterations per sample | Median | Range |
-|---|---:|---:|---:|
-| Bell membership evaluation | 200,000 | 0.416 µs | 0.412–0.424 µs |
-| FuzzySet construction plus legacy centroid | 100 | 354.704 µs | 352.184–383.716 µs |
-| UniversalFuzzyScale construction | 25 | 2,493.754 µs | 2,444.431–2,575.673 µs |
-| UniversalFuzzyScale lookup | 100,000 | 1.854 µs | 1.832–2.308 µs |
+| Operation                                  | Iterations per sample |       Median |                  Range |
+|--------------------------------------------|----------------------:|-------------:|-----------------------:|
+| Bell membership evaluation                 |               200,000 |     0.416 µs |         0.412–0.424 µs |
+| FuzzySet construction plus legacy centroid |                   100 |   354.704 µs |     352.184–383.716 µs |
+| UniversalFuzzyScale construction           |                    25 | 2,493.754 µs | 2,444.431–2,575.673 µs |
+| UniversalFuzzyScale lookup                 |               100,000 |     1.854 µs |         1.832–2.308 µs |
 
 The lookup benchmark constructs the scale once before measurement and measures
 only `scale.Fuzzy(0.5)`. Construction benchmarks include their legacy
