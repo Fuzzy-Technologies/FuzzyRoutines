@@ -22,7 +22,6 @@ def test_FuzzyNOTParabolicSwapsEndpoints(fuzzyNumber):
     assert FuzzyNOTParabolic(fuzzyNumber, alpha=0.5) == 1.0 - fuzzyNumber
 
 
-@pytest.mark.xfail(strict=True, reason="Task #57 will replace the historical epsilon scan with the documented closed form.")
 @pytest.mark.parametrize("fuzzyNumber", [0.125, 0.25, 0.5, 0.75, 0.875])
 def test_FuzzyNOTParabolicHasDocumentedInvolution(fuzzyNumber):
     value = FuzzyNOTParabolic(fuzzyNumber, alpha=0.5)
