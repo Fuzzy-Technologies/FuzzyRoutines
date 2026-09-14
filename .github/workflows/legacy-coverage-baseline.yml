@@ -37,8 +37,9 @@ jobs:
           python - <<'PY'
           import json
 
-          totals = json.load(open("coverage.json", encoding="utf-8"))["totals"]
-          print("COVERAGE_TOTALS", json.dumps(totals, sort_keys=True))
+          report = json.load(open("coverage.json", encoding="utf-8"))
+          print("COVERAGE_TOTALS", json.dumps(report["totals"], sort_keys=True))
+          print("FUZZYROUTINES_SOURCE", json.dumps(report["files"]["fuzzyroutines/FuzzyRoutines.py"]["summary"], sort_keys=True))
           PY
 
       - name: Upload machine-readable coverage
