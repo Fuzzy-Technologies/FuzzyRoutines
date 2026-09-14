@@ -1,6 +1,6 @@
 # ADR-0005: Numerical Precision and Defuzzification Policy
 
-- Status: Proposed
+- Status: Accepted on merge
 - Date: 2026-09-14
 - Related planning task: #12
 - Related Features: #21 and #26
