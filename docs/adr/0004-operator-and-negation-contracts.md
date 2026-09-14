@@ -1,6 +1,6 @@
 # ADR-0004: Fuzzy Operator Families, Negation Domains, and Strict Validation
 
-- Status: Proposed
+- Status: Accepted on merge
 - Date: 2026-09-14
 - Related planning task: #11
 - Related Features: #19 and #20
