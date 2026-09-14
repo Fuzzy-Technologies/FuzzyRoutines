@@ -6,7 +6,6 @@ import json
 import platform
 import sys
 import tracemalloc
-from pathlib import Path
 from statistics import median
 from time import perf_counter_ns
 
