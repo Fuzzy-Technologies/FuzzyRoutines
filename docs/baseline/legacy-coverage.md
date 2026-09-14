@@ -29,18 +29,18 @@ The workflow log is the human-readable evidence. The uploaded `coverage.json` ar
 
 The values below are filled from the first implementation-PR run.
 
-| Metric | Result |
-| --- | ---: |
-| Source statements | 380 |
-| Missing source statements | 226 |
-| Source statement coverage | 40.53% |
-| Source branches | 134 |
-| Missing source branches | 75 |
-| Partial source branches | 3 |
-| Source branch coverage | 44.03% |
-| Source combined coverage | 41.44% |
-| Whole measurement statements | 454 |
-| Whole measurement branch coverage | 56.40% |
+| Metric                              | Result |
+|-------------------------------------|-------:|
+| Source statements                   |    380 |
+| Missing source statements           |    226 |
+| Source statement coverage           | 40.53% |
+| Source branches                     |    134 |
+| Missing source branches             |     75 |
+| Partial source branches             |      3 |
+| Source branch coverage              | 44.03% |
+| Source combined coverage            | 41.44% |
+| Whole measurement statements        |    454 |
+| Whole measurement branch coverage   | 56.40% |
 | Whole measurement combined coverage | 51.92% |
 
 ## Known measurement boundary
