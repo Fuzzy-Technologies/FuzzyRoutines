@@ -54,22 +54,31 @@ not an involutive fuzzy negation.
 
 ### Parabolic negation
 
-The parabolic family is defined by:
+The historical parabolic relation is a separate family from `FuzzyNOT`:
 
 ```text
 2*alpha - x - y = (2*alpha - 1) * (y - x)^2
 ```
 
-Its implementation must select the unique branch satisfying all of:
+The branch satisfying the negation boundary conditions exists exactly for:
+
+```text
+x in [0, 1]
+alpha in [1/4, 3/4]
+```
+
+For that domain, the implementation must use the analytical branch documented
+in [the derivation](../mathematics/parabolic-negation-derivation.md). It must
+satisfy all of:
 
 - output `y` is in `[0, 1]`;
 - `N(0)=1`, `N(1)=0`, and `N(alpha)=alpha`;
 - continuity and monotone decrease on `[0, 1]`;
 - involution within the numerical tolerance defined by ADR-0005.
 
-The implementation must be a deterministic bounded analytical solution, not a
-step-size scan. Task #56 owns derivation and documentation; Task #57 owns the
-replacement.
+An epsilon step size is not part of the formula or its bounded analytical
+solution. Task #56 owns the derivation and documentation; Task #57 owns the
+replacement; Task #58 owns its regression tests.
 
 ## Consequences
 
@@ -81,5 +90,5 @@ replacement.
 
 ## Acceptance and supersession
 
-This ADR is **Proposed** until review and merge. A new operator family or a
-change to the truth-value domain requires an amendment or a new ADR.
+This ADR is **Accepted**. A new operator family or a change to the truth-value
+domain requires an amendment or a new ADR.
