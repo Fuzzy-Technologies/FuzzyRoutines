@@ -157,9 +157,11 @@ def TNormCompose(*fuzzyNumbers, normType='logic'):
     """
     result = None  # return None if errors
 
-    if len(fuzzyNumbers) >= 1:
-        if IsNumber(fuzzyNumbers[0]):
-            result = fuzzyNumbers[0]
+    if normType not in ('logic', 'algebraic', 'boundary', 'drastic'):
+        return result
+
+    if len(fuzzyNumbers) >= 1 and all(IsCorrectFuzzyNumberValue(fuzzyNumber) for fuzzyNumber in fuzzyNumbers):
+        result = fuzzyNumbers[0]
 
         for f in fuzzyNumbers[1:]:
             result = TNorm(result, f, normType)
@@ -212,9 +214,11 @@ def SCoNormCompose(*fuzzyNumbers, normType='logic'):
     """
     result = None  # return None if errors
 
-    if len(fuzzyNumbers) >= 1:
-        if IsNumber(fuzzyNumbers[0]):
-            result = fuzzyNumbers[0]
+    if normType not in ('logic', 'algebraic', 'boundary', 'drastic'):
+        return result
+
+    if len(fuzzyNumbers) >= 1 and all(IsCorrectFuzzyNumberValue(fuzzyNumber) for fuzzyNumber in fuzzyNumbers):
+        result = fuzzyNumbers[0]
 
         for f in fuzzyNumbers[1:]:
             result = SCoNorm(result, f, normType)
