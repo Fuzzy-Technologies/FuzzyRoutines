@@ -73,24 +73,31 @@ def FuzzyNOT(fuzzyNumber, alpha=0.5):
 
 def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
     """
-    Parabolic fuzzy NOT operator. 2a - x - y = (2a - 1)(y - x)^2.
+    Return the valid branch of 2a - x - y = (2a - 1)(y - x)^2.
+
+    The strong-negation branch exists for alpha in [1/4, 3/4]. The epsilon
+    argument is retained for source compatibility but is not part of the
+    analytical solution and is deliberately ignored.
     """
-    result = None  # return None if errors
+    if not IsNumber(alpha) or not math.isfinite(alpha) or not 0.25 <= alpha <= 0.75:
+        raise ValueError("alpha must be a finite real number in the closed interval [1/4, 3/4]")
 
-    if IsCorrectFuzzyNumberValue(fuzzyNumber) and IsCorrectFuzzyNumberValue(alpha) and IsCorrectFuzzyNumberValue(epsilon) and alpha > 0:
-        if fuzzyNumber == 0:
-            result = 1
+    if not IsCorrectFuzzyNumberValue(fuzzyNumber):
+        return None
 
-        elif fuzzyNumber == 1:
-            result = 0
+    if fuzzyNumber == 0:
+        return 1.0
 
-        else:
-            y = 0
-            while (y <= 1) and abs((2 * alpha - fuzzyNumber - y) - (2 * alpha - 1) * (y - fuzzyNumber) ** 2) >= epsilon / 2:
-                y += epsilon
-            result = y
+    if fuzzyNumber == 1:
+        return 0.0
 
-    return result
+    if alpha <= 0.5:
+        discriminant = (4 * alpha - 1) ** 2 + 8 * (1 - 2 * alpha) * fuzzyNumber
+
+    else:
+        discriminant = (4 * alpha - 3) ** 2 + 8 * (2 * alpha - 1) * (1 - fuzzyNumber)
+
+    return fuzzyNumber + 4 * (alpha - fuzzyNumber) / (1 + math.sqrt(discriminant))
 
 
 def FuzzyAND(aNumber, bNumber):
