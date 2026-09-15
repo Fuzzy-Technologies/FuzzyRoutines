@@ -34,14 +34,10 @@ as one.
   from current membership parameters and the current integration interval
   instead of exposing a construction-time value. Evidence: Task #66 and
   [PR #188](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/188).
-
-## Tracked correction candidates
-
-- **Parabolic negation scan:** `FuzzyNOTParabolic` still searches with a
-  caller-controlled epsilon and can fail to terminate for `epsilon=0`. Task
-  #57 must replace the scan with the
-  [documented closed-form branch](../mathematics/parabolic-negation-derivation.md).
-
+- **Parabolic negation scan:** `FuzzyNOTParabolic` now evaluates the documented
+  analytical branch over `alpha in [1/4, 3/4]`; the compatibility-only
+  `epsilon` argument no longer controls execution. Evidence: Task #57 and
+  [PR #192](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/192).
 
 ## Record format for each merged correction
 

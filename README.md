@@ -35,8 +35,10 @@ Supported runtimes are CPython 3.13 and 3.14.
 The current `develop` branch already provides:
 
 - the historical membership families and public import path, protected by compatibility tests;
+- strict parameter validation and exact `gaussian`, `logistic`, `sShoulder`, and `harringtonDesirability` aliases;
 - verified classical t-norm and s-norm families, with validation of every composed operand;
 - finite-domain validation for parameterized `FuzzyNOT`;
+- analytical parabolic negation without an epsilon-driven scan;
 - reentrant Bell evaluation without temporary mutation of shared parameters;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;

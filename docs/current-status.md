@@ -8,10 +8,12 @@ metadata uses `2.0.0.dev0`.
 ## Implemented and verified
 
 - Historical imports and public names remain covered by compatibility tests.
-- Built-in membership families have documented formula and parameter contracts. Strict construction-time validation is not yet complete for every family.
+- Built-in membership families have documented formulas and strict construction-time parameter validation.
+- Exact modern aliases share the historical canonical implementations: `sShoulder`, `gaussian`, `logistic`, and `harringtonDesirability`.
 - Classical logic, algebraic, bounded, and drastic t-norm/s-norm families have reference and property tests.
 - `TNormCompose` and `SCoNormCompose` validate every operand before evaluation.
 - `FuzzyNOT` requires a finite real `alpha` in the open interval `(0, 1)`.
+- `FuzzyNOTParabolic` uses the proved analytical branch and cannot enter an epsilon-driven scan.
 - Bell membership evaluation does not mutate its parameter mapping and has a concurrent reentrancy regression test.
 - `FuzzySet.Defuz()` and `defuzValue` recalculate from the current membership parameters and integration interval.
 - `FuzzyScale.Fuzzy()` evaluates each term once and deliberately selects the later term when memberships tie.
@@ -25,12 +27,12 @@ The corresponding accepted changes are
 [#187](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/187),
 [#188](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/188),
 [#189](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/189), and
-[#190](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/190).
+[#190](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/190),
+[#192](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/192), and
+[#193](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/193).
 
 ## Still in the v2 roadmap
 
-- strict parameter-domain validation for all membership families;
-- the proved closed-form parabolic-negation implementation;
 - explicit universe, integration-domain, mathematical-support, core, and height semantics;
 - fuzzy-set complement, union, intersection, equality, and inclusion;
 - alpha-cuts and derived fuzzy-set properties;

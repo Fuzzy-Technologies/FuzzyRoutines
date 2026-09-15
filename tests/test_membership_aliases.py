@@ -1,0 +1,42 @@
+"""Exact semantic aliases for the historical membership-function registry."""
+
+import pytest
+
+from fuzzyroutines.FuzzyRoutines import MFunction
+
+ALIASCASES = (
+    ("sShoulder", "parabolic", {"a": 0.2, "b": 0.8}),
+    ("gaussian", "exponential", {"a": 0.5, "b": 0.2}),
+    ("logistic", "sigmoidal", {"a": 3.0, "b": 0.5}),
+    ("harringtonDesirability", "desirability", {}),
+)
+
+GRIDVALUES = (-1.0, 0.0, 0.2, 0.5, 0.8, 1.0, 2.0)
+
+
+@pytest.mark.parametrize(("alias", "historicalIdentifier", "parameters"), ALIASCASES)
+def test_MembershipAliasUsesTheHistoricalCanonicalImplementation(alias, historicalIdentifier, parameters):
+    aliasFunction = MFunction(alias, **parameters)
+    historicalFunction = MFunction(historicalIdentifier, **parameters)
+
+    assert aliasFunction.mju.__func__ is historicalFunction.mju.__func__, (
+        "An exact alias must dispatch to the existing canonical implementation."
+    )
+    assert [aliasFunction.mju(value) for value in GRIDVALUES] == pytest.approx(
+        [historicalFunction.mju(value) for value in GRIDVALUES],
+        abs=1e-15,
+    )
+
+
+@pytest.mark.parametrize(
+    ("alias", "parameters", "message"),
+    [
+        ("sShoulder", {"a": 0.5, "b": 0.5}, "a < b"),
+        ("gaussian", {"a": 0.0, "b": 0.0}, "b > 0"),
+        ("logistic", {"a": 0.0, "b": 0.0}, "non-zero"),
+        ("harringtonDesirability", {"a": 0.0}, "requires exactly"),
+    ],
+)
+def test_MembershipAliasPreservesCanonicalParameterValidation(alias, parameters, message):
+    with pytest.raises(ValueError, match=message):
+        MFunction(alias, **parameters)

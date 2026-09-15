@@ -50,7 +50,9 @@ only after the legacy behavior is covered by regression tests.
 - Task #51 owns strict validation implementation.
 - Task #52 owns reference and property tests.
 - Task #53 removes Bell's evaluation-time parameter mutation.
-- Task #54 may introduce additive modern aliases.
+- Task #54 introduces only exact additive aliases that dispatch to the same
+  implementation: `sShoulder`, `gaussian`, `logistic`, and
+  `harringtonDesirability`.
 
 The contract is enforced by Task #51 and covered by the reference/property
 suite from Task #52.
@@ -61,6 +63,12 @@ A common `(left, peak, right)` or
 `(left, plateau_start, plateau_end, right)` API must not be passed through to
 the legacy `triangle` or `trapezium` identifiers. It requires a separate
 modern alias with an unambiguous name.
+
+Aliases do not duplicate formulas. They are additional registry keys pointing
+to the historical canonical bound method and therefore inherit the same
+validated parameter contract. A conventional alias is deliberately absent for
+the non-standard flat-top `bell`, legacy-order `triangle`, and legacy-order
+`trapezium` families.
 
 ## Acceptance and supersession
 
