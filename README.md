@@ -32,6 +32,22 @@ Version 2 is an active correctness-focused modernization. The historical public 
 
 Supported runtimes are CPython 3.13 and 3.14.
 
+The current `develop` branch already provides:
+
+- the historical membership families and public import path, protected by compatibility tests;
+- verified classical t-norm and s-norm families, with validation of every composed operand;
+- finite-domain validation for parameterized `FuzzyNOT`;
+- reentrant Bell evaluation without temporary mutation of shared parameters;
+- `FuzzySet` centroid access that reflects current membership parameters and integration interval;
+- deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
+- reproducible command-line benchmarks and diagnostic reports.
+
+The modern domain model, fuzzy-set algebra, alpha-cuts, analytical/adaptive
+defuzzification strategy, typed module API, optional vectorization, and
+free-threaded execution remain roadmap work. See the
+[current implementation status](docs/current-status.md) for the exact boundary
+and evidence.
+
 ## Install from source
 
     git clone https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
@@ -60,6 +76,7 @@ The legacy triangle argument order is a, b, c, where c is the apex. See the comp
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
+- Current implementation status: docs/current-status.md
 
 ## Development
 

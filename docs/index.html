@@ -23,6 +23,7 @@
         <a class="site-title" href="#top" aria-label="FuzzyRoutines home">◒ FuzzyRoutines</a>
         <nav class="site-nav" aria-label="Primary navigation">
           <a href="#capabilities">Capabilities</a>
+          <a href="#status">Status</a>
           <a href="#engineering">Engineering</a>
           <a href="#start">Quick start</a>
           <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines">GitHub</a>
@@ -77,19 +78,52 @@
           <article class="card">
             <span class="card-label">Membership</span>
             <h3>Functions and sets</h3>
-            <p>Membership families with explicit parameter domains, fuzzy-set operations, alpha-cuts, and derived properties.</p>
+            <p>Built-in membership families, documented parameter contracts, and the historical <code>FuzzySet</code> wrapper. Strict validation for every family remains in progress.</p>
           </article>
           <article class="card">
             <span class="card-label">Operators</span>
             <h3>Fuzzy algebra</h3>
-            <p>Specified negations, t-norms, s-norms, linguistic variables, fuzzy scales, and deliberate edge semantics.</p>
+            <p>Classical t-norms and s-norms, validated composition, parameterized negation, and deliberate boundary behavior.</p>
           </article>
           <article class="card">
-            <span class="card-label">Inference</span>
-            <h3>Numerical results</h3>
-            <p>Analytical solutions where practical and controlled numerical methods with explicit error behavior elsewhere.</p>
+            <span class="card-label">Scales</span>
+            <h3>Deterministic lookup</h3>
+            <p>Legacy linguistic scales with one membership evaluation per term and an explicit later-term tie policy.</p>
           </article>
         </div>
+      </section>
+
+      <section id="status" aria-labelledby="status-title">
+        <p class="section-kicker">Implementation boundary</p>
+        <h2 id="status-title">What works today—and what is still being built.</h2>
+        <div class="status-grid">
+          <article class="status-column" data-status="implemented">
+            <span class="status-badge implemented">Implemented on develop</span>
+            <ul>
+              <li>Compatibility-tested historical imports and public names</li>
+              <li>Reference-tested classical fuzzy operators</li>
+              <li>Finite <code>FuzzyNOT</code> parameter validation</li>
+              <li>Reentrant Bell membership evaluation</li>
+              <li>Centroids recalculated from current set state</li>
+              <li>Single-evaluation scale lookup</li>
+              <li>Executable JSON benchmarks and diagnostics</li>
+            </ul>
+          </article>
+          <article class="status-column" data-status="roadmap">
+            <span class="status-badge roadmap">Still in the v2 roadmap</span>
+            <ul>
+              <li>Strict validation for every membership family</li>
+              <li>Explicit universe and mathematical-support model</li>
+              <li>Fuzzy-set algebra, alpha-cuts, core, and height</li>
+              <li>Analytical and adaptive defuzzification strategies</li>
+              <li>Focused typed modules and compatibility facade</li>
+              <li>Evidence-gated vectorized and free-threaded execution</li>
+            </ul>
+          </article>
+        </div>
+        <p class="status-link">
+          Review the <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/current-status.md">exact implementation status and accepted evidence</a>.
+        </p>
       </section>
 
       <section id="engineering" aria-labelledby="engineering-title">
@@ -112,10 +146,10 @@
             <p>Deterministic, reentrant models without hidden global mutable state, suitable for independent CPU workers and supported Python interpreters.</p>
           </article>
         </div>
-        <aside class="truth-panel" aria-labelledby="status-title">
+        <aside class="truth-panel" aria-labelledby="modernization-title">
           <div>
             <span class="card-label">Current status</span>
-            <h3 id="status-title">Active correctness-focused modernization</h3>
+            <h3 id="modernization-title">Active correctness-focused modernization</h3>
           </div>
           <p>
             The historical public API remains available while documented defects are repaired in reviewable steps.
@@ -165,6 +199,9 @@ print(fuzzySet.Defuz())</code></pre>
           </a>
           <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/benchmark-reproducibility-protocol.md">
             <strong>Benchmark protocol</strong><span>Reproduce measurements →</span>
+          </a>
+          <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/current-status.md">
+            <strong>Current implementation status</strong><span>Implemented versus roadmap →</span>
           </a>
         </div>
       </section>
