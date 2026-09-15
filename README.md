@@ -1,6 +1,8 @@
 # FuzzyRoutines
 
-FuzzyRoutines is a Python library for fuzzy membership functions, fuzzy sets, fuzzy scales, and common t-norm and s-norm operators. It is maintained by Fuzzy Technologies.
+FuzzyRoutines is a Python library for fuzzy membership functions, fuzzy sets, fuzzy scales, and common t-norm and s-norm operators. It is maintained by [Fuzzy Technologies](https://fuzzy-technologies.github.io/).
+
+> Technologies · Knowledge · Science
 
 ## Status
 
