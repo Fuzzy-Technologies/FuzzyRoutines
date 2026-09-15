@@ -56,9 +56,12 @@ def FuzzyNOT(fuzzyNumber, alpha=0.5):
     """
     Fuzzy logic NOT operator. y = 1 - Fuzzy if alpha = 0.5
     """
+    if not IsNumber(alpha) or not math.isfinite(alpha) or not 0 < alpha < 1:
+        raise ValueError("alpha must be a finite real number in the open interval (0, 1)")
+
     result = None  # return None if errors
 
-    if IsCorrectFuzzyNumberValue(fuzzyNumber) and IsCorrectFuzzyNumberValue(alpha) and alpha > 0:
+    if IsCorrectFuzzyNumberValue(fuzzyNumber):
         if (0 <= fuzzyNumber) and (fuzzyNumber <= alpha):
             result = fuzzyNumber * (alpha - 1) / alpha + 1
 
