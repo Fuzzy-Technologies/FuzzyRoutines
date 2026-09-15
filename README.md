@@ -14,10 +14,12 @@ The long-term goal is to make fuzzy models convenient to define, inspect, test, 
 - fuzzy-set operations, alpha-cuts, derived properties, and linguistic variables;
 - mathematically specified negations, t-norms, s-norms, and defuzzification strategies;
 - fuzzy scales with explicit coverage, overlap, tie, and confidence semantics;
-- reproducible diagnostics, benchmarks, and optional vectorized execution where evidence justifies it;
+- high-performance scalar and batch execution, with optional vectorized backends where benchmark evidence justifies them;
 - stable historical entry points alongside a small modern typed API.
 
 Within fuzzy computing, the target is scientific-grade behavior: formulas traceable to authoritative sources, analytical solutions where practical, controlled numerical methods elsewhere, and executable evidence for boundaries and invariants. Python scripts, applications, and notebook systems are intended host environments; FuzzyRoutines supplies the specialized fuzzy-mathematics layer.
+
+Performance is a first-class requirement, not a marketing claim. The target is low-overhead scalar evaluation and efficient batch workloads: eliminate duplicated computation, prefer validated analytical fast paths, allow caching only when results cannot become stale, and introduce vectorized or accelerated backends when measurements justify their complexity and dependency cost. Every optimization must preserve the mathematical contract and provide numerical-parity, timing, and memory evidence.
 
 The library is also the reusable fuzzy foundation for Fuzzy Technologies research, expert systems, trading systems, decision models, and future products.
 
