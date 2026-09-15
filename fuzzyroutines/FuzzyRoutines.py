@@ -311,16 +311,17 @@ class MFunction():
                 result = 1
 
             else:
-                aOld = self._parameters['a']
-                bOld = self._parameters['b']
+                rightBoundary = c + b - a
+                rightMidpoint = (c + rightBoundary) / 2
 
-                self._parameters['a'] = c
-                self._parameters['b'] = c + b - a
+                if x <= rightMidpoint:
+                    result = 1 - (2 * (x - c) ** 2) / (rightBoundary - c) ** 2
 
-                result = 1 - self.Parabolic(x)
+                elif x < rightBoundary:
+                    result = (2 * (x - rightBoundary) ** 2) / (rightBoundary - c) ** 2
 
-                self._parameters['a'] = aOld
-                self._parameters['b'] = bOld
+                else:
+                    result = 0
 
         except Exception:
             print(traceback.format_exc())
