@@ -9,7 +9,7 @@ metadata uses `2.0.0.dev0`.
 
 - Historical imports and public names remain covered by compatibility tests.
 - Built-in membership families have documented formulas and strict construction-time parameter validation.
-- Exact modern aliases share the historical canonical implementations: `sShoulder`, `gaussian`, `logistic`, and `harringtonDesirability`.
+- Forward-looking registry names share one interim implementation with their historical `MFunction` identifiers: `sShoulder`, `gaussian`, `logistic`, and `harringtonDesirability`.
 - Classical logic, algebraic, bounded, and drastic t-norm/s-norm families have reference and property tests.
 - `TNormCompose` and `SCoNormCompose` validate every operand before evaluation.
 - `FuzzyNOT` requires a finite real `alpha` in the open interval `(0, 1)`.
@@ -52,6 +52,10 @@ Ordinary independent Python processes can execute independent models.
 Thread-safe or free-threaded execution is not yet a supported contract for the
 complete library. Individual paths may receive reentrancy tests before that
 broader claim is made.
+
+The focused typed modules will be the canonical API for new code. The existing
+`FuzzyRoutines.py` module and its parameter conventions will remain available
+as compatibility aliases or adapters rather than defining the new architecture.
 
 ## Release status
 

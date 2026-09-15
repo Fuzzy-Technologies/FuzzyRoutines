@@ -35,7 +35,7 @@ Supported runtimes are CPython 3.13 and 3.14.
 The current `develop` branch already provides:
 
 - the historical membership families and public import path, protected by compatibility tests;
-- strict parameter validation and exact `gaussian`, `logistic`, `sShoulder`, and `harringtonDesirability` aliases;
+- strict parameter validation and transitional `gaussian`, `logistic`, `sShoulder`, and `harringtonDesirability` registry names in the historical factory;
 - verified classical t-norm and s-norm families, with validation of every composed operand;
 - finite-domain validation for parameterized `FuzzyNOT`;
 - analytical parabolic negation without an epsilon-driven scan;
@@ -50,13 +50,18 @@ free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
 and evidence.
 
+The focused typed modules will become the default API for new users. The
+historical `FuzzyRoutines.py` entry point will remain a compatibility facade:
+old names and parameter conventions will delegate to or explicitly adapt the
+same mathematically correct core rather than own duplicate implementations.
+
 ## Install from source
 
     git clone https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
     cd FuzzyRoutines
     python -m pip install .
 
-## Quick start
+## Current compatibility API example
 
     from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm, UniversalFuzzyScale
 
@@ -68,7 +73,9 @@ and evidence.
     print(fuzzySet.Defuz())
     print(scale.Fuzzy(0.5)["name"])
 
-The legacy triangle argument order is a, b, c, where c is the apex. See the compatibility documentation before porting an external fuzzy model.
+This example uses the current historical facade. Its triangle argument order is
+`a, b, c`, where `c` is the apex. New v2 examples will default to the focused
+modern API after its parameter contracts are implemented.
 
 ## Mathematics and compatibility
 

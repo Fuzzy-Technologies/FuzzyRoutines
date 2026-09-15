@@ -38,21 +38,27 @@ course notes](https://cse.iitkgp.ac.in/~dsamanta/courses/archive/sca/Archives/Ch
 The legacy `exponential` formula is exactly Gaussian-shaped, while legacy
 `parabolic` is an increasing quadratic shoulder rather than a Gaussian.
 
-## Additive aliases
+## Transitional compatibility registry names
 
-The modern aliases are additional registry keys, not separate formulas:
+The forward-looking spellings currently available through the historical
+`MFunction` factory are additional registry keys, not separate formulas:
 
-| Modern alias             | Historical identifier | Parameter contract |
-|--------------------------|-----------------------|--------------------|
-| `sShoulder`              | `parabolic`           | identical `a, b`   |
-| `gaussian`               | `exponential`         | identical `a, b`   |
-| `logistic`               | `sigmoidal`           | identical `a, b`   |
-| `harringtonDesirability` | `desirability`        | no parameters      |
+| Registry name            | Historical identifier | Interim parameter contract |
+|--------------------------|-----------------------|----------------------------|
+| `sShoulder`              | `parabolic`           | identical `a, b`           |
+| `gaussian`               | `exponential`         | identical `a, b`           |
+| `logistic`               | `sigmoidal`           | identical `a, b`           |
+| `harringtonDesirability` | `desirability`        | no parameters              |
 
 Each alias resolves to the same bound method as its historical identifier, so
-validation and evaluation cannot drift. No aliases are added for `bell`,
-`triangle`, or `trapezium`: their historical shape or parameter ordering would
-make a conventional name ambiguous without a distinct modern API contract.
+validation and evaluation cannot drift during the monolith transition. This
+does not make the historical method canonical. The focused modern module will
+own each final implementation and conventional parameter contract; the legacy
+factory identifiers will become aliases or explicit compatibility adapters.
+
+No aliases are added for `bell`, `triangle`, or `trapezium`: their historical
+shape or parameter ordering would make a conventional name ambiguous without a
+distinct modern API contract.
 
 The desirability transform is attributed to E. C. Harrington, *The
 Desirability Function*, *Industrial Quality Control* 21(10), 494–498 (1965).

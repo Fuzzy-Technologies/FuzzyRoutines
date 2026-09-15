@@ -78,7 +78,7 @@
           <article class="card">
             <span class="card-label">Membership</span>
             <h3>Functions and sets</h3>
-            <p>Built-in membership families with strict parameter contracts, exact modern aliases, and the historical <code>FuzzySet</code> wrapper.</p>
+            <p>Built-in membership families with strict parameter contracts, shared compatibility names, and the historical <code>FuzzySet</code> wrapper.</p>
           </article>
           <article class="card">
             <span class="card-label">Operators</span>
@@ -101,7 +101,7 @@
             <span class="status-badge implemented">Implemented on develop</span>
             <ul>
               <li>Compatibility-tested historical imports and public names</li>
-              <li>Strict membership parameters and exact modern aliases</li>
+              <li>Strict membership parameters and shared compatibility names</li>
               <li>Reference-tested classical fuzzy operators</li>
               <li>Finite <code>FuzzyNOT</code> parameter validation</li>
               <li>Analytical parabolic negation without an epsilon scan</li>
@@ -153,7 +153,8 @@
             <h3 id="modernization-title">Active correctness-focused modernization</h3>
           </div>
           <p>
-            The historical public API remains available while documented defects are repaired in reviewable steps.
+            The future focused modules will be the default modern API. The historical public API remains available
+            as a compatibility facade while documented defects are repaired in reviewable steps.
             Vectorized backends, free-threaded execution, and scaling claims remain future work until their dedicated
             parity and benchmark gates pass.
           </p>

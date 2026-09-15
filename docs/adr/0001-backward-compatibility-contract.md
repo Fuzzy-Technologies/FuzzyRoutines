@@ -35,12 +35,21 @@ surface unless a later ADR explicitly approves an intentional breaking change:
 - legacy membership-function identifiers and their historical keyword names
   and parameter ordering.
 
-The canonical modernization route is additive:
+The canonical modernization route is modern-core-first:
 
-1. new focused modules may become the implementation source;
-2. `fuzzyroutines.FuzzyRoutines` remains a facade for protected names;
-3. modern aliases may be added only when they do not reinterpret a legacy call;
-4. a protected legacy name may delegate to the corrected shared implementation.
+1. focused modules own the mathematically correct implementations and the
+   default public API for new code;
+2. `fuzzyroutines.FuzzyRoutines` remains a compatibility facade for protected
+   historical names;
+3. historical names delegate to, alias, or explicitly adapt the modern core;
+4. compatibility adapters may translate historical parameter names or order,
+   but must not duplicate formulas or silently weaken validation;
+5. modern names never delegate architecturally to a legacy implementation,
+   even when an interim registry maps both names to one bound method.
+
+The compatibility surface is therefore supported but not architecturally
+authoritative. New documentation and examples default to the focused modern
+API once that API lands. Legacy examples are labelled as compatibility usage.
 
 ## Compatibility classification
 
@@ -76,7 +85,6 @@ documented in the compatibility ledger planned under Feature #31.
 
 ## Acceptance and supersession
 
-This ADR is deliberately **Proposed** until its review PR is approved and
-merged. Any future decision that narrows this protected surface must supersede
-or amend this ADR and include consumer-impact evidence and an explicit human
-approval.
+This ADR is **Accepted**. Any future decision that narrows this protected
+surface must supersede or amend this ADR and include consumer-impact evidence
+and an explicit human approval.
