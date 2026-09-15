@@ -28,10 +28,21 @@ def test_FuzzyNOTParabolicHasDocumentedInvolution(fuzzyNumber):
     assert FuzzyNOTParabolic(value, alpha=0.5) == pytest.approx(fuzzyNumber, abs=1e-12)
 
 
-@pytest.mark.xfail(strict=True, reason="Task #55 will make invalid negation parameters explicit errors.")
-@pytest.mark.parametrize("alpha", [0.0, 1.0, -0.25, 1.25])
+@pytest.mark.parametrize(
+    "alpha",
+    [
+        0.0,
+        1.0,
+        -0.25,
+        1.25,
+        True,
+        False,
+        pytest.param(float("nan"), id="nan"),
+        float("inf"),
+    ],
+)
 def test_FuzzyNOTRejectsInvalidAlpha(alpha):
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="open interval"):
         FuzzyNOT(0.5, alpha=alpha)
 
 

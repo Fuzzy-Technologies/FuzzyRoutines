@@ -77,26 +77,16 @@ class TestBaseMethods():
             [1., 0.5, 0.],
             [0.25, 0.25, 0.25],
             [0.25, 0.75, 0.9166666666666666],
-            [0.25, 1, 1.],
-            [0., 1, 1.],
-            [1., 1, 1.],
         ]
         for test in testDataPositive:
             assert FuzzyNOT(test[0], alpha=test[1]) == test[2], 'Input: [ {}, alpha={} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
 
         # negative tests:
         testDataNegative = [
-            [0., 0, None],
-            [1., 0, None],
-            [0.25, 0., None],
             [1.1, 0.5, None],
             [-1.1, 0.5, None],
-            [1.1, 0., None],
             [1.1, 0.25, None],
-            [1.1, 1, None],
-            [-1.1, 0., None],
             [-1.1, 0.25, None],
-            [-1.1, 1, None],
         ]
         for test in testDataNegative:
             assert FuzzyNOT(test[0], alpha=test[1]) is test[2], 'Input: [ {}, alpha={} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
