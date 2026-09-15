@@ -14,7 +14,11 @@ The README documents:
 from fuzzyroutines.FuzzyRoutines import *
 ```
 
-The module does not currently define `__all__`. Therefore wildcard import follows normal Python behavior and also exposes imported module names such as `math`, `copy`, and `traceback`. Those leaked helper modules are recorded as observed behavior, but they are **not** classified here as protected domain API.
+The module does not currently define `__all__`. Therefore wildcard import
+follows normal Python behavior and also exposes imported module names such as
+`math` and `copy`. The historical `traceback` leak disappeared when Task #63
+removed print-and-zero exception handling. These helper modules are observed
+behavior, but they are **not** protected domain API.
 
 ## Protected top-level functions
 

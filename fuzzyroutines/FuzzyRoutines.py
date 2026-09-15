@@ -8,7 +8,6 @@
 
 import math
 import copy
-import traceback
 
 
 def DiapasonParser(diapason):
@@ -52,23 +51,39 @@ def IsCorrectFuzzyNumberValue(value):
         return False
 
 
+def _RequireFiniteReal(value, parameterName):
+    """Return a finite real scalar or raise the public numeric-domain error."""
+
+    if not IsNumber(value) or not math.isfinite(value):
+        raise ValueError(f"{parameterName} must be a finite real number")
+
+    return value
+
+
+def _RequireFuzzyDegree(value, parameterName):
+    """Return a finite scalar in the closed fuzzy-degree interval."""
+
+    _RequireFiniteReal(value, parameterName)
+
+    if not 0 <= value <= 1:
+        raise ValueError(f"{parameterName} must be in the closed interval [0, 1]")
+
+    return value
+
+
 def FuzzyNOT(fuzzyNumber, alpha=0.5):
     """
     Fuzzy logic NOT operator. y = 1 - Fuzzy if alpha = 0.5
     """
+    _RequireFuzzyDegree(fuzzyNumber, 'fuzzyNumber')
+
     if not IsNumber(alpha) or not math.isfinite(alpha) or not 0 < alpha < 1:
         raise ValueError("alpha must be a finite real number in the open interval (0, 1)")
 
-    result = None  # return None if errors
+    if fuzzyNumber <= alpha:
+        return fuzzyNumber * (alpha - 1) / alpha + 1
 
-    if IsCorrectFuzzyNumberValue(fuzzyNumber):
-        if (0 <= fuzzyNumber) and (fuzzyNumber <= alpha):
-            result = fuzzyNumber * (alpha - 1) / alpha + 1
-
-        else:
-            result = (fuzzyNumber - 1) * alpha / (alpha - 1)
-
-    return result
+    return (fuzzyNumber - 1) * alpha / (alpha - 1)
 
 
 def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
@@ -79,11 +94,10 @@ def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
     argument is retained for source compatibility but is not part of the
     analytical solution and is deliberately ignored.
     """
+    _RequireFuzzyDegree(fuzzyNumber, 'fuzzyNumber')
+
     if not IsNumber(alpha) or not math.isfinite(alpha) or not 0.25 <= alpha <= 0.75:
         raise ValueError("alpha must be a finite real number in the closed interval [1/4, 3/4]")
-
-    if not IsCorrectFuzzyNumberValue(fuzzyNumber):
-        return None
 
     if fuzzyNumber == 0:
         return 1.0
@@ -104,22 +118,18 @@ def FuzzyAND(aNumber, bNumber):
     """
     Fuzzy AND operator is minimum of two numbers.
     """
-    if IsNumber(aNumber) and IsNumber(bNumber):
-        return min(aNumber, bNumber)
-
-    else:
-        return None  # return None if errors
+    _RequireFuzzyDegree(aNumber, 'aNumber')
+    _RequireFuzzyDegree(bNumber, 'bNumber')
+    return min(aNumber, bNumber)
 
 
 def FuzzyOR(aNumber, bNumber):
     """
     Fuzzy OR operator is maximum of two numbers.
     """
-    if IsNumber(aNumber) and IsNumber(bNumber):
-        return max(aNumber, bNumber)
-
-    else:
-        return None  # return None if errors
+    _RequireFuzzyDegree(aNumber, 'aNumber')
+    _RequireFuzzyDegree(bNumber, 'bNumber')
+    return max(aNumber, bNumber)
 
 
 def TNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
@@ -131,29 +141,28 @@ def TNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
         'boundary' - result of boundary multiplication operation,
         'drastic' - result of drastic multiplication operation.
     """
-    result = None  # return None if errors
+    _RequireFuzzyDegree(aFuzzyNumber, 'aFuzzyNumber')
+    _RequireFuzzyDegree(bFuzzyNumber, 'bFuzzyNumber')
 
-    if IsCorrectFuzzyNumberValue(aFuzzyNumber) and IsCorrectFuzzyNumberValue(bFuzzyNumber):
-        if normType == 'logic':
-            result = FuzzyAND(aFuzzyNumber, bFuzzyNumber)
+    if normType == 'logic':
+        return min(aFuzzyNumber, bFuzzyNumber)
 
-        if normType == 'algebraic':
-            result = aFuzzyNumber * bFuzzyNumber
+    if normType == 'algebraic':
+        return aFuzzyNumber * bFuzzyNumber
 
-        if normType == 'boundary':
-            result = FuzzyOR(aFuzzyNumber + bFuzzyNumber - 1, 0)
+    if normType == 'boundary':
+        return max(aFuzzyNumber + bFuzzyNumber - 1, 0)
 
-        if normType == 'drastic':
-            if aFuzzyNumber == 1:
-                result = bFuzzyNumber
+    if normType == 'drastic':
+        if aFuzzyNumber == 1:
+            return bFuzzyNumber
 
-            elif bFuzzyNumber == 1:
-                result = aFuzzyNumber
+        if bFuzzyNumber == 1:
+            return aFuzzyNumber
 
-            else:
-                result = 0
+        return 0
 
-    return result
+    raise ValueError(f"unknown t-norm family: {normType!r}")
 
 
 def TNormCompose(*fuzzyNumbers, normType='logic'):
@@ -165,16 +174,19 @@ def TNormCompose(*fuzzyNumbers, normType='logic'):
         'boundary' - result of boundary multiplication operation,
         'drastic' - result of drastic multiplication operation.
     """
-    result = None  # return None if errors
-
     if normType not in ('logic', 'algebraic', 'boundary', 'drastic'):
-        return result
+        raise ValueError(f"unknown t-norm family: {normType!r}")
 
-    if len(fuzzyNumbers) >= 1 and all(IsCorrectFuzzyNumberValue(fuzzyNumber) for fuzzyNumber in fuzzyNumbers):
-        result = fuzzyNumbers[0]
+    if not fuzzyNumbers:
+        raise ValueError("TNormCompose requires at least one fuzzy degree")
 
-        for f in fuzzyNumbers[1:]:
-            result = TNorm(result, f, normType)
+    for operandIndex, fuzzyNumber in enumerate(fuzzyNumbers):
+        _RequireFuzzyDegree(fuzzyNumber, f'fuzzyNumbers[{operandIndex}]')
+
+    result = fuzzyNumbers[0]
+
+    for fuzzyNumber in fuzzyNumbers[1:]:
+        result = TNorm(result, fuzzyNumber, normType)
 
     return result
 
@@ -188,29 +200,28 @@ def SCoNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
         'boundary' - result of boundary addition operation,
         'drastic' - result of drastic addition operation.
     """
-    result = None  # return None if errors
+    _RequireFuzzyDegree(aFuzzyNumber, 'aFuzzyNumber')
+    _RequireFuzzyDegree(bFuzzyNumber, 'bFuzzyNumber')
 
-    if IsCorrectFuzzyNumberValue(aFuzzyNumber) and IsCorrectFuzzyNumberValue(bFuzzyNumber):
-        if normType == 'logic':
-            result = FuzzyOR(aFuzzyNumber, bFuzzyNumber)
+    if normType == 'logic':
+        return max(aFuzzyNumber, bFuzzyNumber)
 
-        if normType == 'algebraic':
-            result = aFuzzyNumber + bFuzzyNumber - aFuzzyNumber * bFuzzyNumber
+    if normType == 'algebraic':
+        return aFuzzyNumber + bFuzzyNumber - aFuzzyNumber * bFuzzyNumber
 
-        if normType == 'boundary':
-            result = FuzzyAND(aFuzzyNumber + bFuzzyNumber, 1)
+    if normType == 'boundary':
+        return min(aFuzzyNumber + bFuzzyNumber, 1)
 
-        if normType == 'drastic':
-            if aFuzzyNumber == 0:
-                result = bFuzzyNumber
+    if normType == 'drastic':
+        if aFuzzyNumber == 0:
+            return bFuzzyNumber
 
-            elif bFuzzyNumber == 0:
-                result = aFuzzyNumber
+        if bFuzzyNumber == 0:
+            return aFuzzyNumber
 
-            else:
-                result = 1
+        return 1
 
-    return result
+    raise ValueError(f"unknown s-norm family: {normType!r}")
 
 
 def SCoNormCompose(*fuzzyNumbers, normType='logic'):
@@ -222,16 +233,19 @@ def SCoNormCompose(*fuzzyNumbers, normType='logic'):
         'boundary' - result of boundary multiplication operation,
         'drastic' - result of drastic multiplication operation.
     """
-    result = None  # return None if errors
-
     if normType not in ('logic', 'algebraic', 'boundary', 'drastic'):
-        return result
+        raise ValueError(f"unknown s-norm family: {normType!r}")
 
-    if len(fuzzyNumbers) >= 1 and all(IsCorrectFuzzyNumberValue(fuzzyNumber) for fuzzyNumber in fuzzyNumbers):
-        result = fuzzyNumbers[0]
+    if not fuzzyNumbers:
+        raise ValueError("SCoNormCompose requires at least one fuzzy degree")
 
-        for f in fuzzyNumbers[1:]:
-            result = SCoNorm(result, f, normType)
+    for operandIndex, fuzzyNumber in enumerate(fuzzyNumbers):
+        _RequireFuzzyDegree(fuzzyNumber, f'fuzzyNumbers[{operandIndex}]')
+
+    result = fuzzyNumbers[0]
+
+    for fuzzyNumber in fuzzyNumbers[1:]:
+        result = SCoNorm(result, fuzzyNumber, normType)
 
     return result
 
@@ -349,216 +363,143 @@ class MFunction():
         """
         This is hyperbolic membership function with real inputs x and parameters a, b, c.
         """
-        a, b, c, result = 0, 0, 0, 0
+        _RequireFiniteReal(x, 'x')
+        a = self._parameters['a']
+        b = self._parameters['b']
+        c = self._parameters['c']
 
-        try:
-            a = self._parameters['a']
-            b = self._parameters['b']
-            c = self._parameters['c']
+        if x <= c:
+            return 1
 
-            if x <= c:
-                result = 1
-
-            else:
-                result = 1 / (1 + (a * (x - c)) ** b)
-
-        except Exception:
-            print(traceback.format_exc())
-            print('Hyperbolic membership function use real inputs x and parameters a, b, c.')
-            print('Your inputs: mju_hyperbolic({}, {}, {}, {})'.format(x, a, b, c))
-            return 0
-
-        return result
+        return 1 / (1 + (a * (x - c)) ** b)
 
     def Bell(self, x):
         """
         This is bell membership function with real inputs x and parameters a, b, c.
         """
-        a, b, c, result = 0, 0, 0, 0
+        _RequireFiniteReal(x, 'x')
+        a = self._parameters['a']
+        b = self._parameters['b']
+        c = self._parameters['c']
 
-        try:
-            a = self._parameters['a']
-            b = self._parameters['b']
-            c = self._parameters['c']
+        if x < b:
+            return self.Parabolic(x)
 
-            if x < b:
-                result = self.Parabolic(x)
+        if x <= c:
+            return 1
 
-            elif (b <= x) and (x <= c):
-                result = 1
+        rightBoundary = c + b - a
+        rightMidpoint = (c + rightBoundary) / 2
 
-            else:
-                rightBoundary = c + b - a
-                rightMidpoint = (c + rightBoundary) / 2
+        if x <= rightMidpoint:
+            return 1 - (2 * (x - c) ** 2) / (rightBoundary - c) ** 2
 
-                if x <= rightMidpoint:
-                    result = 1 - (2 * (x - c) ** 2) / (rightBoundary - c) ** 2
+        if x < rightBoundary:
+            return (2 * (x - rightBoundary) ** 2) / (rightBoundary - c) ** 2
 
-                elif x < rightBoundary:
-                    result = (2 * (x - rightBoundary) ** 2) / (rightBoundary - c) ** 2
-
-                else:
-                    result = 0
-
-        except Exception:
-            print(traceback.format_exc())
-            print('Bell membership function use real inputs x and parameters a, b, c.')
-            print('Your inputs: mju_bell({}, {}, {}, {})'.format(x, a, b, c))
-            return 0
-
-        return result
+        return 0
 
     def Parabolic(self, x):
         """
         This is parabolic membership function with real inputs x and parameters a, b.
         """
-        a, b, result = 0, 0, 0
+        _RequireFiniteReal(x, 'x')
+        a = self._parameters['a']
+        b = self._parameters['b']
 
-        try:
-            a = self._parameters['a']
-            b = self._parameters['b']
-
-            if x <= a:
-                result = 0
-
-            elif (a < x) and (x <= (a + b) / 2):
-                result = (2 * (x - a) ** 2) / (b - a) ** 2
-
-            elif ((a + b) / 2 < x) and (x < b):
-                result = 1 - (2 * (x - b) ** 2) / (b - a) ** 2
-
-            else:
-                result = 1
-
-        except Exception:
-            print(traceback.format_exc())
-            print('Parabolic membership function use real inputs x and parameters a, b.')
-            print('Your inputs: mju_parabolic({}, {}, {})'.format(x, a, b))
+        if x <= a:
             return 0
 
-        return result
+        if x <= (a + b) / 2:
+            return (2 * (x - a) ** 2) / (b - a) ** 2
+
+        if x < b:
+            return 1 - (2 * (x - b) ** 2) / (b - a) ** 2
+
+        return 1
 
     def Triangle(self, x):
         """
         This is triangle membership function with real inputs x and parameters a, b, c.
         """
-        a, b, c, result = 0, 0, 0, 0
+        _RequireFiniteReal(x, 'x')
+        a = self._parameters['a']
+        b = self._parameters['b']
+        c = self._parameters['c']
 
-        try:
-            a = self._parameters['a']
-            b = self._parameters['b']
-            c = self._parameters['c']
-
-            if x <= a:
-                result = 0
-
-            elif (a < x) and (x <= c):
-                result = (x - a) / (c - a)
-
-            elif (c < x) and (x < b):
-                result = (b - x) / (b - c)
-
-            else:
-                result = 0
-
-        except Exception:
-            print(traceback.format_exc())
-            print('Triangle membership function use real inputs x and parameters a, b, c.')
-            print('Your inputs: mju_triangle({}, {}, {}, {})'.format(x, a, b, c))
+        if x <= a:
             return 0
 
-        return result
+        if x <= c:
+            return (x - a) / (c - a)
+
+        if x < b:
+            return (b - x) / (b - c)
+
+        return 0
 
     def Trapezium(self, x):
         """
         This is trapezium membership function with real inputs x and parameters a, b, c, d.
         """
-        a, b, c, d, result = 0, 0, 0, 0, 0
+        _RequireFiniteReal(x, 'x')
+        a = self._parameters['a']
+        b = self._parameters['b']
+        c = self._parameters['c']
+        d = self._parameters['d']
 
-        try:
-            a = self._parameters['a']
-            b = self._parameters['b']
-            c = self._parameters['c']
-            d = self._parameters['d']
-
-            if x < a:
-                result = 0
-
-            elif (a < x) and (x < c):
-                result = (x - a) / (c - a)
-
-            elif (c <= x) and (x <= d):
-                result = 1
-
-            elif (d < x) and (x <= b):
-                result = (b - x) / (b - d)
-
-            else:
-                result = 0
-
-        except Exception:
-            print(traceback.format_exc())
-            print('Trapezium membership function use real inputs x and parameters a, b, c, d.')
-            print('Your inputs: mju_trapezium({}, {}, {}, {}, {})'.format(x, a, b, c, d))
+        if x <= a:
             return 0
 
-        return result
+        if x < c:
+            return (x - a) / (c - a)
+
+        if x <= d:
+            return 1
+
+        if x <= b:
+            return (b - x) / (b - d)
+
+        return 0
 
     def Exponential(self, x):
         """
         This is exponential membership function with real inputs x and parameters a, b.
         """
-        a, b, result = 0, 0, 0
-
-        try:
-            a = self._parameters['a']
-            b = self._parameters['b']
-
-            if b != 0:
-                result = math.exp(1) ** (-0.5 * ((x - a) / b) ** 2)
-
-        except Exception:
-            print(traceback.format_exc())
-            print('Exponential membership function use real inputs x and parameters a, b.')
-            print('Your inputs: mju_exponential({}, {}, {})'.format(x, a, b))
-            return 0
-
-        return result
+        _RequireFiniteReal(x, 'x')
+        a = self._parameters['a']
+        b = self._parameters['b']
+        scaledDistance = (x - a) / b
+        return math.exp(-0.5 * scaledDistance * scaledDistance)
 
     def Sigmoidal(self, x):
         """
         This is sigmoidal membership function with real inputs x and parameters a, b.
         """
-        a, b, result = 0, 0, 0
+        _RequireFiniteReal(x, 'x')
+        a = self._parameters['a']
+        b = self._parameters['b']
+        exponent = a * (x - b)
 
-        try:
-            a = self._parameters['a']
-            b = self._parameters['b']
+        # Algebraically equivalent branches avoid overflow in exp for large |x|.
+        if exponent >= 0:
+            return 1 / (1 + math.exp(-exponent))
 
-            result = 1 / (1 + math.exp(1) ** (-a * (x - b)))
-
-        except Exception:
-            print(traceback.format_exc())
-            print('Sigmoidal membership function use real inputs x and parameters a, b.')
-            print('Your inputs: mju_sigmoidal({}, {}, {})'.format(x, a, b))
-            return 0
-
-        return result
+        exponential = math.exp(exponent)
+        return exponential / (1 + exponential)
 
     def Desirability(self, y):
         """
         This is Harrington's desirability membership function with real input y without any parameters.
         """
-        try:
-            result = math.exp(-math.exp(-y))
+        _RequireFiniteReal(y, 'y')
 
-        except Exception:
-            print(traceback.format_exc())
-            print("Harrington's desirability membership function use only real input y without any parameters.")
-            print('Your inputs: mju_desirability({})'.format(y))
-            return 0
+        # Beyond this bound the inner exponential overflows while the
+        # representable value of exp(-exp(-y)) is already exactly zero.
+        if y < -math.log(float.fromhex('0x1.fffffffffffffp+1023')):
+            return 0.0
 
-        return result
+        return math.exp(-math.exp(-y))
 
 
 class FuzzySet():

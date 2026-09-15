@@ -81,15 +81,9 @@ class TestBaseMethods():
         for test in testDataPositive:
             assert FuzzyNOT(test[0], alpha=test[1]) == test[2], 'Input: [ {}, alpha={} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
 
-        # negative tests:
-        testDataNegative = [
-            [1.1, 0.5, None],
-            [-1.1, 0.5, None],
-            [1.1, 0.25, None],
-            [-1.1, 0.25, None],
-        ]
-        for test in testDataNegative:
-            assert FuzzyNOT(test[0], alpha=test[1]) is test[2], 'Input: [ {}, alpha={} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
+        for fuzzyNumber, alpha in [(1.1, 0.5), (-1.1, 0.5), (1.1, 0.25), (-1.1, 0.25)]:
+            with pytest.raises(ValueError):
+                FuzzyNOT(fuzzyNumber, alpha=alpha)
 
     def test_FuzzyNOTParabolic(self):
         # positive tests:
@@ -107,13 +101,9 @@ class TestBaseMethods():
         for test in testDataPositive:
             assert round(FuzzyNOTParabolic(test[0], alpha=test[1], epsilon=test[2]), 5) == test[3], 'Input: [ {}, alpha={}, epsilon={} ] expected output: [ {} ]'.format(test[0], test[1], test[2], test[3])
 
-        # negative tests:
-        testDataNegative = [
-            [-1., 0.5, 0.001, None],
-            [2., 0.5, 0.001, None],
-        ]
-        for test in testDataNegative:
-            assert FuzzyNOTParabolic(test[0], alpha=test[1], epsilon=test[2]) is test[3], 'Input: [ {}, alpha={}, epsilon={} ] expected output: [ {} ]'.format(test[0], test[1], test[2], test[3])
+        for fuzzyNumber in [-1.0, 2.0]:
+            with pytest.raises(ValueError):
+                FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001)
 
     def test_FuzzyAND(self):
         # positive tests:
@@ -124,9 +114,6 @@ class TestBaseMethods():
             [1., 1., 1.],
             [0.5, 0.6, 0.5],
             [0.7, 0.5, 0.5],
-            [-1., 0., -1.],
-            [0., -1., -1.],
-            [2., 2., 2.],
         ]
         for test in testDataPositive:
             assert FuzzyAND(test[0], test[1]) == test[2], 'Input: [ {}, {} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
@@ -138,8 +125,9 @@ class TestBaseMethods():
             [[], 1., None],
             ['0.', '0.', None],
         ]
-        for test in testDataNegative:
-            assert FuzzyAND(test[0], test[1]) is test[2], 'Input: [ {}, {} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
+        for test in testDataNegative + [[-1., 0., None], [0., -1., None], [2., 2., None]]:
+            with pytest.raises(ValueError):
+                FuzzyAND(test[0], test[1])
 
     def test_FuzzyOR(self):
         # positive tests:
@@ -150,9 +138,6 @@ class TestBaseMethods():
             [1., 1., 1.],
             [0.5, 0.6, 0.6],
             [0.7, 0.5, 0.7],
-            [-1., 0., 0.],
-            [0., -1., 0.],
-            [2., 2., 2.],
         ]
         for test in testDataPositive:
             assert FuzzyOR(test[0], test[1]) == test[2], 'Input: [ {}, {} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
@@ -164,8 +149,9 @@ class TestBaseMethods():
             [[], 1., None],
             ['0.', '0.', None],
         ]
-        for test in testDataNegative:
-            assert FuzzyOR(test[0], test[1]) is test[2], 'Input: [ {}, {} ] expected output: [ {} ]'.format(test[0], test[1], test[2])
+        for test in testDataNegative + [[-1., 0., None], [0., -1., None], [2., 2., None]]:
+            with pytest.raises(ValueError):
+                FuzzyOR(test[0], test[1])
 
     def test_TNorm(self):
         # positive tests:
@@ -230,7 +216,8 @@ class TestBaseMethods():
             [1., [], 'drastic', None],
         ]
         for test in testDataNegative:
-            assert TNorm(test[0], test[1], normType=test[2]) is test[3], 'Input: [ {}, {}, normType={} ] expected output: [ {} ]'.format(test[0], test[1], test[2], test[3])
+            with pytest.raises(ValueError):
+                TNorm(test[0], test[1], normType=test[2])
 
     def test_TNormCompose(self):
         # positive tests:
@@ -251,7 +238,8 @@ class TestBaseMethods():
             [self, None],
         ]
         for test in testDataNegative:
-            assert TNormCompose(test[0]) is test[1], 'Input: [ {} ] expected output: [ {} ]'.format(test[0], test[1])
+            with pytest.raises(ValueError):
+                TNormCompose(test[0])
 
     def test_SCoNorm(self):
         # positive tests:
@@ -316,7 +304,8 @@ class TestBaseMethods():
             [1., [], 'drastic', None],
         ]
         for test in testDataNegative:
-            assert SCoNorm(test[0], test[1], normType=test[2]) is test[3], 'Input: [ {}, {}, normType={} ] expected output: [ {} ]'.format(test[0], test[1], test[2], test[3])
+            with pytest.raises(ValueError):
+                SCoNorm(test[0], test[1], normType=test[2])
 
     def test_SCoNormCompose(self):
         # positive tests:
@@ -337,4 +326,5 @@ class TestBaseMethods():
             [self, None],
         ]
         for test in testDataNegative:
-            assert SCoNormCompose(test[0]) is test[1], 'Input: [ {} ] expected output: [ {} ]'.format(test[0], test[1])
+            with pytest.raises(ValueError):
+                SCoNormCompose(test[0])
