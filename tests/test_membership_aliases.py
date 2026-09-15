@@ -1,4 +1,4 @@
-"""Exact semantic aliases for the historical membership-function registry."""
+"""Shared implementations for exact names in the compatibility registry."""
 
 import pytest
 
@@ -15,12 +15,12 @@ GRIDVALUES = (-1.0, 0.0, 0.2, 0.5, 0.8, 1.0, 2.0)
 
 
 @pytest.mark.parametrize(("alias", "historicalIdentifier", "parameters"), ALIASCASES)
-def test_MembershipAliasUsesTheHistoricalCanonicalImplementation(alias, historicalIdentifier, parameters):
+def test_CompatibilityRegistryNamesShareOneImplementation(alias, historicalIdentifier, parameters):
     aliasFunction = MFunction(alias, **parameters)
     historicalFunction = MFunction(historicalIdentifier, **parameters)
 
     assert aliasFunction.mju.__func__ is historicalFunction.mju.__func__, (
-        "An exact alias must dispatch to the existing canonical implementation."
+        "Exact registry names must dispatch to one shared implementation."
     )
     assert [aliasFunction.mju(value) for value in GRIDVALUES] == pytest.approx(
         [historicalFunction.mju(value) for value in GRIDVALUES],
@@ -37,6 +37,6 @@ def test_MembershipAliasUsesTheHistoricalCanonicalImplementation(alias, historic
         ("harringtonDesirability", {"a": 0.0}, "requires exactly"),
     ],
 )
-def test_MembershipAliasPreservesCanonicalParameterValidation(alias, parameters, message):
+def test_CompatibilityRegistryNameSharesParameterValidation(alias, parameters, message):
     with pytest.raises(ValueError, match=message):
         MFunction(alias, **parameters)

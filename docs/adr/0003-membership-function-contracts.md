@@ -50,8 +50,8 @@ only after the legacy behavior is covered by regression tests.
 - Task #51 owns strict validation implementation.
 - Task #52 owns reference and property tests.
 - Task #53 removes Bell's evaluation-time parameter mutation.
-- Task #54 introduces only exact additive aliases that dispatch to the same
-  implementation: `sShoulder`, `gaussian`, `logistic`, and
+- Task #54 adds exact compatibility registry names that dispatch to the same
+  interim implementation: `sShoulder`, `gaussian`, `logistic`, and
   `harringtonDesirability`.
 
 The contract is enforced by Task #51 and covered by the reference/property
@@ -64,11 +64,17 @@ A common `(left, peak, right)` or
 the legacy `triangle` or `trapezium` identifiers. It requires a separate
 modern alias with an unambiguous name.
 
-Aliases do not duplicate formulas. They are additional registry keys pointing
-to the historical canonical bound method and therefore inherit the same
-validated parameter contract. A conventional alias is deliberately absent for
-the non-standard flat-top `bell`, legacy-order `triangle`, and legacy-order
-`trapezium` families.
+The current `MFunction` aliases do not duplicate formulas. They are additional
+keys in the legacy factory registry and therefore share one bound method and
+validated parameter contract. This is a transitional compatibility mechanism,
+not the final direction of ownership: focused modern modules will own the
+canonical implementations, while historical identifiers delegate to or adapt
+those implementations through `FuzzyRoutines.py`.
+
+A conventional registry alias is deliberately absent for the non-standard
+flat-top `bell`, legacy-order `triangle`, and legacy-order `trapezium`
+families. Their modern replacements require explicit conventional parameter
+contracts rather than ambiguous pass-through aliases.
 
 ## Acceptance and supersession
 
