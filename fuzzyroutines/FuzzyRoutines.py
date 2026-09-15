@@ -727,8 +727,6 @@ class UniversalFuzzyScale(FuzzyScale):
     """
 
     def __init__(self):
-        super().__init__()
-
         self._name = 'FuzzyScale'  # default universal fuzzy scale contains 5 levels, FuzzyScale = {Min, Low, Med, High, Max}:
 
         self._levels = [{'name': 'Min',
