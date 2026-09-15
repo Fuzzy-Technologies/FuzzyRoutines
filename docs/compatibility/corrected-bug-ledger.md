@@ -27,12 +27,13 @@ tasks must change; it does not itself alter public runtime behaviour.
 
 ## Tracked correction candidates
 
-| Behaviour | Legacy observation | Required v2 behaviour | Evidence / implementation | Status |
-|---|---|---|---|---|
-| Parametric negation endpoint | `FuzzyNOT(x, alpha=1)` returns a degenerate non-involutive result. | Reject `alpha=1`; the strong-negation domain is `0 < alpha < 1`. | [ADR-0004](../adr/0004-operator-and-negation-contracts.md), Task #55 | Planned |
-| Parabolic negation scan | `FuzzyNOTParabolic` searches with a caller-controlled epsilon and can fail to terminate for `epsilon=0`. | Use the documented closed-form valid branch; no epsilon scan. | [derivation](../mathematics/parabolic-negation-derivation.md), Task #57 | Planned |
-| Variadic operator validation | One-element composition can bypass fuzzy-domain validation and unknown names do not fail deterministically. | Validate every operand and reject unknown families. | [ADR-0004](../adr/0004-operator-and-negation-contracts.md), Task #61 | Planned |
-| Defuzzification cache | `FuzzySet.Defuz()` returns a construction-time cached centroid after membership mutation. | Return a result derived from the current state. | [strict regression](../../tests/test_stale_defuzzification_regression.py), Task #66 | Planned |
+| Behaviour                    | Legacy observation                                                                                          | Required v2 behaviour                                            | Evidence / implementation                                                           | Status  |
+|------------------------------|-------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------|---------|
+| Parametric negation endpoint | `FuzzyNOT(x, alpha=1)` returns a degenerate non-involutive result.                                          | Reject `alpha=1`; the strong-negation domain is `0 < alpha < 1`. | [ADR-0004](../adr/0004-operator-and-negation-contracts.md), Task #55                | Planned |
+| Parabolic negation scan      | `FuzzyNOTParabolic` searches with a caller-controlled epsilon and can fail to terminate for `epsilon=0`.    | Use the documented closed-form valid branch; no epsilon scan.    | [derivation](../mathematics/parabolic-negation-derivation.md), Task #57             | Planned |
+| Variadic operator validation | One-element composition can bypass fuzzy-domain validation and unknown names do not fail deterministically. | Validate every operand and reject unknown families.              | [ADR-0004](../adr/0004-operator-and-negation-contracts.md), Task #61                | Planned |
+| Defuzzification cache        | `FuzzySet.Defuz()` returns a construction-time cached centroid after membership mutation.                   | Return a result derived from the current state.                  | [strict regression](../../tests/test_stale_defuzzification_regression.py), Task #66 | Planned |
+
 
 ## Record format for each merged correction
 
