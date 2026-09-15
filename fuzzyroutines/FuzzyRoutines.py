@@ -244,13 +244,80 @@ class MFunction():
                            'exponential': self.Exponential,
                            'sigmoidal': self.Sigmoidal,
                            'desirability': self.Desirability}  # Factory registrator for all membership functions
+
+        if userFunc not in self._functions:
+            raise ValueError("unknown membership-function identifier: {!r}".format(userFunc))
+
         self.mju = self._functions[userFunc]  # Calculate result of define membership function
+        self._parameters = self._ValidateParameters(membershipFunctionParams)
 
-        if membershipFunctionParams or self.mju.__name__ == 'Desirability':
-            self._parameters = membershipFunctionParams  # parameters for using in membership function
+    def _ValidateParameters(self, parameters):
+        """
+        Validate and copy the exact parameter mapping for the selected family.
 
-        else:
-            raise Exception("You must specify all membership function's parameters!")
+        Triangle keeps the historical ``a, b, c`` argument names: geometrically
+        ``a`` is the left foot, ``c`` is the apex, and ``b`` is the right foot.
+        """
+        functionName = self.mju.__name__
+        requiredParameters = {
+            'Hyperbolic': ('a', 'b', 'c'),
+            'Bell': ('a', 'b', 'c'),
+            'Parabolic': ('a', 'b'),
+            'Triangle': ('a', 'b', 'c'),
+            'Trapezium': ('a', 'b', 'c', 'd'),
+            'Exponential': ('a', 'b'),
+            'Sigmoidal': ('a', 'b'),
+            'Desirability': (),
+        }[functionName]
+
+        if not isinstance(parameters, dict) or set(parameters) != set(requiredParameters):
+            raise ValueError(
+                "{} membership function requires exactly these parameters: {}".format(
+                    functionName,
+                    ', '.join(requiredParameters) if requiredParameters else 'none',
+                )
+            )
+
+        for parameterName in requiredParameters:
+            parameterValue = parameters[parameterName]
+
+            if not IsNumber(parameterValue) or not math.isfinite(parameterValue):
+                raise ValueError(
+                    "{} parameter {!r} must be a finite real number".format(
+                        functionName,
+                        parameterName,
+                    )
+                )
+
+        if functionName == 'Hyperbolic':
+            if parameters['a'] <= 0 or parameters['b'] <= 0:
+                raise ValueError("Hyperbolic parameters must satisfy a > 0 and b > 0")
+
+        elif functionName == 'Bell':
+            if not parameters['a'] < parameters['b'] <= parameters['c']:
+                raise ValueError("Bell parameters must satisfy a < b <= c")
+
+        elif functionName == 'Parabolic':
+            if not parameters['a'] < parameters['b']:
+                raise ValueError("Parabolic parameters must satisfy a < b")
+
+        elif functionName == 'Triangle':
+            if not parameters['a'] < parameters['c'] <= parameters['b']:
+                raise ValueError("Triangle parameters must satisfy a < c <= b")
+
+        elif functionName == 'Trapezium':
+            if not parameters['a'] < parameters['c'] <= parameters['d'] < parameters['b']:
+                raise ValueError("Trapezium parameters must satisfy a < c <= d < b")
+
+        elif functionName == 'Exponential':
+            if parameters['b'] <= 0:
+                raise ValueError("Exponential parameter b must satisfy b > 0")
+
+        elif functionName == 'Sigmoidal':
+            if parameters['a'] == 0:
+                raise ValueError("Sigmoidal parameter a must be non-zero")
+
+        return dict(parameters)
 
     @property
     def name(self):
@@ -269,11 +336,7 @@ class MFunction():
 
     @parameters.setter
     def parameters(self, value):
-        if value or self.mju.__name__ == 'Desirability':
-            self._parameters = value
-
-        else:
-            raise Exception("You must specify all membership function's parameters!")
+        self._parameters = self._ValidateParameters(value)
 
     def Hyperbolic(self, x):
         """
