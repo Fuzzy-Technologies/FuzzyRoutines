@@ -1,4 +1,13 @@
-from tools.benchmark_scale_lookup import BuildReport, LOOKUPSAMPLES, MINIMUMSAMPLES, Measure, SCALES
+import json
+
+from tools.benchmark_scale_lookup import (
+    LOOKUPSAMPLES,
+    MINIMUMSAMPLES,
+    SCALES,
+    BuildReport,
+    Main,
+    Measure,
+)
 
 
 def test_BenchmarkScaleReportSeparatesConstructionAndLookup():
@@ -25,3 +34,14 @@ def test_BenchmarkScaleRejectsInsufficientSamples():
 
     else:
         raise AssertionError("expected an explicit sample-count error")
+
+
+def test_BenchmarkScaleMainEmitsJson(capsys):
+    Main()
+    report = json.loads(capsys.readouterr().out)
+
+    for scaleName, scaleClass in SCALES.items():
+        constructionResult = report["workloads"][scaleName]["construction"]["result"]
+
+        assert constructionResult["class"] == scaleClass.__name__, "construction evidence identifies the wrong scale"
+        assert constructionResult["level_count"] > 0, "construction evidence lost the scale levels"
