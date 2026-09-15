@@ -699,10 +699,14 @@ class FuzzyScale():
         Fuzzyfication function returns one of levels on fuzzy scale for given real value who MF(value) are highest.
         """
         fuzzyLevel = self._levels[0]
+        fuzzyMembership = fuzzyLevel['fSet'].mFunction.mju(realValue)
 
         for level in self._levels[1:]:
-            if fuzzyLevel['fSet'].mFunction.mju(realValue) <= level['fSet'].mFunction.mju(realValue):
+            levelMembership = level['fSet'].mFunction.mju(realValue)
+
+            if fuzzyMembership <= levelMembership:
                 fuzzyLevel = level
+                fuzzyMembership = levelMembership
 
         return fuzzyLevel
 

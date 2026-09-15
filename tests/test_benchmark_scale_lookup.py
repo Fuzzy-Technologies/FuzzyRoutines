@@ -21,8 +21,8 @@ def test_BenchmarkScaleReportSeparatesConstructionAndLookup():
 
     assert defaultLookup["lookups_per_sample"] == LOOKUPSAMPLES
     assert universalLookup["lookups_per_sample"] == LOOKUPSAMPLES
-    assert defaultLookup["membership_evaluations"] == 4 * LOOKUPSAMPLES
-    assert universalLookup["membership_evaluations"] == 8 * LOOKUPSAMPLES
+    assert defaultLookup["membership_evaluations"] == 3 * LOOKUPSAMPLES
+    assert universalLookup["membership_evaluations"] == 5 * LOOKUPSAMPLES
 
 
 def test_BenchmarkScaleRejectsInsufficientSamples():
