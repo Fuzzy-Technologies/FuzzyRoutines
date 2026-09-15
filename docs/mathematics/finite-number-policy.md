@@ -2,7 +2,9 @@
 
 ## Status
 
-Target v2 contract. The current legacy implementation has inconsistent handling of non-finite values; this document and its executable tests define the correction target for Tasks #62 and #63.
+Implemented scalar contract. Task #62 defined the policy and Task #63 removed
+the silent sentinel and exception-to-zero paths from public scalar operators
+and built-in membership evaluation.
 
 ## Rule
 
@@ -19,4 +21,7 @@ Invalid scalar inputs include NaN, positive infinity, negative infinity, True, F
 
 ## Evidence
 
-The pending tests in tests/test_finite_number_policy.py encode the public correction target. Task #63 will implement it consistently in the shared validation path.
+The tests in `tests/test_finite_number_policy.py` exercise public operator and
+membership boundaries, explicit error behavior, extreme finite coordinates,
+and propagation of internal programming errors. Composition-specific coverage
+is retained in `tests/test_composition_validation.py`.

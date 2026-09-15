@@ -106,7 +106,8 @@ def test_readme_wildcard_import_observation_is_recorded():
     )
     assert protected_names <= set(namespace)
 
-    # Historical implementation leaks imported helper modules through wildcard
-    # import because __all__ is absent. This is observed behavior, not a
-    # declaration that these helpers are protected domain API.
-    assert {"math", "copy", "traceback"} <= set(namespace)
+    # The module still leaks imported helper modules through wildcard import
+    # because __all__ is absent. Traceback disappeared when Task #63 removed
+    # print-and-zero exception handling; helper leakage is not protected API.
+    assert {"math", "copy"} <= set(namespace)
+    assert "traceback" not in namespace
