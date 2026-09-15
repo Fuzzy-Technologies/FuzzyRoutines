@@ -144,6 +144,18 @@ Every approximate assertion must have a reason for its tolerance.
 
 Do not create one global epsilon for unrelated algorithms merely for convenience.
 
+### Executable examples, tools, and benchmarks
+
+Unit tests of internal builder functions do not prove that a user-facing entry
+point works. Every new or changed executable example, CLI tool, benchmark, or
+reporter must have at least one end-to-end invocation in a supported Python
+environment. Verify its exit status and externally observable output.
+
+For a tool that writes JSON to stdout, exercise the same shell boundary a user
+will use: redirect stdout to a file and parse that file as JSON. When a tool
+accepts an output path, exercise that path as well. Keep generated local reports
+out of Git unless the task explicitly publishes versioned evidence.
+
 ### Python code style and quality standard
 
 These rules apply to every Python file, including tests. They govern newly
@@ -185,6 +197,9 @@ the compatibility policy.
 - Do not run `ruff format`: it removes intentional sparse formatting. Use
   `ruff check` where configured, and preserve this layout when applying any
   automated fix.
+- Keep new Markdown tables readable without rendering: make cells concise and
+  pad every source column to the width of its longest cell. Do not rewrite an
+  otherwise unchanged historical table solely for alignment.
 
 #### Implementation and validation
 
