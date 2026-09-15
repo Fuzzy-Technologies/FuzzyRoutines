@@ -6,13 +6,13 @@ This document freezes the legacy preset exactly as it exists on the v2 baseline.
 
 ## Preset identity
 
-| Order | Level | Membership family | Parameters | Support | Linguistic name |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Min | hyperbolic | a=8, b=20, c=0 | [0.00, 0.23] | Min |
-| 2 | Low | bell | a=0.17, b=0.23, c=0.34 | [0.17, 0.40] | Low |
-| 3 | Med | bell | a=0.34, b=0.40, c=0.60 | [0.34, 0.66] | Med |
-| 4 | High | bell | a=0.60, b=0.66, c=0.77 | [0.60, 0.83] | High |
-| 5 | Max | parabolic | a=0.77, b=0.95 | [0.77, 1.00] | Max |
+| Order | Level | Membership family | Parameters             | Support      | Linguistic name |
+|-------|-------|-------------------|------------------------|--------------|-----------------|
+| 1     | Min   | hyperbolic        | a=8, b=20, c=0         | [0.00, 0.23] | Min             |
+| 2     | Low   | bell              | a=0.17, b=0.23, c=0.34 | [0.17, 0.40] | Low             |
+| 3     | Med   | bell              | a=0.34, b=0.40, c=0.60 | [0.34, 0.66] | Med             |
+| 4     | High  | bell              | a=0.60, b=0.66, c=0.77 | [0.60, 0.83] | High            |
+| 5     | Max   | parabolic         | a=0.77, b=0.95         | [0.77, 1.00] | Max             |
 
 The historical scale name is FuzzyScale. Its level-name lookup maps preserve the case-sensitive and uppercase forms exposed by the legacy API.
 
