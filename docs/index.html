@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="FuzzyRoutines is a scientific-grade fuzzy-computing foundation for modern Python." />
+    <meta name="theme-color" content="#0d0d0d" />
+    <meta property="og:title" content="FuzzyRoutines — scientific-grade fuzzy computing for Python" />
+    <meta property="og:description" content="Define, inspect, validate, and execute fuzzy models with explicit mathematical contracts." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fuzzy-technologies.github.io/FuzzyRoutines/" />
+    <meta property="og:site_name" content="Fuzzy Technologies" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="https://fuzzy-technologies.github.io/FuzzyRoutines/" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/site.css" />
+    <title>FuzzyRoutines — scientific-grade fuzzy computing for Python</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <main id="content">
+      <header class="site-header">
+        <a class="site-title" href="#top" aria-label="FuzzyRoutines home">◒ FuzzyRoutines</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#engineering">Engineering</a>
+          <a href="#start">Quick start</a>
+          <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines">GitHub</a>
+        </nav>
+      </header>
+
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Python · Fuzzy mathematics · Open source</p>
+          <h1 id="hero-title">Scientific-grade fuzzy computing for modern Python.</h1>
+          <p class="hero-lead">
+            FuzzyRoutines is a focused foundation for defining, inspecting, validating, and executing fuzzy
+            models in applications, scripts, services, and notebooks.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#start">Try the API</a>
+            <a class="button" href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/develop/docs">Read the engineering docs</a>
+          </div>
+          <p class="runtime-note"><span class="status-dot" aria-hidden="true"></span> v2 modernization · CPython 3.13–3.14</p>
+        </div>
+        <div class="formula-panel" aria-label="Example fuzzy membership curve">
+          <svg viewBox="0 0 520 340" role="img" aria-labelledby="curve-title curve-desc">
+            <title id="curve-title">Triangular and Gaussian membership curves</title>
+            <desc id="curve-desc">Two membership curves plotted between zero and one.</desc>
+            <defs>
+              <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#66d9ef" stop-opacity="0.34" />
+                <stop offset="1" stop-color="#66d9ef" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path class="grid-line" d="M54 42V292M54 292H484M54 229H484M54 167H484M54 104H484M162 42V292M269 42V292M377 42V292" />
+            <path class="area" d="M54 292L269 58L484 292Z" />
+            <path class="triangle-line" d="M54 292L269 58L484 292" />
+            <path class="gaussian-line" d="M54 287C120 280 147 235 183 154C210 94 237 61 269 58C301 61 328 94 355 154C391 235 418 280 484 287" />
+            <text x="24" y="48">1</text><text x="28" y="297">0</text><text x="475" y="322">x</text>
+            <text class="formula" x="95" y="26">μ(x) ∈ [0, 1]</text>
+          </svg>
+          <p>Explicit domains. Testable invariants. Traceable formulas.</p>
+        </div>
+      </section>
+
+      <p class="motto-line">Technologies · Knowledge · Science</p>
+
+      <section id="capabilities" aria-labelledby="capabilities-title">
+        <p class="section-kicker">Focused scope</p>
+        <h2 id="capabilities-title">A fuzzy-mathematics layer, not another notebook system.</h2>
+        <p class="section-intro">
+          Python and notebook environments remain the hosts. FuzzyRoutines supplies reusable fuzzy primitives
+          that can be embedded in research, expert systems, decision models, and production software.
+        </p>
+        <div class="card-grid three">
+          <article class="card">
+            <span class="card-label">Membership</span>
+            <h3>Functions and sets</h3>
+            <p>Membership families with explicit parameter domains, fuzzy-set operations, alpha-cuts, and derived properties.</p>
+          </article>
+          <article class="card">
+            <span class="card-label">Operators</span>
+            <h3>Fuzzy algebra</h3>
+            <p>Specified negations, t-norms, s-norms, linguistic variables, fuzzy scales, and deliberate edge semantics.</p>
+          </article>
+          <article class="card">
+            <span class="card-label">Inference</span>
+            <h3>Numerical results</h3>
+            <p>Analytical solutions where practical and controlled numerical methods with explicit error behavior elsewhere.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="engineering" aria-labelledby="engineering-title">
+        <p class="section-kicker">v2 engineering targets</p>
+        <h2 id="engineering-title">Correct first. Fast by evidence. Parallel by design.</h2>
+        <div class="card-grid three">
+          <article class="card accent-cyan">
+            <span class="target-badge">Target</span>
+            <h3>Mathematical reliability</h3>
+            <p>Authoritative formulas, reference cases, valid domains, boundary tests, and compatibility decisions that are visible instead of implicit.</p>
+          </article>
+          <article class="card accent-pink">
+            <span class="target-badge">Target</span>
+            <h3>Measured performance</h3>
+            <p>Low-overhead scalar paths and efficient batches. Optimizations ship with parity, timing, and memory evidence—never with superlatives alone.</p>
+          </article>
+          <article class="card accent-green">
+            <span class="target-badge">Target</span>
+            <h3>Process-safe concurrency</h3>
+            <p>Deterministic, reentrant models without hidden global mutable state, suitable for independent CPU workers and supported Python interpreters.</p>
+          </article>
+        </div>
+        <aside class="truth-panel" aria-labelledby="status-title">
+          <div>
+            <span class="card-label">Current status</span>
+            <h3 id="status-title">Active correctness-focused modernization</h3>
+          </div>
+          <p>
+            The historical public API remains available while documented defects are repaired in reviewable steps.
+            Vectorized backends, free-threaded execution, and scaling claims remain future work until their dedicated
+            parity and benchmark gates pass.
+          </p>
+        </aside>
+      </section>
+
+      <section id="start" aria-labelledby="start-title">
+        <p class="section-kicker">Run it locally</p>
+        <h2 id="start-title">Small API, inspectable behavior.</h2>
+        <div class="code-layout">
+          <div>
+            <p>Install the active development branch, then create and evaluate a fuzzy set.</p>
+            <pre><code>python -m pip install \
+  git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop</code></pre>
+          </div>
+          <pre class="code-sample"><code>from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
+
+membershipFunction = MFunction(
+    "triangle", a=0.0, b=1.0, c=0.5
+)
+fuzzySet = FuzzySet(
+    membershipFunction,
+    supportSet=(0.0, 1.0),
+    linguisticName="Medium",
+)
+
+print(TNorm(0.4, 0.7, normType="algebraic"))
+print(fuzzySet.Defuz())</code></pre>
+        </div>
+      </section>
+
+      <section aria-labelledby="evidence-title">
+        <p class="section-kicker">Inspect the evidence</p>
+        <h2 id="evidence-title">Contracts, compatibility, and measurements.</h2>
+        <div class="link-grid">
+          <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/mathematics/membership-function-contracts.md">
+            <strong>Membership contracts</strong><span>Families, parameters, limits →</span>
+          </a>
+          <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/adr/0004-operator-and-negation-contracts.md">
+            <strong>Operator contracts</strong><span>Norms and negations →</span>
+          </a>
+          <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/compatibility/corrected-bug-ledger.md">
+            <strong>Compatibility ledger</strong><span>Intentional corrections →</span>
+          </a>
+          <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/benchmark-reproducibility-protocol.md">
+            <strong>Benchmark protocol</strong><span>Reproduce measurements →</span>
+          </a>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <a href="https://fuzzy-technologies.github.io/"><strong>Fuzzy Technologies</strong></a>
+        <span>Technologies · Knowledge · Science</span>
+        <span class="footer-signature">— powered by math &amp; fuzzy logic</span>
+      </footer>
+    </main>
+  </body>
+</html>
