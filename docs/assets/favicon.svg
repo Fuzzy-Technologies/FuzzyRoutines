@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FuzzyRoutines">
+  <rect width="64" height="64" rx="14" fill="#0d0d0d" />
+  <path d="M11 43c8-27 17-27 25 0s13 18 17-11" fill="none" stroke="#66d9ef" stroke-width="5" stroke-linecap="round" />
+  <circle cx="36" cy="22" r="5" fill="#ff79c6" />
+</svg>
