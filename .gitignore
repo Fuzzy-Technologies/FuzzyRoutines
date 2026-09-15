@@ -1,0 +1,21 @@
+# Python environments and caches
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Coverage reports
+.coverage
+.coverage.*
+coverage.json
+htmlcov/
+
+# Package builds
+build/
+dist/
+*.egg-info/
+
+# Local benchmark and diagnostic reports
+/benchmark-*.json
+/universal-scale-coverage.json
