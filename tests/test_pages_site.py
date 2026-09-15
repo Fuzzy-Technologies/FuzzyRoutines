@@ -2,7 +2,6 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
 
-
 PROJECT_ROOT = Path(__file__).parents[1]
 SITE_ROOT = PROJECT_ROOT / "docs"
 
@@ -65,3 +64,13 @@ def testPagesSiteHasNoRuntimeScriptDependencies():
 
     assert "<script" not in pageText.lower()
     assert "http://" not in pageText.lower()
+
+
+def testPagesSiteSeparatesImplementedBehaviorFromRoadmap():
+    pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
+
+    assert 'data-status="implemented"' in pageText
+    assert 'data-status="roadmap"' in pageText
+    assert "Implemented on develop" in pageText
+    assert "Still in the v2 roadmap" in pageText
+    assert "current-status.md" in pageText

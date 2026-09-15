@@ -2,7 +2,10 @@
 
 ## Status
 
-Target v2 contract. This policy implements the decision record requested by Task #64; Task #66 will implement the centroid behavior after the analytical/adaptive integration design is complete.
+Target v2 contract. This policy implements the decision record requested by
+Task #64. Task #66 has removed stale construction-time centroid state. Tasks
+#79 and #80 still own the analytical/adaptive integration strategy, explicit
+precision, convergence failure, and zero-area behavior.
 
 ## Tolerances
 

@@ -21,18 +21,26 @@ as one.
 
 ## Current corrected behaviours
 
-No runtime defect correction has been merged into the v2 implementation yet.
-The completed contract and evidence work defines what future implementation
-tasks must change; it does not itself alter public runtime behaviour.
+- **Parametric negation endpoint:** `FuzzyNOT` now rejects non-finite values,
+  booleans, and every `alpha` outside the open interval `(0, 1)`. The public
+  name is unchanged. Evidence: Task #55 and
+  [PR #186](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/186).
+- **Variadic operator validation:** `TNormCompose` and `SCoNormCompose` now
+  validate every operand and reject unknown operator families consistently.
+  Their historical `None` failure sentinel remains until the explicit error
+  model is implemented. Evidence: Task #61 and
+  [PR #190](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/190).
+- **Defuzzification cache:** `FuzzySet.Defuz()` and `defuzValue` now calculate
+  from current membership parameters and the current integration interval
+  instead of exposing a construction-time value. Evidence: Task #66 and
+  [PR #188](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/188).
 
 ## Tracked correction candidates
 
-| Behaviour                    | Legacy observation                                                                                          | Required v2 behaviour                                            | Evidence / implementation                                                           | Status  |
-|------------------------------|-------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------|---------|
-| Parametric negation endpoint | `FuzzyNOT(x, alpha=1)` returns a degenerate non-involutive result.                                          | Reject `alpha=1`; the strong-negation domain is `0 < alpha < 1`. | [ADR-0004](../adr/0004-operator-and-negation-contracts.md), Task #55                | Planned |
-| Parabolic negation scan      | `FuzzyNOTParabolic` searches with a caller-controlled epsilon and can fail to terminate for `epsilon=0`.    | Use the documented closed-form valid branch; no epsilon scan.    | [derivation](../mathematics/parabolic-negation-derivation.md), Task #57             | Planned |
-| Variadic operator validation | One-element composition can bypass fuzzy-domain validation and unknown names do not fail deterministically. | Validate every operand and reject unknown families.              | [ADR-0004](../adr/0004-operator-and-negation-contracts.md), Task #61                | Planned |
-| Defuzzification cache        | `FuzzySet.Defuz()` returns a construction-time cached centroid after membership mutation.                   | Return a result derived from the current state.                  | [strict regression](../../tests/test_stale_defuzzification_regression.py), Task #66 | Planned |
+- **Parabolic negation scan:** `FuzzyNOTParabolic` still searches with a
+  caller-controlled epsilon and can fail to terminate for `epsilon=0`. Task
+  #57 must replace the scan with the
+  [documented closed-form branch](../mathematics/parabolic-negation-derivation.md).
 
 
 ## Record format for each merged correction
