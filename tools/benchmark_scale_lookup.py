@@ -11,28 +11,35 @@ from time import perf_counter_ns
 
 from fuzzyroutines.FuzzyRoutines import FuzzyScale, UniversalFuzzyScale
 
-
 MINIMUMSAMPLES = 7
 LOOKUPSAMPLES = 100
 SCALES = {"default": FuzzyScale, "universal": UniversalFuzzyScale}
 
 
-def Measure(workload, sampleCount=MINIMUMSAMPLES):
+def Measure(workload, sampleCount=MINIMUMSAMPLES, summarizeResult=None):
+    """Measure a workload and retain one optionally summarized result."""
+
     if sampleCount < MINIMUMSAMPLES:
-        raise ValueError("sampleCount must be at least {}".format(MINIMUMSAMPLES))
+        raise ValueError(f"sampleCount must be at least {MINIMUMSAMPLES}")
 
     durationSamples = []
     peakBytesSamples = []
-    results = []
+    firstResult = None
 
-    for _ in range(sampleCount):
+    for sampleIndex in range(sampleCount):
         tracemalloc.start()
         start = perf_counter_ns()
-        results.append(workload())
+        sampleResult = workload()
         durationSamples.append(perf_counter_ns() - start)
         _, peakBytes = tracemalloc.get_traced_memory()
         peakBytesSamples.append(peakBytes)
         tracemalloc.stop()
+
+        if sampleIndex == 0:
+            firstResult = sampleResult
+
+    if summarizeResult is not None:
+        firstResult = summarizeResult(firstResult)
 
     return {
         "duration_ns": durationSamples,
@@ -41,7 +48,16 @@ def Measure(workload, sampleCount=MINIMUMSAMPLES):
         "max_ns": max(durationSamples),
         "peak_bytes": peakBytesSamples,
         "median_peak_bytes": median(peakBytesSamples),
-        "result": results[0],
+        "result": firstResult,
+    }
+
+
+def SummarizeScale(scale):
+    """Return stable JSON-safe evidence about a constructed scale."""
+
+    return {
+        "class": type(scale).__name__,
+        "level_count": len(scale.levels),
     }
 
 
@@ -79,7 +95,7 @@ def BuildReport(sampleCount=MINIMUMSAMPLES):
     for scaleName, scaleClass in SCALES.items():
         scale = scaleClass()
         workloads[scaleName] = {
-            "construction": Measure(scaleClass, sampleCount),
+            "construction": Measure(scaleClass, sampleCount, SummarizeScale),
             "repeated_lookup": Measure(BuildLookupWorkload(scale), sampleCount),
         }
 
