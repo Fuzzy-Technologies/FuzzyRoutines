@@ -243,14 +243,19 @@ class MFunction():
 
     def __init__(self, userFunc, **membershipFunctionParams):
         self.accuracy = 1000  # Line of numbers divided by points, affect on accuracy, using in integral calculating
+        # Registry values are bound methods; exact aliases must share one implementation.
         self._functions = {'hyperbolic': self.Hyperbolic,
                            'bell': self.Bell,
                            'parabolic': self.Parabolic,
+                           'sShoulder': self.Parabolic,
                            'triangle': self.Triangle,
                            'trapezium': self.Trapezium,
                            'exponential': self.Exponential,
+                           'gaussian': self.Exponential,
                            'sigmoidal': self.Sigmoidal,
-                           'desirability': self.Desirability}  # Factory registrator for all membership functions
+                           'logistic': self.Sigmoidal,
+                           'desirability': self.Desirability,
+                           'harringtonDesirability': self.Desirability}
 
         if userFunc not in self._functions:
             raise ValueError("unknown membership-function identifier: {!r}".format(userFunc))

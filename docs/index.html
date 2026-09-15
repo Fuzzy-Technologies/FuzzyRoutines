@@ -78,7 +78,7 @@
           <article class="card">
             <span class="card-label">Membership</span>
             <h3>Functions and sets</h3>
-            <p>Built-in membership families, documented parameter contracts, and the historical <code>FuzzySet</code> wrapper. Strict validation for every family remains in progress.</p>
+            <p>Built-in membership families with strict parameter contracts, exact modern aliases, and the historical <code>FuzzySet</code> wrapper.</p>
           </article>
           <article class="card">
             <span class="card-label">Operators</span>
@@ -101,8 +101,10 @@
             <span class="status-badge implemented">Implemented on develop</span>
             <ul>
               <li>Compatibility-tested historical imports and public names</li>
+              <li>Strict membership parameters and exact modern aliases</li>
               <li>Reference-tested classical fuzzy operators</li>
               <li>Finite <code>FuzzyNOT</code> parameter validation</li>
+              <li>Analytical parabolic negation without an epsilon scan</li>
               <li>Reentrant Bell membership evaluation</li>
               <li>Centroids recalculated from current set state</li>
               <li>Single-evaluation scale lookup</li>
@@ -112,7 +114,6 @@
           <article class="status-column" data-status="roadmap">
             <span class="status-badge roadmap">Still in the v2 roadmap</span>
             <ul>
-              <li>Strict validation for every membership family</li>
               <li>Explicit universe and mathematical-support model</li>
               <li>Fuzzy-set algebra, alpha-cuts, core, and height</li>
               <li>Analytical and adaptive defuzzification strategies</li>
