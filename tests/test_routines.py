@@ -97,30 +97,20 @@ class TestBaseMethods():
             [0., 0.5, 0.001, 1.],
             [0.5, 0.5, 0.001, 0.5],
             [1., 0.5, 0.001, 0.],
-            [0., 1., 0., 1.],
-            [0., 1., 1., 1.],
             [0., 0.25, 0., 1.],
             [0., 0.25, 1., 1.],
             [1., 0.25, 0., 0.],
             [1., 0.25, 1., 0.],
-            [0., 1., 0.25, 1.],
-            [1., 1., 0.25, 0.],
+            [0., 0.75, 0., 1.],
+            [1., 0.75, 1., 0.],
         ]
         for test in testDataPositive:
             assert round(FuzzyNOTParabolic(test[0], alpha=test[1], epsilon=test[2]), 5) == test[3], 'Input: [ {}, alpha={}, epsilon={} ] expected output: [ {} ]'.format(test[0], test[1], test[2], test[3])
 
         # negative tests:
         testDataNegative = [
-            [1., 0., 0.25, None],
-            [0., 0., 0.25, None],
-            [0., 0., 0., None],
-            [0., 0., 1., None],
             [-1., 0.5, 0.001, None],
             [2., 0.5, 0.001, None],
-            [0., -1., 0.001, None],
-            [1., 2., 0.001, None],
-            [0., 0.5, -1., None],
-            [1., 0.5, 2., None],
         ]
         for test in testDataNegative:
             assert FuzzyNOTParabolic(test[0], alpha=test[1], epsilon=test[2]) is test[3], 'Input: [ {}, alpha={}, epsilon={} ] expected output: [ {} ]'.format(test[0], test[1], test[2], test[3])

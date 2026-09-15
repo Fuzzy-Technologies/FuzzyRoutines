@@ -46,8 +46,64 @@ def test_FuzzyNOTRejectsInvalidAlpha(alpha):
         FuzzyNOT(0.5, alpha=alpha)
 
 
-@pytest.mark.xfail(strict=True, reason="Task #57 will enforce the proved parabolic alpha interval [1/4, 3/4].")
-@pytest.mark.parametrize("alpha", [0.0, 0.2, 0.8, 1.0])
+@pytest.mark.parametrize(
+    "alpha",
+    [
+        0.0,
+        0.2,
+        0.8,
+        1.0,
+        True,
+        False,
+        pytest.param(float("nan"), id="nan"),
+        float("inf"),
+    ],
+)
 def test_FuzzyNOTParabolicRejectsAlphaOutsideProvedInterval(alpha):
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="closed interval"):
         FuzzyNOTParabolic(0.5, alpha=alpha)
+
+
+PARABOLICALPHAS = (0.25, 0.3, 0.5, 0.7, 0.75)
+PARABOLICGRID = tuple(index / 100.0 for index in range(101))
+
+
+@pytest.mark.parametrize("alpha", PARABOLICALPHAS)
+def test_FuzzyNOTParabolicSatisfiesDefiningEquation(alpha):
+    for fuzzyNumber in PARABOLICGRID:
+        result = FuzzyNOTParabolic(fuzzyNumber, alpha=alpha)
+        residual = (
+            2 * alpha
+            - fuzzyNumber
+            - result
+            - (2 * alpha - 1) * (result - fuzzyNumber) ** 2
+        )
+
+        assert residual == pytest.approx(0.0, abs=2e-15, rel=0.0)
+
+
+@pytest.mark.parametrize("alpha", PARABOLICALPHAS)
+def test_FuzzyNOTParabolicIsStrongNegation(alpha):
+    values = [FuzzyNOTParabolic(fuzzyNumber, alpha=alpha) for fuzzyNumber in PARABOLICGRID]
+
+    assert values[0] == 1.0
+    assert values[-1] == 0.0
+    assert FuzzyNOTParabolic(alpha, alpha=alpha) == alpha
+    assert all(0.0 <= value <= 1.0 for value in values)
+    assert values == sorted(values, reverse=True)
+
+    for fuzzyNumber, value in zip(PARABOLICGRID, values):
+        assert FuzzyNOTParabolic(value, alpha=alpha) == pytest.approx(
+            fuzzyNumber,
+            abs=1e-12,
+            rel=0.0,
+        )
+
+
+@pytest.mark.parametrize("epsilon", [0.0, 1e-12, 0.001, 1.0, -1.0])
+def test_FuzzyNOTParabolicRetainsButIgnoresLegacyEpsilon(epsilon):
+    assert FuzzyNOTParabolic(0.2, alpha=0.3, epsilon=epsilon) == pytest.approx(
+        FuzzyNOTParabolic(0.2, alpha=0.3),
+        abs=0.0,
+        rel=0.0,
+    )
