@@ -5,6 +5,15 @@ from fuzzyroutines.domain import (
     DiscreteUniverse,
     IntegrationDomain,
 )
+from fuzzyroutines.fuzzysets import (
+    Complement,
+    Intersection,
+    NegationPolicy,
+    ScalarFuzzySet,
+    SNormPolicy,
+    TNormPolicy,
+    Union,
+)
 from fuzzyroutines.properties import (
     ContinuousFuzzyProperties,
     ContinuousInterval,
@@ -17,6 +26,7 @@ from fuzzyroutines.properties import (
 )
 
 __all__ = [
+    "Complement",
     "ContinuousFuzzyProperties",
     "ContinuousInterval",
     "ContinuousRegion",
@@ -26,6 +36,12 @@ __all__ = [
     "DiscreteRegion",
     "DiscreteUniverse",
     "IntegrationDomain",
+    "Intersection",
+    "NegationPolicy",
+    "SNormPolicy",
     "SampleProperties",
     "SampledFuzzyProperties",
+    "ScalarFuzzySet",
+    "TNormPolicy",
+    "Union",
 ]
