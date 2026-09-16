@@ -96,9 +96,10 @@ Executable property tests cover all four accepted dual family pairs:
 - both De Morgan laws under standard negation.
 
 The modern scalar policies are also checked against the protected historical
-scalar functions on a deterministic reference grid. Equality and inclusion of
-whole fuzzy sets are intentionally not inferred from these grid checks; Task
-#73 owns their exact and tolerance-based semantics.
+scalar functions on a deterministic reference grid. Equality and inclusion use
+the separate fail-closed contract documented in
+[Fuzzy-Set Equality and Inclusion](fuzzy-set-relations.md); operator reference
+grids are not silently reused as comparison domains.
 
 ## References
 

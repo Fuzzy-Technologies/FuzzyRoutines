@@ -167,7 +167,7 @@ class SNormPolicy:
         return 1
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, eq=False)
 class ScalarFuzzySet:
     """Immutable scalar fuzzy-set definition over one explicit universe."""
 

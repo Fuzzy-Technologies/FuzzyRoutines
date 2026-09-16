@@ -24,8 +24,16 @@ from fuzzyroutines.properties import (
     SampledFuzzyProperties,
     SampleProperties,
 )
+from fuzzyroutines.relations import (
+    ComparisonDomain,
+    ComparisonPolicy,
+    EqualOnDomain,
+    IncludedOnDomain,
+)
 
 __all__ = [
+    "ComparisonDomain",
+    "ComparisonPolicy",
     "Complement",
     "ContinuousFuzzyProperties",
     "ContinuousInterval",
@@ -35,6 +43,8 @@ __all__ = [
     "DiscreteFuzzyProperties",
     "DiscreteRegion",
     "DiscreteUniverse",
+    "EqualOnDomain",
+    "IncludedOnDomain",
     "IntegrationDomain",
     "Intersection",
     "NegationPolicy",
