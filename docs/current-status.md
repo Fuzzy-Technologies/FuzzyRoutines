@@ -38,9 +38,22 @@ The corresponding accepted changes are
 - Historical `supportSet` is defined as an integration-domain compatibility
   name; it does not claim to be exact mathematical support.
 
+## Core domain model implemented for review
+
+- immutable scalar `ContinuousUniverse`, `DiscreteUniverse`, and
+  `IntegrationDomain` value objects implement the representation layer of
+  ADR-0002;
+- the legacy `FuzzySet.supportSet` tuple delegates internally to
+  `IntegrationDomain` without changing its constructor, getter, or setter
+  shape;
+- mathematical support, support closure, core, boundary, and height remain a
+  separate implementation step and are not inferred from the integration
+  interval.
+
 ## Still in the v2 roadmap
 
-- implementation of the accepted universe/support domain model;
+- exact or explicitly approximate support/core/boundary/height derivation on
+  top of the accepted universe representation;
 - fuzzy-set complement, union, intersection, equality, and inclusion;
 - alpha-cuts and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
