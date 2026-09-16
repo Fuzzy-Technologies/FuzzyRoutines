@@ -66,3 +66,45 @@ against a continuous universe before a numerical operation begins.
 single compatibility adapter for historical `supportSet` tuples. The legacy
 `FuzzySet` facade now stores this value object internally while its public
 getter and setter retain the historical tuple shape.
+
+## Executable derived properties
+
+`DeriveProperties(membershipFunction, universe)` returns one of two exact
+result types:
+
+- `ContinuousFuzzyProperties` uses analytical geometry declared by the known
+  `MFunction` family and represents sets as immutable unions of
+  `ContinuousInterval` components;
+- `DiscreteFuzzyProperties` evaluates every coordinate in a declared
+  `DiscreteUniverse`. In the discrete topology every subset is closed, so its
+  positive support and support closure are identical.
+
+Each result exposes `positiveSupport`, `supportClosure`, `core`, `boundary`,
+`height`, and `isExact == True`. Regions are clipped to the declared universe;
+support closure is computed in that universe's relative topology. Therefore a
+support limit point outside the universe cannot be imported as a singleton.
+
+```python
+from fuzzyroutines import ContinuousUniverse, DeriveProperties
+from fuzzyroutines.FuzzyRoutines import MFunction
+
+membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
+properties = DeriveProperties(membershipFunction, ContinuousUniverse())
+
+assert properties.positiveSupport.Contains(0.5)
+assert properties.core.Contains(1.0)
+assert properties.height == 1.0
+```
+
+`SampleProperties(membershipFunction, analysisDomain, sampleCount)` is a
+different API with a different result type. `SampledFuzzyProperties` records
+the finite analysis domain, sample count, coordinates, grades, and
+`method="uniform-grid"`; its `isExact` property is always false. Its fields are
+named `positiveSupportSamples`, `coreSamples`, `boundarySamples`, and
+`heightEstimate` so a finite grid cannot masquerade as exact continuous
+geometry.
+
+Gaussian support is derived analytically as the real line even when a distant
+floating-point evaluation underflows to zero. Logistic and Harrington
+membership functions have an empty core on the real line while their height is
+one: the supremum is approached but never attained at a finite coordinate.
