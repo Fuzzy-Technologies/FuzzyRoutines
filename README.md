@@ -43,13 +43,15 @@ The current `develop` branch already provides:
 - immutable scalar universe and numerical integration-domain value objects;
 - an explicit compatibility mapping from legacy `supportSet` tuples to
   `IntegrationDomain`;
+- immutable scalar fuzzy sets with explicit complement, intersection, and
+  union policies and fail-closed universe compatibility;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
 
-Derived support/core properties, fuzzy-set algebra, alpha-cuts,
-analytical/adaptive defuzzification strategy, the complete typed module API,
-optional vectorization, and free-threaded execution remain roadmap work. See the
+Fuzzy-set equality/inclusion, alpha-cuts, analytical/adaptive defuzzification
+strategy, the complete typed module API, optional vectorization, and
+free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
 and evidence.
 
@@ -109,6 +111,24 @@ without scanning floating-point samples:
 observations with `isExact == False`; a finite numerical grid never becomes
 mathematical support by implication.
 
+Set operations require explicit policies; there is no global or implicit
+operator selection:
+
+    from fuzzyroutines import (
+        Complement,
+        Intersection,
+        NegationPolicy,
+        ScalarFuzzySet,
+        SNormPolicy,
+        TNormPolicy,
+        Union,
+    )
+
+    fuzzySet = ScalarFuzzySet(universe, lambda coordinate: coordinate)
+    complement = Complement(fuzzySet, NegationPolicy("standard"))
+    overlap = Intersection(fuzzySet, complement, TNormPolicy("logic"))
+    envelope = Union(fuzzySet, complement, SNormPolicy("logic"))
+
 ## Mathematics and compatibility
 
 - Membership-function contracts: docs/mathematics/membership-function-contracts.md
@@ -116,6 +136,7 @@ mathematical support by implication.
 - Universe/support contract: docs/mathematics/universe-support-contract.md
 - Universe/support ADR: docs/adr/0002-universe-support-semantics.md
 - Operator and negation ADR: docs/adr/0004-operator-and-negation-contracts.md
+- Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md

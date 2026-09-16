@@ -52,10 +52,17 @@ The corresponding accepted changes are
 - discrete-universe properties are exhaustive over every declared coordinate;
 - continuous grid inspection returns a separately typed sampled report with
   explicit domain, resolution, method, and `isExact == False` provenance.
+- immutable `ScalarFuzzySet` values support complement, intersection, and
+  union with mandatory `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`
+  arguments;
+- binary fuzzy-set operations fail closed when their continuous or discrete
+  universes are not exactly equal;
+- the set-level operator families preserve the accepted scalar formulas and
+  have commutativity, associativity, boundary, range, and De Morgan tests.
 
 ## Still in the v2 roadmap
 
-- fuzzy-set complement, union, intersection, equality, and inclusion;
+- fuzzy-set equality and inclusion;
 - alpha-cuts and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
 - deterministic adaptive quadrature with explicit tolerance and convergence errors elsewhere;
