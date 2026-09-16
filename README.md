@@ -44,7 +44,8 @@ The current `develop` branch already provides:
 - an explicit compatibility mapping from legacy `supportSet` tuples to
   `IntegrationDomain`;
 - immutable scalar fuzzy sets with explicit complement, intersection, and
-  union policies, directed difference, and fail-closed universe compatibility;
+  union policies, directed difference, exact height queries, fail-closed
+  normalization, and fail-closed universe compatibility;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
@@ -136,6 +137,23 @@ operator selection:
         NegationPolicy("standard"),
     )
 
+Exact height and normalization deliberately distinguish exhaustive or
+analytical evidence from finite continuous sampling:
+
+    from fuzzyroutines import Height, IsNormal, Normalize
+    from fuzzyroutines.FuzzyRoutines import MFunction
+
+    membershipFunction = MFunction("logistic", a=2.0, b=0.0)
+    analyticalSet = ScalarFuzzySet(universe, membershipFunction.mju)
+    normalizedSet = Normalize(analyticalSet)
+
+    assert Height(normalizedSet) == 1.0
+    assert IsNormal(normalizedSet)
+
+Generic continuous callables fail closed because a finite grid cannot prove
+their global height. See the normalization contract for the exact discrete,
+analytical, zero-height, and tolerance semantics.
+
 ## Mathematics and compatibility
 
 - Membership-function contracts: docs/mathematics/membership-function-contracts.md
@@ -145,6 +163,7 @@ operator selection:
 - Operator and negation ADR: docs/adr/0004-operator-and-negation-contracts.md
 - Directed-difference ADR: docs/adr/0008-fuzzy-set-difference-semantics.md
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
+- Fuzzy-set height and normalization: docs/mathematics/fuzzy-set-normalization.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md

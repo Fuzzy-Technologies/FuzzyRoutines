@@ -58,6 +58,11 @@ The corresponding accepted changes are
 - directed fuzzy-set difference implements `T(mu_A(x), N(mu_B(x)))` with
   mandatory t-norm and negation policies and no classical self-difference
   assumption;
+- exact height queries evaluate discrete universes exhaustively and reuse
+  analytical `MFunction` property derivation for continuous universes;
+- normalization returns a distinct height-one set, rejects zero height, and
+  rejects generic continuous callables rather than treating a sample maximum
+  as exact;
 - binary fuzzy-set operations fail closed when their continuous or discrete
   universes are not exactly equal;
 - the set-level operator families preserve the accepted scalar formulas and

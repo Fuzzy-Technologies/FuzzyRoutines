@@ -193,6 +193,158 @@ class ScalarFuzzySet:
         return _RequireGrade(self.membershipFunction(coordinate), "membership grade")
 
 
+@dataclass(frozen=True, slots=True)
+class _NormalizedDiscreteMembership:
+    """Immutable exhaustive grade snapshot for a normalized discrete set."""
+
+    coordinates: tuple[Real, ...]
+    grades: tuple[Real, ...]
+
+    def __call__(self, coordinate):
+        """Return the normalized grade at one already validated coordinate."""
+
+        return self.grades[self.coordinates.index(coordinate)]
+
+
+@dataclass(frozen=True, slots=True)
+class _NormalizedContinuousMembership:
+    """Immutable continuous normalization evaluator with exact height evidence."""
+
+    familyIdentifier: str
+    parameters: tuple[tuple[str, Real], ...]
+    sourceHeight: Real
+
+    def __call__(self, coordinate):
+        """Evaluate the frozen analytical definition and scale its grade."""
+
+        from fuzzyroutines.FuzzyRoutines import MFunction
+
+        membershipFunction = MFunction(self.familyIdentifier, **dict(self.parameters))
+        return membershipFunction.mju(coordinate) / self.sourceHeight
+
+
+def _ContinuousAnalyticalSource(fuzzySet):
+    """Return the exact analytical source behind a bound ``MFunction`` method."""
+
+    from fuzzyroutines.FuzzyRoutines import MFunction
+
+    source = getattr(fuzzySet.membershipFunction, "__self__", None)
+
+    if isinstance(source, MFunction) and fuzzySet.membershipFunction == source.mju:
+        return source
+
+    return None
+
+
+def _RequireContinuousAnalyticalSource(fuzzySet):
+    """Return a supported exact source or reject an unproved supremum."""
+
+    analyticalSource = _ContinuousAnalyticalSource(fuzzySet)
+
+    if analyticalSource is None:
+        raise ValueError(
+            "exact continuous height is unavailable for a generic membership callable"
+        )
+
+    return analyticalSource
+
+
+def _DiscreteGrades(fuzzySet):
+    """Evaluate every coordinate of a declared discrete universe exactly once."""
+
+    return tuple(fuzzySet.Membership(coordinate) for coordinate in fuzzySet.universe.points)
+
+
+def Height(fuzzySet):
+    """Return the exact supremum of membership grades when it is provable.
+
+    A discrete universe is evaluated exhaustively.  A continuous universe
+    requires either internally preserved exact evidence or a bound analytical
+    ``MFunction`` supported by :func:`fuzzyroutines.properties.DeriveProperties`.
+    The function never promotes a finite sample maximum to an exact height.
+    """
+
+    if not isinstance(fuzzySet, ScalarFuzzySet):
+        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+
+    if isinstance(
+        fuzzySet.membershipFunction,
+        (_NormalizedDiscreteMembership, _NormalizedContinuousMembership),
+    ):
+        return 1.0
+
+    if isinstance(fuzzySet.universe, DiscreteUniverse):
+        return max(_DiscreteGrades(fuzzySet))
+
+    analyticalSource = _RequireContinuousAnalyticalSource(fuzzySet)
+
+    from fuzzyroutines.properties import DeriveProperties
+
+    return DeriveProperties(analyticalSource, fuzzySet.universe).height
+
+
+def IsNormal(fuzzySet, tolerance=1e-12):
+    """Return whether the exact fuzzy-set height equals one within tolerance."""
+
+    tolerance = _RequireFiniteReal(tolerance, "tolerance")
+
+    if tolerance < 0:
+        raise ValueError("tolerance must be non-negative")
+
+    return math.isclose(Height(fuzzySet), 1.0, rel_tol=0.0, abs_tol=tolerance)
+
+
+def Normalize(fuzzySet):
+    """Return a new height-one fuzzy set without mutating the source set.
+
+    Normalization is the pointwise quotient ``mu_A(x) / height(A)``.  It is
+    undefined for height zero and unavailable when an exact continuous height
+    cannot be proved under the current analytical contracts.
+    """
+
+    if not isinstance(fuzzySet, ScalarFuzzySet):
+        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+
+    if isinstance(fuzzySet.universe, DiscreteUniverse):
+        sourceGrades = _DiscreteGrades(fuzzySet)
+        height = max(sourceGrades)
+
+        if height == 0:
+            raise ValueError("cannot normalize a zero-height fuzzy set")
+
+        normalizedGrades = tuple(grade / height for grade in sourceGrades)
+        normalizedMembership = _NormalizedDiscreteMembership(
+            fuzzySet.universe.points,
+            normalizedGrades,
+        )
+
+    else:
+        if isinstance(fuzzySet.membershipFunction, _NormalizedContinuousMembership):
+            return ScalarFuzzySet(fuzzySet.universe, fuzzySet.membershipFunction)
+
+        analyticalSource = _RequireContinuousAnalyticalSource(fuzzySet)
+
+        familyIdentifier = analyticalSource.name.lower()
+        parameters = tuple(sorted(analyticalSource.parameters.items()))
+
+        from fuzzyroutines.FuzzyRoutines import MFunction
+        from fuzzyroutines.properties import DeriveProperties
+
+        frozenSource = MFunction(familyIdentifier, **dict(parameters))
+        height = DeriveProperties(frozenSource, fuzzySet.universe).height
+
+        if height == 0:
+            raise ValueError("cannot normalize a zero-height fuzzy set")
+
+        normalizedMembership = _NormalizedContinuousMembership(
+            familyIdentifier,
+            parameters,
+            height,
+        )
+
+    return ScalarFuzzySet(fuzzySet.universe, normalizedMembership)
+
+
 def Complement(fuzzySet, negationPolicy):
     """Return a new fuzzy set using one explicit approved negation policy."""
 
