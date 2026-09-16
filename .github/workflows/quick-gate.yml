@@ -38,8 +38,8 @@ jobs:
       - name: Install test dependency
         run: python -m pip install -r requirements.txt
 
-      - name: Run legacy test suite
-        run: python -m pytest -q
+      - name: Run deterministic process-parallel test suite
+        run: python -m tools.test_runner --jobs auto --timeout 60
 
       - name: Run legacy import smoke
         run: |

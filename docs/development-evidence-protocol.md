@@ -236,6 +236,15 @@ infrastructure-like changes, run tests, `ruff check`, `compileall`, and CLI
 `--help` when the package exposes a CLI. No CI test may depend on an external
 online service.
 
+The canonical full-suite command is `python -m tools.test_runner`. It discovers
+tests through pytest, runs parallel-safe scopes in pytest-xdist processes, and
+runs tests marked `serial` in a separate sequential phase. The runner uses the
+active `sys.executable`, so IDE and CI environments must install the same
+`requirements.txt` test dependencies. Tests must use isolated temporary/state
+roots and the shared database/port fixtures instead of repository-root files or
+fixed ports. `--serial` and manual reruns are diagnostic tools; the gate never
+retries a failing test automatically.
+
 #### Git discipline
 
 Commit messages are brief, imperative English sentences, for example
