@@ -75,6 +75,5 @@ a later domain-specific subtype must preserve that meaning.
 
 ## Acceptance and supersession
 
-This ADR is **Proposed** until review and merge. A different default numerical
-method, tolerance policy, or zero-area contract requires an amendment or a new
-ADR.
+This ADR is **Accepted**. A different default numerical method, tolerance
+policy, or zero-area contract requires an amendment or a new ADR.
