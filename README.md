@@ -40,13 +40,16 @@ The current `develop` branch already provides:
 - finite-domain validation for parameterized `FuzzyNOT`;
 - analytical parabolic negation without an epsilon-driven scan;
 - reentrant Bell evaluation without temporary mutation of shared parameters;
+- immutable scalar universe and numerical integration-domain value objects;
+- an explicit compatibility mapping from legacy `supportSet` tuples to
+  `IntegrationDomain`;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
 
-The modern domain model, fuzzy-set algebra, alpha-cuts, analytical/adaptive
-defuzzification strategy, typed module API, optional vectorization, and
-free-threaded execution remain roadmap work. See the
+Derived support/core properties, fuzzy-set algebra, alpha-cuts,
+analytical/adaptive defuzzification strategy, the complete typed module API,
+optional vectorization, and free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
 and evidence.
 
@@ -76,6 +79,18 @@ same mathematically correct core rather than own duplicate implementations.
 This example uses the current historical facade. Its triangle argument order is
 `a, b, c`, where `c` is the apex. New v2 examples will default to the focused
 modern API after its parameter contracts are implemented.
+
+## Modern domain API
+
+    from fuzzyroutines import ContinuousUniverse, DiscreteUniverse, IntegrationDomain
+
+    universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+    integrationDomain = IntegrationDomain(0.1, 0.9).ValidateWithin(universe)
+    sampledUniverse = DiscreteUniverse((0.0, 0.5, 1.0))
+
+Universes are part of fuzzy-set identity. An `IntegrationDomain` is only a
+finite operational interval for a numerical method; it is never mathematical
+support. See the universe/support contract for the exact semantics.
 
 ## Mathematics and compatibility
 

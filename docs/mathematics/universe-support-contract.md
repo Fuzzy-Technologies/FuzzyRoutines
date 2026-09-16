@@ -42,3 +42,27 @@ produced it.
 
 This rule prevents numerical underflow, plotting bounds, or a caller-selected
 centroid window from becoming false mathematical metadata.
+
+## Executable domain types
+
+The modern scalar API exposes three immutable value objects:
+
+```python
+from fuzzyroutines import ContinuousUniverse, DiscreteUniverse, IntegrationDomain
+
+realLine = ContinuousUniverse()
+boundedUniverse = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+sampledUniverse = DiscreteUniverse((0.0, 0.5, 1.0))
+integrationDomain = IntegrationDomain(0.1, 0.9).ValidateWithin(boundedUniverse)
+```
+
+`ContinuousUniverse` uses `None` only for an unbounded endpoint and records
+endpoint closure explicitly. `DiscreteUniverse` requires an explicit,
+non-empty, strictly increasing tuple of distinct finite coordinates.
+`IntegrationDomain` is always a finite closed interval and can be validated
+against a continuous universe before a numerical operation begins.
+
+`IntegrationDomain.FromLegacyInterval(...)` and `ToLegacyInterval()` form the
+single compatibility adapter for historical `supportSet` tuples. The legacy
+`FuzzySet` facade now stores this value object internally while its public
+getter and setter retain the historical tuple shape.

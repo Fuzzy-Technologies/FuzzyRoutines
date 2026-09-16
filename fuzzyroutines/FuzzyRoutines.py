@@ -6,8 +6,10 @@
 # e-mail: tim55667757@gmail.com
 
 
-import math
 import copy
+import math
+
+import fuzzyroutines.domain as _domain
 
 
 def DiapasonParser(diapason):
@@ -526,17 +528,18 @@ class FuzzySet():
         else:
             raise Exception('Not MFunction class instance was given!')
 
-        if isinstance(supportSet, tuple) and (len(supportSet) == 2) and (supportSet[0] < supportSet[1]):
-            self._supportSet = supportSet  # support set of given membership function
-
-        else:
-            raise Exception('Support Set must be 2-dim tuple (a, b) with real a, b parameters, a < b!')
+        self._integrationDomain = _domain.IntegrationDomain.FromLegacyInterval(supportSet)
 
         self._defuzValue = None
 
     def __str__(self):
         # return view of fuzzy set - name = <mju(x|y, params), supportSet>. Example: FuzzySet = <Bell(x, a, b), [0, 1]>
-        fSetView = '{} = <{}, [{}, {}]>'.format(self._name, self._mFunction, self._supportSet[0], self._supportSet[1])
+        fSetView = '{} = <{}, [{}, {}]>'.format(
+            self._name,
+            self._mFunction,
+            self._integrationDomain.left,
+            self._integrationDomain.right,
+        )
         return fSetView
 
     @property
@@ -565,15 +568,11 @@ class FuzzySet():
 
     @property
     def supportSet(self):
-        return self._supportSet
+        return self._integrationDomain.ToLegacyInterval()
 
     @supportSet.setter
     def supportSet(self, value):
-        if isinstance(value, tuple) and (len(value) == 2) and (value[0] < value[1]):
-            self._supportSet = value  # new support set of given membership function
-
-        else:
-            raise Exception('Support Set must be 2-dim tuple (a, b) with real a, b parameters, a < b!')
+        self._integrationDomain = _domain.IntegrationDomain.FromLegacyInterval(value)
 
     @property
     def defuzValue(self):
@@ -586,8 +585,8 @@ class FuzzySet():
         Integrals in this method calculated from left to right border of support set of membership function.
         Integrals are approximately calculated by Newton-Leibniz formula.
         """
-        left = self._supportSet[0]
-        right = self._supportSet[1]
+        left = self._integrationDomain.left
+        right = self._integrationDomain.right
         step = (right - left) / self._mFunction.accuracy
 
         numeratorIntegral = 0
