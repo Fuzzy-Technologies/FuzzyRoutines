@@ -147,6 +147,7 @@ operator selection:
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
+- Historical-to-modern migration examples: docs/migration/historical-to-modern.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
 - Current implementation status: docs/current-status.md
 
