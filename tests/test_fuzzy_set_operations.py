@@ -7,6 +7,7 @@ import pytest
 from fuzzyroutines import (
     Complement,
     ContinuousUniverse,
+    Difference,
     DiscreteUniverse,
     Intersection,
     NegationPolicy,
@@ -272,11 +273,143 @@ def test_OperationsDoNotMutateTheirOperands():
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
     otherSet = BuildContinuousSet(lambda coordinate: 1.0 - coordinate)
     originalGrades = tuple(fuzzySet.Membership(coordinate) for coordinate in GRID)
+    originalOtherGrades = tuple(otherSet.Membership(coordinate) for coordinate in GRID)
 
     Complement(fuzzySet, NegationPolicy("standard"))
+    Difference(
+        fuzzySet,
+        otherSet,
+        TNormPolicy("algebraic"),
+        NegationPolicy("standard"),
+    )
     Intersection(fuzzySet, otherSet, TNormPolicy("algebraic"))
     Union(fuzzySet, otherSet, SNormPolicy("algebraic"))
 
     assert tuple(fuzzySet.Membership(coordinate) for coordinate in GRID) == originalGrades, (
         "Constructing derived sets must not mutate either source membership definition."
     )
+    assert tuple(otherSet.Membership(coordinate) for coordinate in GRID) == originalOtherGrades, (
+        "Constructing derived sets must not mutate either source membership definition."
+    )
+
+
+@pytest.mark.parametrize("tNormFamily", FAMILIES)
+@pytest.mark.parametrize(
+    ("negationFamily", "alpha"),
+    [("standard", None), ("parametric", 0.3), ("parabolic", 0.7)],
+)
+def test_DifferenceMatchesExplicitIntersectionWithComplement(
+    tNormFamily,
+    negationFamily,
+    alpha,
+):
+    leftSet = BuildContinuousSet(lambda coordinate: 0.2 + coordinate / 2)
+    rightSet = BuildContinuousSet(lambda coordinate: 0.8 - coordinate / 2)
+    tNormPolicy = TNormPolicy(tNormFamily)
+    negationPolicy = NegationPolicy(negationFamily, alpha)
+    difference = Difference(leftSet, rightSet, tNormPolicy, negationPolicy)
+    explicitComposition = Intersection(
+        leftSet,
+        Complement(rightSet, negationPolicy),
+        tNormPolicy,
+    )
+
+    for coordinate in GRID:
+        assert difference.Membership(coordinate) == pytest.approx(
+            explicitComposition.Membership(coordinate),
+            abs=1e-12,
+            rel=0.0,
+        ), "Directed difference must equal T(mu_A(x), N(mu_B(x))) pointwise."
+
+
+def test_DifferenceIsDirectionalRatherThanCommutative():
+    leftSet = BuildContinuousSet(lambda coordinate: 0.8)
+    rightSet = BuildContinuousSet(lambda coordinate: 0.2)
+    tNormPolicy = TNormPolicy("logic")
+    negationPolicy = NegationPolicy("standard")
+
+    leftMinusRight = Difference(leftSet, rightSet, tNormPolicy, negationPolicy)
+    rightMinusLeft = Difference(rightSet, leftSet, tNormPolicy, negationPolicy)
+
+    assert leftMinusRight.Membership(0.5) == pytest.approx(0.8)
+    assert rightMinusLeft.Membership(0.5) == pytest.approx(0.2)
+    assert leftMinusRight.Membership(0.5) != rightMinusLeft.Membership(0.5), (
+        "Fuzzy-set difference is directed and must not be treated as commutative."
+    )
+
+
+def test_DifferenceMatchesClassicalSetDifferenceForCrispGrades():
+    universe = DiscreteUniverse((0.0, 1.0, 2.0))
+    leftSet = ScalarFuzzySet(universe, {0.0: 1.0, 1.0: 1.0, 2.0: 0.0}.__getitem__)
+    rightSet = ScalarFuzzySet(universe, {0.0: 0.0, 1.0: 1.0, 2.0: 1.0}.__getitem__)
+
+    difference = Difference(
+        leftSet,
+        rightSet,
+        TNormPolicy("logic"),
+        NegationPolicy("standard"),
+    )
+
+    assert tuple(difference.Membership(point) for point in universe.points) == (1.0, 0.0, 0.0), (
+        "Standard negation with the logic t-norm must recover crisp set difference."
+    )
+
+
+def test_FuzzySelfDifferenceDoesNotClaimClassicalEmptiness():
+    fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
+
+    difference = Difference(
+        fuzzySet,
+        fuzzySet,
+        TNormPolicy("logic"),
+        NegationPolicy("standard"),
+    )
+
+    assert difference.Membership(0.5) == pytest.approx(0.5), (
+        "Generic fuzzy self-difference must retain the selected operator result."
+    )
+
+
+def test_DifferenceRequiresExplicitPolicyObjects():
+    leftSet = BuildContinuousSet(lambda coordinate: coordinate)
+    rightSet = BuildContinuousSet(lambda coordinate: 1.0 - coordinate)
+
+    with pytest.raises(TypeError, match="TNormPolicy"):
+        Difference(leftSet, rightSet, None, NegationPolicy("standard"))
+
+    with pytest.raises(TypeError, match="NegationPolicy"):
+        Difference(leftSet, rightSet, TNormPolicy("logic"), None)
+
+
+def test_DifferenceFailsClosedForDifferentUniverses():
+    closedUniverseSet = ScalarFuzzySet(
+        ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True),
+        lambda coordinate: coordinate,
+    )
+    openUniverseSet = ScalarFuzzySet(
+        ContinuousUniverse(0.0, 1.0, leftClosed=False, rightClosed=False),
+        lambda coordinate: coordinate,
+    )
+
+    with pytest.raises(ValueError, match="equal universes"):
+        Difference(
+            closedUniverseSet,
+            openUniverseSet,
+            TNormPolicy("logic"),
+            NegationPolicy("standard"),
+        )
+
+
+def test_DifferencePreservesTheDeclaredUniverse():
+    universe = DiscreteUniverse((0.0, 0.5, 1.0))
+    leftSet = ScalarFuzzySet(universe, lambda coordinate: coordinate)
+    rightSet = ScalarFuzzySet(universe, lambda coordinate: 1.0 - coordinate)
+
+    difference = Difference(
+        leftSet,
+        rightSet,
+        TNormPolicy("algebraic"),
+        NegationPolicy("standard"),
+    )
+
+    assert difference.universe is universe
