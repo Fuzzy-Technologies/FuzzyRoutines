@@ -1,6 +1,6 @@
 # ADR-0007: Deterministic Process-Parallel Test Execution
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-09-16
 - Related planning task: #212
 - Related Feature: #211
@@ -102,9 +102,13 @@ runner return non-zero.
   root directories, database files, or fixed ports.
 - Process startup overhead is accepted in exchange for isolation and scalable
   execution; the 12-worker cap prevents workstation oversubscription.
+- The acceptance benchmark for the 356-result suite measured a median of
+  `4.152 s` in serial mode and `4.571 s` with nine workers. Parallel execution
+  therefore increased current wall time by `10.1%`; the decision is justified
+  by isolation and future scalability, not by a present-day speedup claim.
 
 ## Acceptance and supersession
 
-This ADR becomes **Accepted** when the implementation PR is reviewed and merged.
-A change to the default concurrency model, retry policy, isolation boundary, or
-result schema requires an amendment or superseding ADR.
+This ADR was accepted when implementation PR #216 was reviewed and merged on
+2026-09-16. A change to the default concurrency model, retry policy, isolation
+boundary, or result schema requires an amendment or superseding ADR.
