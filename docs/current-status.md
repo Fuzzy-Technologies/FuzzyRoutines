@@ -58,6 +58,11 @@ The corresponding accepted changes are
 - directed fuzzy-set difference implements `T(mu_A(x), N(mu_B(x)))` with
   mandatory t-norm and negation policies and no classical self-difference
   assumption;
+- immutable `LinguisticTerm` values associate exact names with modern
+  `ScalarFuzzySet` values, while `LinguisticScale` preserves an explicit term
+  tuple without defining lookup, tie-breaking, or fuzzification policy;
+- historical dictionary-based `FuzzyScale.levels` remains available and
+  unchanged as a compatibility surface;
 - binary fuzzy-set operations fail closed when their continuous or discrete
   universes are not exactly equal;
 - the set-level operator families preserve the accepted scalar formulas and

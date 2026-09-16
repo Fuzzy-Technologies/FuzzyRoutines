@@ -15,6 +15,7 @@ from fuzzyroutines.fuzzysets import (
     TNormPolicy,
     Union,
 )
+from fuzzyroutines.linguistic import LinguisticScale, LinguisticTerm
 from fuzzyroutines.properties import (
     ContinuousFuzzyProperties,
     ContinuousInterval,
@@ -49,6 +50,8 @@ __all__ = [
     "IncludedOnDomain",
     "IntegrationDomain",
     "Intersection",
+    "LinguisticScale",
+    "LinguisticTerm",
     "NegationPolicy",
     "SNormPolicy",
     "SampleProperties",
