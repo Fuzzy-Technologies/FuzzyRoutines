@@ -55,6 +55,9 @@ The corresponding accepted changes are
 - immutable `ScalarFuzzySet` values support complement, intersection, and
   union with mandatory `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`
   arguments;
+- directed fuzzy-set difference implements `T(mu_A(x), N(mu_B(x)))` with
+  mandatory t-norm and negation policies and no classical self-difference
+  assumption;
 - binary fuzzy-set operations fail closed when their continuous or discrete
   universes are not exactly equal;
 - the set-level operator families preserve the accepted scalar formulas and
@@ -62,7 +65,7 @@ The corresponding accepted changes are
 
 ## Still in the v2 roadmap
 
-- difference and symmetric-difference semantics;
+- symmetric-difference semantics;
 - alpha-cuts and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
 - deterministic adaptive quadrature with explicit tolerance and convergence errors elsewhere;

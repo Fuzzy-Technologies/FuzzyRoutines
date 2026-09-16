@@ -1,7 +1,8 @@
 # Explicit Fuzzy-Set Operations
 
-- Status: Executable contract for Tasks #71 and #72
-- Related ADR: [ADR-0004](../adr/0004-operator-and-negation-contracts.md)
+- Status: Executable contract for Tasks #71, #72, and #74
+- Related ADRs: [ADR-0004](../adr/0004-operator-and-negation-contracts.md) and
+  [ADR-0008](../adr/0008-fuzzy-set-difference-semantics.md)
 - Public module: `fuzzyroutines.fuzzysets`
 
 ## Set representation
@@ -62,12 +63,33 @@ mu_union(A, B)(x)        = S(mu_A(x), mu_B(x))
 `drastic`. The formulas are exactly those recorded in ADR-0004. Neither
 `Intersection` nor `Union` has a hidden default family.
 
+## Directed difference
+
+Difference is intersection with the explicitly selected complement of the
+right operand:
+
+```text
+mu_Difference(A, B)(x) = T(mu_A(x), N(mu_B(x)))
+```
+
+`Difference` therefore requires both a `TNormPolicy` and a `NegationPolicy`.
+The operands must have exactly equal universes, and the result preserves that
+universe. The operation is directional and does not mutate either operand.
+
+Standard negation with the logic t-norm recovers classical difference for
+crisp grades. General fuzzy grades retain the selected operator semantics; in
+particular, `Difference(A, A)` is not promised to be empty. ADR-0008 does not
+define symmetric difference because composing two directed differences also
+requires an s-norm and does not preserve every classical law for arbitrary
+operator policies.
+
 ## Example
 
 ```python
 from fuzzyroutines import (
     Complement,
     ContinuousUniverse,
+    Difference,
     Intersection,
     NegationPolicy,
     ScalarFuzzySet,
@@ -82,6 +104,12 @@ decreasingSet = Complement(increasingSet, NegationPolicy("standard"))
 
 overlap = Intersection(increasingSet, decreasingSet, TNormPolicy("logic"))
 envelope = Union(increasingSet, decreasingSet, SNormPolicy("logic"))
+directedDifference = Difference(
+    increasingSet,
+    decreasingSet,
+    TNormPolicy("logic"),
+    NegationPolicy("standard"),
+)
 ```
 
 ## Verified laws
@@ -94,6 +122,9 @@ Executable property tests cover all four accepted dual family pairs:
 - t-norm identity `T(x, 1) = x`;
 - s-norm identity `S(x, 0) = x`;
 - both De Morgan laws under standard negation.
+- directed difference equivalence to `T(mu_A(x), N(mu_B(x)))`;
+- crisp compatibility, directionality, and explicit rejection of incompatible
+  universes or missing policies.
 
 The modern scalar policies are also checked against the protected historical
 scalar functions on a deterministic reference grid. Equality and inclusion use

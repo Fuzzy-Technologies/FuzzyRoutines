@@ -7,6 +7,7 @@ from fuzzyroutines.domain import (
 )
 from fuzzyroutines.fuzzysets import (
     Complement,
+    Difference,
     Intersection,
     NegationPolicy,
     ScalarFuzzySet,
@@ -40,6 +41,7 @@ __all__ = [
     "ContinuousRegion",
     "ContinuousUniverse",
     "DeriveProperties",
+    "Difference",
     "DiscreteFuzzyProperties",
     "DiscreteRegion",
     "DiscreteUniverse",

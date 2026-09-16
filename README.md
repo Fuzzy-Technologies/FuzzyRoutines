@@ -44,14 +44,14 @@ The current `develop` branch already provides:
 - an explicit compatibility mapping from legacy `supportSet` tuples to
   `IntegrationDomain`;
 - immutable scalar fuzzy sets with explicit complement, intersection, and
-  union policies and fail-closed universe compatibility;
+  union policies, directed difference, and fail-closed universe compatibility;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
 
-Fuzzy-set difference, alpha-cuts, analytical/adaptive defuzzification
-strategy, the complete typed module API, optional vectorization, and
-free-threaded execution remain roadmap work. See the
+Symmetric fuzzy-set difference, alpha-cuts, analytical/adaptive
+defuzzification strategy, the complete typed module API, optional
+vectorization, and free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
 and evidence.
 
@@ -116,6 +116,7 @@ operator selection:
 
     from fuzzyroutines import (
         Complement,
+        Difference,
         Intersection,
         NegationPolicy,
         ScalarFuzzySet,
@@ -128,6 +129,12 @@ operator selection:
     complement = Complement(fuzzySet, NegationPolicy("standard"))
     overlap = Intersection(fuzzySet, complement, TNormPolicy("logic"))
     envelope = Union(fuzzySet, complement, SNormPolicy("logic"))
+    directedDifference = Difference(
+        fuzzySet,
+        complement,
+        TNormPolicy("logic"),
+        NegationPolicy("standard"),
+    )
 
 ## Mathematics and compatibility
 
@@ -136,6 +143,7 @@ operator selection:
 - Universe/support contract: docs/mathematics/universe-support-contract.md
 - Universe/support ADR: docs/adr/0002-universe-support-semantics.md
 - Operator and negation ADR: docs/adr/0004-operator-and-negation-contracts.md
+- Directed-difference ADR: docs/adr/0008-fuzzy-set-difference-semantics.md
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md

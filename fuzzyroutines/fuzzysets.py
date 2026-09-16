@@ -1,8 +1,9 @@
 """Immutable scalar fuzzy sets and explicitly configured algebraic operations.
 
 The modern algebra has no process-wide operator settings.  Every complement,
-intersection, and union receives an immutable policy value, and binary
-operations require exactly equal universes before constructing a result.
+intersection, union, and directed difference receives immutable policy values,
+and binary operations require exactly equal universes before constructing a
+result.
 """
 
 import math
@@ -257,3 +258,25 @@ def Union(leftSet, rightSet, sNormPolicy):
         )
 
     return ScalarFuzzySet(leftSet.universe, UnionMembership)
+
+
+def Difference(leftSet, rightSet, tNormPolicy, negationPolicy):
+    """Return the directed fuzzy-set difference under explicit policies."""
+
+    leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
+
+    if not isinstance(tNormPolicy, TNormPolicy):
+        raise TypeError("tNormPolicy must be a TNormPolicy")
+
+    if not isinstance(negationPolicy, NegationPolicy):
+        raise TypeError("negationPolicy must be a NegationPolicy")
+
+    def DifferenceMembership(coordinate):
+        """Evaluate T(mu_A(x), N(mu_B(x))) without an implicit policy."""
+
+        return tNormPolicy.Evaluate(
+            leftSet.Membership(coordinate),
+            negationPolicy.Evaluate(rightSet.Membership(coordinate)),
+        )
+
+    return ScalarFuzzySet(leftSet.universe, DifferenceMembership)
