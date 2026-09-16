@@ -33,3 +33,12 @@ Issues = "https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues"
 
 [tool.setuptools.packages.find]
 include = ["fuzzyroutines*"]
+
+[tool.pytest.ini_options]
+markers = [
+  "serial: requires an exclusive shared resource and runs outside the parallel phase",
+]
+
+[tool.fuzzyroutines.test-runner]
+max-workers = 12
+timeout = 60

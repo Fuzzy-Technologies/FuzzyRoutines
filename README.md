@@ -90,7 +90,12 @@ modern API after its parameter contracts are implemented.
 ## Development
 
     python -m pip install -e .
-    python -m pytest
+    python -m tools.test_runner
     ruff check .
 
 The project intentionally does not use ruff format. See docs/development-evidence-protocol.md for the review, evidence, and Python-style rules.
+
+The canonical runner discovers the complete suite, uses process workers by
+default, caps automatic parallelism at 12, and executes tests marked `serial`
+in a separate sequential phase. Use `--jobs N`, `--timeout N`, `--serial`, or
+`--fail-fast` to override one run. It never retries failures automatically.
