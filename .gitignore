@@ -19,3 +19,6 @@ dist/
 # Local benchmark and diagnostic reports
 /benchmark-*.json
 /universal-scale-coverage.json
+
+# Disposable documentation builds and isolated evaluation environments
+/_build/
