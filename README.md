@@ -92,6 +92,23 @@ Universes are part of fuzzy-set identity. An `IntegrationDomain` is only a
 finite operational interval for a numerical method; it is never mathematical
 support. See the universe/support contract for the exact semantics.
 
+Exact properties for the accepted analytical membership families are derived
+without scanning floating-point samples:
+
+    from fuzzyroutines import DeriveProperties
+    from fuzzyroutines.FuzzyRoutines import MFunction
+
+    membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
+    properties = DeriveProperties(membershipFunction, ContinuousUniverse())
+
+    assert properties.positiveSupport.Contains(0.5)
+    assert properties.core.Contains(1.0)
+    assert properties.height == 1.0
+
+`SampleProperties(...)` is deliberately separate and returns provenance-rich
+observations with `isExact == False`; a finite numerical grid never becomes
+mathematical support by implication.
+
 ## Mathematics and compatibility
 
 - Membership-function contracts: docs/mathematics/membership-function-contracts.md

@@ -46,14 +46,15 @@ The corresponding accepted changes are
 - the legacy `FuzzySet.supportSet` tuple delegates internally to
   `IntegrationDomain` without changing its constructor, getter, or setter
   shape;
-- mathematical support, support closure, core, boundary, and height remain a
-  separate implementation step and are not inferred from the integration
-  interval.
+- analytical support, support closure, core, boundary, and height are derived
+  exactly for every accepted `MFunction` family and clipped to the declared
+  continuous universe;
+- discrete-universe properties are exhaustive over every declared coordinate;
+- continuous grid inspection returns a separately typed sampled report with
+  explicit domain, resolution, method, and `isExact == False` provenance.
 
 ## Still in the v2 roadmap
 
-- exact or explicitly approximate support/core/boundary/height derivation on
-  top of the accepted universe representation;
 - fuzzy-set complement, union, intersection, equality, and inclusion;
 - alpha-cuts and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
