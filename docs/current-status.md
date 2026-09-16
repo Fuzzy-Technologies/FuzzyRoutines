@@ -62,7 +62,7 @@ The corresponding accepted changes are
 
 ## Still in the v2 roadmap
 
-- fuzzy-set equality and inclusion;
+- difference and symmetric-difference semantics;
 - alpha-cuts and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
 - deterministic adaptive quadrature with explicit tolerance and convergence errors elsewhere;

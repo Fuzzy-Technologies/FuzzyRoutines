@@ -49,7 +49,7 @@ The current `develop` branch already provides:
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
 
-Fuzzy-set equality/inclusion, alpha-cuts, analytical/adaptive defuzzification
+Fuzzy-set difference, alpha-cuts, analytical/adaptive defuzzification
 strategy, the complete typed module API, optional vectorization, and
 free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
