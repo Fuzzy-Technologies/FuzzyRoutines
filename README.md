@@ -81,6 +81,8 @@ modern API after its parameter contracts are implemented.
 
 - Membership-function contracts: docs/mathematics/membership-function-contracts.md
 - Membership-function ADR: docs/adr/0003-membership-function-contracts.md
+- Universe/support contract: docs/mathematics/universe-support-contract.md
+- Universe/support ADR: docs/adr/0002-universe-support-semantics.md
 - Operator and negation ADR: docs/adr/0004-operator-and-negation-contracts.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md

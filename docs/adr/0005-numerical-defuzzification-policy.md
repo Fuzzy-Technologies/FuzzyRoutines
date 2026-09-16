@@ -43,8 +43,10 @@ The supported default defuzzification method is centroid:
 centroid = integral(x * mu(x)) / integral(mu(x))
 ```
 
-The integration domain is the explicit legacy `supportSet` until ADR-0002
-defines the new universe and support model.
+ADR-0002 defines the legacy `supportSet` as an integration-domain compatibility
+name, not mathematical support. Modern numerical operations consume an
+explicit integration domain and must not infer one from sampled membership
+values.
 
 The legacy right-endpoint, 1000-sample behavior is captured by Task #78 as a
 reference observation. A later implementation may replace it only when it

@@ -31,9 +31,16 @@ The corresponding accepted changes are
 [#192](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/192), and
 [#193](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/193).
 
+## Accepted contracts awaiting implementation
+
+- ADR-0002 distinguishes the universe of discourse, numerical integration
+  domain, positive support, support closure, core, boundary, and height.
+- Historical `supportSet` is defined as an integration-domain compatibility
+  name; it does not claim to be exact mathematical support.
+
 ## Still in the v2 roadmap
 
-- explicit universe, integration-domain, mathematical-support, core, and height semantics;
+- implementation of the accepted universe/support domain model;
 - fuzzy-set complement, union, intersection, equality, and inclusion;
 - alpha-cuts and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
