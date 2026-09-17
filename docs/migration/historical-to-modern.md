@@ -19,13 +19,13 @@ factory, typed linguistic scales, and modern defuzzification strategies are
 still roadmap work. The examples below keep those gaps visible instead of
 inventing future call shapes.
 
-| Area | Historical API remains supported | Preferred path available today |
-|---|---|---|
-| Operators | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly |
-| Membership functions | `MFunction` and every protected historical identifier | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet` |
-| Fuzzy sets | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse` |
-| Scales | `FuzzyScale` and `UniversalFuzzyScale` | No modern scale type yet; retain the historical classes |
-| Defuzzification | `FuzzySet.Defuz()` and `defuzValue` | No modern centroid strategy yet; retain `Defuz()` and treat `supportSet` as a numerical integration interval |
+| Area                 | Historical API remains supported                                   | Preferred path available today                                                                               |
+|----------------------|--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly               |
+| Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                |
+| Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                       |
+| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | No modern scale type yet; retain the historical classes                                                      |
+| Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | No modern centroid strategy yet; retain `Defuz()` and treat `supportSet` as a numerical integration interval |
 
 ## Operators
 
