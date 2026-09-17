@@ -17,6 +17,10 @@ metadata uses `2.0.0.dev0`.
 - Bell membership evaluation does not mutate its parameter mapping and has a concurrent reentrancy regression test.
 - `FuzzySet.Defuz()` and `defuzValue` recalculate from the current membership parameters and integration interval.
 - `FuzzyScale.Fuzzy()` evaluates each term once and deliberately selects the later term when memberships tie.
+- Cross-call caches and persistent membership grids are deliberately absent:
+  mutable legacy objects and caller-supplied callables have no safe invalidation
+  token. The evaluation and future acceptance gate are documented in
+  `performance/cache-and-precomputation-evaluation.md`.
 - `UniversalFuzzyScale` no longer constructs and discards the default three-level scale.
 - Benchmark and diagnostic tools emit machine-readable JSON and have end-to-end command-line tests.
 
