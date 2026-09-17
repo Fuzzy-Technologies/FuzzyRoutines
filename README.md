@@ -138,6 +138,15 @@ operator selection:
         NegationPolicy("standard"),
     )
 
+Modern linguistic terms use an immutable typed representation with explicit
+ordering. Lookup and fuzzification policies are intentionally separate:
+
+    from fuzzyroutines import LinguisticScale, LinguisticTerm
+
+    low = LinguisticTerm("Low", fuzzySet)
+    high = LinguisticTerm("High", complement)
+    scale = LinguisticScale((low, high))
+
 ## Mathematics and compatibility
 
 - Membership-function contracts: docs/mathematics/membership-function-contracts.md
@@ -148,6 +157,7 @@ operator selection:
 - Directed-difference ADR: docs/adr/0008-fuzzy-set-difference-semantics.md
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
 - Alpha-cut contract: docs/mathematics/alpha-cuts.md
+- Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
