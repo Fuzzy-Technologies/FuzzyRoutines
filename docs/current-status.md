@@ -41,6 +41,9 @@ The corresponding accepted changes are
   domain, positive support, support closure, core, boundary, and height.
 - Historical `supportSet` is defined as an integration-domain compatibility
   name; it does not claim to be exact mathematical support.
+- ADR-0009 defines continuous fuzzy convexity as quasiconcavity, discrete
+  convexity as order-convexity, and finite-grid success as sampled evidence
+  rather than proof.
 
 ## Core domain model implemented for review
 
@@ -78,6 +81,7 @@ The corresponding accepted changes are
 ## Still in the v2 roadmap
 
 - symmetric-difference semantics;
+- alpha-cuts, convexity queries, and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
 - deterministic adaptive quadrature with explicit tolerance and convergence errors elsewhere;
 - a focused typed module API with the historical module retained as a compatibility facade;

@@ -51,6 +51,8 @@ The current `develop` branch already provides:
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
 
+Symmetric fuzzy-set difference, alpha-cuts, convexity queries, analytical/adaptive
+defuzzification strategy, the complete typed module API, optional
 Symmetric fuzzy-set difference, analytical/adaptive defuzzification strategy,
 the complete typed module API, optional
 vectorization, and free-threaded execution remain roadmap work. See the
@@ -155,6 +157,8 @@ ordering. Lookup and fuzzification policies are intentionally separate:
 - Universe/support ADR: docs/adr/0002-universe-support-semantics.md
 - Operator and negation ADR: docs/adr/0004-operator-and-negation-contracts.md
 - Directed-difference ADR: docs/adr/0008-fuzzy-set-difference-semantics.md
+- Fuzzy-set convexity contract: docs/mathematics/fuzzy-set-convexity.md
+- Fuzzy-set convexity ADR: docs/adr/0009-fuzzy-set-convexity-semantics.md
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
 - Alpha-cut contract: docs/mathematics/alpha-cuts.md
 - Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
