@@ -45,12 +45,16 @@ The current `develop` branch already provides:
   `IntegrationDomain`;
 - immutable scalar fuzzy sets with explicit complement, intersection, and
   union policies, directed difference, and fail-closed universe compatibility;
+- exact discrete alpha-cuts and explicitly provenance-rich sampled continuous
+  alpha-cut observations;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
 
 Symmetric fuzzy-set difference, alpha-cuts, convexity queries, analytical/adaptive
 defuzzification strategy, the complete typed module API, optional
+Symmetric fuzzy-set difference, analytical/adaptive defuzzification strategy,
+the complete typed module API, optional
 vectorization, and free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
 and evidence.
@@ -136,6 +140,15 @@ operator selection:
         NegationPolicy("standard"),
     )
 
+Modern linguistic terms use an immutable typed representation with explicit
+ordering. Lookup and fuzzification policies are intentionally separate:
+
+    from fuzzyroutines import LinguisticScale, LinguisticTerm
+
+    low = LinguisticTerm("Low", fuzzySet)
+    high = LinguisticTerm("High", complement)
+    scale = LinguisticScale((low, high))
+
 ## Mathematics and compatibility
 
 - Membership-function contracts: docs/mathematics/membership-function-contracts.md
@@ -147,8 +160,11 @@ operator selection:
 - Fuzzy-set convexity contract: docs/mathematics/fuzzy-set-convexity.md
 - Fuzzy-set convexity ADR: docs/adr/0009-fuzzy-set-convexity-semantics.md
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
+- Alpha-cut contract: docs/mathematics/alpha-cuts.md
+- Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
+- Historical-to-modern migration examples: docs/migration/historical-to-modern.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
 - Current implementation status: docs/current-status.md
 

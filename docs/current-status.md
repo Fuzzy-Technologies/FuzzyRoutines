@@ -17,6 +17,10 @@ metadata uses `2.0.0.dev0`.
 - Bell membership evaluation does not mutate its parameter mapping and has a concurrent reentrancy regression test.
 - `FuzzySet.Defuz()` and `defuzValue` recalculate from the current membership parameters and integration interval.
 - `FuzzyScale.Fuzzy()` evaluates each term once and deliberately selects the later term when memberships tie.
+- Cross-call caches and persistent membership grids are deliberately absent:
+  mutable legacy objects and caller-supplied callables have no safe invalidation
+  token. The evaluation and future acceptance gate are documented in
+  `performance/cache-and-precomputation-evaluation.md`.
 - `UniversalFuzzyScale` no longer constructs and discards the default three-level scale.
 - Benchmark and diagnostic tools emit machine-readable JSON and have end-to-end command-line tests.
 
@@ -54,13 +58,21 @@ The corresponding accepted changes are
   continuous universe;
 - discrete-universe properties are exhaustive over every declared coordinate;
 - continuous grid inspection returns a separately typed sampled report with
-  explicit domain, resolution, method, and `isExact == False` provenance.
+  explicit domain, resolution, method, and `isExact == False` provenance;
+- weak alpha-cuts use the exact `>= alpha` boundary convention, evaluate
+  discrete universes exhaustively, and expose continuous finite-grid
+  observations through a separate `SampledAlphaCut` result;
 - immutable `ScalarFuzzySet` values support complement, intersection, and
   union with mandatory `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`
   arguments;
 - directed fuzzy-set difference implements `T(mu_A(x), N(mu_B(x)))` with
   mandatory t-norm and negation policies and no classical self-difference
   assumption;
+- immutable `LinguisticTerm` values associate exact names with modern
+  `ScalarFuzzySet` values, while `LinguisticScale` preserves an explicit term
+  tuple without defining lookup, tie-breaking, or fuzzification policy;
+- historical dictionary-based `FuzzyScale.levels` remains available and
+  unchanged as a compatibility surface;
 - binary fuzzy-set operations fail closed when their continuous or discrete
   universes are not exactly equal;
 - the set-level operator families preserve the accepted scalar formulas and

@@ -28,12 +28,12 @@ input.
 
 The supported historical names and formulas are:
 
-| Family | T-norm | SCo-norm |
-|---|---|---|
-| `logic` | `min(x, y)` | `max(x, y)` |
-| `algebraic` | `xy` | `x + y - xy` |
-| `boundary` | `max(x + y - 1, 0)` | `min(x + y, 1)` |
-| `drastic` | `y` if `x=1`; `x` if `y=1`; otherwise `0` | `y` if `x=0`; `x` if `y=0`; otherwise `1` |
+| Family      | T-norm                                    | SCo-norm                                  |
+|-------------|-------------------------------------------|-------------------------------------------|
+| `logic`     | `min(x, y)`                               | `max(x, y)`                               |
+| `algebraic` | `xy`                                      | `x + y - xy`                              |
+| `boundary`  | `max(x + y - 1, 0)`                       | `min(x + y, 1)`                           |
+| `drastic`   | `y` if `x=1`; `x` if `y=1`; otherwise `0` | `y` if `x=0`; `x` if `y=0`; otherwise `1` |
 
 Unknown family names are invalid. Variadic composition requires at least two
 operands and validates every operand before evaluation.
