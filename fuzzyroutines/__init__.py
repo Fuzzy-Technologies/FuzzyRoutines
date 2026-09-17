@@ -1,5 +1,6 @@
 """Modern public API for explicit fuzzy-set domain and property contracts."""
 
+from fuzzyroutines.alphacuts import AlphaCut, SampleAlphaCut, SampledAlphaCut
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
@@ -18,6 +19,7 @@ from fuzzyroutines.fuzzysets import (
     TNormPolicy,
     Union,
 )
+from fuzzyroutines.linguistic import LinguisticScale, LinguisticTerm
 from fuzzyroutines.properties import (
     ContinuousFuzzyProperties,
     ContinuousInterval,
@@ -36,6 +38,7 @@ from fuzzyroutines.relations import (
 )
 
 __all__ = [
+    "AlphaCut",
     "ComparisonDomain",
     "ComparisonPolicy",
     "Complement",
@@ -54,10 +57,14 @@ __all__ = [
     "IntegrationDomain",
     "Intersection",
     "IsNormal",
+    "LinguisticScale",
+    "LinguisticTerm",
     "NegationPolicy",
     "Normalize",
     "SNormPolicy",
+    "SampleAlphaCut",
     "SampleProperties",
+    "SampledAlphaCut",
     "SampledFuzzyProperties",
     "ScalarFuzzySet",
     "TNormPolicy",
