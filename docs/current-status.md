@@ -68,6 +68,11 @@ The corresponding accepted changes are
 - directed fuzzy-set difference implements `T(mu_A(x), N(mu_B(x)))` with
   mandatory t-norm and negation policies and no classical self-difference
   assumption;
+- exact height queries evaluate discrete universes exhaustively and reuse
+  analytical `MFunction` property derivation for continuous universes;
+- normalization returns a distinct height-one set, rejects zero height, and
+  rejects generic continuous callables rather than treating a sample maximum
+  as exact;
 - immutable `LinguisticTerm` values associate exact names with modern
   `ScalarFuzzySet` values, while `LinguisticScale` preserves an explicit term
   tuple without defining lookup, tie-breaking, or fuzzification policy;

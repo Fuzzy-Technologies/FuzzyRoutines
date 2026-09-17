@@ -44,6 +44,8 @@ The current `develop` branch already provides:
 - an explicit compatibility mapping from legacy `supportSet` tuples to
   `IntegrationDomain`;
 - immutable scalar fuzzy sets with explicit complement, intersection, and
+  union policies, directed difference, exact height queries, fail-closed
+  normalization, and fail-closed universe compatibility;
   union policies, directed difference, and fail-closed universe compatibility;
 - exact discrete alpha-cuts and explicitly provenance-rich sampled continuous
   alpha-cut observations;
@@ -140,6 +142,22 @@ operator selection:
         NegationPolicy("standard"),
     )
 
+Exact height and normalization deliberately distinguish exhaustive or
+analytical evidence from finite continuous sampling:
+
+    from fuzzyroutines import Height, IsNormal, Normalize
+    from fuzzyroutines.FuzzyRoutines import MFunction
+
+    membershipFunction = MFunction("logistic", a=2.0, b=0.0)
+    analyticalSet = ScalarFuzzySet(universe, membershipFunction.mju)
+    normalizedSet = Normalize(analyticalSet)
+
+    assert Height(normalizedSet) == 1.0
+    assert IsNormal(normalizedSet)
+
+Generic continuous callables fail closed because a finite grid cannot prove
+their global height. See the normalization contract for the exact discrete,
+analytical, zero-height, and tolerance semantics.
 Modern linguistic terms use an immutable typed representation with explicit
 ordering. Lookup and fuzzification policies are intentionally separate:
 
@@ -160,6 +178,7 @@ ordering. Lookup and fuzzification policies are intentionally separate:
 - Fuzzy-set convexity contract: docs/mathematics/fuzzy-set-convexity.md
 - Fuzzy-set convexity ADR: docs/adr/0009-fuzzy-set-convexity-semantics.md
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
+- Fuzzy-set height and normalization: docs/mathematics/fuzzy-set-normalization.md
 - Alpha-cut contract: docs/mathematics/alpha-cuts.md
 - Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
