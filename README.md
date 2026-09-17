@@ -160,6 +160,7 @@ ordering. Lookup and fuzzification policies are intentionally separate:
 - Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
+- Historical-to-modern migration examples: docs/migration/historical-to-modern.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
 - Current implementation status: docs/current-status.md
 
