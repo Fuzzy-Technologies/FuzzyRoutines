@@ -55,7 +55,10 @@ The corresponding accepted changes are
   continuous universe;
 - discrete-universe properties are exhaustive over every declared coordinate;
 - continuous grid inspection returns a separately typed sampled report with
-  explicit domain, resolution, method, and `isExact == False` provenance.
+  explicit domain, resolution, method, and `isExact == False` provenance;
+- weak alpha-cuts use the exact `>= alpha` boundary convention, evaluate
+  discrete universes exhaustively, and expose continuous finite-grid
+  observations through a separate `SampledAlphaCut` result;
 - immutable `ScalarFuzzySet` values support complement, intersection, and
   union with mandatory `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`
   arguments;
@@ -75,7 +78,6 @@ The corresponding accepted changes are
 ## Still in the v2 roadmap
 
 - symmetric-difference semantics;
-- alpha-cuts and derived fuzzy-set properties;
 - analytical centroid moments where stable closed forms exist;
 - deterministic adaptive quadrature with explicit tolerance and convergence errors elsewhere;
 - a focused typed module API with the historical module retained as a compatibility facade;

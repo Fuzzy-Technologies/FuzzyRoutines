@@ -45,12 +45,14 @@ The current `develop` branch already provides:
   `IntegrationDomain`;
 - immutable scalar fuzzy sets with explicit complement, intersection, and
   union policies, directed difference, and fail-closed universe compatibility;
+- exact discrete alpha-cuts and explicitly provenance-rich sampled continuous
+  alpha-cut observations;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
 - reproducible command-line benchmarks and diagnostic reports.
 
-Symmetric fuzzy-set difference, alpha-cuts, analytical/adaptive
-defuzzification strategy, the complete typed module API, optional
+Symmetric fuzzy-set difference, analytical/adaptive defuzzification strategy,
+the complete typed module API, optional
 vectorization, and free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
 and evidence.
@@ -154,6 +156,7 @@ ordering. Lookup and fuzzification policies are intentionally separate:
 - Operator and negation ADR: docs/adr/0004-operator-and-negation-contracts.md
 - Directed-difference ADR: docs/adr/0008-fuzzy-set-difference-semantics.md
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
+- Alpha-cut contract: docs/mathematics/alpha-cuts.md
 - Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md

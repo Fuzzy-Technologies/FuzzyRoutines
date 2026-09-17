@@ -1,5 +1,6 @@
 """Modern public API for explicit fuzzy-set domain and property contracts."""
 
+from fuzzyroutines.alphacuts import AlphaCut, SampleAlphaCut, SampledAlphaCut
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
@@ -34,6 +35,7 @@ from fuzzyroutines.relations import (
 )
 
 __all__ = [
+    "AlphaCut",
     "ComparisonDomain",
     "ComparisonPolicy",
     "Complement",
@@ -54,7 +56,9 @@ __all__ = [
     "LinguisticTerm",
     "NegationPolicy",
     "SNormPolicy",
+    "SampleAlphaCut",
     "SampleProperties",
+    "SampledAlphaCut",
     "SampledFuzzyProperties",
     "ScalarFuzzySet",
     "TNormPolicy",
