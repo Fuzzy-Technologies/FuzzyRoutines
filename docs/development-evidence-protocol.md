@@ -179,6 +179,9 @@ the compatibility policy.
 
 - Source code, docstrings, comments, tests, ADRs, and technical Issue/PR content
   are written in English.
+- In Markdown, delimit inline mathematics with `$...$` and display mathematics
+  with `$$...$$` so formulas render in JetBrains IDE and GitHub previews. Do not
+  use `\(...\)` or `\[...\]` as Markdown math delimiters.
 - Every production module, class, function, and method has a concise docstring
   that explains its responsibility and contract. A docstring is the first
   statement, followed by one blank line before the implementation.
