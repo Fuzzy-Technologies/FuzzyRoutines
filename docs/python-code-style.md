@@ -86,9 +86,11 @@ never document clamping, coercion, or fallback behavior that does not exist.
 - Link API objects with qualified mkdocstrings references, for example
   `[ScalarFuzzySet][fuzzyroutines.fuzzysets.ScalarFuzzySet]`.
 - Use backticks for identifiers, literal values, and short expressions.
-- Use inline `$...$` or display `$$...$$` LaTeX when a formula is clearer than
-  prose. Define every symbol that is not already part of the callable's
-  documented arguments.
+- Use `$...$` for inline LaTeX and `$$...$$` for a display block when a formula
+  is clearer than prose. Do not use `\\(...\\)` or `\\[...\\]` as Markdown
+  delimiters: the canonical MkDocs pipeline and JetBrains Markdown preview use
+  the dollar-delimited form. Define every symbol that is not already part of
+  the callable's documented arguments.
 - Use an `r` prefix for a docstring containing LaTeX backslashes, or escape
   each backslash explicitly. Raw docstrings are preferred when their final
   character is not a backslash.
