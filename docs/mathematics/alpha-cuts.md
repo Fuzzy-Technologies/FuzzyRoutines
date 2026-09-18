@@ -2,29 +2,29 @@
 
 ## Definition and boundary convention
 
-For a scalar fuzzy set \(A\) on universe \(X\), FuzzyRoutines defines the
+For a scalar fuzzy set $A$ on universe $X$, FuzzyRoutines defines the
 weak alpha-cut as
 
-\[
+$$
 A_\alpha = \{x \in X \mid \mu_A(x) \ge \alpha\},
 \qquad \alpha \in [0, 1].
-\]
+$$
 
 The comparison is exactly `>=`. A coordinate whose membership grade equals
 the threshold belongs to the cut. The API does not silently substitute the
-strong cut \(\{x \mid \mu_A(x) > \alpha\}\), and it applies no numeric
+strong cut $\{x \mid \mu_A(x) > \alpha\}$, and it applies no numeric
 tolerance.
 
 The endpoint semantics follow directly from this definition:
 
-- \(A_0 = X\), because every valid membership grade lies in \([0, 1]\);
-- \(A_1 = \{x \in X \mid \mu_A(x) = 1\}\), the core of \(A\).
+- $A_0 = X$, because every valid membership grade lies in $[0, 1]$;
+- $A_1 = \{x \in X \mid \mu_A(x) = 1\}$, the core of $A$.
 
-For any \(0 \le \alpha \le \beta \le 1\), cuts are nested:
+For any $0 \le \alpha \le \beta \le 1$, cuts are nested:
 
-\[
+$$
 A_\beta \subseteq A_\alpha.
-\]
+$$
 
 ## Exact discrete operation
 
