@@ -80,6 +80,35 @@ def test_DiscreteNormalizationSnapshotsEveryGradeExactlyOnce():
     )
 
 
+def test_DiscreteNormalizationEvidenceDoesNotEscapeItsUniverse():
+    sourceUniverse = DiscreteUniverse((0.0, 1.0))
+    sourceSet = ScalarFuzzySet(
+        sourceUniverse,
+        lambda coordinate: (0.5, 1.0)[int(coordinate)],
+    )
+    normalizedSet = Normalize(sourceSet)
+    restrictedUniverse = DiscreteUniverse((0.0,))
+    restrictedSet = ScalarFuzzySet(
+        restrictedUniverse,
+        normalizedSet.membershipFunction,
+    )
+
+    assert restrictedSet.Membership(0.0) == 0.5
+    assert Height(restrictedSet) == 0.5, (
+        "Height-one evidence must not survive removal of the maximizing coordinate."
+    )
+    assert not IsNormal(restrictedSet)
+
+    renormalizedSet = Normalize(restrictedSet)
+
+    assert renormalizedSet.Membership(0.0) == 1.0
+    assert Height(renormalizedSet) == 1.0
+    assert IsNormal(renormalizedSet)
+    assert Height(normalizedSet) == 1.0, (
+        "Reusing a normalized callable must not invalidate its original-universe evidence."
+    )
+
+
 def test_NormalizationRejectsZeroHeightExplicitly():
     fuzzySet = ScalarFuzzySet(DiscreteUniverse((0.0, 1.0)), lambda coordinate: 0.0)
 
@@ -135,6 +164,41 @@ def test_ContinuousNormalizationSnapshotsMutableAnalyticalParameters():
     ), "A normalized continuous set must not retain the mutable analytical source."
     assert Height(normalizedSet) == 1.0
     assert IsNormal(normalizedSet)
+
+
+def test_ContinuousNormalizationEvidenceDoesNotEscapeItsUniverse():
+    membershipFunction = MFunction("logistic", a=2.0, b=0.0)
+    sourceUniverse = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+    sourceSet = ScalarFuzzySet(sourceUniverse, membershipFunction.mju)
+    normalizedSet = Normalize(sourceSet)
+    restrictedUniverse = ContinuousUniverse(
+        0.0,
+        0.5,
+        leftClosed=True,
+        rightClosed=True,
+    )
+    restrictedSet = ScalarFuzzySet(
+        restrictedUniverse,
+        normalizedSet.membershipFunction,
+    )
+    expectedRestrictedHeight = restrictedSet.Membership(0.5)
+
+    assert expectedRestrictedHeight < 1.0
+    assert Height(restrictedSet) == pytest.approx(
+        expectedRestrictedHeight,
+        abs=1e-12,
+        rel=0.0,
+    ), "Restricted analytical height must be recomputed from frozen source evidence."
+    assert not IsNormal(restrictedSet)
+
+    renormalizedSet = Normalize(restrictedSet)
+
+    assert renormalizedSet.Membership(0.5) == pytest.approx(1.0, abs=1e-12, rel=0.0)
+    assert Height(renormalizedSet) == 1.0
+    assert IsNormal(renormalizedSet)
+    assert Height(normalizedSet) == 1.0, (
+        "Reusing a normalized callable must not invalidate its original-universe evidence."
+    )
 
 
 def test_ContinuousSupremumNeedNotBeAttainedForNormality():
