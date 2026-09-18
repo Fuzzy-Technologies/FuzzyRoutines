@@ -1,0 +1,3 @@
+# Domain API
+
+::: fuzzyroutines.domain
