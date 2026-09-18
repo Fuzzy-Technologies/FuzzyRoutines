@@ -1,6 +1,6 @@
 # ADR-0010: API Documentation Architecture
 
-- Status: Accepted on merge
+- Status: Accepted
 - Date: 2026-09-16
 - Related planning task: #198
 - Related follow-up tasks: #199, #200, #206
@@ -132,8 +132,8 @@ multi-format publishing ecosystem uniquely satisfies.
 
 ## Acceptance and supersession
 
-This ADR becomes **Accepted** when the implementation PR is merged. Replacing
-the canonical generator or docstring dialect requires a superseding ADR with a
-repeated comparison against the then-current FuzzyRoutines modules. Deployment
-details may be refined by Task #206 without superseding this decision as long
-as the source-of-truth and safe-discovery invariants remain intact.
+This ADR is **Accepted**. Replacing the canonical generator or docstring
+dialect requires a superseding ADR with a repeated comparison against the
+then-current FuzzyRoutines modules. Deployment details may be refined by Task
+#206 without superseding this decision as long as the source-of-truth and
+safe-discovery invariants remain intact.

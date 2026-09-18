@@ -81,4 +81,21 @@ A future proposal may proceed only if all of these conditions are met:
    considered.
 
 Until those preconditions exist, recalculation is the correctness-preserving
-behavior and no persistent cache is part of the FuzzyRoutines contract.
+behavior and no transparent persistent cache on a mutable evaluation surface
+is part of the FuzzyRoutines contract.
+
+## Subsequent immutable snapshot boundary
+
+Task #76 later introduced normalization as an explicit derived-value operation.
+For a `DiscreteUniverse`, `Normalize` evaluates every declared coordinate once
+and stores the normalized grades in the distinct immutable result. For a
+supported analytical continuous set, it snapshots the canonical family and
+parameters so later mutation of the source cannot invalidate the result's
+height-one evidence.
+
+Those values are not transparent caches on the mutable source object: callers
+request a new mathematical object with snapshot semantics, and subsequent
+queries against the original set still observe current source state. This does
+not authorize cross-call memoization for `ScalarFuzzySet.Membership()`,
+`DeriveProperties()`, legacy defuzzification, or linguistic-scale lookup. Any
+future cache on those surfaces must still satisfy the gate above.
