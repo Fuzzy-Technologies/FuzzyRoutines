@@ -46,18 +46,20 @@ The current `develop` branch already provides:
 - immutable scalar fuzzy sets with explicit complement, intersection, and
   union policies, directed difference, exact height queries, fail-closed
   normalization, and fail-closed universe compatibility;
-  union policies, directed difference, and fail-closed universe compatibility;
 - exact discrete alpha-cuts and explicitly provenance-rich sampled continuous
   alpha-cut observations;
+- immutable typed linguistic terms and explicitly ordered linguistic-scale
+  representations, without implicit lookup or fuzzification policy;
 - `FuzzySet` centroid access that reflects current membership parameters and integration interval;
 - deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
+- an explicit no-cache decision for mutable evaluation surfaces, while
+  permitting immutable derived snapshots that cannot become stale;
 - reproducible command-line benchmarks and diagnostic reports.
 
-Symmetric fuzzy-set difference, alpha-cuts, convexity queries, analytical/adaptive
-defuzzification strategy, the complete typed module API, optional
-Symmetric fuzzy-set difference, analytical/adaptive defuzzification strategy,
-the complete typed module API, optional
-vectorization, and free-threaded execution remain roadmap work. See the
+Symmetric fuzzy-set difference, executable convexity queries,
+analytical/adaptive defuzzification strategy, typed linguistic lookup and
+fuzzification policies, the complete typed module API, optional vectorization,
+and free-threaded execution remain roadmap work. See the
 [current implementation status](docs/current-status.md) for the exact boundary
 and evidence.
 
@@ -158,6 +160,7 @@ analytical evidence from finite continuous sampling:
 Generic continuous callables fail closed because a finite grid cannot prove
 their global height. See the normalization contract for the exact discrete,
 analytical, zero-height, and tolerance semantics.
+
 Modern linguistic terms use an immutable typed representation with explicit
 ordering. Lookup and fuzzification policies are intentionally separate:
 
@@ -185,6 +188,9 @@ ordering. Lookup and fuzzification policies are intentionally separate:
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
 - Historical-to-modern migration examples: docs/migration/historical-to-modern.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
+- Cache and precomputation decision: docs/performance/cache-and-precomputation-evaluation.md
+- API documentation architecture ADR: docs/adr/0010-api-documentation-architecture.md
+- API documentation evaluation: docs/api-evaluation/README.md
 - Current implementation status: docs/current-status.md
 
 ## Development
@@ -194,6 +200,13 @@ ordering. Lookup and fuzzification policies are intentionally separate:
     ruff check .
 
 The project intentionally does not use ruff format. See docs/development-evidence-protocol.md for the review, evidence, and Python-style rules.
+
+The accepted API-documentation architecture is MkDocs + Material for MkDocs +
+mkdocstrings-python + Griffe, with English Google-style Markdown docstrings.
+The reproducible comparison under `docs/api-evaluation/` is an architecture
+spike, not the production Pages integration. Generated HTML remains disposable;
+docstring migration, production composition, and deployment are tracked by the
+follow-up work identified in ADR-0010.
 
 The canonical runner discovers the complete suite, uses process workers by
 default, caps automatic parallelism at 12, and executes tests marked `serial`
