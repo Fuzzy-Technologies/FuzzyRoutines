@@ -15,6 +15,9 @@ and belong under ignored `_build/` paths or a temporary directory.
 Never edit generated HTML. Production composition and deployment remain Task
 #206.
 
+The product-specific sign, horizontal wordmark, palette, and usage constraints
+are defined in [`brand-identity.md`](brand-identity.md).
+
 ## One-command comparison
 
 Run all three candidates in new isolated CPython 3.14 environments:

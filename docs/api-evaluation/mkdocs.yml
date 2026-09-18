@@ -13,7 +13,7 @@ use_directory_urls: true
 theme:
   name: material
   language: en
-  logo: assets/favicon.svg
+  logo: assets/brand/fuzzyroutines-sign.svg
   favicon: assets/favicon.svg
   palette:
     scheme: slate
@@ -62,7 +62,7 @@ markdown_extensions:
       permalink: true
 
 extra_css:
-  - assets/stylesheets/fuzzy-technologies.css
+  - assets/stylesheets/fuzzyroutines.css
 
 extra_javascript:
   - assets/javascripts/mathjax.js

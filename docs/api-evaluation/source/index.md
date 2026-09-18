@@ -1,5 +1,7 @@
 # API documentation evaluation
 
+![FuzzyRoutines](assets/brand/fuzzyroutines-horizontal.svg){ .fr-brand-lockup }
+
 This disposable site renders the real
 [`ScalarFuzzySet`][fuzzyroutines.fuzzysets.ScalarFuzzySet] API and the directed
 difference contract
