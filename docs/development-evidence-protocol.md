@@ -177,11 +177,27 @@ the compatibility policy.
 
 #### Documentation and comments
 
+- The canonical repository standard is
+  [`docs/python-code-style.md`](python-code-style.md). It defines required
+  module headers, Google-style sections, Markdown/API references, mathematical
+  notation, and examples for production code, tests, and executable tools.
 - Source code, docstrings, comments, tests, ADRs, and technical Issue/PR content
   are written in English.
 - Every production module, class, function, and method has a concise docstring
-  that explains its responsibility and contract. A docstring is the first
-  statement, followed by one blank line before the implementation.
+  that explains its responsibility and semantic contract. Python annotations
+  remain authoritative for types; docstrings document domains, units,
+  invariants, mathematical behavior, side effects, approximation status, and
+  intentional exceptions without duplicating annotations.
+- Module docstrings are the first Python statement, except that a shebang may
+  precede the provenance header in a genuinely executable script. Every Python
+  file carries the canonical FuzzyRoutines project, collective-maintainer,
+  `SPDX-FileCopyrightText`, and `SPDX-License-Identifier` fields without a
+  misleading single-person author claim. Generated-document constraints must
+  not add import-time behavior or reduce source clarity.
+- FuzzyRoutines follows ADR-0010: canonical docstrings use English Google style
+  with Markdown content and LaTeX mathematics. This repository-specific rule
+  supersedes any older generic instruction requesting Russian production
+  docstrings.
 - Comments explain a reason, limitation, mathematical assumption, or
   architectural decision; they do not narrate obvious code.
 
