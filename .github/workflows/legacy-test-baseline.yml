@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 name: Legacy test baseline
 
 on:
@@ -33,6 +36,18 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Materialize immutable legacy source
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          legacySnapshot="$RUNNER_TEMP/fuzzyroutines-legacy"
+          mkdir -p "$legacySnapshot"
+          git archive 8e739c1665aa9894ede556e3f3f4cb20174d14ff | tar -x -C "$legacySnapshot"
+          echo "LEGACY_SNAPSHOT=$legacySnapshot" >> "$GITHUB_ENV"
 
       - name: Run unmodified legacy suite
         env:
@@ -41,7 +56,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          docker run --rm             -v "$GITHUB_WORKSPACE:/work"             -w /work             "$PYTHON_IMAGE"             sh -lc '
+          docker run --rm             -v "$LEGACY_SNAPSHOT:/work"             -w /work             "$PYTHON_IMAGE"             sh -lc '
               set -eu
               python --version
               python -m pip --version

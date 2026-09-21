@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Legacy Public API Snapshot — FuzzyRoutines 1.0.3
 
 This document records the observed historical public surface before modernization.

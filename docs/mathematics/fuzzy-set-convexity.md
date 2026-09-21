@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Fuzzy-Set Convexity
 
 - Status: Design contract for Task #77

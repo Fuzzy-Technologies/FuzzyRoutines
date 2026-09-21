@@ -1,3 +1,8 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Contract and end-to-end tests for the unified process test runner."""
 
 from __future__ import annotations

@@ -1,3 +1,8 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Derived support, core, boundary, and height contracts for scalar fuzzy sets.
 
 Continuous analytical results are obtained from the declared geometry of the

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # ADR-0005: Numerical Precision and Defuzzification Policy
 
 - Status: Accepted on merge

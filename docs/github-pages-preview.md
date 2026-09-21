@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # GitHub Pages preview
 
 The FuzzyRoutines product page is a static site in `docs/`. It does not require Jekyll, Node.js, a CDN, or external runtime assets.

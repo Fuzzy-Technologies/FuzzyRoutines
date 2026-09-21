@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Extract explicitly closing same-repository issue references from PR text."""
 
 from __future__ import annotations

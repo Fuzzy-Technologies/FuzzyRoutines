@@ -1,3 +1,10 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Mathematical invariants for supported fuzzy negations."""
+
 import pytest
 
 from fuzzyroutines.FuzzyRoutines import FuzzyNOT, FuzzyNOTParabolic

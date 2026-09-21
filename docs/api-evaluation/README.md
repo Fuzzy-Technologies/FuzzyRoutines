@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # API Documentation Architecture Evaluation
 
 This directory is the reproducible Task #198 spike. It compares pdoc,

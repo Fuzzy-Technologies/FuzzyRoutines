@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 name: Quick deterministic gate
 
 on:
@@ -37,6 +40,9 @@ jobs:
 
       - name: Install test dependency
         run: python -m pip install -r requirements.txt
+
+      - name: Validate Apache-2.0 headers and metadata
+        run: python -m tools.check_license_headers
 
       - name: Run deterministic process-parallel test suite
         run: python -m tools.test_runner --jobs auto --timeout 60

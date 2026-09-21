@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Stable release readiness checklist
 
 ## Status
@@ -11,6 +16,7 @@ This is a human-reviewed release gate. Checking a box requires a direct immutabl
 - [ ] Compatibility: public API surface, imports, parameter conventions, and deprecations have tested evidence and release-note links.
 - [ ] Test quality: deterministic suite, branch-coverage report, negative cases, and supported-runtime CI links are attached.
 - [ ] Packaging: wheel and source distribution build, clean installation, metadata validation, and supply-chain evidence are attached.
+- [ ] Licensing: Apache-2.0 metadata, `LICENSE`, `NOTICE`, SPDX headers, provenance audit, and packaged artifacts agree.
 - [ ] Documentation: README, API/mathematics documents, compatibility notes, and links have been reviewed for accuracy and accessibility.
 - [ ] Performance: reproducible benchmark evidence is attached; no performance claim is made without raw measurements and environment metadata.
 - [ ] Security and publishing: release credentials, provenance, and publishing configuration have been explicitly reviewed by an authorized maintainer.

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # ADR-0001: Backward-Compatibility Contract for Historical Public API Names
 
 - Status: Accepted on merge

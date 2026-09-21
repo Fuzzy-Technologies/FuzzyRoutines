@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 
-
-# FuzzyRoutines library contains some routines for work with fuzzy logic operators, fuzzy datasets and fuzzy scales.
-# Copyright (C) 2019, Timur Gilmullin (DevOpsHQ)
-# e-mail: tim55667757@gmail.com
-
+"""Provide the historical fuzzy-logic compatibility API."""
 
 import copy
 import math

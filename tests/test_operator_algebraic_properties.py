@@ -1,3 +1,8 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Deterministic property tests for the supported fuzzy operator families.
 
 The finite grid is deliberate: it keeps the suite dependency-free and

@@ -1,3 +1,8 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Provide process-safe test resources for the FuzzyRoutines suite."""
 
 from __future__ import annotations

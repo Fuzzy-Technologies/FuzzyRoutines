@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # FuzzyRoutines
 
 FuzzyRoutines is a Python library for fuzzy membership functions, fuzzy sets, fuzzy scales, and common t-norm and s-norm operators. It is maintained by [Fuzzy Technologies](https://fuzzy-technologies.github.io/).
@@ -212,3 +217,16 @@ The canonical runner discovers the complete suite, uses process workers by
 default, caps automatic parallelism at 12, and executes tests marked `serial`
 in a separate sequential phase. Use `--jobs N`, `--timeout N`, `--serial`, or
 `--fail-fast` to override one run. It never retries failures automatically.
+
+## License
+
+FuzzyRoutines source code, tests, documentation, examples, tools, workflows,
+and project-owned site assets are licensed under the
+[Apache License 2.0](LICENSE). Redistributions must preserve the license,
+copyright and attribution notices, including [NOTICE](NOTICE), and modified
+files must carry the notices required by Apache-2.0 section 4.
+
+The license does not grant permission to use Fuzzy Technologies trade names,
+trademarks, service marks, or product names beyond reasonable attribution and
+the NOTICE requirements. See [the licensing and provenance policy](docs/licensing.md)
+for the repository boundary and historical relicensing record.

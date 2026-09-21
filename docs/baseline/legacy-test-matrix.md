@@ -1,8 +1,16 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Legacy Test Matrix Baseline
 
 This baseline executes the **unmodified historical test module** `tests/test_routines.py` against explicitly recorded Python candidates.
 
 It intentionally excludes tests added by the modernization effort so that later regression growth does not rewrite the legacy baseline.
+The workflow materializes the immutable pre-baseline source commit
+`8e739c1665aa9894ede556e3f3f4cb20174d14ff` before entering the runtime
+matrix; it does not execute the evolving current package under legacy Python.
 
 ## Candidate runtimes
 
@@ -29,6 +37,8 @@ python -m pytest -q tests/test_routines.py
 ```
 
 inside the corresponding official Python container image.
+The working directory is an archive of the pinned historical source commit
+rather than the pull-request checkout.
 
 ## Environment
 

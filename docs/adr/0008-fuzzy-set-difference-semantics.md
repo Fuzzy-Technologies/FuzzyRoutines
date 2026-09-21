@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # ADR-0008: Directed Fuzzy-Set Difference Semantics
 
 - Status: Accepted on merge

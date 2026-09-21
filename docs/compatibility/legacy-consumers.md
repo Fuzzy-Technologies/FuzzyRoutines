@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Legacy Consumer and Protected-Name Inventory
 
 This inventory records evidence-backed consumers of the historical FuzzyRoutines API before modernization.

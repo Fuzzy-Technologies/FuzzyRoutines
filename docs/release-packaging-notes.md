@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Packaging and release notes
 
 ## 2.0.0 development baseline
@@ -8,6 +13,8 @@ canonical development version, `2.0.0.dev0`, in `pyproject.toml`.
 
 - The package supports CPython 3.13 and 3.14.
 - `setuptools.build_meta` is the build backend.
+- Package metadata uses the SPDX expression `Apache-2.0`; both `LICENSE` and
+  `NOTICE` are included in source and wheel distributions.
 - `setup.py` remains only as a legacy command-line compatibility shim; it owns
   neither package metadata nor versioning.
 - Routine CI must build and install artifacts but cannot publish a release.
@@ -22,6 +29,7 @@ canonical development version, `2.0.0.dev0`, in `pyproject.toml`.
 python -m build
 python -m pip install --force-reinstall dist/fuzzyroutines-2.0.0.dev0-py3-none-any.whl
 python -c "from fuzzyroutines.FuzzyRoutines import MFunction; print(MFunction('triangle', a=0, b=1, c=0.5))"
+python -m tools.check_license_headers
 ```
 
 The release process, tag creation, GitHub release evidence, and PyPI Trusted

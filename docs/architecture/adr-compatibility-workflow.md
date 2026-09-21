@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # ADR and Compatibility Change Workflow
 
 This document defines when FuzzyRoutines requires an Architecture Decision Record and how compatibility-affecting changes are reviewed.
