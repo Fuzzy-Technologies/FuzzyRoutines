@@ -1,5 +1,13 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Architecture contracts for reproducible API documentation."""
+
 import subprocess
 from pathlib import Path
+from xml.etree import ElementTree
 
 PROJECTROOT = Path(__file__).parents[1]
 EVALUATIONROOT = PROJECTROOT / "docs" / "api-evaluation"
@@ -10,10 +18,13 @@ def test_ApiDocumentationDecisionIsBackedByReproducibleInputs():
         PROJECTROOT / "docs" / "adr" / "0010-api-documentation-architecture.md",
         PROJECTROOT / "docs" / "requirements-api.txt",
         EVALUATIONROOT / "README.md",
+        EVALUATIONROOT / "brand-identity.md",
         EVALUATIONROOT / "comparison-evidence.md",
         EVALUATIONROOT / "mkdocs.yml",
         EVALUATIONROOT / "requirements" / "pdoc.txt",
         EVALUATIONROOT / "requirements" / "sphinx.txt",
+        EVALUATIONROOT / "source" / "assets" / "brand" / "fuzzyroutines-sign.svg",
+        EVALUATIONROOT / "source" / "assets" / "brand" / "fuzzyroutines-horizontal.svg",
         EVALUATIONROOT / "sphinx" / "conf.py",
         PROJECTROOT / "tools" / "evaluate_api_documentation.py",
     ]
@@ -53,3 +64,39 @@ def test_MkdocstringsSpikeUsesStableQualifiedAnchorsAndSafeDiscovery():
     assert "show_root_full_path: true" in configurationText
     assert "signature_crossrefs: true" in configurationText
     assert "::: fuzzyroutines.fuzzysets" in apiPageText
+
+
+def test_FuzzyRoutinesIdentityAssetsAreSelfContainedVectors():
+    assetsRoot = EVALUATIONROOT / "source" / "assets"
+    faviconPath = assetsRoot / "favicon.svg"
+    signPath = assetsRoot / "brand" / "fuzzyroutines-sign.svg"
+    horizontalPath = assetsRoot / "brand" / "fuzzyroutines-horizontal.svg"
+
+    assert faviconPath.read_text(encoding="utf-8") == signPath.read_text(encoding="utf-8")
+
+    for assetPath, expectedViewBox in (
+        (faviconPath, "0 0 64 64"),
+        (signPath, "0 0 64 64"),
+        (horizontalPath, "0 0 520 96"),
+    ):
+        assetRoot = ElementTree.parse(assetPath).getroot()
+        assetText = assetPath.read_text(encoding="utf-8")
+
+        assert assetRoot.attrib["viewBox"] == expectedViewBox
+        assert "<title" in assetText
+        assert "<script" not in assetText
+        assert "<image" not in assetText
+        for element in assetRoot.iter():
+            for attributeName, attributeValue in element.attrib.items():
+                if attributeName.endswith("href"):
+                    assert not attributeValue.startswith(("http://", "https://"))
+
+
+def test_FuzzyRoutinesIdentityIsIntegratedIntoTheDocsTheme():
+    configurationText = (EVALUATIONROOT / "mkdocs.yml").read_text(encoding="utf-8")
+    landingPageText = (EVALUATIONROOT / "source" / "index.md").read_text(encoding="utf-8")
+
+    assert "logo: assets/brand/fuzzyroutines-sign.svg" in configurationText
+    assert "favicon: assets/favicon.svg" in configurationText
+    assert "assets/stylesheets/fuzzyroutines.css" in configurationText
+    assert "assets/brand/fuzzyroutines-horizontal.svg" in landingPageText

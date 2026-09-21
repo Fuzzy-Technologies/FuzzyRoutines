@@ -1,0 +1,10 @@
+FuzzyRoutines
+Copyright 2019-2026 Timur Gilmullin and Fuzzy Technologies
+
+FuzzyRoutines was originally published in 2019 by Timur Gilmullin through the
+Open DevOps Community / DevOpsHQ project and is now maintained by Fuzzy
+Technologies.
+
+This product includes no vendored third-party source code as of the provenance
+audit recorded by ADR-0012. Third-party Python and documentation tools are
+external dependencies and retain their own licenses.

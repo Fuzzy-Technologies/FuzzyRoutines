@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Analytical Derivation of the Legacy Parabolic Negation
 
 - Status: Mathematical contract for Task #56

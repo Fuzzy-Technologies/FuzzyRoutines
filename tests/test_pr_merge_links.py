@@ -1,3 +1,10 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Parser contracts for explicit Task-closing PR references."""
+
 from tools.pr_merge_links import extract_issue_numbers
 
 

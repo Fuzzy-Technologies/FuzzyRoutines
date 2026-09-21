@@ -1,0 +1,35 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 96" role="img" aria-labelledby="title description">
+  <title id="title">FuzzyRoutines</title>
+  <desc id="description">The FuzzyRoutines sign and wordmark with a mathematics, logic, and Python descriptor.</desc>
+  <defs>
+    <linearGradient id="sign-spectrum" x1="36.25" y1="25.5" x2="67.5" y2="71.75" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#66d9ef"/>
+      <stop offset="0.52" stop-color="#9b7bff"/>
+      <stop offset="1" stop-color="#ff79c6"/>
+    </linearGradient>
+    <linearGradient id="sign-echo" x1="42.5" y1="30.5" x2="63.75" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#66d9ef"/>
+      <stop offset="0.5" stop-color="#bd7aff"/>
+      <stop offset="1" stop-color="#ff79c6"/>
+    </linearGradient>
+    <linearGradient id="word-spectrum" x1="242" y1="24" x2="496" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#66d9ef"/>
+      <stop offset="0.48" stop-color="#9b7bff"/>
+      <stop offset="1" stop-color="#ff79c6"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <rect x="10.5" y="10.5" width="75" height="75" rx="16.25" fill="#101316" stroke="#2a343d" stroke-width="2.5"/>
+    <path d="M23 25.5H46.75V33H31.75V43H44.25V50.5H31.75V70.5H23Z" fill="#e7f8ff"/>
+    <path d="M46.75 70.5V25.5H58C68 25.5 74.25 31.75 74.25 41.75C74.25 51.75 68 56.75 58 56.75H53L74.25 71.75" fill="none" stroke="url(#sign-spectrum)" stroke-width="5.625" stroke-linecap="square" stroke-linejoin="round"/>
+    <path d="M51.75 31.75H58C64.25 31.75 68 35.5 68 41.75C68 48 64.25 50.5 58 50.5H53" fill="none" stroke="url(#sign-echo)" stroke-width="2.1875" stroke-linecap="round" opacity="0.82"/>
+    <path d="M56.75 60.5L70.5 70.5" fill="none" stroke="#ff79c6" stroke-width="2.1875" stroke-linecap="round" opacity="0.72"/>
+  </g>
+  <text x="108" y="55" fill="#e7f8ff" font-family="DejaVu Sans Mono, Liberation Mono, monospace" font-size="38" font-weight="700" letter-spacing="-1.5">Fuzzy<tspan fill="url(#word-spectrum)">Routines</tspan></text>
+  <text x="111" y="76" fill="#86aebc" font-family="DejaVu Sans Mono, Liberation Mono, monospace" font-size="10.5" font-weight="700" letter-spacing="2.25">MATHEMATICS · LOGIC · PYTHON</text>
+</svg>

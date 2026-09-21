@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # FuzzyRoutines Development and Evidence Protocol
 
 This protocol adapts the F-Tech engineering process to a foundational mathematical library.
@@ -183,6 +188,9 @@ the compatibility policy.
   notation, and examples for production code, tests, and executable tools.
 - Source code, docstrings, comments, tests, ADRs, and technical Issue/PR content
   are written in English.
+- In Markdown, delimit inline mathematics with `$...$` and display mathematics
+  with `$$...$$` so formulas render in JetBrains IDE and GitHub previews. Do not
+  use `\(...\)` or `\[...\]` as Markdown math delimiters.
 - Every production module, class, function, and method has a concise docstring
   that explains its responsibility and semantic contract. Python annotations
   remain authoritative for types; docstrings document domains, units,
@@ -194,6 +202,16 @@ the compatibility policy.
   `SPDX-FileCopyrightText`, and `SPDX-License-Identifier` fields without a
   misleading single-person author claim. Generated-document constraints must
   not add import-time behavior or reduce source clarity.
+- All project-owned source, tests, documentation, examples, tools, workflows,
+  configuration, and site assets use `SPDX-License-Identifier: Apache-2.0` in
+  the comment syntax appropriate to their format. `LICENSE`, `NOTICE`,
+  [`docs/licensing.md`](licensing.md), and ADR-0012 define the authoritative
+  licensing and provenance boundary. A contribution must not introduce an MIT
+  or other license claim into a project-owned file.
+- Before an implementation is handed off for review, its executor verifies
+  every Acceptance Criterion against concrete evidence and checks the
+  corresponding Issue checkbox. The reviewer reviews the PR; the reviewer is
+  not responsible for maintaining the implementation Task checklist.
 - FuzzyRoutines follows ADR-0010: canonical docstrings use English Google style
   with Markdown content and LaTeX mathematics. This repository-specific rule
   supersedes any older generic instruction requesting Russian production

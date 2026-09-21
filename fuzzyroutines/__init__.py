@@ -1,3 +1,8 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Modern public API for explicit fuzzy-set domain and property contracts."""
 
 from fuzzyroutines.alphacuts import AlphaCut, SampleAlphaCut, SampledAlphaCut

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Legacy Coverage Baseline
 
 This measurement captures statement and branch coverage produced by the **unmodified historical test module** `tests/test_routines.py`.

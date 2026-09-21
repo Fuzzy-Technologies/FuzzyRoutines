@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # API Documentation Architecture Evaluation
 
 This directory is the reproducible Task #198 spike. It compares pdoc,
@@ -14,6 +19,9 @@ and belong under ignored `_build/` paths or a temporary directory.
 
 Never edit generated HTML. Production composition and deployment remain Task
 #206.
+
+The product-specific sign, horizontal wordmark, palette, and usage constraints
+are defined in [`brand-identity.md`](brand-identity.md).
 
 ## One-command comparison
 

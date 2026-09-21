@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Historical-to-Modern API Migration Examples
 
 - Status: current `develop` implementation boundary
@@ -14,18 +19,20 @@ time when the focused API already provides the behavior the application
 needs.
 
 The current modern API covers explicit domains, immutable scalar fuzzy sets,
-set algebra, relations, and derived properties. A focused membership-function
-factory, typed linguistic scales, and modern defuzzification strategies are
-still roadmap work. The examples below keep those gaps visible instead of
-inventing future call shapes.
+set algebra, relations, derived properties, alpha-cuts, exact height-aware
+normalization, and typed linguistic-term and ordered-scale representations. A
+focused membership-function factory, typed scale lookup and fuzzification
+policies, and modern defuzzification strategies are still roadmap work. The
+examples below keep those gaps visible instead of inventing future call shapes.
 
-| Area                 | Historical API remains supported                                   | Preferred path available today                                                                               |
-|----------------------|--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly               |
-| Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                |
-| Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                       |
-| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | No modern scale type yet; retain the historical classes                                                      |
-| Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | No modern centroid strategy yet; retain `Defuz()` and treat `supportSet` as a numerical integration interval |
+| Area                 | Historical API remains supported                                   | Preferred path available today                                                                                                  |
+|----------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                  |
+| Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                   |
+| Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                          |
+| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation via `LinguisticTerm` and `LinguisticScale`; legacy classes remain required for lookup and fuzzification   |
+| Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries              |
+| Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | No modern centroid strategy yet; retain `Defuz()` and treat `supportSet` as a numerical integration interval                    |
 
 ## Operators
 
@@ -135,9 +142,21 @@ level = scale.Fuzzy(0.5)
 assert level["name"] == "Med"
 ```
 
-A typed modern scale model is not implemented. There is currently no truthful
-side-by-side replacement for `Fuzzy()`, `GetLevelByName()`, or the historical
-`{"name": ..., "fSet": ...}` level shape.
+The modern API can represent names, fuzzy sets, and explicit term order without
+silently inheriting the historical dictionary shape:
+
+```python
+from fuzzyroutines import LinguisticScale, LinguisticTerm
+
+modernScale = LinguisticScale((LinguisticTerm("Medium", fuzzySet),))
+```
+
+This representation deliberately has no `Fuzzy()` or `GetLevelByName()`
+method, tie-breaking rule, case-matching rule, or scalar fuzzification policy.
+There is therefore no truthful behavioral replacement yet for those historical
+operations. Keep `FuzzyScale` or `UniversalFuzzyScale` when lookup or
+fuzzification is required; use `LinguisticTerm` and `LinguisticScale` when an
+immutable typed representation is sufficient.
 
 ## Defuzzification
 

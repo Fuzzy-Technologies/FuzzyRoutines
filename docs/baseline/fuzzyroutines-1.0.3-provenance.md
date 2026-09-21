@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # FuzzyRoutines 1.0.3 Canonical Provenance Baseline
 
 This record freezes the legacy baseline used by the modernization plan.
@@ -35,7 +40,9 @@ PyPI release:
 - latest release at the time of this provenance record;
 - maintainer shown by PyPI: `devopshq`;
 - author metadata: Timur Gilmullin;
-- license: MIT;
+- license at the immutable 1.0.3 baseline: MIT; the current project-owned tree
+  was relicensed to Apache-2.0 by the sole recorded author and copyright owner
+  under ADR-0012;
 - classifier: Python 3.6.
 
 ## Published artifact

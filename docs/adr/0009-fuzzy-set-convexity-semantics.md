@@ -1,6 +1,11 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # ADR-0009: Fuzzy-Set Convexity Semantics
 
-- Status: Accepted on merge
+- Status: Accepted
 - Date: 2026-09-16
 - Related planning task: #77
 - Related Feature: #25
@@ -202,7 +207,6 @@ for code paths, not mathematical proof of an arbitrary continuous callable.
 
 ## Acceptance and supersession
 
-This ADR becomes **Accepted** when its pull request is reviewed and merged. A
-change to the defining inequalities, alpha-cut equivalence, discrete
-order-convexity, or evidence-strength boundary requires an amendment or a new
-ADR.
+This ADR is **Accepted**. A change to the defining inequalities, alpha-cut
+equivalence, discrete order-convexity, or evidence-strength boundary requires
+an amendment or a new ADR.

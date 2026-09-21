@@ -1,3 +1,10 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Structural and link contracts for the project Pages site."""
+
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # API Documentation Comparison Evidence
 
 ## Evaluation identity
@@ -44,6 +49,29 @@ proxies pointed to an unusable local endpoint. Offline-repeat times were
 run also created all three environments from the pinned manifests using `uv pip
 sync --offline` and completed every build and output check from the local uv
 cache.
+
+## Visual identity follow-up
+
+The Task #233 candidate was rebuilt on 2026-09-18 from parent revision
+`d52d620956d1a13b4846579d10a939923dbe0c41`, including the new product
+identity assets in the working tree. Fresh, isolated CPython 3.14.7
+environments used the same pinned package versions listed above.
+
+| Candidate           | Build time | Files | Bytes     | Runtime project import |
+|---------------------|------------|-------|-----------|------------------------|
+| pdoc                | 0.709574   | 4     | 554,443   | Yes                    |
+| mkdocstrings-python | 1.281988   | 57    | 2,790,025 | No                     |
+| Sphinx autodoc      | 1.738075   | 28    | 393,652   | Yes                    |
+
+The 57-file mkdocstrings result includes the reusable sign and horizontal
+wordmark copied from tracked source; no generated HTML or raster preview is
+tracked. An offline repeat reused only those provisioned environments while
+all proxy protocols pointed to an unusable local endpoint. It completed in
+0.382186, 0.710229, and 0.665479 seconds respectively, with identical checks
+and file counts. The pdoc and mkdocstrings byte counts were identical. The
+Sphinx total was 393,653 bytes because its disposable
+`.doctrees/environment.pickle` differed by one byte; its rendered site files
+were identical.
 
 ## Criteria matrix
 

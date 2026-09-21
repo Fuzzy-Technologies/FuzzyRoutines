@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 
-
-# Some examples of using FuzzyRoutines (just run this module).
-# Copyright (C) 2019, Timur Gilmullin (DevOpsHQ)
-# e-mail: tim55667757@gmail.com
-
+"""Demonstrate the historical FuzzyRoutines API with executable examples."""
 
 from fuzzyroutines.FuzzyRoutines import *
 

@@ -1,3 +1,8 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Report deterministic coverage diagnostics for the legacy UniversalFuzzyScale.
 
 This diagnostic never retunes the preset. It evaluates the historical five-level

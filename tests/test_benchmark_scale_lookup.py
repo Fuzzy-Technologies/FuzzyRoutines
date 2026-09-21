@@ -1,3 +1,10 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Contracts for the reproducible scale-lookup benchmark."""
+
 import json
 
 from tools.benchmark_scale_lookup import (

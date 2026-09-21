@@ -1,3 +1,8 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 """Immutable scalar fuzzy sets and explicitly configured algebraic operations.
 
 The modern algebra has no process-wide operator settings.  Every complement,
@@ -197,19 +202,20 @@ class ScalarFuzzySet:
 class _NormalizedDiscreteMembership:
     """Immutable exhaustive grade snapshot for a normalized discrete set."""
 
-    coordinates: tuple[Real, ...]
+    universe: DiscreteUniverse
     grades: tuple[Real, ...]
 
     def __call__(self, coordinate):
         """Return the normalized grade at one already validated coordinate."""
 
-        return self.grades[self.coordinates.index(coordinate)]
+        return self.grades[self.universe.points.index(coordinate)]
 
 
 @dataclass(frozen=True, slots=True)
 class _NormalizedContinuousMembership:
     """Immutable continuous normalization evaluator with exact height evidence."""
 
+    universe: ContinuousUniverse
     familyIdentifier: str
     parameters: tuple[tuple[str, Real], ...]
     sourceHeight: Real
@@ -255,6 +261,23 @@ def _DiscreteGrades(fuzzySet):
     return tuple(fuzzySet.Membership(coordinate) for coordinate in fuzzySet.universe.points)
 
 
+def _NormalizedContinuousHeight(membershipFunction, universe):
+    """Return exact height after restricting normalized evidence to a universe."""
+
+    from fuzzyroutines.FuzzyRoutines import MFunction
+    from fuzzyroutines.properties import DeriveProperties
+
+    frozenSource = MFunction(
+        membershipFunction.familyIdentifier,
+        **dict(membershipFunction.parameters),
+    )
+    sourceHeight = DeriveProperties(frozenSource, universe).height
+    return _RequireGrade(
+        sourceHeight / membershipFunction.sourceHeight,
+        "normalized height",
+    )
+
+
 def Height(fuzzySet):
     """Return the exact supremum of membership grades when it is provable.
 
@@ -267,11 +290,18 @@ def Height(fuzzySet):
     if not isinstance(fuzzySet, ScalarFuzzySet):
         raise TypeError("fuzzySet must be a ScalarFuzzySet")
 
-    if isinstance(
-        fuzzySet.membershipFunction,
-        (_NormalizedDiscreteMembership, _NormalizedContinuousMembership),
-    ):
-        return 1.0
+    membershipFunction = fuzzySet.membershipFunction
+
+    if isinstance(membershipFunction, _NormalizedDiscreteMembership):
+        if fuzzySet.universe == membershipFunction.universe:
+            return 1.0
+
+    elif isinstance(membershipFunction, _NormalizedContinuousMembership):
+        if fuzzySet.universe == membershipFunction.universe:
+            return 1.0
+
+        if isinstance(fuzzySet.universe, ContinuousUniverse):
+            return _NormalizedContinuousHeight(membershipFunction, fuzzySet.universe)
 
     if isinstance(fuzzySet.universe, DiscreteUniverse):
         return max(_DiscreteGrades(fuzzySet))
@@ -314,13 +344,38 @@ def Normalize(fuzzySet):
 
         normalizedGrades = tuple(grade / height for grade in sourceGrades)
         normalizedMembership = _NormalizedDiscreteMembership(
-            fuzzySet.universe.points,
+            fuzzySet.universe,
             normalizedGrades,
         )
 
     else:
         if isinstance(fuzzySet.membershipFunction, _NormalizedContinuousMembership):
-            return ScalarFuzzySet(fuzzySet.universe, fuzzySet.membershipFunction)
+            if fuzzySet.universe == fuzzySet.membershipFunction.universe:
+                return ScalarFuzzySet(fuzzySet.universe, fuzzySet.membershipFunction)
+
+            familyIdentifier = fuzzySet.membershipFunction.familyIdentifier
+            parameters = fuzzySet.membershipFunction.parameters
+
+            from fuzzyroutines.FuzzyRoutines import MFunction
+            from fuzzyroutines.properties import DeriveProperties
+
+            frozenSource = MFunction(familyIdentifier, **dict(parameters))
+            height = DeriveProperties(frozenSource, fuzzySet.universe).height
+            _RequireGrade(
+                height / fuzzySet.membershipFunction.sourceHeight,
+                "normalized height",
+            )
+
+            if height == 0:
+                raise ValueError("cannot normalize a zero-height fuzzy set")
+
+            normalizedMembership = _NormalizedContinuousMembership(
+                fuzzySet.universe,
+                familyIdentifier,
+                parameters,
+                height,
+            )
+            return ScalarFuzzySet(fuzzySet.universe, normalizedMembership)
 
         analyticalSource = _RequireContinuousAnalyticalSource(fuzzySet)
 
@@ -337,6 +392,7 @@ def Normalize(fuzzySet):
             raise ValueError("cannot normalize a zero-height fuzzy set")
 
         normalizedMembership = _NormalizedContinuousMembership(
+            fuzzySet.universe,
             familyIdentifier,
             parameters,
             height,

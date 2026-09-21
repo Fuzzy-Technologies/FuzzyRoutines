@@ -1,4 +1,11 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # API documentation evaluation
+
+![FuzzyRoutines](assets/brand/fuzzyroutines-horizontal.svg){ .fr-brand-lockup }
 
 This disposable site renders the real
 [`ScalarFuzzySet`][fuzzyroutines.fuzzysets.ScalarFuzzySet] API and the directed

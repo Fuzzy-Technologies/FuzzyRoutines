@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Explicit Fuzzy-Set Operations
 
 - Status: Executable contract for Tasks #71, #72, and #74

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Python Code and Source Documentation Standard
 
 This document is the canonical Python source-style contract for
@@ -110,8 +115,8 @@ files use this exact order:
 ```python
 # Project: FuzzyRoutines by Fuzzy Technologies
 # Maintainer: Fuzzy Technologies contributors
-# SPDX-FileCopyrightText: 2026 Fuzzy Technologies
-# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 ```
 
 Replace `2026` with the first year of project-owned copyrightable content in
@@ -130,8 +135,9 @@ claim inside every module.
 
 Copied or derived third-party code keeps every evidenced copyright holder in
 separate `SPDX-FileCopyrightText` lines and records its source in an adjacent
-`# Source:` line. Its actual SPDX license identifier replaces `MIT` only after
-compatibility and attribution requirements have been reviewed. Never relabel
+`# Source:` line. Its actual SPDX license identifier replaces `Apache-2.0`
+when required by the reviewed upstream license; such material must also be
+listed in `NOTICE` or a dedicated third-party notice manifest. Never relabel
 external code as solely owned by Fuzzy Technologies.
 
 The module docstring is the first Python statement after the comment header.
@@ -149,8 +155,8 @@ A production module header uses this shape:
 ```python
 # Project: FuzzyRoutines by Fuzzy Technologies
 # Maintainer: Fuzzy Technologies contributors
-# SPDX-FileCopyrightText: 2026 Fuzzy Technologies
-# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 
 """Exact alpha-cut operations for scalar fuzzy sets.
 
@@ -228,8 +234,8 @@ but mathematically different concept and states its invariant.
 ```python
 # Project: FuzzyRoutines by Fuzzy Technologies
 # Maintainer: Fuzzy Technologies contributors
-# SPDX-FileCopyrightText: 2026 Fuzzy Technologies
-# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 
 """Immutable linguistic terms and ordered linguistic scales.
 
@@ -246,8 +252,8 @@ could not infer from the filename.
 ```python
 # Project: FuzzyRoutines by Fuzzy Technologies
 # Maintainer: Fuzzy Technologies contributors
-# SPDX-FileCopyrightText: 2026 Fuzzy Technologies
-# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 
 """Executable contracts for exact and sampled weak alpha-cuts."""
 
@@ -270,8 +276,8 @@ individual test docstring would add no useful information.
 #!/usr/bin/env python3
 # Project: FuzzyRoutines by Fuzzy Technologies
 # Maintainer: Fuzzy Technologies contributors
-# SPDX-FileCopyrightText: 2026 Fuzzy Technologies
-# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 
 """Emit a reproducible membership benchmark report as JSON.
 

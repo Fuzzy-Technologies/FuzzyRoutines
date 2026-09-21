@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Legacy Test Matrix Baseline
 
 This baseline executes the **unmodified historical test module** `tests/test_routines.py` against explicitly recorded Python candidates.
