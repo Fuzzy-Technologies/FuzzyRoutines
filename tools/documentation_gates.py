@@ -52,11 +52,15 @@ class _PageParser(html.parser.HTMLParser):
     """Collect rendered anchors and navigational links from one HTML page."""
 
     def __init__(self):
+        """Initialize empty anchor and link collections."""
+
         super().__init__(convert_charrefs=True)
         self.anchors = set()
         self.links = []
 
     def handle_starttag(self, tag, attributes):
+        """Record identifiers and navigational targets from a start tag."""
+
         attributeMap = dict(attributes)
         identifier = attributeMap.get("id")
         if identifier:

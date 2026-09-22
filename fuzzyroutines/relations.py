@@ -124,6 +124,10 @@ class ComparisonPolicy:
 
         Returns:
             Exact equality or `math.isclose` according to `mode`.
+
+        Raises:
+            TypeError: If either grade is not a real scalar.
+            ValueError: If either grade is non-finite or outside $[0, 1]$.
         """
 
         leftGrade = _RequireGrade(leftGrade, "leftGrade")
@@ -149,6 +153,10 @@ class ComparisonPolicy:
         Returns:
             Whether the subset grade is no greater than the superset grade,
             allowing closeness only in tolerance mode.
+
+        Raises:
+            TypeError: If either grade is not a real scalar.
+            ValueError: If either grade is non-finite or outside $[0, 1]$.
         """
 
         subsetGrade = _RequireGrade(subsetGrade, "subsetGrade")
@@ -211,6 +219,8 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
 
     comparisonPoints = _ResolveComparisonPoints(leftSet.universe, comparisonDomain)
 
+    # all() preserves fail-fast semantics: at most one evaluation per declared
+    # point and immediate termination at the first counterexample.
     return all(
         comparisonPolicy.Equal(leftSet.Membership(point), rightSet.Membership(point))
         for point in comparisonPoints
@@ -218,9 +228,10 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
 
 
 def IncludedOnDomain(subset, superset, comparisonPolicy, comparisonDomain=None):
-    """Evaluate fuzzy inclusion over an exhaustive or explicit finite domain.
+    r"""Evaluate fuzzy inclusion over an exhaustive or explicit finite domain.
 
-    Inclusion means $mu_subset(x) <= mu_superset(x)$ at every evaluated point.
+    Inclusion means $\mu_{subset}(x) \leq \mu_{superset}(x)$ at every
+    evaluated point.
     Tolerance mode permits only violations whose two grades are numerically
     close under the explicit comparison policy.
 
@@ -246,6 +257,8 @@ def IncludedOnDomain(subset, superset, comparisonPolicy, comparisonDomain=None):
 
     comparisonPoints = _ResolveComparisonPoints(subset.universe, comparisonDomain)
 
+    # Worst-case O(n), O(1) auxiliary space; a finite continuous domain remains
+    # evidence only for its declared points, never a global proof.
     return all(
         comparisonPolicy.Included(subset.Membership(point), superset.Membership(point))
         for point in comparisonPoints

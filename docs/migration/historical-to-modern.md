@@ -30,7 +30,7 @@ examples below keep those gaps visible instead of inventing future call shapes.
 | Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                  |
 | Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                   |
 | Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                          |
-| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation via `LinguisticTerm` and `LinguisticScale`; legacy classes remain required for lookup and fuzzification   |
+| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation via `LinguisticTerm` and `LinguisticScale`; legacy classes remain required for lookup and fuzzification    |
 | Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries              |
 | Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | No modern centroid strategy yet; retain `Defuz()` and treat `supportSet` as a numerical integration interval                    |
 
@@ -198,7 +198,9 @@ python examples/migration/modern_supported.py
   explicit operator policies and immutable fuzzy sets while clearly using the
   historical membership factory as the current interoperability path.
 
-The example tests execute each script from a temporary working directory.
-Package validation runs the same tests against a clean wheel installation; the
-source-tree developer suite supplies the repository root only when its active
-interpreter has no installed package.
+The example tests execute each script from a temporary working directory. The
+package workflow independently installs the wheel and source distribution,
+removes `PYTHONPATH`, proves the import origin is inside the clean environment,
+and runs the same scripts through the shell-visible entry points. See
+[`Executable Tests, Tools, Benchmarks, and Examples`](../executable-tests-tools-and-examples.md)
+for the complete artifact and exit-code contract.

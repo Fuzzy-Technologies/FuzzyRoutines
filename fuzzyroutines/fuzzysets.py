@@ -109,6 +109,8 @@ class NegationPolicy:
         if grade == 1:
             return 0.0
 
+        # Stable rationalized root of the implicit quadratic relation; see
+        # docs/mathematics/parabolic-negation-derivation.md.
         if self.alpha <= 0.5:
             discriminant = (4 * self.alpha - 1) ** 2 + 8 * (1 - 2 * self.alpha) * grade
 
@@ -254,8 +256,10 @@ class ScalarFuzzySet:
             Membership degree in $[0, 1]$.
 
         Raises:
+            TypeError: If the coordinate or returned grade is not a real
+                scalar.
             ValueError: If the coordinate is outside the universe or the
-                callable returns an invalid grade.
+                callable returns a non-finite or out-of-range grade.
         """
 
         if not self.universe.Contains(coordinate):
@@ -401,6 +405,8 @@ def IsNormal(fuzzySet, tolerance=1e-12):
         Whether the exact height is within `tolerance` of one.
 
     Raises:
+        TypeError: If `fuzzySet` is not a scalar fuzzy set or `tolerance` is
+            not a real scalar.
         ValueError: If `tolerance` is negative or exact height is unavailable.
     """
 
@@ -413,9 +419,10 @@ def IsNormal(fuzzySet, tolerance=1e-12):
 
 
 def Normalize(fuzzySet):
-    """Return a new height-one fuzzy set without mutating the source set.
+    r"""Return a new height-one fuzzy set without mutating the source set.
 
-    Normalization is the pointwise quotient $mu_A(x) / height(A)$. It is
+    Normalization is the pointwise quotient
+    $\mu_A(x) / \operatorname{height}(A)$. It is
     undefined for height zero and unavailable when an exact continuous height
     cannot be proved under the current analytical contracts.
 
@@ -441,6 +448,8 @@ def Normalize(fuzzySet):
             raise ValueError("cannot normalize a zero-height fuzzy set")
 
         normalizedGrades = tuple(grade / height for grade in sourceGrades)
+        # max(grades / height) is exactly one at the coordinate that attained
+        # the finite discrete maximum; no sampled supremum claim is involved.
         normalizedMembership = _NormalizedDiscreteMembership(
             fuzzySet.universe,
             normalizedGrades,
@@ -604,9 +613,9 @@ def Union(leftSet, rightSet, sNormPolicy):
 
 
 def Difference(leftSet, rightSet, tNormPolicy, negationPolicy):
-    """Return the directed fuzzy-set difference under explicit policies.
+    r"""Return the directed fuzzy-set difference under explicit policies.
 
-    The membership definition is $T(mu_A(x), N(mu_B(x)))$.
+    The membership definition is $T(\mu_A(x), N(\mu_B(x)))$.
 
     Args:
         leftSet: Minuend scalar fuzzy set $A$.
@@ -631,7 +640,7 @@ def Difference(leftSet, rightSet, tNormPolicy, negationPolicy):
         raise TypeError("negationPolicy must be a NegationPolicy")
 
     def DifferenceMembership(coordinate):
-        """Evaluate T(mu_A(x), N(mu_B(x))) without an implicit policy."""
+        r"""Evaluate $T(\mu_A(x), N(\mu_B(x)))$ without an implicit policy."""
 
         return tNormPolicy.Evaluate(
             leftSet.Membership(coordinate),

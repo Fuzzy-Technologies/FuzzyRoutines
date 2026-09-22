@@ -31,7 +31,7 @@ Run from a checkout of the recorded revision:
 
 ```bash
 python --version
-python tools/benchmark_legacy_baseline.py --repeats 7
+python -m tools.benchmark_legacy_baseline --repeats 7
 python -m pytest -q
 ```
 

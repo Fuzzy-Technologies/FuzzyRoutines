@@ -44,7 +44,7 @@ def test_BenchmarkScaleRejectsInsufficientSamples():
 
 
 def test_BenchmarkScaleMainEmitsJson(capsys):
-    Main()
+    Main([])
     report = json.loads(capsys.readouterr().out)
 
     for scaleName, scaleClass in SCALES.items():

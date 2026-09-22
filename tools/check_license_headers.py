@@ -3,10 +3,16 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Validate repository-wide Apache-2.0 licensing invariants."""
+"""Validate repository-wide Apache-2.0 licensing invariants.
+
+The command reads tracked repository files, writes a PASS line to stdout or
+actionable violations to stderr, creates no artifacts, and returns `1` when
+license metadata has drifted.
+"""
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import re
 import subprocess
@@ -129,9 +135,17 @@ def ValidateRepository(projectRoot: Path = PROJECTROOT) -> tuple[str, ...]:
     return tuple(errors)
 
 
-def Main() -> int:
+def ParseArguments(arguments=None):
+    """Parse the no-option validation command and provide standard help."""
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    return parser.parse_args(arguments)
+
+
+def Main(arguments=None) -> int:
     """Print actionable violations and return a failing exit code on drift."""
 
+    ParseArguments(arguments)
     errors = ValidateRepository()
     if errors:
         for error in errors:

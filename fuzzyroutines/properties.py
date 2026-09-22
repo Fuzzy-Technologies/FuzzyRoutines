@@ -82,6 +82,10 @@ class ContinuousInterval:
 
         Returns:
             `True` exactly when the endpoint rules admit the coordinate.
+
+        Raises:
+            TypeError: If the coordinate is not a real scalar.
+            ValueError: If the coordinate is not finite.
         """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
@@ -145,6 +149,12 @@ class ContinuousRegion:
 
         Returns:
             `True` when at least one component contains the coordinate.
+
+        Raises:
+            TypeError: If the region is non-empty and the coordinate is not a
+                real scalar.
+            ValueError: If the region is non-empty and the coordinate is not
+                finite.
         """
 
         return any(interval.Contains(coordinate) for interval in self.intervals)
@@ -190,6 +200,10 @@ class DiscreteRegion:
 
         Returns:
             `True` when `coordinate` is one of `points`.
+
+        Raises:
+            TypeError: If the coordinate is not a real scalar.
+            ValueError: If the coordinate is not finite.
         """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
@@ -299,18 +313,28 @@ class DiscreteFuzzyProperties:
 
 @dataclass(frozen=True, slots=True)
 class SampledFuzzyProperties:
-    """Approximate observations from a finite grid over a continuous domain.
+    """Approximate observations from finite coordinates over a continuous domain.
+
+    `SampleProperties` produces a uniform grid and derives every recorded
+    region from the corresponding grades. Direct construction validates the
+    table shape, endpoint coverage, region subsets, and height, but it does not
+    revalidate equal spacing or recompute the three recorded regions.
 
     Attributes:
         analysisDomain: Closed interval covered by the grid.
         sampleCount: Number of coordinates, including both endpoints.
-        coordinates: Strictly increasing uniform-grid coordinates.
+        coordinates: Strictly increasing coordinates spanning
+            `analysisDomain`.
         grades: Validated grades corresponding to `coordinates`.
-        positiveSupportSamples: Sampled points with positive membership.
-        coreSamples: Sampled points with membership one.
-        boundarySamples: Sampled points with membership between zero and one.
+        positiveSupportSamples: Recorded subset of sampled coordinates;
+            `SampleProperties` selects grades greater than zero.
+        coreSamples: Recorded subset of sampled coordinates;
+            `SampleProperties` selects grades equal to one.
+        boundarySamples: Recorded subset of sampled coordinates;
+            `SampleProperties` selects grades strictly between zero and one.
         heightEstimate: Maximum observed grade, not an exact supremum proof.
-        method: Sampling method identifier.
+        method: Non-empty sampling provenance label. `SampleProperties` uses
+            `"uniform-grid"`.
     """
 
     analysisDomain: IntegrationDomain
@@ -476,6 +500,9 @@ def _Point(coordinate):
 def _AnalyticalRegions(membershipFunction):
     """Return exact real-line regions and asymptotic membership limits."""
 
+    # These regions are algebraic consequences of the canonical formulas in
+    # docs/mathematics/membership-function-contracts.md. Never infer them from
+    # floating-point samples: Gaussian tails, for example, may underflow.
     functionName = membershipFunction.name
     parameters = membershipFunction.parameters
     realLine = _Region(ContinuousInterval())
@@ -645,6 +672,8 @@ def DeriveProperties(membershipFunction, universe):
 
     Raises:
         TypeError: If either argument has an unsupported contract type.
+        ValueError: If the analytical family is unsupported or evaluation
+            produces an invalid membership grade.
     """
 
     if not isinstance(membershipFunction, MFunction):
@@ -728,6 +757,8 @@ def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
         raise ValueError("sampleCount must be at least two")
 
     step = (analysisDomain.right - analysisDomain.left) / (sampleCount - 1)
+    # Preserve the exact declared right endpoint instead of trusting the last
+    # rounded multiply-add; see source-algorithm-invariants.md.
     coordinates = tuple(
         analysisDomain.right if sampleIndex == sampleCount - 1 else analysisDomain.left + sampleIndex * step
         for sampleIndex in range(sampleCount)

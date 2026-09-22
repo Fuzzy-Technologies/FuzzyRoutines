@@ -206,6 +206,8 @@ def BuildReport(
 
 
 def _ArgumentParser() -> argparse.ArgumentParser:
+    """Build the command-line parser for external-link reporting."""
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--output",

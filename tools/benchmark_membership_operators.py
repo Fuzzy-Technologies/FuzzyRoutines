@@ -6,9 +6,10 @@
 """Benchmark legacy membership functions and fuzzy operators reproducibly.
 
 The tool is deliberately dependency-free and records raw per-operation samples,
-environment metadata, and independent numerical-parity checks. It reports
-observations only; a performance claim requires comparison with a named
-baseline in the same environment under the benchmark protocol.
+environment metadata, and independent numerical-parity checks. It writes JSON
+to stdout and only creates a file when `--output` names an explicit artifact
+path. It reports observations only; a performance claim requires comparison
+with a named baseline in the same environment under the benchmark protocol.
 """
 
 import argparse
@@ -24,7 +25,6 @@ import time
 from pathlib import Path
 
 from fuzzyroutines.FuzzyRoutines import MFunction, SCoNorm, TNorm
-
 
 DEFAULTITERATIONS = 10000
 DEFAULTREPEATS = 7
@@ -97,9 +97,13 @@ def BuildMembershipWorkloads():
         membershipFunction = MFunction(identifier, **parameters)
 
         def Operation(function=membershipFunction, value=inputValue):
+            """Evaluate the bound membership case without setup overhead."""
+
             return function.mju(value)
 
         def ParityCheck(operation=Operation, expected=expectedValue):
+            """Compare the bound membership result with its analytical oracle."""
+
             return math.isclose(
                 operation(),
                 expected,
@@ -134,6 +138,8 @@ def BuildOperatorWorkloads():
             right=rightValue,
             family=normType,
         ):
+            """Evaluate one bound t-norm case without setup overhead."""
+
             return TNorm(left, right, normType=family)
 
         def SCoNormOperation(
@@ -141,9 +147,13 @@ def BuildOperatorWorkloads():
             right=rightValue,
             family=normType,
         ):
+            """Evaluate one bound s-norm case without setup overhead."""
+
             return SCoNorm(left, right, normType=family)
 
         def TNormParityCheck(operation=TNormOperation, expected=expectedTNorm):
+            """Compare the bound t-norm result with its reference value."""
+
             return math.isclose(
                 operation(),
                 expected,
@@ -152,6 +162,8 @@ def BuildOperatorWorkloads():
             )
 
         def SCoNormParityCheck(operation=SCoNormOperation, expected=expectedSCoNorm):
+            """Compare the bound s-norm result with its reference value."""
+
             return math.isclose(
                 operation(),
                 expected,
@@ -274,7 +286,7 @@ def GetGitMetadata():
     return {"commit": commit, "dirty": dirty}
 
 
-def ParseArguments():
+def ParseArguments(arguments=None):
     """Parse benchmark command-line arguments."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -300,12 +312,13 @@ def ParseArguments():
         type=Path,
         help="optional JSON output path; stdout is always written",
     )
-    return parser.parse_args()
+    return parser.parse_args(arguments)
 
 
-def Main():
-    """Render one reproducible benchmark report."""
-    arguments = ParseArguments()
+def Main(arguments=None):
+    """Render one reproducible benchmark report and return its exit code."""
+
+    arguments = ParseArguments(arguments)
     report = BuildBenchmarkReport(
         iterations=arguments.iterations,
         repeats=arguments.repeats,
@@ -317,6 +330,8 @@ def Main():
     if arguments.output is not None:
         arguments.output.write_text(f"{rendered}\n", encoding="utf-8")
 
+    return 0
+
 
 if __name__ == "__main__":
-    Main()
+    raise SystemExit(Main())
