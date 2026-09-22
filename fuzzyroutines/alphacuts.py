@@ -212,6 +212,8 @@ def SampleAlphaCut(fuzzySet, alpha, analysisDomain, sampleCount=101):
     analysisDomain.ValidateWithin(fuzzySet.universe)
     sampleCount = _RequireSampleCount(sampleCount)
     step = (analysisDomain.right - analysisDomain.left) / (sampleCount - 1)
+    # Assign the final endpoint directly so binary64 accumulation cannot move
+    # a logically closed grid endpoint outside the declared domain.
     coordinates = tuple(
         analysisDomain.right
         if sampleIndex == sampleCount - 1

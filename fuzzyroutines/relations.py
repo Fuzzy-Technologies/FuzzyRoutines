@@ -211,6 +211,8 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
 
     comparisonPoints = _ResolveComparisonPoints(leftSet.universe, comparisonDomain)
 
+    # all() preserves fail-fast semantics: at most one evaluation per declared
+    # point and immediate termination at the first counterexample.
     return all(
         comparisonPolicy.Equal(leftSet.Membership(point), rightSet.Membership(point))
         for point in comparisonPoints
@@ -246,6 +248,8 @@ def IncludedOnDomain(subset, superset, comparisonPolicy, comparisonDomain=None):
 
     comparisonPoints = _ResolveComparisonPoints(subset.universe, comparisonDomain)
 
+    # Worst-case O(n), O(1) auxiliary space; a finite continuous domain remains
+    # evidence only for its declared points, never a global proof.
     return all(
         comparisonPolicy.Included(subset.Membership(point), superset.Membership(point))
         for point in comparisonPoints

@@ -109,6 +109,8 @@ class NegationPolicy:
         if grade == 1:
             return 0.0
 
+        # Stable rationalized root of the implicit quadratic relation; see
+        # docs/mathematics/parabolic-negation-derivation.md.
         if self.alpha <= 0.5:
             discriminant = (4 * self.alpha - 1) ** 2 + 8 * (1 - 2 * self.alpha) * grade
 
@@ -441,6 +443,8 @@ def Normalize(fuzzySet):
             raise ValueError("cannot normalize a zero-height fuzzy set")
 
         normalizedGrades = tuple(grade / height for grade in sourceGrades)
+        # max(grades / height) is exactly one at the coordinate that attained
+        # the finite discrete maximum; no sampled supremum claim is involved.
         normalizedMembership = _NormalizedDiscreteMembership(
             fuzzySet.universe,
             normalizedGrades,

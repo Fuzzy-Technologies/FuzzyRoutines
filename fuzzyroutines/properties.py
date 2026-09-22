@@ -476,6 +476,9 @@ def _Point(coordinate):
 def _AnalyticalRegions(membershipFunction):
     """Return exact real-line regions and asymptotic membership limits."""
 
+    # These regions are algebraic consequences of the canonical formulas in
+    # docs/mathematics/membership-function-contracts.md. Never infer them from
+    # floating-point samples: Gaussian tails, for example, may underflow.
     functionName = membershipFunction.name
     parameters = membershipFunction.parameters
     realLine = _Region(ContinuousInterval())
@@ -728,6 +731,8 @@ def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
         raise ValueError("sampleCount must be at least two")
 
     step = (analysisDomain.right - analysisDomain.left) / (sampleCount - 1)
+    # Preserve the exact declared right endpoint instead of trusting the last
+    # rounded multiply-add; see source-algorithm-invariants.md.
     coordinates = tuple(
         analysisDomain.right if sampleIndex == sampleCount - 1 else analysisDomain.left + sampleIndex * step
         for sampleIndex in range(sampleCount)
