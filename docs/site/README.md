@@ -19,8 +19,10 @@ python tools/build_api_reference.py
 
 The command creates an isolated environment, builds a wheel, installs that
 wheel and the exactly pinned documentation toolchain, and runs MkDocs in strict
-mode against the installed package. It replaces only its own disposable
-`_build/api-reference/` directory.
+mode against the installed package. MkDocs documentation warnings therefore
+fail the build. Informational tool messages and upstream lifecycle advisories
+are reported separately and are not documentation diagnostics. The command
+replaces only its own disposable `_build/api-reference/` directory.
 
 To preview the same installed-package reference locally:
 
