@@ -3,232 +3,171 @@ SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# FuzzyRoutines
+<p align="center">
+  <img src="docs/assets/fuzzyroutines-horizontal.svg" alt="FuzzyRoutines by Fuzzy Technologies" width="720">
+</p>
 
-FuzzyRoutines is a Python library for fuzzy membership functions, fuzzy sets, fuzzy scales, and common t-norm and s-norm operators. It is maintained by [Fuzzy Technologies](https://fuzzy-technologies.github.io/).
+<p align="center">
+  A mathematically explicit Python foundation for fuzzy sets, membership
+  functions, linguistic models, and compatibility-safe modernization.
+</p>
 
-> Technologies · Knowledge · Science
+<p align="center">
+  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml"><img alt="Quick deterministic gate" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml/badge.svg?branch=develop"></a>
+  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml"><img alt="API reference build" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml/badge.svg?branch=develop"></a>
+  <img alt="CPython 3.13 and 3.14" src="https://img.shields.io/badge/CPython-3.13%20%7C%203.14-3776AB?logo=python&amp;logoColor=white">
+  <a href="LICENSE"><img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
+</p>
 
-## Vision and positioning
+> **Development status:** version 2 is an active correctness-focused
+> modernization. The historical API remains protected, while the modern typed
+> surface grows through small, executable contracts. See the
+> [current implementation boundary](docs/current-status.md).
 
-FuzzyRoutines is being developed as a focused, mathematically reliable fuzzy-computing foundation for Python — not as a general-purpose computer algebra system or notebook environment.
+## At a glance
 
-The long-term goal is to make fuzzy models convenient to define, inspect, test, calculate, and embed in real software:
+| Area              | Current contract                                                                                                                                                  |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Runtime           | CPython 3.13 and 3.14                                                                                                                                             |
+| Package version   | `2.0.0.dev0`; not yet a stable release promise                                                                                                                    |
+| Modern API        | Root exports from [`fuzzyroutines`](docs/public-api-documentation-inventory.md#modern-package-exports)                                                            |
+| Compatibility API | [`fuzzyroutines.FuzzyRoutines`](docs/compatibility/legacy-public-api-1.0.3.md) preserves the observed 1.0.3 facade                                                |
+| API reference     | Installed-package build from [`docs/site`](docs/site/README.md); public deployment remains [#206](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/206) |
+| License           | [Apache License 2.0](LICENSE) with attribution details in [NOTICE](NOTICE)                                                                                        |
 
-- validated membership-function families with explicit parameter domains;
-- fuzzy-set operations, alpha-cuts, derived properties, and linguistic variables;
-- mathematically specified negations, t-norms, s-norms, and defuzzification strategies;
-- fuzzy scales with explicit coverage, overlap, tie, and confidence semantics;
-- high-performance scalar and batch execution, with optional vectorized backends where benchmark evidence justifies them;
-- parallel execution across CPU cores through independent Python worker processes and interpreters, without hidden shared mutable state;
-- stable historical entry points alongside a small modern typed API.
+FuzzyRoutines targets scientific-grade behavior within fuzzy computing:
+explicit domains, traceable formulas, analytical results where practical,
+controlled numerical methods elsewhere, and executable evidence for important
+boundaries and invariants. It is a focused library, not a computer-algebra
+system or notebook environment.
 
-Within fuzzy computing, the target is scientific-grade behavior: formulas traceable to authoritative sources, analytical solutions where practical, controlled numerical methods elsewhere, and executable evidence for boundaries and invariants. Python scripts, applications, and notebook systems are intended host environments; FuzzyRoutines supplies the specialized fuzzy-mathematics layer.
+## Install
 
-Performance is a first-class requirement, not a marketing claim. The target is low-overhead scalar evaluation and efficient batch workloads: eliminate duplicated computation, prefer validated analytical fast paths, allow caching only when results cannot become stale, and introduce vectorized or accelerated backends when measurements justify their complexity and dependency cost. Every optimization must preserve the mathematical contract and provide numerical-parity, timing, and memory evidence.
+```console
+git clone https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
+cd FuzzyRoutines
+python -m pip install .
+```
 
-Concurrency is an explicit design target. The mathematical core should be deterministic, reentrant, process-safe, and free of hidden global mutable state; models and configurations should be serializable where practical. This allows callers to distribute independent workloads across multiple CPU cores using separate supported Python processes or interpreters on the same machine. FuzzyRoutines does not hide a global worker pool or force one orchestration framework. Thread-based and free-threaded CPython execution will be claimed only after race-safety, numerical-parity, and scaling benchmarks pass.
+## Choose the API surface
 
-The library is also the reusable fuzzy foundation for Fuzzy Technologies research, expert systems, trading systems, decision models, and future products.
+| Surface                  | Use it for                                                        | Start here                                                                                |
+|--------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| Modern typed API         | New code with explicit universes, policies, and evidence strength | [Modern API inventory](docs/public-api-documentation-inventory.md#modern-package-exports) |
+| Historical compatibility | Existing software written against the 1.0.3-style facade          | [Compatibility contract](docs/compatibility/legacy-public-api-1.0.3.md)                   |
+| Migration boundary       | Moving one supported scenario at a time                           | [Historical-to-modern examples](docs/migration/historical-to-modern.md)                   |
 
-## Status
+### Modern example
 
-Version 2 is an active correctness-focused modernization. The historical public API remains available while documented defects are repaired through small, reviewable changes. Do not treat the current branch as a stable release promise.
+```python
+from fuzzyroutines import ContinuousUniverse, DeriveProperties, ScalarFuzzySet
+from fuzzyroutines.FuzzyRoutines import MFunction
 
-Supported runtimes are CPython 3.13 and 3.14.
+universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
+fuzzySet = ScalarFuzzySet(universe, membershipFunction.mju)
+properties = DeriveProperties(membershipFunction, universe)
 
-The current `develop` branch already provides:
+assert fuzzySet.Membership(0.5) == 1.0
+assert properties.core.Contains(0.5)
+assert properties.height == 1.0
+```
 
-- the historical membership families and public import path, protected by compatibility tests;
-- strict parameter validation and transitional `gaussian`, `logistic`, `sShoulder`, and `harringtonDesirability` registry names in the historical factory;
-- verified classical t-norm and s-norm families, with validation of every composed operand;
-- finite-domain validation for parameterized `FuzzyNOT`;
-- analytical parabolic negation without an epsilon-driven scan;
-- reentrant Bell evaluation without temporary mutation of shared parameters;
-- immutable scalar universe and numerical integration-domain value objects;
-- an explicit compatibility mapping from legacy `supportSet` tuples to
-  `IntegrationDomain`;
-- immutable scalar fuzzy sets with explicit complement, intersection, and
-  union policies, directed difference, exact height queries, fail-closed
-  normalization, and fail-closed universe compatibility;
-- exact discrete alpha-cuts and explicitly provenance-rich sampled continuous
-  alpha-cut observations;
-- immutable typed linguistic terms and explicitly ordered linguistic-scale
-  representations, without implicit lookup or fuzzification policy;
-- `FuzzySet` centroid access that reflects current membership parameters and integration interval;
-- deterministic scale lookup with one membership evaluation per term and an explicit later-term tie policy;
-- an explicit no-cache decision for mutable evaluation surfaces, while
-  permitting immutable derived snapshots that cannot become stale;
-- reproducible command-line benchmarks and diagnostic reports.
+A declared [`ContinuousUniverse`](docs/mathematics/universe-support-contract.md)
+is part of fuzzy-set identity. An
+[`IntegrationDomain`](docs/adr/0005-numerical-defuzzification-policy.md) is only
+a finite interval used by a numerical method; it is never mathematical
+support.
 
-Symmetric fuzzy-set difference, executable convexity queries,
-analytical/adaptive defuzzification strategy, typed linguistic lookup and
-fuzzification policies, the complete typed module API, optional vectorization,
-and free-threaded execution remain roadmap work. See the
-[current implementation status](docs/current-status.md) for the exact boundary
-and evidence.
+### Historical compatibility example
 
-The focused typed modules will become the default API for new users. The
-historical `FuzzyRoutines.py` entry point will remain a compatibility facade:
-old names and parameter conventions will delegate to or explicitly adapt the
-same mathematically correct core rather than own duplicate implementations.
+```python
+from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 
-## Install from source
+membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
+fuzzySet = FuzzySet(
+    membershipFunction,
+    supportSet=(0.0, 1.0),
+    linguisticName="Medium",
+)
 
-    git clone https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
-    cd FuzzyRoutines
-    python -m pip install .
+print(TNorm(0.4, 0.7, normType="algebraic"))
+print(fuzzySet.Defuz())
+```
 
-## Current compatibility API example
+The legacy triangle order is `a, b, c`, where `c` is the apex. Protected
+names and corrected historical defects are tracked in the
+[compatibility ledger](docs/compatibility/corrected-bug-ledger.md).
 
-    from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm, UniversalFuzzyScale
+## Core contracts
 
-    membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
-    fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 1.0), linguisticName="Medium")
-    scale = UniversalFuzzyScale()
+| Concept                     | Mathematical contract                                                                          | Architecture decision                                                              |
+|-----------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| Membership functions        | [Families, formulas, and parameter domains](docs/mathematics/membership-function-contracts.md) | [ADR-0003](docs/adr/0003-membership-function-contracts.md)                         |
+| Universes and support       | [Universe, support, core, boundary, and height](docs/mathematics/universe-support-contract.md) | [ADR-0002](docs/adr/0002-universe-support-semantics.md)                            |
+| Negations and scalar norms  | [Formula and algorithm invariants](docs/mathematics/source-algorithm-invariants.md)            | [ADR-0004](docs/adr/0004-operator-and-negation-contracts.md)                       |
+| Fuzzy-set operations        | [Complement, intersection, union, and difference](docs/mathematics/fuzzy-set-operations.md)    | [ADR-0008](docs/adr/0008-fuzzy-set-difference-semantics.md)                        |
+| Alpha-cuts                  | [Exact and sampled alpha-cut evidence](docs/mathematics/alpha-cuts.md)                         | [Universe semantics](docs/adr/0002-universe-support-semantics.md)                  |
+| Height and normalization    | [Exact evidence and fail-closed normalization](docs/mathematics/fuzzy-set-normalization.md)    | [Numerical policy](docs/adr/0005-numerical-defuzzification-policy.md)              |
+| Equality and inclusion      | [Explicit comparison domains and policies](docs/mathematics/fuzzy-set-relations.md)            | [Modern domain boundary](docs/current-status.md#implemented-modern-domain-surface) |
+| Linguistic terms and scales | [Immutable typed representation](docs/mathematics/linguistic-term-model.md)                    | [Roadmap boundary](docs/current-status.md#still-in-the-v2-roadmap)                 |
 
-    print(TNorm(0.4, 0.7, normType="algebraic"))
-    print(fuzzySet.Defuz())
-    print(scale.Fuzzy(0.5)["name"])
+## Documentation map
 
-This example uses the current historical facade. Its triangle argument order is
-`a, b, c`, where `c` is the apex. New v2 examples will default to the focused
-modern API after its parameter contracts are implemented.
-
-## Modern domain API
-
-    from fuzzyroutines import ContinuousUniverse, DiscreteUniverse, IntegrationDomain
-
-    universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
-    integrationDomain = IntegrationDomain(0.1, 0.9).ValidateWithin(universe)
-    sampledUniverse = DiscreteUniverse((0.0, 0.5, 1.0))
-
-Universes are part of fuzzy-set identity. An `IntegrationDomain` is only a
-finite operational interval for a numerical method; it is never mathematical
-support. See the universe/support contract for the exact semantics.
-
-Exact properties for the accepted analytical membership families are derived
-without scanning floating-point samples:
-
-    from fuzzyroutines import DeriveProperties
-    from fuzzyroutines.FuzzyRoutines import MFunction
-
-    membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
-    properties = DeriveProperties(membershipFunction, ContinuousUniverse())
-
-    assert properties.positiveSupport.Contains(0.5)
-    assert properties.core.Contains(1.0)
-    assert properties.height == 1.0
-
-`SampleProperties(...)` is deliberately separate and returns provenance-rich
-observations with `isExact == False`; a finite numerical grid never becomes
-mathematical support by implication.
-
-Set operations require explicit policies; there is no global or implicit
-operator selection:
-
-    from fuzzyroutines import (
-        Complement,
-        Difference,
-        Intersection,
-        NegationPolicy,
-        ScalarFuzzySet,
-        SNormPolicy,
-        TNormPolicy,
-        Union,
-    )
-
-    fuzzySet = ScalarFuzzySet(universe, lambda coordinate: coordinate)
-    complement = Complement(fuzzySet, NegationPolicy("standard"))
-    overlap = Intersection(fuzzySet, complement, TNormPolicy("logic"))
-    envelope = Union(fuzzySet, complement, SNormPolicy("logic"))
-    directedDifference = Difference(
-        fuzzySet,
-        complement,
-        TNormPolicy("logic"),
-        NegationPolicy("standard"),
-    )
-
-Exact height and normalization deliberately distinguish exhaustive or
-analytical evidence from finite continuous sampling:
-
-    from fuzzyroutines import Height, IsNormal, Normalize
-    from fuzzyroutines.FuzzyRoutines import MFunction
-
-    membershipFunction = MFunction("logistic", a=2.0, b=0.0)
-    analyticalSet = ScalarFuzzySet(universe, membershipFunction.mju)
-    normalizedSet = Normalize(analyticalSet)
-
-    assert Height(normalizedSet) == 1.0
-    assert IsNormal(normalizedSet)
-
-Generic continuous callables fail closed because a finite grid cannot prove
-their global height. See the normalization contract for the exact discrete,
-analytical, zero-height, and tolerance semantics.
-
-Modern linguistic terms use an immutable typed representation with explicit
-ordering. Lookup and fuzzification policies are intentionally separate:
-
-    from fuzzyroutines import LinguisticScale, LinguisticTerm
-
-    low = LinguisticTerm("Low", fuzzySet)
-    high = LinguisticTerm("High", complement)
-    scale = LinguisticScale((low, high))
-
-## Mathematics and compatibility
-
-- Membership-function contracts: docs/mathematics/membership-function-contracts.md
-- Membership-function ADR: docs/adr/0003-membership-function-contracts.md
-- Universe/support contract: docs/mathematics/universe-support-contract.md
-- Universe/support ADR: docs/adr/0002-universe-support-semantics.md
-- Operator and negation ADR: docs/adr/0004-operator-and-negation-contracts.md
-- Directed-difference ADR: docs/adr/0008-fuzzy-set-difference-semantics.md
-- Fuzzy-set convexity contract: docs/mathematics/fuzzy-set-convexity.md
-- Fuzzy-set convexity ADR: docs/adr/0009-fuzzy-set-convexity-semantics.md
-- Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
-- Fuzzy-set height and normalization: docs/mathematics/fuzzy-set-normalization.md
-- Alpha-cut contract: docs/mathematics/alpha-cuts.md
-- Source formula and algorithm invariants: docs/mathematics/source-algorithm-invariants.md
-- Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
-- Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
-- Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
-- Historical-to-modern migration examples: docs/migration/historical-to-modern.md
-- Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
-- Executable tests, tools, benchmarks, and examples: docs/executable-tests-tools-and-examples.md
-- Cache and precomputation decision: docs/performance/cache-and-precomputation-evaluation.md
-- API documentation architecture ADR: docs/adr/0010-api-documentation-architecture.md
-- API documentation evaluation: docs/api-evaluation/README.md
-- Current implementation status: docs/current-status.md
+| Need                                  | Canonical source                                                                                                                                         |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| What exists now                       | [Current implementation status](docs/current-status.md)                                                                                                  |
+| Public symbols                        | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                       |
+| Mathematical definitions              | [`docs/mathematics`](docs/mathematics/)                                                                                                                  |
+| Compatibility and migration           | [Compatibility ledger](docs/compatibility/corrected-bug-ledger.md) · [Migration guide](docs/migration/historical-to-modern.md)                           |
+| Benchmarks and performance claims     | [Benchmark protocol](docs/performance/benchmark-reproducibility-protocol.md) · [Cache decision](docs/performance/cache-and-precomputation-evaluation.md) |
+| Tests, tools, examples, and artifacts | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                                  |
+| Contribution and evidence rules       | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                       |
+| API documentation architecture        | [ADR-0010](docs/adr/0010-api-documentation-architecture.md) · [Reproducible build](docs/site/README.md)                                                  |
 
 ## Development
 
-    python -m pip install -e .
-    python -m tools.test_runner
-    ruff check .
+```console
+python -m pip install -e .
+python -m tools.test_runner
+ruff check .
+python tools/build_api_reference.py
+```
 
-The project intentionally does not use ruff format. See docs/development-evidence-protocol.md for the review, evidence, and Python-style rules.
+The canonical runner discovers the complete suite, uses independent
+`pytest-xdist` worker **processes** by default, caps automatic parallelism at
+12, and moves tests marked `serial` into a separate sequential phase. Use
+`--jobs N`, `--timeout N`, `--serial`, or `--fail-fast` for an explicit run.
+It never retries failures automatically.
 
-The accepted API-documentation architecture is MkDocs + Material for MkDocs +
-mkdocstrings-python + Griffe, with English Google-style Markdown docstrings.
-The reproducible comparison under `docs/api-evaluation/` is an architecture
-spike, not the production Pages integration. Generated HTML remains disposable;
-docstring migration, production composition, and deployment are tracked by the
-follow-up work identified in ADR-0010.
+The project intentionally does not use `ruff format`. Markdown tables are
+source-aligned and checked automatically. Generated API HTML is disposable
+output under `_build/api-reference/`; annotations, English Google-style
+Markdown docstrings, and tracked Markdown remain the sources of truth.
 
-The canonical runner discovers the complete suite, uses process workers by
-default, caps automatic parallelism at 12, and executes tests marked `serial`
-in a separate sequential phase. Use `--jobs N`, `--timeout N`, `--serial`, or
-`--fail-fast` to override one run. It never retries failures automatically.
+## Roadmap boundary
+
+The current typed surface already includes explicit scalar universes, immutable
+fuzzy sets, operations, derived properties, alpha-cuts, comparison policies,
+and linguistic representations. Symmetric difference, executable convexity,
+adaptive/analytical defuzzification, typed linguistic lookup, vectorized
+backends, and free-threaded CPython support remain roadmap work. Performance and
+concurrency claims require numerical-parity, timing, memory, and race-safety
+evidence.
+
+The generated reference currently builds and uploads as a CI artifact. Task
+[#206](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/206) will
+compose it with the existing
+[FuzzyRoutines GitHub Pages site](https://fuzzy-technologies.github.io/FuzzyRoutines/)
+and define stable version/language URLs.
 
 ## License
 
-FuzzyRoutines source code, tests, documentation, examples, tools, workflows,
-and project-owned site assets are licensed under the
+Source code, tests, documentation, examples, tools, workflows, and
+project-owned site assets are licensed under the
 [Apache License 2.0](LICENSE). Redistributions must preserve the license,
-copyright and attribution notices, including [NOTICE](NOTICE), and modified
-files must carry the notices required by Apache-2.0 section 4.
+copyright, and attribution notices, including [NOTICE](NOTICE).
 
-The license does not grant permission to use Fuzzy Technologies trade names,
-trademarks, service marks, or product names beyond reasonable attribution and
-the NOTICE requirements. See [the licensing and provenance policy](docs/licensing.md)
-for the repository boundary and historical relicensing record.
+The license does not grant permission to use Fuzzy Technologies trade names or
+marks beyond reasonable attribution and the NOTICE requirements. See the
+[licensing and provenance policy](docs/licensing.md).
