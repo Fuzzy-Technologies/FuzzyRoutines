@@ -3,7 +3,13 @@
 # SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Modern public API for explicit fuzzy-set domain and property contracts."""
+"""Modern public API for explicit fuzzy-set domain and property contracts.
+
+The root package re-exports the immutable v2 surface from the domain,
+fuzzy-set, property, alpha-cut, relation, and linguistic modules. Historical
+mutable names remain available only from `fuzzyroutines.FuzzyRoutines`; package
+import performs no evaluation, I/O, or configuration changes.
+"""
 
 from fuzzyroutines.alphacuts import AlphaCut, SampleAlphaCut, SampledAlphaCut
 from fuzzyroutines.domain import (

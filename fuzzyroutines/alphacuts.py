@@ -5,8 +5,8 @@
 
 """Exact discrete and explicitly sampled continuous alpha-cut operations.
 
-An alpha-cut uses the weak boundary convention ``mu(x) >= alpha``.  Exact
-evaluation is possible for a ``DiscreteUniverse`` because every declared
+An alpha-cut uses the weak boundary convention $mu(x) >= alpha$. Exact
+evaluation is possible for a `DiscreteUniverse` because every declared
 coordinate is evaluated.  An arbitrary callable over a continuous universe
 cannot be solved exactly by finite inspection, so continuous evaluation uses a
 separate provenance-rich sampled result and never claims exact geometry.
@@ -51,7 +51,17 @@ def _RequireSampleCount(sampleCount):
 
 @dataclass(frozen=True, slots=True)
 class SampledAlphaCut:
-    """Finite observations of a continuous alpha-cut with full provenance."""
+    """Finite observations of a continuous alpha-cut with full provenance.
+
+    Attributes:
+        alpha: Weak membership threshold in $[0, 1]$.
+        analysisDomain: Closed interval covered by the grid.
+        sampleCount: Number of grid coordinates, including both endpoints.
+        coordinates: Strictly increasing uniform-grid coordinates.
+        grades: Validated membership grades corresponding to `coordinates`.
+        cutSamples: Coordinates whose grades satisfy $grade >= alpha$.
+        method: Sampling method identifier; currently always `"uniform-grid"`.
+    """
 
     alpha: Real
     analysisDomain: IntegrationDomain
@@ -128,10 +138,22 @@ class SampledAlphaCut:
 def AlphaCut(fuzzySet, alpha):
     """Return the exact weak alpha-cut of a discrete scalar fuzzy set.
 
-    The returned region contains every declared coordinate ``x`` satisfying
-    ``fuzzySet.Membership(x) >= alpha``.  Continuous universes fail closed
+    The returned region contains every declared coordinate `x` satisfying
+    `fuzzySet.Membership(x) >= alpha`. Continuous universes fail closed
     because an arbitrary membership callable has no analytical inverse or
     finite exhaustive representation in the current model.
+
+    Args:
+        fuzzySet: Scalar fuzzy set over a discrete universe.
+        alpha: Weak membership threshold in $[0, 1]$.
+
+    Returns:
+        The ordered discrete region containing every qualifying coordinate.
+
+    Raises:
+        TypeError: If the input is not a scalar fuzzy set over a discrete
+            universe.
+        ValueError: If `alpha` is not a finite value in $[0, 1]$.
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
@@ -159,7 +181,21 @@ def SampleAlphaCut(fuzzySet, alpha, analysisDomain, sampleCount=101):
 
     The result records coordinates, validated membership grades, threshold,
     domain, resolution, and method.  It is a sampled observation with
-    ``isExact == False`` and is not a proof of the continuous alpha-cut.
+    `isExact == False` and is not a proof of the continuous alpha-cut.
+
+    Args:
+        fuzzySet: Scalar fuzzy set over a continuous universe.
+        alpha: Weak membership threshold in $[0, 1]$.
+        analysisDomain: Closed finite interval to sample inside the universe.
+        sampleCount: Number of uniform-grid coordinates, including endpoints.
+
+    Returns:
+        A provenance-rich sampled alpha-cut observation.
+
+    Raises:
+        TypeError: If argument types do not match the continuous contract.
+        ValueError: If a value is invalid or the domain lies outside the
+            fuzzy-set universe.
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):

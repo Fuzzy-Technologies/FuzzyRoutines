@@ -27,7 +27,11 @@ from fuzzyroutines.fuzzysets import _RequireCompatibleSets, _RequireGrade
 
 @dataclass(frozen=True, slots=True)
 class ComparisonDomain:
-    """Finite ordered coordinates used to compare continuous fuzzy sets."""
+    """Finite ordered coordinates used to compare continuous fuzzy sets.
+
+    Attributes:
+        points: Non-empty, strictly increasing tuple of finite coordinates.
+    """
 
     points: tuple[Real, ...]
 
@@ -51,7 +55,18 @@ class ComparisonDomain:
         object.__setattr__(self, "points", validatedPoints)
 
     def ValidateWithin(self, universe):
-        """Return this domain after proving every point belongs to the universe."""
+        """Return this domain after proving every point belongs to the universe.
+
+        Args:
+            universe: Continuous universe expected to contain every point.
+
+        Returns:
+            This unchanged comparison domain after successful validation.
+
+        Raises:
+            TypeError: If `universe` is not continuous.
+            ValueError: If any comparison point lies outside the universe.
+        """
 
         if not isinstance(universe, ContinuousUniverse):
             raise TypeError("comparison domains are used only with ContinuousUniverse")
@@ -64,7 +79,13 @@ class ComparisonDomain:
 
 @dataclass(frozen=True, slots=True)
 class ComparisonPolicy:
-    """Explicit exact or tolerance-based membership comparison semantics."""
+    """Explicit exact or tolerance-based membership comparison semantics.
+
+    Attributes:
+        mode: Either `"exact"` or `"tolerance"`.
+        absoluteTolerance: Non-negative absolute tolerance in tolerance mode.
+        relativeTolerance: Non-negative relative tolerance in tolerance mode.
+    """
 
     mode: str
     absoluteTolerance: Real | None = None
@@ -95,7 +116,15 @@ class ComparisonPolicy:
         object.__setattr__(self, "relativeTolerance", relativeTolerance)
 
     def Equal(self, leftGrade, rightGrade):
-        """Return whether two validated membership grades are equal by this policy."""
+        """Return whether two membership grades are equal by this policy.
+
+        Args:
+            leftGrade: Left membership degree in $[0, 1]$.
+            rightGrade: Right membership degree in $[0, 1]$.
+
+        Returns:
+            Exact equality or `math.isclose` according to `mode`.
+        """
 
         leftGrade = _RequireGrade(leftGrade, "leftGrade")
         rightGrade = _RequireGrade(rightGrade, "rightGrade")
@@ -111,7 +140,16 @@ class ComparisonPolicy:
         )
 
     def Included(self, subsetGrade, supersetGrade):
-        """Return whether one grade is included in another by this policy."""
+        """Return whether one grade is included in another by this policy.
+
+        Args:
+            subsetGrade: Candidate subset membership degree.
+            supersetGrade: Candidate superset membership degree.
+
+        Returns:
+            Whether the subset grade is no greater than the superset grade,
+            allowing closeness only in tolerance mode.
+        """
 
         subsetGrade = _RequireGrade(subsetGrade, "subsetGrade")
         supersetGrade = _RequireGrade(supersetGrade, "supersetGrade")
@@ -147,9 +185,23 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
     """Compare membership equality over an exhaustive or explicit finite domain.
 
     For a discrete universe the complete declared point set is exhaustive and
-    ``comparisonDomain`` must be omitted.  For a continuous universe the result
+    `comparisonDomain` must be omitted. For a continuous universe the result
     describes only the explicitly supplied sample points; it is not a proof of
     global functional equality.
+
+    Args:
+        leftSet: Left scalar fuzzy set.
+        rightSet: Right scalar fuzzy set over exactly the same universe.
+        comparisonPolicy: Exact or tolerance-based grade policy.
+        comparisonDomain: Required finite observation points for a continuous
+            universe; omitted for a discrete universe.
+
+    Returns:
+        `True` when all evaluated membership pairs compare equal.
+
+    Raises:
+        TypeError: If an argument has the wrong contract type.
+        ValueError: If universes differ or domain selection is invalid.
     """
 
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
@@ -168,9 +220,23 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
 def IncludedOnDomain(subset, superset, comparisonPolicy, comparisonDomain=None):
     """Evaluate fuzzy inclusion over an exhaustive or explicit finite domain.
 
-    Inclusion means ``mu_subset(x) <= mu_superset(x)`` at every evaluated point.
+    Inclusion means $mu_subset(x) <= mu_superset(x)$ at every evaluated point.
     Tolerance mode permits only violations whose two grades are numerically
     close under the explicit comparison policy.
+
+    Args:
+        subset: Candidate subset fuzzy set.
+        superset: Candidate superset over exactly the same universe.
+        comparisonPolicy: Exact or tolerance-based grade policy.
+        comparisonDomain: Required finite observation points for a continuous
+            universe; omitted for a discrete universe.
+
+    Returns:
+        `True` when inclusion holds at every evaluated coordinate.
+
+    Raises:
+        TypeError: If an argument has the wrong contract type.
+        ValueError: If universes differ or domain selection is invalid.
     """
 
     subset, superset = _RequireCompatibleSets(subset, superset)
