@@ -244,7 +244,8 @@ def BuildReference():
             "--outdir",
             artifactRoot,
             PROJECTROOT,
-        ]
+        ],
+        cwd=buildRoot,
     )
 
     wheelPaths = list(artifactRoot.glob("*.whl"))
