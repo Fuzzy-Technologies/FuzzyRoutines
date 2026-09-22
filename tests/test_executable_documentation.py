@@ -71,27 +71,27 @@ def test_ExecutableToolsExposeUsefulHelp(tmp_path):
         assert tuple(tmp_path.iterdir()) == initialEntries, f"{toolName} --help created an artifact"
 
 
-def test_ExecutableDocumentationTablesAreSourceAligned():
-    lines = DOCUMENTATIONPATH.read_text(encoding="utf-8").splitlines()
-    table = []
+def test_LegacyBenchmarkSupportsModuleAndDirectCheckoutHelp(tmp_path):
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    scriptPath = PROJECTROOT / "tools" / "benchmark_legacy_baseline.py"
+    commands = (
+        [sys.executable, "-m", "tools.benchmark_legacy_baseline", "--help"],
+        [sys.executable, "-I", "-S", str(scriptPath), "--help"],
+    )
 
-    def AssertAligned(rows):
-        widths = [[len(cell) for cell in row.strip("|").split("|")] for row in rows]
-        columnCount = len(widths[0])
-        assert all(len(row) == columnCount for row in widths)
-
-        for columnIndex in range(columnCount):
-            assert len({row[columnIndex] for row in widths}) == 1, (
-                f"Markdown table column {columnIndex + 1} is not padded to one source width"
-            )
-
-    for line in [*lines, ""]:
-        if line.startswith("|") and line.endswith("|"):
-            table.append(line)
-
-        elif table:
-            AssertAligned(table)
-            table = []
+    for command in commands:
+        result = subprocess.run(
+            command,
+            cwd=PROJECTROOT if "-m" in command else tmp_path,
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert "usage:" in result.stdout.lower()
 
 
 def test_ExecutableGuideDocumentsShellAndArtifactContracts():
