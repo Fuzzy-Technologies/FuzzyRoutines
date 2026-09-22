@@ -11,10 +11,6 @@ from fuzzyroutines.FuzzyRoutines import *
 
 class TestBaseMethods():
 
-    @pytest.fixture(scope='class', autouse=True)
-    def init(self):
-        pass
-
     def test_DiapasonParser(self):
         testData = [
             # positive tests:
