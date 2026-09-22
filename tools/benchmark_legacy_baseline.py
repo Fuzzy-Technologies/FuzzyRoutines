@@ -18,8 +18,18 @@ import platform
 import statistics
 import sys
 import time
+from pathlib import Path
 
-from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, UniversalFuzzyScale
+try:
+    from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, UniversalFuzzyScale
+
+except ModuleNotFoundError as error:
+    if error.name != "fuzzyroutines":
+        raise
+
+    repositoryRoot = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repositoryRoot))
+    from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, UniversalFuzzyScale
 
 
 def build_bell_membership():
