@@ -158,6 +158,9 @@ def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
     if fuzzyNumber == 1:
         return 0.0
 
+    # The split discriminants stay non-negative on their half-domains. The
+    # rationalized root avoids cancellation and the alpha=1/2 singularity;
+    # see docs/mathematics/parabolic-negation-derivation.md.
     if alpha <= 0.5:
         discriminant = (4 * alpha - 1) ** 2 + 8 * (1 - 2 * alpha) * fuzzyNumber
 
@@ -653,6 +656,8 @@ class MFunction():
         a = self._parameters['a']
         b = self._parameters['b']
         scaledDistance = (x - a) / b
+        # Binary64 underflow may produce zero far from the centre; analytical
+        # support is derived from the formula, never from this sampled value.
         return math.exp(-0.5 * scaledDistance * scaledDistance)
 
     def Sigmoidal(self, x):
@@ -674,7 +679,9 @@ class MFunction():
         b = self._parameters['b']
         exponent = a * (x - b)
 
-        # Algebraically equivalent branches avoid overflow in exp for large |x|.
+        # Algebraically equivalent branches keep the exp argument non-positive,
+        # preventing overflow for every finite exponent. See the numerical
+        # derivation in docs/mathematics/source-algorithm-invariants.md.
         if exponent >= 0:
             return 1 / (1 + math.exp(-exponent))
 
@@ -698,8 +705,9 @@ class MFunction():
         """
         _RequireFiniteReal(y, 'y')
 
-        # Beyond this bound the inner exponential overflows while the
-        # representable value of exp(-exp(-y)) is already exactly zero.
+        # Beyond this binary64 bound the inner exponential overflows while the
+        # representable value of exp(-exp(-y)) is already exactly zero. See
+        # docs/mathematics/source-algorithm-invariants.md.
         if y < -math.log(float.fromhex('0x1.fffffffffffffp+1023')):
             return 0.0
 
@@ -837,6 +845,9 @@ class FuzzySet():
         numeratorIntegral = 0
         denominatorIntegral = 0
 
+        # The common rectangle width cancels from the centroid ratio. This
+        # preserves the historical O(n)-time, O(1)-space right-endpoint sum;
+        # it is compatibility behavior, not an adaptive convergence claim.
         for iteration in range(self._mFunction.accuracy):
             x = left + (iteration + 1) * step
             mjuValue = self._mFunction.mju(x)

@@ -188,6 +188,7 @@ ordering. Lookup and fuzzification policies are intentionally separate:
 - Explicit fuzzy-set operations: docs/mathematics/fuzzy-set-operations.md
 - Fuzzy-set height and normalization: docs/mathematics/fuzzy-set-normalization.md
 - Alpha-cut contract: docs/mathematics/alpha-cuts.md
+- Source formula and algorithm invariants: docs/mathematics/source-algorithm-invariants.md
 - Typed linguistic-term model: docs/mathematics/linguistic-term-model.md
 - Parabolic-negation derivation: docs/mathematics/parabolic-negation-derivation.md
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
