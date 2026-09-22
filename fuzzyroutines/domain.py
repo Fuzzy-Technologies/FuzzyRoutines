@@ -184,8 +184,10 @@ class IntegrationDomain:
             A validated closed integration domain.
 
         Raises:
-            TypeError: If `interval` is not a tuple.
-            ValueError: If its shape or endpoint ordering is invalid.
+            TypeError: If `interval` is not a tuple or an endpoint is not a
+                real scalar.
+            ValueError: If its shape, endpoint finiteness, or ordering is
+                invalid.
         """
 
         if not isinstance(interval, tuple):
@@ -209,6 +211,10 @@ class IntegrationDomain:
 
         Returns:
             `True` when `left <= coordinate <= right`.
+
+        Raises:
+            TypeError: If the coordinate is not a real scalar.
+            ValueError: If the coordinate is not finite.
         """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")

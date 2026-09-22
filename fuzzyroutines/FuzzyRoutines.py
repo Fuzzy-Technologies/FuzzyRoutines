@@ -65,8 +65,10 @@ def IsCorrectFuzzyNumberValue(value):
         value: Candidate membership degree.
 
     Returns:
-        `True` for a supported number in the closed unit interval. Invalid
-        input prints the historical diagnostic and returns `False`.
+        `True` for a supported number in the closed unit interval. A
+        non-numeric input prints the historical diagnostic and returns
+        `False`; a numeric value outside the interval returns `False`
+        silently.
     """
     if IsNumber(value):
         return (0. <= value) and (value <= 1.)
@@ -347,13 +349,13 @@ class MFunction():
         **membershipFunctionParams: Exact parameter set required by the chosen
             family.
 
+    Raises:
+        ValueError: If the family or its parameter set is invalid.
+
     Attributes:
         accuracy: Number of right-endpoint rectangles used by legacy
             defuzzification.
         mju: Bound evaluator for the selected family.
-
-    Raises:
-        ValueError: If the family or its parameter set is invalid.
     """
 
     def __init__(self, userFunc, **membershipFunctionParams):
@@ -468,7 +470,12 @@ class MFunction():
 
     @parameters.setter
     def parameters(self, value):
-        """Validate and replace the complete parameter mapping."""
+        """Validate and replace the complete parameter mapping.
+
+        Raises:
+            ValueError: If `value` does not contain the exact valid parameter
+                set for the selected family.
+        """
         self._parameters = self._ValidateParameters(value)
 
     def Hyperbolic(self, x):
@@ -621,7 +628,9 @@ class MFunction():
             x: Finite scalar coordinate.
 
         Returns:
-            Membership degree in $(0, 1]$.
+            Representable membership degree in $[0, 1]$. Mathematically the
+            function is positive, but sufficiently distant finite inputs can
+            underflow to exactly zero.
 
         Raises:
             ValueError: If `x` is not finite and real.
@@ -639,7 +648,9 @@ class MFunction():
             x: Finite scalar coordinate.
 
         Returns:
-            Membership degree in $(0, 1)$.
+            Representable membership degree in $[0, 1]$. Floating-point
+            underflow and rounding can produce either endpoint for finite
+            inputs with sufficiently large magnitude.
 
         Raises:
             ValueError: If `x` is not finite and real.
@@ -663,8 +674,9 @@ class MFunction():
             y: Finite scalar desirability coordinate.
 
         Returns:
-            Membership degree in $[0, 1)$; sufficiently negative values
-            underflow deterministically to zero.
+            Representable membership degree in $[0, 1]$. Sufficiently
+            negative values underflow deterministically to zero, while
+            sufficiently positive values round to one.
 
         Raises:
             ValueError: If `y` is not finite and real.
@@ -686,6 +698,14 @@ class FuzzySet():
         membershipFunction: A configured [MFunction][fuzzyroutines.FuzzyRoutines.MFunction].
         supportSet: Two-item tuple used as the numerical integration domain.
         linguisticName: Human-readable set name.
+
+    Raises:
+        Exception: If `linguisticName` is not a string or
+            `membershipFunction` is not an `MFunction`.
+        TypeError: If `supportSet` is not a tuple or contains non-real
+            endpoints.
+        ValueError: If `supportSet` does not contain two finite increasing
+            endpoints.
 
     Notes:
         The legacy `supportSet` name denotes integration bounds, not the exact
@@ -729,7 +749,11 @@ class FuzzySet():
 
     @name.setter
     def name(self, value):
-        """Replace the linguistic name with a string value."""
+        """Replace the linguistic name with a string value.
+
+        Raises:
+            Exception: If `value` is not a string.
+        """
         if isinstance(value, str):
             self._name = value
 
@@ -743,7 +767,11 @@ class FuzzySet():
 
     @mFunction.setter
     def mFunction(self, value):
-        """Replace the membership function with an `MFunction` instance."""
+        """Replace the membership function with an `MFunction` instance.
+
+        Raises:
+            Exception: If `value` is not an `MFunction`.
+        """
         if isinstance(value, MFunction):
             self._mFunction = value
 
@@ -757,12 +785,23 @@ class FuzzySet():
 
     @supportSet.setter
     def supportSet(self, value):
-        """Validate and replace the two numerical integration endpoints."""
+        """Validate and replace the two numerical integration endpoints.
+
+        Raises:
+            TypeError: If `value` is not a tuple or contains non-real
+                endpoints.
+            ValueError: If `value` does not contain two finite increasing
+                endpoints.
+        """
         self._integrationDomain = _domain.IntegrationDomain.FromLegacyInterval(value)
 
     @property
     def defuzValue(self):
-        """Calculate and return the center-of-gravity defuzzified value."""
+        """Calculate and return the center-of-gravity defuzzified value.
+
+        Raises:
+            ZeroDivisionError: If every sampled membership grade is zero.
+        """
         self._defuzValue = self._Defuz()
         return self._defuzValue
 
@@ -793,7 +832,11 @@ class FuzzySet():
         return numeratorIntegral / denominatorIntegral
 
     def Defuz(self):
-        """Return `defuzValue` through the historical method alias."""
+        """Return `defuzValue` through the historical method alias.
+
+        Raises:
+            ZeroDivisionError: If every sampled membership grade is zero.
+        """
         return self.defuzValue
 
 
@@ -850,7 +893,11 @@ class FuzzyScale():
 
     @name.setter
     def name(self, value):
-        """Replace the scale name with a string value."""
+        """Replace the scale name with a string value.
+
+        Raises:
+            Exception: If `value` is not a string.
+        """
         if isinstance(value, str):
             self._name = value
 
@@ -864,7 +911,12 @@ class FuzzyScale():
 
     @levels.setter
     def levels(self, value):
-        """Validate and replace the non-empty ordered level list."""
+        """Validate and replace the non-empty ordered level list.
+
+        Raises:
+            Exception: If the list is empty, a level has the wrong shape or
+                value types, or level names are not unique.
+        """
         if value:
             for level in value:
                 if isinstance(level, dict) and (len(level) == 2) and ('name' and 'fSet' in level.keys()):
@@ -916,6 +968,9 @@ class FuzzyScale():
 
         Returns:
             The selected mutable level dictionary.
+
+        Raises:
+            ValueError: If `realValue` is not a finite real coordinate.
         """
         fuzzyLevel = self._levels[0]
         fuzzyMembership = fuzzyLevel['fSet'].mFunction.mju(realValue)
@@ -948,11 +1003,12 @@ class FuzzyScale():
 
 
 class UniversalFuzzyScale(FuzzyScale):
-    """Represent the read-only five-level historical universal scale.
+    """Represent the five-level historical universal scale without a setter.
 
     The ordered levels are `Min`, `Low`, `Med`, `High`, and `Max`. The inherited
     lookup and fuzzification methods remain available, while `levels` has no
-    public setter on this subclass.
+    public setter on this subclass. The returned list, lookup dictionaries, and
+    contained compatibility objects remain mutable.
     """
 
     def __init__(self):

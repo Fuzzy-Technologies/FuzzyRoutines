@@ -124,6 +124,10 @@ class ComparisonPolicy:
 
         Returns:
             Exact equality or `math.isclose` according to `mode`.
+
+        Raises:
+            TypeError: If either grade is not a real scalar.
+            ValueError: If either grade is non-finite or outside $[0, 1]$.
         """
 
         leftGrade = _RequireGrade(leftGrade, "leftGrade")
@@ -149,6 +153,10 @@ class ComparisonPolicy:
         Returns:
             Whether the subset grade is no greater than the superset grade,
             allowing closeness only in tolerance mode.
+
+        Raises:
+            TypeError: If either grade is not a real scalar.
+            ValueError: If either grade is non-finite or outside $[0, 1]$.
         """
 
         subsetGrade = _RequireGrade(subsetGrade, "subsetGrade")
@@ -218,9 +226,10 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
 
 
 def IncludedOnDomain(subset, superset, comparisonPolicy, comparisonDomain=None):
-    """Evaluate fuzzy inclusion over an exhaustive or explicit finite domain.
+    r"""Evaluate fuzzy inclusion over an exhaustive or explicit finite domain.
 
-    Inclusion means $mu_subset(x) <= mu_superset(x)$ at every evaluated point.
+    Inclusion means $\mu_{subset}(x) \leq \mu_{superset}(x)$ at every
+    evaluated point.
     Tolerance mode permits only violations whose two grades are numerically
     close under the explicit comparison policy.
 
