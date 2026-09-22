@@ -194,6 +194,7 @@ ordering. Lookup and fuzzification policies are intentionally separate:
 - Compatibility ledger: docs/compatibility/corrected-bug-ledger.md
 - Historical-to-modern migration examples: docs/migration/historical-to-modern.md
 - Benchmark protocol: docs/performance/benchmark-reproducibility-protocol.md
+- Executable tests, tools, benchmarks, and examples: docs/executable-tests-tools-and-examples.md
 - Cache and precomputation decision: docs/performance/cache-and-precomputation-evaluation.md
 - API documentation architecture ADR: docs/adr/0010-api-documentation-architecture.md
 - API documentation evaluation: docs/api-evaluation/README.md

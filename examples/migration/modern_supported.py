@@ -3,7 +3,12 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Run the currently implemented modern API without claiming roadmap APIs."""
+"""Run the implemented modern API without claiming roadmap APIs.
+
+Execution writes one deterministic JSON object to stdout, creates no files,
+and demonstrates explicit domains and policies while retaining the historical
+membership factory as the current interoperability path.
+"""
 
 import json
 

@@ -81,6 +81,8 @@ jobs:
           assert FuzzySet is not None
           print("wheel root-package and legacy import smoke: PASS")
           PY
+          "$venvPath/bin/python" "$GITHUB_WORKSPACE/tools/verify_installed_executables.py" \
+            --artifact-directory "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}"
 
       - name: Clean-install source distribution and verify installed package
         shell: bash
@@ -111,6 +113,8 @@ jobs:
           assert FuzzyScale is not None
           print("sdist root-package and legacy import smoke: PASS")
           PY
+          "$venvPath/bin/python" "$GITHUB_WORKSPACE/tools/verify_installed_executables.py" \
+            --artifact-directory "$RUNNER_TEMP/sdist-executable-evidence-${{ matrix.python-version }}"
 
       - name: Upload reproducible artifact evidence
         uses: actions/upload-artifact@v4

@@ -3,7 +3,11 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Run one end-to-end example through the protected historical API."""
+"""Run one end-to-end scenario through the protected historical API.
+
+Execution writes one deterministic JSON object to stdout, creates no files,
+and covers membership, fuzzy-set, operator, scale, and defuzzification paths.
+"""
 
 import json
 

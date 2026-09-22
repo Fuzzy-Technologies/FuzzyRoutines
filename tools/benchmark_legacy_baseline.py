@@ -5,12 +5,12 @@
 
 """Capture reproducible timing observations for the unmodified legacy API.
 
-This tool records an informational baseline.  It does not make performance
-claims and must not be used to justify an optimization without a comparable
-before/after run.
+This tool records an informational baseline. It writes JSON to stdout and only
+creates a file when `--output` names an explicit artifact path. It does not
+make performance claims and must not be used to justify an optimization
+without a comparable before/after run.
 """
 
-from __future__ import print_function
 
 import argparse
 import json
@@ -20,20 +20,27 @@ import sys
 import time
 from pathlib import Path
 
+try:
+    from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, UniversalFuzzyScale
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+except ModuleNotFoundError as error:
+    if error.name != "fuzzyroutines":
+        raise
 
-if str(REPOSITORY_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPOSITORY_ROOT))
-
-from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, UniversalFuzzyScale
+    repositoryRoot = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repositoryRoot))
+    from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, UniversalFuzzyScale
 
 
 def build_bell_membership():
-    return MFunction("bell", **{"a": 0.17, "b": 0.23, "c": 0.34})
+    """Build the representative historical bell membership function."""
+
+    return MFunction("bell", a=0.17, b=0.23, c=0.34)
 
 
 def build_fuzzy_set():
+    """Build the representative historical set and compute its centroid."""
+
     return FuzzySet(
         membershipFunction=build_bell_membership(),
         supportSet=(0.17, 0.40),
@@ -66,6 +73,8 @@ def measure(operation, iterations, repeats):
 
 
 def build_report(repeats):
+    """Build the complete historical timing and host-environment report."""
+
     membership = build_bell_membership()
     scale = UniversalFuzzyScale()
     lookup = scale.Fuzzy(0.5)
@@ -106,7 +115,9 @@ def build_report(repeats):
     }
 
 
-def parse_arguments():
+def parse_arguments(arguments=None):
+    """Parse repeat count and optional explicit output path."""
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--repeats",
@@ -118,11 +129,13 @@ def parse_arguments():
         "--output",
         help="optional path for the JSON report; stdout is always written",
     )
-    return parser.parse_args()
+    return parser.parse_args(arguments)
 
 
-def main():
-    arguments = parse_arguments()
+def main(arguments=None):
+    """Emit the baseline report and return zero after successful output."""
+
+    arguments = parse_arguments(arguments)
 
     if arguments.repeats < 3:
         raise ValueError("--repeats must be at least 3")
@@ -132,10 +145,12 @@ def main():
     print(rendered)
 
     if arguments.output:
-        with open(arguments.output, "w") as output_file:
+        with open(arguments.output, "w", encoding="utf-8") as output_file:
             output_file.write(rendered)
             output_file.write("\n")
 
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
