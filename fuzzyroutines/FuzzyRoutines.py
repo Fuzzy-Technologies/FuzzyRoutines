@@ -62,13 +62,14 @@ def IsCorrectFuzzyNumberValue(value):
     """Return whether a value is a valid fuzzy degree in $[0, 1]$.
 
     Args:
-        value: Candidate membership degree.
+        value: Candidate built-in `int` or `float` membership degree;
+            `bool` is excluded.
 
     Returns:
-        `True` for a supported number in the closed unit interval. A
-        non-numeric input prints the historical diagnostic and returns
-        `False`; a numeric value outside the interval returns `False`
-        silently.
+        `True` for a supported built-in number in the closed unit interval. An
+        unsupported numeric type or other non-numeric input prints the
+        historical diagnostic and returns `False`; a supported number outside
+        the interval returns `False` silently.
     """
     if IsNumber(value):
         return (0. <= value) and (value <= 1.)
@@ -79,7 +80,7 @@ def IsCorrectFuzzyNumberValue(value):
 
 
 def _RequireFiniteReal(value, parameterName):
-    """Return a finite real scalar or raise the public numeric-domain error."""
+    """Return a finite built-in integer or float, excluding booleans."""
 
     if not IsNumber(value) or not math.isfinite(value):
         raise ValueError(f"{parameterName} must be a finite real number")
@@ -88,7 +89,7 @@ def _RequireFiniteReal(value, parameterName):
 
 
 def _RequireFuzzyDegree(value, parameterName):
-    """Return a finite scalar in the closed fuzzy-degree interval."""
+    """Return a supported built-in number in the fuzzy-degree interval."""
 
     _RequireFiniteReal(value, parameterName)
 
@@ -105,14 +106,17 @@ def FuzzyNOT(fuzzyNumber, alpha=0.5):
     $1 - fuzzyNumber$.
 
     Args:
-        fuzzyNumber: Membership degree in $[0, 1]$.
-        alpha: Fixed point of the negation in $(0, 1)$.
+        fuzzyNumber: Built-in `int` or `float` membership degree in $[0, 1]$;
+            `bool` is excluded.
+        alpha: Built-in `int` or `float` fixed point in $(0, 1)$; `bool` is
+            excluded.
 
     Returns:
         The complemented membership degree.
 
     Raises:
-        ValueError: If either argument is outside its accepted finite range.
+        ValueError: If either argument has an unsupported type, is non-finite,
+            or lies outside its accepted range.
     """
     _RequireFuzzyDegree(fuzzyNumber, 'fuzzyNumber')
 
@@ -129,8 +133,10 @@ def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
     """Return the valid branch of $2a-x-y=(2a-1)(y-x)^2$.
 
     Args:
-        fuzzyNumber: Membership degree in $[0, 1]$.
-        alpha: Fixed point in $[1/4, 3/4]$.
+        fuzzyNumber: Built-in `int` or `float` membership degree in $[0, 1]$;
+            `bool` is excluded.
+        alpha: Built-in `int` or `float` fixed point in $[1/4, 3/4]$; `bool`
+            is excluded.
         epsilon: Deprecated compatibility argument; the analytical solution
             deliberately ignores it.
 
@@ -138,8 +144,8 @@ def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
         The parabolic complement of `fuzzyNumber`.
 
     Raises:
-        ValueError: If `fuzzyNumber` or `alpha` is outside its accepted finite
-            range.
+        ValueError: If `fuzzyNumber` or `alpha` has an unsupported type, is
+            non-finite, or lies outside its accepted range.
     """
     _RequireFuzzyDegree(fuzzyNumber, 'fuzzyNumber')
 
@@ -165,14 +171,15 @@ def FuzzyAND(aNumber, bNumber):
     """Return the minimum of two fuzzy degrees.
 
     Args:
-        aNumber: Left fuzzy degree in $[0, 1]$.
-        bNumber: Right fuzzy degree in $[0, 1]$.
+        aNumber: Left built-in `int` or `float` degree in $[0, 1]$.
+        bNumber: Right built-in `int` or `float` degree in $[0, 1]$.
 
     Returns:
         `min(aNumber, bNumber)`.
 
     Raises:
-        ValueError: If an operand is not a finite fuzzy degree.
+        ValueError: If an operand is a `bool`, has another unsupported type,
+            is non-finite, or lies outside $[0, 1]$.
     """
     _RequireFuzzyDegree(aNumber, 'aNumber')
     _RequireFuzzyDegree(bNumber, 'bNumber')
@@ -183,14 +190,15 @@ def FuzzyOR(aNumber, bNumber):
     """Return the maximum of two fuzzy degrees.
 
     Args:
-        aNumber: Left fuzzy degree in $[0, 1]$.
-        bNumber: Right fuzzy degree in $[0, 1]$.
+        aNumber: Left built-in `int` or `float` degree in $[0, 1]$.
+        bNumber: Right built-in `int` or `float` degree in $[0, 1]$.
 
     Returns:
         `max(aNumber, bNumber)`.
 
     Raises:
-        ValueError: If an operand is not a finite fuzzy degree.
+        ValueError: If an operand is a `bool`, has another unsupported type,
+            is non-finite, or lies outside $[0, 1]$.
     """
     _RequireFuzzyDegree(aNumber, 'aNumber')
     _RequireFuzzyDegree(bNumber, 'bNumber')
@@ -201,8 +209,8 @@ def TNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
     """Evaluate a binary t-norm from the historical family registry.
 
     Args:
-        aFuzzyNumber: Left fuzzy degree in $[0, 1]$.
-        bFuzzyNumber: Right fuzzy degree in $[0, 1]$.
+        aFuzzyNumber: Left built-in `int` or `float` degree in $[0, 1]$.
+        bFuzzyNumber: Right built-in `int` or `float` degree in $[0, 1]$.
         normType: One of `"logic"`, `"algebraic"`, `"boundary"`, or
             `"drastic"`.
 
@@ -210,7 +218,8 @@ def TNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
         The conjunction of the two degrees under the selected family.
 
     Raises:
-        ValueError: If an operand is invalid or the family is unknown.
+        ValueError: If an operand is not a finite supported built-in number in
+            $[0, 1]$ or the family is unknown.
     """
     _RequireFuzzyDegree(aFuzzyNumber, 'aFuzzyNumber')
     _RequireFuzzyDegree(bFuzzyNumber, 'bFuzzyNumber')
@@ -240,7 +249,8 @@ def TNormCompose(*fuzzyNumbers, normType='logic'):
     """Fold one t-norm over one or more fuzzy degrees.
 
     Args:
-        *fuzzyNumbers: Fuzzy degrees in $[0, 1]$.
+        *fuzzyNumbers: Built-in `int` or `float` degrees in $[0, 1]$;
+            `bool` values are excluded.
         normType: One of `"logic"`, `"algebraic"`, `"boundary"`, or
             `"drastic"`.
 
@@ -272,8 +282,8 @@ def SCoNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
     """Evaluate a binary s-norm from the historical family registry.
 
     Args:
-        aFuzzyNumber: Left fuzzy degree in $[0, 1]$.
-        bFuzzyNumber: Right fuzzy degree in $[0, 1]$.
+        aFuzzyNumber: Left built-in `int` or `float` degree in $[0, 1]$.
+        bFuzzyNumber: Right built-in `int` or `float` degree in $[0, 1]$.
         normType: One of `"logic"`, `"algebraic"`, `"boundary"`, or
             `"drastic"`.
 
@@ -281,7 +291,8 @@ def SCoNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
         The disjunction of the two degrees under the selected family.
 
     Raises:
-        ValueError: If an operand is invalid or the family is unknown.
+        ValueError: If an operand is not a finite supported built-in number in
+            $[0, 1]$ or the family is unknown.
     """
     _RequireFuzzyDegree(aFuzzyNumber, 'aFuzzyNumber')
     _RequireFuzzyDegree(bFuzzyNumber, 'bFuzzyNumber')
@@ -311,7 +322,8 @@ def SCoNormCompose(*fuzzyNumbers, normType='logic'):
     """Fold one s-norm over one or more fuzzy degrees.
 
     Args:
-        *fuzzyNumbers: Fuzzy degrees in $[0, 1]$.
+        *fuzzyNumbers: Built-in `int` or `float` degrees in $[0, 1]$;
+            `bool` values are excluded.
         normType: One of `"logic"`, `"algebraic"`, `"boundary"`, or
             `"drastic"`.
 
@@ -347,7 +359,8 @@ class MFunction():
             `"gaussian"`, `"logistic"`, `"sShoulder"`, and
             `"harringtonDesirability"`.
         **membershipFunctionParams: Exact parameter set required by the chosen
-            family.
+            family. Every value must be a finite built-in `int` or `float`;
+            `bool` is excluded.
 
     Raises:
         ValueError: If the family or its parameter set is invalid.
@@ -473,8 +486,9 @@ class MFunction():
         """Validate and replace the complete parameter mapping.
 
         Raises:
-            ValueError: If `value` does not contain the exact valid parameter
-                set for the selected family.
+            ValueError: If `value` does not contain the exact parameter set or
+                any value is not a finite built-in `int` or `float` accepted
+                by the selected family.
         """
         self._parameters = self._ValidateParameters(value)
 
@@ -482,13 +496,13 @@ class MFunction():
         """Evaluate the right-tailed hyperbolic membership function at `x`.
 
         Args:
-            x: Finite scalar coordinate.
+            x: Finite built-in `int` or `float` coordinate; `bool` is excluded.
 
         Returns:
             Membership degree in $[0, 1]$.
 
         Raises:
-            ValueError: If `x` is not finite and real.
+            ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -504,13 +518,13 @@ class MFunction():
         """Evaluate the finite bell membership function at `x`.
 
         Args:
-            x: Finite scalar coordinate.
+            x: Finite built-in `int` or `float` coordinate; `bool` is excluded.
 
         Returns:
             Membership degree in $[0, 1]$.
 
         Raises:
-            ValueError: If `x` is not finite and real.
+            ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -538,13 +552,13 @@ class MFunction():
         """Evaluate the rising parabolic shoulder at `x`.
 
         Args:
-            x: Finite scalar coordinate.
+            x: Finite built-in `int` or `float` coordinate; `bool` is excluded.
 
         Returns:
             Membership degree in $[0, 1]$.
 
         Raises:
-            ValueError: If `x` is not finite and real.
+            ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -565,13 +579,13 @@ class MFunction():
         """Evaluate the triangular membership function at `x`.
 
         Args:
-            x: Finite scalar coordinate.
+            x: Finite built-in `int` or `float` coordinate; `bool` is excluded.
 
         Returns:
             Membership degree in $[0, 1]$.
 
         Raises:
-            ValueError: If `x` is not finite and real.
+            ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -593,13 +607,13 @@ class MFunction():
         """Evaluate the trapezoidal membership function at `x`.
 
         Args:
-            x: Finite scalar coordinate.
+            x: Finite built-in `int` or `float` coordinate; `bool` is excluded.
 
         Returns:
             Membership degree in $[0, 1]$.
 
         Raises:
-            ValueError: If `x` is not finite and real.
+            ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -625,7 +639,7 @@ class MFunction():
         """Evaluate the Gaussian-shaped exponential function at `x`.
 
         Args:
-            x: Finite scalar coordinate.
+            x: Finite built-in `int` or `float` coordinate; `bool` is excluded.
 
         Returns:
             Representable membership degree in $[0, 1]$. Mathematically the
@@ -633,7 +647,7 @@ class MFunction():
             underflow to exactly zero.
 
         Raises:
-            ValueError: If `x` is not finite and real.
+            ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -645,7 +659,7 @@ class MFunction():
         """Evaluate the numerically stable logistic function at `x`.
 
         Args:
-            x: Finite scalar coordinate.
+            x: Finite built-in `int` or `float` coordinate; `bool` is excluded.
 
         Returns:
             Representable membership degree in $[0, 1]$. Floating-point
@@ -653,7 +667,7 @@ class MFunction():
             inputs with sufficiently large magnitude.
 
         Raises:
-            ValueError: If `x` is not finite and real.
+            ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -671,7 +685,8 @@ class MFunction():
         """Evaluate Harrington's desirability function at `y`.
 
         Args:
-            y: Finite scalar desirability coordinate.
+            y: Finite built-in `int` or `float` desirability coordinate;
+                `bool` is excluded.
 
         Returns:
             Representable membership degree in $[0, 1]$. Sufficiently
@@ -679,7 +694,7 @@ class MFunction():
             sufficiently positive values round to one.
 
         Raises:
-            ValueError: If `y` is not finite and real.
+            ValueError: If `y` is not a supported finite built-in number.
         """
         _RequireFiniteReal(y, 'y')
 
@@ -964,13 +979,15 @@ class FuzzyScale():
         Ties are resolved in favor of the later level in scale order.
 
         Args:
-            realValue: Coordinate evaluated by every level membership function.
+            realValue: Finite built-in `int` or `float` coordinate evaluated by
+                every level membership function; `bool` is excluded.
 
         Returns:
             The selected mutable level dictionary.
 
         Raises:
-            ValueError: If `realValue` is not a finite real coordinate.
+            ValueError: If `realValue` is not a supported finite built-in
+                number.
         """
         fuzzyLevel = self._levels[0]
         fuzzyMembership = fuzzyLevel['fSet'].mFunction.mju(realValue)

@@ -6,6 +6,9 @@
 """Public source-documentation contracts for modern and compatibility APIs."""
 
 import inspect
+from fractions import Fraction
+
+import pytest
 
 import fuzzyroutines
 import fuzzyroutines.FuzzyRoutines as legacyApi
@@ -31,6 +34,16 @@ LEGACYCLASSES = (
     legacyApi.FuzzySet,
     legacyApi.FuzzyScale,
     legacyApi.UniversalFuzzyScale,
+)
+LEGACYNUMERICFUNCTIONS = (
+    (legacyApi.FuzzyNOT, (Fraction(1, 2),)),
+    (legacyApi.FuzzyNOTParabolic, (Fraction(1, 2),)),
+    (legacyApi.FuzzyAND, (Fraction(1, 2), 0.5)),
+    (legacyApi.FuzzyOR, (Fraction(1, 2), 0.5)),
+    (legacyApi.TNorm, (Fraction(1, 2), 0.5)),
+    (legacyApi.TNormCompose, (Fraction(1, 2), 0.5)),
+    (legacyApi.SCoNorm, (Fraction(1, 2), 0.5)),
+    (legacyApi.SCoNormCompose, (Fraction(1, 2), 0.5)),
 )
 
 
@@ -101,9 +114,50 @@ def test_LegacyValidationDiagnosticsMatchTheirDocumentedBoundary(capsys):
     assert legacyApi.IsCorrectFuzzyNumberValue("invalid") is False
     assert capsys.readouterr().out
 
+    assert legacyApi.IsCorrectFuzzyNumberValue(Fraction(1, 2)) is False
+    assert capsys.readouterr().out
+
     documentation = inspect.getdoc(legacyApi.IsCorrectFuzzyNumberValue).lower()
-    assert "non-numeric" in documentation
+    assert "unsupported numeric type" in documentation
     assert "silently" in documentation
+
+
+def test_LegacyNumericDocsMatchBuiltInNumberBoundary():
+    """Document that historical evaluators reject other real-number types."""
+
+    for evaluator, arguments in LEGACYNUMERICFUNCTIONS:
+        with pytest.raises(ValueError):
+            evaluator(*arguments)
+
+        documentation = inspect.getdoc(evaluator).lower()
+        assert "built-in `int` or `float`" in documentation
+
+    membershipFunctions = (
+        legacyApi.MFunction("hyperbolic", a=1, b=2, c=0),
+        legacyApi.MFunction("bell", a=0, b=1, c=2),
+        legacyApi.MFunction("parabolic", a=0, b=1),
+        legacyApi.MFunction("triangle", a=0, b=1, c=0.5),
+        legacyApi.MFunction("trapezium", a=0, b=1, c=0.25, d=0.75),
+        legacyApi.MFunction("exponential", a=0, b=1),
+        legacyApi.MFunction("sigmoidal", a=1, b=0),
+        legacyApi.MFunction("desirability"),
+    )
+
+    for membershipFunction in membershipFunctions:
+        with pytest.raises(ValueError):
+            membershipFunction.mju(Fraction(1, 2))
+
+        documentation = inspect.getdoc(membershipFunction.mju).lower()
+        assert "built-in `int` or `float`" in documentation
+
+    with pytest.raises(ValueError):
+        legacyApi.MFunction("exponential", a=Fraction(0), b=1)
+
+    with pytest.raises(ValueError):
+        legacyApi.FuzzyScale().Fuzzy(Fraction(1, 2))
+
+    assert "built-in `int` or `float`" in inspect.getdoc(legacyApi.MFunction)
+    assert "built-in `int` or `float`" in inspect.getdoc(legacyApi.FuzzyScale.Fuzzy)
 
 
 def test_SampledResultDocsDescribeDirectConstructorValidationLimits():
