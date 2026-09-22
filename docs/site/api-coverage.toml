@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+schemaVersion = 1
+
+[[surfaces]]
+module = "fuzzyroutines"
+source = "fuzzyroutines/__init__.py"
+mode = "exports"
+
+[[surfaces]]
+module = "fuzzyroutines.alphacuts"
+source = "fuzzyroutines/alphacuts.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.domain"
+source = "fuzzyroutines/domain.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.fuzzysets"
+source = "fuzzyroutines/fuzzysets.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.linguistic"
+source = "fuzzyroutines/linguistic.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.properties"
+source = "fuzzyroutines/properties.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.relations"
+source = "fuzzyroutines/relations.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.FuzzyRoutines"
+source = "fuzzyroutines/FuzzyRoutines.py"
+mode = "authored"
+
+[[exclusions]]
+symbol = "fuzzyroutines.Examples"
+reason = "Executable demonstration module validated as documentation, not a reusable public API surface."

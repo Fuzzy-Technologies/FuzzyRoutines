@@ -58,5 +58,12 @@ legacy API comprises:
 `tests/test_public_api_documentation.py` checks the packaged public surface,
 including public legacy members, for non-empty English docstrings and
 period-terminated summaries. The clean-install workflow runs that test against
-both wheel and source-distribution artifacts. Documentation-rendering and
-reference-drift enforcement remain the separate scope of Task #204.
+both wheel and source-distribution artifacts.
+
+Task #204 adds `docs/site/api-coverage.toml` as the machine-readable reviewed
+surface and exclusion manifest. Its deterministic validator compares the
+manifest with statically discovered source symbols and the tracked
+mkdocstrings directives, then reports missing coverage with source file, line,
+and qualified symbol. Generated HTML remains disposable under ADR-0010, so the
+gate rejects committed generated output instead of maintaining a drift-prone
+generated snapshot.

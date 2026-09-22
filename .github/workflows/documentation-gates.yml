@@ -1,0 +1,114 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+name: Documentation quality gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-documentation:
+    name: Coverage, strict build, links and installed examples
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            docs/requirements-api.txt
+
+      - name: Install test dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+
+      - name: Test documentation validators without network access
+        run: |
+          python -m pytest -q \
+            tests/test_documentation_gates.py \
+            tests/test_external_link_report.py
+
+      - name: Build strict reference from a clean installed wheel
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python tools/build_api_reference.py
+          find _build/api-reference/site -type f -print | LC_ALL=C sort \
+            > _build/api-reference/generated-files.txt
+
+      - name: Enforce coverage, source links, rendered anchors and generated policy
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p _build/documentation-gates
+          python -m tools.documentation_gates all \
+            --site-root _build/api-reference/site 2>&1 \
+            | tee _build/documentation-gates/deterministic.txt
+
+      - name: Run documented examples against the clean installed wheel
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          environmentPython="_build/api-reference/environment/bin/python"
+          "$environmentPython" -m pip install --disable-pip-version-check pytest
+          cd "$RUNNER_TEMP"
+          "$GITHUB_WORKSPACE/$environmentPython" -m pytest -q \
+            "$GITHUB_WORKSPACE/tests/test_migration_examples.py"
+
+      - name: Upload deterministic documentation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-deterministic-evidence
+          path: |
+            _build/api-reference/build-evidence.json
+            _build/api-reference/generated-files.txt
+            _build/documentation-gates/deterministic.txt
+          if-no-files-found: warn
+
+  external-link-report:
+    name: Non-blocking external-link health report
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Probe external documentation links
+        continue-on-error: true
+        run: |
+          python tools/report_external_links.py \
+            --output _build/documentation-gates/external-links.json \
+            --timeout 10 \
+            --workers 8
+
+      - name: Upload external-link report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-external-link-report
+          path: _build/documentation-gates/external-links.json
+          if-no-files-found: error

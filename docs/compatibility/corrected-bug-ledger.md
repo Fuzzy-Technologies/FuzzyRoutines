@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 # Corrected-Bug Compatibility Ledger
 
 - Status: Active ledger for Task #98
-- Related Feature: [Build compatibility regression and migration suite](../../issues/31)
+- Related Feature: [Build compatibility regression and migration suite](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/31)
 - Related ADRs: [ADR-0001](../adr/0001-backward-compatibility-contract.md),
   [ADR-0003](../adr/0003-membership-function-contracts.md),
   [ADR-0004](../adr/0004-operator-and-negation-contracts.md), and
