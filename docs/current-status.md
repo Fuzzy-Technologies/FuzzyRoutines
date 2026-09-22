@@ -49,9 +49,10 @@ Representative accepted changes for the historical correctness baseline are
   rather than proof. The public convexity query and evidence-result API remain
   future implementation work.
 - ADR-0010 selects MkDocs + Material for MkDocs + mkdocstrings-python + Griffe
-  and English Google-style Markdown docstrings. Repository-wide docstring
-  migration, production Pages composition, and deployment remain follow-up
-  Tasks #199, #200, and #206.
+  and English Google-style Markdown docstrings. The source standard, public
+  docstring migration, and reproducible installed-package API reference are
+  implemented by Tasks #199, #200, and #203. Production Pages composition and
+  deployment remain the separate scope of Task #206.
 
 ## Implemented modern domain surface
 
@@ -109,6 +110,9 @@ The recent accepted documentation and domain wave is
 - the reproducible three-generator comparison is retained under
   [`docs/api-evaluation/`](api-evaluation/README.md), but it is not a production
   Pages integration;
+- the canonical English API-reference source and build contract live under
+  [`docs/site/`](site/README.md) and build with
+  `python tools/build_api_reference.py`;
 - generated HTML is disposable `_build/` output and must not be committed;
 - the historical-to-modern migration guide and executable examples are
   available under [`docs/migration/`](migration/historical-to-modern.md) and

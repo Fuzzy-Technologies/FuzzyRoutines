@@ -72,11 +72,11 @@ the project contract.
 
 ## Consequences
 
-- The brute-force `epsilon` scan is mathematically unnecessary and must not
-  survive Task #57.
-- Task #57 must implement the stable closed form above with no scan loop.
+- The brute-force `epsilon` scan is mathematically unnecessary and was removed
+  by Task #57.
+- Task #57 implements the stable closed form above with no scan loop.
 - The parabolic family requires `alpha in [1/4, 3/4]`; this is distinct from
   the `0 < alpha < 1` domain of the separate piecewise-linear `FuzzyNOT`
   family.
-- Task #58 must test endpoints, the fixed point, monotone decrease, involution,
+- Task #58 verifies endpoints, the fixed point, monotone decrease, involution,
   and the two out-of-domain regions.

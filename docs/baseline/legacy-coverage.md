@@ -60,9 +60,9 @@ Workflow run:
 
 https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/34830651049
 
-Machine-readable artifact:
-
-https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/34830651049/artifacts/10341594867
+The workflow uploaded machine-readable coverage evidence as an ephemeral CI
+artifact. GitHub artifact retention is finite, so the stable workflow run and
+the recorded digest below are the durable provenance references.
 
 Artifact digest:
 

@@ -105,6 +105,22 @@ def test_FloatingPointEndpointResultsUseClosedDocumentedRanges():
         )
 
 
+def test_HistoricalDirectFormulaDocsExposeExtremeOverflowBoundary():
+    """Keep retained intermediate overflow visible in public contracts."""
+
+    overflowCases = (
+        (legacyApi.MFunction("hyperbolic", a=1.0, b=2.0, c=0.0).Hyperbolic, 1e308),
+        (legacyApi.MFunction("bell", a=-1e308, b=0.0, c=1e308).Bell, 1.5e308),
+        (legacyApi.MFunction("parabolic", a=-1e308, b=1e308).Parabolic, 0.0),
+    )
+
+    for evaluator, coordinate in overflowCases:
+        with pytest.raises(OverflowError):
+            evaluator(coordinate)
+
+        assert "OverflowError" in inspect.getdoc(evaluator)
+
+
 def test_LegacyValidationDiagnosticsMatchTheirDocumentedBoundary(capsys):
     """Distinguish silent numeric rejection from non-numeric diagnostics."""
 

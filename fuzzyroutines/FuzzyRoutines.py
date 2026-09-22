@@ -506,6 +506,8 @@ class MFunction():
 
         Raises:
             ValueError: If `x` is not a supported finite built-in number.
+            OverflowError: If a finite input produces an unrepresentable
+                intermediate power.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -528,6 +530,8 @@ class MFunction():
 
         Raises:
             ValueError: If `x` is not a supported finite built-in number.
+            OverflowError: If a finite input produces an unrepresentable
+                intermediate square.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
@@ -562,6 +566,8 @@ class MFunction():
 
         Raises:
             ValueError: If `x` is not a supported finite built-in number.
+            OverflowError: If a finite input produces an unrepresentable
+                intermediate square.
         """
         _RequireFiniteReal(x, 'x')
         a = self._parameters['a']
