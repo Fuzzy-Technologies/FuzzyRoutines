@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+name: Canonical API reference
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - develop
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-reference:
+    name: Python 3.14 installed-package documentation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: docs/requirements-api.txt
+
+      - name: Build strict API reference from installed wheel
+        run: python tools/build_api_reference.py
+
+      - name: Record generated-file inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          find _build/api-reference/site -type f -print | LC_ALL=C sort \
+            > _build/api-reference/generated-files.txt
+          cat _build/api-reference/build-evidence.json
+          cat _build/api-reference/generated-files.txt
+
+      - name: Upload disposable build evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-api-reference
+          path: |
+            _build/api-reference/build-evidence.json
+            _build/api-reference/generated-files.txt
+            _build/api-reference/site
+          if-no-files-found: error
