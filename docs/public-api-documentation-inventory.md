@@ -16,14 +16,14 @@ The root `fuzzyroutines.__all__` list is the authoritative modern public
 surface. Every export below has an English source docstring and is re-exported
 from `fuzzyroutines`:
 
-| Module | Public symbols |
-|---|---|
-| `alphacuts` | `AlphaCut`, `SampleAlphaCut`, `SampledAlphaCut` |
-| `domain` | `ContinuousUniverse`, `DiscreteUniverse`, `IntegrationDomain` |
-| `fuzzysets` | `Complement`, `Difference`, `Height`, `Intersection`, `IsNormal`, `NegationPolicy`, `Normalize`, `ScalarFuzzySet`, `SNormPolicy`, `TNormPolicy`, `Union` |
-| `linguistic` | `LinguisticScale`, `LinguisticTerm` |
+| Module       | Public symbols                                                                                                                                                                       |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `alphacuts`  | `AlphaCut`, `SampleAlphaCut`, `SampledAlphaCut`                                                                                                                                      |
+| `domain`     | `ContinuousUniverse`, `DiscreteUniverse`, `IntegrationDomain`                                                                                                                        |
+| `fuzzysets`  | `Complement`, `Difference`, `Height`, `Intersection`, `IsNormal`, `NegationPolicy`, `Normalize`, `ScalarFuzzySet`, `SNormPolicy`, `TNormPolicy`, `Union`                             |
+| `linguistic` | `LinguisticScale`, `LinguisticTerm`                                                                                                                                                  |
 | `properties` | `ContinuousFuzzyProperties`, `ContinuousInterval`, `ContinuousRegion`, `DeriveProperties`, `DiscreteFuzzyProperties`, `DiscreteRegion`, `SampledFuzzyProperties`, `SampleProperties` |
-| `relations` | `ComparisonDomain`, `ComparisonPolicy`, `EqualOnDomain`, `IncludedOnDomain` |
+| `relations`  | `ComparisonDomain`, `ComparisonPolicy`, `EqualOnDomain`, `IncludedOnDomain`                                                                                                          |
 
 ## Historical compatibility facade
 
