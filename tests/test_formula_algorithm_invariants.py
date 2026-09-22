@@ -80,6 +80,25 @@ def test_HarringtonGuardMatchesFormulaAtBoundaryAndRejectsInvalidDomain():
         membershipFunction.mju(math.nan)
 
 
+@pytest.mark.parametrize(
+    ("functionName", "parameters", "coordinate"),
+    [
+        ("hyperbolic", {"a": 1.0, "b": 2.0, "c": 0.0}, 1e308),
+        ("bell", {"a": -1e308, "b": 0.0, "c": 1e308}, 1.5e308),
+        ("parabolic", {"a": -1e308, "b": 1e308}, 0.0),
+    ],
+)
+def test_HistoricalDirectFormulasExposeExtremeIntermediateOverflow(
+    functionName,
+    parameters,
+    coordinate,
+):
+    membershipFunction = MFunction(functionName, **parameters)
+
+    with pytest.raises(OverflowError):
+        membershipFunction.mju(coordinate)
+
+
 def test_UniformSamplingRetainsExactEndpointsAndWeakBoundary():
     universe = ContinuousUniverse(0.1, 0.9, leftClosed=True, rightClosed=True)
     fuzzySet = ScalarFuzzySet(universe, lambda coordinate: coordinate)

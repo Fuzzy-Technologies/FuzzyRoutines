@@ -17,7 +17,7 @@ not a second copy of the detailed proofs.
 
 | Implementation area                       | Definition or derivation                                                                                                | Required invariant                                                                  | Executable evidence                                                     |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| Historical membership families            | [Membership-function contracts](membership-function-contracts.md)                                                       | Every accepted parameter set maps finite inputs to representable grades in `[0, 1]` | `tests/test_formula_algorithm_invariants.py`, membership contract tests |
+| Historical membership families            | [Membership-function contracts](membership-function-contracts.md)                                                       | Validated geometry; stable families saturate; formulas expose overflow bounds       | `tests/test_formula_algorithm_invariants.py`, membership contract tests |
 | Parametric and parabolic negations        | [Operator contracts](../adr/0004-operator-and-negation-contracts.md) and [derivation](parabolic-negation-derivation.md) | Endpoint reversal, fixed point, monotone decrease, and involution                   | negation and formula-invariant tests                                    |
 | T-norms, s-norms, and set operations      | [Explicit fuzzy-set operations](fuzzy-set-operations.md)                                                                | Closure, boundary identities, associativity, commutativity, and De Morgan duality   | operator algebraic and reference tests                                  |
 | Exact height and normalization            | [Height and normalization](fuzzy-set-normalization.md)                                                                  | Exact evidence only; positive height scales to one; zero height fails closed        | normalization and derived-property tests                                |
@@ -73,6 +73,18 @@ even though the final representable result is already `0.0`. The guarded
 branch compares $y$ with the logarithm of Python's greatest finite binary64
 value and returns that deterministic underflow limit. For large positive
 finite $y$, ordinary rounding may produce `1.0`.
+
+### Historical intermediate overflow
+
+Finite parameters and a finite input do not imply that every intermediate
+binary64 result is finite. The retained `Hyperbolic`, `Bell`, and `Parabolic`
+expressions are evaluated directly and do not rescale extreme powers or
+squares. They may therefore raise `OverflowError` at sufficiently large
+magnitudes even though their parameters and input passed finite-value
+validation. This is a documented current numerical limitation, not a claim
+that all finite binary64 inputs produce a grade. The stable logistic branches
+and the Harrington guard above address their own known exponential overflow
+paths; they do not generalize that guarantee to the other historical families.
 
 ### Uniform grids
 
