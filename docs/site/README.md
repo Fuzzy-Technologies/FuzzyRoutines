@@ -44,3 +44,21 @@ Simplified Chinese content remains outside Python source as specified by
 The build does not import FuzzyRoutines for API discovery. Griffe reads the
 installed package statically from its isolated environment. Documentation
 dependencies remain separate from runtime package metadata.
+
+## Quality gates
+
+Task #204 adds deterministic gates around the strict build:
+
+- `docs/site/api-coverage.toml` declares every public module and the reviewed
+  reason for each excluded module or symbol;
+- `python -m tools.documentation_gates all` validates public source docstrings,
+  mkdocstrings coverage, repository-local Markdown targets, exact rendered
+  anchors, and the ADR-0010 generated-output policy;
+- documented migration examples run from the clean wheel installation rather
+  than from the source tree;
+- `python tools/report_external_links.py --output REPORT.json` produces a
+  source-located network health report in a separate non-blocking CI job.
+
+Generated reference HTML is intentionally not committed, so a generated-file
+drift comparison is inapplicable. The gate instead fails if generated output
+appears under version control.
