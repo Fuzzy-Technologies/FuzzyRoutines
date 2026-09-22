@@ -198,7 +198,9 @@ python examples/migration/modern_supported.py
   explicit operator policies and immutable fuzzy sets while clearly using the
   historical membership factory as the current interoperability path.
 
-The example tests execute each script from a temporary working directory.
-Package validation runs the same tests against a clean wheel installation; the
-source-tree developer suite supplies the repository root only when its active
-interpreter has no installed package.
+The example tests execute each script from a temporary working directory. The
+package workflow independently installs the wheel and source distribution,
+removes `PYTHONPATH`, proves the import origin is inside the clean environment,
+and runs the same scripts through the shell-visible entry points. See
+[`Executable Tests, Tools, Benchmarks, and Examples`](../executable-tests-tools-and-examples.md)
+for the complete artifact and exit-code contract.

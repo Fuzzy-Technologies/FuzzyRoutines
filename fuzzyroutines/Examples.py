@@ -3,7 +3,13 @@
 # SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Demonstrate the historical FuzzyRoutines API with executable examples."""
+"""Demonstrate the broad historical FuzzyRoutines compatibility API.
+
+Execution prints human-readable membership, set, scale, operator, negation,
+and parser observations to stdout. The module creates no files and performs no
+network access. New integrations should prefer the focused modern API and the
+smaller migration examples under `examples/migration`.
+"""
 
 from fuzzyroutines.FuzzyRoutines import *
 
