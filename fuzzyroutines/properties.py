@@ -27,7 +27,14 @@ from fuzzyroutines.FuzzyRoutines import MFunction
 
 @dataclass(frozen=True, slots=True)
 class ContinuousInterval:
-    """One non-empty interval component of a continuous derived region."""
+    """One non-empty interval component of a continuous derived region.
+
+    Attributes:
+        left: Finite left endpoint, or `None` for negative infinity.
+        right: Finite right endpoint, or `None` for positive infinity.
+        leftClosed: Whether a finite left endpoint is included.
+        rightClosed: Whether a finite right endpoint is included.
+    """
 
     left: Real | None = None
     right: Real | None = None
@@ -68,7 +75,14 @@ class ContinuousInterval:
         return self.left is not None and self.left == self.right
 
     def Contains(self, coordinate):
-        """Return whether a finite coordinate belongs to this interval."""
+        """Return whether a finite coordinate belongs to this interval.
+
+        Args:
+            coordinate: Finite real coordinate to test.
+
+        Returns:
+            `True` exactly when the endpoint rules admit the coordinate.
+        """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
 
@@ -85,7 +99,11 @@ class ContinuousInterval:
 
 @dataclass(frozen=True, slots=True)
 class ContinuousRegion:
-    """Ordered union of disjoint intervals in a continuous scalar universe."""
+    """Ordered union of disjoint intervals in a continuous scalar universe.
+
+    Attributes:
+        intervals: Ordered tuple of non-overlapping interval components.
+    """
 
     intervals: tuple[ContinuousInterval, ...] = ()
 
@@ -120,14 +138,25 @@ class ContinuousRegion:
         return not self.intervals
 
     def Contains(self, coordinate):
-        """Return whether a finite coordinate belongs to any component."""
+        """Return whether a finite coordinate belongs to any component.
+
+        Args:
+            coordinate: Finite real coordinate to test.
+
+        Returns:
+            `True` when at least one component contains the coordinate.
+        """
 
         return any(interval.Contains(coordinate) for interval in self.intervals)
 
 
 @dataclass(frozen=True, slots=True)
 class DiscreteRegion:
-    """Ordered subset of a declared discrete universe."""
+    """Ordered subset of a declared discrete universe.
+
+    Attributes:
+        points: Strictly increasing tuple of finite coordinates.
+    """
 
     points: tuple[Real, ...] = ()
 
@@ -154,7 +183,14 @@ class DiscreteRegion:
         return not self.points
 
     def Contains(self, coordinate):
-        """Return whether a finite coordinate belongs to this discrete region."""
+        """Return whether a finite coordinate belongs to this discrete region.
+
+        Args:
+            coordinate: Finite real coordinate to test.
+
+        Returns:
+            `True` when `coordinate` is one of `points`.
+        """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
         return coordinate in self.points
@@ -162,7 +198,17 @@ class DiscreteRegion:
 
 @dataclass(frozen=True, slots=True)
 class ContinuousFuzzyProperties:
-    """Exact analytical derived properties on a continuous universe."""
+    """Exact analytical derived properties on a continuous universe.
+
+    Attributes:
+        universe: Continuous universe on which all regions are restricted.
+        positiveSupport: Coordinates whose membership is strictly positive.
+        supportClosure: Closure of `positiveSupport` within the universe.
+        core: Coordinates whose membership equals one.
+        boundary: Coordinates whose membership lies strictly between zero and
+            one under the analytical family contract.
+        height: Exact supremum of membership grades on the universe.
+    """
 
     universe: ContinuousUniverse
     positiveSupport: ContinuousRegion
@@ -202,7 +248,16 @@ class ContinuousFuzzyProperties:
 
 @dataclass(frozen=True, slots=True)
 class DiscreteFuzzyProperties:
-    """Exact derived properties on an explicitly discrete universe."""
+    """Exact derived properties on an explicitly discrete universe.
+
+    Attributes:
+        universe: Exhaustively evaluated discrete universe.
+        positiveSupport: Declared points with positive membership.
+        supportClosure: Equal to `positiveSupport` in the discrete topology.
+        core: Declared points with membership one.
+        boundary: Declared points with membership strictly between zero and one.
+        height: Maximum membership across all declared points.
+    """
 
     universe: DiscreteUniverse
     positiveSupport: DiscreteRegion
@@ -244,7 +299,19 @@ class DiscreteFuzzyProperties:
 
 @dataclass(frozen=True, slots=True)
 class SampledFuzzyProperties:
-    """Approximate observations from a finite grid over a continuous domain."""
+    """Approximate observations from a finite grid over a continuous domain.
+
+    Attributes:
+        analysisDomain: Closed interval covered by the grid.
+        sampleCount: Number of coordinates, including both endpoints.
+        coordinates: Strictly increasing uniform-grid coordinates.
+        grades: Validated grades corresponding to `coordinates`.
+        positiveSupportSamples: Sampled points with positive membership.
+        coreSamples: Sampled points with membership one.
+        boundarySamples: Sampled points with membership between zero and one.
+        heightEstimate: Maximum observed grade, not an exact supremum proof.
+        method: Sampling method identifier.
+    """
 
     analysisDomain: IntegrationDomain
     sampleCount: int
@@ -320,7 +387,7 @@ class SampledFuzzyProperties:
 
 
 def _IntersectIntervals(leftInterval, rightInterval):
-    """Return the exact intersection of two interval components or ``None``."""
+    """Return the exact intersection of two interval components or `None`."""
 
     if leftInterval.left is None:
         left = rightInterval.left
@@ -562,9 +629,22 @@ def _EvaluateCoordinates(membershipFunction, coordinates):
 def DeriveProperties(membershipFunction, universe):
     """Derive exact fuzzy-set properties for a supported scalar universe.
 
-    Continuous results require one of the analytical ``MFunction`` families.
+    Continuous results require one of the analytical
+    [MFunction][fuzzyroutines.FuzzyRoutines.MFunction] families.
     A discrete universe is exact because every declared coordinate is evaluated.
-    Use :func:`SampleProperties` for an explicitly approximate continuous query.
+    Use [SampleProperties][fuzzyroutines.properties.SampleProperties] for an
+    explicitly approximate continuous query.
+
+    Args:
+        membershipFunction: Supported historical analytical family.
+        universe: Continuous or discrete scalar universe to analyze.
+
+    Returns:
+        Exact continuous analytical properties or exhaustive discrete
+        properties, matching the universe type.
+
+    Raises:
+        TypeError: If either argument has an unsupported contract type.
     """
 
     if not isinstance(membershipFunction, MFunction):
@@ -619,7 +699,21 @@ def DeriveProperties(membershipFunction, universe):
 
 
 def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
-    """Return explicitly approximate observations on a uniform finite grid."""
+    """Return explicitly approximate observations on a uniform finite grid.
+
+    Args:
+        membershipFunction: Supported historical analytical family to sample.
+        analysisDomain: Closed finite interval covered by the grid.
+        sampleCount: Number of uniform-grid coordinates, including endpoints.
+
+    Returns:
+        Provenance-rich sampled fuzzy-property observations.
+
+    Raises:
+        TypeError: If an argument has the wrong contract type.
+        ValueError: If `sampleCount` is less than two or a sampled grade is
+            outside $[0, 1]$.
+    """
 
     if not isinstance(membershipFunction, MFunction):
         raise TypeError("membershipFunction must be an MFunction instance")

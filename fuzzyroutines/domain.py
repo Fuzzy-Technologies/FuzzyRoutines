@@ -33,9 +33,15 @@ def _RequireFiniteReal(value, parameterName):
 class ContinuousUniverse:
     """One-dimensional real interval that forms a fuzzy set's universe.
 
-    ``None`` represents an unbounded endpoint.  Endpoint closure is explicit;
+    `None` represents an unbounded endpoint. Endpoint closure is explicit;
     an unbounded endpoint cannot be closed because it is not a member of the
     real line.
+
+    Attributes:
+        left: Finite left endpoint, or `None` for negative infinity.
+        right: Finite right endpoint, or `None` for positive infinity.
+        leftClosed: Whether a finite left endpoint belongs to the universe.
+        rightClosed: Whether a finite right endpoint belongs to the universe.
     """
 
     left: Real | None = None
@@ -73,7 +79,18 @@ class ContinuousUniverse:
         return self.left is not None and self.right is not None
 
     def Contains(self, coordinate):
-        """Return whether a finite scalar coordinate belongs to the universe."""
+        """Return whether a finite scalar coordinate belongs to the universe.
+
+        Args:
+            coordinate: Finite real coordinate to test.
+
+        Returns:
+            `True` exactly when the coordinate satisfies both endpoint rules.
+
+        Raises:
+            TypeError: If the coordinate is not a real scalar.
+            ValueError: If the coordinate is not finite.
+        """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
 
@@ -90,7 +107,11 @@ class ContinuousUniverse:
 
 @dataclass(frozen=True, slots=True)
 class DiscreteUniverse:
-    """Finite ordered universe of distinct scalar coordinates."""
+    """Finite ordered universe of distinct scalar coordinates.
+
+    Attributes:
+        points: Non-empty, strictly increasing tuple of finite coordinates.
+    """
 
     points: tuple[Real, ...]
 
@@ -114,7 +135,18 @@ class DiscreteUniverse:
         object.__setattr__(self, "points", validatedPoints)
 
     def Contains(self, coordinate):
-        """Return whether a finite scalar coordinate is declared in the universe."""
+        """Return whether a finite scalar coordinate is declared in the universe.
+
+        Args:
+            coordinate: Finite real coordinate to test.
+
+        Returns:
+            `True` when `coordinate` is one of the declared points.
+
+        Raises:
+            TypeError: If the coordinate is not a real scalar.
+            ValueError: If the coordinate is not finite.
+        """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
         return coordinate in self.points
@@ -122,7 +154,12 @@ class DiscreteUniverse:
 
 @dataclass(frozen=True, slots=True)
 class IntegrationDomain:
-    """Finite closed interval used by a continuous numerical operation."""
+    """Finite closed interval used by a continuous numerical operation.
+
+    Attributes:
+        left: Finite included lower bound.
+        right: Finite included upper bound, strictly greater than `left`.
+    """
 
     left: Real
     right: Real
@@ -138,7 +175,18 @@ class IntegrationDomain:
 
     @classmethod
     def FromLegacyInterval(cls, interval):
-        """Map the historical two-item ``supportSet`` tuple without reinterpretation."""
+        """Map the historical two-item `supportSet` tuple without reinterpretation.
+
+        Args:
+            interval: Exact two-item tuple of numerical endpoints.
+
+        Returns:
+            A validated closed integration domain.
+
+        Raises:
+            TypeError: If `interval` is not a tuple.
+            ValueError: If its shape or endpoint ordering is invalid.
+        """
 
         if not isinstance(interval, tuple):
             raise TypeError("legacy integration interval must be a two-item tuple")
@@ -154,13 +202,31 @@ class IntegrationDomain:
         return (self.left, self.right)
 
     def Contains(self, coordinate):
-        """Return whether a finite scalar coordinate lies in this closed interval."""
+        """Return whether a finite scalar coordinate lies in this closed interval.
+
+        Args:
+            coordinate: Finite real coordinate to test.
+
+        Returns:
+            `True` when `left <= coordinate <= right`.
+        """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
         return self.left <= coordinate <= self.right
 
     def ValidateWithin(self, universe):
-        """Return this domain after proving it is contained in a continuous universe."""
+        """Return this domain after proving it is contained in a continuous universe.
+
+        Args:
+            universe: Continuous universe expected to contain both endpoints.
+
+        Returns:
+            This unchanged domain after successful validation.
+
+        Raises:
+            TypeError: If `universe` is not continuous.
+            ValueError: If either endpoint lies outside the universe.
+        """
 
         if not isinstance(universe, ContinuousUniverse):
             raise TypeError("continuous integration requires a ContinuousUniverse")

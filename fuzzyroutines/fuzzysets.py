@@ -38,7 +38,13 @@ def _RequireGrade(value, parameterName):
 
 @dataclass(frozen=True, slots=True)
 class NegationPolicy:
-    """Explicit fuzzy-negation family and its optional fixed-point parameter."""
+    """Explicit fuzzy-negation family and its optional fixed-point parameter.
+
+    Attributes:
+        family: `"standard"`, `"parametric"`, or `"parabolic"`.
+        alpha: Fixed point for parametric or parabolic negation; absent for
+            standard negation.
+    """
 
     family: str
     alpha: Real | None = None
@@ -73,7 +79,18 @@ class NegationPolicy:
         raise ValueError(f"unknown negation family: {self.family!r}")
 
     def Evaluate(self, grade):
-        """Evaluate the configured negation for one validated membership grade."""
+        """Evaluate the configured negation for one membership grade.
+
+        Args:
+            grade: Finite membership degree in $[0, 1]$.
+
+        Returns:
+            The complemented membership degree under this policy.
+
+        Raises:
+            TypeError: If `grade` is not a real scalar.
+            ValueError: If `grade` is non-finite or outside $[0, 1]$.
+        """
 
         grade = _RequireGrade(grade, "grade")
 
@@ -103,7 +120,11 @@ class NegationPolicy:
 
 @dataclass(frozen=True, slots=True)
 class TNormPolicy:
-    """Explicit t-norm family used by fuzzy-set intersection."""
+    """Explicit t-norm family used by fuzzy-set intersection.
+
+    Attributes:
+        family: One of the names in `OPERATORFAMILIES`.
+    """
 
     family: str
 
@@ -114,7 +135,19 @@ class TNormPolicy:
             raise ValueError(f"unknown t-norm family: {self.family!r}")
 
     def Evaluate(self, leftGrade, rightGrade):
-        """Evaluate the configured t-norm for two membership grades."""
+        """Evaluate the configured t-norm for two membership grades.
+
+        Args:
+            leftGrade: Left membership degree in $[0, 1]$.
+            rightGrade: Right membership degree in $[0, 1]$.
+
+        Returns:
+            Conjunction under the configured family.
+
+        Raises:
+            TypeError: If an operand is not a real scalar.
+            ValueError: If an operand is non-finite or outside $[0, 1]$.
+        """
 
         leftGrade = _RequireGrade(leftGrade, "leftGrade")
         rightGrade = _RequireGrade(rightGrade, "rightGrade")
@@ -139,7 +172,11 @@ class TNormPolicy:
 
 @dataclass(frozen=True, slots=True)
 class SNormPolicy:
-    """Explicit s-norm family used by fuzzy-set union."""
+    """Explicit s-norm family used by fuzzy-set union.
+
+    Attributes:
+        family: One of the names in `OPERATORFAMILIES`.
+    """
 
     family: str
 
@@ -150,7 +187,19 @@ class SNormPolicy:
             raise ValueError(f"unknown s-norm family: {self.family!r}")
 
     def Evaluate(self, leftGrade, rightGrade):
-        """Evaluate the configured s-norm for two membership grades."""
+        """Evaluate the configured s-norm for two membership grades.
+
+        Args:
+            leftGrade: Left membership degree in $[0, 1]$.
+            rightGrade: Right membership degree in $[0, 1]$.
+
+        Returns:
+            Disjunction under the configured family.
+
+        Raises:
+            TypeError: If an operand is not a real scalar.
+            ValueError: If an operand is non-finite or outside $[0, 1]$.
+        """
 
         leftGrade = _RequireGrade(leftGrade, "leftGrade")
         rightGrade = _RequireGrade(rightGrade, "rightGrade")
@@ -175,7 +224,13 @@ class SNormPolicy:
 
 @dataclass(frozen=True, slots=True, eq=False)
 class ScalarFuzzySet:
-    """Immutable scalar fuzzy-set definition over one explicit universe."""
+    """Immutable scalar fuzzy-set definition over one explicit universe.
+
+    Attributes:
+        universe: Continuous or discrete scalar coordinate contract.
+        membershipFunction: Callable evaluated after universe membership is
+            validated; its result must be a finite degree in $[0, 1]$.
+    """
 
     universe: ContinuousUniverse | DiscreteUniverse
     membershipFunction: Callable[[Real], Real]
@@ -190,7 +245,18 @@ class ScalarFuzzySet:
             raise TypeError("membershipFunction must be callable")
 
     def Membership(self, coordinate):
-        """Return the validated membership grade for a coordinate in the universe."""
+        """Return the validated membership grade for a universe coordinate.
+
+        Args:
+            coordinate: Finite scalar coordinate belonging to `universe`.
+
+        Returns:
+            Membership degree in $[0, 1]$.
+
+        Raises:
+            ValueError: If the coordinate is outside the universe or the
+                callable returns an invalid grade.
+        """
 
         if not self.universe.Contains(coordinate):
             raise ValueError("coordinate must belong to the fuzzy set universe")
@@ -230,7 +296,7 @@ class _NormalizedContinuousMembership:
 
 
 def _ContinuousAnalyticalSource(fuzzySet):
-    """Return the exact analytical source behind a bound ``MFunction`` method."""
+    """Return the exact analytical source behind a bound `MFunction` method."""
 
     from fuzzyroutines.FuzzyRoutines import MFunction
 
@@ -283,8 +349,19 @@ def Height(fuzzySet):
 
     A discrete universe is evaluated exhaustively.  A continuous universe
     requires either internally preserved exact evidence or a bound analytical
-    ``MFunction`` supported by :func:`fuzzyroutines.properties.DeriveProperties`.
+    [MFunction][fuzzyroutines.FuzzyRoutines.MFunction] supported by
+    [DeriveProperties][fuzzyroutines.properties.DeriveProperties].
     The function never promotes a finite sample maximum to an exact height.
+
+    Args:
+        fuzzySet: Scalar fuzzy set whose exact height is requested.
+
+    Returns:
+        Exact supremum of the membership grades.
+
+    Raises:
+        TypeError: If `fuzzySet` is not a scalar fuzzy set.
+        ValueError: If an exact continuous height is unavailable.
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
@@ -314,7 +391,18 @@ def Height(fuzzySet):
 
 
 def IsNormal(fuzzySet, tolerance=1e-12):
-    """Return whether the exact fuzzy-set height equals one within tolerance."""
+    """Return whether the exact fuzzy-set height equals one within tolerance.
+
+    Args:
+        fuzzySet: Scalar fuzzy set with a provable exact height.
+        tolerance: Non-negative absolute comparison tolerance.
+
+    Returns:
+        Whether the exact height is within `tolerance` of one.
+
+    Raises:
+        ValueError: If `tolerance` is negative or exact height is unavailable.
+    """
 
     tolerance = _RequireFiniteReal(tolerance, "tolerance")
 
@@ -327,9 +415,19 @@ def IsNormal(fuzzySet, tolerance=1e-12):
 def Normalize(fuzzySet):
     """Return a new height-one fuzzy set without mutating the source set.
 
-    Normalization is the pointwise quotient ``mu_A(x) / height(A)``.  It is
+    Normalization is the pointwise quotient $mu_A(x) / height(A)$. It is
     undefined for height zero and unavailable when an exact continuous height
     cannot be proved under the current analytical contracts.
+
+    Args:
+        fuzzySet: Scalar fuzzy set with a provable nonzero exact height.
+
+    Returns:
+        A new scalar fuzzy set whose exact height is one.
+
+    Raises:
+        TypeError: If `fuzzySet` is not a scalar fuzzy set.
+        ValueError: If exact height is unavailable or equals zero.
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
@@ -402,7 +500,18 @@ def Normalize(fuzzySet):
 
 
 def Complement(fuzzySet, negationPolicy):
-    """Return a new fuzzy set using one explicit approved negation policy."""
+    """Return a new fuzzy set using one explicit approved negation policy.
+
+    Args:
+        fuzzySet: Source scalar fuzzy set.
+        negationPolicy: Explicit complement semantics.
+
+    Returns:
+        A lazy immutable set over the unchanged universe.
+
+    Raises:
+        TypeError: If either argument has the wrong contract type.
+    """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
         raise TypeError("fuzzySet must be a ScalarFuzzySet")
@@ -431,7 +540,20 @@ def _RequireCompatibleSets(leftSet, rightSet):
 
 
 def Intersection(leftSet, rightSet, tNormPolicy):
-    """Return a fuzzy-set intersection under one explicit t-norm family."""
+    """Return a fuzzy-set intersection under one explicit t-norm family.
+
+    Args:
+        leftSet: Left scalar fuzzy set.
+        rightSet: Right scalar fuzzy set over exactly the same universe.
+        tNormPolicy: Explicit conjunction semantics.
+
+    Returns:
+        A lazy immutable intersection over the shared universe.
+
+    Raises:
+        TypeError: If an argument has the wrong contract type.
+        ValueError: If the operand universes differ.
+    """
 
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
 
@@ -450,7 +572,20 @@ def Intersection(leftSet, rightSet, tNormPolicy):
 
 
 def Union(leftSet, rightSet, sNormPolicy):
-    """Return a fuzzy-set union under one explicit s-norm family."""
+    """Return a fuzzy-set union under one explicit s-norm family.
+
+    Args:
+        leftSet: Left scalar fuzzy set.
+        rightSet: Right scalar fuzzy set over exactly the same universe.
+        sNormPolicy: Explicit disjunction semantics.
+
+    Returns:
+        A lazy immutable union over the shared universe.
+
+    Raises:
+        TypeError: If an argument has the wrong contract type.
+        ValueError: If the operand universes differ.
+    """
 
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
 
@@ -469,7 +604,23 @@ def Union(leftSet, rightSet, sNormPolicy):
 
 
 def Difference(leftSet, rightSet, tNormPolicy, negationPolicy):
-    """Return the directed fuzzy-set difference under explicit policies."""
+    """Return the directed fuzzy-set difference under explicit policies.
+
+    The membership definition is $T(mu_A(x), N(mu_B(x)))$.
+
+    Args:
+        leftSet: Minuend scalar fuzzy set $A$.
+        rightSet: Subtrahend scalar fuzzy set $B$ over the same universe.
+        tNormPolicy: Explicit conjunction semantics $T$.
+        negationPolicy: Explicit complement semantics $N$.
+
+    Returns:
+        A lazy immutable directed difference over the shared universe.
+
+    Raises:
+        TypeError: If an argument has the wrong contract type.
+        ValueError: If the operand universes differ.
+    """
 
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
 

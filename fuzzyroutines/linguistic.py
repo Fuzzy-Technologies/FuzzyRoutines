@@ -16,7 +16,12 @@ from fuzzyroutines.fuzzysets import ScalarFuzzySet
 
 @dataclass(frozen=True, slots=True)
 class LinguisticTerm:
-    """Named immutable association with one scalar fuzzy set."""
+    """Named immutable association with one scalar fuzzy set.
+
+    Attributes:
+        name: Non-empty exact lookup and display name.
+        fuzzySet: Modern scalar fuzzy set represented by the term.
+    """
 
     name: str
     fuzzySet: ScalarFuzzySet
@@ -36,7 +41,11 @@ class LinguisticTerm:
 
 @dataclass(frozen=True, slots=True)
 class LinguisticScale:
-    """Immutable ordered tuple of explicitly declared linguistic terms."""
+    """Immutable ordered tuple of explicitly declared linguistic terms.
+
+    Attributes:
+        terms: Non-empty ordered tuple whose term names are exactly unique.
+    """
 
     terms: tuple[LinguisticTerm, ...]
 
