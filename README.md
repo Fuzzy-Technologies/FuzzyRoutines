@@ -4,7 +4,7 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <p align="center">
-  <img src="docs/assets/fuzzyroutines-horizontal.svg" alt="FuzzyRoutines by Fuzzy Technologies" width="720">
+  <img src="docs/site/content/en/assets/brand/fuzzyroutines-horizontal.svg" alt="FuzzyRoutines by Fuzzy Technologies" width="720">
 </p>
 
 <p align="center">
