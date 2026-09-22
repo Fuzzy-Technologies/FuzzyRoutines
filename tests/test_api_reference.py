@@ -5,6 +5,8 @@
 
 """Deterministic contracts for the canonical installed-package API reference."""
 
+import ast
+import re
 import subprocess
 from pathlib import Path
 
@@ -36,6 +38,45 @@ def test_CanonicalReferenceHasCompleteOrderedNavigation():
     assert offsets == sorted(offsets)
 
 
+def test_CanonicalReferenceLinksEveryRootExportToItsCanonicalObject():
+    packageModule = ast.parse(
+        (PROJECTROOT / "fuzzyroutines" / "__init__.py").read_text(encoding="utf-8")
+    )
+    canonicalTargets = {}
+    rootExports = None
+
+    for statement in packageModule.body:
+        if isinstance(statement, ast.ImportFrom):
+            for importedName in statement.names:
+                publicName = importedName.asname or importedName.name
+                canonicalTargets[publicName] = (
+                    f"{statement.module}.{importedName.name}"
+                )
+        elif isinstance(statement, ast.Assign) and any(
+            isinstance(target, ast.Name) and target.id == "__all__"
+            for target in statement.targets
+        ):
+            rootExports = ast.literal_eval(statement.value)
+
+    assert rootExports is not None
+    expectedLinks = {
+        exportName: canonicalTargets[exportName] for exportName in rootExports
+    }
+    packagePage = (
+        SITEROOT / "content" / "en" / "api" / "modern" / "package.md"
+    ).read_text(encoding="utf-8")
+    renderedLinks = {
+        linkText: target
+        for linkText, target in re.findall(
+            r"\[`([^`]+)`\]\[([^\]]+)\]",
+            packagePage,
+        )
+        if linkText in expectedLinks
+    }
+
+    assert renderedLinks == expectedLinks
+
+
 def test_CanonicalReferenceUsesInstalledStaticDiscoveryAndStrictBuilds():
     configurationText = CONFIGPATH.read_text(encoding="utf-8")
     builderText = (PROJECTROOT / "tools" / "build_api_reference.py").read_text(
@@ -46,6 +87,7 @@ def test_CanonicalReferenceUsesInstalledStaticDiscoveryAndStrictBuilds():
     assert build_api_reference.CONFIGPATH == CONFIGPATH
     assert '"--strict"' in builderText
     assert '"--no-deps"' in builderText
+    assert "cwd=buildRoot" in builderText
     assert "FuzzyRoutinesImportGuard" in builderText
     assert "import fuzzyroutines" not in builderText
 
@@ -84,10 +126,16 @@ def test_CanonicalReferenceDoesNotTrackGeneratedHtml():
 
 
 def test_CanonicalReferenceMarkdownTablesHavePaddedColumns():
-    modernIndexLines = (
-        SITEROOT / "content" / "en" / "api" / "modern" / "index.md"
-    ).read_text(encoding="utf-8").splitlines()
-    tableLines = [line for line in modernIndexLines if line.startswith("|")]
+    tablePages = (
+        SITEROOT / "content" / "en" / "api" / "modern" / "index.md",
+        SITEROOT / "content" / "en" / "api" / "modern" / "package.md",
+    )
 
-    assert tableLines
-    assert len({len(line) for line in tableLines}) == 1
+    for tablePage in tablePages:
+        tableLines = [
+            line
+            for line in tablePage.read_text(encoding="utf-8").splitlines()
+            if line.startswith("|")
+        ]
+        assert tableLines
+        assert len({len(line) for line in tableLines}) == 1
