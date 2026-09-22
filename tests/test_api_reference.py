@@ -52,6 +52,7 @@ def test_CanonicalReferenceLinksEveryRootExportToItsCanonicalObject():
                 canonicalTargets[publicName] = (
                     f"{statement.module}.{importedName.name}"
                 )
+
         elif isinstance(statement, ast.Assign) and any(
             isinstance(target, ast.Name) and target.id == "__all__"
             for target in statement.targets

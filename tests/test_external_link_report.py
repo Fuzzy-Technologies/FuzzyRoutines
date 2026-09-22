@@ -176,8 +176,10 @@ def test_MainWritesReportAndReturnsNonzeroForFailedProbe(
 def test_MainRejectsInvalidProbeLimits(capsys):
     try:
         report_external_links.Main(["--timeout", "0"])
+
     except SystemExit as error:
         assert error.code == 2
+
     else:
         raise AssertionError("invalid timeout should terminate argument parsing")
 
