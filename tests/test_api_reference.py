@@ -8,8 +8,6 @@
 import subprocess
 from pathlib import Path
 
-import yaml
-
 from tools import build_api_reference
 
 PROJECTROOT = Path(__file__).parents[1]
@@ -18,15 +16,8 @@ CONFIGPATH = SITEROOT / "mkdocs.yml"
 
 
 def test_CanonicalReferenceHasCompleteOrderedNavigation():
-    configuration = yaml.safe_load(
-        CONFIGPATH.read_text(encoding="utf-8").replace(
-            "!ENV FUZZYROUTINES_INSTALLED_PACKAGES",
-            '"installed-packages"',
-        )
-    )
-    navigationText = repr(configuration["nav"])
-
-    for pagePath in (
+    configurationText = CONFIGPATH.read_text(encoding="utf-8")
+    expectedPages = (
         "api/modern/package.md",
         "api/modern/alphacuts.md",
         "api/modern/domain.md",
@@ -35,9 +26,14 @@ def test_CanonicalReferenceHasCompleteOrderedNavigation():
         "api/modern/properties.md",
         "api/modern/relations.md",
         "api/legacy/index.md",
-    ):
-        assert pagePath in navigationText
+    )
+
+    offsets = []
+    for pagePath in expectedPages:
+        offsets.append(configurationText.index(pagePath))
         assert (SITEROOT / "content" / "en" / pagePath).is_file()
+
+    assert offsets == sorted(offsets)
 
 
 def test_CanonicalReferenceUsesInstalledStaticDiscoveryAndStrictBuilds():
