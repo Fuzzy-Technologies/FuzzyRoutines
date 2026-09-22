@@ -30,7 +30,7 @@ examples below keep those gaps visible instead of inventing future call shapes.
 | Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                  |
 | Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                   |
 | Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                          |
-| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation via `LinguisticTerm` and `LinguisticScale`; legacy classes remain required for lookup and fuzzification   |
+| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation via `LinguisticTerm` and `LinguisticScale`; legacy classes remain required for lookup and fuzzification    |
 | Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries              |
 | Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | No modern centroid strategy yet; retain `Defuz()` and treat `supportSet` as a numerical integration interval                    |
 

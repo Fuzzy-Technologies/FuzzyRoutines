@@ -3,9 +3,9 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Exact discrete and explicitly sampled continuous alpha-cut operations.
+r"""Exact discrete and explicitly sampled continuous alpha-cut operations.
 
-An alpha-cut uses the weak boundary convention $mu(x) >= alpha$. Exact
+An alpha-cut uses the weak boundary convention $\mu(x) \geq \alpha$. Exact
 evaluation is possible for a `DiscreteUniverse` because every declared
 coordinate is evaluated.  An arbitrary callable over a continuous universe
 cannot be solved exactly by finite inspection, so continuous evaluation uses a
@@ -51,16 +51,21 @@ def _RequireSampleCount(sampleCount):
 
 @dataclass(frozen=True, slots=True)
 class SampledAlphaCut:
-    """Finite observations of a continuous alpha-cut with full provenance.
+    r"""Finite observations of a continuous alpha-cut with full provenance.
 
     Attributes:
         alpha: Weak membership threshold in $[0, 1]$.
         analysisDomain: Closed interval covered by the grid.
         sampleCount: Number of grid coordinates, including both endpoints.
-        coordinates: Strictly increasing uniform-grid coordinates.
+        coordinates: Strictly increasing coordinates spanning
+            `analysisDomain`. `SampleAlphaCut` produces a uniform grid;
+            direct construction does not revalidate equal spacing.
         grades: Validated membership grades corresponding to `coordinates`.
-        cutSamples: Coordinates whose grades satisfy $grade >= alpha$.
-        method: Sampling method identifier; currently always `"uniform-grid"`.
+        cutSamples: Coordinates whose grades satisfy
+            $\mathrm{grade} \geq \alpha$.
+        method: Required provenance label, currently always `"uniform-grid"`.
+            The label records the supported producer contract but does not by
+            itself prove equal spacing for a directly constructed instance.
     """
 
     alpha: Real
@@ -151,8 +156,7 @@ def AlphaCut(fuzzySet, alpha):
         The ordered discrete region containing every qualifying coordinate.
 
     Raises:
-        TypeError: If the input is not a scalar fuzzy set over a discrete
-            universe.
+        TypeError: If argument types do not match the discrete contract.
         ValueError: If `alpha` is not a finite value in $[0, 1]$.
     """
 
