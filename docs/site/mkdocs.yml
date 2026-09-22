@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+site_name: FuzzyRoutines API Reference
+site_description: Canonical English API reference for FuzzyRoutines.
+site_url: https://fuzzy-technologies.github.io/FuzzyRoutines/api/
+repo_url: https://github.com/Fuzzy-Technologies/FuzzyRoutines
+repo_name: Fuzzy-Technologies/FuzzyRoutines
+edit_uri: edit/develop/docs/site/content/en/
+
+docs_dir: content/en
+site_dir: ../../_build/api-reference/site
+strict: true
+use_directory_urls: true
+
+theme:
+  name: material
+  language: en
+  logo: assets/brand/fuzzyroutines-sign.svg
+  favicon: assets/favicon.svg
+  palette:
+    scheme: slate
+    primary: black
+    accent: deep purple
+  features:
+    - content.action.edit
+    - content.code.annotate
+    - content.code.copy
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+
+nav:
+  - Overview: index.md
+  - API reference:
+      - Index: api/index.md
+      - Modern API:
+          - Overview: api/modern/index.md
+          - Package exports: api/modern/package.md
+          - Alpha cuts: api/modern/alphacuts.md
+          - Domains: api/modern/domain.md
+          - Fuzzy sets: api/modern/fuzzysets.md
+          - Linguistic terms: api/modern/linguistic.md
+          - Derived properties: api/modern/properties.md
+          - Relations: api/modern/relations.md
+      - Historical API:
+          - Compatibility facade: api/legacy/index.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - !ENV FUZZYROUTINES_INSTALLED_PACKAGES
+          options:
+            docstring_style: google
+            docstring_options:
+              warn_missing_types: false
+            heading_level: 2
+            inherited_members: false
+            members_order: source
+            merge_init_into_class: true
+            separate_signature: true
+            show_if_no_docstring: true
+            show_root_full_path: true
+            show_root_heading: true
+            show_signature_annotations: true
+            show_source: true
+            signature_crossrefs: true
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+extra_css:
+  - assets/stylesheets/fuzzyroutines.css
+
+extra_javascript:
+  - assets/javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+copyright: Technologies · Knowledge · Science
