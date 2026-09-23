@@ -7,7 +7,7 @@
 
 The values below preserve Task #78 provenance for the retired 1000-point
 right-endpoint calculation. Production centroids follow ADR-0005 and remain
-within the approved `5e-4` compatibility tolerance for these valid cases.
+within the declared `5e-4` compatibility bound for these valid cases.
 """
 
 import pytest

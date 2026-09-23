@@ -56,7 +56,7 @@ access. They therefore observe current membership parameters and current
 `supportSet` integration bounds without a retained centroid cache.
 `MFunction.accuracy` remains writable for source compatibility but no longer
 controls correctness or work. The retired 1000-point right-endpoint outputs
-remain test provenance, with an approved absolute compatibility tolerance of
+remain test provenance, with a declared absolute compatibility bound of
 `5e-4` for the Task #78 reference cases.
 
 ## Evidence
