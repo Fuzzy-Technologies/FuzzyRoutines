@@ -35,8 +35,9 @@ def test_PublishCannotRunForPullRequestOrManualDispatch():
     publishText = workflowText.split("  publish-pypi:", maxsplit=1)[1]
 
     requiredCondition = (
-        "if: github.event_name == 'push' && "
-        "startsWith(github.ref, 'refs/tags/v')"
+        "github.event_name == 'push' &&\n"
+        "      startsWith(github.ref, 'refs/tags/v') &&\n"
+        "      vars.PYPI_TRUSTED_PUBLISHING_ENABLED == 'true'"
     )
     assert requiredCondition in publishText
     assert "pull_request:" in workflowText
@@ -80,6 +81,7 @@ def test_RunbookDefinesExternalProtectionWithoutSecrets():
         "Environment",
         "`pypi`",
         "annotated tag",
+        "PYPI_TRUSTED_PUBLISHING_ENABLED",
     ):
         assert requiredText in runbookText
 

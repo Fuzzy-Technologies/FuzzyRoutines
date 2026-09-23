@@ -32,11 +32,18 @@ controls in the GitHub web interface:
 5. Keep the repository or organization default workflow token permissions at
    read-only. The publish job requests only `id-token: write`; the separate
    provenance job additionally requests `attestations: write`.
+6. Complete the PyPI configuration below, then create the repository variable
+   `PYPI_TRUSTED_PUBLISHING_ENABLED` with the exact value `true`. Leave the
+   variable absent until every other protection is verified.
 
 The workflow also rejects lightweight tags, prerelease spellings, mismatched
 package versions, and tag names other than the exact stable form `vX.Y.Z`.
 Repository settings remain the authorization boundary; the workflow checks are
 defence in depth.
+
+The repository activation variable is an additional fail-closed switch, not a
+substitute for required reviewers, tag protection, or PyPI's OIDC identity
+binding. Removing it or setting any value other than `true` disables publishing.
 
 ## One-time PyPI configuration
 
@@ -61,6 +68,8 @@ jobs without requesting a publishing identity. After the workflow is merged, a
 maintainer may also run **Trusted PyPI release → Run workflow** on an approved
 branch. A manual run cannot publish, even after environment approval, because
 both privileged jobs require a tag-push event.
+The publish job additionally requires the explicit repository activation
+variable described above.
 
 The dry run must show all of the following:
 
