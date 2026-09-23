@@ -22,17 +22,18 @@ The current modern API covers explicit domains, immutable scalar fuzzy sets,
 set algebra, relations, derived properties, alpha-cuts, exact height-aware
 normalization, and typed linguistic-term and ordered-scale representations. A
 focused membership-function factory, typed scale lookup and fuzzification
-policies, and modern defuzzification strategies are still roadmap work. The
-examples below keep those gaps visible instead of inventing future call shapes.
+policies remain roadmap work. Modern centroid defuzzification is available
+through an explicit integration domain and numerical policy. The examples
+below keep remaining gaps visible instead of inventing future call shapes.
 
-| Area                 | Historical API remains supported                                   | Preferred path available today                                                                                                  |
-|----------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                  |
-| Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                   |
-| Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                          |
-| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation via `LinguisticTerm` and `LinguisticScale`; legacy classes remain required for lookup and fuzzification    |
-| Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries              |
-| Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | No modern centroid strategy yet; retain `Defuz()` and treat `supportSet` as a numerical integration interval                    |
+| Area                 | Historical API remains supported                                   | Preferred path available today                                                                                                   |
+|----------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                   |
+| Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                    |
+| Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                           |
+| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation via `LinguisticTerm` and `LinguisticScale`; legacy classes remain required for lookup and fuzzification     |
+| Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries               |
+| Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | `Centroid()` with explicit `ScalarFuzzySet`, `IntegrationDomain`, and optional `CentroidPolicy`                                  |
 
 ## Operators
 
@@ -160,7 +161,7 @@ immutable typed representation is sufficient.
 
 ## Defuzzification
 
-Continue to use the recalculating historical centroid entry point:
+Existing code may continue to use the recalculating compatibility entry point:
 
 ```python
 from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
@@ -170,17 +171,22 @@ fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 1.0))
 centroid = fuzzySet.Defuz()
 ```
 
-No modern analytical or adaptive defuzzification strategy is implemented yet.
-The historical `supportSet` tuple is a finite numerical integration interval,
-not exact positive support. Code may make that interpretation explicit without
-changing behavior:
+`Defuz()` now uses the modern analytical/adaptive strategy and ignores the
+retained compatibility attribute `MFunction.accuracy`. The historical
+`supportSet` tuple is a finite numerical integration interval, not exact
+positive support. New code can express the same operation explicitly:
 
 ```python
-from fuzzyroutines import IntegrationDomain
+from fuzzyroutines import Centroid, ContinuousUniverse, IntegrationDomain, ScalarFuzzySet
 
 integrationDomain = IntegrationDomain.FromLegacyInterval(fuzzySet.supportSet)
-assert integrationDomain.ToLegacyInterval() == fuzzySet.supportSet
+modernSet = ScalarFuzzySet(ContinuousUniverse(), membershipFunction.mju)
+centroid = Centroid(modernSet, integrationDomain)
 ```
+
+See [Centroid defuzzification](../mathematics/centroid-defuzzification.md) for
+analytical families, adaptive tolerances, zero-area behavior, and convergence
+failure.
 
 ## Executable examples
 

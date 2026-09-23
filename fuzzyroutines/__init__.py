@@ -12,6 +12,11 @@ import performs no evaluation, I/O, or configuration changes.
 """
 
 from fuzzyroutines.alphacuts import AlphaCut, SampleAlphaCut, SampledAlphaCut
+from fuzzyroutines.defuzzification import (
+    Centroid,
+    CentroidConvergenceError,
+    CentroidPolicy,
+)
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
@@ -50,6 +55,9 @@ from fuzzyroutines.relations import (
 
 __all__ = [
     "AlphaCut",
+    "Centroid",
+    "CentroidConvergenceError",
+    "CentroidPolicy",
     "ComparisonDomain",
     "ComparisonPolicy",
     "Complement",

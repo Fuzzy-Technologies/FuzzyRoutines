@@ -24,7 +24,7 @@ not a second copy of the detailed proofs.
 | Analytical and sampled derived properties | [Universe and support contract](universe-support-contract.md)                                                           | Analytical geometry is exact; finite sampling remains provenance-rich evidence      | derived-property and formula-invariant tests                            |
 | Weak alpha-cuts and uniform sampling      | [Alpha-cut contract](alpha-cuts.md)                                                                                     | `>=` boundary, nested cuts, exact discrete scan, explicit sampled approximation     | alpha-cut and formula-invariant tests                                   |
 | Equality and inclusion                    | [Equality and inclusion](fuzzy-set-relations.md)                                                                        | Exhaustive discrete comparison; bounded continuous claim; explicit tolerance        | fuzzy-set relation tests                                                |
-| Legacy centroid                           | [Numerical policy](../adr/0005-numerical-defuzzification-policy.md)                                                     | Fixed right-endpoint Riemann ratio retained only as compatibility behavior          | legacy centroid reference and numerical-edge tests                      |
+| Centroid defuzzification                  | [Numerical policy](../adr/0005-numerical-defuzzification-policy.md)                                                     | Analytical moments or deterministic adaptive quadrature                             | analytical, convergence, edge, and legacy-reference tests               |
 
 ## Numerically sensitive branches
 
@@ -99,7 +99,7 @@ the closed-domain endpoint invariant exact even when repeated binary64
 arithmetic would produce a neighboring value. Construction and evaluation are
 $O(n)$ time and $O(n)$ retained provenance.
 
-### Legacy centroid
+### Retired legacy centroid evidence
 
 For `accuracy = n`, legacy defuzzification evaluates right endpoints
 $x_i=l+i(r-l)/n$, $i=1,\ldots,n$, and returns
@@ -110,7 +110,18 @@ $$
 
 The common rectangle width cancels from the quotient. This is $O(n)$ time and
 $O(1)$ auxiliary space, but it is not an adaptive quadrature or a convergence
-claim. A zero denominator deliberately raises instead of inventing a centroid.
+claim. Tests preserve this algorithm independently as Task #78 provenance; it
+is no longer the production implementation.
+
+### Current centroid
+
+The current strategy evaluates analytical area and first moment for supported
+piecewise-polynomial and stable Gaussian paths. Other continuous callables use
+adaptive Simpson quadrature with immutable per-operation tolerances and a
+finite recursion limit. Zero area raises `ValueError`, and exhausted adaptive
+work raises `CentroidConvergenceError`; neither condition produces a cached,
+fixed-grid, or best-so-far result. The complete contract and evidence map are
+in [Centroid defuzzification](centroid-defuzzification.md).
 
 ### Finite relations
 

@@ -20,7 +20,12 @@ metadata uses `2.0.0.dev0`.
 - `FuzzyNOT` requires a finite real `alpha` in the open interval `(0, 1)`.
 - `FuzzyNOTParabolic` uses the proved analytical branch and cannot enter an epsilon-driven scan.
 - Bell membership evaluation does not mutate its parameter mapping and has a concurrent reentrancy regression test.
-- `FuzzySet.Defuz()` and `defuzValue` recalculate from the current membership parameters and integration interval.
+- modern `Centroid` consumes a continuous fuzzy set and explicit integration
+  domain, uses stable analytical moments for supported polynomial and Gaussian
+  families, and otherwise uses deterministic adaptive quadrature with explicit
+  tolerance and convergence failure;
+- `FuzzySet.Defuz()` and `defuzValue` delegate to that strategy on every access,
+  ignore retained `MFunction.accuracy`, and never expose stale centroid state;
 - `FuzzyScale.Fuzzy()` evaluates each term once and deliberately selects the later term when memberships tie.
 - Transparent cross-call caches remain absent from mutable legacy objects and
   caller-supplied callables because those surfaces have no safe invalidation
@@ -122,8 +127,6 @@ The recent accepted documentation and domain wave is
 
 - symmetric-difference semantics;
 - executable convexity queries with evidence-strength-preserving results;
-- analytical centroid moments where stable closed forms exist;
-- deterministic adaptive quadrature with explicit tolerance and convergence errors elsewhere;
 - typed linguistic lookup, tie-breaking, and fuzzification policies;
 - completion of the focused typed module API with the historical module retained as a compatibility facade;
 - optional vectorized execution, subject to numerical-parity, time, memory, and dependency evidence;

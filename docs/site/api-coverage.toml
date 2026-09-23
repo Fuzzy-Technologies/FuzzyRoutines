@@ -19,6 +19,11 @@ source = "fuzzyroutines/domain.py"
 mode = "authored"
 
 [[surfaces]]
+module = "fuzzyroutines.defuzzification"
+source = "fuzzyroutines/defuzzification.py"
+mode = "authored"
+
+[[surfaces]]
 module = "fuzzyroutines.fuzzysets"
 source = "fuzzyroutines/fuzzysets.py"
 mode = "authored"

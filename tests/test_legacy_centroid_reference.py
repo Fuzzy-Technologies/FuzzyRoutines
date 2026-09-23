@@ -3,17 +3,16 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Historical centroid observations for the legacy sampling implementation.
+"""Historical sampling observations and corrected-centroid compatibility.
 
-The values below freeze the current 1000-point, right-endpoint Riemann policy.
-They are provenance evidence for Task #78, not the modern centroid
-specification defined by ADR-0005.
+The values below preserve Task #78 provenance for the retired 1000-point
+right-endpoint calculation. Production centroids follow ADR-0005 and remain
+within the approved `5e-4` compatibility tolerance for these valid cases.
 """
 
 import pytest
 
 from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
-
 
 REFERENCECASES = (
     pytest.param(
@@ -47,6 +46,23 @@ REFERENCECASES = (
 )
 
 
+def _LegacyCentroid(membershipFunction, supportSet):
+    """Reproduce the frozen Task #78 algorithm without using production code."""
+
+    left, right = supportSet
+    step = (right - left) / 1000
+    numerator = 0.0
+    denominator = 0.0
+
+    for iteration in range(1000):
+        coordinate = left + (iteration + 1) * step
+        grade = membershipFunction.mju(coordinate)
+        numerator += coordinate * grade
+        denominator += grade
+
+    return numerator / denominator
+
+
 @pytest.mark.parametrize(("identifier", "parameters", "supportSet", "expectedValue"), REFERENCECASES)
 def test_LegacyCentroidReferenceValues(identifier, parameters, supportSet, expectedValue):
     membershipFunction = MFunction(identifier, **parameters)
@@ -55,9 +71,14 @@ def test_LegacyCentroidReferenceValues(identifier, parameters, supportSet, expec
     assert membershipFunction.accuracy == 1000, (
         "This historical reference is valid only for the 1000-point legacy policy."
     )
-    assert fuzzySet.Defuz() == pytest.approx(expectedValue, abs=1e-12, rel=0.0), (
-        f"The frozen legacy centroid changed for {identifier!r} on {supportSet!r}."
+    assert _LegacyCentroid(membershipFunction, supportSet) == pytest.approx(
+        expectedValue,
+        abs=1e-12,
+        rel=0.0,
+    ), f"The frozen Task #78 observation changed for {identifier!r}."
+    assert fuzzySet.Defuz() == pytest.approx(expectedValue, abs=5e-4, rel=0.0), (
+        f"The corrected centroid exceeded compatibility tolerance for {identifier!r}."
     )
-    assert fuzzySet._Defuz() == pytest.approx(expectedValue, abs=1e-12, rel=0.0), (
-        "The construction-time cache must initially match its historical calculation."
+    assert fuzzySet._Defuz() == fuzzySet.Defuz(), (
+        "Both compatibility entry points must expose the current corrected calculation."
     )

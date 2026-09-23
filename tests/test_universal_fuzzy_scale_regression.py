@@ -9,13 +9,12 @@ import pytest
 
 from fuzzyroutines.FuzzyRoutines import UniversalFuzzyScale
 
-
 EXPECTEDLEVELS = (
-    ("Min", "Hyperbolic", {"a": 8, "b": 20, "c": 0}, (0.0, 0.23), 0.06333697923354091),
+    ("Min", "Hyperbolic", {"a": 8, "b": 20, "c": 0}, (0.0, 0.23), 0.0632789828672755),
     ("Low", "Bell", {"a": 0.17, "b": 0.23, "c": 0.34}, (0.17, 0.4), 0.28500000000000003),
-    ("Med", "Bell", {"a": 0.34, "b": 0.4, "c": 0.6}, (0.34, 0.66), 0.49999999999999956),
-    ("High", "Bell", {"a": 0.6, "b": 0.66, "c": 0.77}, (0.6, 0.83), 0.7149999999999982),
-    ("Max", "Parabolic", {"a": 0.77, "b": 0.95}, (0.77, 1.0), 0.9252400129145878),
+    ("Med", "Bell", {"a": 0.34, "b": 0.4, "c": 0.6}, (0.34, 0.66), 0.5000000000000001),
+    ("High", "Bell", {"a": 0.6, "b": 0.66, "c": 0.77}, (0.6, 0.83), 0.7150000000000001),
+    ("Max", "Parabolic", {"a": 0.77, "b": 0.95}, (0.77, 1.0), 0.9251785714285713),
 )
 
 FUZZYCASES = (
@@ -48,7 +47,7 @@ def test_UniversalFuzzyScalePresetStructureAndCentroids():
         )
         assert fuzzySet.supportSet == expectedSupport, f"{expectedName!r} support changed."
         assert fuzzySet.Defuz() == pytest.approx(expectedCentroid, abs=1e-12, rel=0.0), (
-            f"{expectedName!r} historical centroid changed."
+            f"{expectedName!r} corrected centroid changed."
         )
 
 

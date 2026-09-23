@@ -12,6 +12,7 @@ stable fully qualified anchors:
 | Module                                      | Responsibility                                              |
 |---------------------------------------------|-------------------------------------------------------------|
 | [`alphacuts`](alphacuts.md)                 | Exact discrete and sampled continuous alpha-cuts            |
+| [`defuzzification`](defuzzification.md)     | Analytical and adaptive continuous centroid evaluation      |
 | [`domain`](domain.md)                       | Declared universes and finite integration domains           |
 | [`fuzzysets`](fuzzysets.md)                 | Scalar fuzzy sets, operators, policies, and normalization   |
 | [`linguistic`](linguistic.md)               | Immutable linguistic terms and ordered scales               |

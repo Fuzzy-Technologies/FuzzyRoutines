@@ -22,6 +22,7 @@ def test_CanonicalReferenceHasCompleteOrderedNavigation():
     expectedPages = (
         "api/modern/package.md",
         "api/modern/alphacuts.md",
+        "api/modern/defuzzification.md",
         "api/modern/domain.md",
         "api/modern/fuzzysets.md",
         "api/modern/linguistic.md",
