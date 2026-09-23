@@ -1,0 +1,210 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+name: Trusted PyPI release
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: trusted-pypi-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-distributions:
+    name: Build release distributions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the exact source revision
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up build Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Validate protected release tag and version
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$GITHUB_REF" =~ ^refs/tags/v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "Release tags must use the exact stable form vX.Y.Z." >&2
+            exit 1
+          fi
+
+          if [[ "$(git cat-file -t "$GITHUB_REF_NAME")" != "tag" ]]; then
+            echo "Release tag $GITHUB_REF_NAME must be annotated." >&2
+            exit 1
+          fi
+
+          packageVersion="$(python - <<'PY'
+          import pathlib
+          import tomllib
+
+          metadata = tomllib.loads(pathlib.Path("pyproject.toml").read_text(encoding="utf-8"))
+          print(metadata["project"]["version"])
+          PY
+          )"
+          tagVersion="${GITHUB_REF_NAME#v}"
+          if [[ "$packageVersion" != "$tagVersion" ]]; then
+            echo "Tag version $tagVersion does not match package version $packageVersion." >&2
+            exit 1
+          fi
+
+      - name: Build and check wheel and source distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python -m pip install --disable-pip-version-check --upgrade build twine
+          export SOURCE_DATE_EPOCH="$(git log -1 --pretty=%ct)"
+          python -m build --outdir dist
+          python -m twine check --strict dist/*
+
+          test "$(find dist -maxdepth 1 -name '*.whl' -type f | wc -l)" -eq 1
+          test "$(find dist -maxdepth 1 -name '*.tar.gz' -type f | wc -l)" -eq 1
+          git rev-parse HEAD > dist/source-revision.txt
+          sha256sum dist/*.whl dist/*.tar.gz > dist/SHA256SUMS
+          sha256sum --check dist/SHA256SUMS
+
+      - name: Upload immutable release candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: trusted-pypi-distributions
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+  verify-distributions:
+    name: Verify release on Python ${{ matrix.python-version }}
+    needs: build-distributions
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13", "3.14"]
+
+    steps:
+      - name: Check out tested source
+        uses: actions/checkout@v5
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Download exact release candidates
+        uses: actions/download-artifact@v5
+        with:
+          name: trusted-pypi-distributions
+          path: dist
+
+      - name: Verify hashes and full source test suite
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sha256sum --check dist/SHA256SUMS
+          python -m pip install --disable-pip-version-check -r requirements.txt
+          python -m tools.test_runner --jobs auto --timeout 60
+
+      - name: Clean-install and smoke-test both distributions
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          wheelPath="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.whl' -print -quit)"
+          sdistPath="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.tar.gz' -print -quit)"
+          test -n "$wheelPath"
+          test -n "$sdistPath"
+
+          for artifactPath in "$wheelPath" "$sdistPath"; do
+            artifactName="$(basename "$artifactPath")"
+            venvPath="$RUNNER_TEMP/${artifactName//[^A-Za-z0-9]/-}"
+            python -m venv "$venvPath"
+            "$venvPath/bin/python" -m pip install \
+              --disable-pip-version-check \
+              --no-deps \
+              "$artifactPath"
+            cd "$RUNNER_TEMP"
+            "$venvPath/bin/python" - <<'PY'
+          from importlib.metadata import version
+
+          from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
+
+          assert version("fuzzyroutines")
+          assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
+          assert FuzzySet is not None
+          print("clean-install import smoke: PASS")
+          PY
+          done
+
+  attest-provenance:
+    name: Attest release provenance
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: verify-distributions
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+
+    steps:
+      - name: Download verified release candidates
+        uses: actions/download-artifact@v5
+        with:
+          name: trusted-pypi-distributions
+          path: dist
+
+      - name: Generate GitHub build provenance
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: |
+            dist/*.whl
+            dist/*.tar.gz
+
+  publish-pypi:
+    name: Publish verified distributions to PyPI
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs:
+      - verify-distributions
+      - attest-provenance
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: pypi
+      url: https://pypi.org/project/fuzzyroutines/
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download verified release candidates
+        uses: actions/download-artifact@v5
+        with:
+          name: trusted-pypi-distributions
+          path: dist
+
+      - name: Publish with PyPI Trusted Publishing
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
