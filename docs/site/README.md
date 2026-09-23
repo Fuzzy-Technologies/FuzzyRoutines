@@ -47,7 +47,7 @@ dependencies remain separate from runtime package metadata.
 
 ## Quality gates
 
-Task #204 adds deterministic gates around the strict build:
+Task #204 established deterministic gates around the strict build:
 
 - `docs/site/api-coverage.toml` declares every public module and the reviewed
   reason for each excluded module or symbol;
@@ -62,3 +62,25 @@ Task #204 adds deterministic gates around the strict build:
 Generated reference HTML is intentionally not committed, so a generated-file
 drift comparison is inapplicable. The gate instead fails if generated output
 appears under version control.
+
+## GitHub Pages composition
+
+Task #206 composes this generated English reference with the tracked product
+page by running:
+
+```bash
+python tools/compose_pages_site.py
+```
+
+The disposable result is `_build/pages/site`. The canonical English route is
+`/api/latest/en/`. Russian and Simplified Chinese routes are reserved with
+explicit untranslated fallback pages, so language navigation never points to
+missing content or presents English as reviewed translation. `/api/versions/`
+distinguishes the moving latest documentation from immutable stable-release
+paths; no stable 2.x documentation is claimed before a release exists.
+
+Pull requests and `develop` upload preview artifacts without production side
+effects. Only a push to the approved `master` branch can run the Pages deploy
+job. The generated API continues to load the version-pinned MathJax browser
+asset selected in ADR-0010; this is an intentional browser-time dependency and
+does not affect offline static generation.

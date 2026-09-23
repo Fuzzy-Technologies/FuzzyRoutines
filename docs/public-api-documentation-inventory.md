@@ -60,7 +60,7 @@ including public legacy members, for non-empty English docstrings and
 period-terminated summaries. The clean-install workflow runs that test against
 both wheel and source-distribution artifacts.
 
-Task #204 adds `docs/site/api-coverage.toml` as the machine-readable reviewed
+Task #204 established `docs/site/api-coverage.toml` as the machine-readable reviewed
 surface and exclusion manifest. Its deterministic validator compares the
 manifest with statically discovered source symbols and the tracked
 mkdocstrings directives, then reports missing coverage with source file, line,

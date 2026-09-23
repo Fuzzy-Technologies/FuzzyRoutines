@@ -3,7 +3,7 @@
 
 site_name: FuzzyRoutines API Reference
 site_description: Canonical English API reference for FuzzyRoutines.
-site_url: https://fuzzy-technologies.github.io/FuzzyRoutines/api/
+site_url: https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/
 repo_url: https://github.com/Fuzzy-Technologies/FuzzyRoutines
 repo_name: Fuzzy-Technologies/FuzzyRoutines
 edit_uri: edit/develop/docs/site/content/en/
@@ -34,6 +34,9 @@ theme:
 
 nav:
   - Overview: index.md
+  - Product overview: https://fuzzy-technologies.github.io/FuzzyRoutines/
+  - Mathematics guides: https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/develop/docs/mathematics
+  - Languages and versions: https://fuzzy-technologies.github.io/FuzzyRoutines/api/
   - API reference:
       - Index: api/index.md
       - Modern API:
