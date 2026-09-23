@@ -59,6 +59,7 @@ def test_PagesCompositionRejectsIncompleteApiInputBeforeWriting(tmp_path):
 
     try:
         compose_pages_site.ComposeSite(apiRoot, outputRoot)
+
     except FileNotFoundError as error:
         assert "generated API reference is incomplete" in str(error)
 
