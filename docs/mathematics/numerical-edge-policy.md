@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Status
 
-Target v2 contract. This policy implements the decision record requested by
-Task #64. Task #66 has removed stale construction-time centroid state. Tasks
-#79 and #80 still own the analytical/adaptive integration strategy, explicit
-precision, convergence failure, and zero-area behavior.
+Implemented v2 contract. Task #64 established the policy, Task #66 removed
+stale construction-time centroid state, and Tasks #79 and #80 implement the
+[analytical and adaptive centroid strategy](centroid-defuzzification.md),
+explicit precision, convergence failure, and zero-area behavior.
 
 ## Tolerances
 
@@ -30,4 +30,7 @@ Integration accuracy is an algorithm setting owned by the integration method. It
 
 ## Evidence
 
-Tests in tests/test_numerical_edge_policy.py state the correction target. The legacy 1000-point right-endpoint implementation remains documented only as historical baseline evidence in Task #78.
+Tests in `tests/test_numerical_edge_policy.py` and
+`tests/test_defuzzification.py` verify the implemented behavior. The legacy
+1000-point right-endpoint implementation remains only as independently
+reproduced historical baseline evidence in Task #78.

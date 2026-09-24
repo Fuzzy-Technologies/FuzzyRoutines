@@ -3,19 +3,18 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Expected-failure evidence for unresolved numerical edge policy."""
+"""Regression evidence for explicit numerical edge behavior."""
 
 import pytest
 
 from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
 
-@pytest.mark.xfail(strict=True, reason="Task #80 will turn an undefined zero-area centroid into an explicit error.")
 def test_ZeroAreaCentroidRaisesValueError():
     membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
 
-    with pytest.raises(ValueError):
-        FuzzySet(membershipFunction, supportSet=(2.0, 3.0))
+    with pytest.raises(ValueError, match="zero membership area"):
+        FuzzySet(membershipFunction, supportSet=(2.0, 3.0)).Defuz()
 
 
 def test_DegenerateParabolicWidthRaisesValueError():

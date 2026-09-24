@@ -32,6 +32,8 @@ python -c "from fuzzyroutines.FuzzyRoutines import MFunction; print(MFunction('t
 python -m tools.check_license_headers
 ```
 
-The release process, tag creation, GitHub release evidence, and PyPI Trusted
-Publishing belong to the later release milestone. This baseline does not
-publish artifacts and does not alter mathematical behaviour.
+The protected publication mechanics and required manual platform configuration
+are defined in the [PyPI Trusted Publishing runbook](trusted-publishing-runbook.md).
+Routine CI still cannot publish artifacts. A production release additionally
+requires the complete human-reviewed readiness checklist, a protected annotated
+tag, and approval through the `pypi` GitHub environment.

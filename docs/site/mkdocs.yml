@@ -43,6 +43,7 @@ nav:
           - Overview: api/modern/index.md
           - Package exports: api/modern/package.md
           - Alpha cuts: api/modern/alphacuts.md
+          - Defuzzification: api/modern/defuzzification.md
           - Domains: api/modern/domain.md
           - Fuzzy sets: api/modern/fuzzysets.md
           - Linguistic terms: api/modern/linguistic.md

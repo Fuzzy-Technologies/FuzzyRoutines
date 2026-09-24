@@ -120,7 +120,7 @@ names and corrected historical defects are tracked in the
 | Public symbols                        | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                       |
 | Mathematical definitions              | [`docs/mathematics`](docs/mathematics/)                                                                                                                  |
 | Compatibility and migration           | [Compatibility ledger](docs/compatibility/corrected-bug-ledger.md) · [Migration guide](docs/migration/historical-to-modern.md)                           |
-| Benchmarks and performance claims     | [Benchmark protocol](docs/performance/benchmark-reproducibility-protocol.md) · [Cache decision](docs/performance/cache-and-precomputation-evaluation.md) |
+| Benchmarks and performance claims     | [Results](docs/BENCHMARKS.md) · [Protocol](docs/performance/benchmark-reproducibility-protocol.md)                                                       |
 | Tests, tools, examples, and artifacts | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                                  |
 | Contribution and evidence rules       | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                       |
 | API documentation architecture        | [ADR-0010](docs/adr/0010-api-documentation-architecture.md) · [Reproducible build](docs/site/README.md)                                                  |
