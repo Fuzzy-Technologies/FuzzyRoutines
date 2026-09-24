@@ -14,6 +14,8 @@ import copy
 import math
 
 import fuzzyroutines.domain as _domain
+from fuzzyroutines.defuzzification import Centroid as _Centroid
+from fuzzyroutines.fuzzysets import ScalarFuzzySet as _ScalarFuzzySet
 
 
 def DiapasonParser(diapason):
@@ -369,8 +371,8 @@ class MFunction():
         ValueError: If the family or its parameter set is invalid.
 
     Attributes:
-        accuracy: Number of right-endpoint rectangles used by legacy
-            defuzzification.
+        accuracy: Preserved mutable compatibility attribute. Modern centroid
+            defuzzification deliberately ignores it.
         mju: Bound evaluator for the selected family.
     """
 
@@ -826,48 +828,41 @@ class FuzzySet():
 
     @property
     def defuzValue(self):
-        """Calculate and return the center-of-gravity defuzzified value.
+        """Calculate and return the current center-of-area value.
 
         Raises:
-            ZeroDivisionError: If every sampled membership grade is zero.
+            ValueError: If membership area is zero or non-finite.
+            CentroidConvergenceError: If adaptive integration cannot satisfy
+                its explicit default tolerance.
         """
         self._defuzValue = self._Defuz()
         return self._defuzValue
 
     def _Defuz(self):
-        """Approximate centroid defuzzification over the integration domain.
+        """Calculate centroid defuzzification over the integration domain.
 
         Returns:
-            The ratio of right-endpoint rectangle sums for $xμ(x)$ and
-            $μ(x)$.
+            Analytical centroid for supported stable families, otherwise the
+            deterministic adaptive-quadrature result.
 
         Raises:
-            ZeroDivisionError: If all sampled membership grades are zero.
+            ValueError: If membership area is zero or non-finite.
+            CentroidConvergenceError: If adaptive integration cannot satisfy
+                its explicit default tolerance.
         """
-        left = self._integrationDomain.left
-        right = self._integrationDomain.right
-        step = (right - left) / self._mFunction.accuracy
-
-        numeratorIntegral = 0
-        denominatorIntegral = 0
-
-        # The common rectangle width cancels from the centroid ratio. This
-        # preserves the historical O(n)-time, O(1)-space right-endpoint sum;
-        # it is compatibility behavior, not an adaptive convergence claim.
-        for iteration in range(self._mFunction.accuracy):
-            x = left + (iteration + 1) * step
-            mjuValue = self._mFunction.mju(x)
-
-            numeratorIntegral += x * mjuValue
-            denominatorIntegral += mjuValue
-
-        return numeratorIntegral / denominatorIntegral
+        fuzzySet = _ScalarFuzzySet(
+            _domain.ContinuousUniverse(),
+            self._mFunction.mju,
+        )
+        return _Centroid(fuzzySet, self._integrationDomain)
 
     def Defuz(self):
         """Return `defuzValue` through the historical method alias.
 
         Raises:
-            ZeroDivisionError: If every sampled membership grade is zero.
+            ValueError: If membership area is zero or non-finite.
+            CentroidConvergenceError: If adaptive integration cannot satisfy
+                its explicit default tolerance.
         """
         return self.defuzValue
 

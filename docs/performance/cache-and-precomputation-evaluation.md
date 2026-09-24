@@ -25,7 +25,7 @@ enough to justify changing that contract.
 | Candidate                       | Correctness boundary                                                                    | Evidence                                                                                                                                   | Result                                      |
 |---------------------------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
 | Membership result by coordinate | Legacy `MFunction.parameters`, `mju`, and modern callable closure state can change      | No bounded key space or representative hit-rate workload is defined                                                                        | Rejected                                    |
-| Legacy centroid                 | Membership parameters, callable, accuracy, and integration domain can change            | `benchmark_fuzzyset_centroid` measures recalculation cost, but no safe invalidation design or same-environment candidate comparison exists | Rejected                                    |
+| Centroid calculation            | Membership parameters, callable, and integration domain can change                      | `benchmark_fuzzyset_centroid` measures recalculation cost, but no safe invalidation design or same-environment candidate comparison exists | Rejected                                    |
 | Derived properties              | The universe values are immutable, but the accepted `MFunction` is mutable              | Exact derivation is covered by correctness tests; no versioned function identity exists                                                    | Rejected                                    |
 | Discrete membership grid        | A grid would be a snapshot, while `ScalarFuzzySet` accepts arbitrary stateful callables | Snapshot lifetime and memory bound are not part of the public API                                                                          | Deferred to a separately typed snapshot API |
 | Linguistic-scale lookup         | Levels, fuzzy sets, and membership functions remain mutable                             | `benchmark_scale_lookup` proves one evaluation per term per lookup after Task #105                                                         | Keep operation-local reuse only             |
@@ -39,7 +39,8 @@ computed by an earlier public query.
 This rule applies to:
 
 - `FuzzySet.Defuz()` and `FuzzySet.defuzValue` after changes to the membership
-  function, its parameters or accuracy, or `supportSet`;
+  function, its parameters, or `supportSet`; the retained compatibility
+  attribute `accuracy` does not control the modern calculation;
 - `FuzzyScale.Fuzzy()` after changes to `levels` or any contained membership
   function;
 - `DeriveProperties()` after changes to an `MFunction`;

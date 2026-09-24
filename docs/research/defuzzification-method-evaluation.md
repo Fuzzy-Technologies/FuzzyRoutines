@@ -7,7 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Status
 
-This research note evaluates candidate methods before public API expansion. It does not approve or implement a method. The existing centroid strategy remains the only supported legacy behavior until the domain, zero-area, and precision contracts are implemented.
+This research note evaluates candidate methods before public API expansion. It
+does not approve or implement an additional method. The analytical/adaptive
+centroid, domain, zero-area, and precision contracts are now implemented; the
+alternatives below remain research only.
 
 ## Preconditions for any implementation
 
@@ -33,4 +36,7 @@ With a unique maximum, MOM, SOM, and LOM necessarily return the same location. T
 
 ## Recommendation
 
-Do not add these methods to the public API yet. First merge the explicit fuzzy-set domain decision, implement the modern centroid and zero-area contracts, and define whether FuzzyRoutines operates on analytical functions, samples, or both. After that, a separate approval Task can select methods and their exact continuous/discrete conventions; tests must include unique maxima, plateaus, disconnected maximizer sets, zero area, and finite-domain boundaries.
+Do not add these methods to the public API yet. A separate approval Task must
+select methods and their exact continuous/discrete conventions; tests must
+include unique maxima, plateaus, disconnected maximizer sets, zero area, and
+finite-domain boundaries.
