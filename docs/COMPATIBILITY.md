@@ -11,10 +11,10 @@ SPDX-License-Identifier: Apache-2.0
 - Implemented v2 surface: [public API inventory](public-api-documentation-inventory.md)
 
 This page is the canonical entry point for choosing an API surface and moving
-existing FuzzyRoutines code forward. Compatibility means that protected
-historical names and call shapes remain available. It does not mean that a
-known mathematical, numerical, validation, or stale-state defect remains
-available.
+existing FuzzyRoutines code forward. It distinguishes the narrow contract
+protected by ADR-0001 from the larger 1.0.3 surface that remains implemented
+and tested today. Neither category preserves a known mathematical, numerical,
+validation, or stale-state defect.
 
 ## Choose a surface
 
@@ -29,40 +29,53 @@ rename layer for existing callers. Historical names remain supported under
 [ADR-0001](adr/0001-backward-compatibility-contract.md) unless a later approved
 ADR deliberately changes that contract.
 
-## Protected historical surface
+## ADR-protected historical contract
 
-The protected compatibility import is:
+ADR-0001 protects importability of `fuzzyroutines` and
+`fuzzyroutines.FuzzyRoutines`. Historical symbols are imported from the latter:
 
 ```python
 from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 ```
 
-The supported historical surface comprises:
+Its protected symbol and behavior contract comprises:
 
-- functions `DiapasonParser`, `IsNumber`, `IsCorrectFuzzyNumberValue`,
-  `FuzzyNOT`, `FuzzyNOTParabolic`, `FuzzyAND`, `FuzzyOR`, `TNorm`,
+- operators `FuzzyNOT`, `FuzzyNOTParabolic`, `FuzzyAND`, `FuzzyOR`, `TNorm`,
   `TNormCompose`, `SCoNorm`, and `SCoNormCompose`;
 - classes `MFunction`, `FuzzySet`, `FuzzyScale`, and `UniversalFuzzyScale`;
-- `MFunction` members `name`, `parameters`, `mju`, `accuracy`, `Hyperbolic()`,
-  `Bell()`, `Parabolic()`, `Triangle()`, `Trapezium()`, `Exponential()`,
-  `Sigmoidal()`, and `Desirability()`;
-- `FuzzySet` members `name`, `mFunction`, `supportSet`, `defuzValue`, and
-  `Defuz()`;
-- `FuzzyScale` members `name`, `levels`, `Fuzzy()`, and `GetLevelByName()`;
-- inherited `UniversalFuzzyScale` behavior plus `levelsNames` and
-  `levelsNamesUpper`;
+- documented methods `Defuz()`, `Fuzzy()`, and `GetLevelByName()`;
 - historical membership identifiers `hyperbolic`, `bell`, `parabolic`,
   `triangle`, `trapezium`, `exponential`, `sigmoidal`, and `desirability`;
 - the historical membership keyword names, parameter meaning, and parameter
   ordering recorded by the
   [membership-function contract](mathematics/membership-function-contracts.md).
 
-Exact signatures and the observed wildcard-import boundary are recorded in the
-[1.0.3 snapshot](compatibility/legacy-public-api-1.0.3.md) and enforced by
+Removing or changing this contract requires an explicit superseding or
+amending ADR with consumer-impact evidence. Exact signatures are recorded in
+the [1.0.3 snapshot](compatibility/legacy-public-api-1.0.3.md) and enforced by
 [`test_legacy_public_api.py`](../tests/test_legacy_public_api.py) and
 [`test_legacy_import_compatibility.py`](../tests/test_legacy_import_compatibility.py).
-Imported helper modules accidentally visible through wildcard import are not
-project-owned compatibility symbols.
+
+## Currently supported observed surface
+
+The current compatibility facade also implements and tests the following
+observed 1.0.3 names:
+
+- utilities `DiapasonParser`, `IsNumber`, and `IsCorrectFuzzyNumberValue`;
+- `MFunction` members `name`, `parameters`, `mju`, `accuracy`, `Hyperbolic()`,
+  `Bell()`, `Parabolic()`, `Triangle()`, `Trapezium()`, `Exponential()`,
+  `Sigmoidal()`, and `Desirability()`;
+- `FuzzySet` properties `name`, `mFunction`, `supportSet`, and `defuzValue`;
+- `FuzzyScale` properties `name` and `levels`;
+- `UniversalFuzzyScale` properties `levelsNames` and `levelsNamesUpper`.
+
+These names are supported by the current implementation and regression suite,
+but ADR-0001 does not independently grant every listed utility or attribute
+the same long-term protection as its explicit contract above. The
+[legacy snapshot](compatibility/legacy-public-api-1.0.3.md) records this wider
+observed surface so a future compatibility decision can assess migration
+impact rather than silently assuming or discarding it. Imported helper modules
+accidentally visible through wildcard import are not project-owned API symbols.
 
 `sShoulder`, `gaussian`, `logistic`, and `harringtonDesirability` are accepted
 additional `MFunction` identifiers. They select the same implementations as
@@ -94,14 +107,15 @@ The compatibility contract preserves valid usage, not defective results. The
 following implemented corrections can therefore change failure modes or
 outputs while retaining historical names and call shapes:
 
-| Corrected area                | Current behavior                                                                                          |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------|
-| Scalar and composed operators | Reject invalid, non-finite, Boolean, empty, and unknown-family inputs with explicit `ValueError`.         |
-| Parametric negation           | Enforces the proved parameter domains; parabolic negation uses a bounded analytical branch.               |
-| Membership construction       | Requires exact finite parameter sets and valid family geometry.                                           |
-| Bell evaluation               | Does not mutate the caller-visible parameter mapping.                                                     |
-| Centroid state                | Recalculates from current membership parameters and integration bounds rather than returning stale state. |
-| Scale lookup                  | Evaluates each term once and preserves the documented later-term tie policy.                              |
+| Corrected area          | Current behavior                                                                                          |
+|---                      |---                                                                                                        |
+| Binary scalar operators | Reject invalid, non-finite, and Boolean operands; family-selecting functions reject unknown families.     |
+| Variadic composition    | Rejects empty input, invalid operands, and unknown operator families with explicit `ValueError`.          |
+| Parametric negation     | Enforces the proved parameter domains; parabolic negation uses a bounded analytical branch.               |
+| Membership construction | Requires exact finite parameter sets and valid family geometry.                                           |
+| Bell evaluation         | Does not mutate the caller-visible parameter mapping.                                                     |
+| Centroid state          | Recalculates from current membership parameters and integration bounds rather than returning stale state. |
+| Scale lookup            | Evaluates each term once and preserves the documented later-term tie policy.                              |
 
 The [corrected-bug ledger](compatibility/corrected-bug-ledger.md) supplies the
 change history and merged evidence. A future correction must be added there;

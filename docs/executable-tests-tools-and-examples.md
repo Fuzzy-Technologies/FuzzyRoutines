@@ -50,7 +50,11 @@ files. They use deterministic scalar inputs and perform no network access.
 The package workflow executes all three from a temporary working directory
 after installing both the wheel and source distribution. The verifier removes
 `PYTHONPATH`, disables the user site, and rejects an import that does not come
-from the active virtual environment.
+from the active virtual environment. It also extracts every Python fence from
+[`docs/COMPATIBILITY.md`](COMPATIBILITY.md) and executes each snippet with
+Python isolated mode from the same temporary directory. This prevents the
+checkout, user site, or environment overrides from satisfying an undocumented
+import.
 
 ## Benchmark commands
 
@@ -116,10 +120,11 @@ each artifact and supported Python version it then:
 1. creates a clean virtual environment;
 2. installs the artifact without resolving runtime dependencies;
 3. proves `fuzzyroutines` resolves under that environment prefix;
-4. runs historical, modern, and bundled examples from a temporary directory;
-5. runs every benchmark entry point with bounded realistic inputs;
-6. parses redirected JSON stdout and compares each benchmark `--output` file;
-7. leaves generated evidence only under the explicit temporary artifact tree.
+4. executes every canonical compatibility-guide Python snippet in isolated mode;
+5. runs historical, modern, and bundled examples from a temporary directory;
+6. runs every benchmark entry point with bounded realistic inputs;
+7. parses redirected JSON stdout and compares each benchmark `--output` file;
+8. leaves generated evidence only under the explicit temporary artifact tree.
 
 This shell-visible check complements unit tests of report builders. A unit test
 that calls `BuildReport()` directly does not prove argument parsing, installed

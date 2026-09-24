@@ -5,17 +5,13 @@
 
 """Executable contracts for the canonical compatibility guide."""
 
-import re
-import subprocess
-import sys
 from pathlib import Path
+
+from tools.verify_installed_executables import LoadCompatibilityGuideExamples
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
 GUIDEPATH = PROJECTROOT / "docs" / "COMPATIBILITY.md"
-PROTECTEDSYMBOLS = (
-    "DiapasonParser",
-    "IsNumber",
-    "IsCorrectFuzzyNumberValue",
+ADRPROTECTEDSYMBOLS = (
     "FuzzyNOT",
     "FuzzyNOTParabolic",
     "FuzzyAND",
@@ -29,43 +25,47 @@ PROTECTEDSYMBOLS = (
     "FuzzyScale",
     "UniversalFuzzyScale",
 )
+OBSERVEDUTILITYSYMBOLS = (
+    "DiapasonParser",
+    "IsNumber",
+    "IsCorrectFuzzyNumberValue",
+)
 
 
-def test_GuideNamesEveryProtectedHistoricalSymbol():
-    """Keep the canonical entry point complete when the facade evolves."""
+def test_GuideNamesEveryAdrProtectedHistoricalSymbol():
+    """Keep the canonical entry point aligned with ADR-0001."""
 
     guideText = GUIDEPATH.read_text(encoding="utf-8")
 
-    for symbol in PROTECTEDSYMBOLS:
+    for symbol in ADRPROTECTEDSYMBOLS:
         assert f"`{symbol}`" in guideText, (
-            f"docs/COMPATIBILITY.md must identify protected symbol {symbol}."
+            f"docs/COMPATIBILITY.md must identify ADR-protected symbol {symbol}."
         )
 
 
-def test_GuidePythonExamplesExecuteAgainstCurrentPublicApi():
-    """Prevent migration snippets from documenting unavailable call shapes."""
+def test_GuideSeparatesObservedUtilitiesFromAdrProtection():
+    """Do not silently broaden permanent compatibility guarantees."""
 
     guideText = GUIDEPATH.read_text(encoding="utf-8")
-    examples = re.findall(r"```python\n(.*?)```", guideText, flags=re.DOTALL)
+    protectedSection, observedSection = guideText.split(
+        "## Currently supported observed surface",
+        maxsplit=1,
+    )
+
+    for symbol in OBSERVEDUTILITYSYMBOLS:
+        assert f"`{symbol}`" not in protectedSection
+        assert f"`{symbol}`" in observedSection
+
+
+def test_GuidePythonExamplesAreOwnedByCleanInstallVerifier():
+    """Keep snippet discovery shared with the installed-artifact gate."""
+
+    examples = LoadCompatibilityGuideExamples()
 
     assert len(examples) == 3, "The guide must retain one import and two migration examples."
 
     for example in examples:
-        verification = "\nassert abs(centroid - 0.5) < 1e-12\n" if "centroid =" in example else ""
-        result = subprocess.run(
-            [sys.executable, "-c", example + verification],
-            cwd=PROJECTROOT,
-            capture_output=True,
-            text=True,
-            timeout=30,
-            check=False,
-        )
-
-        assert result.returncode == 0, (
-            "A documented compatibility example no longer executes.\n"
-            f"stdout:\n{result.stdout}\n"
-            f"stderr:\n{result.stderr}"
-        )
+        compile(example, str(GUIDEPATH), "exec")
 
 
 def test_GuideSeparatesGuaranteesFromCorrectedBehavior():
@@ -73,8 +73,9 @@ def test_GuideSeparatesGuaranteesFromCorrectedBehavior():
 
     guideText = GUIDEPATH.read_text(encoding="utf-8")
 
-    assert "## Protected historical surface" in guideText
+    assert "## ADR-protected historical contract" in guideText
+    assert "## Currently supported observed surface" in guideText
     assert "## Corrected behavior is not a compatibility promise" in guideText
-    assert guideText.index("## Protected historical surface") < guideText.index(
+    assert guideText.index("## ADR-protected historical contract") < guideText.index(
         "## Corrected behavior is not a compatibility promise"
     )

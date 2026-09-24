@@ -26,14 +26,14 @@ SPDX-License-Identifier: Apache-2.0
 
 ## At a glance
 
-| Area              | Current contract                                                                                                                                                  |
-|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Runtime           | CPython 3.13 and 3.14                                                                                                                                             |
-| Package version   | `2.0.0.dev0`; not yet a stable release promise                                                                                                                    |
-| Modern API        | Root exports from [`fuzzyroutines`](docs/public-api-documentation-inventory.md#modern-package-exports)                                                            |
-| Compatibility API | [`fuzzyroutines.FuzzyRoutines`](docs/compatibility/legacy-public-api-1.0.3.md) preserves the observed 1.0.3 facade                                                |
-| API reference     | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package                                 |
-| License           | [Apache License 2.0](LICENSE) with attribution details in [NOTICE](NOTICE)                                                                                        |
+| Area              | Current contract                                                                                                                          |
+|---                |---                                                                                                                                        |
+| Runtime           | CPython 3.13 and 3.14                                                                                                                     |
+| Package version   | `2.0.0.dev0`; not yet a stable release promise                                                                                            |
+| Modern API        | Root exports from [`fuzzyroutines`](docs/public-api-documentation-inventory.md#modern-package-exports)                                    |
+| Compatibility API | [`fuzzyroutines.FuzzyRoutines`](docs/COMPATIBILITY.md) preserves the ADR-protected contract and documents the wider observed 1.0.3 facade |
+| API reference     | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package         |
+| License           | [Apache License 2.0](LICENSE) with attribution details in [NOTICE](NOTICE)                                                                |
 
 FuzzyRoutines targets scientific-grade behavior within fuzzy computing:
 explicit domains, traceable formulas, analytical results where practical,
@@ -51,11 +51,11 @@ python -m pip install .
 
 ## Choose the API surface
 
-| Surface                  | Use it for                                                        | Start here                                                                                |
-|--------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| Modern typed API         | New code with explicit universes, policies, and evidence strength | [Modern API inventory](docs/public-api-documentation-inventory.md#modern-package-exports) |
-| Historical compatibility | Existing software written against the 1.0.3-style facade          | [Compatibility contract](docs/compatibility/legacy-public-api-1.0.3.md)                   |
-| Migration boundary       | Moving one supported scenario at a time                           | [Historical-to-modern examples](docs/migration/historical-to-modern.md)                   |
+| Surface                  | Use it for                                                        | Start here                                                                                 |
+|---                       |---                                                                |---                                                                                         |
+| Modern typed API         | New code with explicit universes, policies, and evidence strength | [Modern API inventory](docs/public-api-documentation-inventory.md#modern-package-exports)  |
+| Historical compatibility | Existing software written against the 1.0.3-style facade          | [Protected and observed surfaces](docs/COMPATIBILITY.md#adr-protected-historical-contract) |
+| Migration boundary       | Moving one supported scenario at a time                           | [Canonical migration guide](docs/COMPATIBILITY.md#migration-examples)                      |
 
 ### Modern example
 
@@ -119,7 +119,7 @@ names and corrected historical defects are tracked in the
 | What exists now                       | [Current implementation status](docs/current-status.md)                                                                                                  |
 | Public symbols                        | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                       |
 | Mathematical definitions              | [`docs/mathematics`](docs/mathematics/)                                                                                                                  |
-| Compatibility and migration           | [Compatibility ledger](docs/compatibility/corrected-bug-ledger.md) · [Migration guide](docs/migration/historical-to-modern.md)                           |
+| Compatibility and migration           | [Canonical guide](docs/COMPATIBILITY.md) · [Corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md)                                            |
 | Benchmarks and performance claims     | [Results](docs/BENCHMARKS.md) · [Protocol](docs/performance/benchmark-reproducibility-protocol.md)                                                       |
 | Tests, tools, examples, and artifacts | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                                  |
 | Contribution and evidence rules       | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                       |

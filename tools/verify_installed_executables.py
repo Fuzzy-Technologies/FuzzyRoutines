@@ -18,12 +18,14 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
 EXAMPLEROOT = PROJECTROOT / "examples" / "migration"
+COMPATIBILITYGUIDE = PROJECTROOT / "docs" / "COMPATIBILITY.md"
 
 
 def ParseArguments(arguments=None):
@@ -46,6 +48,18 @@ def BuildEnvironment():
     environment.pop("PYTHONPATH", None)
     environment["PYTHONNOUSERSITE"] = "1"
     return environment
+
+
+def LoadCompatibilityGuideExamples():
+    """Return every Python snippet from the canonical compatibility guide."""
+
+    guideText = COMPATIBILITYGUIDE.read_text(encoding="utf-8")
+    examples = tuple(re.findall(r"```python\n(.*?)```", guideText, flags=re.DOTALL))
+
+    if not examples:
+        raise RuntimeError("docs/COMPATIBILITY.md contains no Python examples")
+
+    return examples
 
 
 def RunCommand(name, command, artifactDirectory, environment, expectJson=True):
@@ -125,6 +139,30 @@ def RunJsonEntryPoint(name, command, artifactDirectory, environment):
     return sorted(stdoutReport)
 
 
+def RunCompatibilityGuideExamples(artifactDirectory, environment):
+    """Execute guide snippets against only the active installed package."""
+
+    results = {}
+
+    for exampleIndex, example in enumerate(LoadCompatibilityGuideExamples(), start=1):
+        verification = (
+            "\nassert abs(centroid - 0.5) < 1e-12\n"
+            if "centroid =" in example
+            else ""
+        )
+        command = example + verification + "\nprint('compatibility guide example: PASS')\n"
+        exampleName = f"compatibility-guide-example-{exampleIndex}"
+        results[exampleName] = RunCommand(
+            exampleName,
+            [sys.executable, "-I", "-c", command],
+            artifactDirectory,
+            environment,
+            expectJson=False,
+        )
+
+    return results
+
+
 def Main(arguments=None):
     """Execute clean-install evidence and return zero after a complete pass."""
 
@@ -136,6 +174,10 @@ def Main(arguments=None):
     packagePath = VerifyPackageOrigin(artifactDirectory, environment)
 
     results = {
+        "compatibility-guide-examples": RunCompatibilityGuideExamples(
+            artifactDirectory,
+            environment,
+        ),
         "historical-migration": sorted(
             RunCommand(
                 "historical-migration",
