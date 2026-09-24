@@ -84,8 +84,8 @@ $$
 \begin{cases}
 0, & x\le a,\\
 \dfrac{x-a}{c-a}, & a<x\le c,\\
-\dfrac{b-x}{b-c}, & c<x<b,\\
-0, & x\ge b,
+\dfrac{b-x}{b-c}, & c<x\le b,\\
+0, & x>b,
 \end{cases}
 $$
 
@@ -101,6 +101,12 @@ $$
 0, & x>b.
 \end{cases}
 $$
+
+Every stored membership parameter is a finite built-in `int` or `float`;
+Boolean values are rejected even though Python treats them as integers. The
+family-specific constraints below are additional to that blanket scalar
+contract. `desirability` stores no parameters, but its evaluation coordinate
+must still be a finite built-in scalar.
 
 The implemented families are:
 
@@ -296,9 +302,9 @@ explicit `CentroidPolicy`. A zero or non-finite area raises `ValueError`, and
 exhausted adaptive work raises `CentroidConvergenceError`; no best-so-far or
 fixed-grid estimate is returned as a converged result.
 
-The compatibility methods `FuzzySet.Defuz()` and `defuzValue` delegate to this
-strategy on every access. They observe current parameters and current
-`supportSet` integration bounds without a retained centroid cache. See the
+The compatibility method `FuzzySet.Defuz()` and the `defuzValue` property
+delegate to this strategy on every access. They observe current parameters and
+current `supportSet` integration bounds without a retained centroid cache. See the
 [centroid contract](mathematics/centroid-defuzzification.md) and
 [ADR-0005](adr/0005-numerical-defuzzification-policy.md).
 
