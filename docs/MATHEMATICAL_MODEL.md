@@ -49,10 +49,10 @@ The following concepts are distinct:
 |----------------------|------------------------------------------------------------------|-------------------------------------------------------------|
 | Universe             | Coordinates on which $\mu_A$ defines $A$                         | `ContinuousUniverse` or `DiscreteUniverse`                  |
 | Integration domain   | Finite closed interval used by one numerical operation           | `IntegrationDomain`                                         |
-| Positive support     | $\{x\in X\mid\mu_A(x)>0\}$                                       | Exact region or explicit sampled evidence                   |
+| Positive support     | $\{x\in X\mid\mu_A(x)\gt 0\}$                                       | Exact region or explicit sampled evidence                   |
 | Support closure      | Closure of positive support relative to $X$                      | Exact region for supported representations                  |
 | Core                 | $\{x\in X\mid\mu_A(x)=1\}$                                       | Exact region for supported representations                  |
-| Boundary             | $\{x\in X\mid0<\mu_A(x)<1\}$                                     | Fuzzy transition region, not topological boundary           |
+| Boundary             | $\{x\in X\mid0\lt \mu_A(x)\lt 1\}$                                     | Fuzzy transition region, not topological boundary           |
 | Height               | $\sup\{\mu_A(x)\mid x\in X\}$                                    | Exact scalar only when the representation supports proof    |
 
 An integration domain is never inferred to be support. In particular, the
@@ -70,8 +70,8 @@ $$
 S_{a,b}(x)=
 \begin{cases}
 0, & x\le a,\\
-2\left(\dfrac{x-a}{b-a}\right)^2, & a<x\le\dfrac{a+b}{2},\\
-1-2\left(\dfrac{x-b}{b-a}\right)^2, & \dfrac{a+b}{2}<x<b,\\
+2\left(\dfrac{x-a}{b-a}\right)^2, & a\lt x\le\dfrac{a+b}{2},\\
+1-2\left(\dfrac{x-b}{b-a}\right)^2, & \dfrac{a+b}{2}\lt x\lt b,\\
 1, & x\ge b.
 \end{cases}
 $$
@@ -80,25 +80,25 @@ The triangle and trapezium families use the protected historical parameter
 order even though their geometric breakpoint order is different:
 
 $$
-\operatorname{Tri}_{a,c,b}(x)=
+\mathrm{Tri}_{a,c,b}(x)=
 \begin{cases}
 0, & x\le a,\\
-\dfrac{x-a}{c-a}, & a<x\le c,\\
-\dfrac{b-x}{b-c}, & c<x\le b,\\
-0, & x>b,
+\dfrac{x-a}{c-a}, & a\lt x\le c,\\
+\dfrac{b-x}{b-c}, & c\lt x\le b,\\
+0, & x\gt b,
 \end{cases}
 $$
 
 and
 
 $$
-\operatorname{Trap}_{a,c,d,b}(x)=
+\mathrm{Trap}_{a,c,d,b}(x)=
 \begin{cases}
 0, & x\le a,\\
-\dfrac{x-a}{c-a}, & a<x<c,\\
+\dfrac{x-a}{c-a}, & a\lt x\lt c,\\
 1, & c\le x\le d,\\
-\dfrac{b-x}{b-d}, & d<x\le b,\\
-0, & x>b.
+\dfrac{b-x}{b-d}, & d\lt x\le b,\\
+0, & x\gt b.
 \end{cases}
 $$
 
@@ -112,12 +112,12 @@ The implemented families are:
 
 | Historical identifier   | Mathematical function                                                                    | Valid parameters                                        | Exact aliases               |
 |-------------------------|------------------------------------------------------------------------------------------|---------------------------------------------------------|-----------------------------|
-| `hyperbolic`            | $1$ for $x\le c$; otherwise $1/(1+(a(x-c))^b)$                                           | $a>0$, $b>0$, finite $c$                                | None                        |
-| `bell`                  | $S_{a,b}(x)$ for $x<b$; $1$ on $[b,c]$; $1-S_{c,c+b-a}(x)$ after $c$                     | $a<b\le c$                                              | None                        |
-| `parabolic`             | $S_{a,b}(x)$                                                                             | $a<b$                                                   | `sShoulder`                 |
-| `triangle`              | $\operatorname{Tri}_{a,c,b}(x)$                                                          | $a<c\le b$; legacy order is `a, b, c`                   | None                        |
-| `trapezium`             | $\operatorname{Trap}_{a,c,d,b}(x)$                                                       | $a<c\le d<b$; legacy order is `a, b, c, d`              | None                        |
-| `exponential`           | $\exp\!\left[-\tfrac12((x-a)/b)^2\right]$                                                | finite $a$, $b>0$                                       | `gaussian`                  |
+| `hyperbolic`            | $1$ for $x\le c$; otherwise $1/(1+(a(x-c))^b)$                                           | $a\gt 0$, $b\gt 0$, finite $c$                                | None                        |
+| `bell`                  | $S_{a,b}(x)$ for $x\lt b$; $1$ on $[b,c]$; $1-S_{c,c+b-a}(x)$ after $c$                     | $a\lt b\le c$                                              | None                        |
+| `parabolic`             | $S_{a,b}(x)$                                                                             | $a\lt b$                                                   | `sShoulder`                 |
+| `triangle`              | $\mathrm{Tri}_{a,c,b}(x)$                                                          | $a\lt c\le b$; legacy order is `a, b, c`                   | None                        |
+| `trapezium`             | $\mathrm{Trap}_{a,c,d,b}(x)$                                                       | $a\lt c\le d\lt b$; legacy order is `a, b, c, d`              | None                        |
+| `exponential`           | $\exp\!\left[-\tfrac12((x-a)/b)^2\right]$                                                | finite $a$, $b\gt 0$                                       | `gaussian`                  |
 | `sigmoidal`             | $1/(1+\exp[-a(x-b)])$                                                                    | $a\ne0$, finite $b$                                     | `logistic`                  |
 | `desirability`          | $\exp[-\exp(-y)]$                                                                        | finite $y$; no stored parameters                        | `harringtonDesirability`    |
 
@@ -147,7 +147,7 @@ $$
 N_\alpha(x)=
 \begin{cases}
 1+x\dfrac{\alpha-1}{\alpha}, & x\le\alpha,\\
-(x-1)\dfrac{\alpha}{\alpha-1}, & x>\alpha.
+(x-1)\dfrac{\alpha}{\alpha-1}, & x\gt \alpha.
 \end{cases}
 $$
 
@@ -242,7 +242,7 @@ $A_\beta\subseteq A_\alpha$ whenever $0\le\alpha\le\beta\le1$.
 For exact positive height $h(A)$, normalization is
 
 $$
-\mu_{\operatorname{Normalize}(A)}(x)=\frac{\mu_A(x)}{h(A)}.
+\mu_{\mathrm{Normalize}(A)}(x)=\frac{\mu_A(x)}{h(A)}.
 $$
 
 Zero height is rejected. Exact height is available for exhaustive discrete
