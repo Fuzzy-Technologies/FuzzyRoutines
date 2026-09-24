@@ -202,7 +202,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.CentroidPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:c25a4ccdccc9cddd5fe4d122e4a0387964313ef29fcb727eaa18a278a52b6c1a"
+sourceHash = "sha256:c6ef187d6657e39a8de8f9b21fecd8ac8b5c4ac417da5976239a9c7b52613cd7"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -215,7 +215,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.ComparisonDomain"
 kind = "symbol"
 sourcePath = "fuzzyroutines/relations.py"
-sourceHash = "sha256:b49bd24d8787d72155ce124e26ca0d7cf50f44166293d63cdef03872acaa009d"
+sourceHash = "sha256:73b5ee9afa3aa14616539d5d74a4aed3218a6cb63b17bcf559886f01ce76bff0"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -228,7 +228,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.ComparisonPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/relations.py"
-sourceHash = "sha256:b0cb8936cdb6f2f6736dcbf759029663d99dd3f16e8b2944e459a11e7b6222b5"
+sourceHash = "sha256:2f2514a3ed9ded823d6ab63c97141515bb57eaf9a1f33fc106446f64e8bc6716"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -254,7 +254,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.ContinuousFuzzyProperties"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:a0d1aa1b10c9097fc52404d0654dc4f49aa52666b80004aedde048bc812b4dda"
+sourceHash = "sha256:8e237beaa518ff5fbcc4e1691219eb86a06e9b4922e10a7e8a6f6ac5c57b469b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -267,7 +267,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.ContinuousInterval"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:073378b9ad3f0325052eb8faa72bdddd08aa23ca532575ba37a8d88e4e311776"
+sourceHash = "sha256:7f68a5ae819e6b78989ed4394828f0a46962e9c53b5650212e39541548a3dbac"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -280,7 +280,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.ContinuousRegion"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:8952e1964e5425eba2746db0d9e30f8e300122b30ac494ed3ac3baa7bc76e91d"
+sourceHash = "sha256:b11e4cc978016fd7c845d4d3820ac58f786ed15f2e7ea9b329e3d15123cbed8d"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -293,7 +293,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.ContinuousUniverse"
 kind = "symbol"
 sourcePath = "fuzzyroutines/domain.py"
-sourceHash = "sha256:0d67e1a78688453f961705b27b2d44a5c9a668ef3fc3b1c4ae0c7a0b8342ce46"
+sourceHash = "sha256:dacfaf5ab5027ed9bd5752ab0c2f891984be3b8140da9ba2f59f254e25320593"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -332,7 +332,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.DiscreteFuzzyProperties"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:1ef93ef8b8230a985cd2b68974900ad03050822764437d4de672a8bb74b4093c"
+sourceHash = "sha256:d2f5286b10da9d90970db683624692e779253b1b1a338c6bcd6f8fddbbaa5cf8"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -345,7 +345,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.DiscreteRegion"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:76d363807b6d170c2ce6a6db9ea0c9d007ec786e044d5066f779bace0f6d2d0f"
+sourceHash = "sha256:0b0164493ebe500292c771b12dc3dc63ea0959e21b13deb8f194ca282e254661"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -358,7 +358,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.DiscreteUniverse"
 kind = "symbol"
 sourcePath = "fuzzyroutines/domain.py"
-sourceHash = "sha256:d635098dfc0e9bd9c789420dd95e12f53ab2d4d83255b65bf5925ebab5a9fd6e"
+sourceHash = "sha256:8707c33ff1ef5f8506a62cc454f8e8c49e9a9a7efc2a3d9318cee13b6be6bfcd"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -891,7 +891,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.IntegrationDomain"
 kind = "symbol"
 sourcePath = "fuzzyroutines/domain.py"
-sourceHash = "sha256:dca884d08e17124b33bafa3e5a9369b1798e6989466a306ba37741fb120bb628"
+sourceHash = "sha256:7e82054ab39f0f07f1e97a15a913b017b285cad7abdfc8be8b86cfaef9ec7687"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -930,7 +930,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.LinguisticScale"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
-sourceHash = "sha256:46caef661ed5b18ec8fd5ecf4cf12fb0c659114898d3a219ac7fd5518f0464e3"
+sourceHash = "sha256:13ae80cf16cf455d85d98f1080b94a7790929fb730200398a002640cc5742990"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -943,7 +943,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.LinguisticTerm"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
-sourceHash = "sha256:6c867898aabb79f8a1de69f2a37e959cfd83ae9e733f0a41ac35a5c416987105"
+sourceHash = "sha256:883a7a29e09e99e34dfcec2f5621290a56979e9ac4eec44ec651f494d3a06411"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -956,7 +956,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.NegationPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:f65c47760a2c5afb29dc0c7abf036842c0ac28c4edf3cb1b8371544241509bba"
+sourceHash = "sha256:9ff55ff21105965208d32034af784cf3b29b75f548016405be2bde82d374d5be"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -982,7 +982,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.SNormPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:fb8ec7a54d4b668bb5d3361c8287c5d8179a74cd7e7d2567b038a8de11912d54"
+sourceHash = "sha256:b4b597aef1322078917032a3466efca01bf5e171dec6d0da3df9d8b08cbb2bf5"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1021,7 +1021,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.SampledAlphaCut"
 kind = "symbol"
 sourcePath = "fuzzyroutines/alphacuts.py"
-sourceHash = "sha256:ae584f7ab8df76fc2756c7953c3642e08b3d0be684284515c9854374d703ca3d"
+sourceHash = "sha256:8e553453937ff67637d6927dfdd10a1f1cb43e370e1f944ca31b79754f69bacb"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1034,7 +1034,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.SampledFuzzyProperties"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:1805131c6456ef1c33c778e4d89bc9a9b8d122e9e997abb278c20517f59be22f"
+sourceHash = "sha256:56f933336018af996bf034d34efa8941fde9d66d8928b96366570ba6859e913b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1047,7 +1047,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.ScalarFuzzySet"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:16aeb5be228bd0824e137d275b408a62a38b678f8d9d98f3d83ecaadef92e7d2"
+sourceHash = "sha256:0e3181a25dbd75f90724dc54cf8ff2f972a6561b0438c909cf3478ad5d66eb65"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1060,7 +1060,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.TNormPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:a96ef932f130c118b239adebf5640f934d01b97385fefc12160d23c5b219231e"
+sourceHash = "sha256:25939e49e4ed8e116d2ea237866b3d4d268bd2267c7e85a7140f11a07b223943"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1112,7 +1112,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.alphacuts.SampledAlphaCut"
 kind = "symbol"
 sourcePath = "fuzzyroutines/alphacuts.py"
-sourceHash = "sha256:82044855dfdfcf4b485c9460b6e41acf1555699d2447c8dfd4549fd7ccdd151c"
+sourceHash = "sha256:f1ece2b00a9d0b63ce30a8b7146e59ee90b9741d8923f60ddfb9764a179cbe08"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1164,7 +1164,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.defuzzification.CentroidPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:410fb5b9313bc83c950d0f325ab145deae6308803f61bfaa2542e1eb7a4c891f"
+sourceHash = "sha256:4b272d931898df7957e220d245483501e2c61bb625998d149f5437bdc708916f"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1177,7 +1177,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.domain.ContinuousUniverse"
 kind = "symbol"
 sourcePath = "fuzzyroutines/domain.py"
-sourceHash = "sha256:8ee2842cbe5554a96bccff1f6f7851ca0c6be719e9b920c7565d909039172106"
+sourceHash = "sha256:bc0264e3b17757253aae0d3617492ce67c5ac391c391b1ad1390f49d9144ff9b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1216,7 +1216,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.domain.DiscreteUniverse"
 kind = "symbol"
 sourcePath = "fuzzyroutines/domain.py"
-sourceHash = "sha256:18017f6daedc39e5402bf83e4e00c5fdd2ca24250fa0ec6ca2fe3254d9bd4d47"
+sourceHash = "sha256:494b5016d885f3dffa8624d5fbc10c4d4c03af4a488bb4df97a7aecefc749421"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1242,7 +1242,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.domain.IntegrationDomain"
 kind = "symbol"
 sourcePath = "fuzzyroutines/domain.py"
-sourceHash = "sha256:fa06b1f31d3774f9f0dcd6cbc3c05820d1d1a532bafcd0fb35dc33d6968be1f0"
+sourceHash = "sha256:d338613f11342032568c73ef0b13e6fda92621fc98fe7c103a4062a6f80d1522"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1372,7 +1372,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.fuzzysets.NegationPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:04c23d399da2bab5a9bc4936ec14ef9779a9f58cfa2187c0fa46cbead75089ad"
+sourceHash = "sha256:4a0ffe2e019aa9e46bb735fff1590f3b3ced514c98e9007900a70aff556847a2"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1411,7 +1411,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.fuzzysets.SNormPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:5787bc94186fe4b572ada21a0ad517c4eb05468bd8fab236d7d20e8eb6f56530"
+sourceHash = "sha256:eca595aba5a67720b794fbe185094d908f32e93e59ec8e6a4206448128721f6e"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1437,7 +1437,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.fuzzysets.ScalarFuzzySet"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:932336cbacb1ad483fd14d55fdcb0defde38c6252eab61023799fdaeed0b7956"
+sourceHash = "sha256:8c74cf551a3bd14233fc629b3acb5290656fd436de6fea306ab0fde7b54bb952"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1463,7 +1463,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.fuzzysets.TNormPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:6156ac8ac812856714c2b3285a7aa1781f1955cb8fc8669f2f4c31f5bbec8a94"
+sourceHash = "sha256:8db96c34e232f34d6e76a4bc0e92ec9303a628b6715095e83b73cca30175acad"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1502,7 +1502,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
-sourceHash = "sha256:03a30e02433ad8585f64069e551705bca605c05583cb01388edbf9c8ec2e85e8"
+sourceHash = "sha256:ea4aa20418a1924f4d7ec2f0c9e6d41739c52f31e598d619d9495609abf0ba02"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1515,7 +1515,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.linguistic.LinguisticTerm"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
-sourceHash = "sha256:494d9acc1650bc3e4b44eeca3444d754a2802e41c365ece8a3b7f9fcf0462f0f"
+sourceHash = "sha256:ee601bce05c76360a791dc980f248ef4ce3ff8c08e5e462a92e31a3f10bdfcb6"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1528,7 +1528,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.properties.ContinuousFuzzyProperties"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:2e633f44550c6aea0203f0374ddebd1adc3c34243200d8ed470f45d4bd3c0bb8"
+sourceHash = "sha256:fb74b3d5be4ba5dde6af7c5e1d3f9d7ff4fd572274443313b97526ea8f3fc733"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1554,7 +1554,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.properties.ContinuousInterval"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:f1b1efbedc935f09d551b3bca5f0334c03c26e62b3c5240569037f4b4d69a911"
+sourceHash = "sha256:ad944063f095a9245501832040c61239651b9857e1e8562bff5c90784953375b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1593,7 +1593,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.properties.ContinuousRegion"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:487f18cb1dca7c98e2026b19f709705731adf2f1b2e938ef7e23c0ffe7324f80"
+sourceHash = "sha256:12ffffaf7e23aa2dadbec37542bbf7b272406810ab90fa46b02f45783fec8201"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1645,7 +1645,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.properties.DiscreteFuzzyProperties"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:404f9549d7ce3999c15599d5877d57d09e117c2dcd032dc0d0f62f80e34d3c13"
+sourceHash = "sha256:07af8120ba43177f1bd4494c26b715159099a2819ad6ef697667e45e32210b55"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1671,7 +1671,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.properties.DiscreteRegion"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:8acf58a8368f11eb3659b505ad6f69aff77cf99cceaf5a9ee2c942e118c4b193"
+sourceHash = "sha256:e0c5df41e132e25187abc11bde85d9b7752e1b661d52d8f865792b3e51953d38"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1723,7 +1723,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.properties.SampledFuzzyProperties"
 kind = "symbol"
 sourcePath = "fuzzyroutines/properties.py"
-sourceHash = "sha256:ac931c77039ec56194307e506a1afae135f7414599bcc6e55eb4d159d175198c"
+sourceHash = "sha256:f620628cbf3e714c1211ef60e68ae218afb4ce457d9f1a5f33a66b4e3e1fe23e"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1749,7 +1749,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.relations.ComparisonDomain"
 kind = "symbol"
 sourcePath = "fuzzyroutines/relations.py"
-sourceHash = "sha256:c63f713f4a8476a4a14ec9adfface97f4f1cb11feb4bf88fff8fafed69689cb6"
+sourceHash = "sha256:15c131c720b40ec4e6cf05e9fd116e31c0b33a7c7bcb3f81a14c1f7f1459aab2"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1775,7 +1775,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.relations.ComparisonPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/relations.py"
-sourceHash = "sha256:d98a9b9cf75ae980aa7301d43831e443d411df022abee0f237c2870744da85e9"
+sourceHash = "sha256:3cd0c890aae821d1855db60220c265c30e64e15e1050e4bacf46ccbb1c48b058"
 reviewClass = "mathematical"
 
 [units.translations.ru]

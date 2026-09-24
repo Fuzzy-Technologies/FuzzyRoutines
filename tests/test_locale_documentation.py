@@ -10,6 +10,7 @@ from pathlib import Path
 from tools.locale_documentation import (
     CanonicalHash,
     CanonicalUnit,
+    DiscoverCanonicalUnits,
     ValidateLocales,
 )
 
@@ -201,6 +202,50 @@ def test_ApprovedTranslationBecomesStaleAfterCanonicalEnglishChange(tmp_path):
         and "action=set state=stale" in value
         for value in report.diagnostics
     )
+
+
+def test_PublicClassFieldAnnotationParticipatesInCanonicalHash(tmp_path):
+    """Make dataclass-like public field changes invalidate symbol translations."""
+
+    _PrepareFixture(tmp_path)
+    coveragePath = tmp_path / "docs" / "site" / "api-coverage.toml"
+    _Write(
+        coveragePath,
+        '''schemaVersion = 1
+
+[[surfaces]]
+module = "fixture"
+source = "fixture.py"
+mode = "authored"
+''',
+    )
+    sourcePath = tmp_path / "fixture.py"
+    _Write(
+        sourcePath,
+        '''class Record:
+    """Represent one documented record."""
+
+    value: int
+''',
+    )
+    projectManifest = {
+        "contentRoot": "docs/site/content",
+        "apiCoverageManifest": "docs/site/api-coverage.toml",
+    }
+    originalUnits = DiscoverCanonicalUnits(tmp_path, projectManifest)
+    originalUnit = next(
+        unit for unit in originalUnits if unit.identifier == "symbol:fixture.Record"
+    )
+    sourcePath.write_text(
+        sourcePath.read_text(encoding="utf-8").replace("value: int", "value: float"),
+        encoding="utf-8",
+    )
+    changedUnits = DiscoverCanonicalUnits(tmp_path, projectManifest)
+    changedUnit = next(
+        unit for unit in changedUnits if unit.identifier == "symbol:fixture.Record"
+    )
+
+    assert CanonicalHash(originalUnit) != CanonicalHash(changedUnit)
 
 
 def test_ApprovedTranslationRequiresAllHumanReviewRoles(tmp_path):

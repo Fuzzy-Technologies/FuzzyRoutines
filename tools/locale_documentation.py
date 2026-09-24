@@ -150,8 +150,29 @@ def _ClassSignature(node: ast.ClassDef) -> str:
         if keyword.arg is not None
     )
     suffix = f"({', '.join(arguments)})" if arguments else ""
+    publicFields = []
 
-    return f"class {node.name}{suffix}"
+    for member in node.body:
+        if (
+            isinstance(member, ast.AnnAssign)
+            and isinstance(member.target, ast.Name)
+            and not member.target.id.startswith("_")
+        ):
+            field = f"{member.target.id}: {ast.unparse(member.annotation)}"
+
+            if member.value is not None:
+                field += f" = {ast.unparse(member.value)}"
+
+            publicFields.append(field)
+
+        elif isinstance(member, ast.Assign):
+            for target in member.targets:
+                if isinstance(target, ast.Name) and not target.id.startswith("_"):
+                    publicFields.append(f"{target.id} = {ast.unparse(member.value)}")
+
+    fields = f"; public-fields: {'; '.join(publicFields)}" if publicFields else ""
+
+    return f"class {node.name}{suffix}{fields}"
 
 
 def _IsPropertySetter(node: ast.FunctionDef | ast.AsyncFunctionDef) -> bool:
