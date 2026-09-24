@@ -9,7 +9,7 @@ id = "concept:fuzzy-set.core"
 english = "core"
 preferred = "ядро нечёткого множества"
 avoid = ["центр"]
-note = "Coordinates whose membership grade equals the set height."
+note = "Coordinates whose membership grade equals one."
 references = ["docs/mathematics/universe-support-contract.md"]
 
 [[terms]]
