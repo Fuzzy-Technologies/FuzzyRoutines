@@ -23,7 +23,7 @@ references = ["docs/mathematics/universe-support-contract.md"]
 [[terms]]
 id = "concept:fuzzy-set.universe"
 english = "universe"
-preferred = "универсум"
+preferred = "универсальное множество"
 avoid = ["носитель"]
 note = "Declared coordinate domain on which membership is defined."
 references = ["docs/mathematics/universe-support-contract.md"]
