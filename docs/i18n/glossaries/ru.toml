@@ -15,7 +15,7 @@ references = ["docs/mathematics/universe-support-contract.md"]
 [[terms]]
 id = "concept:fuzzy-set.positive-support"
 english = "positive support"
-preferred = "положительный носитель"
+preferred = "носитель нечёткого множества"
 avoid = ["область интегрирования"]
 note = "Coordinates where membership is strictly positive."
 references = ["docs/mathematics/universe-support-contract.md"]
