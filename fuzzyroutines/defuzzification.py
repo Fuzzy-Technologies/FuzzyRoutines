@@ -244,7 +244,7 @@ def Centroid(fuzzySet: ScalarFuzzySet, integrationDomain: IntegrationDomain, pol
     r"""Return the continuous center-of-area over an explicit finite domain.
 
     The result is
-    $\int x\mu(x)\,dx / \int \mu(x)\,dx$. Piecewise-polynomial and Gaussian
+    $\int x\mu(x)\;\mathrm{d}x / \int \mu(x)\;\mathrm{d}x$. Piecewise-polynomial and Gaussian
     `MFunction` sources use analytical moments when the closed form is stable;
     all other callables use adaptive Simpson quadrature.
 

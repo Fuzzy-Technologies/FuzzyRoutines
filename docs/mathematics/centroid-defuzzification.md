@@ -11,7 +11,7 @@ For a continuous scalar fuzzy set $A$ and an explicit finite integration
 domain $D=[l,r]$, FuzzyRoutines defines the centroid as
 
 $$
-C(A,D)=\frac{\int_l^r x\mu_A(x)\,dx}{\int_l^r \mu_A(x)\,dx}.
+C(A,D)=\frac{\int_l^r x\mu_A(x)\;\mathrm{d}x}{\int_l^r \mu_A(x)\;\mathrm{d}x}.
 $$
 
 The integration domain is operational input, not the mathematical support of
