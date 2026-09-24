@@ -52,8 +52,12 @@ Task #204 established deterministic gates around the strict build:
 - `docs/site/api-coverage.toml` declares every public module and the reviewed
   reason for each excluded module or symbol;
 - `python -m tools.documentation_gates all` validates public source docstrings,
-  mkdocstrings coverage, repository-local Markdown targets, exact rendered
-  anchors, and the ADR-0010 generated-output policy;
+  mkdocstrings coverage, multilingual source hashes and review states,
+  repository-local Markdown targets, exact rendered anchors, and the ADR-0010
+  generated-output policy;
+- `python -m tools.locale_documentation validate --output REPORT.json`
+  validates the tracked English-unit inventory, `ru` and `zh-CN` states, human
+  review evidence, and aligned terminology glossaries without network access;
 - documented migration examples run from the clean wheel installation rather
   than from the source tree;
 - `python tools/report_external_links.py --output REPORT.json` produces a

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+schemaVersion = 1
+locale = "zh-CN"
+
+[[terms]]
+id = "concept:fuzzy-set.core"
+english = "core"
+preferred = "模糊集的核"
+avoid = ["中心"]
+note = "Coordinates whose membership grade equals the set height."
+references = ["docs/mathematics/universe-support-contract.md"]
+
+[[terms]]
+id = "concept:fuzzy-set.positive-support"
+english = "positive support"
+preferred = "正支撑集"
+avoid = ["积分域"]
+note = "Coordinates where membership is strictly positive."
+references = ["docs/mathematics/universe-support-contract.md"]
+
+[[terms]]
+id = "concept:fuzzy-set.universe"
+english = "universe"
+preferred = "论域"
+avoid = ["支撑集"]
+note = "Declared coordinate domain on which membership is defined."
+references = ["docs/mathematics/universe-support-contract.md"]
+
+[[terms]]
+id = "concept:numerical.integration-domain"
+english = "integration domain"
+preferred = "积分域"
+avoid = ["支撑集"]
+note = "Finite operational interval selected for numerical integration."
+references = ["docs/mathematics/centroid-defuzzification.md"]

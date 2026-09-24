@@ -60,6 +60,19 @@ Representative accepted changes for the historical correctness baseline are
   API sites, creates honest reserved-locale/version routes, and restricts
   production Pages deployment to the approved default branch.
 
+## Implemented multilingual documentation controls
+
+- ADR-0011 keeps English pages and source docstrings canonical while reserving
+  `ru` and `zh-CN` for accountable native editorial translations;
+- stable page and public-symbol IDs bind every canonical English unit to a
+  deterministic versioned SHA-256 source hash;
+- tracked locale glossaries share language-independent concept IDs;
+- the offline documentation gate rejects false approval, incomplete human
+  review evidence, malformed locale state, and approved translations made
+  stale by a canonical English change;
+- untranslated locale routes remain explicit fallbacks and are never presented
+  as reviewed translations.
+
 ## Implemented modern domain surface
 
 - immutable scalar `ContinuousUniverse`, `DiscreteUniverse`, and

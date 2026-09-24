@@ -158,9 +158,9 @@ pipeline has passed its own build and drift gates.
 - Human mathematical review adds deliberate latency but prevents fluent text
   from being mistaken for validated mathematics.
 - Manifests and glossaries add maintained metadata. Task #204 established the
-  English API inventory and documentation gates, but did not implement locale
-  manifests, glossaries, or source-hash drift validation; that work requires a
-  dedicated locale-implementation task before translations can be approved.
+  English API inventory and documentation gates; Task #255 implements locale
+  manifests, glossaries, review-state validation, and source-hash drift gates
+  before translations can be approved.
 - Tasks #203, #204, and #206 establish canonical English generation, English
   quality gates, and Pages publication with honest reserved-locale fallbacks.
 
@@ -197,8 +197,7 @@ replace accountable human review.
 
 ## Acceptance and supersession
 
-This ADR becomes **Accepted** when its implementation PR is merged. Changes to
-the canonical language, stable-identity rules, hash contract, approval model,
-or fallback semantics require a superseding ADR. Concrete build tooling may be
-implemented by later Tasks without superseding this decision when it preserves
-these invariants.
+This ADR is **Accepted**. Changes to the canonical language, stable-identity
+rules, hash contract, approval model, or fallback semantics require a
+superseding ADR. Concrete build tooling may be implemented by later Tasks
+without superseding this decision when it preserves these invariants.

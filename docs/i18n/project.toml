@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+schemaVersion = 1
+projectId = "fuzzyroutines"
+projectName = "FuzzyRoutines"
+sourceLocale = "en"
+locales = ["en", "ru", "zh-CN"]
+packageNames = ["fuzzyroutines"]
+contentRoot = "docs/site/content"
+unitManifest = "docs/i18n/units.toml"
+buildRoot = "_build/docs"
+apiCoverageManifest = "docs/site/api-coverage.toml"
+
+[branding]
+organization = "Fuzzy Technologies"
+assetRoot = "docs/site/content/en/assets"
+
+[glossaries]
+ru = "docs/i18n/glossaries/ru.toml"
+zh-CN = "docs/i18n/glossaries/zh-CN.toml"
