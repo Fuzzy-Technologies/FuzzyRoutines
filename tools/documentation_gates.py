@@ -18,6 +18,8 @@ import urllib.parse
 from dataclasses import dataclass
 from pathlib import Path
 
+from tools.locale_documentation import ValidateLocales
+
 PROJECTROOT = Path(__file__).resolve().parents[1]
 MANIFESTPATH = PROJECTROOT / "docs" / "site" / "api-coverage.toml"
 REFERENCEROOT = PROJECTROOT / "docs" / "site" / "content" / "en"
@@ -759,7 +761,14 @@ def ParseArguments(arguments=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "command",
-        choices=("coverage", "source-links", "rendered-links", "generated-policy", "all"),
+        choices=(
+            "coverage",
+            "locales",
+            "source-links",
+            "rendered-links",
+            "generated-policy",
+            "all",
+        ),
     )
     parser.add_argument("--site-root", dest="siteRoot", type=Path, default=SITEROOT)
     return parser.parse_args(arguments)
@@ -771,6 +780,7 @@ def Main(arguments=None):
     options = ParseArguments(arguments)
     validators = {
         "coverage": lambda: ValidateCoverage(),
+        "locales": lambda: ValidateLocales().diagnostics,
         "source-links": lambda: ValidateSourceLinks(),
         "rendered-links": lambda: ValidateRenderedLinks(options.siteRoot),
         "generated-policy": lambda: ValidateGeneratedPolicy(),

@@ -5,22 +5,22 @@ SPDX-License-Identifier: Apache-2.0
 
 # Multilingual Documentation Architecture
 
-- Status: design contract for Task #205
+- Status: accepted design from Task #205; implemented by Task #255
 - Decision: [ADR-0011](../adr/0011-multilingual-documentation-pipeline.md)
 - Generator foundation: [ADR-0010](../adr/0010-api-documentation-architecture.md)
 - Initial locales: `en`, `ru`, `zh-CN`
 
 ## Scope boundary
 
-This document specifies the future tracked inputs and deterministic state
-transitions. It does not create translations, production navigation, a Pages
-deployment, or a translation service. Examples below are schemas and records,
-not active translation inventory.
+This document specifies the tracked inputs and deterministic state transitions
+implemented by Task #255. It does not create translations or a translation
+service. Russian and Simplified Chinese remain explicit `missing` states until
+accountable human review approves native editorial content.
 
 ## Repository layout
 
-The production documentation implementation should converge on this layout
-without moving existing documents until the responsible Task owns that move:
+The production documentation implementation uses this layout without moving
+existing English documents unnecessarily:
 
 ```text
 docs/
@@ -51,8 +51,8 @@ _build/docs/<version>/ru/
 _build/docs/<version>/zh-CN/
 ```
 
-Task #206 owns the eventual public URL and Pages artifact layout. The generated
-path above is a local contract only and does not predetermine deployment URLs.
+Task #206 owns the public URL and Pages artifact layout. The generated path
+above remains a local contract and does not redefine deployment URLs.
 
 ## Stable identifiers
 
@@ -260,10 +260,8 @@ concept changes require mathematical review.
 ## Deterministic stale detection
 
 Task #204 implemented English public-API inventory, documentation coverage,
-repository-link, rendered-anchor, and generated-output gates. It did not create
-the locale manifests or glossaries illustrated by this design. A dedicated
-locale-implementation task must add those tracked inputs before reviewed
-translations can be published. Its validator will perform these steps without
+repository-link, rendered-anchor, and generated-output gates. Task #255 adds
+the tracked locale manifests and glossaries and performs these steps without
 network access:
 
 1. statically inventory canonical English pages and public symbols;
@@ -341,11 +339,11 @@ A reusable implementation consumes only:
 
 Project-specific mathematical text, FuzzyRoutines imports, existing product
 URLs, and generated HTML are not reusable pipeline code. Task #207 can extract
-the proven configuration schema, validator contract, templates, and adoption
-guide only after the locale manifests, glossaries, and drift validator are
-implemented and proved in FuzzyRoutines. Tasks #203, #204, and #206 establish
-the English build, English quality gates, and safe publication boundary; they
-do not by themselves prove the full translation pipeline.
+the configuration schema, validator contract, templates, and adoption guide
+after Task #255 is merged and its drift gate is proved on `develop`. Tasks
+#203, #204, and #206 establish the English build, English quality gates, and
+safe publication boundary; they do not by themselves prove the full
+translation pipeline.
 
 ## Task boundaries
 
@@ -356,9 +354,9 @@ do not by themselves prove the full translation pipeline.
 | #204                   | Implement English API inventory, coverage, link, and generated-output gates  |
 | #205                   | Own this multilingual architecture decision                                  |
 | #206                   | Publish English Pages plus honest reserved-locale and version routes         |
-| Locale implementation  | Add manifests, glossaries, review state, source hashes, and drift validation |
+| #255                   | Add manifests, glossaries, review state, source hashes, and drift validation |
 | #207                   | Extract and validate the reusable Fuzzy Technologies blueprint               |
 
-Bulk translation is intentionally outside Tasks #205 and #206. Translation
-work begins only after canonical English units, stable IDs, manifests,
-validation, and human review ownership exist.
+Bulk translation is intentionally outside Tasks #205, #206, and #255.
+Translation work begins only after canonical English units, stable IDs,
+manifests, validation, and human review ownership exist.
