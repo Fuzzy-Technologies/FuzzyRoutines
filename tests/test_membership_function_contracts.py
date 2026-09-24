@@ -147,7 +147,7 @@ def test_CanonicalMathematicalModelUsesGitHubCompatibleMathMarkup():
     mathFragments = [
         fragment
         for match in re.finditer(
-            r"\\$\\$(.*?)\\$\\$|\\$(.*?)\\$",
+            r"\$\$(.*?)\$\$|\$(.*?)\$",
             document,
             flags=re.DOTALL,
         )
@@ -157,4 +157,4 @@ def test_CanonicalMathematicalModelUsesGitHubCompatibleMathMarkup():
 
     assert mathFragments
     assert all("<" not in fragment and ">" not in fragment for fragment in mathFragments)
-    assert all(r"\\operatorname" not in fragment for fragment in mathFragments)
+    assert all(r"\operatorname" not in fragment for fragment in mathFragments)
