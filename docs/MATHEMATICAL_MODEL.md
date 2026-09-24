@@ -45,15 +45,15 @@ non-finite, and out-of-range grades are rejected rather than coerced.
 
 The following concepts are distinct:
 
-| Concept              | Definition                                                       | Current representation                                      |
-|----------------------|------------------------------------------------------------------|-------------------------------------------------------------|
-| Universe             | Coordinates on which $\mu_A$ defines $A$                         | `ContinuousUniverse` or `DiscreteUniverse`                  |
-| Integration domain   | Finite closed interval used by one numerical operation           | `IntegrationDomain`                                         |
-| Positive support     | $\{x\in X\mid\mu_A(x)\gt 0\}$                                       | Exact region or explicit sampled evidence                   |
-| Support closure      | Closure of positive support relative to $X$                      | Exact region for supported representations                  |
-| Core                 | $\{x\in X\mid\mu_A(x)=1\}$                                       | Exact region for supported representations                  |
-| Boundary             | $\{x\in X\mid0\lt \mu_A(x)\lt 1\}$                                     | Fuzzy transition region, not topological boundary           |
-| Height               | $\sup\{\mu_A(x)\mid x\in X\}$                                    | Exact scalar only when the representation supports proof    |
+| Concept            | Definition                                             | Current representation                                   |
+| ------------------ | ------------------------------------------------------ | -------------------------------------------------------- |
+| Universe           | Coordinates on which $\mu_A$ defines $A$               | `ContinuousUniverse` or `DiscreteUniverse`               |
+| Integration domain | Finite closed interval used by one numerical operation | `IntegrationDomain`                                      |
+| Positive support   | $\{x\in X\mid\mu_A(x)\gt 0\}$                          | Exact region or explicit sampled evidence                |
+| Support closure    | Closure of positive support relative to $X$            | Exact region for supported representations               |
+| Core               | $\{x\in X\mid\mu_A(x)=1\}$                             | Exact region for supported representations               |
+| Boundary           | $\{x\in X\mid0\lt \mu_A(x)\lt 1\}$                     | Fuzzy transition region, not topological boundary        |
+| Height             | $\sup\{\mu_A(x)\mid x\in X\}$                          | Exact scalar only when the representation supports proof |
 
 An integration domain is never inferred to be support. In particular, the
 historical `FuzzySet.supportSet` tuple is a compatibility spelling for a finite
@@ -110,16 +110,16 @@ must still be a finite built-in scalar.
 
 The implemented families are:
 
-| Historical identifier   | Mathematical function                                                                    | Valid parameters                                        | Exact aliases               |
-|-------------------------|------------------------------------------------------------------------------------------|---------------------------------------------------------|-----------------------------|
-| `hyperbolic`            | $1$ for $x\le c$; otherwise $1/(1+(a(x-c))^b)$                                           | $a\gt 0$, $b\gt 0$, finite $c$                                | None                        |
-| `bell`                  | $S_{a,b}(x)$ for $x\lt b$; $1$ on $[b,c]$; $1-S_{c,c+b-a}(x)$ after $c$                     | $a\lt b\le c$                                              | None                        |
-| `parabolic`             | $S_{a,b}(x)$                                                                             | $a\lt b$                                                   | `sShoulder`                 |
-| `triangle`              | $\mathrm{Tri}_{a,c,b}(x)$                                                          | $a\lt c\le b$; legacy order is `a, b, c`                   | None                        |
-| `trapezium`             | $\mathrm{Trap}_{a,c,d,b}(x)$                                                       | $a\lt c\le d\lt b$; legacy order is `a, b, c, d`              | None                        |
-| `exponential`           | $\exp\!\left[-\tfrac12((x-a)/b)^2\right]$                                                | finite $a$, $b\gt 0$                                       | `gaussian`                  |
-| `sigmoidal`             | $1/(1+\exp[-a(x-b)])$                                                                    | $a\ne0$, finite $b$                                     | `logistic`                  |
-| `desirability`          | $\exp[-\exp(-y)]$                                                                        | finite $y$; no stored parameters                        | `harringtonDesirability`    |
+| Historical identifier | Mathematical function                                                   | Valid parameters                                 | Exact aliases            |
+| --------------------- | ----------------------------------------------------------------------- | ------------------------------------------------ | ------------------------ |
+| `hyperbolic`          | $1$ for $x\le c$; otherwise $1/(1+(a(x-c))^b)$                          | $a\gt 0$, $b\gt 0$, finite $c$                   | None                     |
+| `bell`                | $S_{a,b}(x)$ for $x\lt b$; $1$ on $[b,c]$; $1-S_{c,c+b-a}(x)$ after $c$ | $a\lt b\le c$                                    | None                     |
+| `parabolic`           | $S_{a,b}(x)$                                                            | $a\lt b$                                         | `sShoulder`              |
+| `triangle`            | $\mathrm{Tri}_{a,c,b}(x)$                                               | $a\lt c\le b$; legacy order is `a, b, c`         | None                     |
+| `trapezium`           | $\mathrm{Trap}_{a,c,d,b}(x)$                                            | $a\lt c\le d\lt b$; legacy order is `a, b, c, d` | None                     |
+| `exponential`         | $\exp\!\left[-\tfrac12((x-a)/b)^2\right]$                               | finite $a$, $b\gt 0$                             | `gaussian`               |
+| `sigmoidal`           | $1/(1+\exp[-a(x-b)])$                                                   | $a\ne0$, finite $b$                              | `logistic`               |
+| `desirability`        | $\exp[-\exp(-y)]$                                                       | finite $y$; no stored parameters                 | `harringtonDesirability` |
 
 The exact piecewise triangle and trapezium equations, numerical branches, and
 historical parameter order are frozen by the
@@ -175,12 +175,12 @@ and [ADR-0004](adr/0004-operator-and-negation-contracts.md).
 For $x,y\in[0,1]$, the public scalar operators and modern policy values expose
 four dual families:
 
-| Family        | T-norm $T(x,y)$                                       | S-norm $S(x,y)$                                      |
-|---------------|-------------------------------------------------------|------------------------------------------------------|
-| `logic`       | $\min(x,y)$                                           | $\max(x,y)$                                          |
-| `algebraic`   | $xy$                                                  | $x+y-xy$                                             |
-| `boundary`    | $\max(x+y-1,0)$                                       | $\min(x+y,1)$                                        |
-| `drastic`     | $y$ if $x=1$; $x$ if $y=1$; otherwise $0$             | $y$ if $x=0$; $x$ if $y=0$; otherwise $1$            |
+| Family      | T-norm $T(x,y)$                           | S-norm $S(x,y)$                           |
+| ----------- | ----------------------------------------- | ----------------------------------------- |
+| `logic`     | $\min(x,y)$                               | $\max(x,y)$                               |
+| `algebraic` | $xy$                                      | $x+y-xy$                                  |
+| `boundary`  | $\max(x+y-1,0)$                           | $\min(x+y,1)$                             |
+| `drastic`   | $y$ if $x=1$; $x$ if $y=1$; otherwise $0$ | $y$ if $x=0$; $x$ if $y=0$; otherwise $1$ |
 
 The historical spelling is `SCoNorm`; the modern set policy is `SNormPolicy`.
 Composition validates every operand before folding. The executable suite
@@ -310,40 +310,40 @@ current `supportSet` integration bounds without a retained centroid cache. See t
 
 ## Implementation boundary
 
-| Capability                                    | Status                      | Contract or evidence                                                                   |
-|-----------------------------------------------|-----------------------------|----------------------------------------------------------------------------------------|
-| Explicit continuous and discrete universes    | Implemented                 | [Universe and support](mathematics/universe-support-contract.md)                       |
-| Historical analytical membership registry     | Implemented and protected   | [Membership functions](mathematics/membership-function-contracts.md)                   |
-| Explicit negation, t-norm, and s-norm policy  | Implemented                 | [ADR-0004](adr/0004-operator-and-negation-contracts.md)                                |
-| Complement, intersection, union, difference   | Implemented                 | [Fuzzy-set operations](mathematics/fuzzy-set-operations.md)                            |
-| Equality and inclusion                        | Implemented                 | [Relations](mathematics/fuzzy-set-relations.md)                                        |
-| Exact discrete and sampled continuous cuts    | Implemented                 | [Alpha-cuts](mathematics/alpha-cuts.md)                                                |
-| Height and normalization                      | Implemented                 | [Normalization](mathematics/fuzzy-set-normalization.md)                                |
-| Typed linguistic representation               | Implemented                 | [Linguistic terms](mathematics/linguistic-term-model.md)                               |
-| Analytical and adaptive centroid              | Implemented                 | [Centroid defuzzification](mathematics/centroid-defuzzification.md)                    |
-| Executable convexity result API               | Roadmap                     | [Accepted design](mathematics/fuzzy-set-convexity.md)                                  |
-| Typed linguistic lookup and fuzzification     | Roadmap                     | [Current status](current-status.md#still-in-the-v2-roadmap)                            |
-| Symmetric difference                          | Unsupported                 | [ADR-0008](adr/0008-fuzzy-set-difference-semantics.md)                                 |
-| Multidimensional or type-2 fuzzy sets         | Out of scope                | Requires a separate architecture decision                                              |
+| Capability                                   | Status                    | Contract or evidence                                                 |
+| -------------------------------------------- | ------------------------- | -------------------------------------------------------------------- |
+| Explicit continuous and discrete universes   | Implemented               | [Universe and support](mathematics/universe-support-contract.md)     |
+| Historical analytical membership registry    | Implemented and protected | [Membership functions](mathematics/membership-function-contracts.md) |
+| Explicit negation, t-norm, and s-norm policy | Implemented               | [ADR-0004](adr/0004-operator-and-negation-contracts.md)              |
+| Complement, intersection, union, difference  | Implemented               | [Fuzzy-set operations](mathematics/fuzzy-set-operations.md)          |
+| Equality and inclusion                       | Implemented               | [Relations](mathematics/fuzzy-set-relations.md)                      |
+| Exact discrete and sampled continuous cuts   | Implemented               | [Alpha-cuts](mathematics/alpha-cuts.md)                              |
+| Height and normalization                     | Implemented               | [Normalization](mathematics/fuzzy-set-normalization.md)              |
+| Typed linguistic representation              | Implemented               | [Linguistic terms](mathematics/linguistic-term-model.md)             |
+| Analytical and adaptive centroid             | Implemented               | [Centroid defuzzification](mathematics/centroid-defuzzification.md)  |
+| Executable convexity result API              | Roadmap                   | [Accepted design](mathematics/fuzzy-set-convexity.md)                |
+| Typed linguistic lookup and fuzzification    | Roadmap                   | [Current status](current-status.md#still-in-the-v2-roadmap)          |
+| Symmetric difference                         | Unsupported               | [ADR-0008](adr/0008-fuzzy-set-difference-semantics.md)               |
+| Multidimensional or type-2 fuzzy sets        | Out of scope              | Requires a separate architecture decision                            |
 
 ## Detailed contract index
 
-| Topic                          | Canonical detail                                                                            |
-|--------------------------------|---------------------------------------------------------------------------------------------|
-| Finite scalar values           | [Finite-number policy](mathematics/finite-number-policy.md)                                 |
-| Numerical tolerances           | [Numerical edge policy](mathematics/numerical-edge-policy.md)                               |
-| Domains and derived geometry   | [Universe and support](mathematics/universe-support-contract.md)                            |
-| Membership families            | [Formula and parameter contracts](mathematics/membership-function-contracts.md)             |
-| Stable numerical branches      | [Source formula and algorithm invariants](mathematics/source-algorithm-invariants.md)       |
-| Negations                      | [Parabolic derivation](mathematics/parabolic-negation-derivation.md)                        |
-| Set operations                 | [Complement, intersection, union, and difference](mathematics/fuzzy-set-operations.md)      |
-| Relations                      | [Equality and inclusion](mathematics/fuzzy-set-relations.md)                                |
-| Alpha-cuts                     | [Exact and sampled alpha-cuts](mathematics/alpha-cuts.md)                                   |
-| Height and normalization       | [Fuzzy-set normalization](mathematics/fuzzy-set-normalization.md)                           |
-| Convexity                      | [Fuzzy-set convexity](mathematics/fuzzy-set-convexity.md)                                   |
-| Linguistic model               | [Typed linguistic-term representation](mathematics/linguistic-term-model.md)                |
-| Defuzzification                | [Centroid defuzzification](mathematics/centroid-defuzzification.md)                         |
-| Compatibility                  | [Historical-to-modern migration](migration/historical-to-modern.md)                         |
+| Topic                        | Canonical detail                                                                       |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| Finite scalar values         | [Finite-number policy](mathematics/finite-number-policy.md)                            |
+| Numerical tolerances         | [Numerical edge policy](mathematics/numerical-edge-policy.md)                          |
+| Domains and derived geometry | [Universe and support](mathematics/universe-support-contract.md)                       |
+| Membership families          | [Formula and parameter contracts](mathematics/membership-function-contracts.md)        |
+| Stable numerical branches    | [Source formula and algorithm invariants](mathematics/source-algorithm-invariants.md)  |
+| Negations                    | [Parabolic derivation](mathematics/parabolic-negation-derivation.md)                   |
+| Set operations               | [Complement, intersection, union, and difference](mathematics/fuzzy-set-operations.md) |
+| Relations                    | [Equality and inclusion](mathematics/fuzzy-set-relations.md)                           |
+| Alpha-cuts                   | [Exact and sampled alpha-cuts](mathematics/alpha-cuts.md)                              |
+| Height and normalization     | [Fuzzy-set normalization](mathematics/fuzzy-set-normalization.md)                      |
+| Convexity                    | [Fuzzy-set convexity](mathematics/fuzzy-set-convexity.md)                              |
+| Linguistic model             | [Typed linguistic-term representation](mathematics/linguistic-term-model.md)           |
+| Defuzzification              | [Centroid defuzzification](mathematics/centroid-defuzzification.md)                    |
+| Compatibility                | [Historical-to-modern migration](migration/historical-to-modern.md)                    |
 
 ## License
 
