@@ -17,7 +17,6 @@ import pytest
 
 from fuzzyroutines.FuzzyRoutines import MFunction
 
-
 REFERENCECASES = (
     pytest.param("hyperbolic", {"a": 2.0, "b": 2.0, "c": 0.0}, -1.0, 1.0, id="hyperbolic-left-shoulder"),
     pytest.param("hyperbolic", {"a": 2.0, "b": 2.0, "c": 0.0}, 0.5, 0.5, id="hyperbolic-reference"),
@@ -88,6 +87,17 @@ def test_ParabolicMembershipIsNonDecreasing():
     values = [membershipFunction.mju(inputValue) for inputValue in GRIDVALUES]
 
     assert values == sorted(values), "The parabolic S-shoulder must be non-decreasing."
+
+
+def test_TriangleWithApexAtRightFootIncludesItsApex():
+    membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=1.0)
+
+    assert membershipFunction.mju(1.0) == 1.0, (
+        "The accepted c=b triangle boundary must retain membership one at x=b=c."
+    )
+    assert membershipFunction.mju(1.000001) == 0.0, (
+        "The accepted c=b triangle boundary must be zero strictly after its apex."
+    )
 
 
 def test_SymmetricMembershipFamiliesAreMirrorSymmetric():
