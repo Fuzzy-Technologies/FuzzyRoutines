@@ -259,7 +259,12 @@ concept changes require mathematical review.
 
 ## Deterministic stale detection
 
-The future Task #204 validator performs these steps without network access:
+Task #204 implemented English public-API inventory, documentation coverage,
+repository-link, rendered-anchor, and generated-output gates. It did not create
+the locale manifests or glossaries illustrated by this design. A dedicated
+locale-implementation task must add those tracked inputs before reviewed
+translations can be published. Its validator will perform these steps without
+network access:
 
 1. statically inventory canonical English pages and public symbols;
 2. require exactly one active manifest record per stable ID;
@@ -335,21 +340,25 @@ A reusable implementation consumes only:
 - project-supplied branding and navigation metadata.
 
 Project-specific mathematical text, FuzzyRoutines imports, existing product
-URLs, and generated HTML are not reusable pipeline code. Task #207 will extract
+URLs, and generated HTML are not reusable pipeline code. Task #207 can extract
 the proven configuration schema, validator contract, templates, and adoption
-guide only after Tasks #203, #204, and #206 prove them in FuzzyRoutines.
+guide only after the locale manifests, glossaries, and drift validator are
+implemented and proved in FuzzyRoutines. Tasks #203, #204, and #206 establish
+the English build, English quality gates, and safe publication boundary; they
+do not by themselves prove the full translation pipeline.
 
 ## Task boundaries
 
-| Task | Responsibility                                                     |
-|------|--------------------------------------------------------------------|
-| #200 | Complete canonical English production docstrings                   |
-| #203 | Build the canonical English API reference                          |
-| #204 | Implement inventory, coverage, hash, link, and drift gates         |
-| #205 | Own this multilingual architecture decision                        |
-| #206 | Compose locale builds with versioned GitHub Pages publication      |
-| #207 | Extract and validate the reusable Fuzzy Technologies blueprint     |
+| Task                   | Responsibility                                                               |
+|------------------------|------------------------------------------------------------------------------|
+| #200                   | Complete canonical English production docstrings                             |
+| #203                   | Build the canonical English API reference                                    |
+| #204                   | Implement English API inventory, coverage, link, and generated-output gates  |
+| #205                   | Own this multilingual architecture decision                                  |
+| #206                   | Publish English Pages plus honest reserved-locale and version routes         |
+| Locale implementation  | Add manifests, glossaries, review state, source hashes, and drift validation |
+| #207                   | Extract and validate the reusable Fuzzy Technologies blueprint               |
 
-Bulk translation is intentionally outside Task #205. Translation work begins
-only after canonical English units, stable IDs, manifests, validation, and
-human review ownership exist.
+Bulk translation is intentionally outside Tasks #205 and #206. Translation
+work begins only after canonical English units, stable IDs, manifests,
+validation, and human review ownership exist.

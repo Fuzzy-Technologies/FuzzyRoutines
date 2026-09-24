@@ -56,8 +56,9 @@ Representative accepted changes for the historical correctness baseline are
 - ADR-0010 selects MkDocs + Material for MkDocs + mkdocstrings-python + Griffe
   and English Google-style Markdown docstrings. The source standard, public
   docstring migration, and reproducible installed-package API reference are
-  implemented by Tasks #199, #200, and #203. Production Pages composition and
-  deployment remain the separate scope of Task #206.
+  implemented by Tasks #199, #200, and #203. Task #206 composes the product and
+  API sites, creates honest reserved-locale/version routes, and restricts
+  production Pages deployment to the approved default branch.
 
 ## Implemented modern domain surface
 

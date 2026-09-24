@@ -37,6 +37,9 @@ jobs:
       - name: Build strict API reference from installed wheel
         run: python tools/build_api_reference.py
 
+      - name: Compose complete GitHub Pages site
+        run: python tools/compose_pages_site.py
+
       - name: Record generated-file inventory
         shell: bash
         run: |
@@ -56,3 +59,34 @@ jobs:
             _build/api-reference/generated-files.txt
             _build/api-reference/site
           if-no-files-found: error
+
+      - name: Upload previewable Pages content
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzzyroutines-pages-preview
+          path: _build/pages/site
+          if-no-files-found: error
+
+      - name: Upload official Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _build/pages/site
+
+  deploy-pages:
+    name: Publish approved default-branch documentation
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build-reference
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy approved Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

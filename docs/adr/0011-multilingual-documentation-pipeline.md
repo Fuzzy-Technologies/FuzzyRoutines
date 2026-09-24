@@ -157,10 +157,12 @@ pipeline has passed its own build and drift gates.
   from becoming one ambiguous corpus.
 - Human mathematical review adds deliberate latency but prevents fluent text
   from being mistaken for validated mathematics.
-- Manifests and glossaries add maintained metadata; Task #204 must enforce their
-  completeness and report actionable file and unit locations.
-- The design reserves production generation, coverage gates, and Pages
-  publication for Tasks #203, #204, and #206.
+- Manifests and glossaries add maintained metadata. Task #204 established the
+  English API inventory and documentation gates, but did not implement locale
+  manifests, glossaries, or source-hash drift validation; that work requires a
+  dedicated locale-implementation task before translations can be approved.
+- Tasks #203, #204, and #206 establish canonical English generation, English
+  quality gates, and Pages publication with honest reserved-locale fallbacks.
 
 ## Rejected alternatives
 

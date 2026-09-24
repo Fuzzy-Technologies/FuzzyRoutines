@@ -32,7 +32,7 @@ SPDX-License-Identifier: Apache-2.0
 | Package version   | `2.0.0.dev0`; not yet a stable release promise                                                                                                                    |
 | Modern API        | Root exports from [`fuzzyroutines`](docs/public-api-documentation-inventory.md#modern-package-exports)                                                            |
 | Compatibility API | [`fuzzyroutines.FuzzyRoutines`](docs/compatibility/legacy-public-api-1.0.3.md) preserves the observed 1.0.3 facade                                                |
-| API reference     | Installed-package build from [`docs/site`](docs/site/README.md); public deployment remains [#206](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/206) |
+| API reference     | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package                                 |
 | License           | [Apache License 2.0](LICENSE) with attribution details in [NOTICE](NOTICE)                                                                                        |
 
 FuzzyRoutines targets scientific-grade behavior within fuzzy computing:
@@ -44,7 +44,7 @@ system or notebook environment.
 ## Install
 
 ```console
-git clone https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
+git clone --branch develop https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
 cd FuzzyRoutines
 python -m pip install .
 ```
@@ -155,11 +155,11 @@ backends, and free-threaded CPython support remain roadmap work. Performance and
 concurrency claims require numerical-parity, timing, memory, and race-safety
 evidence.
 
-The generated reference currently builds and uploads as a CI artifact. Task
-[#206](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/206) will
-compose it with the existing
-[FuzzyRoutines GitHub Pages site](https://fuzzy-technologies.github.io/FuzzyRoutines/)
-and define stable version/language URLs.
+The generated reference is composed with the
+[FuzzyRoutines GitHub Pages site](https://fuzzy-technologies.github.io/FuzzyRoutines/).
+Pull requests and `develop` produce preview artifacts; production deployment
+occurs only from the approved `master` branch. Stable routes separate the
+moving English reference from reserved translation and release-version paths.
 
 ## License
 
