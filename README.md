@@ -41,6 +41,10 @@ controlled numerical methods elsewhere, and executable evidence for important
 boundaries and invariants. It is a focused library, not a computer-algebra
 system or notebook environment.
 
+Start with the [canonical mathematical model](docs/MATHEMATICAL_MODEL.md) for
+the integrated definitions, formulas, compatibility spellings, and explicit
+implemented-versus-roadmap boundary.
+
 ## Install
 
 ```console
@@ -150,10 +154,10 @@ Markdown docstrings, and tracked Markdown remain the sources of truth.
 The current typed surface already includes explicit scalar universes, immutable
 fuzzy sets, operations, derived properties, alpha-cuts, comparison policies,
 and linguistic representations. Symmetric difference, executable convexity,
-adaptive/analytical defuzzification, typed linguistic lookup, vectorized
-backends, and free-threaded CPython support remain roadmap work. Performance and
-concurrency claims require numerical-parity, timing, memory, and race-safety
-evidence.
+defuzzification methods beyond the implemented centroid contract, typed
+linguistic lookup, vectorized backends, and free-threaded CPython support remain
+roadmap work. Performance and concurrency claims require numerical-parity,
+timing, memory, and race-safety evidence.
 
 The generated reference is composed with the
 [FuzzyRoutines GitHub Pages site](https://fuzzy-technologies.github.io/FuzzyRoutines/).

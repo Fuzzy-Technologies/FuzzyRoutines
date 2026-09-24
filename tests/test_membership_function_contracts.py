@@ -12,11 +12,12 @@ belongs to Task #51.
 """
 
 import math
+import re
+from pathlib import Path
 
 import pytest
 
 from fuzzyroutines.FuzzyRoutines import MFunction
-
 
 REFERENCECASES = (
     pytest.param("hyperbolic", {"a": 2.0, "b": 2.0, "c": 0.0}, -1.0, 1.0, id="hyperbolic-left-shoulder"),
@@ -90,6 +91,17 @@ def test_ParabolicMembershipIsNonDecreasing():
     assert values == sorted(values), "The parabolic S-shoulder must be non-decreasing."
 
 
+def test_TriangleWithApexAtRightFootIncludesItsApex():
+    membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=1.0)
+
+    assert membershipFunction.mju(1.0) == 1.0, (
+        "The accepted c=b triangle boundary must retain membership one at x=b=c."
+    )
+    assert membershipFunction.mju(1.000001) == 0.0, (
+        "The accepted c=b triangle boundary must be zero strictly after its apex."
+    )
+
+
 def test_SymmetricMembershipFamiliesAreMirrorSymmetric():
     bellFunction = MFunction("bell", a=0.0, b=0.25, c=0.5)
     exponentialFunction = MFunction("exponential", a=0.5, b=0.25)
@@ -126,3 +138,23 @@ def test_SigmoidalAndDesirabilityMembershipsIncreaseForTheirDeclaredParameters()
     assert desirabilityValues == sorted(desirabilityValues), (
         "The Harrington desirability transform must be non-decreasing."
     )
+
+
+def test_CanonicalMathematicalModelUsesGitHubCompatibleMathMarkup():
+    repositoryRoot = Path(__file__).resolve().parents[1]
+    documentPath = repositoryRoot / "docs" / "MATHEMATICAL_MODEL.md"
+    document = documentPath.read_text(encoding="utf-8")
+    mathFragments = [
+        fragment
+        for match in re.finditer(
+            r"\$\$(.*?)\$\$|\$(.*?)\$",
+            document,
+            flags=re.DOTALL,
+        )
+        for fragment in match.groups()
+        if fragment is not None
+    ]
+
+    assert mathFragments
+    assert all("<" not in fragment and ">" not in fragment for fragment in mathFragments)
+    assert all(r"\operatorname" not in fragment for fragment in mathFragments)
