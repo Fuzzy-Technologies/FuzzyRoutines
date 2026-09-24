@@ -6,6 +6,8 @@ SPDX-License-Identifier: Apache-2.0
 # Legacy Public API Snapshot — FuzzyRoutines 1.0.3
 
 This document records the observed historical public surface before modernization.
+For current guarantees and supported migration paths, start with the
+[canonical compatibility guide](../COMPATIBILITY.md).
 
 It is a **baseline snapshot**, not a promise to preserve mathematically incorrect behavior. The compatibility rule is:
 

@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 
 - Status: current `develop` implementation boundary
 - Related Task: #99
+- Canonical entry point: [compatibility and migration](../COMPATIBILITY.md)
 - Compatibility decision: [ADR-0001](../adr/0001-backward-compatibility-contract.md)
 - Exact implementation boundary: [current status](../current-status.md)
 

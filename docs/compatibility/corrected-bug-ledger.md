@@ -31,10 +31,11 @@ as one.
   name is unchanged. Evidence: Task #55 and
   [PR #186](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/186).
 - **Variadic operator validation:** `TNormCompose` and `SCoNormCompose` now
-  validate every operand and reject unknown operator families consistently.
-  Their historical `None` failure sentinel remains until the explicit error
-  model is implemented. Evidence: Task #61 and
-  [PR #190](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/190).
+  validate every operand and reject empty input, invalid operands, and unknown
+  operator families with `ValueError`. Evidence: Task #61,
+  [PR #190](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/190), and
+  the completed error-model implementation in
+  [PR #194](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/194).
 - **Defuzzification cache:** `FuzzySet.Defuz()` and `defuzValue` now calculate
   from current membership parameters and the current integration interval
   instead of exposing a construction-time value. Evidence: Task #66 and
