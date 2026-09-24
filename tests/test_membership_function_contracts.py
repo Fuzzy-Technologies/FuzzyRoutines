@@ -12,6 +12,8 @@ belongs to Task #51.
 """
 
 import math
+import re
+from pathlib import Path
 
 import pytest
 
@@ -136,3 +138,23 @@ def test_SigmoidalAndDesirabilityMembershipsIncreaseForTheirDeclaredParameters()
     assert desirabilityValues == sorted(desirabilityValues), (
         "The Harrington desirability transform must be non-decreasing."
     )
+
+
+def test_CanonicalMathematicalModelUsesGitHubCompatibleMathMarkup():
+    repositoryRoot = Path(__file__).resolve().parents[1]
+    documentPath = repositoryRoot / "docs" / "MATHEMATICAL_MODEL.md"
+    document = documentPath.read_text(encoding="utf-8")
+    mathFragments = [
+        fragment
+        for match in re.finditer(
+            r"\\$\\$(.*?)\\$\\$|\\$(.*?)\\$",
+            document,
+            flags=re.DOTALL,
+        )
+        for fragment in match.groups()
+        if fragment is not None
+    ]
+
+    assert mathFragments
+    assert all("<" not in fragment and ">" not in fragment for fragment in mathFragments)
+    assert all(r"\\operatorname" not in fragment for fragment in mathFragments)
