@@ -173,14 +173,15 @@ and [ADR-0004](adr/0004-operator-and-negation-contracts.md).
 ## T-norms and s-norms
 
 For $x,y\in[0,1]$, the public scalar operators and modern policy values expose
-four dual families:
+four dual families. The code values in the first column are protected
+historical registry identifiers, not the standard mathematical family names:
 
-| Family      | T-norm $T(x,y)$                           | S-norm $S(x,y)$                           |
-| ----------- | ----------------------------------------- | ----------------------------------------- |
-| `logic`     | $\min(x,y)$                               | $\max(x,y)$                               |
-| `algebraic` | $xy$                                      | $x+y-xy$                                  |
-| `boundary`  | $\max(x+y-1,0)$                           | $\min(x+y,1)$                             |
-| `drastic`   | $y$ if $x=1$; $x$ if $y=1$; otherwise $0$ | $y$ if $x=0$; $x$ if $y=0$; otherwise $1$ |
+| Historical identifier | Standard t-norm name | T-norm $T(x,y)$                           | Standard s-norm name          | S-norm $S(x,y)$                           |
+| --------------------- | -------------------- | ----------------------------------------- | ----------------------------- | ----------------------------------------- |
+| `logic`               | Minimum              | $\min(x,y)$                               | Maximum                       | $\max(x,y)$                               |
+| `algebraic`           | Product              | $xy$                                      | Probabilistic (algebraic) sum | $x+y-xy$                                  |
+| `boundary`            | Łukasiewicz          | $\max(x+y-1,0)$                           | Łukasiewicz                   | $\min(x+y,1)$                             |
+| `drastic`             | Drastic product      | $y$ if $x=1$; $x$ if $y=1$; otherwise $0$ | Drastic sum                   | $y$ if $x=0$; $x$ if $y=0$; otherwise $1$ |
 
 The historical spelling is `SCoNorm`; the modern set policy is `SNormPolicy`.
 Composition validates every operand before folding. The executable suite

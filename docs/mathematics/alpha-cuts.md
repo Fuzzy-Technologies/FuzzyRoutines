@@ -95,3 +95,8 @@ materialized continuous universe. For `alpha=1`, it contains only sampled
 coordinates with grade exactly one; it is not proof of the complete
 continuous core. The nesting invariant is guaranteed when cuts use the same
 fuzzy set, analysis domain, and grid resolution.
+
+## References
+
+- L. A. Zadeh, “Fuzzy Sets,” *Information and Control*, 8(3), 338–353,
+  1965. <https://doi.org/10.1016/S0019-9958(65)90241-X>

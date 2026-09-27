@@ -70,3 +70,9 @@ remain test provenance, with a declared absolute compatibility bound of
 
 The governing decisions are [ADR-0002](../adr/0002-universe-support-semantics.md)
 and [ADR-0005](../adr/0005-numerical-defuzzification-policy.md).
+
+## References
+
+- W. Van Leekwijck and E. E. Kerre, “Defuzzification: Criteria and
+  Classification,” *Fuzzy Sets and Systems*, 108(2), 159–178, 1999.
+  <https://doi.org/10.1016/S0165-0114(97)00337-0>

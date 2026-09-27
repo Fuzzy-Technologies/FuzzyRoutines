@@ -100,3 +100,11 @@ normalizedSet = Normalize(fuzzySet)
 assert IsNormal(normalizedSet)
 assert normalizedSet.universe == fuzzySet.universe
 ```
+
+## References
+
+- L. A. Zadeh, “Fuzzy Sets,” *Information and Control*, 8(3), 338–353,
+  1965. <https://doi.org/10.1016/S0019-9958(65)90241-X>
+- G. J. Klir and B. Yuan, *Fuzzy Sets and Fuzzy Logic: Theory and
+  Applications*, Prentice Hall, 1995, ISBN 978-0-13-101171-7.
+  <https://books.google.com/books?id=AOhQAAAAMAAJ>

@@ -9,14 +9,14 @@ id = "concept:fuzzy-set.core"
 english = "core"
 preferred = "模糊集的核"
 avoid = ["中心"]
-note = "Coordinates whose membership grade equals the set height."
+note = "Coordinates whose membership grade equals one."
 references = ["docs/mathematics/universe-support-contract.md"]
 
 [[terms]]
 id = "concept:fuzzy-set.positive-support"
 english = "positive support"
-preferred = "正支撑集"
-avoid = ["积分域"]
+preferred = "模糊集的支集"
+avoid = ["正支撑集", "积分域"]
 note = "Coordinates where membership is strictly positive."
 references = ["docs/mathematics/universe-support-contract.md"]
 
