@@ -42,6 +42,17 @@ def test_CurrentGeneratedOutputPolicyMatchesAcceptedAdr():
     assert ValidateGeneratedPolicy() == ()
 
 
+def test_CurrentReleaseNotesDoNotDescribeTravisAsActive():
+    """Keep retired Travis deployment out of current release instructions."""
+
+    releaseNotes = (PROJECTROOT / "docs" / "release-packaging-notes.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "Travis deployment configuration is retained" not in releaseNotes
+    assert not (PROJECTROOT / ".travis.yml").exists()
+
+
 def test_CoverageReportsMissingSymbolWithFileAndSymbol(tmp_path):
     """Make a newly undocumented public symbol actionable."""
 
