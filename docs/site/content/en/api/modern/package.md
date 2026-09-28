@@ -28,6 +28,8 @@ duplicate API contracts or create competing anchors.
 | `DiscreteRegion`            | [`DiscreteRegion`][fuzzyroutines.properties.DiscreteRegion]                          |
 | `DiscreteUniverse`          | [`DiscreteUniverse`][fuzzyroutines.domain.DiscreteUniverse]                          |
 | `EqualOnDomain`             | [`EqualOnDomain`][fuzzyroutines.relations.EqualOnDomain]                             |
+| `FuzzificationPolicy`       | [`FuzzificationPolicy`][fuzzyroutines.linguistic.FuzzificationPolicy]                |
+| `FuzzificationResult`       | [`FuzzificationResult`][fuzzyroutines.linguistic.FuzzificationResult]                |
 | `Height`                    | [`Height`][fuzzyroutines.fuzzysets.Height]                                           |
 | `IncludedOnDomain`          | [`IncludedOnDomain`][fuzzyroutines.relations.IncludedOnDomain]                       |
 | `IntegrationDomain`         | [`IntegrationDomain`][fuzzyroutines.domain.IntegrationDomain]                        |
@@ -44,6 +46,7 @@ duplicate API contracts or create competing anchors.
 | `SampledFuzzyProperties`    | [`SampledFuzzyProperties`][fuzzyroutines.properties.SampledFuzzyProperties]          |
 | `ScalarFuzzySet`            | [`ScalarFuzzySet`][fuzzyroutines.fuzzysets.ScalarFuzzySet]                           |
 | `TNormPolicy`               | [`TNormPolicy`][fuzzyroutines.fuzzysets.TNormPolicy]                                 |
+| `TermMembership`            | [`TermMembership`][fuzzyroutines.linguistic.TermMembership]                          |
 | `Union`                     | [`Union`][fuzzyroutines.fuzzysets.Union]                                             |
 
 ::: fuzzyroutines

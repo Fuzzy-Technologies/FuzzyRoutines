@@ -9,4 +9,7 @@ SPDX-License-Identifier: Apache-2.0
     options:
       members:
         - LinguisticTerm
+        - TermMembership
+        - FuzzificationPolicy
+        - FuzzificationResult
         - LinguisticScale

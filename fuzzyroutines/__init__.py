@@ -35,7 +35,13 @@ from fuzzyroutines.fuzzysets import (
     TNormPolicy,
     Union,
 )
-from fuzzyroutines.linguistic import LinguisticScale, LinguisticTerm
+from fuzzyroutines.linguistic import (
+    FuzzificationPolicy,
+    FuzzificationResult,
+    LinguisticScale,
+    LinguisticTerm,
+    TermMembership,
+)
 from fuzzyroutines.properties import (
     ContinuousFuzzyProperties,
     ContinuousInterval,
@@ -71,6 +77,8 @@ __all__ = [
     "DiscreteRegion",
     "DiscreteUniverse",
     "EqualOnDomain",
+    "FuzzificationPolicy",
+    "FuzzificationResult",
     "Height",
     "IncludedOnDomain",
     "IntegrationDomain",
@@ -87,5 +95,6 @@ __all__ = [
     "SampledFuzzyProperties",
     "ScalarFuzzySet",
     "TNormPolicy",
+    "TermMembership",
     "Union",
 ]

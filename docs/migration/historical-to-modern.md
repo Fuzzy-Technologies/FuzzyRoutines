@@ -22,8 +22,8 @@ needs.
 The current modern API covers explicit domains, immutable scalar fuzzy sets,
 set algebra, relations, derived properties, alpha-cuts, exact height-aware
 normalization, and typed linguistic-term and ordered-scale representations. A
-focused membership-function factory and typed scale fuzzification policies
-remain roadmap work. Exact and Unicode case-insensitive typed scale lookup is
+focused membership-function factory remains roadmap work. Exact and Unicode
+case-insensitive typed scale lookup plus explicit fuzzification policies are
 available. Modern centroid defuzzification is available
 through an explicit integration domain and numerical policy. The examples
 below keep remaining gaps visible instead of inventing future call shapes.
@@ -33,7 +33,7 @@ below keep remaining gaps visible instead of inventing future call shapes.
 | Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                   |
 | Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                    |
 | Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                           |
-| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation and name lookup via `LinguisticTerm` and `LinguisticScale`; legacy classes remain needed for fuzzification  |
+| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation, lookup, scores, confidence, and fuzzification through `LinguisticScale` and `FuzzificationPolicy`          |
 | Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries               |
 | Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | `Centroid()` with explicit `ScalarFuzzySet`, `IntegrationDomain`, and optional `CentroidPolicy`                                  |
 
@@ -149,19 +149,24 @@ The modern API can represent names, fuzzy sets, and explicit term order without
 silently inheriting the historical dictionary shape:
 
 ```python
-from fuzzyroutines import LinguisticScale, LinguisticTerm
+from fuzzyroutines import FuzzificationPolicy, LinguisticScale, LinguisticTerm
 
 modernScale = LinguisticScale((LinguisticTerm("Medium", fuzzySet),))
 term = modernScale.GetTermByName("medium", exactMatching=False)
+result = modernScale.Fuzzify(
+    0.5,
+    FuzzificationPolicy(tiePolicy="last", minimumConfidence=0.05),
+)
 ```
 
 The modern lookup matches only complete names. Its default mode is exact and
 case-sensitive; `exactMatching=False` uses Unicode case-insensitive comparison.
-It does not perform fuzzy, prefix, or substring matching. The representation
-deliberately has no `Fuzzy()` method, tie-breaking rule, or scalar
-fuzzification policy. Keep `FuzzyScale` or `UniversalFuzzyScale` when
-fuzzification is required; use `LinguisticTerm` and `LinguisticScale` for an
-immutable typed representation and name lookup.
+It does not perform fuzzy, prefix, or substring name matching. Modern
+`Fuzzify()` returns all ordered membership scores and the maximum score as
+confidence. Its policy makes the no-match threshold, tie tolerance, and
+`first`, `last`, or `all` tie selection explicit. Historical callers may keep
+`FuzzyScale` or `UniversalFuzzyScale`; `tiePolicy="last"` provides the modern
+equivalent of the historical later-winner rule without changing `Fuzzy()`.
 
 ## Defuzzification
 

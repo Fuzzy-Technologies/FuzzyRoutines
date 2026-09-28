@@ -279,13 +279,16 @@ $$
 `LinguisticScale` stores a non-empty ordered tuple of `LinguisticTerm` values
 whose names are unique under Unicode case-insensitive comparison. Exact lookup
 preserves case; optional case-insensitive lookup compares complete case-folded
-names. Tuple order is data. The current type deliberately does not define
-grade comparison, tie-breaking, or fuzzification.
+names. `Fuzzify()` returns every ordered membership score and the maximum as
+confidence. An explicit `FuzzificationPolicy` defines the minimum confidence,
+absolute tie tolerance, and `first`, `last`, or `all` ordered tie selection.
+The governing contract is
+[ADR-0013](adr/0013-linguistic-fuzzification-policy.md).
 
 The historical mutable `FuzzyScale.levels` list remains available as a
 compatibility surface, and `GetLevelByName()` retains its historical callable
-shape. Its existing `Fuzzy()` behavior is not silently promoted into the typed
-model. See the
+shape. Its existing `Fuzzy()` later-winner behavior remains supported but is an
+explicit `last` policy in the typed model. See the
 [linguistic-term representation](mathematics/linguistic-term-model.md).
 
 ## Centroid defuzzification

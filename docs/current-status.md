@@ -104,6 +104,9 @@ Representative accepted changes for the historical correctness baseline are
 - immutable `LinguisticTerm` values associate exact names with modern
   `ScalarFuzzySet` values, while `LinguisticScale` preserves an explicit term
   tuple and provides exact or Unicode case-insensitive complete-name lookup;
+- modern scale fuzzification exposes every ordered membership score, maximum
+  confidence, explicit no-match thresholds, and `first`, `last`, or `all` tie
+  policies;
 - modern and historical scales reject case-insensitive name collisions, and
   historical dictionary-based `FuzzyScale.levels` plus `GetLevelByName()`
   remain available as compatibility surfaces;
@@ -142,7 +145,6 @@ The recent accepted documentation and domain wave is
 
 - symmetric-difference semantics;
 - executable convexity queries with evidence-strength-preserving results;
-- typed linguistic tie-breaking and fuzzification policies;
 - completion of the focused typed module API with the historical module retained as a compatibility facade;
 - optional vectorized execution, subject to numerical-parity, time, memory, and dependency evidence;
 - free-threaded CPython support, subject to race-safety and scaling evidence.
