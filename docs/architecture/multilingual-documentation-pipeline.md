@@ -149,6 +149,8 @@ packageNames = ["fuzzyroutines"]
 contentRoot = "docs/site/content"
 unitManifest = "docs/i18n/units.toml"
 buildRoot = "_build/docs"
+apiCoverageManifest = "docs/site/api-coverage.toml"
+publicationPath = "/FuzzyRoutines"
 
 [branding]
 organization = "Fuzzy Technologies"
@@ -344,6 +346,15 @@ after Task #255 is merged and its drift gate is proved on `develop`. Tasks
 #203, #204, and #206 establish the English build, English quality gates, and
 safe publication boundary; they do not by themselves prove the full
 translation pipeline.
+
+The extracted configuration templates, adoption sequence, upstream-tool
+upgrade boundary, and TKSBrokerAPI migration guidance are published in the
+[Fuzzy Technologies documentation blueprint](../documentation-blueprint/README.md).
+The validator derives target locales and glossary paths from the project
+manifest; the independent `sampleproject` dry-run proves static discovery
+without importing either FuzzyRoutines or the fixture package. The canonical
+language, stable identity, hash payload, human review, and fail-closed fallback
+invariants remain unchanged, so this extraction does not require a new ADR.
 
 ## Task boundaries
 

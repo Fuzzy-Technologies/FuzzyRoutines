@@ -41,6 +41,12 @@ context; they do not duplicate individual API contracts. Russian and
 Simplified Chinese content remains outside Python source as specified by
 [ADR-0011](../adr/0011-multilingual-documentation-pipeline.md).
 
+Other Fuzzy Technologies repositories can adopt the proven contracts through
+the [reusable documentation blueprint](../documentation-blueprint/README.md).
+The blueprint parameterizes project identity, package roots, locale inventory,
+branding, and publication path without copying FuzzyRoutines prose or generated
+HTML.
+
 The build does not import FuzzyRoutines for API discovery. Griffe reads the
 installed package statically from its isolated environment. Documentation
 dependencies remain separate from runtime package metadata.

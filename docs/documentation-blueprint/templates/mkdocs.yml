@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+site_name: SampleProject API Reference
+site_description: Canonical English API reference for SampleProject.
+site_url: https://fuzzy-technologies.github.io/SampleProject/api/latest/en/
+repo_url: https://github.com/Fuzzy-Technologies/SampleProject
+repo_name: Fuzzy-Technologies/SampleProject
+edit_uri: edit/develop/docs/site/content/en/
+
+docs_dir: content/en
+site_dir: ../../_build/api-reference/site
+strict: true
+use_directory_urls: true
+
+theme:
+  name: material
+  language: en
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - !ENV PACKAGE_INSTALLED_PACKAGES
+          options:
+            docstring_style: google
+            members_order: source
+            show_root_full_path: true
+            show_root_heading: true
+            show_signature_annotations: true
+            show_source: true
+            signature_crossrefs: true
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+nav:
+  - Overview: index.md

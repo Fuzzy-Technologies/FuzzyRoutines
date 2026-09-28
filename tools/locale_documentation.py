@@ -34,6 +34,7 @@ SYMBOLIDFORMAT = re.compile(
 CONCEPTIDFORMAT = re.compile(
     r"^concept:[a-z0-9]+(?:[.-][a-z0-9]+)*$"
 )
+LOCALEFORMAT = re.compile(r"^[a-z]{2,3}(?:-[A-Z][A-Za-z0-9]{1,7})?$")
 TRANSLATIONSTATES = frozenset(
     {"missing", "draft", "review", "approved", "stale", "retired"}
 )
@@ -390,6 +391,13 @@ def DiscoverCanonicalUnits(
         moduleName = surface.get("module", "")
         sourcePath = projectRoot / surface.get("source", "")
         mode = surface.get("mode", "")
+        packageName = moduleName.partition(".")[0]
+
+        if packageName not in projectManifest["packageNames"]:
+            raise ValueError(
+                f"{coveragePath}: module {moduleName!r} is outside declared "
+                f"packageNames {projectManifest['packageNames']!r}"
+            )
 
         if mode == "authored":
             surfaceUnits = _AuthoredUnits(moduleName, sourcePath, projectRoot)
@@ -435,6 +443,7 @@ def _LoadProjectManifest(path: Path) -> dict:
         "unitManifest",
         "buildRoot",
         "apiCoverageManifest",
+        "publicationPath",
     )
 
     for fieldName in requiredText:
@@ -443,16 +452,59 @@ def _LoadProjectManifest(path: Path) -> dict:
 
     locales = manifest.get("locales")
 
+    if manifest["sourceLocale"] != "en":
+        raise ValueError(f"{path}: sourceLocale must be 'en'")
+
     if (
-        manifest["sourceLocale"] != "en"
-        or locales != ["en", "ru", "zh-CN"]
+        not isinstance(locales, list)
+        or len(locales) < 2
+        or locales[0] != manifest["sourceLocale"]
+        or len(locales) != len(set(locales))
+        or not all(isinstance(locale, str) and LOCALEFORMAT.fullmatch(locale) for locale in locales)
     ):
-        raise ValueError(f"{path}: locales must be ['en', 'ru', 'zh-CN']")
+        raise ValueError(
+            f"{path}: locales must be a unique list beginning with sourceLocale "
+            "and containing at least one target locale"
+        )
+
+    packageNames = manifest.get("packageNames")
+
+    if (
+        not isinstance(packageNames, list)
+        or not packageNames
+        or not all(isinstance(name, str) and name.strip() for name in packageNames)
+    ):
+        raise ValueError(f"{path}: packageNames must be a non-empty string list")
+
+    publicationPath = manifest["publicationPath"]
+
+    if (
+        not publicationPath.startswith("/")
+        or (publicationPath != "/" and publicationPath.endswith("/"))
+        or ".." in Path(publicationPath).parts
+    ):
+        raise ValueError(
+            f"{path}: publicationPath must be an absolute URL path without a trailing slash"
+        )
+
+    branding = manifest.get("branding")
+
+    if not isinstance(branding, dict):
+        raise TypeError(f"{path}: branding must be a table")
+
+    for fieldName in ("organization", "assetRoot"):
+        if not isinstance(branding.get(fieldName), str) or not branding[fieldName].strip():
+            raise ValueError(f"{path}: branding.{fieldName} must be a non-empty string")
 
     glossaries = manifest.get("glossaries", {})
 
-    if set(glossaries) != {"ru", "zh-CN"}:
-        raise ValueError(f"{path}: ru and zh-CN glossaries are required")
+    targetLocales = set(locales[1:])
+
+    if set(glossaries) != targetLocales:
+        raise ValueError(
+            f"{path}: glossaries must match target locales "
+            f"{', '.join(sorted(targetLocales))}"
+        )
 
     return manifest
 
@@ -482,7 +534,9 @@ def _ValidateGlossaries(
     conceptSets = {}
     englishTerms = {}
 
-    for locale in ("ru", "zh-CN"):
+    targetLocales = tuple(projectManifest["locales"][1:])
+
+    for locale in targetLocales:
         glossaryPath = projectRoot / projectManifest["glossaries"][locale]
         glossaryLabel = _Relative(glossaryPath, projectRoot)
 
@@ -552,10 +606,8 @@ def _ValidateGlossaries(
 
         conceptSets[locale] = frozenset(conceptIds)
 
-    if len(conceptSets) == 2 and conceptSets["ru"] != conceptSets["zh-CN"]:
-        diagnostics.append(
-            "docs/i18n/glossaries: ru and zh-CN concept IDs must match"
-        )
+    if len(conceptSets) == len(targetLocales) and len(set(conceptSets.values())) > 1:
+        diagnostics.append("docs/i18n/glossaries: target locale concept IDs must match")
 
     return tuple(diagnostics)
 
@@ -591,6 +643,7 @@ def ValidateLocales(
 
     try:
         projectManifest = _LoadProjectManifest(projectManifestPath)
+        targetLocales = tuple(projectManifest["locales"][1:])
         unitManifestPath = projectRoot / projectManifest["unitManifest"]
         unitManifest = tomllib.loads(_ReadCanonicalText(unitManifestPath))
         knownPageIds = {
@@ -604,7 +657,14 @@ def ValidateLocales(
             knownPageIds,
         )
 
-    except (OSError, UnicodeError, ValueError, SyntaxError, tomllib.TOMLDecodeError) as error:
+    except (
+        OSError,
+        UnicodeError,
+        TypeError,
+        ValueError,
+        SyntaxError,
+        tomllib.TOMLDecodeError,
+    ) as error:
         return ValidationReport((str(error),), {})
 
     unitManifestLabel = _Relative(unitManifestPath, projectRoot)
@@ -690,14 +750,14 @@ def ValidateLocales(
             diagnostics.append(f"{recordLabel}: invalid reviewClass {reviewClass!r}")
 
         translations = record.get("translations", {})
-        unexpectedLocales = sorted(set(translations) - {"ru", "zh-CN"})
+        unexpectedLocales = sorted(set(translations) - set(targetLocales))
 
         for locale in unexpectedLocales:
             diagnostics.append(f"{recordLabel}: unsupported locale {locale}")
 
         states[identifier] = {}
 
-        for locale in ("ru", "zh-CN"):
+        for locale in targetLocales:
             translation = translations.get(locale)
 
             if not isinstance(translation, dict):
@@ -858,7 +918,14 @@ def Main(arguments=None):
                 knownPageIds,
             )
 
-        except (OSError, UnicodeError, ValueError, SyntaxError, tomllib.TOMLDecodeError) as error:
+        except (
+            OSError,
+            UnicodeError,
+            TypeError,
+            ValueError,
+            SyntaxError,
+            tomllib.TOMLDecodeError,
+        ) as error:
             print(error, file=sys.stderr)
             return 1
 

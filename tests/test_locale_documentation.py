@@ -68,6 +68,7 @@ contentRoot = "docs/site/content"
 unitManifest = "docs/i18n/units.toml"
 buildRoot = "_build/docs"
 apiCoverageManifest = "docs/site/api-coverage.toml"
+publicationPath = "/fixture"
 
 [branding]
 organization = "Fuzzy Technologies"
@@ -265,6 +266,7 @@ mode = "authored"
     projectManifest = {
         "contentRoot": "docs/site/content",
         "apiCoverageManifest": "docs/site/api-coverage.toml",
+        "packageNames": ["fixture"],
     }
     originalUnits = DiscoverCanonicalUnits(tmp_path, projectManifest)
     originalUnit = next(
@@ -319,6 +321,6 @@ terms = []
 
     report = ValidateLocales(tmp_path)
 
-    assert "docs/i18n/glossaries: ru and zh-CN concept IDs must match" in (
+    assert "docs/i18n/glossaries: target locale concept IDs must match" in (
         report.diagnostics
     )
