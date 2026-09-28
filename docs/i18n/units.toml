@@ -475,7 +475,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.GetLevelByName"
 kind = "symbol"
 sourcePath = "fuzzyroutines/FuzzyRoutines.py"
-sourceHash = "sha256:814654cee23622b932b5d32a6e6ba39452dab82a88a98cb223951e4f5cb21da2"
+sourceHash = "sha256:be2594e4c6775a98fcbc33a1390780b021c4660dd896ca1e58896b979f7d0c08"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -930,7 +930,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.LinguisticScale"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
-sourceHash = "sha256:13ae80cf16cf455d85d98f1080b94a7790929fb730200398a002640cc5742990"
+sourceHash = "sha256:848cdf58c4c0c8ed025fbb7d2cc50392a910e706111ff87e3b44b4917c5e77dc"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1502,7 +1502,20 @@ state = "missing"
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
-sourceHash = "sha256:ea4aa20418a1924f4d7ec2f0c9e6d41739c52f31e598d619d9495609abf0ba02"
+sourceHash = "sha256:7fe5327b5627278bf690538819948769e512cb393b5b0ba34deea5f78192682c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.LinguisticScale.GetTermByName"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:6adcb23be8cb154ba5645edc63da9ec07c78ae3c7dd3bbce0e57c89b377efa5e"
 reviewClass = "mathematical"
 
 [units.translations.ru]

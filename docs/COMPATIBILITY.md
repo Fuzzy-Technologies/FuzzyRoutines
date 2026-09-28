@@ -93,7 +93,7 @@ not replacements that existing callers must adopt.
 | Set algebra                 | Scalar operators applied by caller code | `Complement`, `Intersection`, `Union`, and `Difference` with explicit policy objects        | Binary operations require exactly compatible universes.                                |
 | Derived set information     | No unified historical result            | `DeriveProperties`, `SampleProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, `Normalize` | Exact and sampled evidence use distinct result contracts.                              |
 | Relations                   | No focused historical surface           | `EqualOnDomain`, `IncludedOnDomain`, `ComparisonPolicy`, `ComparisonDomain`                 | Comparison tolerance and inspection domain are explicit.                               |
-| Linguistic representation   | `FuzzyScale`, `UniversalFuzzyScale`     | `LinguisticTerm`, `LinguisticScale`                                                         | Modern lookup, tie-breaking, and fuzzification policies are not implemented yet.       |
+| Linguistic representation   | `FuzzyScale`, `UniversalFuzzyScale`     | `LinguisticTerm`, `LinguisticScale`                                                         | Exact/case-insensitive lookup exists; tie-breaking and fuzzification remain planned.   |
 | Centroid defuzzification    | `FuzzySet.Defuz()`, `defuzValue`        | `Centroid` with `ScalarFuzzySet`, `IntegrationDomain`, and optional `CentroidPolicy`        | The integration interval is explicit and finite.                                       |
 
 The root-package export list in
@@ -116,6 +116,7 @@ outputs while retaining historical names and call shapes:
 | Bell evaluation         | Does not mutate the caller-visible parameter mapping.                                                     |
 | Centroid state          | Recalculates from current membership parameters and integration bounds rather than returning stale state. |
 | Scale lookup            | Evaluates each term once and preserves the documented later-term tie policy.                              |
+| Scale names             | Requires both dictionary keys and consistently rejects names colliding under case-insensitive lookup.     |
 
 The [corrected-bug ledger](compatibility/corrected-bug-ledger.md) supplies the
 change history and merged evidence. A future correction must be added there;
