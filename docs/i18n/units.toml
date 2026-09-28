@@ -98,7 +98,7 @@ state = "missing"
 id = "page:api.modern.linguistic"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/linguistic.md"
-sourceHash = "sha256:bc7914a7e6f77299aef685123b32435393476764fcac40a640ec7c9e59869d0f"
+sourceHash = "sha256:0dd71be5502f1b265b4d92394c84c5d2d925f01c4eb16fe9de77f927f0ad3a2b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -111,7 +111,7 @@ state = "missing"
 id = "page:api.modern.package"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/package.md"
-sourceHash = "sha256:67df19a5975ba8e4221e0c46dffe30228a1a0d92edd33a1fe45b358647c2f344"
+sourceHash = "sha256:e4ba927606f5f7cc73a84143bcc4bcc38cc86be45ca319ab317fed2e1447515c"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -372,6 +372,45 @@ id = "symbol:fuzzyroutines.EqualOnDomain"
 kind = "symbol"
 sourcePath = "fuzzyroutines/relations.py"
 sourceHash = "sha256:e863bc536aaf4599f99866cd078ceee4e84046968a87a94bf1fb8d6d62ea35e7"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.FuzzificationPolicy"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:95697179034440a6aedb8df0ad3a8882ca20d6aaa723e7f4f718c3825a7d2871"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.FuzzificationResult"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:d1eadaf297627bae2b1e772178d7fe36b0407926172476fc97c4cb8e458bd447"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.TermMembership"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:0a94f2f2fac5668092d3a9d36111104cc183b33d882803b8d3888ffa1d71f355"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1499,10 +1538,75 @@ state = "missing"
 state = "missing"
 
 [[units]]
+id = "symbol:fuzzyroutines.linguistic.FuzzificationPolicy"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:6dd84b6922500221e467e6c18c6f5fda4c24afbace2cfd50470e9d6d3ce54c46"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.FuzzificationResult"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:f173e4833b3807a09506a40a88f05ad40fad31b4aec0bdd5e7600da2be281ff4"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.FuzzificationResult.isMatch"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:f41454566be018442bb1f3b3a9ad751af17e4caf37d920a7458c61bb5f450e07"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.FuzzificationResult.isTie"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:4084fad2e788747e69435af4fffe22d445c92829cb390d5ce919b1753a111584"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
 sourceHash = "sha256:7fe5327b5627278bf690538819948769e512cb393b5b0ba34deea5f78192682c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.LinguisticScale.Fuzzify"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:6f219be66e87e8b5ef260fd4080165e8b1bbd322d8ee840c04cac952bc29ba4d"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1529,6 +1633,19 @@ id = "symbol:fuzzyroutines.linguistic.LinguisticTerm"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
 sourceHash = "sha256:ee601bce05c76360a791dc980f248ef4ce3ff8c08e5e462a92e31a3f10bdfcb6"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.TermMembership"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:187f80533ae04fb090a25e2e910d0fb009765c0e2bd87f9295002995f57c5929"
 reviewClass = "mathematical"
 
 [units.translations.ru]

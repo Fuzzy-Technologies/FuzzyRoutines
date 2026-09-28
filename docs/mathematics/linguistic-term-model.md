@@ -35,12 +35,26 @@ The default mode compares names exactly, including case. Passing
 original declared `LinguisticTerm` object or `None`; neither performs substring,
 prefix, approximate, or membership-based matching.
 
-## Deliberate boundary
+## Fuzzification and confidence
 
-`LinguisticScale` does not compare membership grades, choose a term on a tie,
-or fuzzify a scalar value. Those behaviors require their own explicit policies
-and belong to subsequent roadmap tasks. In particular, tuple position is data;
-it is not yet a tie-breaking rule.
+`Fuzzify(coordinate, policy)` evaluates every term exactly once and returns a
+`FuzzificationResult`. Its ordered `memberships` tuple preserves every term and
+grade, while `confidence` is the maximum grade rather than a probability.
+
+`FuzzificationPolicy` makes both uncertain cases explicit:
+
+- `minimumConfidence` rejects a classification when the maximum grade is less
+  than or equal to the threshold; its zero default rejects zero coverage, and a
+  positive value also rejects near-zero coverage;
+- `tieTolerance` defines the absolute distance from the maximum treated as a
+  tie;
+- `tiePolicy` selects the `first`, `last`, or `all` tied terms in declared scale
+  order.
+
+The complete membership tuple remains available even for no-match results.
+The coordinate must belong to every term universe; partial score vectors fail
+closed. These semantics are fixed by
+[ADR-0013](../adr/0013-linguistic-fuzzification-policy.md).
 
 ## Compatibility
 
@@ -52,13 +66,16 @@ the default performs exact complete-name lookup, while `False` performs
 case-insensitive complete-name lookup through the historical uppercase map.
 Names that collide ignoring case are rejected so this lookup remains
 unambiguous. The modern types are additions; they do not replace the mutable
-dictionary compatibility facade.
+dictionary compatibility facade. Historical `Fuzzy()` continues selecting the
+later level on an exact tie. The modern equivalent is an explicit
+`FuzzificationPolicy(tiePolicy="last")` rather than a hidden default.
 
 ## Example
 
 ```python
 from fuzzyroutines import (
     ContinuousUniverse,
+    FuzzificationPolicy,
     LinguisticScale,
     LinguisticTerm,
     ScalarFuzzySet,
@@ -70,4 +87,10 @@ high = LinguisticTerm("High", ScalarFuzzySet(universe, lambda value: value))
 scale = LinguisticScale((low, high))
 assert scale.GetTermByName("Low") is low
 assert scale.GetTermByName("high", exactMatching=False) is high
+result = scale.Fuzzify(
+    0.5,
+    FuzzificationPolicy(tiePolicy="all", minimumConfidence=0.1),
+)
+assert result.confidence == 0.5
+assert result.selectedTerms == (low, high)
 ```
