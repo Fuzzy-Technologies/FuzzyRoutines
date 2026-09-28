@@ -12,4 +12,7 @@ SPDX-License-Identifier: Apache-2.0
         - TermMembership
         - FuzzificationPolicy
         - FuzzificationResult
+        - ScaleDiagnosticsPolicy
+        - ScaleDiagnosticPoint
+        - ScaleDiagnosticsResult
         - LinguisticScale

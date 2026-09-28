@@ -56,6 +56,33 @@ The coordinate must belong to every term universe; partial score vectors fail
 closed. These semantics are fixed by
 [ADR-0013](../adr/0013-linguistic-fuzzification-policy.md).
 
+## Sampled scale diagnostics
+
+`Diagnose(analysisDomain, policy)` evaluates an explicit endpoint-preserving
+grid across a finite `IntegrationDomain`. Every term must use a
+`ContinuousUniverse` containing the complete analysis domain. For each sampled
+coordinate $x_j$, the result records all ordered memberships and
+
+$$
+c_j=\max_i\mu_{L_i}(x_j).
+$$
+
+With explicit activity threshold $\tau$, a term is active only when
+$\mu_{L_i}(x_j)>\tau$. A sampled point is a gap when no term is active and an
+overlap when at least two terms are active. Partition-quality evidence uses
+
+$$
+e_j=\left|\sum_i\mu_{L_i}(x_j)-1\right|.
+$$
+
+`ScaleDiagnosticsResult` exposes every sampled point plus coverage extrema and
+mean, gap and overlap fractions, maximum simultaneous active-term count, and
+mean and maximum partition error. `partitionTolerance` determines whether all
+sampled errors are accepted. These observations are reproducible for the
+declared domain, grid size, and tolerances, but they do not prove a continuous
+property between grid coordinates. [ADR-0014](../adr/0014-sampled-scale-diagnostics.md)
+fixes the complete evidence boundary.
+
 ## Compatibility
 
 The historical `fuzzyroutines.FuzzyRoutines.FuzzyScale` remains available.
@@ -76,8 +103,10 @@ later level on an exact tie. The modern equivalent is an explicit
 from fuzzyroutines import (
     ContinuousUniverse,
     FuzzificationPolicy,
+    IntegrationDomain,
     LinguisticScale,
     LinguisticTerm,
+    ScaleDiagnosticsPolicy,
     ScalarFuzzySet,
 )
 
@@ -93,4 +122,11 @@ result = scale.Fuzzify(
 )
 assert result.confidence == 0.5
 assert result.selectedTerms == (low, high)
+
+diagnostics = scale.Diagnose(
+    IntegrationDomain(0.0, 1.0),
+    ScaleDiagnosticsPolicy(sampleCount=101),
+)
+assert diagnostics.minimumCoverage == 0.5
+assert diagnostics.gapPoints == ()
 ```

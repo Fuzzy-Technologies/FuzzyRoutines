@@ -14,9 +14,25 @@ import math
 from dataclasses import dataclass
 from numbers import Real
 
+from fuzzyroutines.domain import ContinuousUniverse, IntegrationDomain
 from fuzzyroutines.fuzzysets import ScalarFuzzySet, _RequireGrade
 
 TIEPOLICIES = ("first", "last", "all")
+
+
+def _RequireNonNegativeFiniteReal(value, parameterName):
+    """Return a finite non-negative scalar or raise a deterministic error."""
+
+    if isinstance(value, bool) or not isinstance(value, Real):
+        raise TypeError(f"{parameterName} must be a real number")
+
+    if not math.isfinite(value):
+        raise ValueError(f"{parameterName} must be a finite real number")
+
+    if value < 0:
+        raise ValueError(f"{parameterName} must be non-negative")
+
+    return value
 
 
 def _IsWithinTieTolerance(grade, confidence, tolerance):
@@ -188,6 +204,265 @@ class FuzzificationResult:
 
 
 @dataclass(frozen=True, slots=True)
+class ScaleDiagnosticsPolicy:
+    """Explicit grid and tolerance policy for sampled scale diagnostics.
+
+    Attributes:
+        sampleCount: Number of evenly spaced points including both endpoints of
+            the analysis domain.
+        membershipThreshold: A term is active only when its membership is
+            strictly greater than this threshold. No active terms form a gap;
+            two or more active terms form an overlap.
+        partitionTolerance: Maximum accepted absolute difference between the
+            sum of term memberships and one.
+    """
+
+    sampleCount: int = 101
+    membershipThreshold: Real = 0.0
+    partitionTolerance: Real = 1e-12
+
+    def __post_init__(self):
+        """Validate the complete sampled-diagnostics policy."""
+
+        if isinstance(self.sampleCount, bool) or not isinstance(self.sampleCount, int):
+            raise TypeError("sampleCount must be an integer")
+
+        if self.sampleCount < 2:
+            raise ValueError("sampleCount must be at least two")
+
+        object.__setattr__(
+            self,
+            "membershipThreshold",
+            _RequireGrade(self.membershipThreshold, "membershipThreshold"),
+        )
+        object.__setattr__(
+            self,
+            "partitionTolerance",
+            _RequireNonNegativeFiniteReal(
+                self.partitionTolerance,
+                "partitionTolerance",
+            ),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class ScaleDiagnosticPoint:
+    """Immutable sampled membership evidence at one scale coordinate.
+
+    Attributes:
+        coordinate: Finite coordinate from the declared diagnostic grid.
+        memberships: One ordered membership score for every scale term.
+        membershipThreshold: Strict activity threshold used for gap and
+            overlap classification.
+    """
+
+    coordinate: Real
+    memberships: tuple[TermMembership, ...]
+    membershipThreshold: Real
+
+    def __post_init__(self):
+        """Require one finite coordinate and a non-empty membership vector."""
+
+        if isinstance(self.coordinate, bool) or not isinstance(self.coordinate, Real):
+            raise TypeError("coordinate must be a real number")
+
+        if not math.isfinite(self.coordinate):
+            raise ValueError("coordinate must be a finite real number")
+
+        if not isinstance(self.memberships, tuple) or not self.memberships:
+            raise TypeError("memberships must be a non-empty tuple")
+
+        if not all(isinstance(value, TermMembership) for value in self.memberships):
+            raise TypeError("memberships must contain only TermMembership values")
+
+        object.__setattr__(
+            self,
+            "membershipThreshold",
+            _RequireGrade(self.membershipThreshold, "membershipThreshold"),
+        )
+
+    @property
+    def maximumMembership(self):
+        """Greatest term membership sampled at this coordinate."""
+
+        return max(value.grade for value in self.memberships)
+
+    @property
+    def membershipSum(self):
+        """Floating-point sum of every term membership at this coordinate."""
+
+        return math.fsum(float(value.grade) for value in self.memberships)
+
+    @property
+    def activeTerms(self):
+        """Terms whose memberships strictly exceed the activity threshold."""
+
+        return tuple(
+            value.term
+            for value in self.memberships
+            if value.grade > self.membershipThreshold
+        )
+
+    @property
+    def isGap(self):
+        """Whether no term is active at this sampled coordinate."""
+
+        return not self.activeTerms
+
+    @property
+    def isOverlap(self):
+        """Whether at least two terms are active at this sampled coordinate."""
+
+        return len(self.activeTerms) > 1
+
+    @property
+    def partitionError(self):
+        """Absolute sampled deviation of the membership sum from one."""
+
+        return abs(self.membershipSum - 1.0)
+
+
+@dataclass(frozen=True, slots=True)
+class ScaleDiagnosticsResult:
+    """Immutable sampled coverage, overlap, gap, and partition evidence.
+
+    The result describes only the declared finite grid. It does not prove a
+    continuous property between sampled coordinates.
+
+    Attributes:
+        analysisDomain: Finite closed interval sampled by the diagnostic.
+        policy: Grid size and tolerance policy used by the diagnostic.
+        points: Ordered evidence for every evenly spaced grid coordinate.
+    """
+
+    analysisDomain: IntegrationDomain
+    policy: ScaleDiagnosticsPolicy
+    points: tuple[ScaleDiagnosticPoint, ...]
+
+    def __post_init__(self):
+        """Require a complete ordered grid with stable term membership vectors."""
+
+        if not isinstance(self.analysisDomain, IntegrationDomain):
+            raise TypeError("analysisDomain must be an IntegrationDomain")
+
+        if not isinstance(self.policy, ScaleDiagnosticsPolicy):
+            raise TypeError("policy must be a ScaleDiagnosticsPolicy")
+
+        if not isinstance(self.points, tuple):
+            raise TypeError("points must be an explicit tuple")
+
+        if len(self.points) != self.policy.sampleCount:
+            raise ValueError("points must contain exactly policy.sampleCount values")
+
+        if not all(isinstance(point, ScaleDiagnosticPoint) for point in self.points):
+            raise TypeError("points must contain only ScaleDiagnosticPoint values")
+
+        if self.points[0].coordinate != self.analysisDomain.left:
+            raise ValueError("the diagnostic grid must start at analysisDomain.left")
+
+        if self.points[-1].coordinate != self.analysisDomain.right:
+            raise ValueError("the diagnostic grid must end at analysisDomain.right")
+
+        if any(
+            leftPoint.coordinate >= rightPoint.coordinate
+            for leftPoint, rightPoint in zip(self.points, self.points[1:])
+        ):
+            raise ValueError("diagnostic coordinates must be strictly increasing")
+
+        declaredTerms = tuple(value.term for value in self.points[0].memberships)
+        for point in self.points:
+            if point.membershipThreshold != self.policy.membershipThreshold:
+                raise ValueError("point thresholds must match the diagnostics policy")
+
+            if tuple(value.term for value in point.memberships) != declaredTerms:
+                raise ValueError("every diagnostic point must preserve the same term order")
+
+    @property
+    def gapPoints(self):
+        """Sampled points at which no term exceeds the activity threshold."""
+
+        return tuple(point for point in self.points if point.isGap)
+
+    @property
+    def overlapPoints(self):
+        """Sampled points at which at least two terms exceed the threshold."""
+
+        return tuple(point for point in self.points if point.isOverlap)
+
+    @property
+    def gapFraction(self):
+        """Fraction of sampled grid points classified as gaps."""
+
+        return len(self.gapPoints) / len(self.points)
+
+    @property
+    def overlapFraction(self):
+        """Fraction of sampled grid points classified as overlaps."""
+
+        return len(self.overlapPoints) / len(self.points)
+
+    @property
+    def minimumCoverage(self):
+        """Smallest sampled maximum membership across the analysis grid."""
+
+        return min(point.maximumMembership for point in self.points)
+
+    @property
+    def meanCoverage(self):
+        """Arithmetic mean of sampled maximum membership values."""
+
+        return math.fsum(float(point.maximumMembership) for point in self.points) / len(
+            self.points
+        )
+
+    @property
+    def maximumCoverage(self):
+        """Greatest sampled maximum membership across the analysis grid."""
+
+        return max(point.maximumMembership for point in self.points)
+
+    @property
+    def maximumActiveTermCount(self):
+        """Greatest number of simultaneously active terms on the sampled grid."""
+
+        return max(len(point.activeTerms) for point in self.points)
+
+    @property
+    def meanPartitionError(self):
+        """Mean sampled absolute deviation of membership sums from one."""
+
+        return math.fsum(point.partitionError for point in self.points) / len(self.points)
+
+    @property
+    def maximumPartitionError(self):
+        """Greatest sampled absolute deviation of a membership sum from one."""
+
+        return max(point.partitionError for point in self.points)
+
+    @property
+    def isPartitionWithinTolerance(self):
+        """Whether every sampled membership sum satisfies the policy tolerance."""
+
+        return self.maximumPartitionError <= self.policy.partitionTolerance
+
+
+def _BuildDiagnosticCoordinates(analysisDomain, sampleCount):
+    """Return an endpoint-preserving evenly spaced diagnostic grid."""
+
+    intervalWidth = float(analysisDomain.right) - float(analysisDomain.left)
+    intervalCount = sampleCount - 1
+
+    return tuple(
+        analysisDomain.left
+        if pointIndex == 0
+        else analysisDomain.right
+        if pointIndex == intervalCount
+        else float(analysisDomain.left) + intervalWidth * pointIndex / intervalCount
+        for pointIndex in range(sampleCount)
+    )
+
+
+@dataclass(frozen=True, slots=True)
 class LinguisticScale:
     """Immutable ordered tuple of explicitly declared linguistic terms.
 
@@ -323,3 +598,66 @@ class LinguisticScale:
             tiedTerms,
             selectedTerms,
         )
+
+    def Diagnose(
+        self,
+        analysisDomain: IntegrationDomain,
+        policy: ScaleDiagnosticsPolicy | None = None,
+    ) -> ScaleDiagnosticsResult:
+        """Sample coverage, overlaps, gaps, and partition quality on one grid.
+
+        Every term is evaluated exactly once per evenly spaced grid coordinate.
+        A term is active only when its membership is strictly greater than
+        `membershipThreshold`. The operation reads membership functions but
+        never changes scale terms, fuzzy sets, or analytical coefficients.
+
+        Args:
+            analysisDomain: Finite closed interval contained in every term's
+                continuous universe.
+            policy: Explicit sample count and tolerances, or the default
+                101-point policy.
+
+        Returns:
+            Immutable sampled point evidence and aggregate quality metrics.
+
+        Raises:
+            TypeError: The domain or policy has the wrong type, or any term
+                uses a non-continuous universe.
+            ValueError: The domain lies outside any term universe.
+
+        Notes:
+            Finite sampling is reproducible evidence for the declared grid; it
+            is not proof of coverage or partition quality between grid points.
+        """
+
+        if not isinstance(analysisDomain, IntegrationDomain):
+            raise TypeError("analysisDomain must be an IntegrationDomain")
+
+        if policy is None:
+            policy = ScaleDiagnosticsPolicy()
+
+        if not isinstance(policy, ScaleDiagnosticsPolicy):
+            raise TypeError("policy must be a ScaleDiagnosticsPolicy")
+
+        for term in self.terms:
+            if not isinstance(term.fuzzySet.universe, ContinuousUniverse):
+                raise TypeError("scale diagnostics require ContinuousUniverse terms")
+
+            analysisDomain.ValidateWithin(term.fuzzySet.universe)
+
+        points = tuple(
+            ScaleDiagnosticPoint(
+                coordinate,
+                tuple(
+                    TermMembership(term, term.fuzzySet.Membership(coordinate))
+                    for term in self.terms
+                ),
+                policy.membershipThreshold,
+            )
+            for coordinate in _BuildDiagnosticCoordinates(
+                analysisDomain,
+                policy.sampleCount,
+            )
+        )
+
+        return ScaleDiagnosticsResult(analysisDomain, policy, points)
