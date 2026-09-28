@@ -2,21 +2,20 @@
 # SPDX-License-Identifier: Apache-2.0
 
 schemaVersion = 1
-projectId = "fuzzyroutines"
-projectName = "FuzzyRoutines"
+projectId = "sampleproject"
+projectName = "SampleProject"
 sourceLocale = "en"
-locales = ["en", "ru", "zh-CN"]
-packageNames = ["fuzzyroutines"]
+locales = ["en", "de"]
+packageNames = ["sampleproject"]
 contentRoot = "docs/site/content"
 unitManifest = "docs/i18n/units.toml"
 buildRoot = "_build/docs"
 apiCoverageManifest = "docs/site/api-coverage.toml"
-publicationPath = "/FuzzyRoutines"
+publicationPath = "/SampleProject"
 
 [branding]
 organization = "Fuzzy Technologies"
 assetRoot = "docs/site/content/en/assets"
 
 [glossaries]
-ru = "docs/i18n/glossaries/ru.toml"
-zh-CN = "docs/i18n/glossaries/zh-CN.toml"
+de = "docs/i18n/glossaries/de.toml"
