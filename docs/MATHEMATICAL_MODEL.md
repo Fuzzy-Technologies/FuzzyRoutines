@@ -276,13 +276,16 @@ $$
 L=(\text{name},A).
 $$
 
-`LinguisticScale` stores a non-empty ordered tuple of uniquely named
-`LinguisticTerm` values. Tuple order is data. The current type deliberately
-does not define lookup, grade comparison, tie-breaking, or fuzzification.
+`LinguisticScale` stores a non-empty ordered tuple of `LinguisticTerm` values
+whose names are unique under Unicode case-insensitive comparison. Exact lookup
+preserves case; optional case-insensitive lookup compares complete case-folded
+names. Tuple order is data. The current type deliberately does not define
+grade comparison, tie-breaking, or fuzzification.
 
 The historical mutable `FuzzyScale.levels` list remains available as a
-compatibility surface. Its existing `Fuzzy()` lookup behavior is not silently
-promoted into the typed model. See the
+compatibility surface, and `GetLevelByName()` retains its historical callable
+shape. Its existing `Fuzzy()` behavior is not silently promoted into the typed
+model. See the
 [linguistic-term representation](mathematics/linguistic-term-model.md).
 
 ## Centroid defuzzification

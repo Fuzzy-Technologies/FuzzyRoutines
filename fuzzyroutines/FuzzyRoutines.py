@@ -942,27 +942,24 @@ class FuzzyScale():
 
         Raises:
             Exception: If the list is empty, a level has the wrong shape or
-                value types, or level names are not unique.
+                value types.
+            ValueError: If level names collide ignoring case.
         """
         if value:
             for level in value:
-                if isinstance(level, dict) and (len(level) == 2) and ('name' and 'fSet' in level.keys()):
+                if isinstance(level, dict) and set(level) == {'name', 'fSet'}:
                     if not isinstance(level['name'], str):
                         raise Exception("Level name - 'name' parameter - must be a string value!")
 
                     if not isinstance(level['fSet'], FuzzySet):
                         raise Exception("Fuzzy set - 'fSet' parameter - must be an instance of FuzzySet class!")
 
-                    nameCount = 0  # check for unique name:
-                    for otherLevel in value:
-                        if otherLevel['name'] == level['name']:
-                            nameCount += 1
-
-                    if nameCount > 1:
-                        raise Exception("The scale contains no unique levels! Warning for: {}".format(level['name']))
-
                 else:
                     raise Exception("Level of fuzzy scale must be 2-dim dictionary looks like {'name': 'level_name', 'fSet': FuzzySet_instance}!")
+
+            levelNames = [level['name'].upper() for level in value]
+            if len(set(levelNames)) != len(levelNames):
+                raise ValueError("The scale contains level names that are not unique ignoring case!")
 
             self._levels = value  # set up new list of fuzzy levels
             self._levelsNames = self._GetLevelsNames()  # updating dictionary with only levels' names
@@ -1014,7 +1011,7 @@ class FuzzyScale():
         return fuzzyLevel
 
     def GetLevelByName(self, levelName, exactMatching=True):
-        """Look up a level by exact or case-insensitive name.
+        """Look up a level by its complete exact or case-insensitive name.
 
         Args:
             levelName: Name to retrieve.
@@ -1023,6 +1020,10 @@ class FuzzyScale():
 
         Returns:
             The matching level dictionary, or `None` when absent.
+
+        Notes:
+            Case-insensitive lookup uses the historical uppercase-name map.
+            Neither mode performs substring, prefix, or approximate matching.
         """
         if exactMatching:
             return self._levelsNames.get(levelName)

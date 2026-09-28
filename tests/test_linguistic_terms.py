@@ -91,27 +91,72 @@ def test_LinguisticScaleRequiresExplicitNonEmptyTypedTuple():
         LinguisticScale((low, {"name": "High", "fSet": _BuildLegacySet()}))
 
 
-def test_LinguisticScaleRejectsExactDuplicateNamesWithoutNormalizingThem():
+def test_LinguisticScaleRejectsCaseInsensitiveNameCollisions():
     low = LinguisticTerm("Low", _BuildSet())
     duplicate = LinguisticTerm("Low", _BuildSet(0.1))
 
-    with pytest.raises(ValueError, match="exactly unique"):
+    with pytest.raises(ValueError, match="unique ignoring case"):
         LinguisticScale((low, duplicate))
 
-    caseDistinct = LinguisticScale((low, LinguisticTerm("LOW", _BuildSet(0.2))))
+    with pytest.raises(ValueError, match="unique ignoring case"):
+        LinguisticScale((low, LinguisticTerm("LOW", _BuildSet(0.2))))
 
-    assert tuple(term.name for term in caseDistinct.terms) == ("Low", "LOW"), (
-        "Representation must not impose the deferred case-matching lookup policy."
+
+@pytest.mark.parametrize(
+    ("declaredName", "queryName"),
+    [("Low", "low"), ("Straße", "STRASSE"), ("ΟΣ", "ος")],
+)
+def test_LinguisticScaleSupportsUnicodeCaseInsensitiveCompleteNameLookup(
+    declaredName,
+    queryName,
+):
+    term = LinguisticTerm(declaredName, _BuildSet())
+    scale = LinguisticScale((term,))
+
+    assert scale.GetTermByName(queryName) is None, (
+        "Exact lookup must preserve the declared name's case."
+    )
+    assert scale.GetTermByName(queryName, exactMatching=False) is term, (
+        "Case-insensitive lookup must use Unicode case folding."
     )
 
 
-def test_LinguisticScaleIsImmutableAndContainsNoLookupPolicy():
+def test_LinguisticScaleLookupNeverPerformsPartialOrApproximateMatching():
+    low = LinguisticTerm("Low", _BuildSet())
+    scale = LinguisticScale((low,))
+
+    assert scale.GetTermByName("Low") is low, "Exact complete-name lookup must return the term."
+    assert scale.GetTermByName("Lo") is None, "Exact lookup must not accept a name prefix."
+    assert scale.GetTermByName("ow", exactMatching=False) is None, (
+        "Case-insensitive lookup must not accept a name substring."
+    )
+    assert scale.GetTermByName("Lowest", exactMatching=False) is None, (
+        "Case-insensitive lookup must not accept an approximate extension."
+    )
+
+
+@pytest.mark.parametrize("invalidName", [None, 1, (), []])
+def test_LinguisticScaleLookupRejectsNonStringNames(invalidName):
+    scale = LinguisticScale((LinguisticTerm("Low", _BuildSet()),))
+
+    with pytest.raises(TypeError, match="termName must be a string"):
+        scale.GetTermByName(invalidName)
+
+
+@pytest.mark.parametrize("invalidMode", [None, 0, 1, "false"])
+def test_LinguisticScaleLookupRequiresBooleanMatchingMode(invalidMode):
+    scale = LinguisticScale((LinguisticTerm("Low", _BuildSet()),))
+
+    with pytest.raises(TypeError, match="exactMatching must be a boolean"):
+        scale.GetTermByName("Low", exactMatching=invalidMode)
+
+
+def test_LinguisticScaleIsImmutableAndContainsNoFuzzificationPolicy():
     scale = LinguisticScale((LinguisticTerm("Low", _BuildSet()),))
 
     with pytest.raises(FrozenInstanceError):
         scale.terms = ()
 
-    assert not hasattr(scale, "GetTermByName"), "Task 82 must not preempt the deferred lookup policy."
     assert not hasattr(scale, "Fuzzy"), "Task 82 must not preempt the deferred fuzzification policy."
 
 
@@ -146,4 +191,45 @@ def test_LegacyFuzzyScaleLevelsRemainMutableDictionaries():
     assert scale.levels is replacement, "Legacy levels mutation must preserve historical behavior."
     assert scale.GetLevelByName("Only") is replacement[0], (
         "Legacy dictionary lookup must remain available and unchanged."
+    )
+
+
+@pytest.mark.parametrize(
+    "invalidLevel",
+    [
+        {"name": "Missing fuzzy set"},
+        {"fSet": None},
+        {"name": "Extra", "fSet": None, "unexpected": object()},
+    ],
+)
+def test_LegacyFuzzyScaleRequiresBothExactLevelKeys(invalidLevel):
+    scale = FuzzyScale()
+
+    with pytest.raises(Exception, match="2-dim dictionary"):
+        scale.levels = [invalidLevel]
+
+
+@pytest.mark.parametrize(("firstName", "secondName"), [("Low", "LOW"), ("i", "ı")])
+def test_LegacyFuzzyScaleRejectsCaseInsensitiveNameCollisions(firstName, secondName):
+    scale = FuzzyScale()
+
+    with pytest.raises(ValueError, match="not unique ignoring case"):
+        scale.levels = [
+            {"name": firstName, "fSet": _BuildLegacySet()},
+            {"name": secondName, "fSet": _BuildLegacySet()},
+        ]
+
+
+def test_LegacyFuzzyScaleLookupPreservesExactAndCaseInsensitiveModes():
+    scale = FuzzyScale()
+    level = {"name": "Medium", "fSet": _BuildLegacySet()}
+    scale.levels = [level]
+
+    assert scale.GetLevelByName("Medium") is level, "Legacy exact lookup must remain callable."
+    assert scale.GetLevelByName("medium") is None, "Legacy exact lookup must preserve case."
+    assert scale.GetLevelByName("medium", exactMatching=False) is level, (
+        "Legacy case-insensitive lookup must remain callable."
+    )
+    assert scale.GetLevelByName("Med", exactMatching=False) is None, (
+        "Legacy case-insensitive lookup must still require a complete name."
     )
