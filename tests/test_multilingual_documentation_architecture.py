@@ -85,3 +85,12 @@ def test_MultilingualContractTablesHaveConsistentColumns():
 
         else:
             tableColumnCount = None
+
+
+def test_MultilingualExampleUsesReviewedRussianTerminology():
+    """Keep the architecture example aligned with the canonical glossary."""
+
+    contractText = CONTRACTPATH.read_text(encoding="utf-8")
+
+    assert 'preferred = "носитель нечёткого множества"' in contractText
+    assert 'preferred = "положительный носитель"' not in contractText

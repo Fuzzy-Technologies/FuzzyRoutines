@@ -244,7 +244,7 @@ locale = "ru"
 [[terms]]
 id = "concept:fuzzy-set.positive-support"
 english = "positive support"
-preferred = "положительный носитель"
+preferred = "носитель нечёткого множества"
 avoid = ["область интегрирования"]
 note = "Coordinates where membership is strictly positive; not a numerical integration interval."
 references = ["docs/mathematics/universe-support-contract.md"]

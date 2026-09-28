@@ -35,7 +35,7 @@ id = "concept:fuzzy-set.core"
 english = "core"
 preferred = "{preferred}"
 avoid = []
-note = "Coordinates whose membership grade equals the set height."
+note = "Coordinates whose membership grade equals one."
 references = ["docs/reference.md"]
 '''
 
@@ -150,6 +150,40 @@ def test_CurrentLocaleManifestsMatchCanonicalEnglishInventory():
     """Keep every canonical page and public symbol represented exactly once."""
 
     assert ValidateLocales(PROJECTROOT).diagnostics == ()
+
+
+def test_CurrentGlossariesUseReviewedMathematicalTerminology():
+    """Protect the reviewed Russian and Simplified Chinese terminology."""
+
+    russianGlossary = (
+        PROJECTROOT / "docs" / "i18n" / "glossaries" / "ru.toml"
+    ).read_text(encoding="utf-8")
+    chineseGlossary = (
+        PROJECTROOT / "docs" / "i18n" / "glossaries" / "zh-CN.toml"
+    ).read_text(encoding="utf-8")
+
+    for requiredTerm in (
+        'preferred = "универсальное множество"',
+        'preferred = "носитель нечёткого множества"',
+        'preferred = "ядро нечёткого множества"',
+        'preferred = "область интегрирования"',
+    ):
+        assert requiredTerm in russianGlossary, (
+            f"Russian glossary lost the reviewed term: {requiredTerm}"
+        )
+
+    for requiredTerm in (
+        'preferred = "论域"',
+        'preferred = "模糊集的支集"',
+        'preferred = "模糊集的核"',
+        'preferred = "积分域"',
+    ):
+        assert requiredTerm in chineseGlossary, (
+            f"Simplified Chinese glossary lost the reviewed term: {requiredTerm}"
+        )
+
+    assert 'preferred = "正支撑集"' not in chineseGlossary
+    assert "equals the set height" not in chineseGlossary
 
 
 def test_MissingCanonicalUnitHasActionableCompletenessDiagnostic(tmp_path):

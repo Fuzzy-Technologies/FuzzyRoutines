@@ -158,3 +158,54 @@ def test_CanonicalMathematicalModelUsesGitHubCompatibleMathMarkup():
     assert mathFragments
     assert all("<" not in fragment and ">" not in fragment for fragment in mathFragments)
     assert all(r"\operatorname" not in fragment for fragment in mathFragments)
+
+
+def test_CanonicalMathematicalModelSeparatesRegistryAndTheoryNames():
+    """Keep historical operator keys distinct from standard family names."""
+
+    repositoryRoot = Path(__file__).resolve().parents[1]
+    document = (repositoryRoot / "docs" / "MATHEMATICAL_MODEL.md").read_text(
+        encoding="utf-8"
+    )
+
+    for standardName in (
+        "Minimum",
+        "Maximum",
+        "Product",
+        "Probabilistic (algebraic) sum",
+        "Łukasiewicz",
+        "Drastic product",
+        "Drastic sum",
+    ):
+        assert standardName in document, (
+            f"canonical model lost the standard operator name: {standardName}"
+        )
+
+
+def test_TheoryContractsLinkStableAuthoritativeReferences():
+    """Protect direct publication links used by the audited theory pages."""
+
+    repositoryRoot = Path(__file__).resolve().parents[1]
+    expectedReferences = {
+        "docs/mathematics/membership-function-contracts.md": (
+            "https://doi.org/10.1109/21.256541",
+        ),
+        "docs/mathematics/alpha-cuts.md": (
+            "https://doi.org/10.1016/S0019-9958(65)90241-X",
+        ),
+        "docs/mathematics/fuzzy-set-normalization.md": (
+            "https://doi.org/10.1016/S0019-9958(65)90241-X",
+            "https://books.google.com/books?id=AOhQAAAAMAAJ",
+        ),
+        "docs/mathematics/centroid-defuzzification.md": (
+            "https://doi.org/10.1016/S0165-0114(97)00337-0",
+        ),
+    }
+
+    for relativePath, references in expectedReferences.items():
+        document = (repositoryRoot / relativePath).read_text(encoding="utf-8")
+
+        for reference in references:
+            assert reference in document, (
+                f"{relativePath} lost its authoritative reference: {reference}"
+            )
