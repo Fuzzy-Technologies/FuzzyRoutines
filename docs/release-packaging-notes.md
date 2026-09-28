@@ -18,8 +18,8 @@ canonical development version, `2.0.0.dev0`, in `pyproject.toml`.
 - `setup.py` remains only as a legacy command-line compatibility shim; it owns
   neither package metadata nor versioning.
 - Routine CI must build and install artifacts but cannot publish a release.
-- The former Travis deployment configuration is retained until its replacement
-  is verified and Task #46 retires it.
+- The former Travis deployment configuration was retired after the protected
+  Trusted Publishing replacement was verified under Task #46.
 - Any future numerical dependency must support the declared CPython matrix;
   legacy interpreter compatibility is not a dependency-selection constraint.
 
