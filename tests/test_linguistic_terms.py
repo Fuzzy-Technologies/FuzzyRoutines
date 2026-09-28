@@ -11,11 +11,16 @@ import pytest
 
 from fuzzyroutines import (
     ContinuousUniverse,
+    DiscreteUniverse,
     FuzzificationPolicy,
     FuzzificationResult,
+    IntegrationDomain,
     LinguisticScale,
     LinguisticTerm,
     ScalarFuzzySet,
+    ScaleDiagnosticPoint,
+    ScaleDiagnosticsPolicy,
+    ScaleDiagnosticsResult,
     TermMembership,
 )
 from fuzzyroutines.FuzzyRoutines import FuzzyScale, FuzzySet, MFunction
@@ -316,6 +321,172 @@ def test_LinguisticScaleFuzzifyRejectsInvalidPolicyAndIncompleteUniverseCoverage
         scale.Fuzzify(2.0)
 
 
+@pytest.mark.parametrize(
+    ("arguments", "expectedError"),
+    [
+        ({"sampleCount": True}, TypeError),
+        ({"sampleCount": 2.5}, TypeError),
+        ({"sampleCount": 1}, ValueError),
+        ({"membershipThreshold": -0.01}, ValueError),
+        ({"membershipThreshold": 1.01}, ValueError),
+        ({"partitionTolerance": -1e-12}, ValueError),
+        ({"partitionTolerance": float("inf")}, ValueError),
+    ],
+)
+def test_ScaleDiagnosticsPolicyRejectsInvalidGridAndTolerances(
+    arguments,
+    expectedError,
+):
+    with pytest.raises(expectedError):
+        ScaleDiagnosticsPolicy(**arguments)
+
+
+def test_LinguisticScaleDiagnoseReportsCoverageOverlapAndPartitionMetrics():
+    universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+    low = LinguisticTerm("Low", ScalarFuzzySet(universe, lambda coordinate: 1.0 - coordinate))
+    high = LinguisticTerm("High", ScalarFuzzySet(universe, lambda coordinate: coordinate))
+    scale = LinguisticScale((low, high))
+
+    result = scale.Diagnose(
+        IntegrationDomain(0.0, 1.0),
+        ScaleDiagnosticsPolicy(sampleCount=5),
+    )
+
+    assert tuple(point.coordinate for point in result.points) == (0.0, 0.25, 0.5, 0.75, 1.0)
+    assert tuple(point.maximumMembership for point in result.points) == (
+        1.0,
+        0.75,
+        0.5,
+        0.75,
+        1.0,
+    )
+    assert result.gapPoints == (), "A complementary two-term partition must have no sampled gaps."
+    assert tuple(point.coordinate for point in result.overlapPoints) == (0.25, 0.5, 0.75)
+    assert result.gapFraction == 0.0
+    assert result.overlapFraction == 0.6
+    assert result.minimumCoverage == 0.5
+    assert result.meanCoverage == 0.8
+    assert result.maximumCoverage == 1.0
+    assert result.maximumActiveTermCount == 2
+    assert result.meanPartitionError == 0.0
+    assert result.maximumPartitionError == 0.0
+    assert result.isPartitionWithinTolerance
+
+
+def test_LinguisticScaleDiagnoseUsesOneStrictThresholdForGapsAndOverlaps():
+    first = LinguisticTerm("First", _BuildMembershipSet(lambda coordinate: 0.05))
+    second = LinguisticTerm("Second", _BuildMembershipSet(lambda coordinate: 0.04))
+    scale = LinguisticScale((first, second))
+    analysisDomain = IntegrationDomain(0.0, 1.0)
+
+    overlapResult = scale.Diagnose(
+        analysisDomain,
+        ScaleDiagnosticsPolicy(sampleCount=3, membershipThreshold=0.0),
+    )
+    gapResult = scale.Diagnose(
+        analysisDomain,
+        ScaleDiagnosticsPolicy(sampleCount=3, membershipThreshold=0.05),
+    )
+
+    assert all(point.isOverlap for point in overlapResult.points)
+    assert all(point.isGap for point in gapResult.points)
+    assert overlapResult.overlapFraction == 1.0
+    assert gapResult.gapFraction == 1.0
+
+
+def test_LinguisticScaleDiagnoseFindsAnExplicitSampledCoverageGap():
+    low = LinguisticTerm(
+        "Low",
+        _BuildMembershipSet(lambda coordinate: max(0.0, 1.0 - 2.0 * coordinate)),
+    )
+    high = LinguisticTerm(
+        "High",
+        _BuildMembershipSet(lambda coordinate: max(0.0, 2.0 * coordinate - 1.0)),
+    )
+
+    result = LinguisticScale((low, high)).Diagnose(
+        IntegrationDomain(0.0, 1.0),
+        ScaleDiagnosticsPolicy(sampleCount=5),
+    )
+
+    assert tuple(point.coordinate for point in result.gapPoints) == (0.5,)
+    assert result.minimumCoverage == 0.0
+    assert result.gapFraction == 0.2
+    assert not result.isPartitionWithinTolerance
+
+
+def test_LinguisticScaleDiagnoseIsReproducibleAndEvaluatesEachTermOncePerPoint():
+    callCounts = [0, 0]
+
+    def Membership(termIndex):
+        """Return one deterministic counting membership callable."""
+
+        def Evaluate(coordinate):
+            """Record one evaluation and return a stable affine grade."""
+
+            callCounts[termIndex] += 1
+            return coordinate if termIndex else 1.0 - coordinate
+
+        return Evaluate
+
+    scale = LinguisticScale(
+        tuple(
+            LinguisticTerm(f"Term {termIndex}", _BuildMembershipSet(Membership(termIndex)))
+            for termIndex in range(2)
+        )
+    )
+    policy = ScaleDiagnosticsPolicy(sampleCount=7)
+    analysisDomain = IntegrationDomain(0.0, 1.0)
+
+    firstResult = scale.Diagnose(analysisDomain, policy)
+    assert callCounts == [7, 7], "Every term must be evaluated once per declared grid point."
+
+    callCounts[:] = [0, 0]
+    secondResult = scale.Diagnose(analysisDomain, policy)
+
+    assert callCounts == [7, 7]
+    assert firstResult == secondResult, "The declared domain, grid, and tolerance must reproduce."
+
+
+def test_LinguisticScaleDiagnoseRejectsUnsupportedDomainsAndUniverses():
+    continuousScale = LinguisticScale((LinguisticTerm("Bounded", _BuildSet()),))
+    discreteTerm = LinguisticTerm(
+        "Discrete",
+        ScalarFuzzySet(DiscreteUniverse((0.0, 1.0)), lambda coordinate: coordinate),
+    )
+
+    with pytest.raises(TypeError, match="analysisDomain must be an IntegrationDomain"):
+        continuousScale.Diagnose((0.0, 1.0))
+
+    with pytest.raises(TypeError, match="policy must be a ScaleDiagnosticsPolicy"):
+        continuousScale.Diagnose(IntegrationDomain(0.0, 1.0), policy="dense")
+
+    with pytest.raises(ValueError, match="integration domain must lie entirely"):
+        continuousScale.Diagnose(IntegrationDomain(-1.0, 1.0))
+
+    with pytest.raises(TypeError, match="ContinuousUniverse"):
+        LinguisticScale((discreteTerm,)).Diagnose(IntegrationDomain(0.0, 1.0))
+
+
+def test_LinguisticScaleDiagnoseDoesNotModifyMembershipCoefficients():
+    membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
+    originalParameters = dict(membershipFunction.parameters)
+    universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+    term = LinguisticTerm(
+        "Triangle",
+        ScalarFuzzySet(universe, membershipFunction.mju),
+    )
+
+    LinguisticScale((term,)).Diagnose(
+        IntegrationDomain(0.0, 1.0),
+        ScaleDiagnosticsPolicy(sampleCount=11),
+    )
+
+    assert membershipFunction.parameters == originalParameters, (
+        "Scale diagnostics must observe analytical coefficients without modifying them."
+    )
+
+
 def test_ModernLinguisticTypesAreExportedFromPackageRoot():
     import fuzzyroutines
 
@@ -330,12 +501,18 @@ def test_ModernLinguisticTypesAreExportedFromPackageRoot():
         "FuzzificationResult",
         "LinguisticTerm",
         "LinguisticScale",
+        "ScaleDiagnosticPoint",
+        "ScaleDiagnosticsPolicy",
+        "ScaleDiagnosticsResult",
         "TermMembership",
     } <= set(fuzzyroutines.__all__), (
         "The explicit modern export list must contain every linguistic contract type."
     )
     assert fuzzyroutines.FuzzificationPolicy is FuzzificationPolicy
     assert fuzzyroutines.FuzzificationResult is FuzzificationResult
+    assert fuzzyroutines.ScaleDiagnosticPoint is ScaleDiagnosticPoint
+    assert fuzzyroutines.ScaleDiagnosticsPolicy is ScaleDiagnosticsPolicy
+    assert fuzzyroutines.ScaleDiagnosticsResult is ScaleDiagnosticsResult
     assert fuzzyroutines.TermMembership is TermMembership
 
 

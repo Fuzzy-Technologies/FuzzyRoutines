@@ -285,6 +285,14 @@ absolute tie tolerance, and `first`, `last`, or `all` ordered tie selection.
 The governing contract is
 [ADR-0013](adr/0013-linguistic-fuzzification-policy.md).
 
+`Diagnose()` evaluates an explicit endpoint-preserving finite grid and records
+per-point maximum membership, active terms, gaps, overlaps, and partition-of-
+unity error. Its domain, sample count, activity threshold, and partition
+tolerance are explicit. The result is reproducible sampled evidence and never
+claims continuous proof between grid points. The diagnostic definitions and
+non-mutation boundary are fixed by
+[ADR-0014](adr/0014-sampled-scale-diagnostics.md).
+
 The historical mutable `FuzzyScale.levels` list remains available as a
 compatibility surface, and `GetLevelByName()` retains its historical callable
 shape. Its existing `Fuzzy()` later-winner behavior remains supported but is an
@@ -327,9 +335,10 @@ current `supportSet` integration bounds without a retained centroid cache. See t
 | Exact discrete and sampled continuous cuts   | Implemented               | [Alpha-cuts](mathematics/alpha-cuts.md)                              |
 | Height and normalization                     | Implemented               | [Normalization](mathematics/fuzzy-set-normalization.md)              |
 | Typed linguistic representation              | Implemented               | [Linguistic terms](mathematics/linguistic-term-model.md)             |
+| Sampled scale diagnostics                    | Implemented               | [Linguistic terms](mathematics/linguistic-term-model.md)             |
 | Analytical and adaptive centroid             | Implemented               | [Centroid defuzzification](mathematics/centroid-defuzzification.md)  |
 | Executable convexity result API              | Roadmap                   | [Accepted design](mathematics/fuzzy-set-convexity.md)                |
-| Typed linguistic lookup and fuzzification    | Roadmap                   | [Current status](current-status.md#still-in-the-v2-roadmap)          |
+| Typed linguistic lookup and fuzzification    | Implemented               | [Linguistic terms](mathematics/linguistic-term-model.md)             |
 | Symmetric difference                         | Unsupported               | [ADR-0008](adr/0008-fuzzy-set-difference-semantics.md)               |
 | Multidimensional or type-2 fuzzy sets        | Out of scope              | Requires a separate architecture decision                            |
 

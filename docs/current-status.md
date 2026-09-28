@@ -107,6 +107,10 @@ Representative accepted changes for the historical correctness baseline are
 - modern scale fuzzification exposes every ordered membership score, maximum
   confidence, explicit no-match thresholds, and `first`, `last`, or `all` tie
   policies;
+- sampled scale diagnostics expose their finite domain, endpoint-preserving
+  grid, activity threshold, partition tolerance, per-point maximum membership,
+  gaps, overlaps, and aggregate partition-quality evidence without modifying
+  scale coefficients;
 - modern and historical scales reject case-insensitive name collisions, and
   historical dictionary-based `FuzzyScale.levels` plus `GetLevelByName()`
   remain available as compatibility surfaces;

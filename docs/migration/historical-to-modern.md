@@ -24,7 +24,8 @@ set algebra, relations, derived properties, alpha-cuts, exact height-aware
 normalization, and typed linguistic-term and ordered-scale representations. A
 focused membership-function factory remains roadmap work. Exact and Unicode
 case-insensitive typed scale lookup plus explicit fuzzification policies are
-available. Modern centroid defuzzification is available
+available. Explicit-grid coverage, overlap, gap, and partition diagnostics are
+also available without changing membership coefficients. Modern centroid defuzzification is available
 through an explicit integration domain and numerical policy. The examples
 below keep remaining gaps visible instead of inventing future call shapes.
 
@@ -33,7 +34,7 @@ below keep remaining gaps visible instead of inventing future call shapes.
 | Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                   |
 | Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                    |
 | Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                           |
-| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation, lookup, scores, confidence, and fuzzification through `LinguisticScale` and `FuzzificationPolicy`          |
+| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation, lookup, fuzzification, and sampled diagnostics through `LinguisticScale`                                   |
 | Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries               |
 | Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | `Centroid()` with explicit `ScalarFuzzySet`, `IntegrationDomain`, and optional `CentroidPolicy`                                  |
 

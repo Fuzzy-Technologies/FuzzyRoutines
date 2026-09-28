@@ -40,6 +40,9 @@ from fuzzyroutines.linguistic import (
     FuzzificationResult,
     LinguisticScale,
     LinguisticTerm,
+    ScaleDiagnosticPoint,
+    ScaleDiagnosticsPolicy,
+    ScaleDiagnosticsResult,
     TermMembership,
 )
 from fuzzyroutines.properties import (
@@ -94,6 +97,9 @@ __all__ = [
     "SampledAlphaCut",
     "SampledFuzzyProperties",
     "ScalarFuzzySet",
+    "ScaleDiagnosticPoint",
+    "ScaleDiagnosticsPolicy",
+    "ScaleDiagnosticsResult",
     "TNormPolicy",
     "TermMembership",
     "Union",

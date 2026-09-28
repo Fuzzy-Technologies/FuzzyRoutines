@@ -93,7 +93,7 @@ not replacements that existing callers must adopt.
 | Set algebra                 | Scalar operators applied by caller code | `Complement`, `Intersection`, `Union`, and `Difference` with explicit policy objects        | Binary operations require exactly compatible universes.                                |
 | Derived set information     | No unified historical result            | `DeriveProperties`, `SampleProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, `Normalize` | Exact and sampled evidence use distinct result contracts.                              |
 | Relations                   | No focused historical surface           | `EqualOnDomain`, `IncludedOnDomain`, `ComparisonPolicy`, `ComparisonDomain`                 | Comparison tolerance and inspection domain are explicit.                               |
-| Linguistic representation   | `FuzzyScale`, `UniversalFuzzyScale`     | `LinguisticTerm`, `LinguisticScale`, and explicit fuzzification policy/result types         | Lookup, ordered scores, confidence, no-match, and explicit tie policies are available. |
+| Linguistic representation   | `FuzzyScale`, `UniversalFuzzyScale`     | `LinguisticTerm`, `LinguisticScale`, fuzzification, and sampled diagnostic result types     | Lookup, scores, confidence, tie policies, and sampled diagnostics are explicit.        |
 | Centroid defuzzification    | `FuzzySet.Defuz()`, `defuzValue`        | `Centroid` with `ScalarFuzzySet`, `IntegrationDomain`, and optional `CentroidPolicy`        | The integration interval is explicit and finite.                                       |
 
 The root-package export list in

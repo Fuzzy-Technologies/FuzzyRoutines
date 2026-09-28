@@ -98,7 +98,7 @@ state = "missing"
 id = "page:api.modern.linguistic"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/linguistic.md"
-sourceHash = "sha256:0dd71be5502f1b265b4d92394c84c5d2d925f01c4eb16fe9de77f927f0ad3a2b"
+sourceHash = "sha256:035df0c35e41e05561135f788cf37504ae9731f2ab064ccd35797656d95a0ef9"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -111,7 +111,7 @@ state = "missing"
 id = "page:api.modern.package"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/package.md"
-sourceHash = "sha256:e4ba927606f5f7cc73a84143bcc4bcc38cc86be45ca319ab317fed2e1447515c"
+sourceHash = "sha256:11ff7c7769a049595997987bfd324a3838ab59c25e3c89c8da5e9f845fa975cb"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1096,6 +1096,45 @@ state = "missing"
 state = "missing"
 
 [[units]]
+id = "symbol:fuzzyroutines.ScaleDiagnosticPoint"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:41b2bdd05085684ec9809409bd55b52cec3f809b073ffb7f62a6aeb2ac46df2a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.ScaleDiagnosticsPolicy"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:e23952d482336c04d0e85d0ab13b241bb53cabc581dd29b613624af8c17657b8"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.ScaleDiagnosticsResult"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:ac73bb6343df28721ce440e816ddd179de9f7c15d5d77d94f16c5baf97f08dc9"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
 id = "symbol:fuzzyroutines.TNormPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
@@ -1603,6 +1642,19 @@ state = "missing"
 state = "missing"
 
 [[units]]
+id = "symbol:fuzzyroutines.linguistic.LinguisticScale.Diagnose"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:cffb1731fa865f644867521b3001677c5def75556f14b9504a30c357a301aea1"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale.Fuzzify"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
@@ -1633,6 +1685,266 @@ id = "symbol:fuzzyroutines.linguistic.LinguisticTerm"
 kind = "symbol"
 sourcePath = "fuzzyroutines/linguistic.py"
 sourceHash = "sha256:ee601bce05c76360a791dc980f248ef4ce3ff8c08e5e462a92e31a3f10bdfcb6"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:9bdb910a021b887f160192d30b3416b1c9768e6b862f5c813caa11ee94e4596e"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:3b7731260f557be1b7249f54f69571655376d608696797ab3331ee84c3236e01"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:4733209ea05eff3991b53b78cef495f034fc8803dec52d5f9eb8484cbc8cc013"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.isOverlap"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:02e1507f3119a7d4ac6755f84f46b02eec4408a3b0428c43b6bd4610aa93413b"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.maximumMembership"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:43d47ba851d2a7ce2148e804ddcde2fb30e02436c389babbda0f46c564cbc474"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.membershipSum"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:347a0d6fa7ffdfd7f5d436ed5046eecb4f15661d41226c713b364a57a9609db3"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.partitionError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:942bd0a8f704201f5e4d198425bba4a12236fa79a1e4caf2e3f4583d950d1a3a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsPolicy"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:48481ddbb0245a471fc925971152b4bd3af7667b336adceab2e2d0f49674427b"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:d6b0ade2434158a538d7f1d62f977839295d51b9215eb68056c8ea82b8e1c89e"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapFraction"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:c1cce98193830565e5a7126f6c84fbb25a7877515b40ab0fa97721d867487749"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapPoints"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:8b2653a60bbb78529b60642a574fa6aae5eaec4e0a79f4a930e7056662c8ca07"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.isPartitionWithinTolerance"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:ad989d55ae05f0ddc8bd65a79af5377a8bfce9c26d96280a8b7c62464c938786"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumActiveTermCount"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:290ae36020be25cb7cb04e061c975f4fd3ebf17f9ab1711fe57395d315d4577c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumCoverage"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:d4ea78b05bf89b8bf0b3ed48cb5ef07f7bfb6e905843a0fb61a93557c409b3fb"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumPartitionError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:d316d03dcc0a0cd750004d162cf87f8b997d154a5cdc4b9bef6c24007b4a4cf0"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanCoverage"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:29bdca9f57a3f5eb37e4e006d0f3e65a0e373259393988f5fdbeb3e878c2d0e6"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanPartitionError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:8a650283876092281e8652adbd08393dbf34223b3d457b35d3d261bb1d224e23"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.minimumCoverage"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:0799342fb00866bd95056d30941fcdf1f1d17eb3c2850a3ad367b149b90918b4"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapFraction"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:92b1a8246e2b6142fe9ab41973866b37747f8ae76249504716224ad85ae3995b"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapPoints"
+kind = "symbol"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:53c238141a4d925eee12992a1633a9d5eaf0bd256fafe0504117dcc5e4ab16d0"
 reviewClass = "mathematical"
 
 [units.translations.ru]

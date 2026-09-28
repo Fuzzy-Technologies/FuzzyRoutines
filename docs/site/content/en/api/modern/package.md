@@ -45,6 +45,9 @@ duplicate API contracts or create competing anchors.
 | `SampledAlphaCut`           | [`SampledAlphaCut`][fuzzyroutines.alphacuts.SampledAlphaCut]                         |
 | `SampledFuzzyProperties`    | [`SampledFuzzyProperties`][fuzzyroutines.properties.SampledFuzzyProperties]          |
 | `ScalarFuzzySet`            | [`ScalarFuzzySet`][fuzzyroutines.fuzzysets.ScalarFuzzySet]                           |
+| `ScaleDiagnosticPoint`      | [`ScaleDiagnosticPoint`][fuzzyroutines.linguistic.ScaleDiagnosticPoint]              |
+| `ScaleDiagnosticsPolicy`    | [`ScaleDiagnosticsPolicy`][fuzzyroutines.linguistic.ScaleDiagnosticsPolicy]          |
+| `ScaleDiagnosticsResult`    | [`ScaleDiagnosticsResult`][fuzzyroutines.linguistic.ScaleDiagnosticsResult]          |
 | `TNormPolicy`               | [`TNormPolicy`][fuzzyroutines.fuzzysets.TNormPolicy]                                 |
 | `TermMembership`            | [`TermMembership`][fuzzyroutines.linguistic.TermMembership]                          |
 | `Union`                     | [`Union`][fuzzyroutines.fuzzysets.Union]                                             |
