@@ -11,9 +11,12 @@ import pytest
 
 from fuzzyroutines import (
     ContinuousUniverse,
+    FuzzificationPolicy,
+    FuzzificationResult,
     LinguisticScale,
     LinguisticTerm,
     ScalarFuzzySet,
+    TermMembership,
 )
 from fuzzyroutines.FuzzyRoutines import FuzzyScale, FuzzySet, MFunction
 
@@ -23,6 +26,13 @@ def _BuildSet(offset=0.0):
 
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
     return ScalarFuzzySet(universe, lambda coordinate: min(1.0, coordinate + offset))
+
+
+def _BuildMembershipSet(membershipFunction):
+    """Build a bounded modern fuzzy set from an explicit test callable."""
+
+    universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+    return ScalarFuzzySet(universe, membershipFunction)
 
 
 def _BuildLegacySet():
@@ -151,13 +161,159 @@ def test_LinguisticScaleLookupRequiresBooleanMatchingMode(invalidMode):
         scale.GetTermByName("Low", exactMatching=invalidMode)
 
 
-def test_LinguisticScaleIsImmutableAndContainsNoFuzzificationPolicy():
+def test_LinguisticScaleIsImmutableAndContainsNoLegacyFuzzyMethod():
     scale = LinguisticScale((LinguisticTerm("Low", _BuildSet()),))
 
     with pytest.raises(FrozenInstanceError):
         scale.terms = ()
 
     assert not hasattr(scale, "Fuzzy"), "Task 82 must not preempt the deferred fuzzification policy."
+
+
+@pytest.mark.parametrize("tiePolicy", ["first", "last", "all"])
+def test_FuzzificationPolicyAcceptsEveryDocumentedTieMode(tiePolicy):
+    policy = FuzzificationPolicy(tiePolicy=tiePolicy)
+
+    assert policy.tiePolicy == tiePolicy
+    assert policy.minimumConfidence == 0.0
+    assert policy.tieTolerance == 0.0
+
+
+@pytest.mark.parametrize("invalidPolicy", ["earliest", "latest", "", None])
+def test_FuzzificationPolicyRejectsUnknownTieModes(invalidPolicy):
+    with pytest.raises(ValueError, match="unknown tie policy"):
+        FuzzificationPolicy(tiePolicy=invalidPolicy)
+
+
+@pytest.mark.parametrize(
+    ("fieldName", "fieldValue", "expectedError"),
+    [
+        ("minimumConfidence", -0.1, ValueError),
+        ("minimumConfidence", 1.1, ValueError),
+        ("minimumConfidence", None, TypeError),
+        ("tieTolerance", -0.1, ValueError),
+        ("tieTolerance", 1.1, ValueError),
+        ("tieTolerance", True, TypeError),
+    ],
+)
+def test_FuzzificationPolicyRequiresMembershipGradeThresholds(
+    fieldName,
+    fieldValue,
+    expectedError,
+):
+    with pytest.raises(expectedError):
+        FuzzificationPolicy(**{fieldName: fieldValue})
+
+
+@pytest.mark.parametrize(
+    ("tiePolicy", "selectedName"),
+    [("first", "Low"), ("last", "High")],
+)
+def test_LinguisticScaleFuzzifyAppliesOrderedSingleWinnerTiePolicies(
+    tiePolicy,
+    selectedName,
+):
+    low = LinguisticTerm("Low", _BuildMembershipSet(lambda coordinate: 0.5))
+    high = LinguisticTerm("High", _BuildMembershipSet(lambda coordinate: 0.5))
+    scale = LinguisticScale((low, high))
+
+    result = scale.Fuzzify(0.5, FuzzificationPolicy(tiePolicy=tiePolicy))
+
+    assert result.isMatch
+    assert result.isTie
+    assert result.confidence == 0.5
+    assert result.tiedTerms == (low, high)
+    assert tuple(term.name for term in result.selectedTerms) == (selectedName,)
+
+
+def test_LinguisticScaleFuzzifyCanReturnEveryTiedTerm():
+    low = LinguisticTerm("Low", _BuildMembershipSet(lambda coordinate: 0.5))
+    medium = LinguisticTerm("Medium", _BuildMembershipSet(lambda coordinate: 0.2))
+    high = LinguisticTerm("High", _BuildMembershipSet(lambda coordinate: 0.5))
+    scale = LinguisticScale((low, medium, high))
+
+    result = scale.Fuzzify(0.5, FuzzificationPolicy(tiePolicy="all"))
+
+    assert result.tiedTerms == (low, high)
+    assert result.selectedTerms == (low, high)
+    assert result.memberships == (
+        TermMembership(low, 0.5),
+        TermMembership(medium, 0.2),
+        TermMembership(high, 0.5),
+    )
+
+
+def test_LinguisticScaleFuzzifyUsesAbsoluteTieTolerance():
+    first = LinguisticTerm("First", _BuildMembershipSet(lambda coordinate: 0.7))
+    second = LinguisticTerm("Second", _BuildMembershipSet(lambda coordinate: 0.75))
+    scale = LinguisticScale((first, second))
+
+    exactResult = scale.Fuzzify(0.5, FuzzificationPolicy(tiePolicy="all"))
+    tolerantResult = scale.Fuzzify(
+        0.5,
+        FuzzificationPolicy(tiePolicy="all", tieTolerance=0.05),
+    )
+
+    assert exactResult.tiedTerms == (second,)
+    assert tolerantResult.tiedTerms == (first, second)
+
+
+@pytest.mark.parametrize(("grade", "threshold"), [(0.0, 0.0), (0.01, 0.01)])
+def test_LinguisticScaleFuzzifyReturnsNoMatchAtOrBelowMinimumConfidence(
+    grade,
+    threshold,
+):
+    term = LinguisticTerm("Sparse", _BuildMembershipSet(lambda coordinate: grade))
+    scale = LinguisticScale((term,))
+
+    result = scale.Fuzzify(0.5, FuzzificationPolicy(minimumConfidence=threshold))
+
+    assert not result.isMatch
+    assert not result.isTie
+    assert result.confidence == grade
+    assert result.tiedTerms == ()
+    assert result.selectedTerms == ()
+    assert result.memberships == (TermMembership(term, grade),)
+
+
+def test_LinguisticScaleFuzzifyEvaluatesEveryMembershipExactlyOnce():
+    callCounts = [0, 0, 0]
+
+    def Membership(index, grade):
+        """Return a counting membership callable for one declared term."""
+
+        def Evaluate(coordinate):
+            """Count and return one deterministic membership grade."""
+
+            callCounts[index] += 1
+            return grade
+
+        return Evaluate
+
+    terms = tuple(
+        LinguisticTerm(
+            f"Term {index}",
+            _BuildMembershipSet(Membership(index, grade)),
+        )
+        for index, grade in enumerate((0.2, 0.8, 0.3))
+    )
+
+    result = LinguisticScale(terms).Fuzzify(0.5)
+
+    assert callCounts == [1, 1, 1]
+    assert result.confidence == 0.8
+    assert result.selectedTerms == (terms[1],)
+
+
+def test_LinguisticScaleFuzzifyRejectsInvalidPolicyAndIncompleteUniverseCoverage():
+    bounded = LinguisticTerm("Bounded", _BuildMembershipSet(lambda coordinate: 1.0))
+    scale = LinguisticScale((bounded,))
+
+    with pytest.raises(TypeError, match="policy must be a FuzzificationPolicy"):
+        scale.Fuzzify(0.5, policy="first")
+
+    with pytest.raises(ValueError, match="every term universe"):
+        scale.Fuzzify(2.0)
 
 
 def test_ModernLinguisticTypesAreExportedFromPackageRoot():
@@ -169,9 +325,18 @@ def test_ModernLinguisticTypesAreExportedFromPackageRoot():
     assert fuzzyroutines.LinguisticScale is LinguisticScale, (
         "The modern package root must export LinguisticScale."
     )
-    assert {"LinguisticTerm", "LinguisticScale"} <= set(fuzzyroutines.__all__), (
-        "The explicit modern export list must contain both linguistic representation types."
+    assert {
+        "FuzzificationPolicy",
+        "FuzzificationResult",
+        "LinguisticTerm",
+        "LinguisticScale",
+        "TermMembership",
+    } <= set(fuzzyroutines.__all__), (
+        "The explicit modern export list must contain every linguistic contract type."
     )
+    assert fuzzyroutines.FuzzificationPolicy is FuzzificationPolicy
+    assert fuzzyroutines.FuzzificationResult is FuzzificationResult
+    assert fuzzyroutines.TermMembership is TermMembership
 
 
 def test_LegacyFuzzyScaleLevelsRemainMutableDictionaries():
