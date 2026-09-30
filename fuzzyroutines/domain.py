@@ -11,22 +11,11 @@ only one-dimensional scalar coordinates; multidimensional universes require a
 separate architecture decision.
 """
 
-import math
 from dataclasses import dataclass
 from itertools import pairwise
 from numbers import Real
 
-
-def _RequireFiniteReal(value, parameterName):
-    """Return a finite real scalar unchanged or raise a deterministic error."""
-
-    if isinstance(value, bool) or not isinstance(value, Real):
-        raise TypeError(f"{parameterName} must be a real number")
-
-    if not math.isfinite(value):
-        raise ValueError(f"{parameterName} must be a finite real number")
-
-    return value
+from fuzzyroutines.numeric import _RequireFiniteReal
 
 
 @dataclass(frozen=True, slots=True)

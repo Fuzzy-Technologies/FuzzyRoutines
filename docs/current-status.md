@@ -14,6 +14,15 @@ metadata uses `2.0.0.dev0`.
 
 - Historical imports and public names remain covered by compatibility tests.
 - Built-in membership families have documented formulas and strict construction-time parameter validation.
+- Focused `membership`, `operators`, and internal `numeric` modules own the
+  scalar implementations. Modern membership factories are immutable callables
+  with semantic parameter names; `Triangle` and `Trapezoid` use conventional
+  left-to-right parameters. Historical membership methods adapt to the same
+  formula source while preserving their protected signatures.
+- Modern exact-property, normalization, and centroid operations consume
+  analytical snapshots without importing the historical module. Existing
+  `fuzzysets` and `linguistic` module paths stay stable; see
+  [focused module ownership](architecture/focused-modern-modules.md).
 - Forward-looking registry names share one interim implementation with their historical `MFunction` identifiers: `sShoulder`, `gaussian`, `logistic`, and `harringtonDesirability`.
 - Classical logic, algebraic, bounded, and drastic t-norm/s-norm families have reference and property tests.
 - `TNormCompose` and `SCoNormCompose` validate every operand before evaluation.
@@ -149,7 +158,8 @@ The recent accepted documentation and domain wave is
 
 - symmetric-difference semantics;
 - executable convexity queries with evidence-strength-preserving results;
-- completion of the focused typed module API with the historical module retained as a compatibility facade;
+- completion of the historical compatibility facade, curated root exports,
+  public typing, and domain-error model;
 - optional vectorized execution, subject to numerical-parity, time, memory, and dependency evidence;
 - free-threaded CPython support, subject to race-safety and scaling evidence.
 
@@ -164,7 +174,7 @@ Thread-safe or free-threaded execution is not yet a supported contract for the
 complete library. Individual paths may receive reentrancy tests before that
 broader claim is made.
 
-The focused typed modules will be the canonical API for new code. The existing
+The focused modules are the canonical implementation source for new code. The existing
 `FuzzyRoutines.py` module and its parameter conventions will remain available
 as compatibility aliases or adapters rather than defining the new architecture.
 

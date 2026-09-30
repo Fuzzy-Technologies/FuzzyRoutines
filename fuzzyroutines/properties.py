@@ -22,7 +22,8 @@ from fuzzyroutines.domain import (
     IntegrationDomain,
     _RequireFiniteReal,
 )
-from fuzzyroutines.FuzzyRoutines import MFunction
+from fuzzyroutines.membership import _GetAnalyticalSource, _LegacyAnalyticalAdapter
+from fuzzyroutines.numeric import _RequireGrade
 
 
 @dataclass(frozen=True, slots=True)
@@ -636,12 +637,7 @@ def _ContinuousHeight(membershipFunction, core, boundary, leftLimit, rightLimit)
 def _ValidateMembershipGrade(grade, coordinate):
     """Return a finite membership grade in the closed unit interval."""
 
-    grade = _RequireFiniteReal(grade, f"membership grade at {coordinate!r}")
-
-    if not 0 <= grade <= 1:
-        raise ValueError(f"membership grade at {coordinate!r} must lie in [0, 1]")
-
-    return grade
+    return _RequireGrade(grade, f"membership grade at {coordinate!r}")
 
 
 def _EvaluateCoordinates(membershipFunction, coordinates):
@@ -656,14 +652,18 @@ def _EvaluateCoordinates(membershipFunction, coordinates):
 def DeriveProperties(membershipFunction, universe):
     """Derive exact fuzzy-set properties for a supported scalar universe.
 
-    Continuous results require one of the analytical
-    [MFunction][fuzzyroutines.FuzzyRoutines.MFunction] families.
+    Continuous results require a modern
+    [MembershipFunction][fuzzyroutines.membership.MembershipFunction] or a
+    historical [MFunction][fuzzyroutines.FuzzyRoutines.MFunction] adapter.
+    Exact analytical evidence is copied from a validated formula source; an
+    arbitrary callable does not prove continuous support or height.
     A discrete universe is exact because every declared coordinate is evaluated.
     Use [SampleProperties][fuzzyroutines.properties.SampleProperties] for an
     explicitly approximate continuous query.
 
     Args:
-        membershipFunction: Supported historical analytical family.
+        membershipFunction: Modern analytical family or supported historical
+            analytical adapter.
         universe: Continuous or discrete scalar universe to analyze.
 
     Returns:
@@ -676,8 +676,11 @@ def DeriveProperties(membershipFunction, universe):
             produces an invalid membership grade.
     """
 
-    if not isinstance(membershipFunction, MFunction):
-        raise TypeError("membershipFunction must be an MFunction instance")
+    if not (isinstance(universe, DiscreteUniverse) and isinstance(membershipFunction, _LegacyAnalyticalAdapter)):
+        membershipFunction = _GetAnalyticalSource(membershipFunction)
+
+    if membershipFunction is None:
+        raise TypeError("membershipFunction must be a supported analytical membership source")
 
     if isinstance(universe, ContinuousUniverse):
         (
@@ -731,7 +734,8 @@ def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
     """Return explicitly approximate observations on a uniform finite grid.
 
     Args:
-        membershipFunction: Supported historical analytical family to sample.
+        membershipFunction: Modern analytical family or historical analytical
+            adapter whose scalar evaluations are sampled.
         analysisDomain: Closed finite interval covered by the grid.
         sampleCount: Number of uniform-grid coordinates, including endpoints.
 
@@ -744,8 +748,11 @@ def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
             outside $[0, 1]$.
     """
 
-    if not isinstance(membershipFunction, MFunction):
-        raise TypeError("membershipFunction must be an MFunction instance")
+    if not isinstance(membershipFunction, _LegacyAnalyticalAdapter):
+        membershipFunction = _GetAnalyticalSource(membershipFunction)
+
+    if membershipFunction is None:
+        raise TypeError("membershipFunction must be a supported analytical membership source")
 
     if not isinstance(analysisDomain, IntegrationDomain):
         raise TypeError("analysisDomain must be an IntegrationDomain")
