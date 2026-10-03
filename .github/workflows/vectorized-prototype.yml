@@ -36,4 +36,4 @@ jobs:
       - name: Record runtime and optional dependency versions
         run: python -c "import sys, numpy; print(sys.version); print('NumPy', numpy.__version__)"
       - name: Check scalar parity and dependency isolation
-        run: python -m pytest -q tests/test_vectorized_membership.py tests/test_vectorized_optional_boundary.py
+        run: python -m pytest -q tests/test_vectorized_membership.py tests/test_vectorized_optional_boundary.py tests/test_benchmark_vectorized_membership.py

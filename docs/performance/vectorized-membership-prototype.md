@@ -80,3 +80,8 @@ measurement. Task #108 must apply the
 record timing samples, peak memory, dependency/installation cost, input shape,
 dtype, and scalar parity in the same environment. Task #109 must decide whether
 an optional public backend is justified; this experiment makes no such decision.
+
+The [scalar/array comparison](vectorized-membership-comparison.md) provides
+Task #108's reproducible timing, isolated memory, optional dependency cost,
+and parity evidence. Its observations apply to the recorded environment and
+workloads; the public backend decision remains Task #109.
