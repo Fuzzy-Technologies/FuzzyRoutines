@@ -22,21 +22,22 @@ needs.
 The current modern API covers explicit domains, immutable scalar fuzzy sets,
 set algebra, relations, derived properties, alpha-cuts, exact height-aware
 normalization, and typed linguistic-term and ordered-scale representations. A
-focused membership-function factory remains roadmap work. Exact and Unicode
+focused immutable membership-function factory is also available through
+`fuzzyroutines.membership`. Exact and Unicode
 case-insensitive typed scale lookup plus explicit fuzzification policies are
 available. Explicit-grid coverage, overlap, gap, and partition diagnostics are
 also available without changing membership coefficients. Modern centroid defuzzification is available
 through an explicit integration domain and numerical policy. The examples
 below keep remaining gaps visible instead of inventing future call shapes.
 
-| Area                 | Historical API remains supported                                   | Preferred path available today                                                                                                   |
-|----------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| Operators            | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions              | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                   |
-| Membership functions | `MFunction` and every protected historical identifier              | No focused factory yet; use `MFunction` directly or as a callable source for `ScalarFuzzySet`                                    |
-| Fuzzy sets           | Mutable `FuzzySet` with a legacy `supportSet` integration interval | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                           |
-| Scales               | `FuzzyScale` and `UniversalFuzzyScale`                             | Typed representation, lookup, fuzzification, and sampled diagnostics through `LinguisticScale`                                   |
-| Derived operations   | No equivalent unified modern surface                               | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries               |
-| Defuzzification      | `FuzzySet.Defuz()` and `defuzValue`                                | `Centroid()` with explicit `ScalarFuzzySet`, `IntegrationDomain`, and optional `CentroidPolicy`                                  |
+| Area                   | Historical API remains supported                                     | Preferred path available today                                                                                                     |
+| ---------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Operators              | `FuzzyNOT`, `TNorm`, `SCoNorm`, and compose functions                | `NegationPolicy`, `TNormPolicy`, and `SNormPolicy`; set operations require policies explicitly                                     |
+| Membership functions   | `MFunction` and every protected historical identifier                | Immutable callable factories in `fuzzyroutines.membership`, including conventional `Triangle` and `Trapezoid`                      |
+| Fuzzy sets             | Mutable `FuzzySet` with a legacy `supportSet` integration interval   | Immutable `ScalarFuzzySet` with an explicit `ContinuousUniverse` or `DiscreteUniverse`                                             |
+| Scales                 | `FuzzyScale` and `UniversalFuzzyScale`                               | Typed representation, lookup, fuzzification, and sampled diagnostics through `LinguisticScale`                                     |
+| Derived operations     | No equivalent unified modern surface                                 | `DeriveProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, and `Normalize` preserve explicit exactness boundaries                 |
+| Defuzzification        | `FuzzySet.Defuz()` and `defuzValue`                                  | `Centroid()` with explicit `ScalarFuzzySet`, `IntegrationDomain`, and optional `CentroidPolicy`                                    |
 
 ## Operators
 
@@ -77,16 +78,15 @@ membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
 grade = membershipFunction.mju(0.25)
 ```
 
-There is no focused modern membership-function factory yet. When adopting the
-modern set model, reuse the protected evaluator as a callable:
+For new code, use the immutable modern callable directly:
 
 ```python
 from fuzzyroutines import ContinuousUniverse, ScalarFuzzySet
-from fuzzyroutines.FuzzyRoutines import MFunction
+from fuzzyroutines.membership import Triangle
 
-membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
+membershipFunction = Triangle(left=0.0, peak=0.5, right=1.0)
 universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
-fuzzySet = ScalarFuzzySet(universe, membershipFunction.mju)
+fuzzySet = ScalarFuzzySet(universe, membershipFunction)
 ```
 
 Additive registry names such as `gaussian`, `logistic`, `sShoulder`, and
@@ -95,6 +95,14 @@ renaming `exponential`, `sigmoidal`, `parabolic`, or `desirability`. See the
 [membership-function contract](../mathematics/membership-function-contracts.md)
 before changing any identifier because some historical parameter orders are
 deliberately preserved.
+
+The modern `Triangle(left, peak, right)` contract deliberately differs from
+historical `MFunction("triangle", a=left, b=right, c=peak)`. Modern
+`Trapezoid(left, plateau_start, plateau_end, right)` similarly differs from
+the historical `trapezium` keyword mapping. Do not transfer a positional tuple
+between the APIs without translating it explicitly. The shared scalar
+formulas retain the accepted historical boundaries, including `peak == right`
+for the existing high triangular term.
 
 ## Fuzzy sets
 
@@ -124,7 +132,8 @@ from fuzzyroutines import (
 )
 
 universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
-fuzzySet = ScalarFuzzySet(universe, membershipFunction.mju)
+membershipFunction = Triangle(left=0.0, peak=0.5, right=1.0)
+fuzzySet = ScalarFuzzySet(universe, membershipFunction)
 complement = Complement(fuzzySet, NegationPolicy("standard"))
 
 assert complement.Membership(0.25) == 0.5
@@ -212,7 +221,7 @@ python examples/migration/modern_supported.py
   exercises all five historical areas.
 - [`modern_supported.py`](../../examples/migration/modern_supported.py) exercises
   explicit operator policies and immutable fuzzy sets while clearly using the
-  historical membership factory as the current interoperability path.
+  focused immutable membership factory without importing the historical module.
 
 The example tests execute each script from a temporary working directory. The
 package workflow independently installs the wheel and source distribution,

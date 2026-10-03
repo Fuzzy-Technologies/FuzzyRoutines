@@ -34,6 +34,16 @@ source = "fuzzyroutines/linguistic.py"
 mode = "authored"
 
 [[surfaces]]
+module = "fuzzyroutines.membership"
+source = "fuzzyroutines/membership.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.operators"
+source = "fuzzyroutines/operators.py"
+mode = "authored"
+
+[[surfaces]]
 module = "fuzzyroutines.properties"
 source = "fuzzyroutines/properties.py"
 mode = "authored"
@@ -47,6 +57,10 @@ mode = "authored"
 module = "fuzzyroutines.FuzzyRoutines"
 source = "fuzzyroutines/FuzzyRoutines.py"
 mode = "authored"
+
+[[exclusions]]
+symbol = "fuzzyroutines.numeric"
+reason = "Internal scalar validation helpers; public validation contracts are documented at the consuming API boundaries."
 
 [[exclusions]]
 symbol = "fuzzyroutines.Examples"

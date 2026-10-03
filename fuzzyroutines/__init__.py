@@ -28,11 +28,8 @@ from fuzzyroutines.fuzzysets import (
     Height,
     Intersection,
     IsNormal,
-    NegationPolicy,
     Normalize,
     ScalarFuzzySet,
-    SNormPolicy,
-    TNormPolicy,
     Union,
 )
 from fuzzyroutines.linguistic import (
@@ -45,6 +42,7 @@ from fuzzyroutines.linguistic import (
     ScaleDiagnosticsResult,
     TermMembership,
 )
+from fuzzyroutines.operators import NegationPolicy, SNormPolicy, TNormPolicy
 from fuzzyroutines.properties import (
     ContinuousFuzzyProperties,
     ContinuousInterval,

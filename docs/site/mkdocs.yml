@@ -47,6 +47,8 @@ nav:
           - Domains: api/modern/domain.md
           - Fuzzy sets: api/modern/fuzzysets.md
           - Linguistic terms: api/modern/linguistic.md
+          - Membership functions: api/modern/membership.md
+          - Scalar operators: api/modern/operators.md
           - Derived properties: api/modern/properties.md
           - Relations: api/modern/relations.md
       - Historical API:

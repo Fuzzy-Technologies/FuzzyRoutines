@@ -19,209 +19,17 @@ from numbers import Real
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
-    _RequireFiniteReal,
+)
+from fuzzyroutines.membership import _AnalyticalSource, _GetAnalyticalSource
+from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
+from fuzzyroutines.operators import (
+    OPERATOR_FAMILIES,
+    NegationPolicy,
+    SNormPolicy,
+    TNormPolicy,
 )
 
-OPERATORFAMILIES = ("logic", "algebraic", "boundary", "drastic")
-
-
-def _RequireGrade(value, parameterName):
-    """Return a finite real membership grade in the closed unit interval."""
-
-    value = _RequireFiniteReal(value, parameterName)
-
-    if not 0 <= value <= 1:
-        raise ValueError(f"{parameterName} must lie in the closed interval [0, 1]")
-
-    return value
-
-
-@dataclass(frozen=True, slots=True)
-class NegationPolicy:
-    """Explicit fuzzy-negation family and its optional fixed-point parameter.
-
-    Attributes:
-        family: `"standard"`, `"parametric"`, or `"parabolic"`.
-        alpha: Fixed point for parametric or parabolic negation; absent for
-            standard negation.
-    """
-
-    family: str
-    alpha: Real | None = None
-
-    def __post_init__(self):
-        """Validate the complete negation configuration before evaluation."""
-
-        if self.family == "standard":
-            if self.alpha is not None:
-                raise ValueError("standard negation does not accept alpha")
-
-            return
-
-        if self.family == "parametric":
-            alpha = _RequireFiniteReal(self.alpha, "alpha")
-
-            if not 0 < alpha < 1:
-                raise ValueError("parametric negation alpha must lie in the open interval (0, 1)")
-
-            object.__setattr__(self, "alpha", alpha)
-            return
-
-        if self.family == "parabolic":
-            alpha = _RequireFiniteReal(self.alpha, "alpha")
-
-            if not 0.25 <= alpha <= 0.75:
-                raise ValueError("parabolic negation alpha must lie in the closed interval [1/4, 3/4]")
-
-            object.__setattr__(self, "alpha", alpha)
-            return
-
-        raise ValueError(f"unknown negation family: {self.family!r}")
-
-    def Evaluate(self, grade):
-        """Evaluate the configured negation for one membership grade.
-
-        Args:
-            grade: Finite membership degree in $[0, 1]$.
-
-        Returns:
-            The complemented membership degree under this policy.
-
-        Raises:
-            TypeError: If `grade` is not a real scalar.
-            ValueError: If `grade` is non-finite or outside $[0, 1]$.
-        """
-
-        grade = _RequireGrade(grade, "grade")
-
-        if self.family == "standard":
-            return 1 - grade
-
-        if self.family == "parametric":
-            if grade <= self.alpha:
-                return grade * (self.alpha - 1) / self.alpha + 1
-
-            return (grade - 1) * self.alpha / (self.alpha - 1)
-
-        if grade == 0:
-            return 1.0
-
-        if grade == 1:
-            return 0.0
-
-        # Stable rationalized root of the implicit quadratic relation; see
-        # docs/mathematics/parabolic-negation-derivation.md.
-        if self.alpha <= 0.5:
-            discriminant = (4 * self.alpha - 1) ** 2 + 8 * (1 - 2 * self.alpha) * grade
-
-        else:
-            discriminant = (4 * self.alpha - 3) ** 2 + 8 * (2 * self.alpha - 1) * (1 - grade)
-
-        return grade + 4 * (self.alpha - grade) / (1 + math.sqrt(discriminant))
-
-
-@dataclass(frozen=True, slots=True)
-class TNormPolicy:
-    """Explicit t-norm family used by fuzzy-set intersection.
-
-    Attributes:
-        family: One of the names in `OPERATORFAMILIES`.
-    """
-
-    family: str
-
-    def __post_init__(self):
-        """Reject every family not accepted by ADR-0004."""
-
-        if self.family not in OPERATORFAMILIES:
-            raise ValueError(f"unknown t-norm family: {self.family!r}")
-
-    def Evaluate(self, leftGrade, rightGrade):
-        """Evaluate the configured t-norm for two membership grades.
-
-        Args:
-            leftGrade: Left membership degree in $[0, 1]$.
-            rightGrade: Right membership degree in $[0, 1]$.
-
-        Returns:
-            Conjunction under the configured family.
-
-        Raises:
-            TypeError: If an operand is not a real scalar.
-            ValueError: If an operand is non-finite or outside $[0, 1]$.
-        """
-
-        leftGrade = _RequireGrade(leftGrade, "leftGrade")
-        rightGrade = _RequireGrade(rightGrade, "rightGrade")
-
-        if self.family == "logic":
-            return min(leftGrade, rightGrade)
-
-        if self.family == "algebraic":
-            return leftGrade * rightGrade
-
-        if self.family == "boundary":
-            return max(leftGrade + rightGrade - 1, 0)
-
-        if leftGrade == 1:
-            return rightGrade
-
-        if rightGrade == 1:
-            return leftGrade
-
-        return 0
-
-
-@dataclass(frozen=True, slots=True)
-class SNormPolicy:
-    """Explicit s-norm family used by fuzzy-set union.
-
-    Attributes:
-        family: One of the names in `OPERATORFAMILIES`.
-    """
-
-    family: str
-
-    def __post_init__(self):
-        """Reject every family not accepted by ADR-0004."""
-
-        if self.family not in OPERATORFAMILIES:
-            raise ValueError(f"unknown s-norm family: {self.family!r}")
-
-    def Evaluate(self, leftGrade, rightGrade):
-        """Evaluate the configured s-norm for two membership grades.
-
-        Args:
-            leftGrade: Left membership degree in $[0, 1]$.
-            rightGrade: Right membership degree in $[0, 1]$.
-
-        Returns:
-            Disjunction under the configured family.
-
-        Raises:
-            TypeError: If an operand is not a real scalar.
-            ValueError: If an operand is non-finite or outside $[0, 1]$.
-        """
-
-        leftGrade = _RequireGrade(leftGrade, "leftGrade")
-        rightGrade = _RequireGrade(rightGrade, "rightGrade")
-
-        if self.family == "logic":
-            return max(leftGrade, rightGrade)
-
-        if self.family == "algebraic":
-            return leftGrade + rightGrade - leftGrade * rightGrade
-
-        if self.family == "boundary":
-            return min(leftGrade + rightGrade, 1)
-
-        if leftGrade == 0:
-            return rightGrade
-
-        if rightGrade == 0:
-            return leftGrade
-
-        return 1
+OPERATORFAMILIES = OPERATOR_FAMILIES
 
 
 @dataclass(frozen=True, slots=True, eq=False)
@@ -293,20 +101,25 @@ class _NormalizedContinuousMembership:
     def __call__(self, coordinate):
         """Evaluate the frozen analytical definition and scale its grade."""
 
-        from fuzzyroutines.FuzzyRoutines import MFunction
-
-        membershipFunction = MFunction(self.familyIdentifier, **dict(self.parameters))
+        membershipFunction = _AnalyticalSource(self.familyIdentifier.title(), self.parameters)
         return membershipFunction.mju(coordinate) / self.sourceHeight
 
 
 def _ContinuousAnalyticalSource(fuzzySet):
-    """Return the exact analytical source behind a bound `MFunction` method."""
+    """Return trusted analytical evidence from a callable or supported bound evaluator."""
 
-    from fuzzyroutines.FuzzyRoutines import MFunction
+    evaluator = fuzzySet.membershipFunction
+    source = _GetAnalyticalSource(evaluator)
 
-    source = getattr(fuzzySet.membershipFunction, "__self__", None)
+    if source is not None:
+        return source
 
-    if isinstance(source, MFunction) and fuzzySet.membershipFunction == source.mju:
+    owner = getattr(evaluator, "__self__", None)
+    source = _GetAnalyticalSource(owner)
+
+    if source is not None and (
+        evaluator == getattr(owner, "mju", None) or evaluator == getattr(owner, "Evaluate", None)
+    ):
         return source
 
     return None
@@ -334,12 +147,11 @@ def _DiscreteGrades(fuzzySet):
 def _NormalizedContinuousHeight(membershipFunction, universe):
     """Return exact height after restricting normalized evidence to a universe."""
 
-    from fuzzyroutines.FuzzyRoutines import MFunction
     from fuzzyroutines.properties import DeriveProperties
 
-    frozenSource = MFunction(
-        membershipFunction.familyIdentifier,
-        **dict(membershipFunction.parameters),
+    frozenSource = _AnalyticalSource(
+        membershipFunction.familyIdentifier.title(),
+        membershipFunction.parameters,
     )
     sourceHeight = DeriveProperties(frozenSource, universe).height
     return _RequireGrade(
@@ -352,8 +164,10 @@ def Height(fuzzySet):
     """Return the exact supremum of membership grades when it is provable.
 
     A discrete universe is evaluated exhaustively.  A continuous universe
-    requires either internally preserved exact evidence or a bound analytical
-    [MFunction][fuzzyroutines.FuzzyRoutines.MFunction] supported by
+    requires internally preserved exact evidence, a modern analytical
+    [MembershipFunction][fuzzyroutines.membership.MembershipFunction], or a
+    registered historical [MFunction][fuzzyroutines.FuzzyRoutines.MFunction]
+    evaluator supported by
     [DeriveProperties][fuzzyroutines.properties.DeriveProperties].
     The function never promotes a finite sample maximum to an exact height.
 
@@ -463,10 +277,9 @@ def Normalize(fuzzySet):
             familyIdentifier = fuzzySet.membershipFunction.familyIdentifier
             parameters = fuzzySet.membershipFunction.parameters
 
-            from fuzzyroutines.FuzzyRoutines import MFunction
             from fuzzyroutines.properties import DeriveProperties
 
-            frozenSource = MFunction(familyIdentifier, **dict(parameters))
+            frozenSource = _AnalyticalSource(familyIdentifier.title(), parameters)
             height = DeriveProperties(frozenSource, fuzzySet.universe).height
             _RequireGrade(
                 height / fuzzySet.membershipFunction.sourceHeight,
@@ -489,10 +302,9 @@ def Normalize(fuzzySet):
         familyIdentifier = analyticalSource.name.lower()
         parameters = tuple(sorted(analyticalSource.parameters.items()))
 
-        from fuzzyroutines.FuzzyRoutines import MFunction
         from fuzzyroutines.properties import DeriveProperties
 
-        frozenSource = MFunction(familyIdentifier, **dict(parameters))
+        frozenSource = _AnalyticalSource(familyIdentifier.title(), parameters)
         height = DeriveProperties(frozenSource, fuzzySet.universe).height
 
         if height == 0:

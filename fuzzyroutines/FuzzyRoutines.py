@@ -14,8 +14,10 @@ import copy
 import math
 
 import fuzzyroutines.domain as _domain
+import fuzzyroutines.membership as _membership
 from fuzzyroutines.defuzzification import Centroid as _Centroid
 from fuzzyroutines.fuzzysets import ScalarFuzzySet as _ScalarFuzzySet
+from fuzzyroutines.operators import _EvaluateNegation, _EvaluateSNorm, _EvaluateTNorm
 
 
 def DiapasonParser(diapason):
@@ -125,10 +127,7 @@ def FuzzyNOT(fuzzyNumber, alpha=0.5):
     if not IsNumber(alpha) or not math.isfinite(alpha) or not 0 < alpha < 1:
         raise ValueError("alpha must be a finite real number in the open interval (0, 1)")
 
-    if fuzzyNumber <= alpha:
-        return fuzzyNumber * (alpha - 1) / alpha + 1
-
-    return (fuzzyNumber - 1) * alpha / (alpha - 1)
+    return _EvaluateNegation('parametric', alpha, fuzzyNumber)
 
 
 def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
@@ -154,22 +153,7 @@ def FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001):
     if not IsNumber(alpha) or not math.isfinite(alpha) or not 0.25 <= alpha <= 0.75:
         raise ValueError("alpha must be a finite real number in the closed interval [1/4, 3/4]")
 
-    if fuzzyNumber == 0:
-        return 1.0
-
-    if fuzzyNumber == 1:
-        return 0.0
-
-    # The split discriminants stay non-negative on their half-domains. The
-    # rationalized root avoids cancellation and the alpha=1/2 singularity;
-    # see docs/mathematics/parabolic-negation-derivation.md.
-    if alpha <= 0.5:
-        discriminant = (4 * alpha - 1) ** 2 + 8 * (1 - 2 * alpha) * fuzzyNumber
-
-    else:
-        discriminant = (4 * alpha - 3) ** 2 + 8 * (2 * alpha - 1) * (1 - fuzzyNumber)
-
-    return fuzzyNumber + 4 * (alpha - fuzzyNumber) / (1 + math.sqrt(discriminant))
+    return _EvaluateNegation('parabolic', alpha, fuzzyNumber)
 
 
 def FuzzyAND(aNumber, bNumber):
@@ -188,7 +172,7 @@ def FuzzyAND(aNumber, bNumber):
     """
     _RequireFuzzyDegree(aNumber, 'aNumber')
     _RequireFuzzyDegree(bNumber, 'bNumber')
-    return min(aNumber, bNumber)
+    return _EvaluateTNorm('logic', aNumber, bNumber)
 
 
 def FuzzyOR(aNumber, bNumber):
@@ -207,7 +191,7 @@ def FuzzyOR(aNumber, bNumber):
     """
     _RequireFuzzyDegree(aNumber, 'aNumber')
     _RequireFuzzyDegree(bNumber, 'bNumber')
-    return max(aNumber, bNumber)
+    return _EvaluateSNorm('logic', aNumber, bNumber)
 
 
 def TNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
@@ -229,25 +213,7 @@ def TNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
     _RequireFuzzyDegree(aFuzzyNumber, 'aFuzzyNumber')
     _RequireFuzzyDegree(bFuzzyNumber, 'bFuzzyNumber')
 
-    if normType == 'logic':
-        return min(aFuzzyNumber, bFuzzyNumber)
-
-    if normType == 'algebraic':
-        return aFuzzyNumber * bFuzzyNumber
-
-    if normType == 'boundary':
-        return max(aFuzzyNumber + bFuzzyNumber - 1, 0)
-
-    if normType == 'drastic':
-        if aFuzzyNumber == 1:
-            return bFuzzyNumber
-
-        if bFuzzyNumber == 1:
-            return aFuzzyNumber
-
-        return 0
-
-    raise ValueError(f"unknown t-norm family: {normType!r}")
+    return _EvaluateTNorm(normType, aFuzzyNumber, bFuzzyNumber)
 
 
 def TNormCompose(*fuzzyNumbers, normType='logic'):
@@ -302,25 +268,7 @@ def SCoNorm(aFuzzyNumber, bFuzzyNumber, normType='logic'):
     _RequireFuzzyDegree(aFuzzyNumber, 'aFuzzyNumber')
     _RequireFuzzyDegree(bFuzzyNumber, 'bFuzzyNumber')
 
-    if normType == 'logic':
-        return max(aFuzzyNumber, bFuzzyNumber)
-
-    if normType == 'algebraic':
-        return aFuzzyNumber + bFuzzyNumber - aFuzzyNumber * bFuzzyNumber
-
-    if normType == 'boundary':
-        return min(aFuzzyNumber + bFuzzyNumber, 1)
-
-    if normType == 'drastic':
-        if aFuzzyNumber == 0:
-            return bFuzzyNumber
-
-        if bFuzzyNumber == 0:
-            return aFuzzyNumber
-
-        return 1
-
-    raise ValueError(f"unknown s-norm family: {normType!r}")
+    return _EvaluateSNorm(normType, aFuzzyNumber, bFuzzyNumber)
 
 
 def SCoNormCompose(*fuzzyNumbers, normType='logic'):
@@ -356,7 +304,7 @@ def SCoNormCompose(*fuzzyNumbers, normType='logic'):
     return result
 
 
-class MFunction():
+class MFunction(_membership._LegacyAnalyticalAdapter):
     """Represent one historical analytical membership-function family.
 
     Args:
@@ -407,66 +355,22 @@ class MFunction():
         geometrically `a` is the left foot, `c` is the apex, and `b` is the
         right foot.
         """
-        functionName = self.mju.__name__
-        requiredParameters = {
-            'Hyperbolic': ('a', 'b', 'c'),
-            'Bell': ('a', 'b', 'c'),
-            'Parabolic': ('a', 'b'),
-            'Triangle': ('a', 'b', 'c'),
-            'Trapezium': ('a', 'b', 'c', 'd'),
-            'Exponential': ('a', 'b'),
-            'Sigmoidal': ('a', 'b'),
-            'Desirability': (),
-        }[functionName]
+        validated_parameters = _membership._ValidateFamilyParameters(self.mju.__name__, parameters)
 
-        if not isinstance(parameters, dict) or set(parameters) != set(requiredParameters):
-            raise ValueError(
-                "{} membership function requires exactly these parameters: {}".format(
-                    functionName,
-                    ', '.join(requiredParameters) if requiredParameters else 'none',
-                )
-            )
+        for parameter_name, parameter_value in validated_parameters.items():
+            _RequireFiniteReal(parameter_value, parameter_name)
 
-        for parameterName in requiredParameters:
-            parameterValue = parameters[parameterName]
+        return validated_parameters
 
-            if not IsNumber(parameterValue) or not math.isfinite(parameterValue):
-                raise ValueError(
-                    "{} parameter {!r} must be a finite real number".format(
-                        functionName,
-                        parameterName,
-                    )
-                )
+    def _AnalyticalSnapshot(self):
+        """Freeze current validated parameters for modern analytical operations."""
 
-        if functionName == 'Hyperbolic':
-            if parameters['a'] <= 0 or parameters['b'] <= 0:
-                raise ValueError("Hyperbolic parameters must satisfy a > 0 and b > 0")
+        if self.mju not in self._functions.values():
+            raise ValueError("exact analytical evidence requires an unchanged registered evaluator")
 
-        elif functionName == 'Bell':
-            if not parameters['a'] < parameters['b'] <= parameters['c']:
-                raise ValueError("Bell parameters must satisfy a < b <= c")
+        parameters = self._ValidateParameters(self._parameters)
 
-        elif functionName == 'Parabolic':
-            if not parameters['a'] < parameters['b']:
-                raise ValueError("Parabolic parameters must satisfy a < b")
-
-        elif functionName == 'Triangle':
-            if not parameters['a'] < parameters['c'] <= parameters['b']:
-                raise ValueError("Triangle parameters must satisfy a < c <= b")
-
-        elif functionName == 'Trapezium':
-            if not parameters['a'] < parameters['c'] <= parameters['d'] < parameters['b']:
-                raise ValueError("Trapezium parameters must satisfy a < c <= d < b")
-
-        elif functionName == 'Exponential':
-            if parameters['b'] <= 0:
-                raise ValueError("Exponential parameter b must satisfy b > 0")
-
-        elif functionName == 'Sigmoidal':
-            if parameters['a'] == 0:
-                raise ValueError("Sigmoidal parameter a must be non-zero")
-
-        return dict(parameters)
+        return _membership._AnalyticalSource(self.name, tuple(parameters.items()))
 
     @property
     def name(self):
@@ -512,14 +416,8 @@ class MFunction():
                 intermediate power.
         """
         _RequireFiniteReal(x, 'x')
-        a = self._parameters['a']
-        b = self._parameters['b']
-        c = self._parameters['c']
 
-        if x <= c:
-            return 1
-
-        return 1 / (1 + (a * (x - c)) ** b)
+        return _membership._Hyperbolic(self._parameters, x)
 
     def Bell(self, x):
         """Evaluate the finite bell membership function at `x`.
@@ -536,26 +434,8 @@ class MFunction():
                 intermediate square.
         """
         _RequireFiniteReal(x, 'x')
-        a = self._parameters['a']
-        b = self._parameters['b']
-        c = self._parameters['c']
 
-        if x < b:
-            return self.Parabolic(x)
-
-        if x <= c:
-            return 1
-
-        rightBoundary = c + b - a
-        rightMidpoint = (c + rightBoundary) / 2
-
-        if x <= rightMidpoint:
-            return 1 - (2 * (x - c) ** 2) / (rightBoundary - c) ** 2
-
-        if x < rightBoundary:
-            return (2 * (x - rightBoundary) ** 2) / (rightBoundary - c) ** 2
-
-        return 0
+        return _membership._Bell(self._parameters, x)
 
     def Parabolic(self, x):
         """Evaluate the rising parabolic shoulder at `x`.
@@ -572,19 +452,8 @@ class MFunction():
                 intermediate square.
         """
         _RequireFiniteReal(x, 'x')
-        a = self._parameters['a']
-        b = self._parameters['b']
 
-        if x <= a:
-            return 0
-
-        if x <= (a + b) / 2:
-            return (2 * (x - a) ** 2) / (b - a) ** 2
-
-        if x < b:
-            return 1 - (2 * (x - b) ** 2) / (b - a) ** 2
-
-        return 1
+        return _membership._Parabolic(self._parameters, x)
 
     def Triangle(self, x):
         """Evaluate the triangular membership function at `x`.
@@ -599,20 +468,8 @@ class MFunction():
             ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
-        a = self._parameters['a']
-        b = self._parameters['b']
-        c = self._parameters['c']
 
-        if x <= a:
-            return 0
-
-        if x <= c:
-            return (x - a) / (c - a)
-
-        if x < b:
-            return (b - x) / (b - c)
-
-        return 0
+        return _membership._Triangle(self._parameters, x)
 
     def Trapezium(self, x):
         """Evaluate the trapezoidal membership function at `x`.
@@ -627,24 +484,8 @@ class MFunction():
             ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
-        a = self._parameters['a']
-        b = self._parameters['b']
-        c = self._parameters['c']
-        d = self._parameters['d']
 
-        if x <= a:
-            return 0
-
-        if x < c:
-            return (x - a) / (c - a)
-
-        if x <= d:
-            return 1
-
-        if x <= b:
-            return (b - x) / (b - d)
-
-        return 0
+        return _membership._Trapezium(self._parameters, x)
 
     def Exponential(self, x):
         """Evaluate the Gaussian-shaped exponential function at `x`.
@@ -661,12 +502,8 @@ class MFunction():
             ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
-        a = self._parameters['a']
-        b = self._parameters['b']
-        scaledDistance = (x - a) / b
-        # Binary64 underflow may produce zero far from the centre; analytical
-        # support is derived from the formula, never from this sampled value.
-        return math.exp(-0.5 * scaledDistance * scaledDistance)
+
+        return _membership._Exponential(self._parameters, x)
 
     def Sigmoidal(self, x):
         """Evaluate the numerically stable logistic function at `x`.
@@ -683,18 +520,8 @@ class MFunction():
             ValueError: If `x` is not a supported finite built-in number.
         """
         _RequireFiniteReal(x, 'x')
-        a = self._parameters['a']
-        b = self._parameters['b']
-        exponent = a * (x - b)
 
-        # Algebraically equivalent branches keep the exp argument non-positive,
-        # preventing overflow for every finite exponent. See the numerical
-        # derivation in docs/mathematics/source-algorithm-invariants.md.
-        if exponent >= 0:
-            return 1 / (1 + math.exp(-exponent))
-
-        exponential = math.exp(exponent)
-        return exponential / (1 + exponential)
+        return _membership._Sigmoidal(self._parameters, x)
 
     def Desirability(self, y):
         """Evaluate Harrington's desirability function at `y`.
@@ -713,13 +540,7 @@ class MFunction():
         """
         _RequireFiniteReal(y, 'y')
 
-        # Beyond this binary64 bound the inner exponential overflows while the
-        # representable value of exp(-exp(-y)) is already exactly zero. See
-        # docs/mathematics/source-algorithm-invariants.md.
-        if y < -math.log(float.fromhex('0x1.fffffffffffffp+1023')):
-            return 0.0
-
-        return math.exp(-math.exp(-y))
+        return _membership._Desirability(self._parameters, y)
 
 
 class FuzzySet():
