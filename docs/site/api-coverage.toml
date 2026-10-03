@@ -56,7 +56,7 @@ mode = "authored"
 [[surfaces]]
 module = "fuzzyroutines.FuzzyRoutines"
 source = "fuzzyroutines/FuzzyRoutines.py"
-mode = "authored"
+mode = "adapters"
 
 [[exclusions]]
 symbol = "fuzzyroutines.numeric"
@@ -65,3 +65,27 @@ reason = "Internal scalar validation helpers; public validation contracts are do
 [[exclusions]]
 symbol = "fuzzyroutines.Examples"
 reason = "Executable demonstration module validated as documentation, not a reusable public API surface."
+
+[[exclusions]]
+symbol = "fuzzyroutines._legacy"
+reason = "Private historical compatibility adapters rendered under the protected fuzzyroutines.FuzzyRoutines names, rather than as a separate public API."
+
+[[exclusions]]
+symbol = "fuzzyroutines._legacy.utilities"
+reason = "Private historical compatibility adapters rendered under the protected fuzzyroutines.FuzzyRoutines names, rather than as a separate public API."
+
+[[exclusions]]
+symbol = "fuzzyroutines._legacy.operators"
+reason = "Private historical compatibility adapters rendered under the protected fuzzyroutines.FuzzyRoutines names, rather than as a separate public API."
+
+[[exclusions]]
+symbol = "fuzzyroutines._legacy.membership"
+reason = "Private historical compatibility adapters rendered under the protected fuzzyroutines.FuzzyRoutines names, rather than as a separate public API."
+
+[[exclusions]]
+symbol = "fuzzyroutines._legacy.sets"
+reason = "Private historical compatibility adapters rendered under the protected fuzzyroutines.FuzzyRoutines names, rather than as a separate public API."
+
+[[exclusions]]
+symbol = "fuzzyroutines._legacy.scales"
+reason = "Private historical compatibility adapters rendered under the protected fuzzyroutines.FuzzyRoutines names, rather than as a separate public API."
