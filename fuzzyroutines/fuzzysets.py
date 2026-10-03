@@ -19,7 +19,11 @@ from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
 )
-from fuzzyroutines.membership import MembershipCallable, _AnalyticalSource, _GetAnalyticalSource
+from fuzzyroutines.membership import (
+    MembershipCallable,
+    _AnalyticalSource,
+    _GetAnalyticalSource,
+)
 from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
 from fuzzyroutines.operators import (
     OPERATOR_FAMILIES,
