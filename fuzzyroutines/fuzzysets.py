@@ -12,7 +12,6 @@ result.
 """
 
 import math
-from collections.abc import Callable
 from dataclasses import dataclass
 from numbers import Real
 
@@ -20,7 +19,7 @@ from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
 )
-from fuzzyroutines.membership import _AnalyticalSource, _GetAnalyticalSource
+from fuzzyroutines.membership import MembershipCallable, _AnalyticalSource, _GetAnalyticalSource
 from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
 from fuzzyroutines.operators import (
     OPERATOR_FAMILIES,
@@ -40,10 +39,13 @@ class ScalarFuzzySet:
         universe: Continuous or discrete scalar coordinate contract.
         membershipFunction: Callable evaluated after universe membership is
             validated; its result must be a finite degree in $[0, 1]$.
+            [MembershipCallable][fuzzyroutines.membership.MembershipCallable]
+            describes the structural contract without requiring inheritance.
+            Construction checks callability only, not signatures or results.
     """
 
     universe: ContinuousUniverse | DiscreteUniverse
-    membershipFunction: Callable[[Real], Real]
+    membershipFunction: MembershipCallable
 
     def __post_init__(self):
         """Require a supported universe and an evaluable membership function."""
