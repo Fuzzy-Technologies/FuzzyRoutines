@@ -35,10 +35,22 @@ and centroid operations consume a supported formula without depending on the
 historical class. Those snapshots are copied evidence, not transparent caches
 over mutable legacy state or arbitrary callables.
 
-The historical module still owns its mutable compatibility classes and utility
-surface. Task #90 completes its facade work; Task #91 reviews the curated
-root exports. New membership factories are available through explicit imports
-from `fuzzyroutines.membership` in this stage.
+Task #90 makes `FuzzyRoutines.py` an explicit compatibility facade. The private
+`_legacy` package has separate boundaries for utilities, operator call shapes,
+mutable membership functions, mutable sets, and historical scale defaults. Each
+adapter delegates formulas and numerical policies to the focused modern core.
+The facade retains the original class/function module paths for serialized
+objects, including pickles created before extraction.
+
+Historical scale lookup still compares uppercase names, preserves mutable level
+dictionaries, and chooses the last maximum even when all memberships are zero.
+These are compatibility policies; modern scales use Unicode case folding and
+an explicit no-match/tie policy. The adapters preserve these distinct contracts
+without rebuilding an immutable modern scale on every historical call.
+
+The current wildcard helper visibility (`math`, `copy`) remains observed
+behavior. Task #91 reviews curated exports separately. New membership factories
+remain available through explicit imports from `fuzzyroutines.membership`.
 
 ## Modern usage
 

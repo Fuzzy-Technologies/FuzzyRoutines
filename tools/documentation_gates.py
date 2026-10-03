@@ -18,7 +18,7 @@ import urllib.parse
 from dataclasses import dataclass
 from pathlib import Path
 
-from tools.locale_documentation import ValidateLocales
+from tools.locale_documentation import ValidateLocales, _AdapterTargets
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
 MANIFESTPATH = PROJECTROOT / "docs" / "site" / "api-coverage.toml"
@@ -137,6 +137,26 @@ def _AuthoredSymbols(moduleName: str, path: Path) -> tuple[_Symbol, ...]:
             symbols.append(
                 _Symbol(f"{symbolName}.{member.name}", path, member.lineno)
             )
+
+    return tuple(symbols)
+
+
+def _AdapterSymbols(module_name: str, path: Path, project_root: Path) -> tuple[_Symbol, ...]:
+    """Discover facade aliases and members at their authored adapter source."""
+
+    symbols = []
+
+    for public_name, target_name, target_path in _AdapterTargets(module_name, path, project_root):
+        source_prefix = f"{module_name}.{target_name}"
+        public_prefix = f"{module_name}.{public_name}"
+
+        for symbol in _AuthoredSymbols(module_name, target_path):
+            if symbol.name == source_prefix or symbol.name.startswith(source_prefix + "."):
+                symbols.append(_Symbol(
+                    public_prefix + symbol.name[len(source_prefix):],
+                    symbol.path,
+                    symbol.line,
+                ))
 
     return tuple(symbols)
 
@@ -351,7 +371,7 @@ def ValidateCoverage(
         mode = surface.get("mode", "")
         sourcePath = projectRoot / sourceValue
 
-        if not moduleName or mode not in {"authored", "exports"} or not sourcePath.is_file():
+        if not moduleName or mode not in {"authored", "exports", "adapters"} or not sourcePath.is_file():
             errors.append(
                 f"{_Relative(manifestPath, projectRoot)}: invalid surface "
                 f"module={moduleName!r}, source={sourceValue!r}, mode={mode!r}"
@@ -379,6 +399,14 @@ def ValidateCoverage(
                 _Symbol(f"{moduleName}.{name}", sourcePath, 1) for name in exportNames
             )
 
+        elif mode == "adapters":
+            try:
+                symbols = _AdapterSymbols(moduleName, sourcePath, projectRoot)
+
+            except (OSError, SyntaxError, ValueError) as error:
+                errors.append(str(error))
+                continue
+
         else:
             symbols = _AuthoredSymbols(moduleName, sourcePath)
 
@@ -392,30 +420,14 @@ def ValidateCoverage(
             if symbol.name in exclusions:
                 continue
 
-            if mode == "authored":
+            if mode in {"authored", "adapters"}:
                 syntax = _ParseSyntax(symbol.path)
-                targetName = symbol.name.rsplit(".", 1)[1]
-                owningName = symbol.name[len(moduleName) + 1 :].split(".")
-                targetNode = None
-
-                for node in syntax.body:
-                    if getattr(node, "name", None) != owningName[0]:
-                        continue
-
-                    targetNode = node
-
-                    if len(owningName) == 2 and isinstance(node, ast.ClassDef):
-                        targetNode = next(
-                            (
-                                member
-                                for member in node.body
-                                if getattr(member, "name", None) == targetName
-                                and not _IsPropertySetter(member)
-                            ),
-                            None,
-                        )
-
-                    break
+                targetNode = next(
+                    (node for node in ast.walk(syntax)
+                     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                     and node.lineno == symbol.line),
+                    None,
+                )
 
                 if targetNode is not None and not ast.get_docstring(targetNode, clean=False):
                     errors.append(
