@@ -14,7 +14,7 @@ canonical development version, `2.0.0.dev0`, in `pyproject.toml`.
 The [version decision](release-version-decision.md) reaffirms `2.0.0` as the
 first stable target under ADR-0006, based on the CPython support floor and
 observed helper-import changes. It does not change package metadata or approve
-publication. See the [unreleased changelog](../CHANGELOG.md) and
+publication. See the [development changelog](../CHANGELOG.md) and
 [1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) for user-visible impact.
 
 - The package supports CPython 3.13 and 3.14.

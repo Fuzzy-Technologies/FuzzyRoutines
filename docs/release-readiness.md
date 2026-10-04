@@ -11,7 +11,7 @@ This is a human-reviewed release gate. Checking a box requires a direct immutabl
 
 The selected first stable version is **`2.0.0`**; current metadata remains
 **`2.0.0.dev0`**. The [version rationale](release-version-decision.md),
-[unreleased changelog](../CHANGELOG.md), and
+[development changelog](../CHANGELOG.md), and
 [migration notes](migration/1.0.3-to-2.0.0.md) are preparation artifacts, not
 publication approval. [Task #121](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/121)
 owns the final human gate. No tag, stable metadata change, `master` promotion,
