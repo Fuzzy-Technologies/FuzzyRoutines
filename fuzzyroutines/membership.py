@@ -17,6 +17,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from numbers import Real
 from types import MappingProxyType
+from typing import Protocol
 
 from fuzzyroutines.numeric import _RequireFiniteReal
 
@@ -26,11 +27,57 @@ __all__ = [
     "HarringtonDesirability",
     "Hyperbolic",
     "Logistic",
+    "MembershipCallable",
     "MembershipFunction",
+    "MembershipScalar",
     "SShoulder",
     "Trapezoid",
     "Triangle",
 ]
+
+
+type MembershipScalar = float | Real
+"""Scalar typing vocabulary including built-in floats and registered real types.
+
+Built-in integers are compatible with `float` in Python's static numeric tower.
+The `Real` alternative retains the broader runtime scalar contract; finite
+values and exclusion of booleans remain runtime requirements, not type checks.
+"""
+
+
+class MembershipCallable(Protocol):
+    """Structural scalar contract for built-in or user-defined membership.
+
+    Functions, lambdas, bound methods, and callable objects need no inheritance
+    or registration. A conforming evaluator accepts one positional finite
+    real coordinate excluding booleans, and returns a finite real
+    grade in the closed interval $[0, 1]$, also excluding booleans.
+
+    This protocol describes a typing contract; it does not validate a callable
+    at runtime. `ScalarFuzzySet.Membership` validates the coordinate against its
+    universe before calling the evaluator, then validates the returned grade.
+    Direct calls to a custom evaluator retain that evaluator's own behavior.
+    Exceptions raised by the custom evaluator propagate unchanged.
+
+    Generic callables provide no analytical evidence for exact continuous
+    properties. Numerical centroid integration requires a sufficiently regular
+    function whose grades remain consistent during one integration. Internal
+    state such as a call counter is allowed when it does not alter those grades.
+    Use `MembershipScalar` for custom annotations: `numbers.Real` alone does
+    not include built-in `float` and `int` in common static type checkers.
+    """
+
+    def __call__(self, coordinate: MembershipScalar, /) -> MembershipScalar:
+        """Return one finite grade in $[0, 1]$ for a finite real coordinate.
+
+        Args:
+            coordinate: Positional real scalar, finite and not boolean.
+
+        Returns:
+            Finite real membership grade in $[0, 1]$, not boolean.
+        """
+
+        ...
 
 
 def _ValidateFamilyParameters(family_name: str, parameters: dict[str, Real]) -> dict[str, Real]:
@@ -356,7 +403,7 @@ class MembershipFunction:
 
         return MappingProxyType(dict(self._parameter_items))
 
-    def Evaluate(self, coordinate: Real) -> Real:
+    def Evaluate(self, coordinate: MembershipScalar) -> MembershipScalar:
         """Return the scalar membership degree at a finite real coordinate.
 
         Args:
@@ -374,7 +421,7 @@ class MembershipFunction:
 
         return self._source.mju(coordinate)
 
-    def __call__(self, coordinate: Real) -> Real:
+    def __call__(self, coordinate: MembershipScalar) -> MembershipScalar:
         """Evaluate the same scalar contract as `Evaluate` for callable use."""
 
         return self.Evaluate(coordinate)
