@@ -355,6 +355,77 @@ def _ExportUnits(
     return tuple(units)
 
 
+def _AdapterTargets(
+    module_name: str,
+    source_path: Path,
+    project_root: Path,
+) -> tuple[tuple[str, str, Path], ...]:
+    """Resolve explicit project-owned facade imports without importing code."""
+
+    syntax = ast.parse(_ReadCanonicalText(source_path), filename=str(source_path))
+    package_name = module_name.partition(".")[0]
+    targets = {}
+
+    for node in syntax.body:
+        if not isinstance(node, ast.ImportFrom):
+            continue
+
+        if node.level:
+            raise ValueError(f"{source_path}: adapter imports must use absolute module paths")
+
+        if not node.module or not node.module.startswith(package_name + "."):
+            continue
+
+        for imported_name in node.names:
+            public_name = imported_name.asname or imported_name.name
+
+            if public_name == "*":
+                raise ValueError(f"{source_path}: adapter imports must name explicit symbols")
+
+            if public_name.startswith("_"):
+                continue
+
+            if public_name in targets:
+                raise ValueError(f"{source_path}: duplicate adapter export {public_name}")
+
+            target_path = _FindModulePath(node.module, project_root)
+            _FindTopLevelNode(target_path, imported_name.name)
+            targets[public_name] = (public_name, imported_name.name, target_path)
+
+    if not targets:
+        raise ValueError(f"{source_path}: adapter surface has no explicit public definitions")
+
+    return tuple(targets.values())
+
+
+def _AdapterUnits(
+    module_name: str,
+    source_path: Path,
+    project_root: Path,
+) -> tuple[CanonicalUnit, ...]:
+    """Keep facade symbol and member identities attached to adapter source."""
+
+    units = []
+
+    for public_name, target_name, target_path in _AdapterTargets(
+        module_name, source_path, project_root,
+    ):
+        source_prefix = f"symbol:{module_name}.{target_name}"
+        public_prefix = f"symbol:{module_name}.{public_name}"
+
+        for unit in _AuthoredUnits(module_name, target_path, project_root):
+            if unit.identifier == source_prefix or unit.identifier.startswith(source_prefix + "."):
+                units.append(CanonicalUnit(
+                    identifier=public_prefix + unit.identifier[len(source_prefix):],
+                    kind=unit.kind,
+                    sourcePath=unit.sourcePath,
+                    signature=unit.signature,
+                    body=unit.body,
+                ))
+
+    return tuple(units)
+
+
 def DiscoverCanonicalUnits(
     projectRoot: Path,
     projectManifest: dict,
@@ -404,6 +475,9 @@ def DiscoverCanonicalUnits(
 
         elif mode == "exports":
             surfaceUnits = _ExportUnits(moduleName, sourcePath, projectRoot)
+
+        elif mode == "adapters":
+            surfaceUnits = _AdapterUnits(moduleName, sourcePath, projectRoot)
 
         else:
             raise ValueError(f"{coveragePath}: invalid surface mode {mode!r}")

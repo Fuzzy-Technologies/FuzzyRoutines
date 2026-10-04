@@ -435,7 +435,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.DiapasonParser"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/utilities.py"
 sourceHash = "sha256:d623403639581adac57487435c5ffaf4a3cbe5a6b61b73dd0984f2a27d67b582"
 reviewClass = "mathematical"
 
@@ -448,7 +448,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyAND"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:11aefd38bd0cdef3b291f22c0219e77df3e343893eb5f347986ba2933147d44e"
 reviewClass = "mathematical"
 
@@ -461,7 +461,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyNOT"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:a08799c73b2b54cb5fd38f32d383bb90dce97ab4840b9071d463099e5ccb76e0"
 reviewClass = "mathematical"
 
@@ -474,7 +474,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyNOTParabolic"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:583ee9648c1ceff8da74785d8ef67ab1c71b947d820fcdc8747f3df27ee21c67"
 reviewClass = "mathematical"
 
@@ -487,7 +487,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyOR"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:98ca659b2be20af7b2b7964c0f6779222fd51e5e894e475e4a66f1028d477036"
 reviewClass = "mathematical"
 
@@ -500,7 +500,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:f615bf8409edfae81e814b4be6a7ac0dbb6a8654a8ab41a760728d3494f379d3"
 reviewClass = "mathematical"
 
@@ -513,7 +513,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.Fuzzy"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:40cd53e749dd85638db8b0e35f48972bf7b3b7b9a15b5656df01174a8c6bc276"
 reviewClass = "mathematical"
 
@@ -526,7 +526,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.GetLevelByName"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:be2594e4c6775a98fcbc33a1390780b021c4660dd896ca1e58896b979f7d0c08"
 reviewClass = "mathematical"
 
@@ -539,7 +539,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.levels"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:7429fbb46b2cdf8df14775d7667f1ee98082f2aedcedfefca7ca8cffc86e925b"
 reviewClass = "mathematical"
 
@@ -552,7 +552,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.name"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:0dd5b36146905f65b4b4a3f4b90ca464f4b9ac66c32949a8a2bd26d15c06e72d"
 reviewClass = "mathematical"
 
@@ -565,7 +565,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/sets.py"
 sourceHash = "sha256:ed4ba1ed35eb3912a13d90c4cc539bea28e512d32486f04fe6213a784f8681f2"
 reviewClass = "mathematical"
 
@@ -578,7 +578,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.Defuz"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/sets.py"
 sourceHash = "sha256:92db8d812a36907e50e83244d1e15c9f80c7ec79078a28b1d0811472b82f0c10"
 reviewClass = "mathematical"
 
@@ -591,7 +591,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.defuzValue"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/sets.py"
 sourceHash = "sha256:83c4c4219f897ff4c28aa88758534d131b6ad6f083008cd0627bf25484f34bb1"
 reviewClass = "mathematical"
 
@@ -604,7 +604,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.mFunction"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/sets.py"
 sourceHash = "sha256:fb5f1bb5794dae5f396758e09df910540ddec604e6cbf56d9fff1c7bba81df2b"
 reviewClass = "mathematical"
 
@@ -617,7 +617,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.name"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/sets.py"
 sourceHash = "sha256:daf496678d8077e2ea2e70a35b65519a7b781b493324f9019ee38e024939620f"
 reviewClass = "mathematical"
 
@@ -630,7 +630,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.supportSet"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/sets.py"
 sourceHash = "sha256:7f73e60efcb4f9327a392da8aa40be307a8e404261f7eafdc6feff4e68a771e7"
 reviewClass = "mathematical"
 
@@ -643,7 +643,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.IsCorrectFuzzyNumberValue"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/utilities.py"
 sourceHash = "sha256:628318190b48201cda8b2cade6eb076024c9abc66a2aee6d27056389c8188399"
 reviewClass = "mathematical"
 
@@ -656,7 +656,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.IsNumber"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/utilities.py"
 sourceHash = "sha256:d999f7ddaaeac83100028206835fba8051bc7cd76bce10af29f6b89413d2d6af"
 reviewClass = "mathematical"
 
@@ -669,7 +669,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:23232357e23c0e5b7e89ef4796564c0a9d359f674ea084d07ddb78f01b4e112f"
 reviewClass = "mathematical"
 
@@ -682,7 +682,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Bell"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:a1c9d8eca710faec3e7cd60a14ad5b5350eb214abfe202e6c2f48cc0d5e5ed55"
 reviewClass = "mathematical"
 
@@ -695,7 +695,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Desirability"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:5b7054a461770ecfd12e310d988f08320cacb5d00a8909aecdb598d7bb374854"
 reviewClass = "mathematical"
 
@@ -708,7 +708,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Exponential"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:0b2d17d0db0145c93ffbc500ffed6d9d7bf62758a2fd764210793e9b40465db0"
 reviewClass = "mathematical"
 
@@ -721,7 +721,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Hyperbolic"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:586482e2cf28c9423f9e1781aa058ce1f19275d085736b9478c15ad9b1f01bde"
 reviewClass = "mathematical"
 
@@ -734,7 +734,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Parabolic"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:666c23a8193dae02e3078585c00698e81e42ac5ba34b71ec25b3733f101f6f13"
 reviewClass = "mathematical"
 
@@ -747,7 +747,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Sigmoidal"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:4e5df78b0c14490121918c2047c26206c592caa957577ac525a6d4dde118c901"
 reviewClass = "mathematical"
 
@@ -760,7 +760,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Trapezium"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:8c696636bc2a3d86f7660af9dc0991d18cad05ed952944d6224cb44769c7a1c6"
 reviewClass = "mathematical"
 
@@ -773,7 +773,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Triangle"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:d68a49c8ba7a4f5b0e8f4d2ad9e100a44b1c954f2d7e630e8e2aa3e4f3f0c191"
 reviewClass = "mathematical"
 
@@ -786,7 +786,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.name"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:124b74989182e657a3012c6209cdc1fad280a994752a6c2633f2f41f55d8579d"
 reviewClass = "mathematical"
 
@@ -799,7 +799,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.parameters"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/membership.py"
 sourceHash = "sha256:a442a45c5d954720ab76763ba7393b7cceace4cf777e4c674cde251a6278a7b4"
 reviewClass = "mathematical"
 
@@ -812,7 +812,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.SCoNorm"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:ed90501fd7144b4d00c0601e0fe2707ece17afe0bd05bd1543ca3b4b0ec4e462"
 reviewClass = "mathematical"
 
@@ -825,7 +825,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.SCoNormCompose"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:a572fa9e51de603dd0f94c5ca39f543f7090bda3be1ad1d4093d7c0a1a10188a"
 reviewClass = "mathematical"
 
@@ -838,7 +838,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.TNorm"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:7760b339c7be1fbb83d852349bb581907821aa86193e302b87a19494e2ec80ff"
 reviewClass = "mathematical"
 
@@ -851,7 +851,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.TNormCompose"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/operators.py"
 sourceHash = "sha256:dd32e97be9820abd2c449071984d0a97594203a8f381f16b22e1a8f2763e6da0"
 reviewClass = "mathematical"
 
@@ -864,7 +864,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:728ab821120f12df7d472e3bd2b17af295b826c886a39beb0c933b839c13c025"
 reviewClass = "mathematical"
 
@@ -877,7 +877,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levels"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:b33482f25694a973cbb9f208247aa8c6fc8d871b2aba80197d4e1ff885405a5e"
 reviewClass = "mathematical"
 
@@ -890,7 +890,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levelsNames"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:9232aae176dcec51cd5a1022e307e7ca76afdaff4de7e786bf5afb440ebb2c09"
 reviewClass = "mathematical"
 
@@ -903,7 +903,7 @@ state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levelsNamesUpper"
 kind = "symbol"
-sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourcePath = "fuzzyroutines/_legacy/scales.py"
 sourceHash = "sha256:4f75a924a42314c95599e5521a1cf0f50d0c028048cc2afab9189d04ff2c6a36"
 reviewClass = "mathematical"
 
