@@ -12,23 +12,29 @@ continuous sampling returns a separate result type that records its numerical
 provenance and cannot be mistaken for exact mathematical support.
 """
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from itertools import pairwise
-from numbers import Real
+from typing import cast, overload
 
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
     IntegrationDomain,
-    _RequireFiniteReal,
 )
 from fuzzyroutines.exceptions import (
     InvalidDomainError,
     InvalidParameterError,
     InvalidParameterTypeError,
 )
-from fuzzyroutines.membership import _GetAnalyticalSource, _LegacyAnalyticalAdapter
-from fuzzyroutines.numeric import _RequireGrade
+from fuzzyroutines.membership import (
+    MembershipFunction,
+    MembershipScalar,
+    _AnalyticalSource,
+    _GetAnalyticalSource,
+    _LegacyAnalyticalAdapter,
+)
+from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
 
 
 @dataclass(frozen=True, slots=True)
@@ -42,12 +48,12 @@ class ContinuousInterval:
         rightClosed: Whether a finite right endpoint is included.
     """
 
-    left: Real | None = None
-    right: Real | None = None
+    left: MembershipScalar | None = None
+    right: MembershipScalar | None = None
     leftClosed: bool = False
     rightClosed: bool = False
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate finite or unbounded endpoints and singleton semantics."""
 
         if not isinstance(self.leftClosed, bool) or not isinstance(self.rightClosed, bool):
@@ -68,19 +74,19 @@ class ContinuousInterval:
             object.__setattr__(self, "right", _RequireFiniteReal(self.right, "right"))
 
         if self.left is not None and self.right is not None:
-            if self.left > self.right:
+            if cast(float, self.left) > cast(float, self.right):
                 raise InvalidDomainError("continuous interval endpoints must satisfy left <= right")
 
             if self.left == self.right and not (self.leftClosed and self.rightClosed):
                 raise InvalidDomainError("a singleton interval must be closed at both endpoints")
 
     @property
-    def isSingleton(self):
+    def isSingleton(self) -> bool:
         """Return whether this component represents exactly one coordinate."""
 
         return self.left is not None and self.left == self.right
 
-    def Contains(self, coordinate):
+    def Contains(self, coordinate: MembershipScalar) -> bool:
         """Return whether a finite coordinate belongs to this interval.
 
         Args:
@@ -97,13 +103,13 @@ class ContinuousInterval:
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
 
         if self.left is not None and (
-            coordinate < self.left or (coordinate == self.left and not self.leftClosed)
+            coordinate < cast(float, self.left) or (coordinate == self.left and not self.leftClosed)
         ):
             return False
 
         return not (
             self.right is not None
-            and (coordinate > self.right or (coordinate == self.right and not self.rightClosed))
+            and (coordinate > cast(float, self.right) or (coordinate == self.right and not self.rightClosed))
         )
 
 
@@ -117,7 +123,7 @@ class ContinuousRegion:
 
     intervals: tuple[ContinuousInterval, ...] = ()
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require an explicit ordered tuple of non-overlapping components."""
 
         if not isinstance(self.intervals, tuple):
@@ -131,7 +137,7 @@ class ContinuousRegion:
             if leftInterval.right is None or rightInterval.left is None:
                 raise InvalidDomainError("continuous region intervals must be strictly ordered")
 
-            if leftInterval.right > rightInterval.left:
+            if cast(float, leftInterval.right) > cast(float, rightInterval.left):
                 raise InvalidDomainError("continuous region intervals must not overlap")
 
             if (
@@ -142,12 +148,12 @@ class ContinuousRegion:
                 raise InvalidDomainError("continuous region intervals must not share a coordinate")
 
     @property
-    def isEmpty(self):
+    def isEmpty(self) -> bool:
         """Return whether the region contains no coordinates."""
 
         return not self.intervals
 
-    def Contains(self, coordinate):
+    def Contains(self, coordinate: MembershipScalar) -> bool:
         """Return whether a finite coordinate belongs to any component.
 
         Args:
@@ -174,9 +180,9 @@ class DiscreteRegion:
         points: Strictly increasing tuple of finite coordinates.
     """
 
-    points: tuple[Real, ...] = ()
+    points: tuple[MembershipScalar, ...] = ()
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require finite, strictly increasing, distinct coordinates."""
 
         if not isinstance(self.points, tuple):
@@ -193,12 +199,12 @@ class DiscreteRegion:
         object.__setattr__(self, "points", validatedPoints)
 
     @property
-    def isEmpty(self):
+    def isEmpty(self) -> bool:
         """Return whether the region contains no declared coordinates."""
 
         return not self.points
 
-    def Contains(self, coordinate):
+    def Contains(self, coordinate: MembershipScalar) -> bool:
         """Return whether a finite coordinate belongs to this discrete region.
 
         Args:
@@ -235,9 +241,9 @@ class ContinuousFuzzyProperties:
     supportClosure: ContinuousRegion
     core: ContinuousRegion
     boundary: ContinuousRegion
-    height: Real
+    height: MembershipScalar
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require internally consistent regions and a valid membership height."""
 
         if not isinstance(self.universe, ContinuousUniverse):
@@ -260,7 +266,7 @@ class ContinuousFuzzyProperties:
         object.__setattr__(self, "height", height)
 
     @property
-    def isExact(self):
+    def isExact(self) -> bool:
         """State that interval geometry came from an analytical family contract."""
 
         return True
@@ -284,9 +290,9 @@ class DiscreteFuzzyProperties:
     supportClosure: DiscreteRegion
     core: DiscreteRegion
     boundary: DiscreteRegion
-    height: Real
+    height: MembershipScalar
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require derived point sets to be subsets of the declared universe."""
 
         if not isinstance(self.universe, DiscreteUniverse):
@@ -311,7 +317,7 @@ class DiscreteFuzzyProperties:
         object.__setattr__(self, "height", height)
 
     @property
-    def isExact(self):
+    def isExact(self) -> bool:
         """State that every coordinate in the declared universe was evaluated."""
 
         return True
@@ -345,15 +351,15 @@ class SampledFuzzyProperties:
 
     analysisDomain: IntegrationDomain
     sampleCount: int
-    coordinates: tuple[Real, ...]
-    grades: tuple[Real, ...]
+    coordinates: tuple[MembershipScalar, ...]
+    grades: tuple[MembershipScalar, ...]
     positiveSupportSamples: DiscreteRegion
     coreSamples: DiscreteRegion
     boundarySamples: DiscreteRegion
-    heightEstimate: Real
+    heightEstimate: MembershipScalar
     method: str = "uniform-grid"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate the complete provenance and observation table."""
 
         if not isinstance(self.analysisDomain, IntegrationDomain):
@@ -410,24 +416,27 @@ class SampledFuzzyProperties:
         object.__setattr__(self, "heightEstimate", heightEstimate)
 
     @property
-    def isExact(self):
+    def isExact(self) -> bool:
         """Prevent sampled observations from being presented as exact geometry."""
 
         return False
 
 
-def _IntersectIntervals(leftInterval, rightInterval):
+def _IntersectIntervals(
+    leftInterval: ContinuousInterval,
+    rightInterval: ContinuousInterval,
+) -> ContinuousInterval | None:
     """Return the exact intersection of two interval components or `None`."""
 
     if leftInterval.left is None:
         left = rightInterval.left
         leftClosed = rightInterval.leftClosed
 
-    elif rightInterval.left is None or leftInterval.left > rightInterval.left:
+    elif rightInterval.left is None or cast(float, leftInterval.left) > cast(float, rightInterval.left):
         left = leftInterval.left
         leftClosed = leftInterval.leftClosed
 
-    elif rightInterval.left > leftInterval.left:
+    elif cast(float, rightInterval.left) > cast(float, leftInterval.left):
         left = rightInterval.left
         leftClosed = rightInterval.leftClosed
 
@@ -439,11 +448,11 @@ def _IntersectIntervals(leftInterval, rightInterval):
         right = rightInterval.right
         rightClosed = rightInterval.rightClosed
 
-    elif rightInterval.right is None or leftInterval.right < rightInterval.right:
+    elif rightInterval.right is None or cast(float, leftInterval.right) < cast(float, rightInterval.right):
         right = leftInterval.right
         rightClosed = leftInterval.rightClosed
 
-    elif rightInterval.right < leftInterval.right:
+    elif cast(float, rightInterval.right) < cast(float, leftInterval.right):
         right = rightInterval.right
         rightClosed = rightInterval.rightClosed
 
@@ -452,14 +461,14 @@ def _IntersectIntervals(leftInterval, rightInterval):
         rightClosed = leftInterval.rightClosed and rightInterval.rightClosed
 
     if left is not None and right is not None and (
-        left > right or (left == right and not (leftClosed and rightClosed))
+        cast(float, left) > cast(float, right) or (left == right and not (leftClosed and rightClosed))
     ):
         return None
 
     return ContinuousInterval(left, right, leftClosed, rightClosed)
 
 
-def _IntersectRegion(region, universe):
+def _IntersectRegion(region: ContinuousRegion, universe: ContinuousUniverse) -> ContinuousRegion:
     """Clip an analytical region to a declared continuous universe."""
 
     universeInterval = ContinuousInterval(
@@ -476,7 +485,7 @@ def _IntersectRegion(region, universe):
     return ContinuousRegion(clippedIntervals)
 
 
-def _ClosureWithin(region, universe):
+def _ClosureWithin(region: ContinuousRegion, universe: ContinuousUniverse) -> ContinuousRegion:
     """Return the closure of a clipped region in the universe's topology."""
 
     closedIntervals = tuple(
@@ -491,26 +500,28 @@ def _ClosureWithin(region, universe):
     return ContinuousRegion(closedIntervals)
 
 
-def _Region(*intervals):
+def _Region(*intervals: ContinuousInterval) -> ContinuousRegion:
     """Build a continuous region from already ordered interval components."""
 
     return ContinuousRegion(tuple(intervals))
 
 
-def _Point(coordinate):
+def _Point(coordinate: MembershipScalar) -> ContinuousInterval:
     """Build a closed singleton interval."""
 
     return ContinuousInterval(coordinate, coordinate, True, True)
 
 
-def _AnalyticalRegions(membershipFunction):
+def _AnalyticalRegions(
+    membershipFunction: _AnalyticalSource,
+) -> tuple[ContinuousRegion, ContinuousRegion, ContinuousRegion, MembershipScalar, MembershipScalar]:
     """Return exact real-line regions and asymptotic membership limits."""
 
     # These regions are algebraic consequences of the canonical formulas in
     # docs/mathematics/membership-function-contracts.md. Never infer them from
     # floating-point samples: Gaussian tails, for example, may underflow.
     functionName = membershipFunction.name
-    parameters = membershipFunction.parameters
+    parameters = cast(Mapping[str, float], membershipFunction.parameters)
     realLine = _Region(ContinuousInterval())
 
     if functionName == "Hyperbolic":
@@ -612,7 +623,13 @@ def _AnalyticalRegions(membershipFunction):
     raise InvalidParameterError(f"unsupported analytical membership family: {functionName!r}")
 
 
-def _ContinuousHeight(membershipFunction, core, boundary, leftLimit, rightLimit):
+def _ContinuousHeight(
+    membershipFunction: _AnalyticalSource,
+    core: ContinuousRegion,
+    boundary: ContinuousRegion,
+    leftLimit: MembershipScalar,
+    rightLimit: MembershipScalar,
+) -> MembershipScalar:
     """Derive the exact supremum structure without scanning a numerical grid."""
 
     if not core.isEmpty:
@@ -639,13 +656,16 @@ def _ContinuousHeight(membershipFunction, core, boundary, leftLimit, rightLimit)
     return max(candidates)
 
 
-def _ValidateMembershipGrade(grade, coordinate):
+def _ValidateMembershipGrade(grade: MembershipScalar, coordinate: MembershipScalar) -> float:
     """Return a finite membership grade in the closed unit interval."""
 
     return _RequireGrade(grade, f"membership grade at {coordinate!r}")
 
 
-def _EvaluateCoordinates(membershipFunction, coordinates):
+def _EvaluateCoordinates(
+    membershipFunction: _AnalyticalSource | _LegacyAnalyticalAdapter,
+    coordinates: tuple[MembershipScalar, ...],
+) -> tuple[float, ...]:
     """Evaluate and validate a membership function at explicit coordinates."""
 
     return tuple(
@@ -654,7 +674,26 @@ def _EvaluateCoordinates(membershipFunction, coordinates):
     )
 
 
-def DeriveProperties(membershipFunction, universe):
+@overload
+def DeriveProperties(
+    membershipFunction: MembershipFunction | _AnalyticalSource | _LegacyAnalyticalAdapter,
+    universe: ContinuousUniverse,
+) -> ContinuousFuzzyProperties:
+    """Describe exact analytical evidence on a continuous universe."""
+
+
+@overload
+def DeriveProperties(
+    membershipFunction: MembershipFunction | _AnalyticalSource | _LegacyAnalyticalAdapter,
+    universe: DiscreteUniverse,
+) -> DiscreteFuzzyProperties:
+    """Describe exhaustive evidence on a discrete universe."""
+
+
+def DeriveProperties(
+    membershipFunction: MembershipFunction | _AnalyticalSource | _LegacyAnalyticalAdapter,
+    universe: ContinuousUniverse | DiscreteUniverse,
+) -> ContinuousFuzzyProperties | DiscreteFuzzyProperties:
     """Derive exact fuzzy-set properties for a supported scalar universe.
 
     Continuous results require a modern
@@ -681,26 +720,33 @@ def DeriveProperties(membershipFunction, universe):
             produces an invalid membership grade.
     """
 
-    if not (isinstance(universe, DiscreteUniverse) and isinstance(membershipFunction, _LegacyAnalyticalAdapter)):
-        membershipFunction = _GetAnalyticalSource(membershipFunction)
+    source: _AnalyticalSource | _LegacyAnalyticalAdapter | None
 
-    if membershipFunction is None:
+    if not (isinstance(universe, DiscreteUniverse) and isinstance(membershipFunction, _LegacyAnalyticalAdapter)):
+        source = _GetAnalyticalSource(membershipFunction)
+
+    else:
+        source = membershipFunction
+
+    if source is None:
         raise InvalidParameterTypeError("membershipFunction must be a supported analytical membership source")
 
     if isinstance(universe, ContinuousUniverse):
+        # Continuous inputs always pass through _GetAnalyticalSource above.
+        analytical_source = cast(_AnalyticalSource, source)
         (
             globalPositiveSupport,
             globalCore,
             globalBoundary,
             leftLimit,
             rightLimit,
-        ) = _AnalyticalRegions(membershipFunction)
+        ) = _AnalyticalRegions(analytical_source)
         positiveSupport = _IntersectRegion(globalPositiveSupport, universe)
         supportClosure = _ClosureWithin(positiveSupport, universe)
         core = _IntersectRegion(globalCore, universe)
         boundary = _IntersectRegion(globalBoundary, universe)
         height = _ContinuousHeight(
-            membershipFunction,
+            analytical_source,
             core,
             boundary,
             leftLimit,
@@ -716,17 +762,17 @@ def DeriveProperties(membershipFunction, universe):
         )
 
     if isinstance(universe, DiscreteUniverse):
-        grades = _EvaluateCoordinates(membershipFunction, universe.points)
+        grades = _EvaluateCoordinates(source, universe.points)
         positivePoints = tuple(point for point, grade in zip(universe.points, grades) if grade > 0)
         corePoints = tuple(point for point, grade in zip(universe.points, grades) if grade == 1)
         boundaryPoints = tuple(
             point for point, grade in zip(universe.points, grades) if 0 < grade < 1
         )
-        positiveSupport = DiscreteRegion(positivePoints)
+        discrete_support = DiscreteRegion(positivePoints)
         return DiscreteFuzzyProperties(
             universe,
-            positiveSupport,
-            positiveSupport,
+            discrete_support,
+            discrete_support,
             DiscreteRegion(corePoints),
             DiscreteRegion(boundaryPoints),
             max(grades),
@@ -735,7 +781,11 @@ def DeriveProperties(membershipFunction, universe):
     raise InvalidParameterTypeError("universe must be a ContinuousUniverse or DiscreteUniverse")
 
 
-def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
+def SampleProperties(
+    membershipFunction: MembershipFunction | _AnalyticalSource | _LegacyAnalyticalAdapter,
+    analysisDomain: IntegrationDomain,
+    sampleCount: int = 101,
+) -> SampledFuzzyProperties:
     """Return explicitly approximate observations on a uniform finite grid.
 
     Args:
@@ -753,10 +803,15 @@ def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
             outside $[0, 1]$.
     """
 
-    if not isinstance(membershipFunction, _LegacyAnalyticalAdapter):
-        membershipFunction = _GetAnalyticalSource(membershipFunction)
+    source: _AnalyticalSource | _LegacyAnalyticalAdapter | None
 
-    if membershipFunction is None:
+    if not isinstance(membershipFunction, _LegacyAnalyticalAdapter):
+        source = _GetAnalyticalSource(membershipFunction)
+
+    else:
+        source = membershipFunction
+
+    if source is None:
         raise InvalidParameterTypeError("membershipFunction must be a supported analytical membership source")
 
     if not isinstance(analysisDomain, IntegrationDomain):
@@ -768,14 +823,14 @@ def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
     if sampleCount < 2:
         raise InvalidParameterError("sampleCount must be at least two")
 
-    step = (analysisDomain.right - analysisDomain.left) / (sampleCount - 1)
+    step = (cast(float, analysisDomain.right) - cast(float, analysisDomain.left)) / (sampleCount - 1)
     # Preserve the exact declared right endpoint instead of trusting the last
     # rounded multiply-add; see source-algorithm-invariants.md.
     coordinates = tuple(
-        analysisDomain.right if sampleIndex == sampleCount - 1 else analysisDomain.left + sampleIndex * step
+        analysisDomain.right if sampleIndex == sampleCount - 1 else cast(float, analysisDomain.left) + sampleIndex * step
         for sampleIndex in range(sampleCount)
     )
-    grades = _EvaluateCoordinates(membershipFunction, coordinates)
+    grades = _EvaluateCoordinates(source, coordinates)
     positivePoints = tuple(point for point, grade in zip(coordinates, grades) if grade > 0)
     corePoints = tuple(point for point, grade in zip(coordinates, grades) if grade == 1)
     boundaryPoints = tuple(point for point, grade in zip(coordinates, grades) if 0 < grade < 1)

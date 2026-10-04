@@ -12,13 +12,14 @@ I/O.
 """
 
 import math
+from collections.abc import Mapping
 from dataclasses import dataclass
-from numbers import Integral, Real
+from numbers import Integral
+from typing import cast
 
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     IntegrationDomain,
-    _RequireFiniteReal,
 )
 from fuzzyroutines.exceptions import (
     InvalidParameterError,
@@ -27,6 +28,8 @@ from fuzzyroutines.exceptions import (
     UndefinedResultError,
 )
 from fuzzyroutines.fuzzysets import ScalarFuzzySet, _ContinuousAnalyticalSource
+from fuzzyroutines.membership import MembershipScalar, _AnalyticalSource
+from fuzzyroutines.numeric import _RequireFiniteReal
 
 
 class CentroidConvergenceError(NumericalError):
@@ -48,11 +51,11 @@ class CentroidPolicy:
         paths do not consume this policy because they do not iterate.
     """
 
-    absoluteTolerance: Real = 1e-12
-    relativeTolerance: Real = 1e-10
+    absoluteTolerance: MembershipScalar = 1e-12
+    relativeTolerance: MembershipScalar = 1e-10
     maximumDepth: int = 20
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate finite positive tolerances and a non-negative work limit."""
 
         absoluteTolerance = _RequireFiniteReal(self.absoluteTolerance, "absoluteTolerance")
@@ -71,7 +74,14 @@ class CentroidPolicy:
             raise InvalidParameterError("maximumDepth must be non-negative")
 
 
-def _PolynomialMoments(left, right, origin, constant, linear, quadratic):
+def _PolynomialMoments(
+    left: float,
+    right: float,
+    origin: float,
+    constant: float,
+    linear: float,
+    quadratic: float,
+) -> tuple[float, float]:
     """Return exact binary64 integrals of a shifted quadratic and its moment."""
 
     leftOffset = left - origin
@@ -85,11 +95,20 @@ def _PolynomialMoments(left, right, origin, constant, linear, quadratic):
     return area, origin * area + localMoment
 
 
-def _AddSegment(moments, domain, left, right, origin, constant, linear, quadratic):
+def _AddSegment(
+    moments: tuple[float, float],
+    domain: IntegrationDomain,
+    left: float,
+    right: float,
+    origin: float,
+    constant: float,
+    linear: float,
+    quadratic: float,
+) -> tuple[float, float]:
     """Add one clipped shifted-polynomial segment to accumulated moments."""
 
-    clippedLeft = max(domain.left, left)
-    clippedRight = min(domain.right, right)
+    clippedLeft = max(cast(float, domain.left), left)
+    clippedRight = min(cast(float, domain.right), right)
 
     if clippedLeft >= clippedRight:
         return moments
@@ -105,10 +124,13 @@ def _AddSegment(moments, domain, left, right, origin, constant, linear, quadrati
     return moments[0] + area, moments[1] + firstMoment
 
 
-def _PolynomialFamilyMoments(membershipFunction, domain):
+def _PolynomialFamilyMoments(
+    membershipFunction: _AnalyticalSource,
+    domain: IntegrationDomain,
+) -> tuple[float, float]:
     """Return analytical moments for supported piecewise-polynomial families."""
 
-    parameters = membershipFunction.parameters
+    parameters = cast(Mapping[str, float], membershipFunction.parameters)
     familyName = membershipFunction.name
     moments = (0.0, 0.0)
 
@@ -140,7 +162,7 @@ def _PolynomialFamilyMoments(membershipFunction, domain):
     moments = _AddSegment(moments, domain, midpoint, right, right, 1.0, 0.0, -2 / width**2)
 
     if familyName == "Parabolic":
-        return _AddSegment(moments, domain, right, domain.right, right, 1.0, 0.0, 0.0)
+        return _AddSegment(moments, domain, right, cast(float, domain.right), right, 1.0, 0.0, 0.0)
 
     coreRight = parameters["c"]
     rightBoundary = coreRight + width
@@ -150,13 +172,16 @@ def _PolynomialFamilyMoments(membershipFunction, domain):
     return _AddSegment(moments, domain, rightMidpoint, rightBoundary, rightBoundary, 0.0, 0.0, 2 / width**2)
 
 
-def _GaussianMoments(membershipFunction, domain):
+def _GaussianMoments(
+    membershipFunction: _AnalyticalSource,
+    domain: IntegrationDomain,
+) -> tuple[float, float]:
     """Return stable closed-form Gaussian area and first moment when resolvable."""
 
-    centre = membershipFunction.parameters["a"]
-    deviation = membershipFunction.parameters["b"]
-    leftDistance = (domain.left - centre) / deviation
-    rightDistance = (domain.right - centre) / deviation
+    centre = cast(float, membershipFunction.parameters["a"])
+    deviation = cast(float, membershipFunction.parameters["b"])
+    leftDistance = (cast(float, domain.left) - centre) / deviation
+    rightDistance = (cast(float, domain.right) - centre) / deviation
     errorDifference = math.erf(rightDistance / math.sqrt(2)) - math.erf(leftDistance / math.sqrt(2))
     area = deviation * math.sqrt(math.pi / 2) * errorDifference
     firstMoment = centre * area + deviation**2 * (
@@ -165,7 +190,13 @@ def _GaussianMoments(membershipFunction, domain):
     return area, firstMoment
 
 
-def _SimpsonEstimate(left, right, leftValues, midpointValues, rightValues):
+def _SimpsonEstimate(
+    left: float,
+    right: float,
+    leftValues: tuple[float, float],
+    midpointValues: tuple[float, float],
+    rightValues: tuple[float, float],
+) -> tuple[float, float]:
     """Return Simpson estimates for area and first moment on one interval."""
 
     scale = (right - left) / 6
@@ -175,16 +206,32 @@ def _SimpsonEstimate(left, right, leftValues, midpointValues, rightValues):
     )
 
 
-def _AdaptiveMoments(fuzzySet, domain, policy):
+def _AdaptiveMoments(
+    fuzzySet: ScalarFuzzySet,
+    domain: IntegrationDomain,
+    policy: CentroidPolicy,
+) -> tuple[float, float]:
     """Integrate both centroid moments with deterministic adaptive Simpson work."""
 
-    def Evaluate(coordinate):
-        grade = fuzzySet.Membership(coordinate)
+    def Evaluate(coordinate: float) -> tuple[float, float]:
+        """Evaluate both real moments without coercing callback results."""
+
+        grade = cast(float, fuzzySet.Membership(coordinate))
         return grade, coordinate * grade
 
-    coordinateScale = max(abs(domain.left), abs(domain.right), 1.0)
+    coordinateScale = max(abs(cast(float, domain.left)), abs(cast(float, domain.right)), 1.0)
 
-    def Refine(left, right, leftValues, midpointValues, rightValues, estimate, depth):
+    def Refine(
+        left: float,
+        right: float,
+        leftValues: tuple[float, float],
+        midpointValues: tuple[float, float],
+        rightValues: tuple[float, float],
+        estimate: tuple[float, float],
+        depth: int,
+    ) -> tuple[float, float]:
+        """Refine both moments until the configured error target is met."""
+
         midpoint = (left + right) / 2
         leftMidpoint = (left + midpoint) / 2
         rightMidpoint = (midpoint + right) / 2
@@ -195,8 +242,8 @@ def _AdaptiveMoments(fuzzySet, domain, policy):
         refined = (leftEstimate[0] + rightEstimate[0], leftEstimate[1] + rightEstimate[1])
         areaError = abs(refined[0] - estimate[0]) / 15
         momentError = abs(refined[1] - estimate[1]) / 15
-        areaTarget = policy.absoluteTolerance + policy.relativeTolerance * abs(refined[0])
-        momentTarget = policy.absoluteTolerance * coordinateScale + policy.relativeTolerance * abs(refined[1])
+        areaTarget = cast(float, policy.absoluteTolerance) + cast(float, policy.relativeTolerance) * abs(refined[0])
+        momentTarget = cast(float, policy.absoluteTolerance) * coordinateScale + cast(float, policy.relativeTolerance) * abs(refined[1])
 
         if areaError <= areaTarget and momentError <= momentTarget:
             return (
@@ -230,14 +277,14 @@ def _AdaptiveMoments(fuzzySet, domain, policy):
         )
         return leftResult[0] + rightResult[0], leftResult[1] + rightResult[1]
 
-    midpoint = (domain.left + domain.right) / 2
-    leftValues = Evaluate(domain.left)
+    midpoint = (cast(float, domain.left) + cast(float, domain.right)) / 2
+    leftValues = Evaluate(cast(float, domain.left))
     midpointValues = Evaluate(midpoint)
-    rightValues = Evaluate(domain.right)
-    estimate = _SimpsonEstimate(domain.left, domain.right, leftValues, midpointValues, rightValues)
+    rightValues = Evaluate(cast(float, domain.right))
+    estimate = _SimpsonEstimate(cast(float, domain.left), cast(float, domain.right), leftValues, midpointValues, rightValues)
     return Refine(
-        domain.left,
-        domain.right,
+        cast(float, domain.left),
+        cast(float, domain.right),
         leftValues,
         midpointValues,
         rightValues,
@@ -246,7 +293,11 @@ def _AdaptiveMoments(fuzzySet, domain, policy):
     )
 
 
-def Centroid(fuzzySet: ScalarFuzzySet, integrationDomain: IntegrationDomain, policy: CentroidPolicy | None = None):
+def Centroid(
+    fuzzySet: ScalarFuzzySet,
+    integrationDomain: IntegrationDomain,
+    policy: CentroidPolicy | None = None,
+) -> MembershipScalar:
     r"""Return the continuous center-of-area over an explicit finite domain.
 
     The result is
@@ -280,7 +331,12 @@ def Centroid(fuzzySet: ScalarFuzzySet, integrationDomain: IntegrationDomain, pol
     return _Centroid(fuzzySet, integrationDomain, policy, UndefinedResultError)
 
 
-def _Centroid(fuzzy_set, integration_domain, policy, undefined_error):
+def _Centroid(
+    fuzzy_set: ScalarFuzzySet,
+    integration_domain: IntegrationDomain,
+    policy: CentroidPolicy | None,
+    undefined_error: type[Exception],
+) -> MembershipScalar:
     """Evaluate centroid with the caller boundary's explicit result-error type.
 
     Only engine-owned zero-area and non-finite-result checks use this type.

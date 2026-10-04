@@ -21,6 +21,7 @@ from pathlib import Path
 from tools.locale_documentation import (
     ValidateLocales,
     _AdapterTargets,
+    _IsOverload,
     _SourceDocstring,
 )
 
@@ -118,7 +119,7 @@ def _AuthoredSymbols(moduleName: str, path: Path) -> tuple[_Symbol, ...]:
 
         node_name = node.name.id if isinstance(node, ast.TypeAlias) else node.name
 
-        if node_name.startswith("_"):
+        if node_name.startswith("_") or _IsOverload(node):
             continue
 
         symbolName = f"{moduleName}.{node_name}"
@@ -133,7 +134,7 @@ def _AuthoredSymbols(moduleName: str, path: Path) -> tuple[_Symbol, ...]:
             if not isinstance(member, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue
 
-            if member.name.startswith("_") or _IsPropertySetter(member):
+            if member.name.startswith("_") or _IsPropertySetter(member) or _IsOverload(member):
                 continue
 
             if member.name in seenMembers:

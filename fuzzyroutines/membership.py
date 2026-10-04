@@ -17,7 +17,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from numbers import Real
 from types import MappingProxyType
-from typing import Protocol
+from typing import Protocol, cast
 
 from fuzzyroutines.exceptions import InvalidParameterError
 from fuzzyroutines.numeric import _RequireFiniteReal
@@ -81,7 +81,7 @@ class MembershipCallable(Protocol):
         ...
 
 
-def _ValidateFamilyParameters(family_name: str, parameters: dict[str, Real]) -> dict[str, Real]:
+def _ValidateFamilyParameters(family_name: str, parameters: dict[str, MembershipScalar]) -> dict[str, float]:
     """Validate canonical analytical geometry without coercion or mutation."""
 
     required_parameters = {
@@ -103,6 +103,8 @@ def _ValidateFamilyParameters(family_name: str, parameters: dict[str, Real]) -> 
             )
         )
 
+    arithmetic_parameters = cast(dict[str, float], parameters)
+
     for parameter_name in required_parameters:
         parameter_value = parameters[parameter_name]
 
@@ -112,36 +114,36 @@ def _ValidateFamilyParameters(family_name: str, parameters: dict[str, Real]) -> 
             )
 
     if family_name == 'Hyperbolic':
-        if parameters['a'] <= 0 or parameters['b'] <= 0:
+        if arithmetic_parameters['a'] <= 0 or arithmetic_parameters['b'] <= 0:
             raise ValueError("Hyperbolic parameters must satisfy a > 0 and b > 0")
 
     elif family_name == 'Bell':
-        if not parameters['a'] < parameters['b'] <= parameters['c']:
+        if not arithmetic_parameters['a'] < arithmetic_parameters['b'] <= arithmetic_parameters['c']:
             raise ValueError("Bell parameters must satisfy a < b <= c")
 
     elif family_name == 'Parabolic':
-        if not parameters['a'] < parameters['b']:
+        if not arithmetic_parameters['a'] < arithmetic_parameters['b']:
             raise ValueError("Parabolic parameters must satisfy a < b")
 
     elif family_name == 'Triangle':
-        if not parameters['a'] < parameters['c'] <= parameters['b']:
+        if not arithmetic_parameters['a'] < arithmetic_parameters['c'] <= arithmetic_parameters['b']:
             raise ValueError("Triangle parameters must satisfy a < c <= b")
 
     elif family_name == 'Trapezium':
-        if not parameters['a'] < parameters['c'] <= parameters['d'] < parameters['b']:
+        if not arithmetic_parameters['a'] < arithmetic_parameters['c'] <= arithmetic_parameters['d'] < arithmetic_parameters['b']:
             raise ValueError("Trapezium parameters must satisfy a < c <= d < b")
 
     elif family_name == 'Exponential':
-        if parameters['b'] <= 0:
+        if arithmetic_parameters['b'] <= 0:
             raise ValueError("Exponential parameter b must satisfy b > 0")
 
-    elif family_name == 'Sigmoidal' and parameters['a'] == 0:
+    elif family_name == 'Sigmoidal' and arithmetic_parameters['a'] == 0:
         raise ValueError("Sigmoidal parameter a must be non-zero")
 
-    return dict(parameters)
+    return dict(arithmetic_parameters)
 
 
-def _Hyperbolic(parameters: Mapping[str, Real], x: Real) -> Real:
+def _Hyperbolic(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated hyperbolic family without changing parameters."""
 
     a = parameters['a']
@@ -151,10 +153,10 @@ def _Hyperbolic(parameters: Mapping[str, Real], x: Real) -> Real:
     if x <= c:
         return 1
 
-    return 1 / (1 + (a * (x - c)) ** b)
+    return cast(float, 1 / (1 + (a * (x - c)) ** b))
 
 
-def _Bell(parameters: Mapping[str, Real], x: Real) -> Real:
+def _Bell(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated bell family without changing parameters."""
 
     a = parameters['a']
@@ -179,7 +181,7 @@ def _Bell(parameters: Mapping[str, Real], x: Real) -> Real:
     return 0
 
 
-def _Parabolic(parameters: Mapping[str, Real], x: Real) -> Real:
+def _Parabolic(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated parabolic family without changing parameters."""
 
     a = parameters['a']
@@ -197,7 +199,7 @@ def _Parabolic(parameters: Mapping[str, Real], x: Real) -> Real:
     return 1
 
 
-def _Triangle(parameters: Mapping[str, Real], x: Real) -> Real:
+def _Triangle(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated triangle family without changing parameters."""
 
     a = parameters['a']
@@ -216,7 +218,7 @@ def _Triangle(parameters: Mapping[str, Real], x: Real) -> Real:
     return 0
 
 
-def _Trapezium(parameters: Mapping[str, Real], x: Real) -> Real:
+def _Trapezium(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated trapezium family without changing parameters."""
 
     a = parameters['a']
@@ -239,7 +241,7 @@ def _Trapezium(parameters: Mapping[str, Real], x: Real) -> Real:
     return 0
 
 
-def _Exponential(parameters: Mapping[str, Real], x: Real) -> Real:
+def _Exponential(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated exponential family without changing parameters."""
 
     a = parameters['a']
@@ -250,7 +252,7 @@ def _Exponential(parameters: Mapping[str, Real], x: Real) -> Real:
     return math.exp(-0.5 * scaled_distance * scaled_distance)
 
 
-def _Sigmoidal(parameters: Mapping[str, Real], x: Real) -> Real:
+def _Sigmoidal(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated sigmoidal family without changing parameters."""
 
     a = parameters['a']
@@ -267,7 +269,7 @@ def _Sigmoidal(parameters: Mapping[str, Real], x: Real) -> Real:
     return exponential / (1 + exponential)
 
 
-def _Desirability(parameters: Mapping[str, Real], y: Real) -> Real:
+def _Desirability(parameters: Mapping[str, float], y: float) -> float:
     """Evaluate the validated desirability family without changing parameters."""
 
 
@@ -310,9 +312,9 @@ class _AnalyticalSource:
     """Frozen validated formula source for exact regions and numerical moments."""
 
     name: str
-    parameter_items: tuple[tuple[str, Real], ...]
+    parameter_items: tuple[tuple[str, MembershipScalar], ...]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Reject unsupported families and freeze a validated parameter copy."""
 
         if self.name not in _FORMULAS:
@@ -322,17 +324,17 @@ class _AnalyticalSource:
         object.__setattr__(self, "parameter_items", tuple(sorted(parameters.items())))
 
     @property
-    def parameters(self) -> Mapping[str, Real]:
+    def parameters(self) -> Mapping[str, MembershipScalar]:
         """Return a read-only view of the frozen analytical parameters."""
 
         return MappingProxyType(dict(self.parameter_items))
 
-    def mju(self, coordinate: Real) -> Real:
+    def mju(self, coordinate: MembershipScalar) -> float:
         """Evaluate the frozen scalar formula at one finite real coordinate."""
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
 
-        return _FORMULAS[self.name](self.parameters, coordinate)
+        return _FORMULAS[self.name](cast(Mapping[str, float], self.parameters), coordinate)
 
 
 @dataclass(frozen=True, slots=True, init=False)
@@ -356,10 +358,10 @@ class MembershipFunction:
     """
 
     family: str
-    _parameter_items: tuple[tuple[str, Real], ...]
+    _parameter_items: tuple[tuple[str, MembershipScalar], ...]
     _source: _AnalyticalSource
 
-    def __init__(self, family: str, **parameters: Real):
+    def __init__(self, family: str, **parameters: MembershipScalar) -> None:
         """Freeze a family with its exact named parameter set.
 
         Args:
@@ -399,7 +401,7 @@ class MembershipFunction:
         object.__setattr__(self, "_source", source)
 
     @property
-    def parameters(self) -> Mapping[str, Real]:
+    def parameters(self) -> Mapping[str, MembershipScalar]:
         """Return the read-only modern parameter mapping."""
 
         return MappingProxyType(dict(self._parameter_items))
@@ -431,13 +433,18 @@ class MembershipFunction:
 class _LegacyAnalyticalAdapter:
     """Explicit private marker for trusted historical analytical adapters."""
 
+    def mju(self, coordinate: MembershipScalar) -> MembershipScalar:
+        """Describe the scalar evaluation supplied by a historical adapter."""
+
+        raise NotImplementedError
+
     def _AnalyticalSnapshot(self) -> _AnalyticalSource:
         """Return an immutable validated source; implemented by the adapter."""
 
         raise NotImplementedError
 
 
-def _GetAnalyticalSource(value) -> _AnalyticalSource | None:
+def _GetAnalyticalSource(value: object) -> _AnalyticalSource | None:
     """Return trusted formula evidence, rejecting arbitrary lookalike objects."""
 
     if isinstance(value, _AnalyticalSource):
@@ -452,7 +459,11 @@ def _GetAnalyticalSource(value) -> _AnalyticalSource | None:
     return None
 
 
-def Hyperbolic(scale: Real, exponent: Real, cutoff: Real) -> MembershipFunction:
+def Hyperbolic(
+    scale: MembershipScalar,
+    exponent: MembershipScalar,
+    cutoff: MembershipScalar,
+) -> MembershipFunction:
     """Return decreasing hyperbolic tail with grade one for coordinates at or below cutoff.
 
     The finite real parameters must satisfy `scale > 0 and exponent > 0`; booleans are
@@ -474,7 +485,11 @@ def Hyperbolic(scale: Real, exponent: Real, cutoff: Real) -> MembershipFunction:
     return MembershipFunction("hyperbolic", scale=scale, exponent=exponent, cutoff=cutoff)
 
 
-def Bell(left: Real, plateau_start: Real, plateau_end: Real) -> MembershipFunction:
+def Bell(
+    left: MembershipScalar,
+    plateau_start: MembershipScalar,
+    plateau_end: MembershipScalar,
+) -> MembershipFunction:
     """Return finite flat-top quadratic bell with mirrored shoulders.
 
     The finite real parameters must satisfy `left < plateau_start <= plateau_end`; booleans are
@@ -496,7 +511,7 @@ def Bell(left: Real, plateau_start: Real, plateau_end: Real) -> MembershipFuncti
     return MembershipFunction("bell", left=left, plateau_start=plateau_start, plateau_end=plateau_end)
 
 
-def SShoulder(left: Real, right: Real) -> MembershipFunction:
+def SShoulder(left: MembershipScalar, right: MembershipScalar) -> MembershipFunction:
     """Return rising quadratic S-shoulder, zero at left and one from right onward.
 
     The finite real parameters must satisfy `left < right`; booleans are
@@ -517,7 +532,7 @@ def SShoulder(left: Real, right: Real) -> MembershipFunction:
     return MembershipFunction("s_shoulder", left=left, right=right)
 
 
-def Triangle(left: Real, peak: Real, right: Real) -> MembershipFunction:
+def Triangle(left: MembershipScalar, peak: MembershipScalar, right: MembershipScalar) -> MembershipFunction:
     """Return piecewise linear triangle with conventional left, peak, right order.
 
     The finite real parameters must satisfy `left < peak <= right`; booleans are
@@ -539,7 +554,12 @@ def Triangle(left: Real, peak: Real, right: Real) -> MembershipFunction:
     return MembershipFunction("triangle", left=left, peak=peak, right=right)
 
 
-def Trapezoid(left: Real, plateau_start: Real, plateau_end: Real, right: Real) -> MembershipFunction:
+def Trapezoid(
+    left: MembershipScalar,
+    plateau_start: MembershipScalar,
+    plateau_end: MembershipScalar,
+    right: MembershipScalar,
+) -> MembershipFunction:
     """Return piecewise linear trapezoid with conventional left-to-right order.
 
     The finite real parameters must satisfy `left < plateau_start <= plateau_end < right`; booleans are
@@ -562,7 +582,7 @@ def Trapezoid(left: Real, plateau_start: Real, plateau_end: Real, right: Real) -
     return MembershipFunction("trapezoid", left=left, plateau_start=plateau_start, plateau_end=plateau_end, right=right)
 
 
-def Gaussian(center: Real, scale: Real) -> MembershipFunction:
+def Gaussian(center: MembershipScalar, scale: MembershipScalar) -> MembershipFunction:
     """Return gaussian membership exp(-0.5 * ((x - center) / scale)^2).
 
     The finite real parameters must satisfy `scale > 0`; booleans are
@@ -583,7 +603,7 @@ def Gaussian(center: Real, scale: Real) -> MembershipFunction:
     return MembershipFunction("gaussian", center=center, scale=scale)
 
 
-def Logistic(slope: Real, midpoint: Real) -> MembershipFunction:
+def Logistic(slope: MembershipScalar, midpoint: MembershipScalar) -> MembershipFunction:
     """Return stable logistic membership with grade one-half at midpoint.
 
     The finite real parameters must satisfy `slope != 0`; booleans are

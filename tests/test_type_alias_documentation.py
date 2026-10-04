@@ -5,6 +5,8 @@
 
 """Static type-alias documentation and translation drift regression contracts."""
 
+import pytest
+
 from tools.documentation_gates import ValidateCoverage
 from tools.locale_documentation import CanonicalHash, DiscoverCanonicalUnits
 
@@ -14,6 +16,24 @@ type Scalar = float | int
 """Accept built-in numeric scalar annotations."""
 
 type _Internal = str
+'''
+
+OVERLOAD_SOURCE = '''raise RuntimeError("Documentation discovery must never import source")
+from typing import overload
+
+@overload
+def Scalar(value: int) -> int:
+    """Describe the integer signature."""
+    ...
+
+@overload
+def Scalar(value: str) -> str:
+    """Describe the string signature."""
+    ...
+
+def Scalar(value: int | str) -> int | str:
+    """Preserve the complete concrete implementation contract."""
+    return value
 '''
 
 
@@ -100,4 +120,54 @@ def test_UndocumentedOrUnrenderedTypeAliasesFailCoverage(tmp_path):
     errors = ValidateCoverage(projectRoot=tmp_path)
     assert any("fuzzyroutines.membership.Scalar is public but absent" in error for error in errors), (
         "Public aliases omitted from reference selections must fail coverage"
+    )
+
+
+def test_OverloadsRetainOneIdentityAndConcreteDocumentation(tmp_path):
+    """Select concrete contracts while preserving every overload signature."""
+
+    manifest = _Prepare(tmp_path, source=OVERLOAD_SOURCE)
+    units = [unit for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"]
+    assert len(units) == 2, "Overload stubs must not duplicate authored or exported identities"
+    assert {unit.identifier for unit in units} == {
+        "symbol:fuzzyroutines.Scalar", "symbol:fuzzyroutines.membership.Scalar",
+    }, "Both public identities must resolve statically to the concrete implementation"
+
+    for unit in units:
+        assert unit.body == "Preserve the complete concrete implementation contract.", (
+            "Overload summaries must not replace the full implementation documentation"
+        )
+        assert unit.signature.splitlines() == [
+            "def Scalar(value: int) -> int",
+            "def Scalar(value: str) -> str",
+            "def Scalar(value: int | str) -> int | str",
+        ], "Canonical hashes must retain ordered overload and implementation signatures"
+
+    assert ValidateCoverage(projectRoot=tmp_path) == (), "Documented overload implementations must pass coverage"
+
+
+def test_OverloadOnlyChangesInvalidateCanonicalHashes(tmp_path):
+    """Detect a changed overload even when the implementation stays identical."""
+
+    manifest = _Prepare(tmp_path, source=OVERLOAD_SOURCE)
+    before = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"}
+    _Prepare(tmp_path, source=OVERLOAD_SOURCE.replace("value: str) -> str", "value: bytes) -> bytes"))
+    after = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"}
+    assert all(after[identifier] != digest for identifier, digest in before.items()), (
+        "Overload-only edits must invalidate both exported and authored translation hashes"
+    )
+
+
+def test_OverloadStubsCannotSubstituteForConcreteContracts(tmp_path):
+    """Reject missing concrete implementations and missing implementation docs."""
+
+    manifest = _Prepare(tmp_path, source=OVERLOAD_SOURCE.split("\ndef Scalar(value: int | str)")[0])
+
+    with pytest.raises(ValueError, match="cannot find public definition Scalar"):
+        DiscoverCanonicalUnits(tmp_path, manifest)
+
+    _Prepare(tmp_path, source=OVERLOAD_SOURCE.replace('    """Preserve the complete concrete implementation contract."""\n', ""))
+    errors = ValidateCoverage(projectRoot=tmp_path)
+    assert any("fuzzyroutines.membership.Scalar has no source docstring" in error for error in errors), (
+        "Stub docstrings must not hide an undocumented implementation"
     )

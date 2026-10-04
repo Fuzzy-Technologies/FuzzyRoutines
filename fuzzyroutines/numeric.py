@@ -7,10 +7,18 @@
 
 Validation rejects booleans, non-real values, non-finite numbers, and invalid
 membership degrees. It does not coerce, clamp, or configure global policy.
+
+Private arithmetic uses a static float view of validated Real values because
+Typeshed's numeric abstract classes return complex-like operator types. Those
+casts describe the supported real arithmetic interface; they never convert the
+runtime value. Public inputs, fields, and scalar results retain MembershipScalar,
+including Fraction. Casts of interval endpoints occur only after finite endpoint
+validation or an explicit check that the endpoint is bounded.
 """
 
 import math
 from numbers import Real
+from typing import cast
 
 from fuzzyroutines.exceptions import (
     InvalidParameterError,
@@ -18,7 +26,7 @@ from fuzzyroutines.exceptions import (
 )
 
 
-def _RequireFiniteReal(value: Real, parameter_name: str) -> Real:
+def _RequireFiniteReal(value: object, parameter_name: str) -> float:
     """Return a finite real scalar unchanged or raise a deterministic error."""
 
     if isinstance(value, bool) or not isinstance(value, Real):
@@ -27,10 +35,12 @@ def _RequireFiniteReal(value: Real, parameter_name: str) -> Real:
     if not math.isfinite(value):
         raise InvalidParameterError(f"{parameter_name} must be a finite real number")
 
-    return value
+    # Typeshed models Real arithmetic through a complex-like base. This
+    # static arithmetic view preserves the original value, including Fraction.
+    return cast(float, value)
 
 
-def _RequireGrade(value: Real, parameter_name: str) -> Real:
+def _RequireGrade(value: object, parameter_name: str) -> float:
     """Return a finite real membership degree in the closed unit interval."""
 
     value = _RequireFiniteReal(value, parameter_name)

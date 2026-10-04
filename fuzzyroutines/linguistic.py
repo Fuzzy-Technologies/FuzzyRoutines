@@ -13,6 +13,7 @@ minimum-confidence policies without changing the historical compatibility API.
 import math
 from dataclasses import dataclass
 from numbers import Real
+from typing import cast
 
 from fuzzyroutines.domain import ContinuousUniverse, IntegrationDomain
 from fuzzyroutines.exceptions import (
@@ -20,12 +21,14 @@ from fuzzyroutines.exceptions import (
     InvalidParameterError,
     InvalidParameterTypeError,
 )
-from fuzzyroutines.fuzzysets import ScalarFuzzySet, _RequireGrade
+from fuzzyroutines.fuzzysets import ScalarFuzzySet
+from fuzzyroutines.membership import MembershipScalar
+from fuzzyroutines.numeric import _RequireGrade
 
 TIEPOLICIES = ("first", "last", "all")
 
 
-def _RequireNonNegativeFiniteReal(value, parameterName):
+def _RequireNonNegativeFiniteReal(value: MembershipScalar, parameterName: str) -> MembershipScalar:
     """Return a finite non-negative scalar or raise a deterministic error."""
 
     if isinstance(value, bool) or not isinstance(value, Real):
@@ -40,7 +43,11 @@ def _RequireNonNegativeFiniteReal(value, parameterName):
     return value
 
 
-def _IsWithinTieTolerance(grade, confidence, tolerance):
+def _IsWithinTieTolerance(
+    grade: MembershipScalar,
+    confidence: MembershipScalar,
+    tolerance: MembershipScalar,
+) -> bool:
     """Return whether a grade is within an inclusive absolute tie tolerance."""
 
     difference = float(confidence) - float(grade)
@@ -65,7 +72,7 @@ class LinguisticTerm:
     name: str
     fuzzySet: ScalarFuzzySet
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require a non-empty exact name and a modern scalar fuzzy set."""
 
         if not isinstance(self.name, str):
@@ -93,10 +100,10 @@ class FuzzificationPolicy:
     """
 
     tiePolicy: str = "first"
-    minimumConfidence: Real = 0.0
-    tieTolerance: Real = 0.0
+    minimumConfidence: MembershipScalar = 0.0
+    tieTolerance: MembershipScalar = 0.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate the complete classification policy."""
 
         if self.tiePolicy not in TIEPOLICIES:
@@ -119,9 +126,9 @@ class TermMembership:
     """One linguistic term and its validated membership score."""
 
     term: LinguisticTerm
-    grade: Real
+    grade: MembershipScalar
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require a typed term and a valid membership grade."""
 
         if not isinstance(self.term, LinguisticTerm):
@@ -145,12 +152,12 @@ class FuzzificationResult:
     """
 
     memberships: tuple[TermMembership, ...]
-    confidence: Real
+    confidence: MembershipScalar
     policy: FuzzificationPolicy
     tiedTerms: tuple[LinguisticTerm, ...]
     selectedTerms: tuple[LinguisticTerm, ...]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require internally consistent classification evidence."""
 
         if not isinstance(self.memberships, tuple) or not self.memberships:
@@ -163,13 +170,13 @@ class FuzzificationResult:
             raise InvalidParameterTypeError("policy must be a FuzzificationPolicy")
 
         confidence = _RequireGrade(self.confidence, "confidence")
-        if confidence != max(value.grade for value in self.memberships):
+        if confidence != max(cast(float, value.grade) for value in self.memberships):
             raise InvalidParameterError("confidence must equal the maximum membership grade")
 
         object.__setattr__(self, "confidence", confidence)
 
-        expectedTiedTerms = ()
-        if confidence > self.policy.minimumConfidence:
+        expectedTiedTerms: tuple[LinguisticTerm, ...] = ()
+        if confidence > cast(float, self.policy.minimumConfidence):
             expectedTiedTerms = tuple(
                 value.term
                 for value in self.memberships
@@ -196,13 +203,13 @@ class FuzzificationResult:
             raise InvalidParameterError("selectedTerms do not match tiedTerms and policy")
 
     @property
-    def isMatch(self):
+    def isMatch(self) -> bool:
         """Return whether the policy selected at least one term."""
 
         return bool(self.selectedTerms)
 
     @property
-    def isTie(self):
+    def isTie(self) -> bool:
         """Return whether multiple maximum terms satisfied the tie policy."""
 
         return len(self.tiedTerms) > 1
@@ -223,10 +230,10 @@ class ScaleDiagnosticsPolicy:
     """
 
     sampleCount: int = 101
-    membershipThreshold: Real = 0.0
-    partitionTolerance: Real = 1e-12
+    membershipThreshold: MembershipScalar = 0.0
+    partitionTolerance: MembershipScalar = 1e-12
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate the complete sampled-diagnostics policy."""
 
         if isinstance(self.sampleCount, bool) or not isinstance(self.sampleCount, int):
@@ -261,11 +268,11 @@ class ScaleDiagnosticPoint:
             overlap classification.
     """
 
-    coordinate: Real
+    coordinate: MembershipScalar
     memberships: tuple[TermMembership, ...]
-    membershipThreshold: Real
+    membershipThreshold: MembershipScalar
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require one finite coordinate and a non-empty membership vector."""
 
         if isinstance(self.coordinate, bool) or not isinstance(self.coordinate, Real):
@@ -287,41 +294,41 @@ class ScaleDiagnosticPoint:
         )
 
     @property
-    def maximumMembership(self):
+    def maximumMembership(self) -> MembershipScalar:
         """Greatest term membership sampled at this coordinate."""
 
-        return max(value.grade for value in self.memberships)
+        return max(cast(float, value.grade) for value in self.memberships)
 
     @property
-    def membershipSum(self):
+    def membershipSum(self) -> float:
         """Floating-point sum of every term membership at this coordinate."""
 
         return math.fsum(float(value.grade) for value in self.memberships)
 
     @property
-    def activeTerms(self):
+    def activeTerms(self) -> tuple[LinguisticTerm, ...]:
         """Terms whose memberships strictly exceed the activity threshold."""
 
         return tuple(
             value.term
             for value in self.memberships
-            if value.grade > self.membershipThreshold
+            if cast(float, value.grade) > cast(float, self.membershipThreshold)
         )
 
     @property
-    def isGap(self):
+    def isGap(self) -> bool:
         """Whether no term is active at this sampled coordinate."""
 
         return not self.activeTerms
 
     @property
-    def isOverlap(self):
+    def isOverlap(self) -> bool:
         """Whether at least two terms are active at this sampled coordinate."""
 
         return len(self.activeTerms) > 1
 
     @property
-    def partitionError(self):
+    def partitionError(self) -> float:
         """Absolute sampled deviation of the membership sum from one."""
 
         return abs(self.membershipSum - 1.0)
@@ -344,7 +351,7 @@ class ScaleDiagnosticsResult:
     policy: ScaleDiagnosticsPolicy
     points: tuple[ScaleDiagnosticPoint, ...]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require a complete ordered grid with stable term membership vectors."""
 
         if not isinstance(self.analysisDomain, IntegrationDomain):
@@ -369,7 +376,7 @@ class ScaleDiagnosticsResult:
             raise InvalidDomainError("the diagnostic grid must end at analysisDomain.right")
 
         if any(
-            leftPoint.coordinate >= rightPoint.coordinate
+            cast(float, leftPoint.coordinate) >= cast(float, rightPoint.coordinate)
             for leftPoint, rightPoint in zip(self.points, self.points[1:])
         ):
             raise InvalidDomainError("diagnostic coordinates must be strictly increasing")
@@ -383,37 +390,37 @@ class ScaleDiagnosticsResult:
                 raise InvalidParameterError("every diagnostic point must preserve the same term order")
 
     @property
-    def gapPoints(self):
+    def gapPoints(self) -> tuple[ScaleDiagnosticPoint, ...]:
         """Sampled points at which no term exceeds the activity threshold."""
 
         return tuple(point for point in self.points if point.isGap)
 
     @property
-    def overlapPoints(self):
+    def overlapPoints(self) -> tuple[ScaleDiagnosticPoint, ...]:
         """Sampled points at which at least two terms exceed the threshold."""
 
         return tuple(point for point in self.points if point.isOverlap)
 
     @property
-    def gapFraction(self):
+    def gapFraction(self) -> float:
         """Fraction of sampled grid points classified as gaps."""
 
         return len(self.gapPoints) / len(self.points)
 
     @property
-    def overlapFraction(self):
+    def overlapFraction(self) -> float:
         """Fraction of sampled grid points classified as overlaps."""
 
         return len(self.overlapPoints) / len(self.points)
 
     @property
-    def minimumCoverage(self):
+    def minimumCoverage(self) -> MembershipScalar:
         """Smallest sampled maximum membership across the analysis grid."""
 
         return min(point.maximumMembership for point in self.points)
 
     @property
-    def meanCoverage(self):
+    def meanCoverage(self) -> float:
         """Arithmetic mean of sampled maximum membership values."""
 
         return math.fsum(float(point.maximumMembership) for point in self.points) / len(
@@ -421,37 +428,40 @@ class ScaleDiagnosticsResult:
         )
 
     @property
-    def maximumCoverage(self):
+    def maximumCoverage(self) -> MembershipScalar:
         """Greatest sampled maximum membership across the analysis grid."""
 
         return max(point.maximumMembership for point in self.points)
 
     @property
-    def maximumActiveTermCount(self):
+    def maximumActiveTermCount(self) -> int:
         """Greatest number of simultaneously active terms on the sampled grid."""
 
         return max(len(point.activeTerms) for point in self.points)
 
     @property
-    def meanPartitionError(self):
+    def meanPartitionError(self) -> float:
         """Mean sampled absolute deviation of membership sums from one."""
 
         return math.fsum(point.partitionError for point in self.points) / len(self.points)
 
     @property
-    def maximumPartitionError(self):
+    def maximumPartitionError(self) -> float:
         """Greatest sampled absolute deviation of a membership sum from one."""
 
         return max(point.partitionError for point in self.points)
 
     @property
-    def isPartitionWithinTolerance(self):
+    def isPartitionWithinTolerance(self) -> bool:
         """Whether every sampled membership sum satisfies the policy tolerance."""
 
-        return self.maximumPartitionError <= self.policy.partitionTolerance
+        return self.maximumPartitionError <= cast(float, self.policy.partitionTolerance)
 
 
-def _BuildDiagnosticCoordinates(analysisDomain, sampleCount):
+def _BuildDiagnosticCoordinates(
+    analysisDomain: IntegrationDomain,
+    sampleCount: int,
+) -> tuple[MembershipScalar, ...]:
     """Return an endpoint-preserving evenly spaced diagnostic grid."""
 
     intervalWidth = float(analysisDomain.right) - float(analysisDomain.left)
@@ -478,7 +488,7 @@ class LinguisticScale:
 
     terms: tuple[LinguisticTerm, ...]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require typed terms whose names have unambiguous lookup keys."""
 
         if not isinstance(self.terms, tuple):
@@ -533,7 +543,7 @@ class LinguisticScale:
 
     def Fuzzify(
         self,
-        coordinate: Real,
+        coordinate: MembershipScalar,
         policy: FuzzificationPolicy | None = None,
     ) -> FuzzificationResult:
         """Classify one coordinate with explicit tie and confidence semantics.
@@ -572,9 +582,9 @@ class LinguisticScale:
             TermMembership(term, term.fuzzySet.Membership(coordinate))
             for term in self.terms
         )
-        confidence = max(membership.grade for membership in memberships)
+        confidence = max(cast(float, membership.grade) for membership in memberships)
 
-        if confidence <= policy.minimumConfidence:
+        if confidence <= cast(float, policy.minimumConfidence):
             return FuzzificationResult(memberships, confidence, policy, (), ())
 
         tiedTerms = tuple(

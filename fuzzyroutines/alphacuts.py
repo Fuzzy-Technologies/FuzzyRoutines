@@ -14,24 +14,25 @@ separate provenance-rich sampled result and never claims exact geometry.
 
 from dataclasses import dataclass
 from itertools import pairwise
-from numbers import Real
+from typing import cast
 
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
     IntegrationDomain,
-    _RequireFiniteReal,
 )
 from fuzzyroutines.exceptions import (
     InvalidDomainError,
     InvalidParameterError,
     InvalidParameterTypeError,
 )
-from fuzzyroutines.fuzzysets import ScalarFuzzySet, _RequireGrade
+from fuzzyroutines.fuzzysets import ScalarFuzzySet
+from fuzzyroutines.membership import MembershipScalar
+from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
 from fuzzyroutines.properties import DiscreteRegion
 
 
-def _RequireAlpha(alpha):
+def _RequireAlpha(alpha: MembershipScalar) -> MembershipScalar:
     """Return a finite alpha threshold in the closed unit interval."""
 
     alpha = _RequireFiniteReal(alpha, "alpha")
@@ -42,7 +43,7 @@ def _RequireAlpha(alpha):
     return alpha
 
 
-def _RequireSampleCount(sampleCount):
+def _RequireSampleCount(sampleCount: int) -> int:
     """Return a sample count that defines at least two grid endpoints."""
 
     if isinstance(sampleCount, bool) or not isinstance(sampleCount, int):
@@ -73,15 +74,15 @@ class SampledAlphaCut:
             itself prove equal spacing for a directly constructed instance.
     """
 
-    alpha: Real
+    alpha: MembershipScalar
     analysisDomain: IntegrationDomain
     sampleCount: int
-    coordinates: tuple[Real, ...]
-    grades: tuple[Real, ...]
+    coordinates: tuple[MembershipScalar, ...]
+    grades: tuple[MembershipScalar, ...]
     cutSamples: DiscreteRegion
     method: str = "uniform-grid"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require a complete, ordered, and internally consistent sample table."""
 
         alpha = _RequireAlpha(self.alpha)
@@ -139,13 +140,13 @@ class SampledAlphaCut:
         object.__setattr__(self, "grades", grades)
 
     @property
-    def isExact(self):
+    def isExact(self) -> bool:
         """Prevent finite continuous samples from masquerading as exact geometry."""
 
         return False
 
 
-def AlphaCut(fuzzySet, alpha):
+def AlphaCut(fuzzySet: ScalarFuzzySet, alpha: MembershipScalar) -> DiscreteRegion:
     """Return the exact weak alpha-cut of a discrete scalar fuzzy set.
 
     The returned region contains every declared coordinate `x` satisfying
@@ -180,12 +181,17 @@ def AlphaCut(fuzzySet, alpha):
         tuple(
             coordinate
             for coordinate in fuzzySet.universe.points
-            if fuzzySet.Membership(coordinate) >= alpha
+            if cast(float, fuzzySet.Membership(coordinate)) >= alpha
         )
     )
 
 
-def SampleAlphaCut(fuzzySet, alpha, analysisDomain, sampleCount=101):
+def SampleAlphaCut(
+    fuzzySet: ScalarFuzzySet,
+    alpha: MembershipScalar,
+    analysisDomain: IntegrationDomain,
+    sampleCount: int = 101,
+) -> SampledAlphaCut:
     """Observe a continuous weak alpha-cut on one explicit uniform grid.
 
     The result records coordinates, validated membership grades, threshold,
@@ -220,13 +226,13 @@ def SampleAlphaCut(fuzzySet, alpha, analysisDomain, sampleCount=101):
 
     analysisDomain.ValidateWithin(fuzzySet.universe)
     sampleCount = _RequireSampleCount(sampleCount)
-    step = (analysisDomain.right - analysisDomain.left) / (sampleCount - 1)
+    step = (cast(float, analysisDomain.right) - cast(float, analysisDomain.left)) / (sampleCount - 1)
     # Assign the final endpoint directly so binary64 accumulation cannot move
     # a logically closed grid endpoint outside the declared domain.
     coordinates = tuple(
         analysisDomain.right
         if sampleIndex == sampleCount - 1
-        else analysisDomain.left + sampleIndex * step
+        else cast(float, analysisDomain.left) + sampleIndex * step
         for sampleIndex in range(sampleCount)
     )
     grades = tuple(fuzzySet.Membership(coordinate) for coordinate in coordinates)
@@ -234,7 +240,7 @@ def SampleAlphaCut(fuzzySet, alpha, analysisDomain, sampleCount=101):
         tuple(
             coordinate
             for coordinate, grade in zip(coordinates, grades, strict=True)
-            if grade >= alpha
+            if cast(float, grade) >= alpha
         )
     )
     return SampledAlphaCut(
