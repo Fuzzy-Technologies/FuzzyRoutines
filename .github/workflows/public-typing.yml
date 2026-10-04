@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+name: Public modern typing
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - develop
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-typing:
+    name: Python ${{ matrix.python-version }} source and wheel typing
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13", "3.14"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements-typing.txt
+
+      - name: Install pinned checker
+        run: python -m pip install --disable-pip-version-check -r requirements-typing.txt
+
+      - name: Check all modern source and consumer contracts
+        run: python -m tools.typecheck
+
+      - name: Build wheel for the installed consumer boundary
+        run: |
+          python -m pip install --disable-pip-version-check \
+            build==1.4.0 packaging==26.3 pyproject-hooks==1.3.3 setuptools==80.9.0
+          python -m build --wheel --no-isolation --outdir dist
+
+      - name: Check isolated consumers against the installed wheel
+        shell: bash
+        run: |
+          set -euo pipefail
+          wheelPaths=("$GITHUB_WORKSPACE"/dist/*.whl)
+          test "${#wheelPaths[@]}" -eq 1
+          test -f "${wheelPaths[0]}"
+
+          venvPath="$RUNNER_TEMP/fuzzyroutines-typing-${{ matrix.python-version }}"
+          python -m venv "$venvPath"
+          "$venvPath/bin/python" -m pip install --disable-pip-version-check \
+            -r "$GITHUB_WORKSPACE/requirements-typing.txt"
+          "$venvPath/bin/python" -m pip install --disable-pip-version-check \
+            --no-deps "${wheelPaths[0]}"
+
+          cd "$RUNNER_TEMP"
+          "$venvPath/bin/python" "$GITHUB_WORKSPACE/tools/typecheck.py" --installed

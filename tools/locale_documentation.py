@@ -186,6 +186,43 @@ def _IsPropertySetter(node: ast.FunctionDef | ast.AsyncFunctionDef) -> bool:
     )
 
 
+def _IsOverload(node: ast.AST) -> bool:
+    """Identify typing overload declarations without executing their module."""
+
+    return isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
+        isinstance(decorator, ast.Name) and decorator.id == "overload"
+        or isinstance(decorator, ast.Attribute) and decorator.attr == "overload"
+        for decorator in node.decorator_list
+    )
+
+
+def _SourceFunctionSignature(
+    path: Path, node: ast.FunctionDef | ast.AsyncFunctionDef,
+) -> str:
+    """Hash overload declarations and the implementation in their own scope."""
+
+    syntax = ast.parse(_ReadCanonicalText(path), filename=str(path))
+
+    for scope in ast.walk(syntax):
+        if not isinstance(scope, (ast.Module, ast.ClassDef)):
+            continue
+
+        if not any(member.lineno == node.lineno for member in scope.body):
+            continue
+
+        signatures = [
+            _FunctionSignature(member)
+            for member in scope.body
+            if isinstance(member, (ast.FunctionDef, ast.AsyncFunctionDef))
+            and member.name == node.name
+            and (_IsOverload(member) or member.lineno == node.lineno)
+        ]
+
+        return "\n".join(signatures)
+
+    return _FunctionSignature(node)
+
+
 def _NodeUnit(
     identifier: str,
     sourcePath: str,
@@ -197,7 +234,7 @@ def _NodeUnit(
     signature = ast.unparse(node) if isinstance(node, ast.TypeAlias) else (
         _ClassSignature(node)
         if isinstance(node, ast.ClassDef)
-        else _FunctionSignature(node)
+        else _SourceFunctionSignature(source_path, node)
     )
 
     return CanonicalUnit(
@@ -263,7 +300,7 @@ def _FindTopLevelNode(path: Path, name: str):
         if isinstance(
             node,
             (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
-        ) and node.name == name:
+        ) and node.name == name and not _IsOverload(node):
             return node
 
         if isinstance(node, ast.TypeAlias) and node.name.id == name:
@@ -289,7 +326,7 @@ def _AuthoredUnits(
 
         node_name = node.name.id if isinstance(node, ast.TypeAlias) else node.name
 
-        if node_name.startswith("_"):
+        if node_name.startswith("_") or _IsOverload(node):
             continue
 
         symbolName = f"{moduleName}.{node_name}"
@@ -308,6 +345,7 @@ def _AuthoredUnits(
                 member.name.startswith("_")
                 or member.name in seenMembers
                 or _IsPropertySetter(member)
+                or _IsOverload(member)
             ):
                 continue
 

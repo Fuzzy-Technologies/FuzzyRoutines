@@ -13,7 +13,7 @@ result.
 
 import math
 from dataclasses import dataclass
-from numbers import Real
+from typing import cast
 
 from fuzzyroutines.domain import (
     ContinuousUniverse,
@@ -27,6 +27,7 @@ from fuzzyroutines.exceptions import (
 )
 from fuzzyroutines.membership import (
     MembershipCallable,
+    MembershipScalar,
     _AnalyticalSource,
     _GetAnalyticalSource,
 )
@@ -57,7 +58,7 @@ class ScalarFuzzySet:
     universe: ContinuousUniverse | DiscreteUniverse
     membershipFunction: MembershipCallable
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require a supported universe and an evaluable membership function."""
 
         if not isinstance(self.universe, (ContinuousUniverse, DiscreteUniverse)):
@@ -66,7 +67,7 @@ class ScalarFuzzySet:
         if not callable(self.membershipFunction):
             raise InvalidParameterTypeError("membershipFunction must be callable")
 
-    def Membership(self, coordinate):
+    def Membership(self, coordinate: MembershipScalar) -> MembershipScalar:
         """Return the validated membership grade for a universe coordinate.
 
         Args:
@@ -93,9 +94,9 @@ class _NormalizedDiscreteMembership:
     """Immutable exhaustive grade snapshot for a normalized discrete set."""
 
     universe: DiscreteUniverse
-    grades: tuple[Real, ...]
+    grades: tuple[MembershipScalar, ...]
 
-    def __call__(self, coordinate):
+    def __call__(self, coordinate: MembershipScalar) -> MembershipScalar:
         """Return the normalized grade at one already validated coordinate."""
 
         return self.grades[self.universe.points.index(coordinate)]
@@ -107,17 +108,17 @@ class _NormalizedContinuousMembership:
 
     universe: ContinuousUniverse
     familyIdentifier: str
-    parameters: tuple[tuple[str, Real], ...]
-    sourceHeight: Real
+    parameters: tuple[tuple[str, MembershipScalar], ...]
+    sourceHeight: MembershipScalar
 
-    def __call__(self, coordinate):
+    def __call__(self, coordinate: MembershipScalar) -> MembershipScalar:
         """Evaluate the frozen analytical definition and scale its grade."""
 
         membershipFunction = _AnalyticalSource(self.familyIdentifier.title(), self.parameters)
-        return membershipFunction.mju(coordinate) / self.sourceHeight
+        return membershipFunction.mju(coordinate) / cast(float, self.sourceHeight)
 
 
-def _ContinuousAnalyticalSource(fuzzySet):
+def _ContinuousAnalyticalSource(fuzzySet: ScalarFuzzySet) -> _AnalyticalSource | None:
     """Return trusted analytical evidence from a callable or supported bound evaluator."""
 
     evaluator = fuzzySet.membershipFunction
@@ -137,7 +138,7 @@ def _ContinuousAnalyticalSource(fuzzySet):
     return None
 
 
-def _RequireContinuousAnalyticalSource(fuzzySet):
+def _RequireContinuousAnalyticalSource(fuzzySet: ScalarFuzzySet) -> _AnalyticalSource:
     """Return a supported exact source or reject an unproved supremum."""
 
     analyticalSource = _ContinuousAnalyticalSource(fuzzySet)
@@ -150,13 +151,18 @@ def _RequireContinuousAnalyticalSource(fuzzySet):
     return analyticalSource
 
 
-def _DiscreteGrades(fuzzySet):
+def _DiscreteGrades(fuzzySet: ScalarFuzzySet) -> tuple[float, ...]:
     """Evaluate every coordinate of a declared discrete universe exactly once."""
 
-    return tuple(fuzzySet.Membership(coordinate) for coordinate in fuzzySet.universe.points)
+    universe = cast(DiscreteUniverse, fuzzySet.universe)
+
+    return tuple(_RequireGrade(fuzzySet.Membership(coordinate), "membership grade") for coordinate in universe.points)
 
 
-def _NormalizedContinuousHeight(membershipFunction, universe):
+def _NormalizedContinuousHeight(
+    membershipFunction: _NormalizedContinuousMembership,
+    universe: ContinuousUniverse,
+) -> MembershipScalar:
     """Return exact height after restricting normalized evidence to a universe."""
 
     from fuzzyroutines.properties import DeriveProperties
@@ -167,12 +173,12 @@ def _NormalizedContinuousHeight(membershipFunction, universe):
     )
     sourceHeight = DeriveProperties(frozenSource, universe).height
     return _RequireGrade(
-        sourceHeight / membershipFunction.sourceHeight,
+        sourceHeight / cast(float, membershipFunction.sourceHeight),
         "normalized height",
     )
 
 
-def Height(fuzzySet):
+def Height(fuzzySet: ScalarFuzzySet) -> MembershipScalar:
     """Return the exact supremum of membership grades when it is provable.
 
     A discrete universe is evaluated exhaustively.  A continuous universe
@@ -220,7 +226,7 @@ def Height(fuzzySet):
     return DeriveProperties(analyticalSource, fuzzySet.universe).height
 
 
-def IsNormal(fuzzySet, tolerance=1e-12):
+def IsNormal(fuzzySet: ScalarFuzzySet, tolerance: MembershipScalar = 1e-12) -> bool:
     """Return whether the exact fuzzy-set height equals one within tolerance.
 
     Args:
@@ -244,7 +250,7 @@ def IsNormal(fuzzySet, tolerance=1e-12):
     return math.isclose(Height(fuzzySet), 1.0, rel_tol=0.0, abs_tol=tolerance)
 
 
-def Normalize(fuzzySet):
+def Normalize(fuzzySet: ScalarFuzzySet) -> ScalarFuzzySet:
     r"""Return a new height-one fuzzy set without mutating the source set.
 
     Normalization is the pointwise quotient
@@ -265,6 +271,9 @@ def Normalize(fuzzySet):
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
         raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
+
+    height: MembershipScalar
+    normalizedMembership: MembershipCallable
 
     if isinstance(fuzzySet.universe, DiscreteUniverse):
         sourceGrades = _DiscreteGrades(fuzzySet)
@@ -294,7 +303,7 @@ def Normalize(fuzzySet):
             frozenSource = _AnalyticalSource(familyIdentifier.title(), parameters)
             height = DeriveProperties(frozenSource, fuzzySet.universe).height
             _RequireGrade(
-                height / fuzzySet.membershipFunction.sourceHeight,
+                height / cast(float, fuzzySet.membershipFunction.sourceHeight),
                 "normalized height",
             )
 
@@ -332,7 +341,7 @@ def Normalize(fuzzySet):
     return ScalarFuzzySet(fuzzySet.universe, normalizedMembership)
 
 
-def Complement(fuzzySet, negationPolicy):
+def Complement(fuzzySet: ScalarFuzzySet, negationPolicy: NegationPolicy) -> ScalarFuzzySet:
     """Return a new fuzzy set using one explicit approved negation policy.
 
     Args:
@@ -352,7 +361,7 @@ def Complement(fuzzySet, negationPolicy):
     if not isinstance(negationPolicy, NegationPolicy):
         raise InvalidParameterTypeError("negationPolicy must be a NegationPolicy")
 
-    def ComplementMembership(coordinate):
+    def ComplementMembership(coordinate: MembershipScalar) -> MembershipScalar:
         """Evaluate the source set before applying the configured negation."""
 
         return negationPolicy.Evaluate(fuzzySet.Membership(coordinate))
@@ -360,7 +369,10 @@ def Complement(fuzzySet, negationPolicy):
     return ScalarFuzzySet(fuzzySet.universe, ComplementMembership)
 
 
-def _RequireCompatibleSets(leftSet, rightSet):
+def _RequireCompatibleSets(
+    leftSet: ScalarFuzzySet,
+    rightSet: ScalarFuzzySet,
+) -> tuple[ScalarFuzzySet, ScalarFuzzySet]:
     """Return two fuzzy sets after proving exact universe compatibility."""
 
     if not isinstance(leftSet, ScalarFuzzySet) or not isinstance(rightSet, ScalarFuzzySet):
@@ -372,7 +384,11 @@ def _RequireCompatibleSets(leftSet, rightSet):
     return leftSet, rightSet
 
 
-def Intersection(leftSet, rightSet, tNormPolicy):
+def Intersection(
+    leftSet: ScalarFuzzySet,
+    rightSet: ScalarFuzzySet,
+    tNormPolicy: TNormPolicy,
+) -> ScalarFuzzySet:
     """Return a fuzzy-set intersection under one explicit t-norm family.
 
     Args:
@@ -393,7 +409,7 @@ def Intersection(leftSet, rightSet, tNormPolicy):
     if not isinstance(tNormPolicy, TNormPolicy):
         raise InvalidParameterTypeError("tNormPolicy must be a TNormPolicy")
 
-    def IntersectionMembership(coordinate):
+    def IntersectionMembership(coordinate: MembershipScalar) -> MembershipScalar:
         """Evaluate both operands before applying the configured t-norm."""
 
         return tNormPolicy.Evaluate(
@@ -404,7 +420,7 @@ def Intersection(leftSet, rightSet, tNormPolicy):
     return ScalarFuzzySet(leftSet.universe, IntersectionMembership)
 
 
-def Union(leftSet, rightSet, sNormPolicy):
+def Union(leftSet: ScalarFuzzySet, rightSet: ScalarFuzzySet, sNormPolicy: SNormPolicy) -> ScalarFuzzySet:
     """Return a fuzzy-set union under one explicit s-norm family.
 
     Args:
@@ -425,7 +441,7 @@ def Union(leftSet, rightSet, sNormPolicy):
     if not isinstance(sNormPolicy, SNormPolicy):
         raise InvalidParameterTypeError("sNormPolicy must be an SNormPolicy")
 
-    def UnionMembership(coordinate):
+    def UnionMembership(coordinate: MembershipScalar) -> MembershipScalar:
         """Evaluate both operands before applying the configured s-norm."""
 
         return sNormPolicy.Evaluate(
@@ -436,7 +452,12 @@ def Union(leftSet, rightSet, sNormPolicy):
     return ScalarFuzzySet(leftSet.universe, UnionMembership)
 
 
-def Difference(leftSet, rightSet, tNormPolicy, negationPolicy):
+def Difference(
+    leftSet: ScalarFuzzySet,
+    rightSet: ScalarFuzzySet,
+    tNormPolicy: TNormPolicy,
+    negationPolicy: NegationPolicy,
+) -> ScalarFuzzySet:
     r"""Return the directed fuzzy-set difference under explicit policies.
 
     The membership definition is $T(\mu_A(x), N(\mu_B(x)))$.
@@ -463,7 +484,7 @@ def Difference(leftSet, rightSet, tNormPolicy, negationPolicy):
     if not isinstance(negationPolicy, NegationPolicy):
         raise InvalidParameterTypeError("negationPolicy must be a NegationPolicy")
 
-    def DifferenceMembership(coordinate):
+    def DifferenceMembership(coordinate: MembershipScalar) -> MembershipScalar:
         r"""Evaluate $T(\mu_A(x), N(\mu_B(x)))$ without an implicit policy."""
 
         return tNormPolicy.Evaluate(

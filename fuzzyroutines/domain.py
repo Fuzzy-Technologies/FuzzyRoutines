@@ -13,12 +13,13 @@ separate architecture decision.
 
 from dataclasses import dataclass
 from itertools import pairwise
-from numbers import Real
+from typing import cast
 
 from fuzzyroutines.exceptions import (
     InvalidDomainError,
     InvalidParameterTypeError,
 )
+from fuzzyroutines.membership import MembershipScalar
 from fuzzyroutines.numeric import _RequireFiniteReal
 
 
@@ -37,12 +38,12 @@ class ContinuousUniverse:
         rightClosed: Whether a finite right endpoint belongs to the universe.
     """
 
-    left: Real | None = None
-    right: Real | None = None
+    left: MembershipScalar | None = None
+    right: MembershipScalar | None = None
     leftClosed: bool = False
     rightClosed: bool = False
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate interval endpoints without changing caller-supplied values."""
 
         if not isinstance(self.leftClosed, bool) or not isinstance(self.rightClosed, bool):
@@ -62,16 +63,16 @@ class ContinuousUniverse:
         else:
             object.__setattr__(self, "right", _RequireFiniteReal(self.right, "right"))
 
-        if self.left is not None and self.right is not None and self.left >= self.right:
+        if self.left is not None and self.right is not None and cast(float, self.left) >= cast(float, self.right):
             raise InvalidDomainError("continuous universe endpoints must satisfy left < right")
 
     @property
-    def isBounded(self):
+    def isBounded(self) -> bool:
         """Return whether both real endpoints are finite and declared."""
 
         return self.left is not None and self.right is not None
 
-    def Contains(self, coordinate):
+    def Contains(self, coordinate: MembershipScalar) -> bool:
         """Return whether a finite scalar coordinate belongs to the universe.
 
         Args:
@@ -88,13 +89,13 @@ class ContinuousUniverse:
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
 
         if self.left is not None and (
-            coordinate < self.left or (coordinate == self.left and not self.leftClosed)
+            coordinate < cast(float, self.left) or (coordinate == self.left and not self.leftClosed)
         ):
             return False
 
         return not (
             self.right is not None
-            and (coordinate > self.right or (coordinate == self.right and not self.rightClosed))
+            and (coordinate > cast(float, self.right) or (coordinate == self.right and not self.rightClosed))
         )
 
 
@@ -106,9 +107,9 @@ class DiscreteUniverse:
         points: Non-empty, strictly increasing tuple of finite coordinates.
     """
 
-    points: tuple[Real, ...]
+    points: tuple[MembershipScalar, ...]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require an explicit, non-empty, strictly increasing coordinate tuple."""
 
         if not isinstance(self.points, tuple):
@@ -127,7 +128,7 @@ class DiscreteUniverse:
 
         object.__setattr__(self, "points", validatedPoints)
 
-    def Contains(self, coordinate):
+    def Contains(self, coordinate: MembershipScalar) -> bool:
         """Return whether a finite scalar coordinate is declared in the universe.
 
         Args:
@@ -154,20 +155,20 @@ class IntegrationDomain:
         right: Finite included upper bound, strictly greater than `left`.
     """
 
-    left: Real
-    right: Real
+    left: MembershipScalar
+    right: MembershipScalar
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require finite ordered endpoints without changing their scalar type."""
 
         object.__setattr__(self, "left", _RequireFiniteReal(self.left, "left"))
         object.__setattr__(self, "right", _RequireFiniteReal(self.right, "right"))
 
-        if self.left >= self.right:
+        if cast(float, self.left) >= cast(float, self.right):
             raise InvalidDomainError("integration-domain endpoints must satisfy left < right")
 
     @classmethod
-    def FromLegacyInterval(cls, interval):
+    def FromLegacyInterval(cls, interval: tuple[MembershipScalar, MembershipScalar]) -> "IntegrationDomain":
         """Map the historical two-item `supportSet` tuple without reinterpretation.
 
         Args:
@@ -191,12 +192,12 @@ class IntegrationDomain:
 
         return cls(interval[0], interval[1])
 
-    def ToLegacyInterval(self):
+    def ToLegacyInterval(self) -> tuple[MembershipScalar, MembershipScalar]:
         """Return the exact tuple shape required by the historical facade."""
 
         return (self.left, self.right)
 
-    def Contains(self, coordinate):
+    def Contains(self, coordinate: MembershipScalar) -> bool:
         """Return whether a finite scalar coordinate lies in this closed interval.
 
         Args:
@@ -211,9 +212,9 @@ class IntegrationDomain:
         """
 
         coordinate = _RequireFiniteReal(coordinate, "coordinate")
-        return self.left <= coordinate <= self.right
+        return cast(float, self.left) <= coordinate <= cast(float, self.right)
 
-    def ValidateWithin(self, universe):
+    def ValidateWithin(self, universe: ContinuousUniverse) -> "IntegrationDomain":
         """Return this domain after proving it is contained in a continuous universe.
 
         Args:

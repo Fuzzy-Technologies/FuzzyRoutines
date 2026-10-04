@@ -15,19 +15,20 @@ selected by an immutable policy object.
 import math
 from dataclasses import dataclass
 from itertools import pairwise
-from numbers import Real
+from typing import cast
 
 from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
-    _RequireFiniteReal,
 )
 from fuzzyroutines.exceptions import (
     InvalidDomainError,
     InvalidParameterError,
     InvalidParameterTypeError,
 )
-from fuzzyroutines.fuzzysets import _RequireCompatibleSets, _RequireGrade
+from fuzzyroutines.fuzzysets import ScalarFuzzySet, _RequireCompatibleSets
+from fuzzyroutines.membership import MembershipScalar
+from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
 
 
 @dataclass(frozen=True, slots=True)
@@ -38,9 +39,9 @@ class ComparisonDomain:
         points: Non-empty, strictly increasing tuple of finite coordinates.
     """
 
-    points: tuple[Real, ...]
+    points: tuple[MembershipScalar, ...]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Require a non-empty tuple of finite, strictly increasing points."""
 
         if not isinstance(self.points, tuple):
@@ -59,7 +60,7 @@ class ComparisonDomain:
 
         object.__setattr__(self, "points", validatedPoints)
 
-    def ValidateWithin(self, universe):
+    def ValidateWithin(self, universe: ContinuousUniverse) -> "ComparisonDomain":
         """Return this domain after proving every point belongs to the universe.
 
         Args:
@@ -93,10 +94,10 @@ class ComparisonPolicy:
     """
 
     mode: str
-    absoluteTolerance: Real | None = None
-    relativeTolerance: Real | None = None
+    absoluteTolerance: MembershipScalar | None = None
+    relativeTolerance: MembershipScalar | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Reject incomplete, ambiguous, or zero-effect comparison policies."""
 
         if self.mode == "exact":
@@ -120,7 +121,7 @@ class ComparisonPolicy:
         object.__setattr__(self, "absoluteTolerance", absoluteTolerance)
         object.__setattr__(self, "relativeTolerance", relativeTolerance)
 
-    def Equal(self, leftGrade, rightGrade):
+    def Equal(self, leftGrade: MembershipScalar, rightGrade: MembershipScalar) -> bool:
         """Return whether two membership grades are equal by this policy.
 
         Args:
@@ -144,11 +145,11 @@ class ComparisonPolicy:
         return math.isclose(
             leftGrade,
             rightGrade,
-            abs_tol=self.absoluteTolerance,
-            rel_tol=self.relativeTolerance,
+            abs_tol=cast(float, self.absoluteTolerance),
+            rel_tol=cast(float, self.relativeTolerance),
         )
 
-    def Included(self, subsetGrade, supersetGrade):
+    def Included(self, subsetGrade: MembershipScalar, supersetGrade: MembershipScalar) -> bool:
         """Return whether one grade is included in another by this policy.
 
         Args:
@@ -176,7 +177,10 @@ class ComparisonPolicy:
         return self.Equal(subsetGrade, supersetGrade)
 
 
-def _ResolveComparisonPoints(universe, comparisonDomain):
+def _ResolveComparisonPoints(
+    universe: ContinuousUniverse | DiscreteUniverse,
+    comparisonDomain: ComparisonDomain | None,
+) -> tuple[MembershipScalar, ...]:
     """Resolve exhaustive discrete points or validate an explicit sampled domain."""
 
     if isinstance(universe, DiscreteUniverse):
@@ -194,7 +198,12 @@ def _ResolveComparisonPoints(universe, comparisonDomain):
     return comparisonDomain.ValidateWithin(universe).points
 
 
-def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
+def EqualOnDomain(
+    leftSet: ScalarFuzzySet,
+    rightSet: ScalarFuzzySet,
+    comparisonPolicy: ComparisonPolicy,
+    comparisonDomain: ComparisonDomain | None=None,
+) -> bool:
     """Compare membership equality over an exhaustive or explicit finite domain.
 
     For a discrete universe the complete declared point set is exhaustive and
@@ -232,7 +241,12 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
     )
 
 
-def IncludedOnDomain(subset, superset, comparisonPolicy, comparisonDomain=None):
+def IncludedOnDomain(
+    subset: ScalarFuzzySet,
+    superset: ScalarFuzzySet,
+    comparisonPolicy: ComparisonPolicy,
+    comparisonDomain: ComparisonDomain | None=None,
+) -> bool:
     r"""Evaluate fuzzy inclusion over an exhaustive or explicit finite domain.
 
     Inclusion means $\mu_{subset}(x) \leq \mu_{superset}(x)$ at every

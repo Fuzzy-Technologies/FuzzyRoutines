@@ -12,11 +12,12 @@ Existing fuzzysets import paths re-export these same class objects.
 
 import math
 from dataclasses import dataclass
-from numbers import Real
+from typing import cast
 
 from fuzzyroutines.exceptions import (
     InvalidParameterError,
 )
+from fuzzyroutines.membership import MembershipScalar
 from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
 
 __all__ = ["NegationPolicy", "SNormPolicy", "TNormPolicy"]
@@ -35,9 +36,9 @@ class NegationPolicy:
     """
 
     family: str
-    alpha: Real | None = None
+    alpha: MembershipScalar | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate the complete negation configuration before evaluation."""
 
         if self.family == "standard":
@@ -66,7 +67,7 @@ class NegationPolicy:
 
         raise InvalidParameterError(f"unknown negation family: {self.family!r}")
 
-    def Evaluate(self, grade):
+    def Evaluate(self, grade: MembershipScalar) -> MembershipScalar:
         """Evaluate the configured negation for one membership grade.
 
         Args:
@@ -82,7 +83,7 @@ class NegationPolicy:
 
         grade = _RequireGrade(grade, "grade")
 
-        return _EvaluateNegation(self.family, self.alpha, grade)
+        return _EvaluateNegation(self.family, cast(float | None, self.alpha), grade)
 
 
 @dataclass(frozen=True, slots=True)
@@ -95,13 +96,13 @@ class TNormPolicy:
 
     family: str
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Reject every family not accepted by ADR-0004."""
 
         if self.family not in OPERATOR_FAMILIES:
             raise InvalidParameterError(f"unknown t-norm family: {self.family!r}")
 
-    def Evaluate(self, leftGrade, rightGrade):
+    def Evaluate(self, leftGrade: MembershipScalar, rightGrade: MembershipScalar) -> MembershipScalar:
         """Evaluate the configured t-norm for two membership grades.
 
         Args:
@@ -132,13 +133,13 @@ class SNormPolicy:
 
     family: str
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Reject every family not accepted by ADR-0004."""
 
         if self.family not in OPERATOR_FAMILIES:
             raise InvalidParameterError(f"unknown s-norm family: {self.family!r}")
 
-    def Evaluate(self, leftGrade, rightGrade):
+    def Evaluate(self, leftGrade: MembershipScalar, rightGrade: MembershipScalar) -> MembershipScalar:
         """Evaluate the configured s-norm for two membership grades.
 
         Args:
@@ -159,11 +160,14 @@ class SNormPolicy:
         return _EvaluateSNorm(self.family, leftGrade, rightGrade)
 
 
-def _EvaluateNegation(family: str, alpha: Real | None, grade: Real) -> Real:
+def _EvaluateNegation(family: str, alpha: float | None, grade: float) -> float:
     """Evaluate a prevalidated negation without allocating a policy."""
 
     if family == "standard":
         return 1 - grade
+
+    # Construction validates alpha for every non-standard policy.
+    alpha = cast(float, alpha)
 
     if family == "parametric":
         if grade <= alpha:
@@ -188,7 +192,7 @@ def _EvaluateNegation(family: str, alpha: Real | None, grade: Real) -> Real:
     return grade + 4 * (alpha - grade) / (1 + math.sqrt(discriminant))
 
 
-def _EvaluateTNorm(family: str, left_grade: Real, right_grade: Real) -> Real:
+def _EvaluateTNorm(family: str, left_grade: float, right_grade: float) -> float:
     """Evaluate a prevalidated t-norm without allocating a policy."""
 
     if family == "logic":
@@ -212,7 +216,7 @@ def _EvaluateTNorm(family: str, left_grade: Real, right_grade: Real) -> Real:
     return 0
 
 
-def _EvaluateSNorm(family: str, left_grade: Real, right_grade: Real) -> Real:
+def _EvaluateSNorm(family: str, left_grade: float, right_grade: float) -> float:
     """Evaluate a prevalidated s-norm without allocating a policy."""
 
     if family == "logic":
