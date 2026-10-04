@@ -10,6 +10,12 @@ separates implemented and tested behavior from the FuzzyRoutines 2 roadmap. The
 first stable modernization release remains planned as `2.0.0`; current package
 metadata uses `2.0.0.dev0`.
 
+The [release version review](release-version-decision.md) reaffirms that stable
+target from observable compatibility impact. The
+[unreleased changelog](../CHANGELOG.md) and
+[1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) describe the implemented
+boundary; release approval remains pending.
+
 ## Implemented and verified
 
 - Historical imports and public names remain covered by compatibility tests.
@@ -23,7 +29,9 @@ metadata uses `2.0.0.dev0`.
   analytical snapshots without importing the historical module. Existing
   `fuzzysets` and `linguistic` module paths stay stable; see
   [focused module ownership](architecture/focused-modern-modules.md).
-- Forward-looking registry names share one interim implementation with their historical `MFunction` identifiers: `sShoulder`, `gaussian`, `logistic`, and `harringtonDesirability`.
+- Additive registry names select the shared scalar formulas of their historical
+  `MFunction` identifiers: `sShoulder`, `gaussian`, `logistic`, and
+  `harringtonDesirability`.
 - Classical logic, algebraic, bounded, and drastic t-norm/s-norm families have reference and property tests.
 - `TNormCompose` and `SCoNormCompose` validate every operand before evaluation.
 - `FuzzyNOT` requires a finite real `alpha` in the open interval `(0, 1)`.
@@ -44,6 +52,22 @@ metadata uses `2.0.0.dev0`.
   [the cache and precomputation decision](performance/cache-and-precomputation-evaluation.md).
 - `UniversalFuzzyScale` no longer constructs and discards the default three-level scale.
 - Benchmark and diagnostic tools emit machine-readable JSON and have end-to-end command-line tests.
+- The root `__all__` now defines the curated modern exports; the historical
+  facade exports exactly fifteen supported names and excludes helper modules.
+- Modern `fuzzyroutines.exceptions` categories distinguish input, domain,
+  and numerical failures while preserving built-in catch compatibility.
+  Historical adapters retain their concrete built-in failures and serialized
+  class/function identities.
+
+The latest accepted architecture and contract wave includes
+[PR #272](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/272)
+([`7f13ebb`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/7f13ebb)),
+[PR #273](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/273)
+([`d654c9b`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/d654c9b)),
+and [PR #274](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/274)
+([`126986a`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/126986a)).
+These establish the vectorization decision, curated exports, and error model;
+the vectorized backend itself remains future work.
 
 Representative accepted changes for the historical correctness baseline are
 [#184](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/184),
@@ -69,12 +93,6 @@ Representative accepted changes for the historical correctness baseline are
   convexity as order-convexity, and finite-grid success as sampled evidence
   rather than proof. The public convexity query and evidence-result API remain
   future implementation work.
-- ADR-0010 selects MkDocs + Material for MkDocs + mkdocstrings-python + Griffe
-  and English Google-style Markdown docstrings. The source standard, public
-  docstring migration, and reproducible installed-package API reference are
-  implemented by Tasks #199, #200, and #203. Task #206 composes the product and
-  API sites, creates honest reserved-locale/version routes, and restricts
-  production Pages deployment to the approved default branch.
 
 ## Implemented multilingual documentation controls
 
@@ -148,6 +166,10 @@ The recent accepted documentation and domain wave is
 
 ## Documentation source of truth
 
+- ADR-0010's source standard, English public docstrings, installed-package API
+  reference, and composed product/API site are implemented. Production Pages
+  deployment is restricted to the approved default branch; reserved locale and
+  release-version routes remain explicit fallbacks.
 - Python annotations and docstrings remain authoritative for the generated API
   reference, while mathematical narratives remain hand-authored Markdown;
 - the reproducible three-generator comparison is retained under
@@ -165,7 +187,7 @@ The recent accepted documentation and domain wave is
 
 - symmetric-difference semantics;
 - executable convexity queries with evidence-strength-preserving results;
-- completion of curated root exports, public typing, and the domain-error model;
+- completion of public typing and signature coverage under Tasks #92 and #95;
 - public optional vectorized execution under ADR-0015's API, numerical-parity,
   time, memory and dependency gates;
 - free-threaded CPython support, subject to race-safety and scaling evidence.
@@ -191,3 +213,7 @@ Routine pull-request workflows build and clean-install packages but cannot
 publish them. Release candidates, signed tags, GitHub Releases, and PyPI Trusted
 Publishing belong to the release milestone and require the complete
 human-reviewed readiness gate.
+
+The [readiness checklist](release-readiness.md) remains unchecked until evidence
+for the exact release commit and Task #121's human approval are recorded.
+Accepted release notes and a selected version do not authorize publication.

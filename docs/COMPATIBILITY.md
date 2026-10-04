@@ -9,6 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 - Governing decision: [ADR-0001](adr/0001-backward-compatibility-contract.md)
 - Observed 1.0.3 surface: [legacy public API snapshot](compatibility/legacy-public-api-1.0.3.md)
 - Implemented v2 surface: [public API inventory](public-api-documentation-inventory.md)
+- Release-specific changes: [1.0.3 to planned 2.0.0 migration notes](migration/1.0.3-to-2.0.0.md)
 
 This page is the canonical entry point for choosing an API surface and moving
 existing FuzzyRoutines code forward. It distinguishes the narrow contract
@@ -139,8 +140,11 @@ fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 1.0))
 centroid = fuzzySet.Defuz()
 ```
 
-The same membership definition can move to the implemented modern set and
-defuzzification contracts without inventing a future membership factory:
+The same membership definition can bridge to the implemented modern set and
+defuzzification contracts through `MFunction.mju`. New code may instead use
+the already available immutable modern `Triangle` factory; the
+[detailed guide](migration/historical-to-modern.md#membership-functions)
+shows its different parameter convention:
 
 ```python
 from fuzzyroutines import Centroid, ContinuousUniverse, IntegrationDomain, ScalarFuzzySet

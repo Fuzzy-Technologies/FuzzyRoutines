@@ -124,6 +124,7 @@ names and corrected historical defects are tracked in the
 | Public symbols                        | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                  |
 | Mathematical definitions              | [`docs/mathematics`](docs/mathematics/)                                                                                                             |
 | Compatibility and migration           | [Canonical guide](docs/COMPATIBILITY.md) · [Corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md)                                       |
+| Release changes and version decision  | [Unreleased changelog](CHANGELOG.md) · [1.0.3 migration](docs/migration/1.0.3-to-2.0.0.md) · [Version rationale](docs/release-version-decision.md)  |
 | Benchmarks and performance claims     | [Results](docs/BENCHMARKS.md) · [Protocol](docs/performance/benchmark-reproducibility-protocol.md)                                                  |
 | Tests, tools, examples, and artifacts | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                             |
 | Contribution and evidence rules       | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                  |
@@ -155,9 +156,9 @@ Markdown docstrings, and tracked Markdown remain the sources of truth.
 The current typed surface already includes explicit scalar universes, immutable
 fuzzy sets, operations, derived properties, alpha-cuts, comparison policies,
 and linguistic representations. Symmetric difference, executable convexity,
-defuzzification methods beyond the implemented centroid contract, typed
-linguistic lookup, vectorized backends, and free-threaded CPython support remain
-roadmap work. Performance and concurrency claims require numerical-parity,
+defuzzification methods beyond the implemented centroid contract, completion
+of public typing/signature coverage, vectorized backends, and free-threaded
+CPython support remain roadmap work. Performance and concurrency claims require numerical-parity,
 timing, memory, and race-safety evidence.
 
 The generated reference is composed with the
