@@ -12,6 +12,20 @@ from fuzzyroutines.exceptions import InvalidParameterError, InvalidParameterType
 from fuzzyroutines.fuzzysets import ScalarFuzzySet as _ScalarFuzzySet
 
 
+def _LegacyIntegrationDomain(value):
+    """Validate legacy bounds while retaining concrete built-in input errors."""
+
+    # Domain construction runs no user callbacks, so only owned failures translate.
+    try:
+        return _domain.IntegrationDomain.FromLegacyInterval(value)
+
+    except InvalidParameterTypeError as error:
+        raise TypeError(str(error)) from error
+
+    except InvalidParameterError as error:
+        raise ValueError(str(error)) from error
+
+
 class FuzzySet():
     """Represent a mutable historical fuzzy set and integration interval.
 
@@ -49,7 +63,7 @@ class FuzzySet():
         else:
             raise Exception('Not MFunction class instance was given!')
 
-        self.supportSet = supportSet
+        self._integrationDomain = _LegacyIntegrationDomain(supportSet)
 
         self._defuzValue = None
 
@@ -123,18 +137,7 @@ class FuzzySet():
                 endpoints.
         """
 
-        # This adapter retains the documented concrete built-in input errors.
-        # Domain construction runs no user callbacks, so only owned failures translate.
-        try:
-            integration_domain = _domain.IntegrationDomain.FromLegacyInterval(value)
-
-        except InvalidParameterTypeError as error:
-            raise TypeError(str(error)) from error
-
-        except InvalidParameterError as error:
-            raise ValueError(str(error)) from error
-
-        self._integrationDomain = integration_domain
+        self._integrationDomain = _LegacyIntegrationDomain(value)
 
     @property
     def defuzValue(self):

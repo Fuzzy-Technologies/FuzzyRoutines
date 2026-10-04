@@ -238,3 +238,24 @@ def test_HistoricalGenericValidationErrorRemainsConcreteException():
         FuzzySet(MFunction("desirability"), linguisticName=None)
 
     assert type(captured.value) is Exception, "Historical validation changed its protected generic exception"
+
+
+def test_HistoricalConstructionDoesNotInvokeOverriddenSupportSetter():
+    """Construction initializes the base domain before later property dispatch."""
+
+    class CustomFuzzySet(FuzzySet):
+        """Reject explicit interval assignments through a user-owned setter."""
+
+        @FuzzySet.supportSet.setter
+        def supportSet(self, value):
+            """Expose unexpected constructor dispatch with a deterministic error."""
+
+            raise RuntimeError("custom support setter called")
+
+    fuzzy_set = CustomFuzzySet(MFunction("desirability"), (0.25, 0.75))
+    assert fuzzy_set.supportSet == (0.25, 0.75), "Construction did not initialize the inherited domain getter"
+
+    with pytest.raises(RuntimeError, match="custom support setter called"):
+        fuzzy_set.supportSet = (0.0, 1.0)
+
+    assert fuzzy_set.supportSet == (0.25, 0.75), "The overridden setter changed the initialized base domain"
