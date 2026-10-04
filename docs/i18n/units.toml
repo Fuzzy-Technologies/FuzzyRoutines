@@ -137,7 +137,7 @@ state = "missing"
 id = "page:api.modern.package"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/package.md"
-sourceHash = "sha256:29587657af1f20306c92c7c5ebeb5a1a2e751742252746f34256c75ea78a70cf"
+sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2459,3 +2459,159 @@ state = "missing"
 [units.translations.zh-CN]
 state = "missing"
 
+
+[[units]]
+id = "symbol:fuzzyroutines.Bell"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:80f8abde00cc72936d362e04795601a2d82ac20b0b72b4815161f785c09ea73d"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.Gaussian"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:a94124e23f3e037661ed3bf305a390773d53ec805ca04eac840d058b54ba358d"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.HarringtonDesirability"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:bd3d4d2e64da1c2f730ffd1f3428c30e0ee52a69a9909585b735505d6e547afe"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.Hyperbolic"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:800be4513220a8740fa51a4343773920c68dfc32a8815d41272fcda3a364970a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.Logistic"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:f47aacf403d22c231bf20a8a65ce7e57f5a49b04d26d5ed3c53d0887f18f1d4a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.MembershipCallable"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:cd36f745573e6139f1293efaea48733801993480f4cdb4fa1762a60a3e3cb305"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.MembershipFunction"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:d0dbf0a2c80a1d400310fef0e52898944b4b69c120cf903e418d630b0c525739"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.MembershipScalar"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:6b5ec5792357a433f282bdc88419042b646090628dd10742b65e31cb163d95d8"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.SShoulder"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:c0c5c45fd348c135f06e882f6b14908b1853a1c0d41a584ab97364930a6150a8"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.Trapezoid"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:57a6c682c437e97ba111a795be59ca41023420af7582aa26f537655ca3b61b62"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.Triangle"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:13fed08e3e82e824ba08236308d9c7558f60e69bae8bcfea066474c956a813c3"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.membership.MembershipScalar"
+kind = "symbol"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:ef9a8bb2f9f79e362679d96fc2d494231773bc40f588b74a6aedc90299911f8e"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"

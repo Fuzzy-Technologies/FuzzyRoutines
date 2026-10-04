@@ -5,8 +5,8 @@
 
 """Modern public API for explicit fuzzy-set domain and property contracts.
 
-The root package re-exports the immutable v2 surface from the domain,
-fuzzy-set, property, alpha-cut, relation, and linguistic modules. Historical
+The literal `__all__` list defines the curated modern API, including immutable
+membership factories, typing contracts, universes, sets, and policies. Historical
 mutable names remain available only from `fuzzyroutines.FuzzyRoutines`; package
 import performs no evaluation, I/O, or configuration changes.
 """
@@ -42,6 +42,19 @@ from fuzzyroutines.linguistic import (
     ScaleDiagnosticsResult,
     TermMembership,
 )
+from fuzzyroutines.membership import (
+    Bell,
+    Gaussian,
+    HarringtonDesirability,
+    Hyperbolic,
+    Logistic,
+    MembershipCallable,
+    MembershipFunction,
+    MembershipScalar,
+    SShoulder,
+    Trapezoid,
+    Triangle,
+)
 from fuzzyroutines.operators import NegationPolicy, SNormPolicy, TNormPolicy
 from fuzzyroutines.properties import (
     ContinuousFuzzyProperties,
@@ -62,6 +75,7 @@ from fuzzyroutines.relations import (
 
 __all__ = [
     "AlphaCut",
+    "Bell",
     "Centroid",
     "CentroidConvergenceError",
     "CentroidPolicy",
@@ -80,16 +94,24 @@ __all__ = [
     "EqualOnDomain",
     "FuzzificationPolicy",
     "FuzzificationResult",
+    "Gaussian",
+    "HarringtonDesirability",
     "Height",
+    "Hyperbolic",
     "IncludedOnDomain",
     "IntegrationDomain",
     "Intersection",
     "IsNormal",
     "LinguisticScale",
     "LinguisticTerm",
+    "Logistic",
+    "MembershipCallable",
+    "MembershipFunction",
+    "MembershipScalar",
     "NegationPolicy",
     "Normalize",
     "SNormPolicy",
+    "SShoulder",
     "SampleAlphaCut",
     "SampleProperties",
     "SampledAlphaCut",
@@ -100,5 +122,7 @@ __all__ = [
     "ScaleDiagnosticsResult",
     "TNormPolicy",
     "TermMembership",
+    "Trapezoid",
+    "Triangle",
     "Union",
 ]

@@ -48,15 +48,16 @@ These are compatibility policies; modern scales use Unicode case folding and
 an explicit no-match/tie policy. The adapters preserve these distinct contracts
 without rebuilding an immutable modern scale on every historical call.
 
-The current wildcard helper visibility (`math`, `copy`) remains observed
-behavior. Task #91 reviews curated exports separately. New membership factories
-remain available through explicit imports from `fuzzyroutines.membership`.
+Task #91 defines the curated root `__all__`, including modern membership
+factories and their typing contracts. The historical facade `__all__` contains
+the fifteen supported names and excludes the old `math` and `copy` helper
+leaks. The [public API inventory](../public-api-documentation-inventory.md)
+records both surfaces and the source-documentation policy for type aliases.
 
 ## Modern usage
 
 ```python
-from fuzzyroutines import Centroid, ContinuousUniverse, IntegrationDomain, ScalarFuzzySet
-from fuzzyroutines.membership import Triangle
+from fuzzyroutines import Centroid, ContinuousUniverse, IntegrationDomain, ScalarFuzzySet, Triangle
 
 membership = Triangle(left=0.0, peak=0.5, right=1.0)
 universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)

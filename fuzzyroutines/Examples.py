@@ -11,6 +11,8 @@ network access. New integrations should prefer the focused modern API and the
 smaller migration examples under `examples/migration`.
 """
 
+import copy
+
 from fuzzyroutines.FuzzyRoutines import *
 
 # --- Usage of some membership functions (uncomment one of them):

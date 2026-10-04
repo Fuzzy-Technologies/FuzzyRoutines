@@ -21,11 +21,15 @@ The README documents:
 from fuzzyroutines.FuzzyRoutines import *
 ```
 
-The module does not currently define `__all__`. Therefore wildcard import
-follows normal Python behavior and also exposes imported module names such as
-`math` and `copy`. The historical `traceback` leak disappeared when Task #63
-removed print-and-zero exception handling. These helper modules are observed
-behavior, but they are **not** protected domain API.
+The historical module did not define `__all__`. Its wildcard import therefore
+followed normal Python behavior and exposed imported module names such as
+`math`, `copy`, and `traceback`. These helper modules are recorded baseline
+behavior, but they are **not** protected domain API. Task #63 removed the
+`traceback` leak with print-and-zero exception handling. Task #91 defines the
+current facade `__all__` as the fifteen supported functions and classes below
+and removes the unused `math` and `copy` imports. The historical snapshot
+remains evidence of the old behavior; the
+[compatibility guide](../COMPATIBILITY.md) defines the current surface.
 
 ## Protected top-level functions
 

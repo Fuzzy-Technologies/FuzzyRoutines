@@ -10,12 +10,9 @@ in the focused modern modules. Private adapters retain historical argument order
 mutable state, default scales, and return identities. New code should import the
 focused modules or the modern package API.
 
-Imported helper modules remain visible until the separate export-policy task.
+The literal `__all__` list retains the fifteen supported historical symbols.
+Imported helpers and private adapters are outside this compatibility surface.
 """
-
-# Helper visibility is historical wildcard behavior retained for the export-policy task.
-import copy  # noqa: F401 - retained historical wildcard helper
-import math  # noqa: F401 - retained historical wildcard helper
 
 from fuzzyroutines._legacy.membership import MFunction
 from fuzzyroutines._legacy.operators import (
@@ -35,6 +32,24 @@ from fuzzyroutines._legacy.utilities import (
     IsCorrectFuzzyNumberValue,
     IsNumber,
 )
+
+__all__ = [
+    "DiapasonParser",
+    "FuzzyAND",
+    "FuzzyNOT",
+    "FuzzyNOTParabolic",
+    "FuzzyOR",
+    "FuzzyScale",
+    "FuzzySet",
+    "IsCorrectFuzzyNumberValue",
+    "IsNumber",
+    "MFunction",
+    "SCoNorm",
+    "SCoNormCompose",
+    "TNorm",
+    "TNormCompose",
+    "UniversalFuzzyScale",
+]
 
 # Serialized historical objects must continue resolving the original module path.
 # Adapters are private implementation details, not a replacement public namespace.

@@ -18,7 +18,11 @@ import urllib.parse
 from dataclasses import dataclass
 from pathlib import Path
 
-from tools.locale_documentation import ValidateLocales, _AdapterTargets
+from tools.locale_documentation import (
+    ValidateLocales,
+    _AdapterTargets,
+    _SourceDocstring,
+)
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
 MANIFESTPATH = PROJECTROOT / "docs" / "site" / "api-coverage.toml"
@@ -109,13 +113,15 @@ def _AuthoredSymbols(moduleName: str, path: Path) -> tuple[_Symbol, ...]:
     symbols = []
 
     for node in syntax.body:
-        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.TypeAlias)):
             continue
 
-        if node.name.startswith("_"):
+        node_name = node.name.id if isinstance(node, ast.TypeAlias) else node.name
+
+        if node_name.startswith("_"):
             continue
 
-        symbolName = f"{moduleName}.{node.name}"
+        symbolName = f"{moduleName}.{node_name}"
         symbols.append(_Symbol(symbolName, path, node.lineno))
 
         if not isinstance(node, ast.ClassDef):
@@ -424,12 +430,12 @@ def ValidateCoverage(
                 syntax = _ParseSyntax(symbol.path)
                 targetNode = next(
                     (node for node in ast.walk(syntax)
-                     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.TypeAlias))
                      and node.lineno == symbol.line),
                     None,
                 )
 
-                if targetNode is not None and not ast.get_docstring(targetNode, clean=False):
+                if targetNode is not None and not _SourceDocstring(symbol.path, targetNode):
                     errors.append(
                         f"{_Relative(symbol.path, projectRoot)}:{symbol.line}: "
                         f"{symbol.name} has no source docstring"
