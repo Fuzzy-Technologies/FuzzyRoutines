@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # FuzzyRoutines API reference
 
-![FuzzyRoutines](assets/brand/fuzzyroutines-horizontal.svg){ .fr-brand-lockup }
+![FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory](assets/brand/fuzzyroutines-alice.png){ .fr-project-art }
 
 This is the canonical English reference for the installed FuzzyRoutines
 package. It is generated from Python annotations and English Google-style

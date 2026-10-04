@@ -21,7 +21,7 @@ for recognition.
 ## Asset set
 
 | Asset                                       | Purpose                                      | View box     |
-|---------------------------------------------|----------------------------------------------|--------------|
+| ------------------------------------------- | -------------------------------------------- | ------------ |
 | `assets/favicon.svg`                        | Self-contained browser favicon               | `0 0 64 64`  |
 | `assets/brand/fuzzyroutines-sign.svg`       | Reusable square sign for navigation and UI   | `0 0 64 64`  |
 | `assets/brand/fuzzyroutines-horizontal.svg` | Product wordmark for landing and wide spaces | `0 0 520 96` |
@@ -33,7 +33,7 @@ self-contained file without an external SVG dependency.
 ## Color contract
 
 | Token         | Value     | Role                                      |
-|---------------|-----------|-------------------------------------------|
+| ------------- | --------- | ----------------------------------------- |
 | Graphite      | `#101316` | Sign base and code-oriented product tone  |
 | Deep graphite | `#0d0d0d` | Documentation background                  |
 | Strong text   | `#e7f8ff` | Crisp geometry and primary wordmark       |
@@ -49,6 +49,14 @@ width.
 
 ## Usage
 
+- The supplied Alice artwork is the primary project banner in the repository
+  README, product overview, and canonical API overview. Its canonical asset is
+  `docs/site/content/en/assets/brand/fuzzyroutines-alice.png`; it is preserved
+  without cropping or recoloring. Pages composition serves the same asset
+  under `api/latest/en/assets/brand/`.
+- Retain both SVG marks for compact documentation, package-index descriptions,
+  and navigation. The canonical documentation theme still uses the square sign
+  and its self-contained favicon; the banner does not replace these small icons.
 - Use the compact sign at 16, 32, and 64 CSS pixels.
 - Use the horizontal wordmark only at widths of 240 CSS pixels or greater.
 - Keep `FuzzyRoutines` as semantic HTML text in page titles and navigation;

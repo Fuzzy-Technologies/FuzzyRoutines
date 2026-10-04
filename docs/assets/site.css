@@ -108,6 +108,15 @@ a:focus-visible {
 .site-nav a { color: var(--muted); }
 .site-nav a:hover { color: var(--cyan); }
 
+.project-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 2rem;
+  border: 1px solid #66d9ef33;
+  border-radius: 0.5rem;
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
