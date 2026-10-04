@@ -7,8 +7,23 @@
 
 import fuzzyroutines.domain as _domain
 from fuzzyroutines._legacy.membership import MFunction
-from fuzzyroutines.defuzzification import Centroid as _Centroid
+from fuzzyroutines.defuzzification import _Centroid
+from fuzzyroutines.exceptions import InvalidParameterError, InvalidParameterTypeError
 from fuzzyroutines.fuzzysets import ScalarFuzzySet as _ScalarFuzzySet
+
+
+def _LegacyIntegrationDomain(value):
+    """Validate legacy bounds while retaining concrete built-in input errors."""
+
+    # Domain construction runs no user callbacks, so only owned failures translate.
+    try:
+        return _domain.IntegrationDomain.FromLegacyInterval(value)
+
+    except InvalidParameterTypeError as error:
+        raise TypeError(str(error)) from error
+
+    except InvalidParameterError as error:
+        raise ValueError(str(error)) from error
 
 
 class FuzzySet():
@@ -48,7 +63,7 @@ class FuzzySet():
         else:
             raise Exception('Not MFunction class instance was given!')
 
-        self._integrationDomain = _domain.IntegrationDomain.FromLegacyInterval(supportSet)
+        self._integrationDomain = _LegacyIntegrationDomain(supportSet)
 
         self._defuzValue = None
 
@@ -122,7 +137,7 @@ class FuzzySet():
                 endpoints.
         """
 
-        self._integrationDomain = _domain.IntegrationDomain.FromLegacyInterval(value)
+        self._integrationDomain = _LegacyIntegrationDomain(value)
 
     @property
     def defuzValue(self):
@@ -156,7 +171,9 @@ class FuzzySet():
             self._mFunction.mju,
         )
 
-        return _Centroid(fuzzy_set, self._integrationDomain)
+        # Select the historical result contract inside the engine, where callback
+        # failures can propagate without being mistaken for an undefined result.
+        return _Centroid(fuzzy_set, self._integrationDomain, None, ValueError)
 
     def Defuz(self):
         """Return `defuzValue` through the historical method alias.

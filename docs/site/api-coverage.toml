@@ -24,6 +24,11 @@ source = "fuzzyroutines/defuzzification.py"
 mode = "authored"
 
 [[surfaces]]
+module = "fuzzyroutines.exceptions"
+source = "fuzzyroutines/exceptions.py"
+mode = "authored"
+
+[[surfaces]]
 module = "fuzzyroutines.fuzzysets"
 source = "fuzzyroutines/fuzzysets.py"
 mode = "authored"

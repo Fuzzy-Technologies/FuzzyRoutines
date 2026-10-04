@@ -33,7 +33,7 @@ state = "missing"
 id = "page:api.modern"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/index.md"
-sourceHash = "sha256:6ffd20a19f3d503c8783b700ee7819d570a46290e32f84e8b2a21050b66ea702"
+sourceHash = "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbed2314"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -74,6 +74,19 @@ kind = "page"
 sourcePath = "docs/site/content/en/api/modern/domain.md"
 sourceHash = "sha256:08c0675cff7942459a4d5c50f3cc9aaa94d122dd339b844f9d931cde0494620e"
 reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:api.modern.exceptions"
+kind = "page"
+sourcePath = "docs/site/content/en/api/modern/exceptions.md"
+sourceHash = "sha256:1e01fd72a486c17bbbf7651c6f051b0943165b87d286c441e5c8132e87313a63"
+reviewClass = "technical"
 
 [units.translations.ru]
 state = "missing"
@@ -202,7 +215,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.Centroid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:5e2460ab3ba156e4bba8116350f832c58dfb788f1b195009f67c58386317cb16"
+sourceHash = "sha256:a65e39525fa2a05f4513b2b183e4db3ba87c66e82a4d603eb4533151d2a37e11"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -215,7 +228,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.CentroidConvergenceError"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:94fc49b82957bf907e4f2a30003197247085ccb3cc588907bac2173e02fd5e0c"
+sourceHash = "sha256:0a09150d3e614174b69041b9f0724701c989c1db13d6947b0bdd82f9bb079ed5"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1242,7 +1255,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.defuzzification.Centroid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:3f080cdaa906e2791cec00dc2321ca919f795b1eafc305af6f987cfb49177c97"
+sourceHash = "sha256:359e6285b9f66913ca8d3d4450410f6d8b1ba0213c7c861b23334c6b9c4a1661"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1255,7 +1268,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.defuzzification.CentroidConvergenceError"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:e3b8fd114b43cbfb951056a6891b16b342686e7f8e8aa6d600e100b247382cc5"
+sourceHash = "sha256:58472f5e4fc2cf869fc00578f1300e757530f2a4c73902162f0ae1e300c49ece"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1407,6 +1420,83 @@ state = "missing"
 [units.translations.zh-CN]
 state = "missing"
 
+[[units]]
+id = "symbol:fuzzyroutines.exceptions.FuzzyRoutinesError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/exceptions.py"
+sourceHash = "sha256:931262fc14fbc4674531080d18fc93dc45b941beccb95260a46fecd282a62f35"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.exceptions.InvalidDomainError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/exceptions.py"
+sourceHash = "sha256:ab26e30965783534e55f75e7130b79973bf90c90f80c9409d5ebb7301d6807ab"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.exceptions.InvalidParameterError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/exceptions.py"
+sourceHash = "sha256:68eec67c11116e32d5b8adc98840e204b78bac1417ac19cb2ab011418b891b46"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.exceptions.InvalidParameterTypeError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/exceptions.py"
+sourceHash = "sha256:f4d59c7129524d6f4fafdf1105d74102103002feb30c91edd2a314c5f336d1a8"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.exceptions.NumericalError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/exceptions.py"
+sourceHash = "sha256:602d0ee237f4cfe7bb701bc7963427bf8f37e3e119ceb988d3317d607020f6e6"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.exceptions.UndefinedResultError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/exceptions.py"
+sourceHash = "sha256:4e93e8e7587670b53e44525e518c6f1575c6d1d009dd82ac8be886ed8fcb8e85"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Complement"
 kind = "symbol"

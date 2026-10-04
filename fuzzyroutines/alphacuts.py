@@ -22,6 +22,11 @@ from fuzzyroutines.domain import (
     IntegrationDomain,
     _RequireFiniteReal,
 )
+from fuzzyroutines.exceptions import (
+    InvalidDomainError,
+    InvalidParameterError,
+    InvalidParameterTypeError,
+)
 from fuzzyroutines.fuzzysets import ScalarFuzzySet, _RequireGrade
 from fuzzyroutines.properties import DiscreteRegion
 
@@ -32,7 +37,7 @@ def _RequireAlpha(alpha):
     alpha = _RequireFiniteReal(alpha, "alpha")
 
     if not 0 <= alpha <= 1:
-        raise ValueError("alpha must lie in the closed interval [0, 1]")
+        raise InvalidParameterError("alpha must lie in the closed interval [0, 1]")
 
     return alpha
 
@@ -41,10 +46,10 @@ def _RequireSampleCount(sampleCount):
     """Return a sample count that defines at least two grid endpoints."""
 
     if isinstance(sampleCount, bool) or not isinstance(sampleCount, int):
-        raise TypeError("sampleCount must be an integer")
+        raise InvalidParameterTypeError("sampleCount must be an integer")
 
     if sampleCount < 2:
-        raise ValueError("sampleCount must be at least two")
+        raise InvalidParameterError("sampleCount must be at least two")
 
     return sampleCount
 
@@ -82,15 +87,15 @@ class SampledAlphaCut:
         alpha = _RequireAlpha(self.alpha)
 
         if not isinstance(self.analysisDomain, IntegrationDomain):
-            raise TypeError("analysisDomain must be an IntegrationDomain")
+            raise InvalidParameterTypeError("analysisDomain must be an IntegrationDomain")
 
         sampleCount = _RequireSampleCount(self.sampleCount)
 
         if not isinstance(self.coordinates, tuple) or not isinstance(self.grades, tuple):
-            raise TypeError("sample coordinates and grades must be explicit tuples")
+            raise InvalidParameterTypeError("sample coordinates and grades must be explicit tuples")
 
         if len(self.coordinates) != sampleCount or len(self.grades) != sampleCount:
-            raise ValueError("sampleCount must match coordinate and grade counts")
+            raise InvalidParameterError("sampleCount must match coordinate and grade counts")
 
         coordinates = tuple(
             _RequireFiniteReal(coordinate, f"coordinates[{coordinateIndex}]")
@@ -101,13 +106,13 @@ class SampledAlphaCut:
             leftCoordinate >= rightCoordinate
             for leftCoordinate, rightCoordinate in pairwise(coordinates)
         ):
-            raise ValueError("sample coordinates must be strictly increasing and distinct")
+            raise InvalidDomainError("sample coordinates must be strictly increasing and distinct")
 
         if (
             coordinates[0] != self.analysisDomain.left
             or coordinates[-1] != self.analysisDomain.right
         ):
-            raise ValueError("sample coordinates must include both analysis-domain endpoints")
+            raise InvalidDomainError("sample coordinates must include both analysis-domain endpoints")
 
         grades = tuple(
             _RequireGrade(grade, f"grades[{gradeIndex}]")
@@ -115,7 +120,7 @@ class SampledAlphaCut:
         )
 
         if not isinstance(self.cutSamples, DiscreteRegion):
-            raise TypeError("cutSamples must be a DiscreteRegion")
+            raise InvalidParameterTypeError("cutSamples must be a DiscreteRegion")
 
         expectedCutPoints = tuple(
             coordinate
@@ -124,10 +129,10 @@ class SampledAlphaCut:
         )
 
         if self.cutSamples.points != expectedCutPoints:
-            raise ValueError("cutSamples must contain exactly the coordinates with grade >= alpha")
+            raise InvalidParameterError("cutSamples must contain exactly the coordinates with grade >= alpha")
 
         if self.method != "uniform-grid":
-            raise ValueError("sampled alpha cuts require method='uniform-grid'")
+            raise InvalidParameterError("sampled alpha cuts require method='uniform-grid'")
 
         object.__setattr__(self, "alpha", alpha)
         object.__setattr__(self, "coordinates", coordinates)
@@ -161,12 +166,12 @@ def AlphaCut(fuzzySet, alpha):
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
-        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+        raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
 
     alpha = _RequireAlpha(alpha)
 
     if not isinstance(fuzzySet.universe, DiscreteUniverse):
-        raise TypeError(
+        raise InvalidParameterTypeError(
             "exact alpha cuts require a DiscreteUniverse; "
             "use SampleAlphaCut for explicit continuous observations"
         )
@@ -203,15 +208,15 @@ def SampleAlphaCut(fuzzySet, alpha, analysisDomain, sampleCount=101):
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
-        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+        raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
 
     alpha = _RequireAlpha(alpha)
 
     if not isinstance(fuzzySet.universe, ContinuousUniverse):
-        raise TypeError("sampled alpha cuts require a ContinuousUniverse")
+        raise InvalidParameterTypeError("sampled alpha cuts require a ContinuousUniverse")
 
     if not isinstance(analysisDomain, IntegrationDomain):
-        raise TypeError("analysisDomain must be an IntegrationDomain")
+        raise InvalidParameterTypeError("analysisDomain must be an IntegrationDomain")
 
     analysisDomain.ValidateWithin(fuzzySet.universe)
     sampleCount = _RequireSampleCount(sampleCount)

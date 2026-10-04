@@ -22,6 +22,11 @@ from fuzzyroutines.domain import (
     IntegrationDomain,
     _RequireFiniteReal,
 )
+from fuzzyroutines.exceptions import (
+    InvalidDomainError,
+    InvalidParameterError,
+    InvalidParameterTypeError,
+)
 from fuzzyroutines.membership import _GetAnalyticalSource, _LegacyAnalyticalAdapter
 from fuzzyroutines.numeric import _RequireGrade
 
@@ -46,28 +51,28 @@ class ContinuousInterval:
         """Validate finite or unbounded endpoints and singleton semantics."""
 
         if not isinstance(self.leftClosed, bool) or not isinstance(self.rightClosed, bool):
-            raise TypeError("interval closure flags must be boolean values")
+            raise InvalidParameterTypeError("interval closure flags must be boolean values")
 
         if self.left is None:
             if self.leftClosed:
-                raise ValueError("an unbounded left endpoint cannot be closed")
+                raise InvalidDomainError("an unbounded left endpoint cannot be closed")
 
         else:
             object.__setattr__(self, "left", _RequireFiniteReal(self.left, "left"))
 
         if self.right is None:
             if self.rightClosed:
-                raise ValueError("an unbounded right endpoint cannot be closed")
+                raise InvalidDomainError("an unbounded right endpoint cannot be closed")
 
         else:
             object.__setattr__(self, "right", _RequireFiniteReal(self.right, "right"))
 
         if self.left is not None and self.right is not None:
             if self.left > self.right:
-                raise ValueError("continuous interval endpoints must satisfy left <= right")
+                raise InvalidDomainError("continuous interval endpoints must satisfy left <= right")
 
             if self.left == self.right and not (self.leftClosed and self.rightClosed):
-                raise ValueError("a singleton interval must be closed at both endpoints")
+                raise InvalidDomainError("a singleton interval must be closed at both endpoints")
 
     @property
     def isSingleton(self):
@@ -116,25 +121,25 @@ class ContinuousRegion:
         """Require an explicit ordered tuple of non-overlapping components."""
 
         if not isinstance(self.intervals, tuple):
-            raise TypeError("continuous region intervals must be an explicit tuple")
+            raise InvalidParameterTypeError("continuous region intervals must be an explicit tuple")
 
         for interval in self.intervals:
             if not isinstance(interval, ContinuousInterval):
-                raise TypeError("continuous region components must be ContinuousInterval values")
+                raise InvalidParameterTypeError("continuous region components must be ContinuousInterval values")
 
         for leftInterval, rightInterval in zip(self.intervals, self.intervals[1:]):
             if leftInterval.right is None or rightInterval.left is None:
-                raise ValueError("continuous region intervals must be strictly ordered")
+                raise InvalidDomainError("continuous region intervals must be strictly ordered")
 
             if leftInterval.right > rightInterval.left:
-                raise ValueError("continuous region intervals must not overlap")
+                raise InvalidDomainError("continuous region intervals must not overlap")
 
             if (
                 leftInterval.right == rightInterval.left
                 and leftInterval.rightClosed
                 and rightInterval.leftClosed
             ):
-                raise ValueError("continuous region intervals must not share a coordinate")
+                raise InvalidDomainError("continuous region intervals must not share a coordinate")
 
     @property
     def isEmpty(self):
@@ -175,7 +180,7 @@ class DiscreteRegion:
         """Require finite, strictly increasing, distinct coordinates."""
 
         if not isinstance(self.points, tuple):
-            raise TypeError("discrete region points must be an explicit tuple")
+            raise InvalidParameterTypeError("discrete region points must be an explicit tuple")
 
         validatedPoints = tuple(
             _RequireFiniteReal(point, f"points[{pointIndex}]")
@@ -183,7 +188,7 @@ class DiscreteRegion:
         )
 
         if any(leftPoint >= rightPoint for leftPoint, rightPoint in pairwise(validatedPoints)):
-            raise ValueError("discrete region points must be strictly increasing and distinct")
+            raise InvalidDomainError("discrete region points must be strictly increasing and distinct")
 
         object.__setattr__(self, "points", validatedPoints)
 
@@ -236,21 +241,21 @@ class ContinuousFuzzyProperties:
         """Require internally consistent regions and a valid membership height."""
 
         if not isinstance(self.universe, ContinuousUniverse):
-            raise TypeError("universe must be a ContinuousUniverse")
+            raise InvalidParameterTypeError("universe must be a ContinuousUniverse")
 
         for fieldName in ("positiveSupport", "supportClosure", "core", "boundary"):
             region = getattr(self, fieldName)
 
             if not isinstance(region, ContinuousRegion):
-                raise TypeError(f"{fieldName} must be a ContinuousRegion")
+                raise InvalidParameterTypeError(f"{fieldName} must be a ContinuousRegion")
 
             if _IntersectRegion(region, self.universe) != region:
-                raise ValueError(f"{fieldName} must lie within the declared universe")
+                raise InvalidDomainError(f"{fieldName} must lie within the declared universe")
 
         height = _RequireFiniteReal(self.height, "height")
 
         if not 0 <= height <= 1:
-            raise ValueError("height must lie in [0, 1]")
+            raise InvalidParameterError("height must lie in [0, 1]")
 
         object.__setattr__(self, "height", height)
 
@@ -285,7 +290,7 @@ class DiscreteFuzzyProperties:
         """Require derived point sets to be subsets of the declared universe."""
 
         if not isinstance(self.universe, DiscreteUniverse):
-            raise TypeError("universe must be a DiscreteUniverse")
+            raise InvalidParameterTypeError("universe must be a DiscreteUniverse")
 
         universePoints = set(self.universe.points)
 
@@ -293,15 +298,15 @@ class DiscreteFuzzyProperties:
             region = getattr(self, fieldName)
 
             if not isinstance(region, DiscreteRegion):
-                raise TypeError(f"{fieldName} must be a DiscreteRegion")
+                raise InvalidParameterTypeError(f"{fieldName} must be a DiscreteRegion")
 
             if not set(region.points) <= universePoints:
-                raise ValueError(f"{fieldName} must lie within the declared universe")
+                raise InvalidDomainError(f"{fieldName} must lie within the declared universe")
 
         height = _RequireFiniteReal(self.height, "height")
 
         if not 0 <= height <= 1:
-            raise ValueError("height must lie in [0, 1]")
+            raise InvalidParameterError("height must lie in [0, 1]")
 
         object.__setattr__(self, "height", height)
 
@@ -352,19 +357,19 @@ class SampledFuzzyProperties:
         """Validate the complete provenance and observation table."""
 
         if not isinstance(self.analysisDomain, IntegrationDomain):
-            raise TypeError("analysisDomain must be an IntegrationDomain")
+            raise InvalidParameterTypeError("analysisDomain must be an IntegrationDomain")
 
         if isinstance(self.sampleCount, bool) or not isinstance(self.sampleCount, int):
-            raise TypeError("sampleCount must be an integer")
+            raise InvalidParameterTypeError("sampleCount must be an integer")
 
         if self.sampleCount < 2:
-            raise ValueError("sampleCount must be at least two")
+            raise InvalidParameterError("sampleCount must be at least two")
 
         if not isinstance(self.coordinates, tuple) or not isinstance(self.grades, tuple):
-            raise TypeError("sample coordinates and grades must be explicit tuples")
+            raise InvalidParameterTypeError("sample coordinates and grades must be explicit tuples")
 
         if len(self.coordinates) != self.sampleCount or len(self.grades) != self.sampleCount:
-            raise ValueError("sampleCount must match coordinate and grade counts")
+            raise InvalidParameterError("sampleCount must match coordinate and grade counts")
 
         coordinates = tuple(
             _RequireFiniteReal(coordinate, f"coordinates[{coordinateIndex}]")
@@ -372,10 +377,10 @@ class SampledFuzzyProperties:
         )
 
         if any(leftCoordinate >= rightCoordinate for leftCoordinate, rightCoordinate in pairwise(coordinates)):
-            raise ValueError("sample coordinates must be strictly increasing and distinct")
+            raise InvalidDomainError("sample coordinates must be strictly increasing and distinct")
 
         if coordinates[0] != self.analysisDomain.left or coordinates[-1] != self.analysisDomain.right:
-            raise ValueError("sample coordinates must include both analysis-domain endpoints")
+            raise InvalidDomainError("sample coordinates must include both analysis-domain endpoints")
 
         grades = tuple(
             _ValidateMembershipGrade(grade, coordinate)
@@ -387,18 +392,18 @@ class SampledFuzzyProperties:
             region = getattr(self, fieldName)
 
             if not isinstance(region, DiscreteRegion):
-                raise TypeError(f"{fieldName} must be a DiscreteRegion")
+                raise InvalidParameterTypeError(f"{fieldName} must be a DiscreteRegion")
 
             if not set(region.points) <= samplePoints:
-                raise ValueError(f"{fieldName} must contain only sampled coordinates")
+                raise InvalidParameterError(f"{fieldName} must contain only sampled coordinates")
 
         heightEstimate = _RequireFiniteReal(self.heightEstimate, "heightEstimate")
 
         if heightEstimate != max(grades):
-            raise ValueError("heightEstimate must equal the maximum sampled grade")
+            raise InvalidParameterError("heightEstimate must equal the maximum sampled grade")
 
         if not isinstance(self.method, str) or not self.method:
-            raise TypeError("method must be a non-empty string")
+            raise InvalidParameterTypeError("method must be a non-empty string")
 
         object.__setattr__(self, "coordinates", coordinates)
         object.__setattr__(self, "grades", grades)
@@ -604,7 +609,7 @@ def _AnalyticalRegions(membershipFunction):
     if functionName == "Desirability":
         return realLine, _Region(), realLine, 0.0, 1.0
 
-    raise ValueError(f"unsupported analytical membership family: {functionName!r}")
+    raise InvalidParameterError(f"unsupported analytical membership family: {functionName!r}")
 
 
 def _ContinuousHeight(membershipFunction, core, boundary, leftLimit, rightLimit):
@@ -680,7 +685,7 @@ def DeriveProperties(membershipFunction, universe):
         membershipFunction = _GetAnalyticalSource(membershipFunction)
 
     if membershipFunction is None:
-        raise TypeError("membershipFunction must be a supported analytical membership source")
+        raise InvalidParameterTypeError("membershipFunction must be a supported analytical membership source")
 
     if isinstance(universe, ContinuousUniverse):
         (
@@ -727,7 +732,7 @@ def DeriveProperties(membershipFunction, universe):
             max(grades),
         )
 
-    raise TypeError("universe must be a ContinuousUniverse or DiscreteUniverse")
+    raise InvalidParameterTypeError("universe must be a ContinuousUniverse or DiscreteUniverse")
 
 
 def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
@@ -752,16 +757,16 @@ def SampleProperties(membershipFunction, analysisDomain, sampleCount=101):
         membershipFunction = _GetAnalyticalSource(membershipFunction)
 
     if membershipFunction is None:
-        raise TypeError("membershipFunction must be a supported analytical membership source")
+        raise InvalidParameterTypeError("membershipFunction must be a supported analytical membership source")
 
     if not isinstance(analysisDomain, IntegrationDomain):
-        raise TypeError("analysisDomain must be an IntegrationDomain")
+        raise InvalidParameterTypeError("analysisDomain must be an IntegrationDomain")
 
     if isinstance(sampleCount, bool) or not isinstance(sampleCount, int):
-        raise TypeError("sampleCount must be an integer")
+        raise InvalidParameterTypeError("sampleCount must be an integer")
 
     if sampleCount < 2:
-        raise ValueError("sampleCount must be at least two")
+        raise InvalidParameterError("sampleCount must be at least two")
 
     step = (analysisDomain.right - analysisDomain.left) / (sampleCount - 1)
     # Preserve the exact declared right endpoint instead of trusting the last

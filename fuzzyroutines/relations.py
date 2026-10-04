@@ -22,6 +22,11 @@ from fuzzyroutines.domain import (
     DiscreteUniverse,
     _RequireFiniteReal,
 )
+from fuzzyroutines.exceptions import (
+    InvalidDomainError,
+    InvalidParameterError,
+    InvalidParameterTypeError,
+)
 from fuzzyroutines.fuzzysets import _RequireCompatibleSets, _RequireGrade
 
 
@@ -39,10 +44,10 @@ class ComparisonDomain:
         """Require a non-empty tuple of finite, strictly increasing points."""
 
         if not isinstance(self.points, tuple):
-            raise TypeError("comparison-domain points must be an explicit tuple")
+            raise InvalidParameterTypeError("comparison-domain points must be an explicit tuple")
 
         if not self.points:
-            raise ValueError("comparison domain must contain at least one coordinate")
+            raise InvalidDomainError("comparison domain must contain at least one coordinate")
 
         validatedPoints = tuple(
             _RequireFiniteReal(point, f"points[{pointIndex}]")
@@ -50,7 +55,7 @@ class ComparisonDomain:
         )
 
         if any(leftPoint >= rightPoint for leftPoint, rightPoint in pairwise(validatedPoints)):
-            raise ValueError("comparison-domain points must be strictly increasing and distinct")
+            raise InvalidDomainError("comparison-domain points must be strictly increasing and distinct")
 
         object.__setattr__(self, "points", validatedPoints)
 
@@ -69,10 +74,10 @@ class ComparisonDomain:
         """
 
         if not isinstance(universe, ContinuousUniverse):
-            raise TypeError("comparison domains are used only with ContinuousUniverse")
+            raise InvalidParameterTypeError("comparison domains are used only with ContinuousUniverse")
 
         if any(not universe.Contains(point) for point in self.points):
-            raise ValueError("every comparison-domain point must belong to the universe")
+            raise InvalidDomainError("every comparison-domain point must belong to the universe")
 
         return self
 
@@ -96,21 +101,21 @@ class ComparisonPolicy:
 
         if self.mode == "exact":
             if self.absoluteTolerance is not None or self.relativeTolerance is not None:
-                raise ValueError("exact comparison does not accept tolerances")
+                raise InvalidParameterError("exact comparison does not accept tolerances")
 
             return
 
         if self.mode != "tolerance":
-            raise ValueError(f"unknown comparison mode: {self.mode!r}")
+            raise InvalidParameterError(f"unknown comparison mode: {self.mode!r}")
 
         absoluteTolerance = _RequireFiniteReal(self.absoluteTolerance, "absoluteTolerance")
         relativeTolerance = _RequireFiniteReal(self.relativeTolerance, "relativeTolerance")
 
         if absoluteTolerance < 0 or relativeTolerance < 0:
-            raise ValueError("comparison tolerances must be non-negative")
+            raise InvalidParameterError("comparison tolerances must be non-negative")
 
         if absoluteTolerance == 0 and relativeTolerance == 0:
-            raise ValueError("tolerance comparison requires at least one positive tolerance")
+            raise InvalidParameterError("tolerance comparison requires at least one positive tolerance")
 
         object.__setattr__(self, "absoluteTolerance", absoluteTolerance)
         object.__setattr__(self, "relativeTolerance", relativeTolerance)
@@ -176,15 +181,15 @@ def _ResolveComparisonPoints(universe, comparisonDomain):
 
     if isinstance(universe, DiscreteUniverse):
         if comparisonDomain is not None:
-            raise ValueError("discrete fuzzy-set relations always evaluate the complete universe")
+            raise InvalidParameterError("discrete fuzzy-set relations always evaluate the complete universe")
 
         return universe.points
 
     if comparisonDomain is None:
-        raise ValueError("continuous fuzzy-set relations require an explicit ComparisonDomain")
+        raise InvalidDomainError("continuous fuzzy-set relations require an explicit ComparisonDomain")
 
     if not isinstance(comparisonDomain, ComparisonDomain):
-        raise TypeError("comparisonDomain must be a ComparisonDomain")
+        raise InvalidParameterTypeError("comparisonDomain must be a ComparisonDomain")
 
     return comparisonDomain.ValidateWithin(universe).points
 
@@ -215,7 +220,7 @@ def EqualOnDomain(leftSet, rightSet, comparisonPolicy, comparisonDomain=None):
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
 
     if not isinstance(comparisonPolicy, ComparisonPolicy):
-        raise TypeError("comparisonPolicy must be a ComparisonPolicy")
+        raise InvalidParameterTypeError("comparisonPolicy must be a ComparisonPolicy")
 
     comparisonPoints = _ResolveComparisonPoints(leftSet.universe, comparisonDomain)
 
@@ -253,7 +258,7 @@ def IncludedOnDomain(subset, superset, comparisonPolicy, comparisonDomain=None):
     subset, superset = _RequireCompatibleSets(subset, superset)
 
     if not isinstance(comparisonPolicy, ComparisonPolicy):
-        raise TypeError("comparisonPolicy must be a ComparisonPolicy")
+        raise InvalidParameterTypeError("comparisonPolicy must be a ComparisonPolicy")
 
     comparisonPoints = _ResolveComparisonPoints(subset.universe, comparisonDomain)
 
