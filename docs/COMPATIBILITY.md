@@ -19,7 +19,7 @@ validation, or stale-state defect.
 ## Choose a surface
 
 | Situation                                     | Supported entry point                                   | Guidance                                                                                            |
-|-----------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| --------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | Existing 1.0.3-style application              | `fuzzyroutines.FuzzyRoutines`                           | Keep the historical calls until a focused modern path supplies every behavior the application uses. |
 | New code with explicit mathematical contracts | Root exports from `fuzzyroutines`                       | Prefer immutable universes, fuzzy sets, policies, result types, and explicit numerical domains.     |
 | Incremental migration                         | Modern root exports plus selected compatibility objects | Migrate one operation at a time; using `MFunction` as a callable source is currently supported.     |
@@ -75,7 +75,10 @@ the same long-term protection as its explicit contract above. The
 [legacy snapshot](compatibility/legacy-public-api-1.0.3.md) records this wider
 observed surface so a future compatibility decision can assess migration
 impact rather than silently assuming or discarding it. Imported helper modules
-accidentally visible through wildcard import are not project-owned API symbols.
+accidentally visible through historical wildcard import are not project-owned API
+symbols. The current facade defines `__all__` as exactly the fifteen supported
+functions and classes; `math` and `copy` are no longer facade imports. Import
+those standard-library modules directly if older code relied on that leakage.
 
 `sShoulder`, `gaussian`, `logistic`, and `harringtonDesirability` are accepted
 additional `MFunction` identifiers. They select the same implementations as
@@ -85,10 +88,10 @@ not replacements that existing callers must adopt.
 ## Modern paths available now
 
 | Need                        | Historical path                         | Implemented modern path                                                                     | Boundary                                                                               |
-|-----------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| --------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | Binary scalar operators     | `FuzzyNOT`, `TNorm`, `SCoNorm`          | `NegationPolicy`, `TNormPolicy`, `SNormPolicy`                                              | The policy objects expose `Evaluate()` and are immutable.                              |
 | Variadic scalar composition | `TNormCompose`, `SCoNormCompose`        | No focused n-ary replacement                                                                | Keep the historical functions when n-ary folding is required.                          |
-| Membership functions        | `MFunction`                             | No focused factory                                                                          | `MFunction.mju` may supply a callable to the modern set API.                           |
+| Membership functions        | `MFunction`                             | `MembershipFunction`, semantic factories such as `Triangle`, and `MembershipCallable`       | Modern factories use explicit geometry; `MFunction.mju` remains a supported callable.  |
 | Fuzzy-set representation    | Mutable `FuzzySet`                      | `ScalarFuzzySet` with `ContinuousUniverse` or `DiscreteUniverse`                            | `supportSet` is an integration interval, not a mathematical universe or exact support. |
 | Set algebra                 | Scalar operators applied by caller code | `Complement`, `Intersection`, `Union`, and `Difference` with explicit policy objects        | Binary operations require exactly compatible universes.                                |
 | Derived set information     | No unified historical result            | `DeriveProperties`, `SampleProperties`, `AlphaCut`, `SampleAlphaCut`, `Height`, `Normalize` | Exact and sampled evidence use distinct result contracts.                              |
@@ -108,7 +111,7 @@ following implemented corrections can therefore change failure modes or
 outputs while retaining historical names and call shapes:
 
 | Corrected area          | Current behavior                                                                                          |
-|---                      |---                                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- |
 | Binary scalar operators | Reject invalid, non-finite, and Boolean operands; family-selecting functions reject unknown families.     |
 | Variadic composition    | Rejects empty input, invalid operands, and unknown operator families with explicit `ValueError`.          |
 | Parametric negation     | Enforces the proved parameter domains; parabolic negation uses a bounded analytical branch.               |

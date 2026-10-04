@@ -7,6 +7,7 @@
 
 import inspect
 from fractions import Fraction
+from typing import TypeAliasType
 
 import pytest
 
@@ -63,6 +64,11 @@ def test_ModernRootExportsHaveCanonicalDocstrings():
     assert len(fuzzyroutines.__all__) == len(set(fuzzyroutines.__all__))
 
     for publicName in fuzzyroutines.__all__:
+        if isinstance(getattr(fuzzyroutines, publicName), TypeAliasType):
+            # PEP 695 aliases use source attribute documentation, checked by the
+            # static documentation gate; their runtime docstring belongs to Python.
+            continue
+
         _AssertDocumented(publicName, getattr(fuzzyroutines, publicName))
 
 

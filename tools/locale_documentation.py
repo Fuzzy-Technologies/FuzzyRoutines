@@ -189,11 +189,12 @@ def _IsPropertySetter(node: ast.FunctionDef | ast.AsyncFunctionDef) -> bool:
 def _NodeUnit(
     identifier: str,
     sourcePath: str,
-    node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef,
+    node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef | ast.TypeAlias,
+    source_path: Path,
 ) -> CanonicalUnit:
     """Build one canonical symbol unit from an authored syntax node."""
 
-    signature = (
+    signature = ast.unparse(node) if isinstance(node, ast.TypeAlias) else (
         _ClassSignature(node)
         if isinstance(node, ast.ClassDef)
         else _FunctionSignature(node)
@@ -204,8 +205,36 @@ def _NodeUnit(
         kind="symbol",
         sourcePath=sourcePath,
         signature=signature,
-        body=ast.get_docstring(node, clean=False) or "",
+        body=_SourceDocstring(source_path, node),
     )
+
+
+def _SourceDocstring(path: Path, node: ast.AST) -> str:
+    """Read authored documentation, including the string following a type alias.
+
+    PEP 695 aliases have no runtime per-alias docstring. The immediately following
+    source string is their canonical contract, as for documented attributes.
+    """
+
+    if not isinstance(node, ast.TypeAlias):
+        return ast.get_docstring(node, clean=False) or ""
+
+    syntax = ast.parse(_ReadCanonicalText(path), filename=str(path))
+
+    for index, statement in enumerate(syntax.body[:-1]):
+        if statement.lineno != node.lineno:
+            continue
+
+        following = syntax.body[index + 1]
+
+        if (
+            isinstance(following, ast.Expr)
+            and isinstance(following.value, ast.Constant)
+            and isinstance(following.value.value, str)
+        ):
+            return following.value.value
+
+    return ""
 
 
 def _FindModulePath(moduleName: str, projectRoot: Path) -> Path:
@@ -237,6 +266,9 @@ def _FindTopLevelNode(path: Path, name: str):
         ) and node.name == name:
             return node
 
+        if isinstance(node, ast.TypeAlias) and node.name.id == name:
+            return node
+
     raise ValueError(f"{path}: cannot find public definition {name}")
 
 
@@ -252,14 +284,16 @@ def _AuthoredUnits(
     units = []
 
     for node in syntax.body:
-        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.TypeAlias)):
             continue
 
-        if node.name.startswith("_"):
+        node_name = node.name.id if isinstance(node, ast.TypeAlias) else node.name
+
+        if node_name.startswith("_"):
             continue
 
-        symbolName = f"{moduleName}.{node.name}"
-        units.append(_NodeUnit(f"symbol:{symbolName}", relativePath, node))
+        symbolName = f"{moduleName}.{node_name}"
+        units.append(_NodeUnit(f"symbol:{symbolName}", relativePath, node, sourcePath))
 
         if not isinstance(node, ast.ClassDef):
             continue
@@ -283,6 +317,7 @@ def _AuthoredUnits(
                     f"symbol:{symbolName}.{member.name}",
                     relativePath,
                     member,
+                    sourcePath,
                 )
             )
 
@@ -349,6 +384,7 @@ def _ExportUnits(
                 f"symbol:{moduleName}.{publicName}",
                 _Relative(targetPath, projectRoot),
                 targetNode,
+                targetPath,
             )
         )
 

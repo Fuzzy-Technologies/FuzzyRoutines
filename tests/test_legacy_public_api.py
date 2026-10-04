@@ -101,8 +101,8 @@ def test_historical_membership_identifiers_are_registered():
     assert registered == EXPECTED_MEMBERSHIP_IDENTIFIERS
 
 
-def test_readme_wildcard_import_observation_is_recorded():
-    assert not hasattr(fr, "__all__")
+def test_HistoricalWildcardImportRetainsOnlySupportedSymbols():
+    """Exclude historical helper leaks while retaining all fifteen API symbols."""
 
     namespace = {}
     exec("from fuzzyroutines.FuzzyRoutines import *", namespace)
@@ -111,10 +111,7 @@ def test_readme_wildcard_import_observation_is_recorded():
         set(EXPECTED_FUNCTION_SIGNATURES)
         | set(EXPECTED_CLASS_SIGNATURES)
     )
-    assert protected_names <= set(namespace)
-
-    # The module still leaks imported helper modules through wildcard import
-    # because __all__ is absent. Traceback disappeared when Task #63 removed
-    # print-and-zero exception handling; helper leakage is not protected API.
-    assert {"math", "copy"} <= set(namespace)
-    assert "traceback" not in namespace
+    assert set(fr.__all__) == protected_names, "The facade must retain all supported historical names"
+    assert set(namespace) - {"__builtins__"} == protected_names, (
+        "Historical wildcard imports must expose only the curated compatibility API"
+    )

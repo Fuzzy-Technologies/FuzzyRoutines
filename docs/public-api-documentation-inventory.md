@@ -13,24 +13,26 @@ recommended design.
 ## Modern package exports
 
 The root `fuzzyroutines.__all__` list is the authoritative modern public
-surface. Every export below has an English source docstring and is re-exported
+surface. Every export below has English source documentation and is re-exported
 from `fuzzyroutines`:
 
-| Module             | Public symbols                                                                                                                                                                       |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `alphacuts`        | `AlphaCut`, `SampleAlphaCut`, `SampledAlphaCut`                                                                                                                                      |
-| `defuzzification`  | `Centroid`, `CentroidConvergenceError`, `CentroidPolicy`                                                                                                                             |
-| `domain`           | `ContinuousUniverse`, `DiscreteUniverse`, `IntegrationDomain`                                                                                                                        |
-| `fuzzysets`        | `Complement`, `Difference`, `Height`, `Intersection`, `IsNormal`, `NegationPolicy`, `Normalize`, `ScalarFuzzySet`, `SNormPolicy`, `TNormPolicy`, `Union`                             |
-| `linguistic`       | `LinguisticScale`, `LinguisticTerm`                                                                                                                                                  |
-| `properties`       | `ContinuousFuzzyProperties`, `ContinuousInterval`, `ContinuousRegion`, `DeriveProperties`, `DiscreteFuzzyProperties`, `DiscreteRegion`, `SampledFuzzyProperties`, `SampleProperties` |
-| `relations`        | `ComparisonDomain`, `ComparisonPolicy`, `EqualOnDomain`, `IncludedOnDomain`                                                                                                          |
+| Module            | Public symbols                                                                                                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `alphacuts`       | `AlphaCut`, `SampleAlphaCut`, `SampledAlphaCut`                                                                                                                                      |
+| `defuzzification` | `Centroid`, `CentroidConvergenceError`, `CentroidPolicy`                                                                                                                             |
+| `domain`          | `ContinuousUniverse`, `DiscreteUniverse`, `IntegrationDomain`                                                                                                                        |
+| `fuzzysets`       | `Complement`, `Difference`, `Height`, `Intersection`, `IsNormal`, `Normalize`, `ScalarFuzzySet`, `Union`                                                                             |
+| `linguistic`      | `FuzzificationPolicy`, `FuzzificationResult`, `LinguisticScale`, `LinguisticTerm`, `ScaleDiagnosticPoint`, `ScaleDiagnosticsPolicy`, `ScaleDiagnosticsResult`, `TermMembership`      |
+| `membership`      | `Bell`, `Gaussian`, `HarringtonDesirability`, `Hyperbolic`, `Logistic`, `MembershipCallable`, `MembershipFunction`, `MembershipScalar`, `SShoulder`, `Trapezoid`, `Triangle`         |
+| `operators`       | `NegationPolicy`, `SNormPolicy`, `TNormPolicy`                                                                                                                                       |
+| `properties`      | `ContinuousFuzzyProperties`, `ContinuousInterval`, `ContinuousRegion`, `DeriveProperties`, `DiscreteFuzzyProperties`, `DiscreteRegion`, `SampleProperties`, `SampledFuzzyProperties` |
+| `relations`       | `ComparisonDomain`, `ComparisonPolicy`, `EqualOnDomain`, `IncludedOnDomain`                                                                                                          |
 
 ## Historical compatibility facade
 
-`fuzzyroutines.FuzzyRoutines` intentionally has no `__all__`: its wildcard
-behavior is part of the observed 1.0.3 compatibility baseline. The documented
-legacy API comprises:
+`fuzzyroutines.FuzzyRoutines.__all__` explicitly defines the fifteen supported
+historical names. Its wildcard import retains every supported function and class
+while excluding imported helpers. The documented legacy API comprises:
 
 - Functions: `DiapasonParser`, `IsNumber`, `IsCorrectFuzzyNumberValue`,
   `FuzzyNOT`, `FuzzyNOTParabolic`, `FuzzyAND`, `FuzzyOR`, `TNorm`,
@@ -49,8 +51,13 @@ legacy API comprises:
   architectural boundary, as required by `docs/python-code-style.md`.
 - `fuzzyroutines.Examples` is executable demonstration code, not a production
   API module. Its migration and executable documentation belong to Task #202.
-- Imported modules exposed by the historical wildcard behavior (`copy`,
-  `math`) are observed compatibility artifacts, not project-owned API symbols.
+- Imported modules formerly exposed by historical wildcard behavior (`copy`,
+  `math`) are observed baseline artifacts, not project-owned API symbols; the
+  curated facade no longer imports them.
+- PEP 695 aliases such as `MembershipScalar` use the immediately following
+  source string as their documentation. Static discovery checks their coverage
+  and hashes both the alias definition and documentation for translation drift.
+  Their runtime `__doc__` describes Python's `TypeAliasType`, not the alias.
 - Dataclass-generated methods are documented through their owning class and
   public attributes; generated callables are not separate authored symbols.
 
