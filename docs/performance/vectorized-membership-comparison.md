@@ -11,9 +11,11 @@ families were slower through NumPy for 1- and 16-coordinate batches. With
 100,000 coordinates and list conversion included, NumPy was 7.14–11.88 times
 faster for membership evaluation and 10.03 times faster for default-scale batch
 classification. The faster cases consumed more measured process memory and
-traced temporary allocations. These observations inform Task #109; they do
-not introduce a public backend or resolve the
-[vectorization decision #14](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/14).
+traced temporary allocations. These observations support
+[ADR-0015](../adr/0015-optional-vectorized-execution-strategy.md): retain the
+dependency-free scalar default and adopt optional, explicitly selected
+vectorization for large built-in batches. Public backend implementation remains
+separate future work under that decision's acceptance gates.
 
 ## Evidence and source identity
 
@@ -235,6 +237,8 @@ threshold and CI does not assert speedup.
 
 The experiment and harness remain outside the built package. NumPy stays an
 isolated requirement in `experiments/requirements-vectorized.txt`; no runtime
-requirement, extra, public import or backend selection was added. Task #109
-and the [vectorization decision #14](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/14)
-retain the adoption/API decision.
+requirement, extra, public import or backend selection was added.
+[ADR-0015](../adr/0015-optional-vectorized-execution-strategy.md) resolves
+Tasks #109 and #14's strategy decision without promoting this prototype. The
+measured source identity above remains authoritative for these observations;
+future promotion must validate and measure its current scalar and array APIs.

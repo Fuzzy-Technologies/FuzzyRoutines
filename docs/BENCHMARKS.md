@@ -14,24 +14,30 @@ the [benchmark protocol](performance/benchmark-reproducibility-protocol.md).
 The [cache decision](performance/cache-and-precomputation-evaluation.md)
 defines the related correctness boundary for mutable objects.
 
+The separate [scalar/NumPy comparison](performance/vectorized-membership-comparison.md)
+records Task #108's optional batch experiment and raw evidence.
+[ADR-0015](adr/0015-optional-vectorized-execution-strategy.md) uses that evidence
+to retain the scalar default and adopt optional explicit vectorization for
+large built-in batches, with public implementation gated separately.
+
 The numbers below describe one virtualized host and one source revision. They
 are not cross-machine comparisons, release guarantees, or claims that one
 implementation is faster than another.
 
 ## Evidence identity
 
-| Item                  | Recorded value                                                                                                                             |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| Source revision       | `33e517325fcd9337e75efd52bf7b80e8aa9912b8`                                                                                                 |
-| Source state          | Clean worktree                                                                                                                             |
-| Package               | `fuzzyroutines==2.0.0.dev0`, installed from the local checkout                                                                             |
-| Interpreter           | CPython 3.13.15, Clang 22.1.3                                                                                                              |
-| Platform              | Linux 6.18.44, x86_64, glibc 2.39, KVM virtual machine                                                                                     |
-| Processor             | Intel Xeon Platinum 8573C, 9 logical CPUs exposed                                                                                          |
-| Physical memory       | 23,109,894,144 bytes reported by the host                                                                                                  |
-| Environment manager   | `uv 0.12.17`                                                                                                                               |
-| CPU controls          | No affinity, governor, or process-priority change was applied                                                                              |
-| Measurement date      | 2026-09-23                                                                                                                                 |
+| Item                | Recorded value                                                 |
+| ------------------- | -------------------------------------------------------------- |
+| Source revision     | `33e517325fcd9337e75efd52bf7b80e8aa9912b8`                     |
+| Source state        | Clean worktree                                                 |
+| Package             | `fuzzyroutines==2.0.0.dev0`, installed from the local checkout |
+| Interpreter         | CPython 3.13.15, Clang 22.1.3                                  |
+| Platform            | Linux 6.18.44, x86_64, glibc 2.39, KVM virtual machine         |
+| Processor           | Intel Xeon Platinum 8573C, 9 logical CPUs exposed              |
+| Physical memory     | 23,109,894,144 bytes reported by the host                      |
+| Environment manager | `uv 0.12.17`                                                   |
+| CPU controls        | No affinity, governor, or process-priority change was applied  |
+| Measurement date    | 2026-09-23                                                     |
 
 The benchmark processes use only the Python standard library and the installed
 local package. Test-only dependencies are not imported by the benchmark tools.
@@ -69,24 +75,24 @@ Before timing, each workload compares its result with an analytical reference
 using absolute tolerance $10^{-12}$ and zero relative tolerance. All 16 parity
 checks passed in this evidence set.
 
-| Workload                    | Median ns/op | Minimum ns/op | IQR ns/op | Parity |
-|-----------------------------|-------------:|--------------:|----------:|:------:|
-| `membership_hyperbolic`     |      310.647 |       298.279 |     7.276 |  PASS  |
-| `membership_bell`           |      699.538 |       583.869 |   253.632 |  PASS  |
-| `membership_parabolic`      |      382.997 |       375.719 |    44.102 |  PASS  |
-| `membership_triangle`       |      303.779 |       296.483 |    17.896 |  PASS  |
-| `membership_trapezium`      |      357.618 |       284.933 |   161.055 |  PASS  |
-| `membership_exponential`    |      399.255 |       318.822 |   321.996 |  PASS  |
-| `membership_sigmoidal`      |      430.550 |       344.012 |   205.052 |  PASS  |
-| `membership_desirability`   |      686.617 |       506.447 |   174.807 |  PASS  |
-| `tnorm_logic`               |      572.033 |       477.840 |   293.041 |  PASS  |
-| `tnorm_algebraic`           |      477.470 |       465.661 |    11.653 |  PASS  |
-| `tnorm_boundary`            |      581.074 |       523.723 |    49.181 |  PASS  |
-| `tnorm_drastic`             |      602.120 |       495.499 |   137.697 |  PASS  |
-| `sconorm_logic`             |      537.064 |       520.489 |    47.329 |  PASS  |
-| `sconorm_algebraic`         |      477.295 |       474.018 |    21.717 |  PASS  |
-| `sconorm_boundary`          |      514.751 |       490.947 |    25.844 |  PASS  |
-| `sconorm_drastic`           |      532.395 |       512.493 |   191.793 |  PASS  |
+| Workload                  | Median ns/op | Minimum ns/op | IQR ns/op | Parity |
+| ------------------------- | -----------: | ------------: | --------: | :----: |
+| `membership_hyperbolic`   | 310.647      | 298.279       | 7.276     | PASS   |
+| `membership_bell`         | 699.538      | 583.869       | 253.632   | PASS   |
+| `membership_parabolic`    | 382.997      | 375.719       | 44.102    | PASS   |
+| `membership_triangle`     | 303.779      | 296.483       | 17.896    | PASS   |
+| `membership_trapezium`    | 357.618      | 284.933       | 161.055   | PASS   |
+| `membership_exponential`  | 399.255      | 318.822       | 321.996   | PASS   |
+| `membership_sigmoidal`    | 430.550      | 344.012       | 205.052   | PASS   |
+| `membership_desirability` | 686.617      | 506.447       | 174.807   | PASS   |
+| `tnorm_logic`             | 572.033      | 477.840       | 293.041   | PASS   |
+| `tnorm_algebraic`         | 477.470      | 465.661       | 11.653    | PASS   |
+| `tnorm_boundary`          | 581.074      | 523.723       | 49.181    | PASS   |
+| `tnorm_drastic`           | 602.120      | 495.499       | 137.697   | PASS   |
+| `sconorm_logic`           | 537.064      | 520.489       | 47.329    | PASS   |
+| `sconorm_algebraic`       | 477.295      | 474.018       | 21.717    | PASS   |
+| `sconorm_boundary`        | 514.751      | 490.947       | 25.844    | PASS   |
+| `sconorm_drastic`         | 532.395      | 512.493       | 191.793   | PASS   |
 
 Raw timing samples, in nanoseconds per operation and original execution order:
 
@@ -119,16 +125,16 @@ seven-sample workload measured with `time.perf_counter_ns()` while
 the published raw samples with the same inclusive-quartile method used by the
 membership benchmark.
 
-| Shape        | Workload                 | Median ns | Minimum ns | Maximum ns | IQR ns      | Median peak bytes |
-|--------------|--------------------------|----------:|-----------:|-----------:|------------:|------------------:|
-| `hyperbolic` | construction             |    24,300 |     21,211 |     96,244 |     8,773.5 |             2,384 |
-| `hyperbolic` | centroid recalculation   | 1,936,409 |  1,705,914 |  2,460,943 |   360,889.5 |               152 |
-| `bell`       | construction             |    24,254 |     22,223 |     37,882 |     3,729.0 |             2,240 |
-| `bell`       | centroid recalculation   | 1,767,720 |  1,612,235 |  2,446,258 |   245,615.5 |               152 |
-| `triangle`   | construction             |    23,340 |     22,346 |     36,718 |     1,936.5 |             2,128 |
-| `triangle`   | centroid recalculation   | 1,578,263 |  1,423,033 |  1,925,849 |   164,450.5 |               152 |
-| `parabolic`  | construction             |    22,668 |     21,570 |     43,044 |    10,348.0 |             2,064 |
-| `parabolic`  | centroid recalculation   | 2,013,154 |  1,863,378 |  5,491,256 | 1,014,031.0 |               152 |
+| Shape        | Workload               | Median ns | Minimum ns | Maximum ns | IQR ns      | Median peak bytes |
+| ------------ | ---------------------- | --------: | ---------: | ---------: | ----------: | ----------------: |
+| `hyperbolic` | construction           | 24,300    | 21,211     | 96,244     | 8,773.5     | 2,384             |
+| `hyperbolic` | centroid recalculation | 1,936,409 | 1,705,914  | 2,460,943  | 360,889.5   | 152               |
+| `bell`       | construction           | 24,254    | 22,223     | 37,882     | 3,729.0     | 2,240             |
+| `bell`       | centroid recalculation | 1,767,720 | 1,612,235  | 2,446,258  | 245,615.5   | 152               |
+| `triangle`   | construction           | 23,340    | 22,346     | 36,718     | 1,936.5     | 2,128             |
+| `triangle`   | centroid recalculation | 1,578,263 | 1,423,033  | 1,925,849  | 164,450.5   | 152               |
+| `parabolic`  | construction           | 22,668    | 21,570     | 43,044     | 10,348.0    | 2,064             |
+| `parabolic`  | centroid recalculation | 2,013,154 | 1,863,378  | 5,491,256  | 1,014,031.0 | 152               |
 
 Raw samples use `duration_ns / peak_bytes` pairs in original order:
 
@@ -156,12 +162,12 @@ three terms and the universal scale has five. Instrumentation confirmed exactly
 one membership evaluation per term per lookup: 300 and 500 evaluations per
 sample respectively. Both workloads selected `Med`.
 
-| Scale       | Workload              | Median ns | Minimum ns | Maximum ns | IQR ns   | Median peak bytes |
-|-------------|-----------------------|----------:|-----------:|-----------:|---------:|------------------:|
-| `default`   | construction          |    86,356 |     76,816 |    351,255 | 75,806.0 |             6,541 |
-| `default`   | 100 repeated lookups  |   291,635 |    265,638 |    392,812 | 60,772.5 |               200 |
-| `universal` | construction          |   125,885 |    122,684 |    461,951 | 18,971.5 |             9,477 |
-| `universal` | 100 repeated lookups  |   503,912 |    458,913 |    604,431 | 71,397.0 |               216 |
+| Scale       | Workload             | Median ns | Minimum ns | Maximum ns | IQR ns   | Median peak bytes |
+| ----------- | -------------------- | --------: | ---------: | ---------: | -------: | ----------------: |
+| `default`   | construction         | 86,356    | 76,816     | 351,255    | 75,806.0 | 6,541             |
+| `default`   | 100 repeated lookups | 291,635   | 265,638    | 392,812    | 60,772.5 | 200               |
+| `universal` | construction         | 125,885   | 122,684    | 461,951    | 18,971.5 | 9,477             |
+| `universal` | 100 repeated lookups | 503,912   | 458,913    | 604,431    | 71,397.0 | 216               |
 
 Raw samples use `duration_ns / peak_bytes` pairs in original order:
 

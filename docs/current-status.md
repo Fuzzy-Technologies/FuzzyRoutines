@@ -58,6 +58,13 @@ Representative accepted changes for the historical correctness baseline are
 
 ## Accepted contracts awaiting implementation
 
+- ADR-0015 retains the dependency-free scalar default and adopts optional,
+  explicitly selected vectorization for large batches of supported built-in
+  membership families. The measured NumPy experiment remains outside the
+  package; public backend implementation, packaging and API gates remain
+  separate future work. See the
+  [strategy decision](adr/0015-optional-vectorized-execution-strategy.md) and
+  [recorded comparison](performance/vectorized-membership-comparison.md).
 - ADR-0009 defines continuous fuzzy convexity as quasiconcavity, discrete
   convexity as order-convexity, and finite-grid success as sampled evidence
   rather than proof. The public convexity query and evidence-result API remain
@@ -158,9 +165,9 @@ The recent accepted documentation and domain wave is
 
 - symmetric-difference semantics;
 - executable convexity queries with evidence-strength-preserving results;
-- completion of the historical compatibility facade, curated root exports,
-  public typing, and domain-error model;
-- optional vectorized execution, subject to numerical-parity, time, memory, and dependency evidence;
+- completion of curated root exports, public typing, and the domain-error model;
+- public optional vectorized execution under ADR-0015's API, numerical-parity,
+  time, memory and dependency gates;
 - free-threaded CPython support, subject to race-safety and scaling evidence.
 
 ## Performance and concurrency claims

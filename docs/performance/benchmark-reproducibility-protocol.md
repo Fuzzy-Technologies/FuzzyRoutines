@@ -67,5 +67,10 @@ Result:
 ## Scope boundary
 
 This protocol preserves the dependency-free scalar core. Optional NumPy or
-other vectorized execution remains an ADR-0007 decision and requires memory,
-installation-cost, and numerical-parity evidence in addition to timing data.
+other vectorized execution follows
+[ADR-0015](../adr/0015-optional-vectorized-execution-strategy.md): optional
+explicit selection for large supported built-in batches, with separate public
+implementation gates. Memory, installation-cost, and numerical-parity evidence
+are required in addition to timing data. ADR-0007 governs process-parallel
+test execution; the historical vectorization planning label does not change
+that accepted contract.
