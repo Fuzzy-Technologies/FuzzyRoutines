@@ -16,6 +16,7 @@ property, alpha-cut, and relation modules. Their existing names remain stable;
 adding `sets.py` or `scales.py` solely to duplicate those boundaries is
 unnecessary.
 
+- `exceptions.py` owns modern input, domain, and numerical error categories.
 - `numeric.py` owns internal finite-real and membership-grade validation.
 - `membership.py` owns analytical scalar evaluation and immutable modern
   membership definitions with semantic parameter names.
@@ -69,3 +70,20 @@ assert abs(Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) - 0.5) < 1e-12
 The module extraction is validated by historical compatibility tests,
 modern/legacy numerical parity, exact-property and centroid tests, a legacy
 import blocker for modern operations, and the installed-wheel strict API build.
+
+
+## Error boundaries
+
+Task #94 introduces the explicit `fuzzyroutines.exceptions` import surface.
+Modern errors preserve built-in catch compatibility while distinguishing wrong
+object kinds, invalid values, invalid domain geometry, and unresolved numerical
+results. The existing `CentroidConvergenceError` stays in its defining module
+and joins the numerical category without changing its public import identity.
+
+The legacy interval adapter translates only controlled domain constructor
+failures to the protected concrete built-in error types. A private centroid
+engine accepts an explicit result-error class: modern calls select
+`UndefinedResultError`, and historical calls select `ValueError`. This selection
+applies only to engine-owned result checks, so evaluator failures and convergence
+errors propagate unchanged. The shared historical membership geometry validator
+continues to raise concrete `ValueError`.

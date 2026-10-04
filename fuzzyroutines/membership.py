@@ -19,6 +19,7 @@ from numbers import Real
 from types import MappingProxyType
 from typing import Protocol
 
+from fuzzyroutines.exceptions import InvalidParameterError
 from fuzzyroutines.numeric import _RequireFiniteReal
 
 __all__ = [
@@ -372,12 +373,12 @@ class MembershipFunction:
         """
 
         if family not in _PARAMETER_MAP:
-            raise ValueError(f"unknown membership-function family: {family!r}")
+            raise InvalidParameterError(f"unknown membership-function family: {family!r}")
 
         analytical_name, parameter_map = _PARAMETER_MAP[family]
 
         if set(parameters) != {name for name, _ in parameter_map}:
-            raise ValueError(f"{family} requires exactly these parameters: {tuple(name for name, _ in parameter_map)}")
+            raise InvalidParameterError(f"{family} requires exactly these parameters: {tuple(name for name, _ in parameter_map)}")
 
         try:
             source = _AnalyticalSource(
@@ -392,7 +393,7 @@ class MembershipFunction:
                 # Replace only standalone analytical keys, never letters inside words.
                 modern_message = re.sub(rf"\b{key}\b", name, modern_message)
 
-            raise ValueError(modern_message) from error
+            raise InvalidParameterError(modern_message) from error
         object.__setattr__(self, "family", family)
         object.__setattr__(self, "_parameter_items", tuple(sorted(parameters.items())))
         object.__setattr__(self, "_source", source)

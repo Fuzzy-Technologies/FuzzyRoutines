@@ -15,6 +15,10 @@ from dataclasses import dataclass
 from itertools import pairwise
 from numbers import Real
 
+from fuzzyroutines.exceptions import (
+    InvalidDomainError,
+    InvalidParameterTypeError,
+)
 from fuzzyroutines.numeric import _RequireFiniteReal
 
 
@@ -42,24 +46,24 @@ class ContinuousUniverse:
         """Validate interval endpoints without changing caller-supplied values."""
 
         if not isinstance(self.leftClosed, bool) or not isinstance(self.rightClosed, bool):
-            raise TypeError("endpoint closure flags must be boolean values")
+            raise InvalidParameterTypeError("endpoint closure flags must be boolean values")
 
         if self.left is None:
             if self.leftClosed:
-                raise ValueError("an unbounded left endpoint cannot be closed")
+                raise InvalidDomainError("an unbounded left endpoint cannot be closed")
 
         else:
             object.__setattr__(self, "left", _RequireFiniteReal(self.left, "left"))
 
         if self.right is None:
             if self.rightClosed:
-                raise ValueError("an unbounded right endpoint cannot be closed")
+                raise InvalidDomainError("an unbounded right endpoint cannot be closed")
 
         else:
             object.__setattr__(self, "right", _RequireFiniteReal(self.right, "right"))
 
         if self.left is not None and self.right is not None and self.left >= self.right:
-            raise ValueError("continuous universe endpoints must satisfy left < right")
+            raise InvalidDomainError("continuous universe endpoints must satisfy left < right")
 
     @property
     def isBounded(self):
@@ -108,10 +112,10 @@ class DiscreteUniverse:
         """Require an explicit, non-empty, strictly increasing coordinate tuple."""
 
         if not isinstance(self.points, tuple):
-            raise TypeError("discrete universe points must be an explicit tuple")
+            raise InvalidParameterTypeError("discrete universe points must be an explicit tuple")
 
         if not self.points:
-            raise ValueError("discrete universe must contain at least one coordinate")
+            raise InvalidDomainError("discrete universe must contain at least one coordinate")
 
         validatedPoints = tuple(
             _RequireFiniteReal(point, f"points[{pointIndex}]")
@@ -119,7 +123,7 @@ class DiscreteUniverse:
         )
 
         if any(leftPoint >= rightPoint for leftPoint, rightPoint in pairwise(validatedPoints)):
-            raise ValueError("discrete universe points must be strictly increasing and distinct")
+            raise InvalidDomainError("discrete universe points must be strictly increasing and distinct")
 
         object.__setattr__(self, "points", validatedPoints)
 
@@ -160,7 +164,7 @@ class IntegrationDomain:
         object.__setattr__(self, "right", _RequireFiniteReal(self.right, "right"))
 
         if self.left >= self.right:
-            raise ValueError("integration-domain endpoints must satisfy left < right")
+            raise InvalidDomainError("integration-domain endpoints must satisfy left < right")
 
     @classmethod
     def FromLegacyInterval(cls, interval):
@@ -180,10 +184,10 @@ class IntegrationDomain:
         """
 
         if not isinstance(interval, tuple):
-            raise TypeError("legacy integration interval must be a two-item tuple")
+            raise InvalidParameterTypeError("legacy integration interval must be a two-item tuple")
 
         if len(interval) != 2:
-            raise ValueError("legacy integration interval must be a two-item tuple")
+            raise InvalidDomainError("legacy integration interval must be a two-item tuple")
 
         return cls(interval[0], interval[1])
 
@@ -224,9 +228,9 @@ class IntegrationDomain:
         """
 
         if not isinstance(universe, ContinuousUniverse):
-            raise TypeError("continuous integration requires a ContinuousUniverse")
+            raise InvalidParameterTypeError("continuous integration requires a ContinuousUniverse")
 
         if not universe.Contains(self.left) or not universe.Contains(self.right):
-            raise ValueError("integration domain must lie entirely within the continuous universe")
+            raise InvalidDomainError("integration domain must lie entirely within the continuous universe")
 
         return self

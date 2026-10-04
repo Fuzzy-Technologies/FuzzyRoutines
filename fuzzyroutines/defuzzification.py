@@ -20,10 +20,16 @@ from fuzzyroutines.domain import (
     IntegrationDomain,
     _RequireFiniteReal,
 )
+from fuzzyroutines.exceptions import (
+    InvalidParameterError,
+    InvalidParameterTypeError,
+    NumericalError,
+    UndefinedResultError,
+)
 from fuzzyroutines.fuzzysets import ScalarFuzzySet, _ContinuousAnalyticalSource
 
 
-class CentroidConvergenceError(ArithmeticError):
+class CentroidConvergenceError(NumericalError):
     """Adaptive centroid integration that exhausted its subdivision limit."""
 
 
@@ -53,16 +59,16 @@ class CentroidPolicy:
         relativeTolerance = _RequireFiniteReal(self.relativeTolerance, "relativeTolerance")
 
         if absoluteTolerance <= 0:
-            raise ValueError("absoluteTolerance must be greater than zero")
+            raise InvalidParameterError("absoluteTolerance must be greater than zero")
 
         if relativeTolerance <= 0:
-            raise ValueError("relativeTolerance must be greater than zero")
+            raise InvalidParameterError("relativeTolerance must be greater than zero")
 
         if isinstance(self.maximumDepth, bool) or not isinstance(self.maximumDepth, Integral):
-            raise TypeError("maximumDepth must be an integer")
+            raise InvalidParameterTypeError("maximumDepth must be an integer")
 
         if self.maximumDepth < 0:
-            raise ValueError("maximumDepth must be non-negative")
+            raise InvalidParameterError("maximumDepth must be non-negative")
 
 
 def _PolynomialMoments(left, right, origin, constant, linear, quadratic):
@@ -258,9 +264,10 @@ def Centroid(fuzzySet: ScalarFuzzySet, integrationDomain: IntegrationDomain, pol
         Finite centroid coordinate within `integrationDomain`.
 
     Raises:
-        TypeError: The set, universe, domain, or policy has the wrong type.
-        ValueError: The domain lies outside the universe or membership area is
-            zero or non-finite.
+        InvalidParameterTypeError: The set, universe, domain, or policy has the wrong type.
+        InvalidDomainError: The domain lies outside the universe.
+        UndefinedResultError: Membership area is zero or a computed moment or
+            centroid is non-finite.
         CentroidConvergenceError: Adaptive quadrature exceeds `maximumDepth`.
 
     Notes:
@@ -270,48 +277,58 @@ def Centroid(fuzzySet: ScalarFuzzySet, integrationDomain: IntegrationDomain, pol
         partitioned-domain API; no fixed fallback grid is used.
     """
 
-    if not isinstance(fuzzySet, ScalarFuzzySet):
-        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+    return _Centroid(fuzzySet, integrationDomain, policy, UndefinedResultError)
 
-    if not isinstance(fuzzySet.universe, ContinuousUniverse):
-        raise TypeError("continuous centroid requires a ContinuousUniverse")
 
-    if not isinstance(integrationDomain, IntegrationDomain):
-        raise TypeError("integrationDomain must be an IntegrationDomain")
+def _Centroid(fuzzy_set, integration_domain, policy, undefined_error):
+    """Evaluate centroid with the caller boundary's explicit result-error type.
+
+    Only engine-owned zero-area and non-finite-result checks use this type.
+    Evaluator exceptions and the existing convergence error remain unchanged.
+    """
+
+    if not isinstance(fuzzy_set, ScalarFuzzySet):
+        raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
+
+    if not isinstance(fuzzy_set.universe, ContinuousUniverse):
+        raise InvalidParameterTypeError("continuous centroid requires a ContinuousUniverse")
+
+    if not isinstance(integration_domain, IntegrationDomain):
+        raise InvalidParameterTypeError("integrationDomain must be an IntegrationDomain")
 
     if policy is None:
         policy = CentroidPolicy()
 
     elif not isinstance(policy, CentroidPolicy):
-        raise TypeError("policy must be a CentroidPolicy")
+        raise InvalidParameterTypeError("policy must be a CentroidPolicy")
 
-    integrationDomain.ValidateWithin(fuzzySet.universe)
-    analyticalSource = _ContinuousAnalyticalSource(fuzzySet)
+    integration_domain.ValidateWithin(fuzzy_set.universe)
+    analytical_source = _ContinuousAnalyticalSource(fuzzy_set)
     moments = None
 
-    if analyticalSource is not None and analyticalSource.name in {"Triangle", "Trapezium", "Parabolic", "Bell"}:
-        moments = _PolynomialFamilyMoments(analyticalSource, integrationDomain)
+    if analytical_source is not None and analytical_source.name in {"Triangle", "Trapezium", "Parabolic", "Bell"}:
+        moments = _PolynomialFamilyMoments(analytical_source, integration_domain)
 
-    elif analyticalSource is not None and analyticalSource.name == "Exponential":
-        candidateMoments = _GaussianMoments(analyticalSource, integrationDomain)
+    elif analytical_source is not None and analytical_source.name == "Exponential":
+        candidate_moments = _GaussianMoments(analytical_source, integration_domain)
 
-        if candidateMoments[0] > 0 and all(math.isfinite(value) for value in candidateMoments):
-            moments = candidateMoments
+        if candidate_moments[0] > 0 and all(math.isfinite(value) for value in candidate_moments):
+            moments = candidate_moments
 
     if moments is None:
-        moments = _AdaptiveMoments(fuzzySet, integrationDomain, policy)
+        moments = _AdaptiveMoments(fuzzy_set, integration_domain, policy)
 
-    area, firstMoment = moments
+    area, first_moment = moments
 
-    if not math.isfinite(area) or not math.isfinite(firstMoment):
-        raise ValueError("centroid moments must be finite")
+    if not math.isfinite(area) or not math.isfinite(first_moment):
+        raise undefined_error("centroid moments must be finite")
 
     if area <= 0:
-        raise ValueError("centroid is undefined for zero membership area")
+        raise undefined_error("centroid is undefined for zero membership area")
 
-    centroid = firstMoment / area
+    centroid = first_moment / area
 
     if not math.isfinite(centroid):
-        raise ValueError("centroid must be finite")
+        raise undefined_error("centroid must be finite")
 
     return centroid

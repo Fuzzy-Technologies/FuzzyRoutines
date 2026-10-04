@@ -45,6 +45,7 @@ nav:
           - Alpha cuts: api/modern/alphacuts.md
           - Defuzzification: api/modern/defuzzification.md
           - Domains: api/modern/domain.md
+          - Exceptions: api/modern/exceptions.md
           - Fuzzy sets: api/modern/fuzzysets.md
           - Linguistic terms: api/modern/linguistic.md
           - Membership functions: api/modern/membership.md

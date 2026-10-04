@@ -15,6 +15,11 @@ from dataclasses import dataclass
 from numbers import Real
 
 from fuzzyroutines.domain import ContinuousUniverse, IntegrationDomain
+from fuzzyroutines.exceptions import (
+    InvalidDomainError,
+    InvalidParameterError,
+    InvalidParameterTypeError,
+)
 from fuzzyroutines.fuzzysets import ScalarFuzzySet, _RequireGrade
 
 TIEPOLICIES = ("first", "last", "all")
@@ -24,13 +29,13 @@ def _RequireNonNegativeFiniteReal(value, parameterName):
     """Return a finite non-negative scalar or raise a deterministic error."""
 
     if isinstance(value, bool) or not isinstance(value, Real):
-        raise TypeError(f"{parameterName} must be a real number")
+        raise InvalidParameterTypeError(f"{parameterName} must be a real number")
 
     if not math.isfinite(value):
-        raise ValueError(f"{parameterName} must be a finite real number")
+        raise InvalidParameterError(f"{parameterName} must be a finite real number")
 
     if value < 0:
-        raise ValueError(f"{parameterName} must be non-negative")
+        raise InvalidParameterError(f"{parameterName} must be non-negative")
 
     return value
 
@@ -64,13 +69,13 @@ class LinguisticTerm:
         """Require a non-empty exact name and a modern scalar fuzzy set."""
 
         if not isinstance(self.name, str):
-            raise TypeError("name must be a string")
+            raise InvalidParameterTypeError("name must be a string")
 
         if not self.name.strip():
-            raise ValueError("name must contain at least one non-whitespace character")
+            raise InvalidParameterError("name must contain at least one non-whitespace character")
 
         if not isinstance(self.fuzzySet, ScalarFuzzySet):
-            raise TypeError("fuzzySet must be a ScalarFuzzySet")
+            raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
 
 
 @dataclass(frozen=True, slots=True)
@@ -95,7 +100,7 @@ class FuzzificationPolicy:
         """Validate the complete classification policy."""
 
         if self.tiePolicy not in TIEPOLICIES:
-            raise ValueError(f"unknown tie policy: {self.tiePolicy!r}")
+            raise InvalidParameterError(f"unknown tie policy: {self.tiePolicy!r}")
 
         object.__setattr__(
             self,
@@ -120,7 +125,7 @@ class TermMembership:
         """Require a typed term and a valid membership grade."""
 
         if not isinstance(self.term, LinguisticTerm):
-            raise TypeError("term must be a LinguisticTerm")
+            raise InvalidParameterTypeError("term must be a LinguisticTerm")
 
         object.__setattr__(self, "grade", _RequireGrade(self.grade, "grade"))
 
@@ -149,17 +154,17 @@ class FuzzificationResult:
         """Require internally consistent classification evidence."""
 
         if not isinstance(self.memberships, tuple) or not self.memberships:
-            raise TypeError("memberships must be a non-empty tuple")
+            raise InvalidParameterTypeError("memberships must be a non-empty tuple")
 
         if not all(isinstance(value, TermMembership) for value in self.memberships):
-            raise TypeError("memberships must contain only TermMembership values")
+            raise InvalidParameterTypeError("memberships must contain only TermMembership values")
 
         if not isinstance(self.policy, FuzzificationPolicy):
-            raise TypeError("policy must be a FuzzificationPolicy")
+            raise InvalidParameterTypeError("policy must be a FuzzificationPolicy")
 
         confidence = _RequireGrade(self.confidence, "confidence")
         if confidence != max(value.grade for value in self.memberships):
-            raise ValueError("confidence must equal the maximum membership grade")
+            raise InvalidParameterError("confidence must equal the maximum membership grade")
 
         object.__setattr__(self, "confidence", confidence)
 
@@ -176,7 +181,7 @@ class FuzzificationResult:
             )
 
         if self.tiedTerms != expectedTiedTerms:
-            raise ValueError("tiedTerms do not match memberships and policy")
+            raise InvalidParameterError("tiedTerms do not match memberships and policy")
 
         if self.policy.tiePolicy == "first":
             expectedSelectedTerms = expectedTiedTerms[:1]
@@ -188,7 +193,7 @@ class FuzzificationResult:
             expectedSelectedTerms = expectedTiedTerms
 
         if self.selectedTerms != expectedSelectedTerms:
-            raise ValueError("selectedTerms do not match tiedTerms and policy")
+            raise InvalidParameterError("selectedTerms do not match tiedTerms and policy")
 
     @property
     def isMatch(self):
@@ -225,10 +230,10 @@ class ScaleDiagnosticsPolicy:
         """Validate the complete sampled-diagnostics policy."""
 
         if isinstance(self.sampleCount, bool) or not isinstance(self.sampleCount, int):
-            raise TypeError("sampleCount must be an integer")
+            raise InvalidParameterTypeError("sampleCount must be an integer")
 
         if self.sampleCount < 2:
-            raise ValueError("sampleCount must be at least two")
+            raise InvalidParameterError("sampleCount must be at least two")
 
         object.__setattr__(
             self,
@@ -264,16 +269,16 @@ class ScaleDiagnosticPoint:
         """Require one finite coordinate and a non-empty membership vector."""
 
         if isinstance(self.coordinate, bool) or not isinstance(self.coordinate, Real):
-            raise TypeError("coordinate must be a real number")
+            raise InvalidParameterTypeError("coordinate must be a real number")
 
         if not math.isfinite(self.coordinate):
-            raise ValueError("coordinate must be a finite real number")
+            raise InvalidParameterError("coordinate must be a finite real number")
 
         if not isinstance(self.memberships, tuple) or not self.memberships:
-            raise TypeError("memberships must be a non-empty tuple")
+            raise InvalidParameterTypeError("memberships must be a non-empty tuple")
 
         if not all(isinstance(value, TermMembership) for value in self.memberships):
-            raise TypeError("memberships must contain only TermMembership values")
+            raise InvalidParameterTypeError("memberships must contain only TermMembership values")
 
         object.__setattr__(
             self,
@@ -343,39 +348,39 @@ class ScaleDiagnosticsResult:
         """Require a complete ordered grid with stable term membership vectors."""
 
         if not isinstance(self.analysisDomain, IntegrationDomain):
-            raise TypeError("analysisDomain must be an IntegrationDomain")
+            raise InvalidParameterTypeError("analysisDomain must be an IntegrationDomain")
 
         if not isinstance(self.policy, ScaleDiagnosticsPolicy):
-            raise TypeError("policy must be a ScaleDiagnosticsPolicy")
+            raise InvalidParameterTypeError("policy must be a ScaleDiagnosticsPolicy")
 
         if not isinstance(self.points, tuple):
-            raise TypeError("points must be an explicit tuple")
+            raise InvalidParameterTypeError("points must be an explicit tuple")
 
         if len(self.points) != self.policy.sampleCount:
-            raise ValueError("points must contain exactly policy.sampleCount values")
+            raise InvalidParameterError("points must contain exactly policy.sampleCount values")
 
         if not all(isinstance(point, ScaleDiagnosticPoint) for point in self.points):
-            raise TypeError("points must contain only ScaleDiagnosticPoint values")
+            raise InvalidParameterTypeError("points must contain only ScaleDiagnosticPoint values")
 
         if self.points[0].coordinate != self.analysisDomain.left:
-            raise ValueError("the diagnostic grid must start at analysisDomain.left")
+            raise InvalidDomainError("the diagnostic grid must start at analysisDomain.left")
 
         if self.points[-1].coordinate != self.analysisDomain.right:
-            raise ValueError("the diagnostic grid must end at analysisDomain.right")
+            raise InvalidDomainError("the diagnostic grid must end at analysisDomain.right")
 
         if any(
             leftPoint.coordinate >= rightPoint.coordinate
             for leftPoint, rightPoint in zip(self.points, self.points[1:])
         ):
-            raise ValueError("diagnostic coordinates must be strictly increasing")
+            raise InvalidDomainError("diagnostic coordinates must be strictly increasing")
 
         declaredTerms = tuple(value.term for value in self.points[0].memberships)
         for point in self.points:
             if point.membershipThreshold != self.policy.membershipThreshold:
-                raise ValueError("point thresholds must match the diagnostics policy")
+                raise InvalidParameterError("point thresholds must match the diagnostics policy")
 
             if tuple(value.term for value in point.memberships) != declaredTerms:
-                raise ValueError("every diagnostic point must preserve the same term order")
+                raise InvalidParameterError("every diagnostic point must preserve the same term order")
 
     @property
     def gapPoints(self):
@@ -477,19 +482,19 @@ class LinguisticScale:
         """Require typed terms whose names have unambiguous lookup keys."""
 
         if not isinstance(self.terms, tuple):
-            raise TypeError("terms must be an explicit tuple")
+            raise InvalidParameterTypeError("terms must be an explicit tuple")
 
         if not self.terms:
-            raise ValueError("linguistic scale must contain at least one term")
+            raise InvalidParameterError("linguistic scale must contain at least one term")
 
         for termIndex, term in enumerate(self.terms):
             if not isinstance(term, LinguisticTerm):
-                raise TypeError(f"terms[{termIndex}] must be a LinguisticTerm")
+                raise InvalidParameterTypeError(f"terms[{termIndex}] must be a LinguisticTerm")
 
         termNames = tuple(term.name.casefold() for term in self.terms)
 
         if len(set(termNames)) != len(termNames):
-            raise ValueError("linguistic term names must be unique ignoring case")
+            raise InvalidParameterError("linguistic term names must be unique ignoring case")
 
     def GetTermByName(self, termName: str, exactMatching: bool = True) -> LinguisticTerm | None:
         """Return the term whose complete name matches the query.
@@ -512,10 +517,10 @@ class LinguisticScale:
         """
 
         if not isinstance(termName, str):
-            raise TypeError("termName must be a string")
+            raise InvalidParameterTypeError("termName must be a string")
 
         if not isinstance(exactMatching, bool):
-            raise TypeError("exactMatching must be a boolean")
+            raise InvalidParameterTypeError("exactMatching must be a boolean")
 
         lookupName = termName if exactMatching else termName.casefold()
 
@@ -557,11 +562,11 @@ class LinguisticScale:
             policy = FuzzificationPolicy()
 
         if not isinstance(policy, FuzzificationPolicy):
-            raise TypeError("policy must be a FuzzificationPolicy")
+            raise InvalidParameterTypeError("policy must be a FuzzificationPolicy")
 
         for term in self.terms:
             if not term.fuzzySet.universe.Contains(coordinate):
-                raise ValueError("coordinate must belong to every term universe")
+                raise InvalidDomainError("coordinate must belong to every term universe")
 
         memberships = tuple(
             TermMembership(term, term.fuzzySet.Membership(coordinate))
@@ -631,17 +636,17 @@ class LinguisticScale:
         """
 
         if not isinstance(analysisDomain, IntegrationDomain):
-            raise TypeError("analysisDomain must be an IntegrationDomain")
+            raise InvalidParameterTypeError("analysisDomain must be an IntegrationDomain")
 
         if policy is None:
             policy = ScaleDiagnosticsPolicy()
 
         if not isinstance(policy, ScaleDiagnosticsPolicy):
-            raise TypeError("policy must be a ScaleDiagnosticsPolicy")
+            raise InvalidParameterTypeError("policy must be a ScaleDiagnosticsPolicy")
 
         for term in self.terms:
             if not isinstance(term.fuzzySet.universe, ContinuousUniverse):
-                raise TypeError("scale diagnostics require ContinuousUniverse terms")
+                raise InvalidParameterTypeError("scale diagnostics require ContinuousUniverse terms")
 
             analysisDomain.ValidateWithin(term.fuzzySet.universe)
 

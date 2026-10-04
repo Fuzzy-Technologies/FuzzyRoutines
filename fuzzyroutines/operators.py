@@ -14,6 +14,9 @@ import math
 from dataclasses import dataclass
 from numbers import Real
 
+from fuzzyroutines.exceptions import (
+    InvalidParameterError,
+)
 from fuzzyroutines.numeric import _RequireFiniteReal, _RequireGrade
 
 __all__ = ["NegationPolicy", "SNormPolicy", "TNormPolicy"]
@@ -39,7 +42,7 @@ class NegationPolicy:
 
         if self.family == "standard":
             if self.alpha is not None:
-                raise ValueError("standard negation does not accept alpha")
+                raise InvalidParameterError("standard negation does not accept alpha")
 
             return
 
@@ -47,7 +50,7 @@ class NegationPolicy:
             alpha = _RequireFiniteReal(self.alpha, "alpha")
 
             if not 0 < alpha < 1:
-                raise ValueError("parametric negation alpha must lie in the open interval (0, 1)")
+                raise InvalidParameterError("parametric negation alpha must lie in the open interval (0, 1)")
 
             object.__setattr__(self, "alpha", alpha)
             return
@@ -56,12 +59,12 @@ class NegationPolicy:
             alpha = _RequireFiniteReal(self.alpha, "alpha")
 
             if not 0.25 <= alpha <= 0.75:
-                raise ValueError("parabolic negation alpha must lie in the closed interval [1/4, 3/4]")
+                raise InvalidParameterError("parabolic negation alpha must lie in the closed interval [1/4, 3/4]")
 
             object.__setattr__(self, "alpha", alpha)
             return
 
-        raise ValueError(f"unknown negation family: {self.family!r}")
+        raise InvalidParameterError(f"unknown negation family: {self.family!r}")
 
     def Evaluate(self, grade):
         """Evaluate the configured negation for one membership grade.
@@ -96,7 +99,7 @@ class TNormPolicy:
         """Reject every family not accepted by ADR-0004."""
 
         if self.family not in OPERATOR_FAMILIES:
-            raise ValueError(f"unknown t-norm family: {self.family!r}")
+            raise InvalidParameterError(f"unknown t-norm family: {self.family!r}")
 
     def Evaluate(self, leftGrade, rightGrade):
         """Evaluate the configured t-norm for two membership grades.
@@ -133,7 +136,7 @@ class SNormPolicy:
         """Reject every family not accepted by ADR-0004."""
 
         if self.family not in OPERATOR_FAMILIES:
-            raise ValueError(f"unknown s-norm family: {self.family!r}")
+            raise InvalidParameterError(f"unknown s-norm family: {self.family!r}")
 
     def Evaluate(self, leftGrade, rightGrade):
         """Evaluate the configured s-norm for two membership grades.
@@ -198,7 +201,7 @@ def _EvaluateTNorm(family: str, left_grade: Real, right_grade: Real) -> Real:
         return max(left_grade + right_grade - 1, 0)
 
     if family != "drastic":
-        raise ValueError(f"unknown t-norm family: {family!r}")
+        raise InvalidParameterError(f"unknown t-norm family: {family!r}")
 
     if left_grade == 1:
         return right_grade
@@ -222,7 +225,7 @@ def _EvaluateSNorm(family: str, left_grade: Real, right_grade: Real) -> Real:
         return min(left_grade + right_grade, 1)
 
     if family != "drastic":
-        raise ValueError(f"unknown s-norm family: {family!r}")
+        raise InvalidParameterError(f"unknown s-norm family: {family!r}")
 
     if left_grade == 0:
         return right_grade

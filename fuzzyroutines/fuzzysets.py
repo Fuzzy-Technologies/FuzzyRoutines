@@ -19,6 +19,12 @@ from fuzzyroutines.domain import (
     ContinuousUniverse,
     DiscreteUniverse,
 )
+from fuzzyroutines.exceptions import (
+    InvalidDomainError,
+    InvalidParameterError,
+    InvalidParameterTypeError,
+    UndefinedResultError,
+)
 from fuzzyroutines.membership import (
     MembershipCallable,
     _AnalyticalSource,
@@ -55,10 +61,10 @@ class ScalarFuzzySet:
         """Require a supported universe and an evaluable membership function."""
 
         if not isinstance(self.universe, (ContinuousUniverse, DiscreteUniverse)):
-            raise TypeError("universe must be a ContinuousUniverse or DiscreteUniverse")
+            raise InvalidParameterTypeError("universe must be a ContinuousUniverse or DiscreteUniverse")
 
         if not callable(self.membershipFunction):
-            raise TypeError("membershipFunction must be callable")
+            raise InvalidParameterTypeError("membershipFunction must be callable")
 
     def Membership(self, coordinate):
         """Return the validated membership grade for a universe coordinate.
@@ -77,7 +83,7 @@ class ScalarFuzzySet:
         """
 
         if not self.universe.Contains(coordinate):
-            raise ValueError("coordinate must belong to the fuzzy set universe")
+            raise InvalidDomainError("coordinate must belong to the fuzzy set universe")
 
         return _RequireGrade(self.membershipFunction(coordinate), "membership grade")
 
@@ -137,7 +143,7 @@ def _RequireContinuousAnalyticalSource(fuzzySet):
     analyticalSource = _ContinuousAnalyticalSource(fuzzySet)
 
     if analyticalSource is None:
-        raise ValueError(
+        raise InvalidParameterError(
             "exact continuous height is unavailable for a generic membership callable"
         )
 
@@ -189,7 +195,7 @@ def Height(fuzzySet):
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
-        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+        raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
 
     membershipFunction = fuzzySet.membershipFunction
 
@@ -233,7 +239,7 @@ def IsNormal(fuzzySet, tolerance=1e-12):
     tolerance = _RequireFiniteReal(tolerance, "tolerance")
 
     if tolerance < 0:
-        raise ValueError("tolerance must be non-negative")
+        raise InvalidParameterError("tolerance must be non-negative")
 
     return math.isclose(Height(fuzzySet), 1.0, rel_tol=0.0, abs_tol=tolerance)
 
@@ -258,14 +264,14 @@ def Normalize(fuzzySet):
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
-        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+        raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
 
     if isinstance(fuzzySet.universe, DiscreteUniverse):
         sourceGrades = _DiscreteGrades(fuzzySet)
         height = max(sourceGrades)
 
         if height == 0:
-            raise ValueError("cannot normalize a zero-height fuzzy set")
+            raise UndefinedResultError("cannot normalize a zero-height fuzzy set")
 
         normalizedGrades = tuple(grade / height for grade in sourceGrades)
         # max(grades / height) is exactly one at the coordinate that attained
@@ -293,7 +299,7 @@ def Normalize(fuzzySet):
             )
 
             if height == 0:
-                raise ValueError("cannot normalize a zero-height fuzzy set")
+                raise UndefinedResultError("cannot normalize a zero-height fuzzy set")
 
             normalizedMembership = _NormalizedContinuousMembership(
                 fuzzySet.universe,
@@ -314,7 +320,7 @@ def Normalize(fuzzySet):
         height = DeriveProperties(frozenSource, fuzzySet.universe).height
 
         if height == 0:
-            raise ValueError("cannot normalize a zero-height fuzzy set")
+            raise UndefinedResultError("cannot normalize a zero-height fuzzy set")
 
         normalizedMembership = _NormalizedContinuousMembership(
             fuzzySet.universe,
@@ -341,10 +347,10 @@ def Complement(fuzzySet, negationPolicy):
     """
 
     if not isinstance(fuzzySet, ScalarFuzzySet):
-        raise TypeError("fuzzySet must be a ScalarFuzzySet")
+        raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
 
     if not isinstance(negationPolicy, NegationPolicy):
-        raise TypeError("negationPolicy must be a NegationPolicy")
+        raise InvalidParameterTypeError("negationPolicy must be a NegationPolicy")
 
     def ComplementMembership(coordinate):
         """Evaluate the source set before applying the configured negation."""
@@ -358,10 +364,10 @@ def _RequireCompatibleSets(leftSet, rightSet):
     """Return two fuzzy sets after proving exact universe compatibility."""
 
     if not isinstance(leftSet, ScalarFuzzySet) or not isinstance(rightSet, ScalarFuzzySet):
-        raise TypeError("both operands must be ScalarFuzzySet instances")
+        raise InvalidParameterTypeError("both operands must be ScalarFuzzySet instances")
 
     if leftSet.universe != rightSet.universe:
-        raise ValueError("fuzzy-set operations require exactly equal universes")
+        raise InvalidDomainError("fuzzy-set operations require exactly equal universes")
 
     return leftSet, rightSet
 
@@ -385,7 +391,7 @@ def Intersection(leftSet, rightSet, tNormPolicy):
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
 
     if not isinstance(tNormPolicy, TNormPolicy):
-        raise TypeError("tNormPolicy must be a TNormPolicy")
+        raise InvalidParameterTypeError("tNormPolicy must be a TNormPolicy")
 
     def IntersectionMembership(coordinate):
         """Evaluate both operands before applying the configured t-norm."""
@@ -417,7 +423,7 @@ def Union(leftSet, rightSet, sNormPolicy):
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
 
     if not isinstance(sNormPolicy, SNormPolicy):
-        raise TypeError("sNormPolicy must be an SNormPolicy")
+        raise InvalidParameterTypeError("sNormPolicy must be an SNormPolicy")
 
     def UnionMembership(coordinate):
         """Evaluate both operands before applying the configured s-norm."""
@@ -452,10 +458,10 @@ def Difference(leftSet, rightSet, tNormPolicy, negationPolicy):
     leftSet, rightSet = _RequireCompatibleSets(leftSet, rightSet)
 
     if not isinstance(tNormPolicy, TNormPolicy):
-        raise TypeError("tNormPolicy must be a TNormPolicy")
+        raise InvalidParameterTypeError("tNormPolicy must be a TNormPolicy")
 
     if not isinstance(negationPolicy, NegationPolicy):
-        raise TypeError("negationPolicy must be a NegationPolicy")
+        raise InvalidParameterTypeError("negationPolicy must be a NegationPolicy")
 
     def DifferenceMembership(coordinate):
         r"""Evaluate $T(\mu_A(x), N(\mu_B(x)))$ without an implicit policy."""
