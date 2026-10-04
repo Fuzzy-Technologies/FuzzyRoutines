@@ -75,13 +75,18 @@ checks is evidence for those workloads, not a proof of equivalence everywhere.
 
 No speedup, memory-efficiency, installation-cost, or adoption claim is made in
 Task #107. Array allocation and intermediate masks have costs that require
-measurement. Task #108 must apply the
+measurement. Task #108 applies the
 [benchmark reproducibility protocol](benchmark-reproducibility-protocol.md) and
 record timing samples, peak memory, dependency/installation cost, input shape,
-dtype, and scalar parity in the same environment. Task #109 must decide whether
-an optional public backend is justified; this experiment makes no such decision.
+dtype, and scalar parity in the same environment. This experiment alone does
+not establish a public backend contract.
 
 The [scalar/array comparison](vectorized-membership-comparison.md) provides
 Task #108's reproducible timing, isolated memory, optional dependency cost,
 and parity evidence. Its observations apply to the recorded environment and
-workloads; the public backend decision remains Task #109.
+workloads.
+[ADR-0015](../adr/0015-optional-vectorized-execution-strategy.md) resolves the
+strategy decision for Tasks #109 and #14: keep scalar execution as the
+zero-dependency default and adopt optional explicit vectorization for large
+built-in batches. The prototype remains experimental; public implementation
+must separately satisfy the ADR's API, parity, resource and packaging gates.
