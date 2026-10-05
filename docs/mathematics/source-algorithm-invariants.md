@@ -65,6 +65,43 @@ Both exponents are non-positive, so `math.exp` cannot overflow. Binary64 may
 still round the mathematical open-interval result to exactly `0.0` or `1.0`;
 that is representational saturation, not clamping.
 
+If subtraction of opposite-sign finite coordinates overflows, the implementation
+evaluates $ax-ab$ instead of multiplying an already infinite $x-b$. For example,
+`slope=1e-308`, `midpoint=-1e308`, and `coordinate=1e308` have an exponent near
+$2$, so their grade is about $0.880797$, rather than an overflow-induced $1$.
+The distributed products cannot cancel infinite terms in this branch because
+the original coordinates have opposite signs. Ordinary finite subtraction
+retains the original arithmetic.
+
+### Linear ramps and Gaussian distances
+
+Triangle and trapezoid ramps divide one endpoint difference by another. When
+either finite-coordinate subtraction overflows, halving all four operands
+before subtraction preserves the ratio and keeps binary64 differences finite.
+Thus `Triangle(-1e308, 1e308, 1e308)` retains grade $1/2$ at zero and grade $1$
+at its included right apex. Finite ordinary differences use their established
+operations; the fallback does not clamp grades.
+
+Gaussian membership evaluates $e^{-(x-c)^2/(2s^2)}$ through the dimensionless
+distance $(x-c)/s$. If the raw difference overflows, distributed division
+$x/s-c/s$ avoids discarding a finite scaled distance. With center $-10^{308}$,
+scale $10^{308}$, and coordinate $10^{308}$, that distance is $2$ and the grade
+is $e^{-2}$, about $0.135335$. A genuinely unrepresentable scaled distance
+still gives the representable zero tail. These safeguards share the same scalar
+kernels with the historical adapters.
+
+### Analytical evaluator identity
+
+Exact regions, height, normalization, and centroid moments describe the active
+scalar evaluator, not merely a stored family name. An unchanged inherited
+`MembershipFunction` evaluator retains built-in evidence. Overriding `__call__`
+or its delegated `Evaluate` method makes that callable generic: centroid uses
+adaptive quadrature and exact continuous height is unavailable. A separately
+passed canonical bound `Evaluate` method retains its own verified evidence even
+if its owner's `__call__` is overridden. Historical adapters likewise require
+their registered bound evaluator to be the canonical family method; a custom
+method in a subclass does not inherit analytical certification.
+
 ### Harrington desirability
 
 The formula $d(y)=e^{-e^{-y}}$ has the mathematical range $(0,1)$. For very
