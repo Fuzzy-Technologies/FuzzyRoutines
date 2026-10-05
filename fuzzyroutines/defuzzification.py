@@ -47,8 +47,10 @@ class CentroidPolicy:
 
     Notes:
         The first-moment absolute target is `absoluteTolerance` multiplied by
-        the largest absolute coordinate in the integration domain. Analytical
-        paths do not consume this policy because they do not iterate.
+        the largest absolute coordinate in the integration domain. Polynomial
+        analytical paths do not iterate. Gaussian moments use
+        `relativeTolerance` to reject unresolved closed-form subtraction before
+        delegating to adaptive integration with this same policy.
     """
 
     absoluteTolerance: MembershipScalar = 1e-12
@@ -173,21 +175,98 @@ def _PolynomialFamilyMoments(
 
 
 def _GaussianMoments(
-    membershipFunction: _AnalyticalSource,
+    membership_function: _AnalyticalSource,
     domain: IntegrationDomain,
-) -> tuple[float, float]:
-    """Return stable closed-form Gaussian area and first moment when resolvable."""
+    policy: CentroidPolicy,
+) -> tuple[float, float] | None:
+    """Return resolved Gaussian moments, or request configured adaptive work.
 
-    centre = cast(float, membershipFunction.parameters["a"])
-    deviation = cast(float, membershipFunction.parameters["b"])
-    leftDistance = (cast(float, domain.left) - centre) / deviation
-    rightDistance = (cast(float, domain.right) - centre) / deviation
-    errorDifference = math.erf(rightDistance / math.sqrt(2)) - math.erf(leftDistance / math.sqrt(2))
-    area = deviation * math.sqrt(math.pi / 2) * errorDifference
-    firstMoment = centre * area + deviation**2 * (
-        math.exp(-0.5 * leftDistance**2) - math.exp(-0.5 * rightDistance**2)
+    Same-sided tails subtract erfc values rather than two erf values near one.
+    A first-order resolution estimate accounts for endpoint normalization and
+    special-function rounding; it is a method-selection guard, not a rigorous
+    error certificate. Unresolved or out-of-domain results fail closed to the
+    caller's existing adaptive policy instead of being clamped.
+    """
+
+    centre = cast(float, membership_function.parameters["a"])
+    deviation = cast(float, membership_function.parameters["b"])
+    left_distance = (cast(float, domain.left) - centre) / deviation
+    right_distance = (cast(float, domain.right) - centre) / deviation
+    root_two = math.sqrt(2)
+    left_argument = left_distance / root_two
+    right_argument = right_distance / root_two
+
+    if left_distance >= 0:
+        left_value = math.erfc(left_argument)
+        right_value = math.erfc(right_argument)
+        error_difference = left_value - right_value
+
+    elif right_distance <= 0:
+        left_value = math.erfc(-left_argument)
+        right_value = math.erfc(-right_argument)
+        error_difference = right_value - left_value
+
+    else:
+        left_value = math.erf(left_argument)
+        right_value = math.erf(right_argument)
+        error_difference = right_value - left_value
+
+    if error_difference <= 0 or not math.isfinite(error_difference):
+        return None
+
+    resolution_estimate = math.ulp(left_value) + math.ulp(right_value)
+
+    for distance, argument in (
+        (left_distance, left_argument),
+        (right_distance, right_argument),
+    ):
+        if math.isfinite(argument):
+            # Two normalizing operations precede division by sqrt(2). The
+            # erf/erfc derivative converts their ULP scale to area resolution.
+            argument_resolution = 2 * math.ulp(distance) / root_two + math.ulp(argument)
+            resolution_estimate += (
+                2 / math.sqrt(math.pi)
+                * math.exp(-argument * argument)
+                * argument_resolution
+            )
+
+    if resolution_estimate > cast(float, policy.relativeTolerance) * error_difference:
+        return None
+
+    left_exponent = -0.5 * left_distance * left_distance
+    right_exponent = -0.5 * right_distance * right_distance
+    squared_distance_difference = (right_distance - left_distance) * (
+        right_distance + left_distance
     )
-    return area, firstMoment
+
+    if not math.isfinite(squared_distance_difference):
+        # At an infinite standardized endpoint its exponential is exactly
+        # zero in binary64, so direct subtraction cannot cancel two tails.
+        exponential_difference = math.exp(left_exponent) - math.exp(right_exponent)
+
+    elif squared_distance_difference >= 0:
+        exponential_difference = math.exp(left_exponent) * (
+            -math.expm1(-0.5 * squared_distance_difference)
+        )
+
+    else:
+        exponential_difference = math.exp(right_exponent) * math.expm1(
+            0.5 * squared_distance_difference
+        )
+
+    standardized_area = math.sqrt(math.pi / 2) * error_difference
+    area = deviation * standardized_area
+    centroid = centre + deviation * (exponential_difference / standardized_area)
+    first_moment = area * centroid
+
+    if (
+        area <= 0
+        or not all(math.isfinite(value) for value in (area, first_moment, centroid))
+        or not domain.Contains(centroid)
+    ):
+        return None
+
+    return area, first_moment
 
 
 def _SimpsonEstimate(
@@ -366,10 +445,7 @@ def _Centroid(
         moments = _PolynomialFamilyMoments(analytical_source, integration_domain)
 
     elif analytical_source is not None and analytical_source.name == "Exponential":
-        candidate_moments = _GaussianMoments(analytical_source, integration_domain)
-
-        if candidate_moments[0] > 0 and all(math.isfinite(value) for value in candidate_moments):
-            moments = candidate_moments
+        moments = _GaussianMoments(analytical_source, integration_domain, policy)
 
     if moments is None:
         moments = _AdaptiveMoments(fuzzy_set, integration_domain, policy)

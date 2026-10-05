@@ -241,7 +241,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.CentroidPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:24486a8dea2bbcd744e989556375b7797542450796f8e4e52957c3ea855f4448"
+sourceHash = "sha256:0fcba50f0cc456a6292422ab137b1f57e913b531a0fa5d346c55464094df9458"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1281,7 +1281,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.defuzzification.CentroidPolicy"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:b6ca890088784fda9526efca6707585f96d52b0ca520f0084f8ac99ba45eb69b"
+sourceHash = "sha256:5322d743920c8aceff7a318ddf85967bf1f731abc0976e5d25c608051dfa7d7a"
 reviewClass = "mathematical"
 
 [units.translations.ru]
