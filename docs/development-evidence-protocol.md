@@ -339,3 +339,57 @@ Historical encrypted CI blobs must be treated as obsolete credential paths and r
 ## 9. Canonical principle
 
 **Mathematics requires proof-oriented evidence. Compatibility requires consumer/API evidence. Refactoring requires parity evidence. Performance requires measurement. Release claims require artifact evidence.**
+
+## 10. Changelog contract
+
+`CHANGELOG.md` follows the shared Fuzzy Technologies hierarchy adopted from
+[1337's development protocol, section 8](https://github.com/Fuzzy-Technologies/1337/blob/68a26886d8ab9a98fa112e174c1736f053ab3c3c/DEVELOPMENT_PROTOCOL.md#8-changelog-contract):
+
+```text
+# <Product> Changelog
+
+# Major N
+
+## Minor N.M
+
+### Patch P — vN.M.P — YYYY-MM-DD
+
+#### Digest
+#### Added
+#### Fixed
+#### Changed
+#### Removed
+#### Security
+```
+
+Only relevant sections are included, in the order shown. Every patch starts
+with a concise `Digest` describing its purpose and result. Changes must be
+readable to users: explain new capabilities, corrected behavior, compatibility
+impact, and limitations rather than listing commits or internal work items.
+Use `Security` for publishing, credentials, hardening, or other security
+boundaries. Classify mathematical defect corrections under `Fixed`; describe
+retained guarantees and intentional compatibility changes explicitly.
+
+- Order majors, minors within each major, and patches within each minor newest
+  first.
+- Add a new patch entry for a new version. Do not reorder or rewrite released
+  history; correcting a proven factual error requires explicit owner approval.
+- Do not maintain a free-form `Unreleased` area. In-progress entries must use
+  the actual development version owned by `pyproject.toml`.
+- ADR-0006 permits PEP 440 development versions: for example,
+  `Patch 0 — v2.0.0.dev0 — 2026-10-05`. The suffix qualifies the full version
+  without changing the Major/Minor/Patch hierarchy. Clearly identify a
+  development entry's date as its preparation date, not a publication date.
+  Never invent a future release date or imply stable publication.
+- Finalize a stable version entry only against the exact human-approved
+  release revision and actual release date under
+  [ADR-0006](adr/0006-packaging-versioning-release-policy.md) and
+  [the release-readiness gate](release-readiness.md). Changelog formatting
+  does not authorize a version bump, tag, release, or package publication.
+- Preserve historical provenance without inventing undocumented changes.
+  The initial 1.0.3 summary links the immutable baseline evidence; later
+  entries must not rewrite that baseline.
+- During development, validate the changed Markdown files and relevant
+  feature tests. Full repository regression, documentation/API, and packaging
+  gates run in PR CI before review, following the maintainer's local-test
+  preference.
