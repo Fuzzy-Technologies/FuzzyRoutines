@@ -37,6 +37,9 @@ Issues = "https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues"
 [tool.setuptools.package-data]
 fuzzyroutines = ["py.typed"]
 
+[tool.setuptools.cmdclass]
+sdist = "tools.reproducible_artifacts.ReproducibleSdist"
+
 [tool.setuptools.packages.find]
 include = ["fuzzyroutines*"]
 

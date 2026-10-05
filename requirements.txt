@@ -4,3 +4,4 @@
 pytest
 pytest-timeout
 pytest-xdist
+setuptools==84.0.0

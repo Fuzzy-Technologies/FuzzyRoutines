@@ -36,21 +36,20 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Build wheel and source distribution
+      - name: Build and compare independent wheel and source distributions
         run: |
-          python -m pip install --disable-pip-version-check --upgrade build
-          python -m build --outdir dist
+          python -m pip install --disable-pip-version-check -r requirements-build.txt
+          python -m tools.reproducible_artifacts --output-directory dist
 
       - name: Record artifact hashes and source revision
         shell: bash
         run: |
           set -euo pipefail
 
-          git rev-parse HEAD > dist/source-revision.txt
-          sha256sum dist/* > dist/SHA256SUMS
-          sha256sum --check dist/SHA256SUMS
+          (cd dist && sha256sum --check SHA256SUMS)
           cat dist/source-revision.txt
           cat dist/SHA256SUMS
+          cat dist/reproducibility.json
 
       - name: Clean-install wheel and verify installed package
         shell: bash
