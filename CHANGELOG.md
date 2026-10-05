@@ -94,6 +94,13 @@ supported operation-by-operation migration.
   for all supported families, correcting the document's stricter operand
   count. Empty input and invalid values remain rejected; runtime formulas and
   historical signatures are unchanged.
+- ADR-0013 records the existing positive float-only tie-boundary accommodation
+  precisely: `math.isclose` with `rel_tol=1e-12` and `abs_tol=0` follows the
+  inclusive absolute-distance check. Zero tolerance retains exact equality,
+  rational/mixed comparisons receive no allowance, and the default policy is
+  unchanged. This is a proposed compatibility clarification under
+  [Task #281](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/281),
+  not a proved numerical error bound or new global epsilon.
 
 Merged PRs and focused regression tests are collected in the
 [corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md).
