@@ -85,8 +85,11 @@ The [changelog](../CHANGELOG.md) and
 [release migration notes](migration/1.0.3-to-2.0.0.md) describe implemented
 changes. Public typing and signature coverage under Tasks
 [#92](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/92) and
-[#95](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/95) still need
-their own merged evidence before the candidate is approved. Every item in the
+[#95](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/95) are now merged
+in [PR #276](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/276)
+([`82647a7`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/82647a7)).
+Their source and installed-wheel checks are documented in
+[public modern typing](public-typing.md). Every item in the
 [readiness checklist](release-readiness.md) must be reviewed against the exact
 candidate commit, including supported-runtime CI and artifact evidence.
 

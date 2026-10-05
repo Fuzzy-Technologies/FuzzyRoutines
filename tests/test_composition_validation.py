@@ -13,20 +13,37 @@ COMPOSITIONS = (TNormCompose, SCoNormCompose)
 
 
 @pytest.mark.parametrize("composition", COMPOSITIONS)
-@pytest.mark.parametrize("invalidValue", [-0.1, 1.1, True, False, float("nan"), float("inf")])
-def test_CompositionRejectsInvalidSingleOperand(composition, invalidValue):
-    with pytest.raises(ValueError, match="finite real number|closed interval"):
-        composition(invalidValue)
+@pytest.mark.parametrize("family", ["logic", "algebraic", "boundary", "drastic"])
+@pytest.mark.parametrize("grade", [0.0, 0.25, 1.0])
+def test_CompositionPreservesUnaryIdentity(composition, family, grade):
+    """Preserve valid unary calls for every accepted historical family."""
+
+    assert composition(grade, normType=family) == grade, (
+        "A nonempty unary fold must retain its validated degree."
+    )
 
 
 @pytest.mark.parametrize("composition", COMPOSITIONS)
-@pytest.mark.parametrize("invalidValue", [-0.1, 1.1, "0.5", None])
-def test_CompositionRejectsInvalidLaterOperand(composition, invalidValue):
+@pytest.mark.parametrize("invalid_value", [-0.1, 1.1, True, False, float("nan"), float("inf")])
+def test_CompositionRejectsInvalidSingleOperand(composition, invalid_value):
+    """Validate a unary operand even when no binary fold is required."""
+
     with pytest.raises(ValueError, match="finite real number|closed interval"):
-        composition(0.5, invalidValue)
+        composition(invalid_value)
+
+
+@pytest.mark.parametrize("composition", COMPOSITIONS)
+@pytest.mark.parametrize("invalid_value", [-0.1, 1.1, "0.5", None])
+def test_CompositionRejectsInvalidLaterOperand(composition, invalid_value):
+    """Reject invalid later operands before a fold can return a result."""
+
+    with pytest.raises(ValueError, match="finite real number|closed interval"):
+        composition(0.5, invalid_value)
 
 
 @pytest.mark.parametrize("composition", COMPOSITIONS)
 def test_CompositionRejectsUnknownOperatorForSingleOperand(composition):
+    """Validate the selected family independently of operand count."""
+
     with pytest.raises(ValueError, match="unknown .*norm family"):
         composition(0.5, normType="unknown")

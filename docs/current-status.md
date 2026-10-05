@@ -12,9 +12,14 @@ metadata uses `2.0.0.dev0`.
 
 The [release version review](release-version-decision.md) reaffirms that stable
 target from observable compatibility impact. The
-[unreleased changelog](../CHANGELOG.md) and
+[development changelog](../CHANGELOG.md) and
 [1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) describe the implemented
 boundary; release approval remains pending.
+
+The [2026-10-05 project audit](audits/2026-10-05-project-audit.md) reviews the
+production modules, all accepted ADRs, practical usage, documentation and
+examples. It records concrete correctness findings and distinguishes pending
+review candidates from merged release evidence.
 
 ## Implemented and verified
 
@@ -58,6 +63,12 @@ boundary; release approval remains pending.
   and numerical failures while preserving built-in catch compatibility.
   Historical adapters retain their concrete built-in failures and serialized
   class/function identities.
+- The modern public modules ship inline annotations and the `py.typed` marker.
+  Strict source typing and consumer fixtures cover root and focused imports,
+  custom callbacks, policy families, immutable results, and return types.
+  CI checks those consumers against an independently installed wheel on
+  CPython 3.13 and 3.14; legacy adapters retain their runtime contract outside
+  the modern static-typing promise. See [public modern typing](public-typing.md).
 
 The latest accepted architecture and contract wave includes
 [PR #272](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/272)
@@ -68,6 +79,18 @@ and [PR #274](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/274)
 ([`126986a`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/126986a)).
 These establish the vectorization decision, curated exports, and error model;
 the vectorized backend itself remains future work.
+
+The subsequent accepted preparation wave includes
+[PR #276](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/276)
+([`82647a7`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/82647a7)),
+which implements public modern typing and signature coverage,
+[PR #277](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/277)
+([`f29858c`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/f29858c)),
+which adds the Alice project artwork while retaining compact branding, and
+[PR #275](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/275)
+([`f700e0e`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/f700e0e)),
+which records version, migration, and shared changelog preparation. Merged
+implementation evidence does not approve the future stable release candidate.
 
 Representative accepted changes for the historical correctness baseline are
 [#184](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/184),
@@ -183,11 +206,22 @@ The recent accepted documentation and domain wave is
   available under [`docs/migration/`](migration/historical-to-modern.md) and
   `examples/migration/`.
 
+Explanatory visual guides remain a separate documentation deliverable under
+[M6 Task #280](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/280):
+reproducible membership and operation graphs, exact-versus-sampled evidence,
+centroid geometry, and linguistic tie/no-match examples with readable captions
+and corresponding executable code. They do not change mathematical contracts
+or introduce runtime plotting dependencies.
+
+Existing test-function docstring debt is tracked separately in
+[Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286).
+The updated source standard governs new and modified code; it does not claim
+that every existing test already satisfies the shared documentation rules.
+
 ## Still in the v2 roadmap
 
 - symmetric-difference semantics;
 - executable convexity queries with evidence-strength-preserving results;
-- completion of public typing and signature coverage under Tasks #92 and #95;
 - public optional vectorized execution under ADR-0015's API, numerical-parity,
   time, memory and dependency gates;
 - free-threaded CPython support, subject to race-safety and scaling evidence.
@@ -217,3 +251,14 @@ human-reviewed readiness gate.
 The [readiness checklist](release-readiness.md) remains unchecked until evidence
 for the exact release commit and Task #121's human approval are recorded.
 Accepted release notes and a selected version do not authorize publication.
+
+The current code audit identified correctness follow-ups for remote-interval
+Gaussian centroids ([#282](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/282)),
+exact-rational fuzzification comparisons
+([#283](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/283)),
+analytical certificates for evaluator overrides
+([#284](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/284)),
+and extreme finite membership arithmetic
+([#285](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/285)). Their
+fixes require separate review and merge; see the
+[audit follow-up gate](release-readiness.md#audit-follow-ups).
