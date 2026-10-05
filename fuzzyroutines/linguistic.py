@@ -12,7 +12,8 @@ minimum-confidence policies without changing the historical compatibility API.
 
 import math
 from dataclasses import dataclass
-from numbers import Real
+from fractions import Fraction
+from numbers import Rational, Real
 from typing import cast
 
 from fuzzyroutines.domain import ContinuousUniverse, IntegrationDomain
@@ -48,15 +49,39 @@ def _IsWithinTieTolerance(
     confidence: MembershipScalar,
     tolerance: MembershipScalar,
 ) -> bool:
-    """Return whether a grade is within an inclusive absolute tie tolerance."""
+    """Compare exact grades before applying an explicit positive tolerance."""
 
-    difference = float(confidence) - float(grade)
-    tolerance = float(tolerance)
-    return difference <= tolerance or math.isclose(
-        difference,
-        tolerance,
-        rel_tol=1e-12,
-        abs_tol=0.0,
+    if tolerance == 0:
+        return grade == confidence
+
+    difference: MembershipScalar
+    if (
+        isinstance(grade, (Rational, float))
+        and isinstance(confidence, (Rational, float))
+        and any(isinstance(value, Rational) for value in (grade, confidence, tolerance))
+    ):
+        # Mixed Fraction/float subtraction would round the rational operand.
+        # Fraction(float) retains the float's exact represented value instead.
+        difference = Fraction(confidence) - Fraction(grade)
+
+    else:
+        difference = cast(float, confidence) - cast(float, grade)
+
+    if cast(float, difference) <= cast(float, tolerance):
+        return True
+
+    # Retain the existing decimal-boundary accommodation for explicit float
+    # policies only; exact rational evidence never acquires this extra margin.
+    return (
+        isinstance(grade, float)
+        and isinstance(confidence, float)
+        and isinstance(tolerance, float)
+        and math.isclose(
+            cast(float, difference),
+            tolerance,
+            rel_tol=1e-12,
+            abs_tol=0.0,
+        )
     )
 
 
