@@ -19,11 +19,14 @@ from fuzzyroutines import (
     Centroid,
     ContinuousUniverse,
     DeriveProperties,
+    DiscreteUniverse,
     Height,
     IntegrationDomain,
     Normalize,
+    SampleProperties,
     ScalarFuzzySet,
 )
+from fuzzyroutines.exceptions import InvalidParameterError
 from fuzzyroutines.FuzzyRoutines import MFunction
 from fuzzyroutines.membership import (
     Bell,
@@ -223,16 +226,19 @@ assert "fuzzyroutines.FuzzyRoutines" not in sys.modules
 
 
 def test_AlteredLegacyEvaluatorCannotRetainExactContinuousFormulaEvidence():
-    """Reject an analytical source once its registered evaluator is replaced."""
+    """Reject invalid formula evidence while retaining observable custom grades."""
 
     historical = MFunction("triangle", a=0, b=2, c=1)
     historical.mju = lambda coordinate: 0.5
 
-    with pytest.raises(ValueError, match="unchanged registered evaluator"):
+    with pytest.raises(InvalidParameterError, match="unchanged registered evaluator"):
         DeriveProperties(historical, ContinuousUniverse())
 
     with pytest.raises(ValueError):
         Height(ScalarFuzzySet(ContinuousUniverse(), historical.mju))
+
+    assert DeriveProperties(historical, DiscreteUniverse((0, 1, 2))).height == 0.5
+    assert SampleProperties(historical, IntegrationDomain(0, 2), sampleCount=3).grades == (0.5, 0.5, 0.5)
 
 
 def test_GenericCallableLookalikeCannotClaimAnalyticalHeight():
