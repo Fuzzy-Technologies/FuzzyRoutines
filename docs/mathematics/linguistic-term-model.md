@@ -51,6 +51,19 @@ grade, while `confidence` is the maximum grade rather than a probability.
 - `tiePolicy` selects the `first`, `last`, or `all` tied terms in declared scale
   order.
 
+Zero tie tolerance compares the validated grades directly. Distinct `Fraction`
+grades remain distinct even when converting them to `float` would produce the
+same value. A positive tolerance uses an inclusive distance comparison;
+rational grades and mixed rational/float grades retain their exact represented
+values during that comparison. The values recorded in the result and policy
+are never converted.
+
+When both grades and the explicitly positive tolerance are floats, the
+existing boundary-rounding rule also accepts a distance relatively close to
+the tolerance (`rel_tol=1e-12`, `abs_tol=0`). For example, grades `0.7` and `0.75`
+are tied under tolerance `0.05` despite subtraction rounding. This rule does
+not apply to zero tolerance or rational evidence.
+
 The complete membership tuple remains available even for no-match results.
 The coordinate must belong to every term universe; partial score vectors fail
 closed. These semantics are fixed by
