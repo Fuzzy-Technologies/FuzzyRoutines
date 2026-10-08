@@ -67,21 +67,20 @@ jobs:
             exit 1
           fi
 
-      - name: Build and check wheel and source distribution
+      - name: Build, reproduce, and check wheel and source distribution
         shell: bash
         run: |
           set -euo pipefail
 
-          python -m pip install --disable-pip-version-check --upgrade build twine
-          export SOURCE_DATE_EPOCH="$(git log -1 --pretty=%ct)"
-          python -m build --outdir dist
-          python -m twine check --strict dist/*
+          python -m pip install --disable-pip-version-check -r requirements-build.txt
+          python -m tools.reproducible_artifacts --output-directory dist
+          python -m pip install --disable-pip-version-check twine==7.0.0
+          python -m twine check --strict dist/*.whl dist/*.tar.gz
 
           test "$(find dist -maxdepth 1 -name '*.whl' -type f | wc -l)" -eq 1
           test "$(find dist -maxdepth 1 -name '*.tar.gz' -type f | wc -l)" -eq 1
-          git rev-parse HEAD > dist/source-revision.txt
-          sha256sum dist/*.whl dist/*.tar.gz > dist/SHA256SUMS
-          sha256sum --check dist/SHA256SUMS
+          (cd dist && sha256sum --check SHA256SUMS)
+          cat dist/reproducibility.json
 
       - name: Upload immutable release candidates
         uses: actions/upload-artifact@v4
@@ -123,7 +122,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          sha256sum --check dist/SHA256SUMS
+          (cd dist && sha256sum --check SHA256SUMS)
           python -m pip install --disable-pip-version-check -r requirements.txt
           python -m tools.test_runner --jobs auto --timeout 60
 

@@ -19,6 +19,8 @@ def WorkflowText():
 
 
 def test_PublishIdentityIsJobScopedAndTokenless():
+    """Publication permissions remain job-scoped and tokenless."""
+
     workflowText = WorkflowText()
     publishText = workflowText.split("  publish-pypi:", maxsplit=1)[1]
 
@@ -31,6 +33,8 @@ def test_PublishIdentityIsJobScopedAndTokenless():
 
 
 def test_PublishCannotRunForPullRequestOrManualDispatch():
+    """Only protected tag pushes can reach the gated publication job."""
+
     workflowText = WorkflowText()
     publishText = workflowText.split("  publish-pypi:", maxsplit=1)[1]
 
@@ -46,6 +50,8 @@ def test_PublishCannotRunForPullRequestOrManualDispatch():
 
 
 def test_ReleaseTagAndPackageVersionAreFailClosed():
+    """Stable annotated tags must match the canonical package version."""
+
     workflowText = WorkflowText()
 
     assert "^refs/tags/v([0-9]+)" in workflowText
@@ -55,12 +61,15 @@ def test_ReleaseTagAndPackageVersionAreFailClosed():
 
 
 def test_BuildEvidencePrecedesPublishing():
+    """Reproducible candidates and full CI evidence precede publication."""
+
     workflowText = WorkflowText()
 
     for evidence in (
-        "python -m build --outdir dist",
-        "python -m twine check --strict dist/*",
-        "sha256sum --check dist/SHA256SUMS",
+        "python -m tools.reproducible_artifacts --output-directory dist",
+        "-r requirements-build.txt",
+        "python -m twine check --strict dist/*.whl dist/*.tar.gz",
+        "sha256sum --check SHA256SUMS",
         "python -m tools.test_runner --jobs auto --timeout 60",
         "actions/attest-build-provenance@v3",
     ):
@@ -70,6 +79,8 @@ def test_BuildEvidencePrecedesPublishing():
 
 
 def test_RunbookDefinesExternalProtectionWithoutSecrets():
+    """The runbook distinguishes platform protection from source mechanics."""
+
     runbookText = RUNBOOKPATH.read_text(encoding="utf-8")
 
     for requiredText in (

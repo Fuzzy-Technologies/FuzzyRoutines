@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+include tools/__init__.py
+include tools/reproducible_artifacts.py
+include requirements-build.txt
