@@ -9,6 +9,8 @@ from tools.benchmark_fuzzyset_centroid import BuildReport, MINIMUMSAMPLES, Measu
 
 
 def test_BenchmarkFuzzySetReportCoversRepresentativeShapes():
+    """Verify that benchmark fuzzy set report covers representative shapes."""
+
     report = BuildReport()
 
     assert report["sample_count"] == MINIMUMSAMPLES
@@ -25,6 +27,8 @@ def test_BenchmarkFuzzySetReportCoversRepresentativeShapes():
 
 
 def test_BenchmarkFuzzySetRejectsInsufficientSamples():
+    """Verify that benchmark fuzzy set rejects insufficient samples."""
+
     try:
         Measure(lambda: None, MINIMUMSAMPLES - 1)
 

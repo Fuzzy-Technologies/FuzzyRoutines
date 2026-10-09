@@ -18,6 +18,8 @@ CONFIGPATH = SITEROOT / "mkdocs.yml"
 
 
 def test_CanonicalReferenceHasCompleteOrderedNavigation():
+    """Verify that canonical reference has complete ordered navigation."""
+
     configurationText = CONFIGPATH.read_text(encoding="utf-8")
     expectedPages = (
         "api/modern/package.md",
@@ -40,6 +42,8 @@ def test_CanonicalReferenceHasCompleteOrderedNavigation():
 
 
 def test_CanonicalReferenceLinksEveryRootExportToItsCanonicalObject():
+    """Verify that canonical reference links every root export to its canonical object."""
+
     packageModule = ast.parse(
         (PROJECTROOT / "fuzzyroutines" / "__init__.py").read_text(encoding="utf-8")
     )
@@ -80,6 +84,8 @@ def test_CanonicalReferenceLinksEveryRootExportToItsCanonicalObject():
 
 
 def test_CanonicalReferenceUsesInstalledStaticDiscoveryAndStrictBuilds():
+    """Verify that canonical reference uses installed static discovery and strict builds."""
+
     configurationText = CONFIGPATH.read_text(encoding="utf-8")
     builderText = (PROJECTROOT / "tools" / "build_api_reference.py").read_text(
         encoding="utf-8"
@@ -95,6 +101,8 @@ def test_CanonicalReferenceUsesInstalledStaticDiscoveryAndStrictBuilds():
 
 
 def test_CanonicalReferenceDependenciesRemainExactlyPinnedAndDocsOnly():
+    """Verify that canonical reference dependencies remain exactly pinned and docs only."""
+
     requirements = (PROJECTROOT / "docs" / "requirements-api.txt").read_text(
         encoding="utf-8"
     )
@@ -117,6 +125,8 @@ def test_CanonicalReferenceDependenciesRemainExactlyPinnedAndDocsOnly():
 
 
 def test_CanonicalReferenceDoesNotTrackGeneratedHtml():
+    """Verify that canonical reference does not track generated HTML."""
+
     trackedPaths = subprocess.check_output(
         ["git", "ls-files"],
         cwd=PROJECTROOT,
@@ -128,6 +138,8 @@ def test_CanonicalReferenceDoesNotTrackGeneratedHtml():
 
 
 def test_CanonicalReferenceMarkdownTablesHavePaddedColumns():
+    """Verify that canonical reference markdown tables have padded columns."""
+
     tablePages = (
         SITEROOT / "content" / "en" / "api" / "modern" / "index.md",
         SITEROOT / "content" / "en" / "api" / "modern" / "package.md",

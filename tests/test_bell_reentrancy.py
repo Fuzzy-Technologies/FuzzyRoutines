@@ -25,6 +25,8 @@ REFERENCEVALUES = (
 
 
 def test_BellEvaluationPreservesParameters():
+    """Verify that bell evaluation preserves parameters."""
+
     membershipFunction = MFunction("bell", a=0.2, b=0.4, c=0.6)
     originalParameters = dict(membershipFunction.parameters)
 
@@ -39,6 +41,8 @@ def test_BellEvaluationPreservesParameters():
 
 
 def test_BellEvaluationIsReentrantAcrossThreads():
+    """Verify that bell evaluation is reentrant across threads."""
+
     membershipFunction = MFunction("bell", a=0.2, b=0.4, c=0.6)
     inputValues = tuple(value for value, _ in REFERENCEVALUES) * 100
     expectedValues = tuple(value for _, value in REFERENCEVALUES) * 100

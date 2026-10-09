@@ -37,6 +37,8 @@ def test_OperatorReferenceValues(
     expectedTNorm,
     expectedSCoNorm,
 ):
+    """Compare each operator family with independently declared scalar reference values."""
+
     actualTNorm = TNorm(leftValue, rightValue, normType=normType)
     actualSCoNorm = SCoNorm(leftValue, rightValue, normType=normType)
 
@@ -52,6 +54,8 @@ def test_OperatorReferenceValues(
 
 @pytest.mark.parametrize("normType", NORMTYPES)
 def test_OperatorReferenceBoundaries(normType):
+    """Check each operator family at its documented unit-interval boundaries."""
+
     assert TNorm(0.0, 1.0, normType=normType) == 0.0, (
         f"TNorm {normType!r} must have zero as annihilator."
     )

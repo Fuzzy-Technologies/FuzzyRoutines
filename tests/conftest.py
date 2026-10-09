@@ -73,6 +73,8 @@ def ReservedPortFactory() -> Iterator[Callable[[], ReservedTcpPort]]:
     reservations: list[ReservedTcpPort] = []
 
     def Reserve() -> ReservedTcpPort:
+        """Bind and retain one unique loopback TCP port until fixture teardown."""
+
         reservation = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         reservation.bind(("127.0.0.1", 0))
         reservedPort = ReservedTcpPort(

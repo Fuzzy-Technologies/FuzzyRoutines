@@ -40,6 +40,8 @@ def BuildContinuousSet(membershipFunction):
 
 
 def test_AlphaCutUsesWeakBoundaryConvention():
+    """Verify that alpha cut uses weak boundary convention."""
+
     fuzzySet = BuildDiscreteSet(
         (0.0, 0.25, 0.5, 0.75, 1.0),
         (0.0, 0.49, 0.5, 0.51, 1.0),
@@ -53,6 +55,8 @@ def test_AlphaCutUsesWeakBoundaryConvention():
 
 
 def test_AlphaZeroIsTheCompleteDeclaredDiscreteUniverse():
+    """Verify that alpha zero is the complete declared discrete universe."""
+
     fuzzySet = BuildDiscreteSet((-1.0, 0.0, 1.0), (0.0, 0.4, 1.0))
 
     assert AlphaCut(fuzzySet, 0).points == fuzzySet.universe.points, (
@@ -61,6 +65,8 @@ def test_AlphaZeroIsTheCompleteDeclaredDiscreteUniverse():
 
 
 def test_AlphaOneIsTheExactDiscreteCore():
+    """Verify that alpha one is the exact discrete core."""
+
     fuzzySet = BuildDiscreteSet((-1.0, 0.0, 1.0), (0.999999999, 1.0, 0.0))
 
     assert AlphaCut(fuzzySet, 1).points == (0.0,), (
@@ -69,6 +75,8 @@ def test_AlphaOneIsTheExactDiscreteCore():
 
 
 def test_ExactDiscreteAlphaCutsAreNested():
+    """Verify that exact discrete alpha cuts are nested."""
+
     fuzzySet = BuildDiscreteSet(
         (0.0, 0.25, 0.5, 0.75, 1.0),
         (0.0, 0.25, 0.5, 0.75, 1.0),
@@ -83,6 +91,8 @@ def test_ExactDiscreteAlphaCutsAreNested():
 
 
 def test_ExactAlphaCutFailsClosedForContinuousCallables():
+    """Verify that exact alpha cut fails closed for continuous callables."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
 
     with pytest.raises(TypeError, match="exact alpha cuts require a DiscreteUniverse"):
@@ -90,6 +100,8 @@ def test_ExactAlphaCutFailsClosedForContinuousCallables():
 
 
 def test_SampledContinuousCutRecordsBoundaryAndProvenance():
+    """Verify that sampled continuous cut records boundary and provenance."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
     analysisDomain = IntegrationDomain(0.0, 1.0)
 
@@ -108,6 +120,10 @@ def test_SampledContinuousCutRecordsBoundaryAndProvenance():
 
 
 def test_SampledAlphaZeroAndOneSemanticsAreExplicitlyLimitedToTheGrid():
+    """Verify that sampled alpha zero and one semantics are explicitly limited to the
+    grid.
+    """
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
     analysisDomain = IntegrationDomain(0.0, 1.0)
 
@@ -123,6 +139,8 @@ def test_SampledAlphaZeroAndOneSemanticsAreExplicitlyLimitedToTheGrid():
 
 
 def test_SampledAlphaCutsAreNestedOnTheSameGrid():
+    """Verify that sampled alpha cuts are nested on the same grid."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate * coordinate)
     analysisDomain = IntegrationDomain(0.0, 1.0)
     thresholds = (0.0, 0.25, 0.5, 0.75, 1.0)
@@ -139,6 +157,8 @@ def test_SampledAlphaCutsAreNestedOnTheSameGrid():
 
 @pytest.mark.parametrize("alpha", [-0.1, 1.1, math.nan, math.inf, True, "0.5"])
 def test_AlphaCutRejectsInvalidThresholds(alpha):
+    """Verify that alpha cut rejects invalid thresholds."""
+
     fuzzySet = BuildDiscreteSet((0.0, 1.0), (0.0, 1.0))
 
     with pytest.raises((TypeError, ValueError)):
@@ -147,6 +167,8 @@ def test_AlphaCutRejectsInvalidThresholds(alpha):
 
 @pytest.mark.parametrize("invalidGrade", [-0.1, 1.1, math.nan, math.inf, True])
 def test_ExactAlphaCutFailsClosedForInvalidMembershipGrades(invalidGrade):
+    """Verify that exact alpha cut fails closed for invalid membership grades."""
+
     fuzzySet = BuildDiscreteSet((0.0, 1.0), (0.0, invalidGrade))
 
     with pytest.raises((TypeError, ValueError)):
@@ -155,6 +177,8 @@ def test_ExactAlphaCutFailsClosedForInvalidMembershipGrades(invalidGrade):
 
 @pytest.mark.parametrize("invalidGrade", [-0.1, 1.1, math.nan, math.inf, True])
 def test_SampledAlphaCutFailsClosedForInvalidMembershipGrades(invalidGrade):
+    """Verify that sampled alpha cut fails closed for invalid membership grades."""
+
     fuzzySet = BuildContinuousSet(
         lambda coordinate: invalidGrade if coordinate == 0.5 else coordinate
     )
@@ -165,6 +189,8 @@ def test_SampledAlphaCutFailsClosedForInvalidMembershipGrades(invalidGrade):
 
 @pytest.mark.parametrize("sampleCount", [True, 1.5, "5"])
 def test_SampledAlphaCutRejectsNonIntegerCounts(sampleCount):
+    """Verify that sampled alpha cut rejects noninteger counts."""
+
     with pytest.raises(TypeError, match="sampleCount"):
         SampleAlphaCut(
             BuildContinuousSet(lambda coordinate: coordinate),
@@ -175,6 +201,8 @@ def test_SampledAlphaCutRejectsNonIntegerCounts(sampleCount):
 
 
 def test_SampledAlphaCutRequiresAtLeastTwoPoints():
+    """Verify that sampled alpha cut requires at least two points."""
+
     with pytest.raises(ValueError, match="at least two"):
         SampleAlphaCut(
             BuildContinuousSet(lambda coordinate: coordinate),
@@ -185,6 +213,8 @@ def test_SampledAlphaCutRequiresAtLeastTwoPoints():
 
 
 def test_SampledAlphaCutDomainMustLieInsideTheContinuousUniverse():
+    """Verify that sampled alpha cut domain must lie inside the continuous universe."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
 
     with pytest.raises(ValueError, match="entirely within"):
@@ -197,6 +227,8 @@ def test_SampledAlphaCutDomainMustLieInsideTheContinuousUniverse():
 
 
 def test_SampledAlphaCutRejectsDiscreteUniverses():
+    """Verify that sampled alpha cut rejects discrete universes."""
+
     fuzzySet = BuildDiscreteSet((0.0, 1.0), (0.0, 1.0))
 
     with pytest.raises(TypeError, match="ContinuousUniverse"):
@@ -204,6 +236,8 @@ def test_SampledAlphaCutRejectsDiscreteUniverses():
 
 
 def test_AlphaCutOperationsRequireScalarFuzzySets():
+    """Verify that alpha cut operations require scalar fuzzy sets."""
+
     with pytest.raises(TypeError, match="ScalarFuzzySet"):
         AlphaCut(object(), 0.5)
 
@@ -212,6 +246,8 @@ def test_AlphaCutOperationsRequireScalarFuzzySets():
 
 
 def test_SampledAlphaCutResultIsImmutable():
+    """Verify that sampled alpha cut result is immutable."""
+
     cut = SampleAlphaCut(
         BuildContinuousSet(lambda coordinate: coordinate),
         0.5,

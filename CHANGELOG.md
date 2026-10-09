@@ -54,6 +54,9 @@ Existing users should read the
   source and clean installed wheels on the supported CPython versions.
 - Alice project artwork appears in the README and API documentation; the
   compact project sign remains available for package and small-icon contexts.
+- Every test declaration now documents its invariant or fixture boundary.
+  The existing documentation gate checks modules, classes, methods and nested
+  helpers statically, including callbacks and asynchronous functions.
 
 See [PR #273](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/273)
 for export curation and the

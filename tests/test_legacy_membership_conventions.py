@@ -15,6 +15,8 @@ from fuzzyroutines.FuzzyRoutines import MFunction
 
 
 def test_TriangleKeepsItsHistoricalABCPParameterMeaning():
+    """Verify that triangle keeps its historical ABC parameter meaning."""
+
     membershipFunction = MFunction("triangle", a=0.1, b=0.9, c=0.4)
 
     assert membershipFunction.mju(0.1) == 0.0, "Legacy triangle parameter a is the left foot."
@@ -23,6 +25,8 @@ def test_TriangleKeepsItsHistoricalABCPParameterMeaning():
 
 
 def test_TrapeziumKeepsItsHistoricalABCDParameterMeaning():
+    """Verify that trapezium keeps its historical ABCD parameter meaning."""
+
     membershipFunction = MFunction("trapezium", a=0.1, b=0.9, c=0.3, d=0.7)
 
     assert membershipFunction.mju(0.1) == 0.0, "Legacy trapezium parameter a is the left foot."
@@ -32,6 +36,8 @@ def test_TrapeziumKeepsItsHistoricalABCDParameterMeaning():
 
 
 def test_BellDerivesItsHistoricalRightFootFromABC():
+    """Verify that bell derives its historical right foot from ABC."""
+
     membershipFunction = MFunction("bell", a=0.1, b=0.3, c=0.6)
 
     assert membershipFunction.mju(0.3) == 1.0, "Legacy bell parameter b starts the plateau."
@@ -42,6 +48,8 @@ def test_BellDerivesItsHistoricalRightFootFromABC():
 
 
 def test_ExponentialKeepsItsHistoricalCentreAndScaleKeywords():
+    """Verify that exponential keeps its historical centre and scale keywords."""
+
     membershipFunction = MFunction("exponential", a=0.5, b=0.25)
 
     assert membershipFunction.mju(0.5) == 1.0, "Legacy exponential parameter a is the centre."

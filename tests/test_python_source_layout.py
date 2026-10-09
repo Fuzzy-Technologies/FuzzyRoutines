@@ -55,6 +55,8 @@ def _StatementHeaderLines(sourceText):
 
 
 def test_ClauseTransitionsHaveRequiredLeadingBlankLine():
+    """Verify that clause transitions have required leading blank line."""
+
     violations = []
 
     for path in _TrackedPythonPaths():
@@ -80,6 +82,8 @@ def test_ClauseTransitionsHaveRequiredLeadingBlankLine():
 
 
 def test_BlockHeadersHaveNoImmediateBlankLine():
+    """Verify that block headers have no immediate blank line."""
+
     violations = []
 
     for path in _TrackedPythonPaths():

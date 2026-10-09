@@ -69,24 +69,32 @@ EXPECTED_MEMBERSHIP_IDENTIFIERS = {
 
 
 def test_LegacyTopLevelFunctionSignatures():
+    """Preserve protected top-level legacy parameter names and defaults."""
+
     for name, expected in EXPECTED_FUNCTION_SIGNATURES.items():
         obj = getattr(fr, name)
         assert str(inspect.signature(obj)) == expected
 
 
 def test_LegacyClassConstructorSignatures():
+    """Preserve historical constructor parameter names and defaults."""
+
     for name, expected in EXPECTED_CLASS_SIGNATURES.items():
         obj = getattr(fr, name)
         assert str(inspect.signature(obj)) == expected
 
 
 def test_LegacyPublicClassMembersExist():
+    """Verify that legacy public class members exist."""
+
     for className, expectedMembers in EXPECTED_PUBLIC_MEMBERS.items():
         actualMembers = set(dir(getattr(fr, className)))
         assert expectedMembers <= actualMembers
 
 
 def test_HistoricalMembershipIdentifiersAreRegistered():
+    """Verify that historical membership identifiers are registered."""
+
     instances = [
         fr.MFunction("hyperbolic", a=1, b=1, c=0),
         fr.MFunction("bell", a=0, b=0.5, c=0.75),

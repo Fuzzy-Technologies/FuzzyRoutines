@@ -11,6 +11,8 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
 
 def test_ZeroAreaCentroidRaisesValueError():
+    """Reject a zero-area centroid with the documented ValueError category."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
 
     with pytest.raises(ValueError, match="zero membership area"):
@@ -18,5 +20,7 @@ def test_ZeroAreaCentroidRaisesValueError():
 
 
 def test_DegenerateParabolicWidthRaisesValueError():
+    """Reject a parabolic shoulder with coincident endpoints."""
+
     with pytest.raises(ValueError):
         MFunction("parabolic", a=0.5, b=0.5)

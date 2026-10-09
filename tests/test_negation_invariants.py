@@ -12,25 +12,35 @@ from fuzzyroutines.FuzzyRoutines import FuzzyNOT, FuzzyNOTParabolic
 
 @pytest.mark.parametrize("fuzzyNumber", [0.0, 0.125, 0.25, 0.5, 0.875, 1.0])
 def test_FuzzyNOTStandardNegationInvolution(fuzzyNumber):
+    """Apply the standard complement twice and recover the original grade."""
+
     assert FuzzyNOT(FuzzyNOT(fuzzyNumber)) == pytest.approx(fuzzyNumber)
 
 
 @pytest.mark.parametrize("fuzzyNumber", [0.0, 1.0])
 def test_FuzzyNOTStandardNegationSwapsEndpoints(fuzzyNumber):
+    """Verify that fuzzy NOT standard negation swaps endpoints."""
+
     assert FuzzyNOT(fuzzyNumber) == 1.0 - fuzzyNumber
 
 
 def test_FuzzyNOTStandardNegationFixedPoint():
+    """Keep one-half unchanged under the standard complement."""
+
     assert FuzzyNOT(0.5) == pytest.approx(0.5)
 
 
 @pytest.mark.parametrize("fuzzyNumber", [0.0, 1.0])
 def test_FuzzyNOTParabolicSwapsEndpoints(fuzzyNumber):
+    """Verify that fuzzy NOT parabolic swaps endpoints."""
+
     assert FuzzyNOTParabolic(fuzzyNumber, alpha=0.5) == 1.0 - fuzzyNumber
 
 
 @pytest.mark.parametrize("fuzzyNumber", [0.125, 0.25, 0.5, 0.75, 0.875])
 def test_FuzzyNOTParabolicHasDocumentedInvolution(fuzzyNumber):
+    """Verify that fuzzy NOT parabolic has documented involution."""
+
     value = FuzzyNOTParabolic(fuzzyNumber, alpha=0.5)
     assert FuzzyNOTParabolic(value, alpha=0.5) == pytest.approx(fuzzyNumber, abs=1e-12)
 
@@ -49,6 +59,8 @@ def test_FuzzyNOTParabolicHasDocumentedInvolution(fuzzyNumber):
     ],
 )
 def test_FuzzyNOTRejectsInvalidAlpha(alpha):
+    """Verify that fuzzy NOT rejects invalid alpha."""
+
     with pytest.raises(ValueError, match="open interval"):
         FuzzyNOT(0.5, alpha=alpha)
 
@@ -67,6 +79,8 @@ def test_FuzzyNOTRejectsInvalidAlpha(alpha):
     ],
 )
 def test_FuzzyNOTParabolicRejectsAlphaOutsideProvedInterval(alpha):
+    """Verify that fuzzy NOT parabolic rejects alpha outside proved interval."""
+
     with pytest.raises(ValueError, match="closed interval"):
         FuzzyNOTParabolic(0.5, alpha=alpha)
 
@@ -77,6 +91,8 @@ PARABOLICGRID = tuple(index / 100.0 for index in range(101))
 
 @pytest.mark.parametrize("alpha", PARABOLICALPHAS)
 def test_FuzzyNOTParabolicSatisfiesDefiningEquation(alpha):
+    """Verify that fuzzy NOT parabolic satisfies defining equation."""
+
     for fuzzyNumber in PARABOLICGRID:
         result = FuzzyNOTParabolic(fuzzyNumber, alpha=alpha)
         residual = (
@@ -91,6 +107,8 @@ def test_FuzzyNOTParabolicSatisfiesDefiningEquation(alpha):
 
 @pytest.mark.parametrize("alpha", PARABOLICALPHAS)
 def test_FuzzyNOTParabolicIsStrongNegation(alpha):
+    """Verify that fuzzy NOT parabolic is strong negation."""
+
     values = [FuzzyNOTParabolic(fuzzyNumber, alpha=alpha) for fuzzyNumber in PARABOLICGRID]
 
     assert values[0] == 1.0
@@ -109,6 +127,8 @@ def test_FuzzyNOTParabolicIsStrongNegation(alpha):
 
 @pytest.mark.parametrize("epsilon", [0.0, 1e-12, 0.001, 1.0, -1.0])
 def test_FuzzyNOTParabolicRetainsButIgnoresLegacyEpsilon(epsilon):
+    """Verify that fuzzy NOT parabolic retains but ignores legacy epsilon."""
+
     assert FuzzyNOTParabolic(0.2, alpha=0.3, epsilon=epsilon) == pytest.approx(
         FuzzyNOTParabolic(0.2, alpha=0.3),
         abs=0.0,

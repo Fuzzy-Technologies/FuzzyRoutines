@@ -9,6 +9,8 @@ from fuzzyroutines.FuzzyRoutines import FuzzyScale, FuzzySet, MFunction
 
 
 def test_ScaleLookupPreservesLaterLevelTiePolicy():
+    """Select the later legacy level when maximum membership grades are equal."""
+
     scale = FuzzyScale()
     sharedParameters = {"a": 0.0, "b": 1.0}
     scale.levels = [

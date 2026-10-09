@@ -11,6 +11,8 @@ from pathlib import Path
 
 
 def test_EveryTestReceivesAnIsolatedStateAndDatabaseRoot(isolatedStateRoot, isolatedDatabasePath):
+    """Verify that every test receives an isolated state and database root."""
+
     assert isolatedStateRoot.exists()
     assert isolatedDatabasePath.parent == isolatedStateRoot
     assert os.environ["FUZZYROUTINES_TEST_STATE_ROOT"] == str(isolatedStateRoot)
@@ -19,6 +21,8 @@ def test_EveryTestReceivesAnIsolatedStateAndDatabaseRoot(isolatedStateRoot, isol
 
 
 def test_ReservedPortsRemainUniqueWhileHeld(reservedPortFactory):
+    """Verify that reserved ports remain unique while held."""
+
     firstReservation = reservedPortFactory()
     secondReservation = reservedPortFactory()
 

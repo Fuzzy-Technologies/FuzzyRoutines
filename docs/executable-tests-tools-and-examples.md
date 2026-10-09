@@ -12,10 +12,21 @@ explicit command.
 
 ## Test documentation
 
-Every test module identifies the contract or evidence family it covers. A test
-function needs a docstring only when its discovery name, fixtures, parameter
-identifiers, assertions, and failure messages do not make the tested property
-clear. This avoids ceremonial text such as “test that the function works.”
+Every test module identifies the contract or evidence family it covers. Every
+test function, helper, class and method has a concise English docstring stating
+the invariant, regression or fixture boundary it verifies. Nested helpers and
+framework callbacks follow the same rule. Meaningless placeholders such as
+“test that the function works” do not satisfy editorial review.
+
+The existing static documentation gate checks declarations without importing
+or collecting tests:
+
+```console
+python -m tools.documentation_gates test-docstrings
+```
+
+This check also runs in the documentation CI `all` gate. Embedded Python
+fixtures remain test data and do not require source-declaration docstrings.
 
 Comments inside tests explain non-obvious matters such as:
 

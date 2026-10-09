@@ -15,6 +15,8 @@ from tools.report_external_links import LinkReference, ProbeResult
 
 
 def test_ScanDocumentsReportsActionableSortedLocations(tmpPath):
+    """Return source locations and URLs in deterministic document order."""
+
     secondPath = tmpPath / "z.md"
     secondPath.write_text("See <https://example.com/z>.\n", encoding="utf-8")
     firstPath = tmpPath / "a.md"
@@ -36,6 +38,8 @@ def test_ScanDocumentsReportsActionableSortedLocations(tmpPath):
 
 
 def test_ScanDocumentsIgnoresIntentionalLoopbackExamples(tmpPath):
+    """Exclude intentional localhost and loopback URLs from external health checks."""
+
     documentPath = tmpPath / "offline.md"
     documentPath.write_text(
         "http://127.0.0.1:9\nhttp://localhost:8000\nhttps://example.com\n",
@@ -52,6 +56,8 @@ def test_ScanDocumentsIgnoresIntentionalLoopbackExamples(tmpPath):
 
 
 def test_BuildReportIsDeterministicAndProbesEachUrlOnce():
+    """Probe each distinct URL once and preserve deterministic report ordering."""
+
     references = (
         LinkReference("z.md", 8, "https://example.com/shared"),
         LinkReference("a.md", 2, "https://example.com/failure"),
@@ -60,6 +66,8 @@ def test_BuildReportIsDeterministicAndProbesEachUrlOnce():
     calls = []
 
     def FakeProbe(url, timeoutSeconds):
+        """Return deterministic link-probe evidence without making network requests."""
+
         calls.append((url, timeoutSeconds))
         if url.endswith("failure"):
             return ProbeResult(False, 503, "HTTP 503: unavailable")
@@ -106,7 +114,11 @@ def test_BuildReportIsDeterministicAndProbesEachUrlOnce():
 
 
 def test_BuildReportRecordsMalformedUrlWithoutProbingIt():
+    """Report malformed URLs without passing them to the network probe."""
+
     def UnexpectedProbe(url, timeoutSeconds):
+        """Fail if a malformed URL incorrectly reaches the network probe."""
+
         raise AssertionError(f"unexpected network probe: {url}, {timeoutSeconds}")
 
     report = reportExternalLinks.BuildReport(
@@ -127,9 +139,13 @@ def test_BuildReportRecordsMalformedUrlWithoutProbingIt():
 
 
 def test_BuildReportRunsProbesConcurrently():
+    """Demonstrate overlapping independent probes with a synchronization barrier."""
+
     barrier = threading.Barrier(2, timeout=1)
 
     def SynchronizedProbe(url, timeoutSeconds):
+        """Coordinate concurrent fixture probes and expose serialized execution."""
+
         barrier.wait()
         return ProbeResult(True, 200, None)
 
@@ -148,6 +164,8 @@ def test_BuildReportRunsProbesConcurrently():
 def test_MainWritesReportAndReturnsNonzeroForFailedProbe(
     tmpPath, monkeypatch
 ):
+    """Verify that main writes report and returns nonzero for failed probe."""
+
     outputPath = tmpPath / "report.json"
     monkeypatch.setattr(
         reportExternalLinks,
@@ -174,6 +192,8 @@ def test_MainWritesReportAndReturnsNonzeroForFailedProbe(
 
 
 def test_MainRejectsInvalidProbeLimits(capsys):
+    """Verify that main rejects invalid probe limits."""
+
     try:
         reportExternalLinks.Main(["--timeout", "0"])
 
@@ -187,7 +207,11 @@ def test_MainRejectsInvalidProbeLimits(capsys):
 
 
 def test_ProbeUrlRecordsUnreachableError(monkeypatch):
+    """Verify that probe url records unreachable error."""
+
     def FailingUrlopen(request, timeout):
+        """Raise a deterministic connection error in place of real URL access."""
+
         raise TimeoutError("timed out")
 
     monkeypatch.setattr(reportExternalLinks, "urlopen", FailingUrlopen)

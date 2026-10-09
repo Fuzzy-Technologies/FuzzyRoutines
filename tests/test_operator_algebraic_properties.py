@@ -20,6 +20,8 @@ NORMTYPES = ("logic", "algebraic", "boundary", "drastic")
 
 @pytest.mark.parametrize("normType", NORMTYPES)
 def test_OperatorCommutativity(normType):
+    """Check operand exchange for every declared scalar operator family."""
+
     for leftValue in GRIDVALUES:
         for rightValue in GRIDVALUES:
             assert TNorm(leftValue, rightValue, normType=normType) == TNorm(
@@ -36,6 +38,8 @@ def test_OperatorCommutativity(normType):
 
 @pytest.mark.parametrize("normType", NORMTYPES)
 def test_OperatorAssociativity(normType):
+    """Compare both binary groupings across each declared operator input grid."""
+
     for firstValue in GRIDVALUES:
         for secondValue in GRIDVALUES:
             for thirdValue in GRIDVALUES:
@@ -70,6 +74,8 @@ def test_OperatorAssociativity(normType):
 
 @pytest.mark.parametrize("normType", NORMTYPES)
 def test_OperatorBoundaryIdentities(normType):
+    """Check neutral and absorbing boundary grades for every operator family."""
+
     for value in GRIDVALUES:
         assert TNorm(value, 1.0, normType=normType) == value, (
             f"TNorm {normType!r} must use one as identity."
@@ -87,6 +93,8 @@ def test_OperatorBoundaryIdentities(normType):
 
 @pytest.mark.parametrize("normType", NORMTYPES)
 def test_OperatorMonotonicity(normType):
+    """Require operator grades to be nondecreasing in each operand."""
+
     for lowerValue in GRIDVALUES:
         for higherValue in GRIDVALUES:
             if lowerValue > higherValue:
@@ -107,6 +115,8 @@ def test_OperatorMonotonicity(normType):
 
 @pytest.mark.parametrize("normType", NORMTYPES)
 def test_DeMorganDualityWithStandardComplement(normType):
+    """Check De Morgan duality using the standard one-minus-grade complement."""
+
     for leftValue in GRIDVALUES:
         for rightValue in GRIDVALUES:
             dualTNorm = 1.0 - SCoNorm(

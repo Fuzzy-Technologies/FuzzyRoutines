@@ -14,6 +14,8 @@ EVALUATIONROOT = PROJECTROOT / "docs" / "api-evaluation"
 
 
 def test_ApiDocumentationDecisionIsBackedByReproducibleInputs():
+    """Verify that API documentation decision is backed by reproducible inputs."""
+
     requiredPaths = [
         PROJECTROOT / "docs" / "adr" / "0010-api-documentation-architecture.md",
         PROJECTROOT / "docs" / "requirements-api.txt",
@@ -34,6 +36,8 @@ def test_ApiDocumentationDecisionIsBackedByReproducibleInputs():
 
 
 def test_ApiDocumentationDependenciesRemainDocsOnly():
+    """Verify that API documentation dependencies remain docs only."""
+
     projectText = (PROJECTROOT / "pyproject.toml").read_text(encoding="utf-8")
     documentationDependencies = (PROJECTROOT / "docs" / "requirements-api.txt").read_text(
         encoding="utf-8"
@@ -45,6 +49,8 @@ def test_ApiDocumentationDependenciesRemainDocsOnly():
 
 
 def test_ApiDocumentationGeneratedHtmlIsNotTracked():
+    """Verify that API documentation generated HTML is not tracked."""
+
     trackedPaths = subprocess.check_output(
         ["git", "ls-files"],
         cwd=PROJECTROOT,
@@ -55,6 +61,8 @@ def test_ApiDocumentationGeneratedHtmlIsNotTracked():
 
 
 def test_MkdocstringsSpikeUsesStableQualifiedAnchorsAndSafeDiscovery():
+    """Verify that mkdocstrings spike uses stable qualified anchors and safe discovery."""
+
     configurationText = (EVALUATIONROOT / "mkdocs.yml").read_text(encoding="utf-8")
     apiPageText = (EVALUATIONROOT / "source" / "api" / "fuzzysets.md").read_text(
         encoding="utf-8"
@@ -67,6 +75,8 @@ def test_MkdocstringsSpikeUsesStableQualifiedAnchorsAndSafeDiscovery():
 
 
 def test_FuzzyRoutinesIdentityAssetsAreSelfContainedVectors():
+    """Verify that fuzzy routines identity assets are self contained vectors."""
+
     assetsRoot = EVALUATIONROOT / "source" / "assets"
     faviconPath = assetsRoot / "favicon.svg"
     signPath = assetsRoot / "brand" / "fuzzyroutines-sign.svg"
@@ -93,6 +103,8 @@ def test_FuzzyRoutinesIdentityAssetsAreSelfContainedVectors():
 
 
 def test_FuzzyRoutinesIdentityIsIntegratedIntoTheDocsTheme():
+    """Verify that fuzzy routines identity is integrated into the docs theme."""
+
     configurationText = (EVALUATIONROOT / "mkdocs.yml").read_text(encoding="utf-8")
     landingPageText = (EVALUATIONROOT / "source" / "index.md").read_text(encoding="utf-8")
 

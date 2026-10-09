@@ -329,6 +329,41 @@ def _ModuleName(path: Path, packageRoot: Path) -> str:
     return "fuzzyroutines" + (f".{suffix}" if suffix else "")
 
 
+def ValidateTestDocumentation(projectRoot: Path = PROJECTROOT) -> tuple[str, ...]:
+    """Require source docstrings for test modules, classes and nested callables.
+
+    The check uses syntax only: it never imports or collects a test module.
+    Lambda expressions and Python source stored as fixture data are outside
+    this declaration contract.
+    """
+
+    errors = []
+
+    for sourcePath in sorted((projectRoot / "tests").rglob("*.py")):
+        relativePath = _Relative(sourcePath, projectRoot)
+
+        try:
+            syntax = _ParseSyntax(sourcePath)
+
+        except (OSError, SyntaxError, UnicodeError) as error:
+            errors.append(f"{relativePath}: cannot inspect test documentation: {error}")
+            continue
+
+        if not (ast.get_docstring(syntax) or "").strip():
+            errors.append(f"{relativePath}:1: test module has no source docstring")
+
+        for node in ast.walk(syntax):
+            if not isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+
+            if not (ast.get_docstring(node) or "").strip():
+                errors.append(
+                    f"{relativePath}:{node.lineno}: {node.name} has no source docstring"
+                )
+
+    return tuple(sorted(errors))
+
+
 def ValidateCoverage(
     projectRoot: Path = PROJECTROOT,
     manifestPath: Path | None = None,
@@ -782,6 +817,7 @@ def ParseArguments(arguments=None):
         "command",
         choices=(
             "coverage",
+            "test-docstrings",
             "locales",
             "source-links",
             "rendered-links",
@@ -799,6 +835,7 @@ def Main(arguments=None):
     options = ParseArguments(arguments)
     validators = {
         "coverage": lambda: ValidateCoverage(),
+        "test-docstrings": lambda: ValidateTestDocumentation(),
         "locales": lambda: ValidateLocales().diagnostics,
         "source-links": lambda: ValidateSourceLinks(),
         "rendered-links": lambda: ValidateRenderedLinks(options.siteRoot),

@@ -49,6 +49,8 @@ def _BuildLegacySet():
 
 
 def test_LinguisticTermCarriesExactNameAndScalarFuzzySet():
+    """Verify that linguistic term carries exact name and scalar fuzzy set."""
+
     fuzzySet = _BuildSet()
     term = LinguisticTerm("Medium", fuzzySet)
 
@@ -58,23 +60,31 @@ def test_LinguisticTermCarriesExactNameAndScalarFuzzySet():
 
 @pytest.mark.parametrize("invalidName", [None, 1, (), []])
 def test_LinguisticTermRejectsNonStringNames(invalidName):
+    """Verify that linguistic term rejects nonstring names."""
+
     with pytest.raises(TypeError, match="name must be a string"):
         LinguisticTerm(invalidName, _BuildSet())
 
 
 @pytest.mark.parametrize("invalidName", ["", " ", "\t\n"])
 def test_LinguisticTermRejectsEmptyNames(invalidName):
+    """Verify that linguistic term rejects empty names."""
+
     with pytest.raises(ValueError, match="non-whitespace"):
         LinguisticTerm(invalidName, _BuildSet())
 
 
 def test_LinguisticTermRejectsLegacyAndArbitraryFuzzySetValues():
+    """Verify that linguistic term rejects legacy and arbitrary fuzzy set values."""
+
     for invalidFuzzySet in (None, object(), _BuildLegacySet()):
         with pytest.raises(TypeError, match="ScalarFuzzySet"):
             LinguisticTerm("Medium", invalidFuzzySet)
 
 
 def test_LinguisticTermIsImmutable():
+    """Verify that linguistic term is immutable."""
+
     term = LinguisticTerm("Medium", _BuildSet())
 
     with pytest.raises(FrozenInstanceError):
@@ -85,6 +95,8 @@ def test_LinguisticTermIsImmutable():
 
 
 def test_LinguisticScalePreservesExplicitTermOrderAndIdentity():
+    """Verify that linguistic scale preserves explicit term order and identity."""
+
     low = LinguisticTerm("Low", _BuildSet())
     medium = LinguisticTerm("Medium", _BuildSet(0.1))
     high = LinguisticTerm("High", _BuildSet(0.2))
@@ -96,6 +108,8 @@ def test_LinguisticScalePreservesExplicitTermOrderAndIdentity():
 
 
 def test_LinguisticScaleRequiresExplicitNonEmptyTypedTuple():
+    """Verify that linguistic scale requires explicit nonempty typed tuple."""
+
     low = LinguisticTerm("Low", _BuildSet())
 
     with pytest.raises(TypeError, match="explicit tuple"):
@@ -109,6 +123,8 @@ def test_LinguisticScaleRequiresExplicitNonEmptyTypedTuple():
 
 
 def test_LinguisticScaleRejectsCaseInsensitiveNameCollisions():
+    """Verify that linguistic scale rejects case insensitive name collisions."""
+
     low = LinguisticTerm("Low", _BuildSet())
     duplicate = LinguisticTerm("Low", _BuildSet(0.1))
 
@@ -127,6 +143,10 @@ def test_LinguisticScaleSupportsUnicodeCaseInsensitiveCompleteNameLookup(
     declaredName,
     queryName,
 ):
+    """Verify that linguistic scale supports unicode case insensitive complete name
+    lookup.
+    """
+
     term = LinguisticTerm(declaredName, _BuildSet())
     scale = LinguisticScale((term,))
 
@@ -139,6 +159,8 @@ def test_LinguisticScaleSupportsUnicodeCaseInsensitiveCompleteNameLookup(
 
 
 def test_LinguisticScaleLookupNeverPerformsPartialOrApproximateMatching():
+    """Verify that linguistic scale lookup never performs partial or approximate matching."""
+
     low = LinguisticTerm("Low", _BuildSet())
     scale = LinguisticScale((low,))
 
@@ -154,6 +176,8 @@ def test_LinguisticScaleLookupNeverPerformsPartialOrApproximateMatching():
 
 @pytest.mark.parametrize("invalidName", [None, 1, (), []])
 def test_LinguisticScaleLookupRejectsNonStringNames(invalidName):
+    """Verify that linguistic scale lookup rejects nonstring names."""
+
     scale = LinguisticScale((LinguisticTerm("Low", _BuildSet()),))
 
     with pytest.raises(TypeError, match="termName must be a string"):
@@ -162,6 +186,8 @@ def test_LinguisticScaleLookupRejectsNonStringNames(invalidName):
 
 @pytest.mark.parametrize("invalidMode", [None, 0, 1, "false"])
 def test_LinguisticScaleLookupRequiresBooleanMatchingMode(invalidMode):
+    """Verify that linguistic scale lookup requires boolean matching mode."""
+
     scale = LinguisticScale((LinguisticTerm("Low", _BuildSet()),))
 
     with pytest.raises(TypeError, match="exactMatching must be a boolean"):
@@ -169,6 +195,8 @@ def test_LinguisticScaleLookupRequiresBooleanMatchingMode(invalidMode):
 
 
 def test_LinguisticScaleIsImmutableAndContainsNoLegacyFuzzyMethod():
+    """Verify that linguistic scale is immutable and contains no legacy fuzzy method."""
+
     scale = LinguisticScale((LinguisticTerm("Low", _BuildSet()),))
 
     with pytest.raises(FrozenInstanceError):
@@ -179,6 +207,8 @@ def test_LinguisticScaleIsImmutableAndContainsNoLegacyFuzzyMethod():
 
 @pytest.mark.parametrize("tiePolicy", ["first", "last", "all"])
 def test_FuzzificationPolicyAcceptsEveryDocumentedTieMode(tiePolicy):
+    """Verify that fuzzification policy accepts every documented tie mode."""
+
     policy = FuzzificationPolicy(tiePolicy=tiePolicy)
 
     assert policy.tiePolicy == tiePolicy
@@ -188,6 +218,8 @@ def test_FuzzificationPolicyAcceptsEveryDocumentedTieMode(tiePolicy):
 
 @pytest.mark.parametrize("invalidPolicy", ["earliest", "latest", "", None])
 def test_FuzzificationPolicyRejectsUnknownTieModes(invalidPolicy):
+    """Verify that fuzzification policy rejects unknown tie modes."""
+
     with pytest.raises(ValueError, match="unknown tie policy"):
         FuzzificationPolicy(tiePolicy=invalidPolicy)
 
@@ -208,6 +240,8 @@ def test_FuzzificationPolicyRequiresMembershipGradeThresholds(
     fieldValue,
     expectedError,
 ):
+    """Verify that fuzzification policy requires membership grade thresholds."""
+
     with pytest.raises(expectedError):
         FuzzificationPolicy(**{fieldName: fieldValue})
 
@@ -220,6 +254,8 @@ def test_LinguisticScaleFuzzifyAppliesOrderedSingleWinnerTiePolicies(
     tiePolicy,
     selectedName,
 ):
+    """Verify that linguistic scale fuzzify applies ordered single winner tie policies."""
+
     low = LinguisticTerm("Low", _BuildMembershipSet(lambda coordinate: 0.5))
     high = LinguisticTerm("High", _BuildMembershipSet(lambda coordinate: 0.5))
     scale = LinguisticScale((low, high))
@@ -234,6 +270,8 @@ def test_LinguisticScaleFuzzifyAppliesOrderedSingleWinnerTiePolicies(
 
 
 def test_LinguisticScaleFuzzifyCanReturnEveryTiedTerm():
+    """Verify that linguistic scale fuzzify can return every tied term."""
+
     low = LinguisticTerm("Low", _BuildMembershipSet(lambda coordinate: 0.5))
     medium = LinguisticTerm("Medium", _BuildMembershipSet(lambda coordinate: 0.2))
     high = LinguisticTerm("High", _BuildMembershipSet(lambda coordinate: 0.5))
@@ -251,6 +289,8 @@ def test_LinguisticScaleFuzzifyCanReturnEveryTiedTerm():
 
 
 def test_LinguisticScaleFuzzifyUsesAbsoluteTieTolerance():
+    """Verify that linguistic scale fuzzify uses absolute tie tolerance."""
+
     first = LinguisticTerm("First", _BuildMembershipSet(lambda coordinate: 0.7))
     second = LinguisticTerm("Second", _BuildMembershipSet(lambda coordinate: 0.75))
     scale = LinguisticScale((first, second))
@@ -383,6 +423,10 @@ def test_LinguisticScaleFuzzifyReturnsNoMatchAtOrBelowMinimumConfidence(
     grade,
     threshold,
 ):
+    """Verify that linguistic scale fuzzify returns no match at or below minimum
+    confidence.
+    """
+
     term = LinguisticTerm("Sparse", _BuildMembershipSet(lambda coordinate: grade))
     scale = LinguisticScale((term,))
 
@@ -397,6 +441,8 @@ def test_LinguisticScaleFuzzifyReturnsNoMatchAtOrBelowMinimumConfidence(
 
 
 def test_LinguisticScaleFuzzifyEvaluatesEveryMembershipExactlyOnce():
+    """Verify that linguistic scale fuzzify evaluates every membership exactly once."""
+
     callCounts = [0, 0, 0]
 
     def Membership(index, grade):
@@ -426,6 +472,10 @@ def test_LinguisticScaleFuzzifyEvaluatesEveryMembershipExactlyOnce():
 
 
 def test_LinguisticScaleFuzzifyRejectsInvalidPolicyAndIncompleteUniverseCoverage():
+    """Verify that linguistic scale fuzzify rejects invalid policy and incomplete universe
+    coverage.
+    """
+
     bounded = LinguisticTerm("Bounded", _BuildMembershipSet(lambda coordinate: 1.0))
     scale = LinguisticScale((bounded,))
 
@@ -452,11 +502,17 @@ def test_ScaleDiagnosticsPolicyRejectsInvalidGridAndTolerances(
     arguments,
     expectedError,
 ):
+    """Verify that scale diagnostics policy rejects invalid grid and tolerances."""
+
     with pytest.raises(expectedError):
         ScaleDiagnosticsPolicy(**arguments)
 
 
 def test_LinguisticScaleDiagnoseReportsCoverageOverlapAndPartitionMetrics():
+    """Verify that linguistic scale diagnose reports coverage overlap and partition
+    metrics.
+    """
+
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
     low = LinguisticTerm("Low", ScalarFuzzySet(universe, lambda coordinate: 1.0 - coordinate))
     high = LinguisticTerm("High", ScalarFuzzySet(universe, lambda coordinate: coordinate))
@@ -489,6 +545,10 @@ def test_LinguisticScaleDiagnoseReportsCoverageOverlapAndPartitionMetrics():
 
 
 def test_LinguisticScaleDiagnoseUsesOneStrictThresholdForGapsAndOverlaps():
+    """Verify that linguistic scale diagnose uses one strict threshold for gaps and
+    overlaps.
+    """
+
     first = LinguisticTerm("First", _BuildMembershipSet(lambda coordinate: 0.05))
     second = LinguisticTerm("Second", _BuildMembershipSet(lambda coordinate: 0.04))
     scale = LinguisticScale((first, second))
@@ -510,6 +570,8 @@ def test_LinguisticScaleDiagnoseUsesOneStrictThresholdForGapsAndOverlaps():
 
 
 def test_LinguisticScaleDiagnoseFindsAnExplicitSampledCoverageGap():
+    """Verify that linguistic scale diagnose finds an explicit sampled coverage gap."""
+
     low = LinguisticTerm(
         "Low",
         _BuildMembershipSet(lambda coordinate: max(0.0, 1.0 - 2.0 * coordinate)),
@@ -531,6 +593,10 @@ def test_LinguisticScaleDiagnoseFindsAnExplicitSampledCoverageGap():
 
 
 def test_LinguisticScaleDiagnoseIsReproducibleAndEvaluatesEachTermOncePerPoint():
+    """Verify that linguistic scale diagnose is reproducible and evaluates each term once
+    per point.
+    """
+
     callCounts = [0, 0]
 
     def Membership(termIndex):
@@ -564,6 +630,8 @@ def test_LinguisticScaleDiagnoseIsReproducibleAndEvaluatesEachTermOncePerPoint()
 
 
 def test_LinguisticScaleDiagnoseRejectsUnsupportedDomainsAndUniverses():
+    """Verify that linguistic scale diagnose rejects unsupported domains and universes."""
+
     continuousScale = LinguisticScale((LinguisticTerm("Bounded", _BuildSet()),))
     discreteTerm = LinguisticTerm(
         "Discrete",
@@ -584,6 +652,8 @@ def test_LinguisticScaleDiagnoseRejectsUnsupportedDomainsAndUniverses():
 
 
 def test_LinguisticScaleDiagnoseDoesNotModifyMembershipCoefficients():
+    """Verify that linguistic scale diagnose does not modify membership coefficients."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
     originalParameters = dict(membershipFunction.parameters)
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
@@ -603,6 +673,8 @@ def test_LinguisticScaleDiagnoseDoesNotModifyMembershipCoefficients():
 
 
 def test_ModernLinguisticTypesAreExportedFromPackageRoot():
+    """Verify that modern linguistic types are exported from package root."""
+
     import fuzzyroutines
 
     assert fuzzyroutines.LinguisticTerm is LinguisticTerm, (
@@ -632,6 +704,8 @@ def test_ModernLinguisticTypesAreExportedFromPackageRoot():
 
 
 def test_LegacyFuzzyScaleLevelsRemainMutableDictionaries():
+    """Verify that legacy fuzzy scale levels remain mutable dictionaries."""
+
     scale = FuzzyScale()
 
     assert isinstance(scale.levels, list), "Legacy levels must remain a list."
@@ -660,6 +734,8 @@ def test_LegacyFuzzyScaleLevelsRemainMutableDictionaries():
     ],
 )
 def test_LegacyFuzzyScaleRequiresBothExactLevelKeys(invalidLevel):
+    """Verify that legacy fuzzy scale requires both exact level keys."""
+
     scale = FuzzyScale()
 
     with pytest.raises(Exception, match="2-dim dictionary"):
@@ -668,6 +744,8 @@ def test_LegacyFuzzyScaleRequiresBothExactLevelKeys(invalidLevel):
 
 @pytest.mark.parametrize(("firstName", "secondName"), [("Low", "LOW"), ("i", "ı")])
 def test_LegacyFuzzyScaleRejectsCaseInsensitiveNameCollisions(firstName, secondName):
+    """Verify that legacy fuzzy scale rejects case insensitive name collisions."""
+
     scale = FuzzyScale()
 
     with pytest.raises(ValueError, match="not unique ignoring case"):
@@ -678,6 +756,8 @@ def test_LegacyFuzzyScaleRejectsCaseInsensitiveNameCollisions(firstName, secondN
 
 
 def test_LegacyFuzzyScaleLookupPreservesExactAndCaseInsensitiveModes():
+    """Verify that legacy fuzzy scale lookup preserves exact and case insensitive modes."""
+
     scale = FuzzyScale()
     level = {"name": "Medium", "fSet": _BuildLegacySet()}
     scale.levels = [level]

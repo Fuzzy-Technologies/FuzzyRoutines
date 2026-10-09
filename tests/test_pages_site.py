@@ -14,7 +14,11 @@ SITE_ROOT = PROJECT_ROOT / "docs"
 
 
 class PageParser(HTMLParser):
+    """Collect page metadata, anchors and links without executing JavaScript."""
+
     def __init__(self):
+        """Initialize independent metadata, anchor and link collections."""
+
         super().__init__()
         self.ids = set()
         self.links = []
@@ -22,6 +26,8 @@ class PageParser(HTMLParser):
         self.hasTitle = False
 
     def handle_starttag(self, tag, attributes):
+        """Record title presence, metadata names, anchors and navigational links."""
+
         attributeMap = dict(attributes)
         if "id" in attributeMap:
             self.ids.add(attributeMap["id"])
@@ -34,12 +40,16 @@ class PageParser(HTMLParser):
 
 
 def ParsePage(pagePath):
+    """Parse one tracked UTF-8 HTML page for structural and link assertions."""
+
     parser = PageParser()
     parser.feed(pagePath.read_text(encoding="utf-8"))
     return parser
 
 
 def test_PagesEntryPointHasRequiredMetadata():
+    """Verify that pages entry point has required metadata."""
+
     pagePath = SITE_ROOT / "index.html"
     parser = ParsePage(pagePath)
 
@@ -48,6 +58,8 @@ def test_PagesEntryPointHasRequiredMetadata():
 
 
 def test_PagesLocalLinksAndFragmentsResolve():
+    """Verify that pages local links and fragments resolve."""
+
     pagePath = SITE_ROOT / "index.html"
     parser = ParsePage(pagePath)
 
@@ -67,6 +79,8 @@ def test_PagesLocalLinksAndFragmentsResolve():
 
 
 def test_PagesSiteHasNoRuntimeScriptDependencies():
+    """Verify that pages site has no runtime script dependencies."""
+
     pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
 
     assert "<script" not in pageText.lower()
@@ -74,6 +88,8 @@ def test_PagesSiteHasNoRuntimeScriptDependencies():
 
 
 def test_PagesSiteSeparatesImplementedBehaviorFromRoadmap():
+    """Verify that pages site separates implemented behavior from roadmap."""
+
     pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
 
     assert 'data-status="implemented"' in pageText

@@ -28,6 +28,8 @@ EXECUTABLETOOLS = (
 
 
 def test_NonLibraryModulesDeclareTheirEvidenceFamily():
+    """Verify that non library modules declare their evidence family."""
+
     modulePaths = tuple(
         path
         for sourceRoot in ("tests", "tools", "examples")
@@ -40,6 +42,8 @@ def test_NonLibraryModulesDeclareTheirEvidenceFamily():
 
 
 def test_ExecutableToolCallablesDocumentTheirBoundary():
+    """Verify that executable tool callables document their boundary."""
+
     for modulePath in (PROJECTROOT / "tools").glob("*.py"):
         module = ast.parse(modulePath.read_text(encoding="utf-8"))
 
@@ -52,6 +56,8 @@ def test_ExecutableToolCallablesDocumentTheirBoundary():
 
 
 def test_ExecutableToolsExposeUsefulHelp(tmpPath):
+    """Verify that executable tools expose useful help."""
+
     environment = os.environ.copy()
     environment["PYTHONPATH"] = str(PROJECTROOT)
     initialEntries = tuple(tmpPath.iterdir())
@@ -72,6 +78,8 @@ def test_ExecutableToolsExposeUsefulHelp(tmpPath):
 
 
 def test_LegacyBenchmarkSupportsModuleAndDirectCheckoutHelp(tmpPath):
+    """Verify that legacy benchmark supports module and direct checkout help."""
+
     environment = os.environ.copy()
     environment.pop("PYTHONPATH", None)
     scriptPath = PROJECTROOT / "tools" / "benchmark_legacy_baseline.py"
@@ -95,6 +103,8 @@ def test_LegacyBenchmarkSupportsModuleAndDirectCheckoutHelp(tmpPath):
 
 
 def test_ExecutableGuideDocumentsShellAndArtifactContracts():
+    """Verify that executable guide documents shell and artifact contracts."""
+
     documentation = DOCUMENTATIONPATH.read_text(encoding="utf-8")
 
     for requiredConcept in (
