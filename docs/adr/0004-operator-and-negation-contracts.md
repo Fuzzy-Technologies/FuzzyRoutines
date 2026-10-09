@@ -8,6 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 - Status: Accepted on merge
 - Date: 2026-09-14
 - Related planning task: #11
+- Related amendment task: [#281](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/281)
 - Related Features: #19 and #20
 
 ## Context
@@ -40,8 +41,12 @@ The supported historical names and formulas are:
 | `boundary`  | `max(x + y - 1, 0)`                       | `min(x + y, 1)`                           |
 | `drastic`   | `y` if `x=1`; `x` if `y=1`; otherwise `0` | `y` if `x=0`; `x` if `y=0`; otherwise `1` |
 
-Unknown family names are invalid. Variadic composition requires at least two
-operands and validates every operand before evaluation.
+Unknown family names are invalid. Variadic composition requires at least one
+operand and validates every operand and the selected family before evaluation.
+Composition of one valid degree is the identity: `TNormCompose(x)` and
+`SCoNormCompose(x)` return `x` for every supported family. Two or more operands
+use the left-associated fold of the selected binary formula. Empty input is
+invalid.
 
 ### Parametric negation
 
@@ -97,3 +102,27 @@ replacement; Task #58 owns its regression tests.
 
 This ADR is **Accepted**. A new operator family or a change to the truth-value
 domain requires an amendment or a new ADR.
+
+### Amendment: historical unary composition identity — 2026-10-05
+
+Task #281 records this amendment; it becomes accepted with the implementing
+PR's human review and merge.
+
+The original text required at least two operands. The project audit found that
+this contradicted the established valid historical call contract and the
+implemented migration boundary. Both composition functions at the immutable
+[1.0.3 source revision](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/ceb9403d44c19ba73fd351e1b05091d337280864/fuzzyroutines/FuzzyRoutines.py)
+accept one degree and return it unchanged; strict validation subsequently
+rejected empty input, invalid degrees, and unknown families without removing
+valid unary calls.
+
+This amendment adopts the nonempty fold convention and its unary identity to
+align the ADR with [ADR-0001's compatibility policy](0001-backward-compatibility-contract.md),
+the [migration notes](../migration/1.0.3-to-2.0.0.md), and existing behavior.
+It changes no binary formula, truth-value domain, public signature, or runtime
+implementation. The
+[composition tests](../../tests/test_composition_validation.py) cover unary
+identity across every accepted family, invalid unary/later operands, and
+unknown families. The
+[finite-input tests](../../tests/test_finite_number_policy.py) cover rejection
+of empty composition.

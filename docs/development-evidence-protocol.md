@@ -170,14 +170,16 @@ the compatibility policy.
 #### Naming and compatibility
 
 - Functions, methods, and classes use `PascalCase`, including `Main()`.
-- Variables, parameters, and instance attributes use `lowerCamelCase`.
-- Constants use unseparated `UPPERCASE` names, without underscores.
-- Do not introduce `snake_case` in project-owned identifiers.
+- New variables, parameters, and instance attributes use `snake_case`.
+  Internal implementation details may have a leading underscore.
+- New constants use `UPPER_SNAKE_CASE`, with underscores between words.
 - Required Python dunder names, external API/SDK/protobuf/library names, and
   test-discovery names are exceptions. Test files retain the `test_*.py`
   convention; names after the mandatory `test_` prefix use `PascalCase`.
-- Do not rename historical public identifiers, import paths, signatures, or
-  parameter conventions merely to conform to this style. Such a change requires
+- Preserve established public identifiers and keyword parameter names,
+  including the modern API's existing camel-case fields and parameters as well
+  as the historical facade. Do not rename import paths, signatures, or
+  parameter conventions merely to conform to style. Such a change requires
   explicit compatibility classification and, where breaking, a migration plan.
 
 #### Documentation and comments
@@ -191,7 +193,11 @@ the compatibility policy.
 - In Markdown, delimit inline mathematics with `$...$` and display mathematics
   with `$$...$$` so formulas render in JetBrains IDE and GitHub previews. Do not
   use `\(...\)` or `\[...\]` as Markdown math delimiters.
-- Every production module, class, function, and method has a concise docstring
+- Use `\mathrm{...}` for function names in mathematics. GitHub blocks
+  `\operatorname{...}`; a successful generic MathJax render alone does not
+  establish GitHub compatibility. Include authored Markdown and source
+  docstrings in the markup check.
+- Every production and test module, class, function, and method has a concise docstring
   that explains its responsibility and semantic contract. Python annotations
   remain authoritative for types; docstrings document domains, units,
   invariants, mathematical behavior, side effects, approximation status, and
@@ -222,6 +228,12 @@ the compatibility policy.
 #### Layout and formatting
 
 - Separate logical blocks with intentional blank lines.
+- Leave one blank line after every function or method docstring before its
+  implementation. Add one blank line before a new control-flow statement or
+  asynchronous operation when it follows completed work, and before a
+  `return`, `raise`, or `yield` that starts the next logical phase.
+- Leave one blank line after a completed nested or multi-line control-flow
+  block before the next independent statement.
 - Do not put a blank line immediately after the header of `def`, `class`,
   `try`, `if`, `elif`, `else`, `except`, `finally`, `for`,
   `while`, `with`, `match`, or `case`.
@@ -258,17 +270,20 @@ the compatibility policy.
 #### Infrastructure-like changes and gates
 
 For a change to CI, Python IaC, cloud-init, TOML configuration profiles, network
-rules, or hardening, first run and record the full relevant test baseline. After
-the change, repeat the checks. Such changes require invariant and failure-path
-tests without contacting a real external service.
+rules, or hardening, record the affected-test baseline and verify the same
+scope after the change. Such changes require invariant and failure-path tests
+without contacting a real external service. Full repository baselines and
+regressions run in PR CI rather than in routine local development.
 
 Run focused checks first. The deterministic developer gate includes
 formatting/linting, unit tests, property tests, and import/package smoke; the
-full gate may add typing, branch coverage, build/clean-install,
-benchmark-regression, and supported-CPython checks. After applicable
-infrastructure-like changes, run tests, `ruff check`, `compileall`, and CLI
-`--help` when the package exposes a CLI. No CI test may depend on an external
-online service.
+full CI gate adds typing, branch coverage, build/clean-install,
+benchmark-regression, and supported-CPython checks where configured. Locally,
+run only affected tests and static checks, including `ruff check`, `compileall`,
+and CLI `--help` for changed executable boundaries when applicable. Do not run
+the complete regression suite, documentation builds, or package builds locally
+unless the maintainer explicitly requests them. No CI test may depend on an
+external online service.
 
 The canonical full-suite command is `python -m tools.test_runner`. It discovers
 tests through pytest, runs parallel-safe scopes in pytest-xdist processes, and

@@ -48,6 +48,12 @@ Existing users should read the
   error categories. Error names are available through that explicit module;
   the [API inventory](docs/public-api-documentation-inventory.md) records the
   current root surface.
+- Inline modern annotations and the `py.typed` marker provide a strict typing
+  contract for root and focused imports. Static consumers exercise custom
+  callbacks, policy families, immutable results, and return types against both
+  source and clean installed wheels on the supported CPython versions.
+- Alice project artwork appears in the README and API documentation; the
+  compact project sign remains available for package and small-icon contexts.
 
 See [PR #273](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/273)
 for export curation and the
@@ -77,9 +83,35 @@ supported operation-by-operation migration.
   collisions under case-insensitive lookup. Historical fuzzification
   evaluates each term once; `UniversalFuzzyScale` avoids a discarded default
   construction.
+- Implementation and product documentation identify analytical centroids,
+  linguistic fuzzification, and modern typing as implemented capabilities
+  rather than future work. Release notes retain the separate exact-candidate
+  and human-approval requirements.
+- A [project readiness audit](docs/audits/2026-10-05-project-audit.md) records
+  source and ADR alignment, reproduced correctness findings, practical usage,
+  documentation gaps, and the limits of release evidence.
+- ADR-0004 explicitly preserves valid unary norm composition as the identity
+  for all supported families, correcting the document's stricter operand
+  count. Empty input and invalid values remain rejected; runtime formulas and
+  historical signatures are unchanged.
+- ADR-0013 records the existing positive float-only tie-boundary accommodation
+  precisely: `math.isclose` with `rel_tol=1e-12` and `abs_tol=0` follows the
+  inclusive absolute-distance check. Zero tolerance retains exact equality,
+  rational/mixed comparisons receive no allowance, and the default policy is
+  unchanged. This is a proposed compatibility clarification under
+  [Task #281](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/281),
+  not a proved numerical error bound or new global epsilon.
 
 Merged PRs and focused regression tests are collected in the
 [corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md).
+
+Audit follow-ups remain pending review:
+[Gaussian centroid cancellation on remote intervals](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/282),
+[exact rational fuzzification tie comparisons](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/283),
+[analytical certificates for overridden evaluators](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/284),
+and [extreme finite membership arithmetic](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/285).
+Their issue references record discovered regressions, not merged fixes or
+stable release approval.
 
 #### Changed
 
@@ -96,6 +128,18 @@ Merged PRs and focused regression tests are collected in the
   controls support review. Reserved translations are not approved translations.
 - `MFunction.accuracy` and `FuzzyNOTParabolic`'s `epsilon` argument remain for
   source compatibility but no longer select the numerical algorithms.
+- New-code naming guidance follows the current shared Python standard:
+  `snake_case` variables and parameters, `UPPER_SNAKE_CASE` constants, and
+  concise docstrings for tests. Existing public keyword spellings remain
+  protected. Routine local validation covers affected paths; full regression,
+  documentation, typing, and package gates run in PR CI.
+- Release readiness requires identical wheel and source-distribution bytes
+  from independent builds of the exact candidate, with a fixed environment
+  and recorded hashes, alongside clean-install evidence. Build success alone
+  does not satisfy this stronger reproducibility gate. The comparison applies
+  within the same Python, platform, and pinned build toolchain; archive and CI
+  implementation are tracked separately in
+  [Task #278](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/278).
 
 Compatibility preserved during modernization:
 

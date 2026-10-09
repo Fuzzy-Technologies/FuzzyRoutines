@@ -89,7 +89,7 @@ SPDX-License-Identifier: Apache-2.0
           <article class="card">
             <span class="card-label">Membership</span>
             <h3>Functions and sets</h3>
-            <p>Built-in membership families with strict parameter contracts, shared compatibility names, and the historical <code>FuzzySet</code> wrapper.</p>
+            <p>Immutable scalar sets over explicit universes, built-in membership families with strict parameter contracts, and the historical compatibility wrapper.</p>
           </article>
           <article class="card">
             <span class="card-label">Operators</span>
@@ -99,7 +99,7 @@ SPDX-License-Identifier: Apache-2.0
           <article class="card">
             <span class="card-label">Scales</span>
             <h3>Deterministic lookup</h3>
-            <p>Legacy linguistic scales with one membership evaluation per term and an explicit later-term tie policy.</p>
+            <p>Typed terms and scales with complete-name lookup, ordered membership scores, confidence, and explicit no-match and tie policies.</p>
           </article>
         </div>
       </section>
@@ -117,18 +117,19 @@ SPDX-License-Identifier: Apache-2.0
               <li>Finite <code>FuzzyNOT</code> parameter validation</li>
               <li>Analytical parabolic negation without an epsilon scan</li>
               <li>Reentrant Bell membership evaluation</li>
-              <li>Centroids recalculated from current set state</li>
-              <li>Single-evaluation scale lookup</li>
+              <li>Explicit universes, immutable sets, and exact or sampled properties</li>
+              <li>Analytical centroid moments and adaptive quadrature</li>
+              <li>Typed linguistic lookup, fuzzification, and sampled diagnostics</li>
+              <li>Strict modern annotations and installed-wheel typing checks</li>
               <li>Executable JSON benchmarks and diagnostics</li>
             </ul>
           </article>
           <article class="status-column" data-status="roadmap">
             <span class="status-badge roadmap">Still in the v2 roadmap</span>
             <ul>
-              <li>Analytical and adaptive defuzzification strategies</li>
+              <li>Defuzzification methods beyond the implemented centroid</li>
               <li>Executable convexity queries with evidence-strength results</li>
-              <li>Typed linguistic lookup and fuzzification policies</li>
-              <li>Completion of the focused typed module API</li>
+              <li>Explicit symmetric-difference semantics</li>
               <li>Evidence-gated vectorized and free-threaded execution</li>
             </ul>
           </article>
@@ -164,7 +165,7 @@ SPDX-License-Identifier: Apache-2.0
             <h3 id="modernization-title">Active correctness-focused modernization</h3>
           </div>
           <p>
-            The focused typed modules are the default modern API as that surface is completed. The historical public API remains available
+            The focused typed modules provide the modern scalar API with inline annotations and strict consumer checks. The historical public API remains available
             as a compatibility facade while documented defects are repaired in reviewable steps.
             Vectorized backends, free-threaded execution, and scaling claims remain future work until their dedicated
             parity and benchmark gates pass.
@@ -177,23 +178,23 @@ SPDX-License-Identifier: Apache-2.0
         <h2 id="start-title">Small API, inspectable behavior.</h2>
         <div class="code-layout">
           <div>
-            <p>Install the active development branch, then create and evaluate a fuzzy set.</p>
+            <p>Use CPython 3.13 or 3.14 to install the active development branch, then create and evaluate a modern scalar set.</p>
             <pre><code>python -m pip install \
   git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop</code></pre>
           </div>
-          <pre class="code-sample"><code>from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
-
-membershipFunction = MFunction(
-    "triangle", a=0.0, b=1.0, c=0.5
-)
-fuzzySet = FuzzySet(
-    membershipFunction,
-    supportSet=(0.0, 1.0),
-    linguisticName="Medium",
+          <pre class="code-sample"><code>from fuzzyroutines import (
+    Centroid, ContinuousUniverse,
+    IntegrationDomain, ScalarFuzzySet, Triangle,
 )
 
-print(TNorm(0.4, 0.7, normType="algebraic"))
-print(fuzzySet.Defuz())</code></pre>
+membership = Triangle(left=0.0, peak=0.5, right=1.0)
+universe = ContinuousUniverse(0.0, 1.0, True, True)
+fuzzy_set = ScalarFuzzySet(universe, membership)
+
+print(fuzzy_set.Membership(0.25))
+print(Centroid(
+    fuzzy_set, IntegrationDomain(0.0, 1.0),
+))</code></pre>
         </div>
       </section>
 

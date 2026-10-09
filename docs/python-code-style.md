@@ -20,14 +20,22 @@ repository.
 ## Naming and compatibility
 
 - Functions, methods, and classes use `PascalCase`, including `Main()`.
-- Variables, parameters, and instance attributes use `lowerCamelCase`.
-- Constants use unseparated `UPPERCASE` names without underscores.
-- Project-owned identifiers do not introduce `snake_case`.
+- New variables, parameters, and instance attributes use `snake_case`; a
+  leading underscore is allowed for internal implementation details.
+- New constants use `UPPER_SNAKE_CASE`, with underscores between words.
 - Python dunder names, external API names, and test discovery are exceptions.
   Test files keep `test_*.py`; names after the mandatory `test_` prefix use
   `PascalCase`.
-- Historical public identifiers, import paths, signatures, and parameter
-  conventions are not renamed solely for style compliance.
+- Established public identifiers, import paths, signatures, and parameter
+  conventions are not renamed solely for style compliance. This includes
+  existing modern camel-case fields and keyword parameters as well as the
+  historical facade. New local variables follow the current naming rules;
+  changing an existing public signature needs compatibility review.
+
+These rules govern new and modified source. Existing test-function docstring
+coverage is a separate maintenance deliverable under
+[Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286);
+the [project audit](audits/2026-10-05-project-audit.md) records the baseline.
 
 ## Canonical source-documentation contract
 
@@ -43,7 +51,7 @@ side effects, approximation status, and intentional failures.
 | Production class   | Required    | Represented concept, invariants, mutability or ownership, and attributes whose meaning is nontrivial |
 | Function or method | Required    | Operation, mathematical semantics, argument domains, result meaning, and intentional exceptions      |
 | Test module        | Required    | Contract or evidence family covered by the module                                                    |
-| Individual test    | Optional    | Add only when the discovery name and assertions do not explain the invariant sufficiently            |
+| Individual test    | Required    | Concise English summary of the invariant established by its assertions                               |
 | Example module     | Required    | User scenario and whether it demonstrates compatibility or the modern API                            |
 | Executable tool    | Required    | User-visible purpose, inputs and outputs, side effects, and failure boundary                         |
 
@@ -53,12 +61,11 @@ phrase for a class or module (`Immutable ...`, `Utilities for ...`). Add a
 body only when it carries contract information. Do not repeat the Python name,
 signature, annotation, or obvious implementation steps in prose.
 
-Every production module, class, function, and method receives a docstring,
+Every production and test module, class, function, and method receives a docstring,
 including non-public helpers when they encode a mathematical or architectural
 boundary. A property docstring states the value's meaning, not that it “gets”
-the value. Constructors may rely on the class docstring when `__init__` adds no
-independent contract; an explicit `__init__` with additional validation or
-side effects documents that behavior.
+the value. An explicit constructor receives its own concise docstring; any
+additional validation or side effects are part of that contract.
 
 ### Google-style sections
 
@@ -96,6 +103,9 @@ never document clamping, coercion, or fallback behavior that does not exist.
   delimiters: the canonical MkDocs pipeline and JetBrains Markdown preview use
   the dollar-delimited form. Define every symbol that is not already part of
   the callable's documented arguments.
+- Use `\mathrm{...}` for names inside formulas; GitHub blocks
+  `\operatorname{...}` even though ordinary MathJax accepts it. Check authored
+  Markdown and Python docstrings, because both become rendered documentation.
 - Use an `r` prefix for a docstring containing LaTeX backslashes, or escape
   each backslash explicitly. Raw docstrings are preferred when their final
   character is not a backslash.
@@ -182,14 +192,14 @@ library APIs.
 ### Mathematical function
 
 ```python
-def WeakAlphaCut(fuzzySet: ScalarFuzzySet, alpha: Real) -> DiscreteRegion:
+def WeakAlphaCut(fuzzy_set: ScalarFuzzySet, alpha: Real) -> DiscreteRegion:
     r"""Return the weak alpha-cut of a discrete fuzzy set.
 
     The cut uses the inclusive boundary
     $A_\alpha = \{x \in X \mid \mu_A(x) \geq \alpha\}$.
 
     Args:
-        fuzzySet: Set over an exhaustively enumerable discrete universe.
+        fuzzy_set: Set over an exhaustively enumerable discrete universe.
         alpha: Membership threshold in the closed interval $[0, 1]$.
 
     Returns:
@@ -259,16 +269,18 @@ could not infer from the filename.
 
 
 def test_HigherAlphaCutIsNestedInsideLowerCut():
-    lowerCut = AlphaCut(fuzzySet, 0.25)
-    higherCut = AlphaCut(fuzzySet, 0.75)
+    """Keep weak cuts nested when the membership threshold increases."""
 
-    assert set(higherCut.points) <= set(lowerCut.points), (
+    lower_cut = AlphaCut(fuzzy_set, 0.25)
+    higher_cut = AlphaCut(fuzzy_set, 0.75)
+
+    assert set(higher_cut.points) <= set(lower_cut.points), (
         "For beta >= alpha, A_beta must remain a subset of A_alpha."
     )
 ```
 
-The test name and assertion message already state the invariant, so an
-individual test docstring would add no useful information.
+The name, docstring, and assertion message state the same invariant at their
+respective discovery, source-documentation, and failure-report boundaries.
 
 ### Executable tool
 
@@ -328,7 +340,12 @@ Generated API documentation must not reduce source clarity:
 ## Layout and validation
 
 - A docstring is the first statement in its scope. Leave one blank line after
-  a multi-line docstring before implementation.
+  every function or method docstring before implementation.
+- Separate completed work from the next logical phase with one blank line:
+  before a new control-flow or asynchronous operation, before `return`,
+  `raise`, or `yield`, and after a completed nested or multi-line control-flow
+  block before the next independent statement. Keep closely related
+  assignments and calls together.
 - Leave two blank lines between module-level definitions and one blank line
   between class methods.
 - Leave one blank line before `elif`, `else`, `except`, and `finally`, and
@@ -339,5 +356,7 @@ Generated API documentation must not reduce source clarity:
   cell. Do not realign an otherwise untouched historical table solely for
   appearance.
 - Validate changed links, fenced examples, table structure, `ruff check`,
-  `compileall`, and focused tests before review. Documentation generators are
-  additional evidence; they do not replace source and behavioral checks.
+  `compileall`, and focused tests before review. Full regression, installed
+  typing consumers, documentation generators, and package build/install gates
+  run in PR CI; local complete runs require an explicit maintainer request.
+  Generated documentation does not replace source and behavioral checks.

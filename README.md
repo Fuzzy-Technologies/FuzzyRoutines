@@ -64,15 +64,14 @@ python -m pip install .
 ### Modern example
 
 ```python
-from fuzzyroutines import ContinuousUniverse, DeriveProperties, ScalarFuzzySet
-from fuzzyroutines.FuzzyRoutines import MFunction
+from fuzzyroutines import ContinuousUniverse, DeriveProperties, ScalarFuzzySet, Triangle
 
 universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
-membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
-fuzzySet = ScalarFuzzySet(universe, membershipFunction.mju)
-properties = DeriveProperties(membershipFunction, universe)
+membership = Triangle(left=0.0, peak=0.5, right=1.0)
+fuzzy_set = ScalarFuzzySet(universe, membership)
+properties = DeriveProperties(membership, universe)
 
-assert fuzzySet.Membership(0.5) == 1.0
+assert fuzzy_set.Membership(0.5) == 1.0
 assert properties.core.Contains(0.5)
 assert properties.height == 1.0
 ```
@@ -88,15 +87,15 @@ support.
 ```python
 from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 
-membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
-fuzzySet = FuzzySet(
-    membershipFunction,
+membership = MFunction("triangle", a=0.0, b=1.0, c=0.5)
+fuzzy_set = FuzzySet(
+    membership,
     supportSet=(0.0, 1.0),
     linguisticName="Medium",
 )
 
 print(TNorm(0.4, 0.7, normType="algebraic"))
-print(fuzzySet.Defuz())
+print(fuzzy_set.Defuz())
 ```
 
 The legacy triangle order is `a, b, c`, where `c` is the apex. Protected
@@ -119,9 +118,11 @@ names and corrected historical defects are tracked in the
 ## Documentation map
 
 | Need                                  | Canonical source                                                                                                                                    |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | What exists now                       | [Current implementation status](docs/current-status.md)                                                                                             |
+| Audited contracts and release limits  | [Project readiness audit](docs/audits/2026-10-05-project-audit.md)                                                                                  |
 | Public symbols                        | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                  |
+| Static types and custom callbacks     | [Public modern typing](docs/public-typing.md)                                                                                                       |
 | Mathematical definitions              | [`docs/mathematics`](docs/mathematics/)                                                                                                             |
 | Compatibility and migration           | [Canonical guide](docs/COMPATIBILITY.md) · [Corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md)                                       |
 | Release changes and version decision  | [Development changelog](CHANGELOG.md) · [1.0.3 migration](docs/migration/1.0.3-to-2.0.0.md) · [Version rationale](docs/release-version-decision.md) |
@@ -135,12 +136,17 @@ names and corrected historical defects are tracked in the
 
 ```console
 python -m pip install -e .
-python -m tools.test_runner
-ruff check .
-python tools/build_api_reference.py
+python -m pip install -r requirements.txt
+python -m pytest -q tests/test_membership_function_contracts.py
+python -m ruff check fuzzyroutines/membership.py
 ```
 
-The canonical runner discovers the complete suite, uses independent
+Choose the tests and lint paths for the files and contracts being changed.
+PR CI runs the complete deterministic suite, typing, documentation builds,
+and package installation gates. Full local regression and build runs are
+reserved for an explicit maintainer request.
+
+The canonical full-suite runner, `python -m tools.test_runner`, discovers the complete suite, uses independent
 `pytest-xdist` worker **processes** by default, caps automatic parallelism at
 12, and moves tests marked `serial` into a separate sequential phase. Use
 `--jobs N`, `--timeout N`, `--serial`, or `--fail-fast` for an explicit run.
@@ -155,10 +161,12 @@ Markdown docstrings, and tracked Markdown remain the sources of truth.
 
 The current typed surface already includes explicit scalar universes, immutable
 fuzzy sets, operations, derived properties, alpha-cuts, comparison policies,
-and linguistic representations. Symmetric difference, executable convexity,
-defuzzification methods beyond the implemented centroid contract, completion
-of public typing/signature coverage, vectorized backends, and free-threaded
-CPython support remain roadmap work. Performance and concurrency claims require numerical-parity,
+and linguistic representations. Inline modern annotations, `py.typed`, strict
+source checks, and installed-wheel consumer checks are implemented; see the
+[typing contract](docs/public-typing.md). Symmetric difference, executable
+convexity, defuzzification methods beyond the implemented centroid contract,
+vectorized backends, and free-threaded CPython support remain roadmap work.
+Performance and concurrency claims require numerical-parity,
 timing, memory, and race-safety evidence.
 
 The generated reference is composed with the
