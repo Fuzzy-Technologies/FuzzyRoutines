@@ -80,8 +80,10 @@ Documentation maintenance has separate follow-ups:
 [Task #280](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/280)
 for explained visual examples and
 [Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286)
-for missing test-function docstrings. They remain reviewable documentation
-work and do not substitute for final numerical acceptance.
+for missing test-function docstrings. The test-documentation repair is merged
+in [PR #300](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/300);
+#280 remains open for complete multilingual visual-example acceptance. Neither
+substitutes for final numerical acceptance.
 
 ## Complete three-language documentation for 2.0.0
 

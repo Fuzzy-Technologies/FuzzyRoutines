@@ -37,7 +37,7 @@ Existing users should read the
 
 - Canonical English quick start and eight worked scenarios explain physical
   inputs, model assumptions, intermediate grades, policy choices, exact versus
-  sampled results, and independently verified area moments. Nine reproducible
+  sampled results, and independently verified area moments. Ten reproducible
   SVG figures and a membership gallery accompany the calculations; plotting
   dependencies remain documentation-only. Clean-install CI executes every
   canonical English Python snippet and the complete scenario script. Independent
@@ -123,13 +123,16 @@ supported operation-by-operation migration.
 Merged PRs and focused regression tests are collected in the
 [corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md).
 
-Audit follow-ups remain pending review:
+Merged audit follow-ups address:
 [Gaussian centroid cancellation on remote intervals](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/282),
 [exact rational fuzzification tie comparisons](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/283),
 [analytical certificates for overridden evaluators](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/284),
 and [extreme finite membership arithmetic](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/285).
-Their issue references record discovered regressions, not merged fixes or
-stable release approval.
+The fixes are merged in
+[PR #287](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/287),
+[PR #289](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/289), and
+[PR #291](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/291).
+They remain subject to verification on the final stable release candidate.
 
 #### Changed
 

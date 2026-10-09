@@ -104,7 +104,9 @@ PR CI. Final desktop/mobile review of all three languages belongs to #297.
 
 The stale API-page statement that Task #95 typing coverage was still planned
 was replaced with the implemented contract link. The properties-page grammar
-and recipe navigation were corrected. README, changelog, figure counts and
+and recipe navigation were corrected. Changelog audit-fix statuses and the
+readiness record for #286 now identify their already merged PRs.
+README, changelog, figure counts and
 executable-tool instructions agree with this corpus.
 
 ## Evidence and handoff
