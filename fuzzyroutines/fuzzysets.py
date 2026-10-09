@@ -240,7 +240,7 @@ def Normalize(fuzzySet: ScalarFuzzySet) -> ScalarFuzzySet:
     r"""Return a new height-one fuzzy set without mutating the source set.
 
     Normalization is the pointwise quotient
-    $\mu_A(x) / \operatorname{height}(A)$. It is
+    $\mu_A(x) / \mathrm{height}(A)$. It is
     undefined for height zero and unavailable when an exact continuous height
     cannot be proved under the current analytical contracts.
 
