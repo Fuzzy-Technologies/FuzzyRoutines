@@ -22,6 +22,8 @@ SPHINX_SETTINGS = frozenset({
 })
 # These are upstream override points, never a blanket snake_case allowance.
 EXTERNAL_METHODS = {
+    "tools/locale_griffe_extension.py": {"on_instance"},
+    "tools/locale_site_hook.py": {"on_page_context", "on_page_markdown"},
     "tools/reproducible_artifacts.py": {"make_archive"},
     "tools/documentation_gates.py": {"handle_starttag"},
     "tests/test_pages_site.py": {"handle_starttag"},

@@ -96,6 +96,14 @@ Every translatable unit has one permanent ASCII identifier:
 - terminology entries use `concept:<hierarchical-id>`, for example
   `concept:fuzzy-set.positive-support`.
 
+Task #297 extends the inventory with `module:<qualified-module-name>` for
+module-level English docstrings, including the package root. These are separate
+documentation units, not additional callable API symbols. Projects opt in with
+`includeModuleDocstrings = true`. Module overviews then receive the same source
+hash, translation, and human-review requirements as pages and symbol bodies;
+they cannot silently remain English inside a translated API page. This also
+binds overview-only source edits without changing executable-example counts.
+
 Identifiers survive file moves, title edits, translated headings, and URL
 changes. Identifiers are never translated or recycled for a different concept.
 Qualified Python symbol names follow actual compatibility decisions: a rename
@@ -104,7 +112,7 @@ retired record rather than being rewritten in translation history.
 
 ### Hash-bound translation state
 
-Each page or symbol unit records a SHA-256 hash of a deterministic canonical
+Each page, symbol or opted-in module unit records a SHA-256 hash of a deterministic canonical
 English payload. The payload includes schema version, stable identifier, unit
 kind, public signature when applicable, and newline-normalized English content.
 The exact serialization is defined in the detailed contract.

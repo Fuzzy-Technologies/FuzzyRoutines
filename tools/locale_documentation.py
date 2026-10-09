@@ -15,10 +15,12 @@ from __future__ import annotations
 import argparse
 import ast
 import hashlib
+import inspect
 import json
 import re
 import sys
 import tomllib
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -31,6 +33,7 @@ PAGEIDFORMAT = re.compile(r"^page:[a-z0-9]+(?:[.-][a-z0-9]+)*$")
 SYMBOLIDFORMAT = re.compile(
     r"^symbol:[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+$"
 )
+MODULEIDFORMAT = re.compile(r"^module:[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*$")
 CONCEPTIDFORMAT = re.compile(
     r"^concept:[a-z0-9]+(?:[.-][a-z0-9]+)*$"
 )
@@ -52,7 +55,7 @@ class CanonicalUnit:
 
     Attributes:
         identifier: Stable manifest identifier.
-        kind: Unit kind, either `page` or `symbol`.
+        kind: Unit kind: `page`, `symbol`, or opted-in module documentation.
         sourcePath: Project-relative canonical source path.
         signature: Public symbol signature, or an empty string for a page.
         body: Canonical English Markdown page or Python docstring.
@@ -115,6 +118,52 @@ def CanonicalHash(unit: CanonicalUnit) -> str:
     payload += bodyBytes
 
     return f"sha256:{hashlib.sha256(payload).hexdigest()}"
+
+
+def TranslationHash(text: str) -> str:
+    """Bind review evidence to the exact normalized translation, not just its source."""
+
+    normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+    return f"sha256:{hashlib.sha256(normalized.encode()).hexdigest()}"
+
+
+def ProtectedPageParts(text: str) -> tuple:
+    """Retain executable fences and mathematical expressions across prose translations."""
+
+    fencePattern = re.compile(r"^([ \t]*)(`{3,}|~{3,})([^\n]*)\n(.*?)^\1\2[ \t]*$", re.MULTILINE | re.DOTALL)
+    fences = tuple((match.group(3).strip(), match.group(4).rstrip()) for match in fencePattern.finditer(text))
+    prose = fencePattern.sub("", text)
+    displayPattern = re.compile(r"^\$\$[ \t]*\n(.*?)^\$\$[ \t]*$", re.MULTILINE | re.DOTALL)
+    displays = tuple(re.sub(r"\s+", "", match.group(1)) for match in displayPattern.finditer(prose))
+    prose = displayPattern.sub("", prose)
+    inline = Counter(re.sub(r"\s+", "", match) for match in re.findall(r"(?<![\\$])\$(?!\$)(.+?)(?<!\\)\$", prose))
+    return fences, displays, tuple(sorted(inline.items()))
+
+
+def ProtectedApiContract(text: str) -> tuple:
+    """Keep Google sections and argument, attribute and exception identities intact."""
+
+    sections = []
+    fields = []
+    activeSection = ""
+
+    for line in inspect.cleandoc(text).splitlines():
+        section = re.fullmatch(r"(Args|Returns|Raises|Attributes|Notes|Examples):", line)
+
+        if section:
+            activeSection = section.group(1)
+            sections.append(activeSection)
+
+        elif line and not line[:1].isspace():
+            activeSection = ""
+
+        elif activeSection in {"Args", "Attributes", "Raises"}:
+            field = re.match(r"^    (\*{0,2}[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)(?: \([^)]*\))?:", line)
+
+            if field:
+                fields.append((activeSection, field.group(1)))
+
+    return tuple(sections), tuple(fields)
 
 
 def _PageIdentifier(path: Path, contentRoot: Path) -> str:
@@ -526,6 +575,16 @@ def DiscoverCanonicalUnits(
             )
         )
 
+    for page in projectManifest.get("externalPages", ()):
+        sourcePath = page["sourcePath"]
+        units.append(CanonicalUnit(
+            identifier=page["id"],
+            kind="page",
+            sourcePath=sourcePath,
+            signature="",
+            body=_ReadCanonicalText(projectRoot / sourcePath),
+        ))
+
     coveragePath = projectRoot / projectManifest["apiCoverageManifest"]
     coverage = tomllib.loads(_ReadCanonicalText(coveragePath))
     exclusions = {
@@ -543,6 +602,19 @@ def DiscoverCanonicalUnits(
                 f"{coveragePath}: module {moduleName!r} is outside declared "
                 f"packageNames {projectManifest['packageNames']!r}"
             )
+
+        if projectManifest.get("includeModuleDocstrings", False):
+            syntax = ast.parse(_ReadCanonicalText(sourcePath), filename=str(sourcePath))
+            moduleBody = ast.get_docstring(syntax, clean=False) or ""
+
+            if moduleBody:
+                units.append(CanonicalUnit(
+                    identifier=f"module:{moduleName}",
+                    kind="module",
+                    sourcePath=_Relative(sourcePath, projectRoot),
+                    signature=f"module {moduleName}",
+                    body=moduleBody,
+                ))
 
         if mode == "authored":
             surfaceUnits = _AuthoredUnits(moduleName, sourcePath, projectRoot)
@@ -782,6 +854,8 @@ def _TranslationDiagnostic(
 def ValidateLocales(
     projectRoot: Path = PROJECTROOT,
     projectManifestPath: Path | None = None,
+    *,
+    requireApproved: bool = False,
 ) -> ValidationReport:
     """Validate canonical inventory, source hashes, review state, and glossaries."""
 
@@ -870,7 +944,7 @@ def ValidateLocales(
         sourcePath = record.get("sourcePath", "")
         reviewClass = record.get("reviewClass", "")
 
-        identifierFormat = PAGEIDFORMAT if unit.kind == "page" else SYMBOLIDFORMAT
+        identifierFormat = {"page": PAGEIDFORMAT, "symbol": SYMBOLIDFORMAT, "module": MODULEIDFORMAT}[unit.kind]
 
         if not identifierFormat.fullmatch(identifier):
             diagnostics.append(f"{recordLabel}: invalid stable ID")
@@ -924,6 +998,9 @@ def ValidateLocales(
 
             states[identifier][locale] = state
 
+            if requireApproved and state != "approved":
+                diagnostics.append(f"{recordLabel}: {locale} release requires approved, got {state}")
+
             if state == "missing":
                 if translationPath or reviews:
                     diagnostics.append(
@@ -940,6 +1017,15 @@ def ValidateLocales(
 
             resolvedTranslation = projectRoot / translationPath
 
+            if resolvedTranslation.is_file():
+                translatedBody = _ReadCanonicalText(resolvedTranslation)
+
+                if ProtectedPageParts(inspect.cleandoc(translatedBody)) != ProtectedPageParts(inspect.cleandoc(unit.body)):
+                    diagnostics.append(f"{recordLabel}: {locale} translated code or mathematical expressions differ from canonical source")
+
+                if unit.kind != "page" and ProtectedApiContract(translatedBody) != ProtectedApiContract(unit.body):
+                    diagnostics.append(f"{recordLabel}: {locale} API sections or parameter, attribute, exception names differ from canonical source")
+
             if not translationPath or not resolvedTranslation.is_file():
                 diagnostics.append(
                     _TranslationDiagnostic(
@@ -952,6 +1038,12 @@ def ValidateLocales(
                         "add the locale file or use state=missing",
                     )
                 )
+
+            translationSourceHash = translation.get("sourceHash")
+
+            if translationSourceHash is not None and translationSourceHash != currentHash:
+                states[identifier][locale] = "stale"
+                diagnostics.append(f"{recordLabel}: {locale} translation sourceHash is stale")
 
             if state != "approved":
                 continue
@@ -968,6 +1060,13 @@ def ValidateLocales(
                 reviewLabel = f"{recordLabel}:{locale}:reviews[{reviewIndex}]"
                 role = review.get("role", "")
                 reviewHash = review.get("reviewedSourceHash", "")
+                reviewedTranslationHash = review.get("reviewedTranslationHash", "")
+
+                if resolvedTranslation.is_file() and reviewedTranslationHash != TranslationHash(
+                    _ReadCanonicalText(resolvedTranslation)
+                ):
+                    states[identifier][locale] = "stale"
+                    diagnostics.append(f"{reviewLabel}: translation changed or reviewedTranslationHash is missing")
 
                 if role in reviewedRoles:
                     diagnostics.append(f"{reviewLabel}: duplicate review role {role}")
@@ -1034,6 +1133,7 @@ def ParseArguments(arguments=None):
     parser.add_argument("--project-root", dest="projectRoot", type=Path, default=PROJECTROOT)
     parser.add_argument("--project-manifest", dest="projectManifest", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--require-approved", dest="requireApproved", action="store_true")
 
     return parser.parse_args(arguments)
 
@@ -1092,7 +1192,9 @@ def Main(arguments=None):
 
         return 0
 
-    report = ValidateLocales(options.projectRoot, projectManifestPath)
+    report = ValidateLocales(
+        options.projectRoot, projectManifestPath, requireApproved=options.requireApproved,
+    )
 
     if options.output:
         _WriteReport(report, options.output)

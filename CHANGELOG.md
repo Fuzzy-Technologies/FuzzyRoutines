@@ -40,6 +40,12 @@ Existing users should read the
   index, and installed examples on both supported Python versions. PR and
   manual dry runs cannot reach publication or this post-publication matrix.
 
+- Three-language documentation rendering from the installed package, shared
+  English-labelled figures, stable page routes, and source-bound API fragments.
+  Include mathematical and migration chapters in the required locale corpus.
+  Draft previews remain explicit; stable publication requires current human
+  review bound to both English source and translated text.
+
 - Canonical English quick start and eight worked scenarios explain physical
   inputs, model assumptions, intermediate grades, policy choices, exact versus
   sampled results, and independently verified area moments. Ten reproducible
@@ -84,6 +90,10 @@ for export curation and the
 supported operation-by-operation migration.
 
 #### Fixed
+
+- Task-closing automation reads standalone completion directives only. Context
+  references, negated prose and Markdown examples cannot prematurely close
+  unfinished release tasks after a merge.
 
 - The process test runner counts collection-level skipped modules once across
   parallel/serial phases. Optional retained JUnit evidence supports an exact
