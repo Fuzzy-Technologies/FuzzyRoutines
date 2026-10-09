@@ -90,6 +90,9 @@ def RewriteExternalLinks(text, sourcePath, destination, destinations):
 def AuthoredSymbolPath(unit):
     """Resolve root/facade aliases to their physical Griffe object identity."""
 
+    if unit.kind == "module":
+        return unit.identifier.removeprefix("module:")
+
     modulePath = Path(unit.sourcePath).with_suffix("")
     moduleName = ".".join(modulePath.parts)
     publicPath = unit.identifier.removeprefix("symbol:")

@@ -33,6 +33,8 @@ def test_AliasTranslationsResolveToOnePhysicalObject():
     ):
         assert AuthoredSymbolPath(CanonicalUnit(identifier, "symbol", source, "", "")) == expected
 
+    assert AuthoredSymbolPath(CanonicalUnit("module:fuzzyroutines", "module", "fuzzyroutines/__init__.py", "", "")) == "fuzzyroutines"
+
 
 def test_ExternalPageLinksFollowStableRoutesAndRetainSourceReferences():
     """Moving a source page into the site must not break its mathematical references."""
@@ -81,16 +83,35 @@ def test_GriffeTranslationChangesDocumentationWithoutExecutingOrChangingTheApi(t
 
     griffe = pytest.importorskip("griffe")
     source = tmpPath / "sample.py"
-    source.write_text('raise RuntimeError("project import is forbidden")\n\ndef Calculate(value: float = 1.0) -> float:\n    """Canonical English documentation."""\n    return value\n', encoding="utf-8")
+    source.write_text('"""Canonical module overview."""\nraise RuntimeError("project import is forbidden")\n\ndef Calculate(value: float = 1.0) -> float:\n    """Canonical English documentation."""\n    return value\n', encoding="utf-8")
     translationMap = tmpPath / "translations.json"
-    translationMap.write_text(json.dumps({"sample.Calculate": "Русское описание."}), encoding="utf-8")
+    translationMap.write_text(json.dumps({"sample": "Описание модуля.", "sample.Calculate": "Русское описание."}), encoding="utf-8")
     extensions = griffe.load_extensions({str(PROJECTROOT / "tools/locale_griffe_extension.py"): {"translationMap": str(translationMap)}})
     module = griffe.load("sample", search_paths=[tmpPath], extensions=extensions, allow_inspection=False)
     function = module["Calculate"]
+    assert module.docstring.value == "Описание модуля."
     assert function.docstring.value == "Русское описание."
     assert function.parameters["value"].default == "1.0"
     assert str(function.returns) == "float"
     assert "Canonical English documentation." in function.source
+
+
+def test_OnlyKnownRedundantConstructorSummariesCanBeSuppressed(tmpPath):
+    """New constructor facts must never disappear behind translated class prose."""
+
+    pytest.importorskip("griffe")
+    from tools.locale_griffe_extension import LocaleDocstrings
+
+    translationMap = tmpPath / "translations.json"
+    classPath = "fuzzyroutines._legacy.membership.MFunction"
+    translationMap.write_text(json.dumps({classPath: "Переведённый контракт класса."}), encoding="utf-8")
+    extension = LocaleDocstrings(translationMap=str(translationMap))
+    obj = SimpleNamespace(name="__init__", path=classPath + ".__init__", parent=SimpleNamespace(path=classPath), docstring=SimpleNamespace(value="Initialize and validate a historical membership function."))
+    extension.on_instance(node=None, obj=obj, agent=None)
+    assert obj.docstring.value == ""
+    obj.docstring.value = "Additional constructor constraint."
+    with pytest.raises(ValueError, match="needs explicit translation inventory"):
+        extension.on_instance(node=None, obj=obj, agent=None)
 
 
 def test_OnePageLocaleBuildRendersTranslatedApiAndPreservesStableAnchors(tmpPath):

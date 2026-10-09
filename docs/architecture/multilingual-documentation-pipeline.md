@@ -18,7 +18,8 @@ artifacts; it never grants human approval. Stable tagged publication requires
 every required Russian and Simplified Chinese unit to be current and approved.
 
 The required corpus is all 34 canonical site pages, 16 existing mathematical
-and migration documents, and 193 public symbol units. `externalPages` in the
+and migration documents, 193 public symbol units and 12 module overviews:
+255 independently tracked units per locale. `externalPages` in the
 project manifest binds the existing English source files to stable site routes,
 avoiding a second canonical copy. Development protocols, ADRs, audit records,
 benchmark reports and research provenance remain English engineering records;
@@ -129,6 +130,21 @@ docstrings. An approved translated symbol body is a Markdown fragment under
 the locale API page at build time. It never replaces or shadows the English
 docstring in Python source.
 
+### Module overview IDs
+
+With `includeModuleDocstrings = true`, the inventory also includes the non-empty
+module docstring of every declared API surface, including the package root.
+Its ID is `module:<qualified-name>`; its kind is `module` and its signature is
+the literal `module <qualified-name>`. It uses the same fragment directory,
+hash-bound state and human-review requirements as symbols. Module overviews do
+not increase callable API counts or require artificial executable examples.
+
+Four historical constructors have one-line summaries that repeat their class
+contracts. Rendering suppresses only those exact, explicitly listed summaries
+when the class is translated. An edited or new constructor docstring fails the
+locale build until its translation inventory is addressed; additional contract
+facts cannot silently disappear. Signatures and displayed source stay intact.
+
 ### Concept IDs
 
 Glossary concepts are language-independent and prefixed with `concept:`:
@@ -156,7 +172,7 @@ The versioned payload is:
 ```text
 fuzzy-doc-unit-v1\n
 id:<stable-id>\n
-kind:<page|symbol>\n
+kind:<page|symbol|module>\n
 signature-length:<UTF-8-byte-count>\n
 <public-signature-or-empty>\n
 body-length:<UTF-8-byte-count>\n
@@ -168,6 +184,10 @@ signature is empty. For a symbol, the AST inventory extracts the public signatur
 and English docstring without importing the package. Including the signature
 makes a parameter, default, or return-annotation change stale even when prose
 was not updated.
+
+For a module, the body is its AST docstring and the signature is
+`module <qualified-name>`. An overview-only edit therefore invalidates that
+unit independently of the callable symbols it introduces.
 
 Hashing never reads rendered HTML. Generated output cannot become a source of
 truth.
@@ -235,7 +255,8 @@ reviewedAt = "2026-09-18T00:00:00Z"
 state = "missing"
 ```
 
-Required fields by unit kind are:
+Required fields by unit kind are shown below. Opted-in `module` units use the
+Symbol column, with a `module:` ID and kind `module`; they cannot use `aliasOf`.
 
 | Field                  | Page        | Symbol      | Meaning                                       |
 |------------------------|-------------|-------------|-----------------------------------------------|

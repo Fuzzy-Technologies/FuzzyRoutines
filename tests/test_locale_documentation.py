@@ -11,6 +11,7 @@ from tools.locale_documentation import (
     CanonicalHash,
     CanonicalUnit,
     DiscoverCanonicalUnits,
+    ProtectedApiContract,
     ProtectedPageParts,
     TranslationHash,
     ValidateLocales,
@@ -190,6 +191,18 @@ def test_TranslationProtectionDetectsChangedCodeAndFormulaButAllowsProse():
     assert ProtectedPageParts(source) != ProtectedPageParts(translated.replace("value = 1", "value = 2"))
 
 
+def test_ApiTranslationProtectsIndentedExamplesAndEveryDocumentedField():
+    """Indented docstring examples and contract names need the same protection as pages."""
+
+    source = 'English.\n\nArgs:\n    **parameters: Input.\n\nAttributes:\n    value: Result.\n\nRaises:\n    ValueError: Invalid.\n\nExamples:\n    ```python\n    value = 1\n    ```\n'
+    translated = source.replace("English.", "Русский текст.").replace("Input.", "Параметры.")
+    assert ProtectedApiContract(source) == ProtectedApiContract(translated)
+    assert ProtectedApiContract(source) != ProtectedApiContract(translated.replace("**parameters:", "**параметры:"))
+    assert ProtectedApiContract(source) != ProtectedApiContract(translated.replace("ValueError:", "TypeError:"))
+    assert ProtectedPageParts(source) == ProtectedPageParts(translated)
+    assert ProtectedPageParts(source) != ProtectedPageParts(translated.replace("value = 1", "value = 2"))
+
+
 def test_CurrentGlossariesUseReviewedMathematicalTerminology():
     """Protect the reviewed Russian and Simplified Chinese terminology."""
 
@@ -319,6 +332,25 @@ mode = "authored"
     )
 
     assert CanonicalHash(originalUnit) != CanonicalHash(changedUnit)
+
+
+def test_ModuleOverviewHashIsOptInAndIndependentOfCallableInventory(tmpPath):
+    """Overview-only edits must invalidate translations without inventing API symbols."""
+
+    _PrepareFixture(tmpPath)
+    _Write(tmpPath / "docs/site/api-coverage.toml", 'schemaVersion = 1\n[[surfaces]]\nmodule = "fixture"\nsource = "fixture.py"\nmode = "authored"\n')
+    sourcePath = tmpPath / "fixture.py"
+    _Write(sourcePath, '"""Canonical overview."""\n\ndef Calculate():\n    """Return a value."""\n    return 1\n')
+    projectManifest = {"contentRoot": "docs/site/content", "apiCoverageManifest": "docs/site/api-coverage.toml", "packageNames": ["fixture"]}
+    defaultUnits = DiscoverCanonicalUnits(tmpPath, projectManifest)
+    assert all(unit.kind != "module" for unit in defaultUnits)
+    projectManifest["includeModuleDocstrings"] = True
+    originalUnits = {unit.identifier: unit for unit in DiscoverCanonicalUnits(tmpPath, projectManifest)}
+    assert {unit.identifier for unit in defaultUnits} == set(originalUnits) - {"module:fixture"}
+    sourcePath.write_text(sourcePath.read_text().replace("Canonical overview.", "Changed overview."))
+    changedUnits = {unit.identifier: unit for unit in DiscoverCanonicalUnits(tmpPath, projectManifest)}
+    assert CanonicalHash(originalUnits["module:fixture"]) != CanonicalHash(changedUnits["module:fixture"])
+    assert CanonicalHash(originalUnits["symbol:fixture.Calculate"]) == CanonicalHash(changedUnits["symbol:fixture.Calculate"])
 
 
 def test_ApprovedTranslationRequiresAllHumanReviewRoles(tmpPath):

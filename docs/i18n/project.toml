@@ -5,6 +5,7 @@ schemaVersion = 1
 projectId = "fuzzyroutines"
 projectName = "FuzzyRoutines"
 sourceLocale = "en"
+includeModuleDocstrings = true
 locales = ["en", "ru", "zh-CN"]
 packageNames = ["fuzzyroutines"]
 contentRoot = "docs/site/content"
