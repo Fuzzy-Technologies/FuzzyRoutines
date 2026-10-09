@@ -101,7 +101,7 @@ def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):
         outputRoot / "api" / "versions" / "index.html"
     ).read_text(encoding="utf-8")
 
-    assert "2.0.0.dev0" in versionText
+    assert "2.0.0" in versionText
     assert "No stable 2.x release documentation has been published yet" in versionText
     assert "/api/versions/&lt;version&gt;/" in versionText
 

@@ -9,8 +9,8 @@ SPDX-License-Identifier: Apache-2.0
 
 This is a human-reviewed release gate. Checking a box requires a direct immutable evidence link. An unchecked blocker means the release is not approved.
 
-The selected first stable version is **`2.0.0`**; current metadata remains
-**`2.0.0.dev0`**. The [version rationale](release-version-decision.md),
+The selected first stable version is **`2.0.0`**; the proposed candidate metadata is
+**`2.0.0`**. This branch is prepared for review, not approved for publication. The [version rationale](release-version-decision.md),
 [development changelog](../CHANGELOG.md), and
 [migration notes](migration/1.0.3-to-2.0.0.md) are preparation artifacts, not
 publication approval. [Task #121](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/121)
@@ -103,7 +103,7 @@ does not approve missing Russian or Chinese translations or check final
 release-candidate boxes.
 
 The [multilingual implementation review](audits/2026-10-09-multilingual-review.md)
-records the complete 257-unit Russian/Chinese drafts, canonical corrections,
+records the original 257-unit Russian/Chinese drafts, canonical corrections,
 rendered findings and the remaining hash-bound human reviews. Complete draft
 coverage is not approval.
 
@@ -139,7 +139,7 @@ Complete the work in this order:
    figures, captions, accessible descriptions and installed-example evidence.
 
 [Task #298](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/298)
-owns the final all-module mathematics, meaningful per-module line/branch
+records the completed all-module mathematics, meaningful per-module line/branch
 coverage and process-based parallel-test audit. The historical legacy-only
 coverage report cannot establish coverage adequacy for the modern modules.
 
@@ -151,6 +151,10 @@ it does not mean the stable artifacts have been published to PyPI.
 
 The maintainer target is 2026-10-09 ahead of the conference week. The target
 does not waive any review, correctness, documentation or publication gate.
+
+The [candidate handoff](audits/2026-10-09-release-candidate-handoff.md) lists
+the prepared integration, the three changed locale-review targets, observed
+external-control limits and the remaining execution order.
 
 ## Mandatory evidence
 

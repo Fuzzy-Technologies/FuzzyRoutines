@@ -23,26 +23,26 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-**While 2.0 is in development**, install the modern code from `develop`:
-
-```bash
-python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
-```
-
-This command requires Git and follows a moving development branch. For a
-reproducible experiment, replace `develop` with the full reviewed commit SHA.
-The public modern API used here is available at
-`bd239d2b0972a796c4084498676042bdb7016bed`.
-
-**After stable 2.0.0 has been published through release CI**, the installation
-command will be:
+For the stable 2.0.0 package on PyPI:
 
 ```bash
 python -m pip install fuzzyroutines==2.0.0
 ```
 
-An older 1.x PyPI installation does not provide this modern API. The command
-above is the stable-release route, not evidence that publication has completed.
+Older 1.x releases do not provide this modern API.
+
+For development or a candidate that has not yet been published, install from a
+reviewed Git revision instead:
+
+```bash
+python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
+```
+
+This command requires Git and follows the moving `develop` branch. For a
+reproducible experiment, replace `develop` with the full reviewed commit SHA.
+The public modern API used here is available at
+`bd239d2b0972a796c4084498676042bdb7016bed`. Candidate preparation alone does not
+mean that the PyPI release has been published.
 
 ## Measure and classify in a few lines
 

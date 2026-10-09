@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Совместимость и миграция {#compatibility-and-migration}
 
-- Статус: текущий контракт `develop` для `2.0.0.dev0`
+- Статус: подготовленный контракт кандидата в релиз `2.0.0`
 - Определяющее решение: [ADR-0001](../../../../adr/0001-backward-compatibility-contract.md)
 - Наблюдаемый интерфейс 1.0.3: [снимок исторического публичного API](../../../../compatibility/legacy-public-api-1.0.3.md)
 - Реализованный интерфейс v2: [инвентаризация публичного API](../../../../public-api-documentation-inventory.md)

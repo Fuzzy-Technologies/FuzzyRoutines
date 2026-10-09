@@ -5,25 +5,11 @@ SPDX-License-Identifier: Apache-2.0
 
 # Figure provenance and reproduction
 
-The ten checked-in SVGs are scientific teaching figures produced by
+The eleven checked-in SVGs are scientific teaching figures produced by
 `tools/generate_guide_figures.py` from real scalar API evaluations. They are
 not generated artwork. The generator first executes every assertion in the
-eight worked scenarios, then draws the models and annotations. The scenario
+nine worked scenarios, then draws the models and annotations. The scenario
 code and numerical expectations are in `examples/guide.py`.
-
-## One figure set for all languages
-
-English, Russian, and Simplified Chinese documentation share these same SVGs.
-Text inside the images stays English: titles, axes, legends, annotations, and
-units. Translated pages explain those labels in localized captions, prose, and
-descriptive image alternatives. No translated image variants are generated.
-
-The canonical files are under `docs/site/content/en/assets/figures/`. Locale
-builds may copy them for working relative links; the copies must preserve the
-same bytes. Russian and Chinese pages still require their own language and
-scientific review before publication. See the
-[locale architecture](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/architecture/multilingual-documentation-pipeline.md) for
-the documentation contracts.
 
 ## Reproduce the assets
 
@@ -56,7 +42,7 @@ them. The default example script imports neither.
 
 SVG byte comparison detects stale assets; it does not prove their mathematics.
 `tests/test_guide_figures.py` independently checks all 401 coordinates of each
-of the 26 plotted curves against elementary piecewise or exponential formulas.
+of the 36 plotted curves against elementary piecewise or exponential formulas.
 It also checks scatter coordinates, six sensor bars, thresholds, the four-node
 centroid calculation with exact rational arithmetic, and title/legend layout.
 The reference calculations do not call the library's membership functions.
@@ -83,6 +69,8 @@ Every image has a descriptive Markdown alternative and SVG title/description.
 Its accompanying page gives the numerical result in text, so colour perception
 or image availability is not required to understand the example. Model
 parameters and labels are illustrative rather than empirical calibration data.
+The [Universal Fuzzy Scale](universal-fuzzy-scale.md) figure specifically preserves
+the historical coefficients and compares the historical and modern evaluators.
 
 The plots use [Matplotlib's SVG backend](https://github.com/matplotlib/matplotlib/blob/main/lib/matplotlib/backends/backend_svg.py)
 and [savefig metadata support](https://matplotlib.org/3.11.0/api/_as_gen/matplotlib.pyplot.savefig.html).

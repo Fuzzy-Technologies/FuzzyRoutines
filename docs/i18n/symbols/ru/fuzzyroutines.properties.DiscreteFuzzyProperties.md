@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-Точные производные свойства на явно дискретном универсальном множестве.
+Точные вычисляемые свойства на явно дискретном универсальном множестве.
 
 Attributes:
     universe: Полностью перебранное дискретное универсальное множество.

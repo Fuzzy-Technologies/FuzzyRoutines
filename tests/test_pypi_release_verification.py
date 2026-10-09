@@ -8,7 +8,10 @@
 import copy
 import io
 import json
+import subprocess
+import textwrap
 import urllib.error
+from pathlib import Path
 
 import pytest
 
@@ -158,3 +161,46 @@ def test_MetadataMismatchAndExhaustedVisibilityNeverReportSuccess(tmpPath):
     with pytest.raises(ValueError):
         FetchMetadata("2.0.0", candidates, 12, openUrl=OpenUrl, pause=lambda delay: None)
     assert len(calls) == 1
+
+
+@pytest.mark.parametrize("defect", (None, "extra-wheel", "missing-sdist", "tampered", "existing-upload"))
+def test_PublishingStagesOnlyVerifiedDistributions(tmpPath, defect):
+    """Execute the production staging script without credentials or network access."""
+
+    artifacts, candidates, _ = ReleaseFixture(tmpPath)
+    manifest = "".join(f"{item['sha256']}  {name}\n" for name, item in candidates.items())
+    (artifacts / "SHA256SUMS").write_text(manifest)
+    (artifacts / "reproducibility.json").write_text('{"independent_builds": 2}\n')
+    (artifacts / "source-revision.txt").write_text("approved revision\n")
+    upload = tmpPath / "pypi-upload"
+
+    if defect == "extra-wheel":
+        (artifacts / "unexpected.whl").write_bytes(b"unapproved wheel")
+
+    elif defect == "missing-sdist":
+        (artifacts / "fuzzyroutines-2.0.0.tar.gz").unlink()
+
+    elif defect == "tampered":
+        (artifacts / "fuzzyroutines-2.0.0-py3-none-any.whl").write_bytes(b"tampered")
+
+    elif defect == "existing-upload":
+        upload.mkdir()
+        (upload / "unapproved.whl").write_bytes(b"stale artifact")
+
+    before = {path.name: path.read_bytes() for path in artifacts.iterdir()}
+    workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/release-pypi.yml").read_text()
+    preparation = workflow.split("- name: Prepare distribution-only upload directory\n", 1)[1]
+    script = textwrap.dedent(preparation.split("run: |\n", 1)[1].split("      - name:", 1)[0])
+    publication = workflow.split("- name: Publish with PyPI Trusted Publishing\n", 1)[1].split("\n  verify-published:", 1)[0]
+    assert "packages-dir: pypi-upload" in publication, "Publisher must consume the isolated distribution directory"
+    result = subprocess.run(["bash", "-c", script], cwd=tmpPath, capture_output=True, text=True, check=False)
+    assert {path.name: path.read_bytes() for path in artifacts.iterdir()} == before, "Staging must preserve all original evidence"
+
+    if defect is not None:
+        assert result.returncode != 0, f"Unsafe release staging must fail: {defect}"
+        assert not upload.exists() or {path.name for path in upload.iterdir()} == {"unapproved.whl"}, "Failed staging must not prepare an upload"
+
+    else:
+        assert result.returncode == 0, result.stderr
+        assert {path.name for path in upload.iterdir()} == set(candidates), "PyPI must receive only the wheel and sdist"
+        assert all((upload / name).read_bytes() == before[name] for name in candidates), "Staging must retain the approved bytes"

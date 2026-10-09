@@ -210,10 +210,21 @@ jobs:
           name: trusted-pypi-distributions
           path: dist
 
+      - name: Prepare distribution-only upload directory
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          (cd dist && sha256sum --check SHA256SUMS)
+          test "$(find dist -maxdepth 1 -name '*.whl' -type f | wc -l)" -eq 1
+          test "$(find dist -maxdepth 1 -name '*.tar.gz' -type f | wc -l)" -eq 1
+          mkdir pypi-upload
+          cp dist/*.whl dist/*.tar.gz pypi-upload/
+
       - name: Publish with PyPI Trusted Publishing
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: dist
+          packages-dir: pypi-upload
 
   verify-published:
     name: Verify PyPI installation on Python ${{ matrix.python-version }}

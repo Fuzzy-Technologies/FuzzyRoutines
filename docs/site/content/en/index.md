@@ -8,13 +8,10 @@ SPDX-License-Identifier: Apache-2.0
 ![FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory](assets/brand/fuzzyroutines-alice.png){ .fr-project-art }
 
 Start with the [quick start](quick-start.md) to install the modern API and
-classify a physical measurement. The [eight worked scenarios](guides/index.md)
+classify a physical measurement. The [nine worked scenarios](guides/index.md)
 explain inputs, policies, calculations, expected results, and figures. Browse
 the [membership gallery](guides/membership-families.md) to choose a curve, or
 use the [practical API recipes](guides/api-recipes.md) for smaller operations.
-
-The canonical English API reference is generated from installed-package Python
-annotations and English Google-style docstrings using static Griffe discovery.
 
 Start with the [modern API](api/modern/index.md) for new code. Use the
 [historical compatibility facade](api/legacy/index.md) only when maintaining
@@ -32,6 +29,3 @@ $$
 \mu_{A \setminus B}(x)
 = T\left(\mu_A(x), N\left(\mu_B(x)\right)\right).
 $$
-
-The rendered formula and qualified links above are part of the strict build
-contract.

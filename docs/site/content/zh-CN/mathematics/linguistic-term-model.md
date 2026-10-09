@@ -54,7 +54,7 @@ LinguisticScale((term1, term2, ...))
 此规则不适用于零容差或有理数依据。
 
 即使没有匹配，完整隶属度元组仍可用。坐标必须属于每个术语的论域；
-部分分数向量会明确失败。这些语义由
+若无法得到完整的隶属度向量，调用会显式报错。这些语义由
 [ADR-0013](../../../../adr/0013-linguistic-fuzzification-policy.md) 固定。
 
 ## 尺度采样诊断 {#sampled-scale-diagnostics}

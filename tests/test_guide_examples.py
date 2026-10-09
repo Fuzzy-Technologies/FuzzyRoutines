@@ -23,7 +23,7 @@ import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 VERIFIER = runpy.run_path(str(PROJECT_ROOT / "tools" / "verify_installed_executables.py"))
-SCENARIOS = ("temperature", "risk", "sensors", "alarm", "alpha-cuts", "centroid", "scale-audit", "custom")
+SCENARIOS = ("temperature", "risk", "sensors", "alarm", "alpha-cuts", "centroid", "scale-audit", "custom", "universal-fuzzy-scale")
 CANONICAL_EXAMPLES = VERIFIER["LoadCanonicalGuideExamples"]()
 
 
@@ -46,7 +46,7 @@ def RunPython(arguments, workingDirectory):
 
 
 def test_AllWorkedScenariosVerifyIndependentOraclesWithoutFiles(tmpPath):
-    """Execute all eight calculations and check key mathematical and policy outcomes."""
+    """Execute all nine calculations and check key mathematical and policy outcomes."""
 
     initialEntries = set(tmpPath.iterdir())
     result = RunPython([str(PROJECT_ROOT / "examples" / "guide.py")], tmpPath)
@@ -63,6 +63,9 @@ def test_AllWorkedScenariosVerifyIndependentOraclesWithoutFiles(tmpPath):
     assert report["scale-audit"]["gapSamples"] == [0, 4, 5, 6, 10]
     assert report["custom"]["originalHeight"] == 0.5
     assert report["custom"]["normalizedHeight"] == 1
+    assert report["universal-fuzzy-scale"]["gridSamples"] == 1001
+    assert report["universal-fuzzy-scale"]["maximumOracleError"] < 1e-12
+    assert not report["universal-fuzzy-scale"]["cautiousIsMatch"]
     assert set(tmpPath.iterdir()) == initialEntries
 
 

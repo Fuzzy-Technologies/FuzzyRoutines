@@ -27,9 +27,9 @@ SPDX-License-Identifier: Apache-2.0
 ## At a glance
 
 | Area              | Current contract                                                                                                                          |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | Runtime           | CPython 3.13 and 3.14                                                                                                                     |
-| Package version   | `2.0.0.dev0`; not yet a stable release promise                                                                                            |
+| Package version   | `2.0.0` candidate; publication awaits final approval                                                                                      |
 | Modern API        | Root exports from [`fuzzyroutines`](docs/public-api-documentation-inventory.md#modern-package-exports)                                    |
 | Compatibility API | [`fuzzyroutines.FuzzyRoutines`](docs/COMPATIBILITY.md) preserves the ADR-protected contract and documents the wider observed 1.0.3 facade |
 | API reference     | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package         |
@@ -63,8 +63,9 @@ python -m pip install .
 
 The [quick start](docs/site/content/en/quick-start.md) explains the development
 and future stable PyPI installation routes and classifies a 24 °C measurement.
-Explore [eight worked scenarios](docs/site/content/en/guides/index.md), with
-independent numerical checks and ten reproducible scientific figures, or
+Explore [nine worked scenarios](docs/site/content/en/guides/index.md), with
+independent numerical checks and eleven reproducible scientific figures, or
+reconstruct the [historical Universal Fuzzy Scale](docs/site/content/en/guides/universal-fuzzy-scale.md), or
 browse the [membership gallery](docs/site/content/en/guides/membership-families.md).
 The [computation diagrams](docs/site/content/en/guides/workflow.md) explain the
 different workflows; the [public example index](docs/site/content/en/guides/example-index.md)
@@ -75,7 +76,7 @@ every scenario without NumPy, Matplotlib, network access, or file creation.
 ## Choose the API surface
 
 | Surface                  | Use it for                                                        | Start here                                                                                 |
-| ------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+|--------------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
 | Modern typed API         | New code with explicit universes, policies, and evidence strength | [Modern API inventory](docs/public-api-documentation-inventory.md#modern-package-exports)  |
 | Historical compatibility | Existing software written against the 1.0.3-style facade          | [Protected and observed surfaces](docs/COMPATIBILITY.md#adr-protected-historical-contract) |
 | Migration boundary       | Moving one supported scenario at a time                           | [Canonical migration guide](docs/COMPATIBILITY.md#migration-examples)                      |
@@ -124,7 +125,7 @@ names and corrected historical defects are tracked in the
 ## Core contracts
 
 | Concept                     | Mathematical contract                                                                          | Architecture decision                                                              |
-| --------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+|-----------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
 | Membership functions        | [Families, formulas, and parameter domains](docs/mathematics/membership-function-contracts.md) | [ADR-0003](docs/adr/0003-membership-function-contracts.md)                         |
 | Universes and support       | [Universe, support, core, boundary, and height](docs/mathematics/universe-support-contract.md) | [ADR-0002](docs/adr/0002-universe-support-semantics.md)                            |
 | Negations and scalar norms  | [Formula and algorithm invariants](docs/mathematics/source-algorithm-invariants.md)            | [ADR-0004](docs/adr/0004-operator-and-negation-contracts.md)                       |
@@ -136,20 +137,20 @@ names and corrected historical defects are tracked in the
 
 ## Documentation map
 
-| Need                                  | Canonical source                                                                                                                                    |
-|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| What exists now                       | [Current implementation status](docs/current-status.md)                                                                                             |
-| Audited contracts and release limits  | [Project readiness audit](docs/audits/2026-10-05-project-audit.md)                                                                                  |
-| Public symbols                        | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                  |
-| Static types and custom callbacks     | [Public modern typing](docs/public-typing.md)                                                                                                       |
-| Mathematical definitions              | [`docs/mathematics`](docs/mathematics/)                                                                                                             |
-| Compatibility and migration           | [Canonical guide](docs/COMPATIBILITY.md) · [Corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md)                                       |
-| Release changes and version decision  | [Development changelog](CHANGELOG.md) · [1.0.3 migration](docs/migration/1.0.3-to-2.0.0.md) · [Version rationale](docs/release-version-decision.md) |
-| Benchmarks and performance claims     | [Results](docs/BENCHMARKS.md) · [Protocol](docs/performance/benchmark-reproducibility-protocol.md)                                                  |
-| Tests, tools, examples, and artifacts | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                             |
-| Contribution and evidence rules       | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                  |
-| Optional vectorization strategy       | [ADR-0015](docs/adr/0015-optional-vectorized-execution-strategy.md) · [Scalar/array evidence](docs/performance/vectorized-membership-comparison.md) |
-| API documentation architecture        | [ADR-0010](docs/adr/0010-api-documentation-architecture.md) · [Reproducible build](docs/site/README.md)                                             |
+| Need                                    | Canonical source                                                                                                                                      |
+|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| What exists now                         | [Current implementation status](docs/current-status.md)                                                                                               |
+| Audited contracts and release limits    | [Project readiness audit](docs/audits/2026-10-05-project-audit.md)                                                                                    |
+| Public symbols                          | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                    |
+| Static types and custom callbacks       | [Public modern typing](docs/public-typing.md)                                                                                                         |
+| Mathematical definitions                | [`docs/mathematics`](docs/mathematics/)                                                                                                               |
+| Compatibility and migration             | [Canonical guide](docs/COMPATIBILITY.md) · [Corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md)                                         |
+| Release changes and version decision    | [Development changelog](CHANGELOG.md) · [1.0.3 migration](docs/migration/1.0.3-to-2.0.0.md) · [Version rationale](docs/release-version-decision.md)   |
+| Benchmarks and performance claims       | [Results](docs/BENCHMARKS.md) · [Protocol](docs/performance/benchmark-reproducibility-protocol.md)                                                    |
+| Tests, tools, examples, and artifacts   | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                               |
+| Contribution and evidence rules         | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                    |
+| Optional vectorization strategy         | [ADR-0015](docs/adr/0015-optional-vectorized-execution-strategy.md) · [Scalar/array evidence](docs/performance/vectorized-membership-comparison.md)   |
+| API documentation architecture          | [ADR-0010](docs/adr/0010-api-documentation-architecture.md) · [Reproducible build](docs/site/README.md)                                               |
 
 ## Development
 

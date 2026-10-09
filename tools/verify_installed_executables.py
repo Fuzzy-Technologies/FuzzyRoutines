@@ -180,7 +180,7 @@ def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT):
 
 
 def RunCanonicalGuideExamples(artifactDirectory, environment):
-    """Execute every English snippet and all eight scenarios against an installed artifact."""
+    """Execute every English snippet and all nine scenarios against an installed artifact."""
 
     results = {}
     for name, snippet in LoadCanonicalGuideExamples().items():
@@ -197,7 +197,7 @@ def RunCanonicalGuideExamples(artifactDirectory, environment):
         artifactDirectory,
         environment,
     )
-    expectedScenarios = {"temperature", "risk", "sensors", "alarm", "alpha-cuts", "centroid", "scale-audit", "custom"}
+    expectedScenarios = {"temperature", "risk", "sensors", "alarm", "alpha-cuts", "centroid", "scale-audit", "custom", "universal-fuzzy-scale"}
     if set(report) != expectedScenarios:
         raise RuntimeError("worked-scenarios did not execute the complete documented scenario set")
     results["worked-scenarios"] = sorted(report)

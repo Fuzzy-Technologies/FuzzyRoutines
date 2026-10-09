@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Run eight worked scalar scenarios with independent numerical assertions.
+"""Run nine worked scalar scenarios with independent numerical assertions.
 
 The default executes every scenario and prints deterministic JSON. Use
 ``--scenario NAME`` to select one. No files, network, plotting packages, or
@@ -18,6 +18,7 @@ from math import fsum, isclose
 
 from fuzzyroutines import (
     AlphaCut,
+    Bell,
     Centroid,
     ComparisonPolicy,
     Complement,
@@ -28,6 +29,7 @@ from fuzzyroutines import (
     EqualOnDomain,
     FuzzificationPolicy,
     Height,
+    Hyperbolic,
     IncludedOnDomain,
     IntegrationDomain,
     Intersection,
@@ -45,6 +47,7 @@ from fuzzyroutines import (
     Triangle,
     Union,
 )
+from fuzzyroutines.FuzzyRoutines import UniversalFuzzyScale
 
 
 def ClosedUniverse(left: float, right: float) -> ContinuousUniverse:
@@ -320,6 +323,92 @@ def CustomModel() -> dict:
     }
 
 
+def UniversalScale() -> LinguisticScale:
+    """Reconstruct the historical classifier on its intended normalized range."""
+
+    universe = ClosedUniverse(0, 1)
+    models = (
+        ("Min", Hyperbolic(8, 20, 0)),
+        ("Low", Bell(0.17, 0.23, 0.34)),
+        ("Med", Bell(0.34, 0.40, 0.60)),
+        ("High", Bell(0.60, 0.66, 0.77)),
+        ("Max", SShoulder(0.77, 0.95)),
+    )
+
+    return LinguisticScale(tuple(
+        LinguisticTerm(name, ScalarFuzzySet(universe, model))
+        for name, model in models
+    ))
+
+
+def UniversalReference(coordinate: float) -> tuple[float, ...]:
+    """Calculate grades independently with normalized quadratic ramps."""
+
+    def Ramp(left: float, right: float) -> float:
+        """Evaluate the elementary piecewise quadratic S shape."""
+
+        fraction = max(0.0, min(1.0, (coordinate - left) / (right - left)))
+
+        if fraction <= 0.5:
+            return 2 * fraction**2
+
+        return 1 - 2 * (1 - fraction)**2
+
+    return (
+        1 / (1 + (8 * coordinate)**20),
+        min(Ramp(0.17, 0.23), 1 - Ramp(0.34, 0.40)),
+        min(Ramp(0.34, 0.40), 1 - Ramp(0.60, 0.66)),
+        min(Ramp(0.60, 0.66), 1 - Ramp(0.77, 0.83)),
+        Ramp(0.77, 0.95),
+    )
+
+
+def HistoricalUniversalScale() -> dict:
+    """Verify migration grades, labels, tails and explicit confidence policy."""
+
+    historical = UniversalFuzzyScale()
+    modern = UniversalScale()
+    policy = FuzzificationPolicy(tiePolicy="last")
+    coordinates = tuple(index / 1000 for index in range(1001))
+    error = 0.0
+
+    for coordinate in coordinates:
+        expected = UniversalReference(coordinate)
+        previous = tuple(level["fSet"].mFunction.mju(coordinate) for level in historical.levels)
+        result = modern.Fuzzify(coordinate, policy)
+        current = tuple(item.grade for item in result.memberships)
+
+        for grades in (previous, current):
+            for observed, reference in zip(grades, expected, strict=True):
+                CheckClose(observed, reference, tolerance=1e-12)
+                error = max(error, abs(observed - reference))
+
+        assert result.selectedTerms[0].name == historical.Fuzzy(coordinate)["name"]
+
+    selected = {str(x): modern.Fuzzify(x, policy).selectedTerms[0].name for x in (0, 0.2, 0.4, 0.7, 0.9, 1)}
+    assert tuple(selected.values()) == ("Min", "Low", "Med", "High", "Max", "Max")
+    CheckClose(modern.Fuzzify(0.125).confidence, 0.5)
+    CheckClose(modern.Fuzzify(0.17).confidence, 1 / (1 + 1.36**20))
+    tail = modern.terms[0].fuzzySet.Membership(0.5)
+    CheckClose(tail, 1 / (1 + 4**20), tolerance=1e-15)
+    assert tail > 0, "Historical supportSet must not truncate the Min tail."
+    cautious = modern.Fuzzify(0.17, FuzzificationPolicy(minimumConfidence=0.1))
+    assert not cautious.isMatch, "A confidence threshold must reject the weakly covered coordinate."
+    equality = modern.Fuzzify(0.125, FuzzificationPolicy(minimumConfidence=0.5))
+    assert not equality.isMatch, "Equality with minimumConfidence is a no-match."
+
+    return {
+        "selected": selected,
+        "gridSamples": len(coordinates),
+        "maximumOracleError": error,
+        "gradesAt020": UniversalReference(0.2),
+        "confidenceAt017": modern.Fuzzify(0.17).confidence,
+        "minTailAt050": tail,
+        "cautiousIsMatch": cautious.isMatch,
+        "tiePolicy": policy.tiePolicy,
+    }
+
+
 SCENARIOS = {
     "temperature": TemperatureComfort,
     "risk": RiskAbstention,
@@ -329,6 +418,7 @@ SCENARIOS = {
     "centroid": CentroidAndSampling,
     "scale-audit": ScaleAudit,
     "custom": CustomModel,
+    "universal-fuzzy-scale": HistoricalUniversalScale,
 }
 
 

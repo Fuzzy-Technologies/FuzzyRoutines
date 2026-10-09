@@ -19,24 +19,21 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-
-**在 2.0 开发期间**，从 `develop` 安装现代代码：
-
-```bash
-python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
-```
-
-
-此命令需要 Git，并跟随持续变化的开发分支。为了复现实验，请将 `develop` 替换为已审阅提交的完整 SHA。这里使用的现代公共 API 已在提交 `bd239d2b0972a796c4084498676042bdb7016bed` 中提供。
-
-**稳定版 2.0.0 通过发布 CI 正式发布后**，安装命令将是：
+对于 PyPI 上的稳定版 2.0.0 软件包：
 
 ```bash
 python -m pip install fuzzyroutines==2.0.0
 ```
 
+较早的 1.x 版本不提供此现代 API。
 
-PyPI 上较早的 1.x 版本不提供此现代 API。上面的命令描述稳定版的安装方式，并不表示发布已经完成。
+开发时，或候选版本尚未发布时，请改为从已审阅的 Git 修订安装：
+
+```bash
+python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
+```
+
+此命令需要 Git，并跟随持续变化的 `develop` 分支。为了复现实验，请将 `develop` 替换为已审阅提交的完整 SHA。这里使用的现代公共 API 已在提交 `bd239d2b0972a796c4084498676042bdb7016bed` 中提供。准备好候选版本本身并不表示 PyPI 发布已经完成。
 
 ## 用几行代码完成测量与分类 {#measure-and-classify-in-a-few-lines}
 

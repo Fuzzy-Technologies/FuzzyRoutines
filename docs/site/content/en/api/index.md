@@ -12,9 +12,8 @@ FuzzyRoutines exposes two intentionally distinct surfaces:
 - The [historical API](legacy/index.md) preserves the observed 1.0.3 facade for
   compatibility.
 
-Public module, class, function, method, property, signature, and source views
-are generated from the installed package. Search covers this complete English
-reference.
+Use search to find modules, classes, functions, methods, and properties. Each
+API entry includes its signature and a link to the source.
 
 The [public example index](../guides/example-index.md) maps each supported
 symbol to an executed guide block. Start with [computation paths](../guides/workflow.md)

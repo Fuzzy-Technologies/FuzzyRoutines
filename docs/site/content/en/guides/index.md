@@ -16,9 +16,10 @@ Then choose the question that matches your application:
 6. [Centroids and numerical accuracy](centroid.md): verify area moments independently.
 7. [Scale audit](scale-audit.md): reveal ties, gaps, and unbalanced partitions.
 8. [Custom quality model](custom.md): use a typed callable and normalize discrete data.
+9. [Historical Universal Fuzzy Scale](universal-fuzzy-scale.md): preserve the five original levels and reconstruct them with the modern API.
 
 Every scenario defines its units or score range, shows intermediate values,
-and asserts an expected result. Parameters are illustrative expert choices.
+and asserts an expected result. Parameters are illustrative expert choices, except for the explicitly frozen historical preset.
 These examples demonstrate fuzzy calculations, not a validated controller,
 trained statistical model, or complete rule-based inference engine.
 

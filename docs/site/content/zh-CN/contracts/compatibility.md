@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 兼容性与迁移 {#compatibility-and-migration}
 
-- 状态：`2.0.0.dev0` 的当前 `develop` 契约
+- 状态：为 `2.0.0` 发布候选准备的契约
 - 主导决策：[ADR-0001](../../../../adr/0001-backward-compatibility-contract.md)
 - 已观察的 1.0.3 接口：[历史公共 API 快照](../../../../compatibility/legacy-public-api-1.0.3.md)
 - 已实现的 v2 接口：[公共 API 清单](../../../../public-api-documentation-inventory.md)
