@@ -36,6 +36,11 @@ Existing users should read the
 
 #### Added
 
+- A dedicated Universal Fuzzy Scale guide preserves the five historical
+  levels, coefficients and raw membership curves, reconstructs them with the
+  modern API, and verifies grade/classification parity on 1001 coordinates.
+  The comparison plot, boundary cases and tie-policy notes are included in
+  English, Russian and Simplified Chinese.
 - Three-language documentation rendering from the installed package, shared
   English-labelled figures, stable page routes, and source-bound API fragments.
   Include mathematical and migration chapters in the required locale corpus.
@@ -46,9 +51,9 @@ Existing users should read the
   index, and installed examples on both supported Python versions. PR and
   manual dry runs cannot reach publication or this post-publication matrix.
 
-- Canonical English quick start and eight worked scenarios explain physical
+- Canonical English quick start and nine worked scenarios explain physical
   inputs, model assumptions, intermediate grades, policy choices, exact versus
-  sampled results, and independently verified area moments. Ten reproducible
+  sampled results, and independently verified area moments. Eleven reproducible
   SVG figures and a membership gallery accompany the calculations; plotting
   dependencies remain documentation-only. Clean-install CI executes every
   canonical English Python snippet and the complete scenario script. Independent
@@ -60,7 +65,7 @@ Existing users should read the
   canonical root aliases rather than counting imports. Result-record recipes,
   three computation diagrams and a tenth SVG comparing conjunction/disjunction
   complete the canonical English example routes; scientific curve tests now
-  check 26 plotted curves against independent references.
+  check 36 plotted curves against independent references.
 - Curated modern root exports provide immutable membership factories and a
   structural custom-callable protocol, explicit continuous/discrete universes,
   numerical integration domains, immutable scalar sets, and scalar policies.

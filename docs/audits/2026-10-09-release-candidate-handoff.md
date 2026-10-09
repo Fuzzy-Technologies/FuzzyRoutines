@@ -3,123 +3,86 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# 2.0.0 candidate handoff — 2026-10-09
+# 2.0.0 candidate handoff — updated 2026-10-10
 
-## Prepared result
+## Integrated candidate
 
-The draft integration candidate includes the merged mathematical audit (#303),
-translations (#304), task-closing repair (#305) and PyPI verification (#306).
-It was refreshed from `develop` at
-`ec9baf333dab0aed7e6e47f57b3e1575be6dbba5` after all nine workflows passed
-on #306's conflict-resolution head. That integration preserved the preceding
-candidate's code, version metadata and translated text byte-for-byte. Subsequent
-finalization changes are listed below. The candidate
-proposes `2.0.0` package metadata and the stable classifier, aligns active
-version/compatibility/migration records and clean-install assertions, and
-puts the stable pip installation route first in all three quick starts.
-The development installation route remains available for an unpublished
-candidate. Historical benchmark measurements and reproducibility fixtures
-retain their original version; future optional benchmark runs read the actual
-source metadata instead of a hard-coded development version.
+[PR #307](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/307) was
+accepted by the maintainer and squash-merged into `develop` at
+[`45c9db375033437fc01e73789fbac968e730f0d0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/45c9db375033437fc01e73789fbac968e730f0d0).
+The maintainer explicitly requested removal of Draft and squash merge on
+2026-10-10. That integration is complete; it is not an outstanding approval.
 
-No tag, branch promotion, GitHub Release or PyPI publication has occurred.
-The changelog entry remains a proposal with a clearly identified preparation
-date. Finalize it against the approved revision and actual publication date.
-The prerequisite PRs are merged. The candidate remains draft pending the
-release prerequisites below. New candidate CI must cover the refreshed head;
-earlier green revisions do not substitute.
+The candidate includes the original mathematical audit, complete translations,
+post-publication package verification, the Universal Fuzzy Scale example and
+comparison plot, editorial corrections, portable mathematical notation and
+distribution-only PyPI staging. The corpus contains 258 units per locale,
+nine scenarios, 31 executable guide blocks and eleven scientific figures.
+The historical scale retains its original coefficients and classification
+behavior on the verified 1001-point grid.
 
-## Documentation review target
+## Verified integration evidence
 
-There are 258 required units per language: 53 pages, 193 public symbol
-contracts and 12 module overviews. Russian and Chinese translations are complete.
-On 2026-10-10 at 01:30 Europe/Moscow, maintainer Timur Gilmullin provisionally
-approved the Russian documentation at candidate `86f4afc` while noting awkward
-wording. Later editorial fixes and the new Universal Fuzzy Scale guide are
-separate changes for review.
-Record that maintainer acceptance without inventing separate specialist review
-roles or extending it to Chinese. Per-unit review records remain unchanged;
-the statement alone does not satisfy every ADR-0011 release requirement.
-Polish Russian wording in a subsequent reviewed change and revalidate affected
-translation hashes. This version transition changes three
-canonical user units and their two translations:
+All seven push workflows passed on the merged revision:
 
-- `page:quick-start`;
-- `page:migration.1.0.3-to-2.0.0`;
-- `page:contracts.compatibility`.
+- [Mathematics, supported runtimes and serial/process parity](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38004590789).
+- [Package reproducibility and clean installs](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38004590808).
+- [Documentation, source links and installed examples](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38004590831).
+- [Three-language API reference](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38004590734).
+- [Deterministic correctness gate](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38004590760).
+- [Public typing](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38004590741).
+- [Optional vectorized parity](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38004590736).
 
-Their current canonical hashes are recorded in `docs/i18n/units.toml`. The
-updated translations retain the code, formulas and original stable anchors.
-Review these candidate texts, not just the earlier #304 versions. An actual
-editorial and technical/mathematical reviewer must approve the applicable
-source and translation hashes under ADR-0011. The same human may only be
-recorded for roles they actually performed; AI assistance is not such evidence.
+The final PR head also passed all nine PR workflows before the authorized merge.
+These links certify their recorded revision; later changes receive their own CI.
 
-`python -m tools.locale_documentation validate` passes draft freshness and
-protected-content checks. The stable `--require-approved` gate intentionally
-remains blocked until the required human records exist. Public locale routes
-retain explicit fallbacks during that state; use the PR's labelled preview
-artifact to review the complete translations.
+## Remaining documentation acceptance
 
-## Parallel finalization changes — 2026-10-10
+The maintainer accepted the integrated candidate after reviewing corrections.
+That decision is recorded without claiming an independent native-Chinese or
+mathematical specialist review. The existing ADR-0011 contract still requires
+explicit editorial and applicable technical/mathematical responsibility, tied
+to each English-source and translation hash. One human may hold several roles;
+separate reviewers or line-by-line approval are not required.
 
-- Russian and Chinese editorial passes correct concrete terminology and prose;
-  their audit records explicitly identify AI assistance and invariant checks.
-- The ninth worked scenario reconstructs the historical Universal Fuzzy Scale
-  with modern scalar APIs, preserves all five original membership functions and
-  classification behavior on a 1001-point grid, and explains the historical
-  support-window and floating-point tie subtleties. One shared English-labelled
-  comparison SVG brings the scientific figure set to eleven images.
-- The PyPI job now stages only the verified wheel and source archive for upload.
-  Hash/provenance sidecars remain evidence and cannot be mistaken for packages.
-  Offline tests execute the actual staging shell on valid and invalid inputs.
-- Mathematical audit Task #298 is complete; publication remains #299/#121.
+All Russian and Chinese units are current drafts. The ordinary locale validator
+passes; `--require-approved` reports 516 draft units. No missing translation
+implementation is implied by that count. The remaining action is recording real
+review responsibility and acceptance for the current corpus, not translating it
+again or creating further tasks.
 
-These changes remain in the existing release PR #307. No extra planning issues
-were introduced. Current CI evidence belongs in that PR after the final push.
+Browser inspection is tracked in existing Task #297. The local Chromium process
+cannot start because runtime sockets are denied. The existing API-reference CI
+now runs the browser inspection on its hosted runner and uploads desktop/mobile
+screenshots and a machine report for actual review. CI execution and screenshot
+inspection must succeed before the rendered acceptance is checked.
 
-## Publishing controls to verify
+## Remaining publication configuration
 
-The repository ruleset API, including inherited rules, returned an empty list
-during this session. This is not evidence of a protected `v*` release-tag
-ruleset. The GitHub connector excludes environment and Actions-variable
-administration endpoints, so this session cannot certify their current values.
-The private PyPI publisher binding has not been inspected either.
+PyPI ownership is confirmed in
+[Task #115](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/115#issuecomment-5663895446).
+Task #116 explicitly left production configuration to an administrator; its
+closure certifies the workflow implementation, not the external settings.
+The current repository ruleset response is empty. Environment reviewers,
+Actions variables and the private Trusted Publisher binding are not exposed by
+the available GitHub connector and have not been certified.
 
-An authorized maintainer must verify the actual configuration described in
-the [publishing runbook](../trusted-publishing-runbook.md):
+Use the [publishing runbook](../trusted-publishing-runbook.md) to verify:
 
-- a `v*` tag ruleset restricting creation to release maintainers and preventing
-  routine tag update/deletion;
-- environment `pypi`, required reviewers and deployment restrictions for
-  protected release tags;
-- PyPI Trusted Publisher: owner `Fuzzy-Technologies`, repository
-  `FuzzyRoutines`, workflow `release-pypi.yml`, environment `pypi`;
-- repository variable `PYPI_TRUSTED_PUBLISHING_ENABLED=true`, enabled only
-  after the other controls are verified.
+- protected `v*` tags and environment `pypi` with deployment review;
+- PyPI publisher owner `Fuzzy-Technologies`, repository `FuzzyRoutines`,
+  workflow `release-pypi.yml`, environment `pypi`;
+- `PYPI_TRUSTED_PUBLISHING_ENABLED=true`, enabled after those controls.
 
-Record configuration evidence in Task #299 or #121. Workflow source and a
-successful PR dry run cannot establish these settings. No long-lived token or
-manual upload is an alternative to the approved OIDC workflow.
+## Execution order
 
-## Final execution order
+1. Finish hosted-browser evidence and the existing locale approval records.
+2. Verify actual external publishing controls and record final release approval.
+3. Promote the verified candidate from `develop` to `master`, using the actual
+   publication date in the changelog, then create annotated tag `v2.0.0`.
+4. Let protected GitHub Actions publish the approved wheel and sdist with OIDC.
+5. Require both supported-Python post-publication jobs to verify PyPI hashes,
+   clean installation and installed scenarios; attach evidence to the release.
+6. Close #299/#121 and their parent features only after actual publication.
 
-1. Prerequisite integration is complete: #304, #305 and #306 are merged and the
-   candidate includes the resulting `develop` without mathematical changes.
-2. Complete the real hash-bound editorial and scientific reviews on the exact
-   candidate texts. Record findings and resolutions, not inferred approvals.
-3. Attach exact-candidate CI evidence: full supported-runtime suite, per-module
-   coverage, sequential/process outcome parity, installed examples, complete
-   locale builds and reproducible wheel/sdist hashes.
-4. Verify the external publishing controls and complete the human release
-   readiness decision in #121. Review/promote the final source through the
-   protected branch process and use the actual release date in the changelog.
-5. Create the approved annotated `v2.0.0` tag on the verified commit and review
-   the `pypi` environment deployment. PR and manual workflow runs cannot publish.
-6. Require both post-publication Python jobs to pass: downloaded PyPI artifacts
-   must match approved bytes, hash-pinned pip installation must succeed, and
-   installed quick start/scenarios/compatibility examples must execute.
-7. Attach the tag, workflow, provenance, artifact hashes, PyPI URL and verified
-   documentation link to the final GitHub Release and #121.
-
-These remaining items are explicit release prerequisites, not completed boxes.
+No release tag, `master` promotion, GitHub Release or PyPI upload has occurred.
