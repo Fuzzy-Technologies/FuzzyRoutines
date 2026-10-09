@@ -214,3 +214,67 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist
+
+  verify-published:
+    name: Verify PyPI installation on Python ${{ matrix.python-version }}
+    if: needs.publish-pypi.result == 'success'
+    needs: publish-pypi
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13", "3.14"]
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out the approved release evidence
+        uses: actions/checkout@v5
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download the exact approved candidates
+        uses: actions/download-artifact@v5
+        with:
+          name: trusted-pypi-distributions
+          path: dist
+
+      - name: Verify the actual PyPI wheel and sdist bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          (cd dist && sha256sum --check SHA256SUMS)
+          releaseVersion="${GITHUB_REF_NAME#v}"
+          python -m tools.verify_pypi_release \
+            --version "$releaseVersion" \
+            --artifact-directory dist \
+            --output-directory published-evidence
+
+      - name: Install from PyPI and run the documented examples
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          venvPath="$RUNNER_TEMP/published-fuzzyroutines-${{ matrix.python-version }}"
+          python -m venv "$venvPath"
+          "$venvPath/bin/python" -m pip install \
+            --disable-pip-version-check --no-cache-dir --no-deps \
+            --only-binary=:all: --index-url https://pypi.org/simple \
+            --require-hashes -r published-evidence/requirements-published.txt
+          cd "$RUNNER_TEMP"
+          "$venvPath/bin/python" -I "$GITHUB_WORKSPACE/tools/verify_installed_executables.py" \
+            --artifact-directory "$GITHUB_WORKSPACE/published-evidence/installed-examples"
+
+      - name: Preserve publication verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: published-pypi-verification-${{ matrix.python-version }}
+          path: published-evidence
+          if-no-files-found: warn
+          retention-days: 90

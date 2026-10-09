@@ -35,6 +35,11 @@ Existing users should read the
 
 #### Added
 
+- Protected PyPI publication is followed by actual wheel/sdist byte comparison
+  with approved CI candidates, hash-pinned clean installation from the public
+  index, and installed examples on both supported Python versions. PR and
+  manual dry runs cannot reach publication or this post-publication matrix.
+
 - Three-language documentation rendering from the installed package, shared
   English-labelled figures, stable page routes, and source-bound API fragments.
   Include mathematical and migration chapters in the required locale corpus.

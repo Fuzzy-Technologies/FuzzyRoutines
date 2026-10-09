@@ -25,6 +25,7 @@ EXECUTABLETOOLS = (
     "report_universal_scale_coverage",
     "test_runner",
     "verify_installed_executables",
+    "verify_pypi_release",
 )
 
 

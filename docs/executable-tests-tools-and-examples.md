@@ -182,6 +182,19 @@ output directory unless its documented reuse mode is selected. Its default
 requires a new artifact directory so stale output cannot be mistaken for
 current evidence.
 
+## Published-release verification
+
+After protected CI publication, `python -m tools.verify_pypi_release --version
+2.0.0 --artifact-directory dist --output-directory published-evidence` reads
+public PyPI metadata and both distribution files. It requires exact filenames,
+sizes and SHA-256 hashes matching the approved candidates; mismatches exit
+nonzero. Only temporary listing visibility is retried. The new output directory
+contains downloaded distributions, JSON evidence and a hash-pinned pip
+requirement; an existing directory is never overwritten. `--help` performs no
+network access. This tool never uploads or installs packages. The release
+workflow separately installs the verified wheel from PyPI and runs the
+installed examples; see the [publishing runbook](trusted-publishing-runbook.md).
+
 ## Clean-install evidence
 
 The package workflow builds a wheel and source distribution independently. For
