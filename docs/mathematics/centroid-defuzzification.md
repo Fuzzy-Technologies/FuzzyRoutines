@@ -35,9 +35,9 @@ standardized area is
 $$
 I=\sqrt{\frac{\pi}{2}}
 \begin{cases}
-\operatorname{erfc}(u/\sqrt{2})-\operatorname{erfc}(v/\sqrt{2}), & u\ge0,\\
-\operatorname{erfc}(-v/\sqrt{2})-\operatorname{erfc}(-u/\sqrt{2}), & v\le0,\\
-\operatorname{erf}(v/\sqrt{2})-\operatorname{erf}(u/\sqrt{2}), & u<0<v.
+\mathrm{erfc}(u/\sqrt{2})-\mathrm{erfc}(v/\sqrt{2}), & u\ge0,\\
+\mathrm{erfc}(-v/\sqrt{2})-\mathrm{erfc}(-u/\sqrt{2}), & v\le0,\\
+\mathrm{erf}(v/\sqrt{2})-\mathrm{erf}(u/\sqrt{2}), & u\lt0\lt v.
 \end{cases}
 $$
 

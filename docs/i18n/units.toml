@@ -1034,7 +1034,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.Normalize"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:77f98865fd7c131fefc791d057ddcedd2d2c46a9e0b14b3951332642f97711be"
+sourceHash = "sha256:8436767afea75085984d8620d3797ba9e330bd708e8181bbd8ffd8897015de08"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -1566,7 +1566,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.fuzzysets.Normalize"
 kind = "symbol"
 sourcePath = "fuzzyroutines/fuzzysets.py"
-sourceHash = "sha256:710b8c1ae40d5f733c197af137096d67ac430b09d8c4ac6394348eb3f0e927c7"
+sourceHash = "sha256:8fcb31870fa613efd0e6ebb2c8cab24dce5970b8aade7ecd7f5058ff70747405"
 reviewClass = "mathematical"
 
 [units.translations.ru]
