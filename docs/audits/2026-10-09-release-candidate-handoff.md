@@ -11,8 +11,9 @@ The draft integration candidate includes the merged mathematical audit (#303),
 translations (#304), task-closing repair (#305) and PyPI verification (#306).
 It was refreshed from `develop` at
 `ec9baf333dab0aed7e6e47f57b3e1575be6dbba5` after all nine workflows passed
-on #306's conflict-resolution head. The integration preserves the preceding
-candidate's code, version metadata and translated text byte-for-byte. It
+on #306's conflict-resolution head. That integration preserved the preceding
+candidate's code, version metadata and translated text byte-for-byte. Subsequent
+finalization changes are listed below. The candidate
 proposes `2.0.0` package metadata and the stable classifier, aligns active
 version/compatibility/migration records and clean-install assertions, and
 puts the stable pip installation route first in all three quick starts.
@@ -30,10 +31,12 @@ earlier green revisions do not substitute.
 
 ## Documentation review target
 
-There are 257 required units per language: 52 pages, 193 public symbol
+There are 258 required units per language: 53 pages, 193 public symbol
 contracts and 12 module overviews. Russian and Chinese translations are complete.
 On 2026-10-10 at 01:30 Europe/Moscow, maintainer Timur Gilmullin provisionally
-approved the current Russian documentation while noting awkward wording.
+approved the Russian documentation at candidate `86f4afc` while noting awkward
+wording. Later editorial fixes and the new Universal Fuzzy Scale guide are
+separate changes for review.
 Record that maintainer acceptance without inventing separate specialist review
 roles or extending it to Chinese. Per-unit review records remain unchanged;
 the statement alone does not satisfy every ADR-0011 release requirement.
@@ -57,6 +60,23 @@ protected-content checks. The stable `--require-approved` gate intentionally
 remains blocked until the required human records exist. Public locale routes
 retain explicit fallbacks during that state; use the PR's labelled preview
 artifact to review the complete translations.
+
+## Parallel finalization changes — 2026-10-10
+
+- Russian and Chinese editorial passes correct concrete terminology and prose;
+  their audit records explicitly identify AI assistance and invariant checks.
+- The ninth worked scenario reconstructs the historical Universal Fuzzy Scale
+  with modern scalar APIs, preserves all five original membership functions and
+  classification behavior on a 1001-point grid, and explains the historical
+  support-window and floating-point tie subtleties. One shared English-labelled
+  comparison SVG brings the scientific figure set to eleven images.
+- The PyPI job now stages only the verified wheel and source archive for upload.
+  Hash/provenance sidecars remain evidence and cannot be mistaken for packages.
+  Offline tests execute the actual staging shell on valid and invalid inputs.
+- Mathematical audit Task #298 is complete; publication remains #299/#121.
+
+These changes remain in the existing release PR #307. No extra planning issues
+were introduced. Current CI evidence belongs in that PR after the final push.
 
 ## Publishing controls to verify
 

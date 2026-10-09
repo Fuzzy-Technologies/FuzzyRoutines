@@ -79,6 +79,20 @@ CURVE_REFERENCES = (
 )
 
 
+UNIVERSAL_REFERENCES = (
+    lambda x: 1 / (1 + (8 * x)**20),
+    lambda x: min(ShoulderReference(x, 0.17, 0.23), 1 - ShoulderReference(x, 0.34, 0.40)),
+    lambda x: min(ShoulderReference(x, 0.34, 0.40), 1 - ShoulderReference(x, 0.60, 0.66)),
+    lambda x: min(ShoulderReference(x, 0.60, 0.66), 1 - ShoulderReference(x, 0.77, 0.83)),
+    lambda x: ShoulderReference(x, 0.77, 0.95),
+)
+CURVE_REFERENCES += tuple(
+    ("universal-fuzzy-scale", panel, curve, 0, 1, reference)
+    for panel in range(2)
+    for curve, reference in enumerate(UNIVERSAL_REFERENCES)
+)
+
+
 @pytest.mark.parametrize("figureName,axisIndex,lineIndex,left,right,reference", CURVE_REFERENCES)
 def test_EveryPlottedCurveMatchesIndependentFormula(guideFigures, figureName, axisIndex, lineIndex, left, right, reference):
     """Verify all 401 coordinates and grades, rather than comparing API with itself."""

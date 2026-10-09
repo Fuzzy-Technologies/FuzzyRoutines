@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 图形来源与复现 {#figure-provenance-and-reproduction}
 
-仓库中的十幅 SVG 是科学教学图，由 `tools/generate_guide_figures.py` 根据真实标量 API 求值生成，并非生成式艺术图像。生成器先执行八个场景中的全部断言，再绘制模型和注释。场景代码及数值预期位于 `examples/guide.py`。
+仓库中的十一幅 SVG 是科学教学图，由 `tools/generate_guide_figures.py` 根据真实标量 API 求值生成，并非生成式艺术图像。生成器先执行九个场景中的全部断言，再绘制模型和注释。场景代码及数值预期位于 `examples/guide.py`。
 
 ## 所有语言共用一套图形 {#one-figure-set-for-all-languages}
 
@@ -32,7 +32,7 @@ Matplotlib 及其依赖（包括 NumPy）仅属于文档工具链。安装或导
 
 ## 独立验证科学内容 {#verify-scientific-content-independently}
 
-SVG 字节比较可以发现过期资源，但不能证明其数学正确性。`tests/test_guide_figures.py` 使用基本分段或指数公式，独立检查 26 条曲线各自的全部 401 个坐标，还检查散点坐标、六个传感器柱形、阈值、使用精确有理数运算的四节点质心计算，以及标题和图例布局。参考计算不调用库的隶属函数。文档 CI 安装绘图依赖，先针对已安装的标量 API 运行这些测试，再比较 SVG 文件。
+SVG 字节比较可以发现过期资源，但不能证明其数学正确性。`tests/test_guide_figures.py` 使用基本分段或指数公式，独立检查 36 条曲线各自的全部 401 个坐标，还检查散点坐标、六个传感器柱形、阈值、使用精确有理数运算的四节点质心计算，以及标题和图例布局。参考计算不调用库的隶属函数。文档 CI 安装绘图依赖，先针对已安装的标量 API 运行这些测试，再比较 SVG 文件。
 
 ## 正确理解图形 {#interpret-the-pictures-correctly}
 

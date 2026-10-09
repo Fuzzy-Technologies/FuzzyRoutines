@@ -63,8 +63,9 @@ python -m pip install .
 
 The [quick start](docs/site/content/en/quick-start.md) explains the development
 and future stable PyPI installation routes and classifies a 24 °C measurement.
-Explore [eight worked scenarios](docs/site/content/en/guides/index.md), with
-independent numerical checks and ten reproducible scientific figures, or
+Explore [nine worked scenarios](docs/site/content/en/guides/index.md), with
+independent numerical checks and eleven reproducible scientific figures, or
+reconstruct the [historical Universal Fuzzy Scale](docs/site/content/en/guides/universal-fuzzy-scale.md), or
 browse the [membership gallery](docs/site/content/en/guides/membership-families.md).
 The [computation diagrams](docs/site/content/en/guides/workflow.md) explain the
 different workflows; the [public example index](docs/site/content/en/guides/example-index.md)

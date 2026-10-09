@@ -103,7 +103,7 @@ does not approve missing Russian or Chinese translations or check final
 release-candidate boxes.
 
 The [multilingual implementation review](audits/2026-10-09-multilingual-review.md)
-records the complete 257-unit Russian/Chinese drafts, canonical corrections,
+records the original 257-unit Russian/Chinese drafts, canonical corrections,
 rendered findings and the remaining hash-bound human reviews. Complete draft
 coverage is not approval.
 
@@ -139,7 +139,7 @@ Complete the work in this order:
    figures, captions, accessible descriptions and installed-example evidence.
 
 [Task #298](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/298)
-owns the final all-module mathematics, meaningful per-module line/branch
+records the completed all-module mathematics, meaningful per-module line/branch
 coverage and process-based parallel-test audit. The historical legacy-only
 coverage report cannot establish coverage adequacy for the modern modules.
 

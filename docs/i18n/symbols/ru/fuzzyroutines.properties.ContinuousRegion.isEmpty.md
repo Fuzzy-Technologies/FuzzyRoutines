@@ -3,4 +3,4 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-Проверяет, не содержит ли регион ни одной координаты.
+Проверяет, не содержит ли область ни одной координаты.

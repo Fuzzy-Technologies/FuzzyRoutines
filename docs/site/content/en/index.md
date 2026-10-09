@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 ![FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory](assets/brand/fuzzyroutines-alice.png){ .fr-project-art }
 
 Start with the [quick start](quick-start.md) to install the modern API and
-classify a physical measurement. The [eight worked scenarios](guides/index.md)
+classify a physical measurement. The [nine worked scenarios](guides/index.md)
 explain inputs, policies, calculations, expected results, and figures. Browse
 the [membership gallery](guides/membership-families.md) to choose a curve, or
 use the [practical API recipes](guides/api-recipes.md) for smaller operations.

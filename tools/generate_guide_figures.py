@@ -101,11 +101,31 @@ def DrawScale(axis, scale, left: float, right: float, xlabel: str) -> None:
 
 
 def BuildFigures() -> dict:
-    """Run the eight scenario assertions and draw their explanatory figures."""
+    """Run the nine scenario assertions and draw their explanatory figures."""
 
     guide = runpy.run_path(str(PROJECT_ROOT / "examples" / "guide.py"))
     scenarioResults = {name: scenario() for name, scenario in guide["SCENARIOS"].items()}
     figures = {}
+
+    figure, axes = NewFigure("Historical Universal Fuzzy Scale", panels=2)
+    figure.texts[-1].set_text("FuzzyRoutines  ·  historical preset coefficients  ·  no retuning or empirical calibration")
+    historical = guide["UniversalFuzzyScale"]()
+    modern = guide["UniversalScale"]()
+    models = (
+        tuple((level["name"], level["fSet"].mFunction.mju) for level in historical.levels),
+        tuple((term.name, term.fuzzySet.Membership) for term in modern.terms),
+    )
+
+    for axis, curves, title in zip(axes, models, ("Historical facade", "Explicit modern construction"), strict=True):
+        axis.set_prop_cycle(color=(*COLORS, "#8cdb91"))
+        DrawCurves(axis, curves, 0, 1, "Normalized coordinate x")
+        axis.set_title(title, fontsize=12, pad=44)
+        axis.get_legend().set_bbox_to_anchor((0.5, 1.19))
+        axis.axvspan(0.15, 0.19, color="#ffffff", alpha=0.07)
+        axis.annotate("Weak coverage near 0.17", (0.17, 0.04), xytext=(0.25, 0.20), fontsize=9,
+                      arrowprops={"arrowstyle": "->", "color": "#edf0f8"})
+
+    figures["universal-fuzzy-scale"] = figure
 
     figure, (axis,) = NewFigure("From a temperature to linguistic labels")
     scale = guide["ComfortScale"]()

@@ -78,3 +78,38 @@ def test_UniversalFuzzyScaleLevelNamesRemainAvailable():
     assert set(scale.levelsNamesUpper) == {"MIN", "LOW", "MED", "HIGH", "MAX"}, (
         "The case-insensitive UniversalFuzzyScale name map changed."
     )
+
+
+@pytest.mark.parametrize(("coordinate", "expected"), ((0.37, "Low"), (0.63, "High"), (0.81, "High")))
+def test_UniversalGuidePreservesFloatingPointWinner(coordinate, expected):
+    """Protect near-tie migration semantics instead of rounding the grades."""
+
+    import runpy
+    from pathlib import Path
+
+    from fuzzyroutines import FuzzificationPolicy
+
+    guide = runpy.run_path(str(Path(__file__).resolve().parents[1] / "examples/guide.py"))
+    result = guide["UniversalScale"]().Fuzzify(coordinate, FuzzificationPolicy(tiePolicy="last"))
+    assert result.selectedTerms[0].name == expected
+    assert UniversalFuzzyScale().Fuzzy(coordinate)["name"] == expected
+
+
+def test_UniversalGuideDeclaresBoundaryAndTailDifferences():
+    """Keep closed normalized bounds and reject accidental legacy-window clipping."""
+
+    import runpy
+    from pathlib import Path
+
+    guide = runpy.run_path(str(Path(__file__).resolve().parents[1] / "examples/guide.py"))
+    scale = guide["UniversalScale"]()
+    historical = UniversalFuzzyScale()
+    assert scale.Fuzzify(0).selectedTerms[0].name == "Min"
+    assert scale.Fuzzify(1).selectedTerms[0].name == "Max"
+    assert scale.terms[0].fuzzySet.Membership(0.5) == pytest.approx(1 / (1 + 4**20), rel=1e-12, abs=0)
+
+    for coordinate, label in ((-0.1, "Min"), (1.1, "Max")):
+        assert historical.Fuzzy(coordinate)["name"] == label
+
+        with pytest.raises(ValueError, match="universe"):
+            scale.Fuzzify(coordinate)
