@@ -120,7 +120,8 @@ def BuildFigures() -> dict:
         axis.set_prop_cycle(color=(*COLORS, "#8cdb91"))
         DrawCurves(axis, curves, 0, 1, "Normalized coordinate x")
         axis.set_title(title, fontsize=12, pad=44)
-        axis.get_legend().set_bbox_to_anchor((0.5, 1.19))
+        axis.legend(loc="upper center", bbox_to_anchor=(0.5, 1.19), ncol=5,
+                    frameon=False, fontsize=10, handlelength=1.3, columnspacing=0.9)
         axis.axvspan(0.15, 0.19, color="#ffffff", alpha=0.07)
         axis.annotate("Weak coverage near 0.17", (0.17, 0.04), xytext=(0.25, 0.20), fontsize=9,
                       arrowprops={"arrowstyle": "->", "color": "#edf0f8"})

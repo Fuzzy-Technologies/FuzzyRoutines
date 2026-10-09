@@ -213,3 +213,20 @@ def test_TitlesAndLegendsFitWithoutOverlappingEachOther(guideFigures):
             assert not legendBounds.overlaps(titleBounds)
             if axis.get_title():
                 assert not legendBounds.overlaps(axis.title.get_window_extent(renderer))
+
+
+def test_UniversalLegendFollowsCurveOrderFromLeftToRight(guideFigures):
+    """Keep the visible legend in scale order instead of column-major wrapping."""
+
+    figure = guideFigures["universal-fuzzy-scale"]
+    figure.canvas.draw()
+    renderer = figure.canvas.get_renderer()
+
+    for axis in figure.axes:
+        legend = axis.get_legend()
+        labels = legend.get_texts()
+        bounds = [label.get_window_extent(renderer) for label in labels]
+        assert [label.get_text() for label in labels] == ["Min", "Low", "Med", "High", "Max"]
+        assert all(first.x1 < second.x0 for first, second in pairwise(bounds)), "Legend order must follow increasing scale coordinates."
+        assert len({round(bound.y0, 4) for bound in bounds}) == 1, "All five levels must share one legend row."
+        assert [handle.get_color() for handle in legend.legend_handles] == [line.get_color() for line in axis.lines]

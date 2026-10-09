@@ -473,49 +473,49 @@ L 118.743697 277.59962
    </g>
    <g id="legend_1">
     <g id="line2d_28">
-     <path d="M 118.594595 47.366117
-L 128.594595 47.366117
-L 138.594595 47.366117
+     <path d="M 90.657877 47.366117
+L 97.157877 47.366117
+L 103.657877 47.366117
 " style="fill: none; stroke: #a99aff; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_16">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="146.594595" y="50.866117" transform="rotate(-0 146.594595 50.866117)">Min</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="111.657877" y="50.866117" transform="rotate(-0 111.657877 50.866117)">Min</text>
     </g>
     <g id="line2d_29">
-     <path d="M 118.594595 62.366899
-L 128.594595 62.366899
-L 138.594595 62.366899
+     <path d="M 138.401627 47.366117
+L 144.901627 47.366117
+L 151.401627 47.366117
 " style="fill: none; stroke: #4dd8d0; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_17">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="146.594595" y="65.866899" transform="rotate(-0 146.594595 65.866899)">Low</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="159.401627" y="50.866117" transform="rotate(-0 159.401627 50.866117)">Low</text>
     </g>
     <g id="line2d_30">
-     <path d="M 186.288345 47.366117
-L 196.288345 47.366117
-L 206.288345 47.366117
+     <path d="M 188.095377 47.366117
+L 194.595377 47.366117
+L 201.095377 47.366117
 " style="fill: none; stroke: #ffd166; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_18">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="214.288345" y="50.866117" transform="rotate(-0 214.288345 50.866117)">Med</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="209.095377" y="50.866117" transform="rotate(-0 209.095377 50.866117)">Med</text>
     </g>
     <g id="line2d_31">
-     <path d="M 186.288345 62.366899
-L 196.288345 62.366899
-L 206.288345 62.366899
+     <path d="M 239.225064 47.366117
+L 245.725064 47.366117
+L 252.225064 47.366117
 " style="fill: none; stroke: #ff8c9d; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_19">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="214.288345" y="65.866899" transform="rotate(-0 214.288345 65.866899)">High</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="260.225064" y="50.866117" transform="rotate(-0 260.225064 50.866117)">High</text>
     </g>
     <g id="line2d_32">
-     <path d="M 257.27272 47.366117
-L 267.27272 47.366117
-L 277.27272 47.366117
+     <path d="M 292.209439 47.366117
+L 298.709439 47.366117
+L 305.209439 47.366117
 " style="fill: none; stroke: #8cdb91; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_20">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="285.27272" y="50.866117" transform="rotate(-0 285.27272 50.866117)">Max</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="313.209439" y="50.866117" transform="rotate(-0 313.209439 50.866117)">Max</text>
     </g>
    </g>
   </g>
@@ -948,49 +948,49 @@ L 502.905381 277.59962
    </g>
    <g id="legend_2">
     <g id="line2d_60">
-     <path d="M 502.75628 47.366117
-L 512.75628 47.366117
-L 522.75628 47.366117
+     <path d="M 474.819561 47.366117
+L 481.319561 47.366117
+L 487.819561 47.366117
 " style="fill: none; stroke: #a99aff; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_36">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="530.75628" y="50.866117" transform="rotate(-0 530.75628 50.866117)">Min</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="495.819561" y="50.866117" transform="rotate(-0 495.819561 50.866117)">Min</text>
     </g>
     <g id="line2d_61">
-     <path d="M 502.75628 62.366899
-L 512.75628 62.366899
-L 522.75628 62.366899
+     <path d="M 522.563311 47.366117
+L 529.063311 47.366117
+L 535.563311 47.366117
 " style="fill: none; stroke: #4dd8d0; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_37">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="530.75628" y="65.866899" transform="rotate(-0 530.75628 65.866899)">Low</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="543.563311" y="50.866117" transform="rotate(-0 543.563311 50.866117)">Low</text>
     </g>
     <g id="line2d_62">
-     <path d="M 570.45003 47.366117
-L 580.45003 47.366117
-L 590.45003 47.366117
+     <path d="M 572.257061 47.366117
+L 578.757061 47.366117
+L 585.257061 47.366117
 " style="fill: none; stroke: #ffd166; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_38">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="598.45003" y="50.866117" transform="rotate(-0 598.45003 50.866117)">Med</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="593.257061" y="50.866117" transform="rotate(-0 593.257061 50.866117)">Med</text>
     </g>
     <g id="line2d_63">
-     <path d="M 570.45003 62.366899
-L 580.45003 62.366899
-L 590.45003 62.366899
+     <path d="M 623.386748 47.366117
+L 629.886748 47.366117
+L 636.386748 47.366117
 " style="fill: none; stroke: #ff8c9d; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_39">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="598.45003" y="65.866899" transform="rotate(-0 598.45003 65.866899)">High</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="644.386748" y="50.866117" transform="rotate(-0 644.386748 50.866117)">High</text>
     </g>
     <g id="line2d_64">
-     <path d="M 641.434405 47.366117
-L 651.434405 47.366117
-L 661.434405 47.366117
+     <path d="M 676.371123 47.366117
+L 682.871123 47.366117
+L 689.371123 47.366117
 " style="fill: none; stroke: #8cdb91; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
     <g id="text_40">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="669.434405" y="50.866117" transform="rotate(-0 669.434405 50.866117)">Max</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="697.371123" y="50.866117" transform="rotate(-0 697.371123 50.866117)">Max</text>
     </g>
    </g>
   </g>

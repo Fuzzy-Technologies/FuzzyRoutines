@@ -4376,15 +4376,15 @@ sourceHash = "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4
 id = "page:guides.universal-fuzzy-scale"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:b4e9d7fa9e87e6b602f3707ed53ecf2cf7fef76b8faf95a3b50bffd8a7469a79"
+sourceHash = "sha256:16e60e9330230fff910c3673c2cbaf4aa9912bf47d0127dfcb5dc8c8a2d590aa"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:b4e9d7fa9e87e6b602f3707ed53ecf2cf7fef76b8faf95a3b50bffd8a7469a79"
+sourceHash = "sha256:16e60e9330230fff910c3673c2cbaf4aa9912bf47d0127dfcb5dc8c8a2d590aa"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/site/content/zh-CN/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:b4e9d7fa9e87e6b602f3707ed53ecf2cf7fef76b8faf95a3b50bffd8a7469a79"
+sourceHash = "sha256:16e60e9330230fff910c3673c2cbaf4aa9912bf47d0127dfcb5dc8c8a2d590aa"

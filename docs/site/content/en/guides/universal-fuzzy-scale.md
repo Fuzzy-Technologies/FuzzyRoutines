@@ -42,15 +42,21 @@ For normalized coordinates $0\le x\le1$, define the quadratic rising shoulder:
 $$
 s_{a,b}(x)=\begin{cases}
 0,&x\le a,\\
-2\left(\frac{x-a}{b-a}\right)^2,&a<x\le\frac{a+b}{2},\\
-1-2\left(\frac{b-x}{b-a}\right)^2,&\frac{a+b}{2}<x<b,\\
+2\left(\frac{x-a}{b-a}\right)^2,&a\lt x\le\frac{a+b}{2},\\
+1-2\left(\frac{b-x}{b-a}\right)^2,&\frac{a+b}{2}\lt x\lt b,\\
 1,&x\ge b.
 \end{cases}
 $$
 
 $$
-\mu_{\mathrm{Min}}(x)=\frac{1}{1+(8x)^{20}},\quad
-\mu_{\mathrm{Bell}(a,b,c)}(x)=\min\{s_{a,b}(x),1-s_{c,c+b-a}(x)\},\quad
+\mu_{\mathrm{Min}}(x)=\frac{1}{1+(8x)^{20}}
+$$
+
+$$
+\mu_{\mathrm{Bell}(a,b,c)}(x)=\min\left\lbrace s_{a,b}(x),1-s_{c,c+b-a}(x)\right\rbrace
+$$
+
+$$
 \mu_{\mathrm{Max}}(x)=s_{0.77,0.95}(x).
 $$
 
