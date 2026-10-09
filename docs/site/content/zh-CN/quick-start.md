@@ -68,9 +68,9 @@ print(grades, result.selectedTerms[0].name)
 
 ## 组合、检查并解释结果 {#combine-inspect-and-explain-a-result}
 
-接着阅读[八个完整场景](guides/index.md)。它们涵盖物理测量、策略选择、拒绝分类、有向模糊差、α-截集、质心、尺度诊断和自定义模型。每个场景都包含可独立运行的代码、预期数值和图形。[隶属函数图集](guides/membership-families.md)可以帮助选择曲线。
+接着阅读[九个完整场景](guides/index.md)。它们涵盖物理测量、策略选择、拒绝分类、有向模糊差、α-截集、质心、尺度诊断和自定义模型。每个场景都包含可独立运行的代码、预期数值和图形。[隶属函数图集](guides/membership-families.md)可以帮助选择曲线。
 
-脚本 [`examples/guide.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/guide.py)运行全部八个场景，并检查独立确定的数值预期。在已安装软件包的仓库工作副本中运行：
+脚本 [`examples/guide.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/guide.py)运行全部九个场景，并检查独立确定的数值预期。在已安装软件包的仓库工作副本中运行：
 
 ```bash
 python -I examples/guide.py

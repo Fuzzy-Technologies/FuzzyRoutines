@@ -38,18 +38,21 @@ These links certify their recorded revision; later changes receive their own CI.
 
 ## Remaining documentation acceptance
 
-The maintainer accepted the integrated candidate after reviewing corrections.
-That decision is recorded without claiming an independent native-Chinese or
-mathematical specialist review. The existing ADR-0011 contract still requires
+The maintainer explicitly accepted the Russian translation, with a reservation
+about its style, and subsequently accepted the corrected PR #307 for squash
+merge. The Russian corpus has not changed since that accepted revision. This
+is recorded as maintainer editorial acceptance; another general Russian
+editorial approval is not being requested. It does not claim a native-Chinese
+or mathematical specialist review. The existing ADR-0011 contract still requires
 explicit editorial and applicable technical/mathematical responsibility, tied
 to each English-source and translation hash. One human may hold several roles;
 separate reviewers or line-by-line approval are not required.
 
-All Russian and Chinese units are current drafts. The ordinary locale validator
+The review manifests still mark all Russian and Chinese units as current drafts. The ordinary locale validator
 passes; `--require-approved` reports 516 draft units. No missing translation
 implementation is implied by that count. The remaining action is recording real
-review responsibility and acceptance for the current corpus, not translating it
-again or creating further tasks.
+the remaining review responsibility and hash-bound records for the current
+corpus, not translating it again or repeating acceptance already given.
 
 Browser inspection is tracked in existing Task #297. The local Chromium process
 cannot start because runtime sockets are denied. The existing API-reference CI

@@ -281,7 +281,7 @@ def Main(arguments=None):
                 sys.executable,
                 str(PROJECTROOT / "tools" / "benchmark_membership_operators.py"),
                 "--iterations",
-                "1",
+                "10000",
                 "--repeats",
                 "7",
                 "--warmups",

@@ -3747,18 +3747,18 @@ sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0e
 id = "page:quick-start"
 kind = "page"
 sourcePath = "docs/site/content/en/quick-start.md"
-sourceHash = "sha256:7c1b5ce1e4a525a8140169843d2909be0db80c5ae055b17d8b25a01be98b7d39"
+sourceHash = "sha256:2a05f8feebea743b86a490c2dbff7fcdec52e84c8c90b62f6b83d3abd8687ae0"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/quick-start.md"
-sourceHash = "sha256:7c1b5ce1e4a525a8140169843d2909be0db80c5ae055b17d8b25a01be98b7d39"
+sourceHash = "sha256:2a05f8feebea743b86a490c2dbff7fcdec52e84c8c90b62f6b83d3abd8687ae0"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/site/content/zh-CN/quick-start.md"
-sourceHash = "sha256:7c1b5ce1e4a525a8140169843d2909be0db80c5ae055b17d8b25a01be98b7d39"
+sourceHash = "sha256:2a05f8feebea743b86a490c2dbff7fcdec52e84c8c90b62f6b83d3abd8687ae0"
 
 [[units]]
 id = "page:guides.errors"

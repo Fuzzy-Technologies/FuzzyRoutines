@@ -75,13 +75,22 @@ async function Main() {
           const searchResults = page.locator('[data-md-component="search-result"] a.md-search-result__link');
           await searchResults.first().waitFor({state: 'visible', timeout: 15000});
           result.search = {query: 'UniversalFuzzyScale', results: await searchResults.count(), firstLink: await searchResults.first().getAttribute('href')};
-          await page.screenshot({path: path.join(outputRoot, `${locale}-search-${viewport.width}.png`), fullPage: true});
-          await page.keyboard.press('Escape');
+          await page.screenshot({path: path.join(outputRoot, `${locale}-search-${viewport.width}.png`), fullPage: false, animations: 'disabled'});
+          if (await page.locator('#__search').isChecked()) {
+            await page.locator('label.md-search__icon[for="__search"]').click();
+          } else {
+            await page.keyboard.press('Escape');
+          }
+          await page.waitForFunction(() => !document.querySelector('#__search').checked);
         }
         const screenshot = `${locale}-${pageRoute.replaceAll('/', '-')}-${viewport.width}.png`;
-        await page.screenshot({path: path.join(outputRoot, screenshot), fullPage: true});
+        const pixels = await page.screenshot({path: path.join(outputRoot, screenshot), fullPage: true, animations: 'disabled'});
+        result.screenshotWidth = pixels.readUInt32BE(16);
+        result.overflowAfterInteraction = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
         evidence.pages.push({locale, route: pageRoute, viewport, ...result, errors, screenshot});
         assert.deepEqual(errors, [], url);
+        assert.equal(result.screenshotWidth, viewport.width, `${url}: screenshot width after interaction`);
+        assert.equal(result.overflowAfterInteraction, false, `${url}: overflow after interaction`);
         assert.equal(result.overflow, false, `${url}: page-level overflow`);
         assert.deepEqual(result.brokenImages, [], url);
         assert.deepEqual(result.emptyAlternatives, [], url);
@@ -99,7 +108,7 @@ async function Main() {
         await page.setContent(`<html><body style="margin:0;background:#101827"><img alt="${figure}" style="display:block;width:100%;height:auto" src="${origin}/FuzzyRoutines/api/latest/en/assets/figures/${figure}"></body></html>`, {waitUntil: 'networkidle'});
         assert.ok(await page.locator('img').evaluate(image => image.complete && image.naturalWidth > 0), figure);
         const screenshot = `figure-${figure}-${viewport.width}.png`;
-        await page.screenshot({path: path.join(outputRoot, screenshot), fullPage: true});
+        await page.screenshot({path: path.join(outputRoot, screenshot), fullPage: true, animations: 'disabled'});
         evidence.figures.push({figure, viewport, screenshot});
         await page.close();
       }
