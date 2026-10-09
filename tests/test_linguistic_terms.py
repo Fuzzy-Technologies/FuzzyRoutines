@@ -265,33 +265,33 @@ def test_LinguisticScaleFuzzifyUsesAbsoluteTieTolerance():
     assert tolerantResult.tiedTerms == (first, second)
 
 
-@pytest.mark.parametrize("tie_policy", ["first", "last", "all"])
-@pytest.mark.parametrize("maximum_grade", [Fraction(1, 2), 0.5])
-@pytest.mark.parametrize("maximum_first", [False, True])
+@pytest.mark.parametrize('tiePolicy', ["first", "last", "all"])
+@pytest.mark.parametrize('maximumGrade', [Fraction(1, 2), 0.5])
+@pytest.mark.parametrize('maximumFirst', [False, True])
 def test_LinguisticScaleFuzzifyPreservesExactRationalMaxima(
-    tie_policy,
-    maximum_grade,
-    maximum_first,
+    tiePolicy,
+    maximumGrade,
+    maximumFirst,
 ):
     """Distinguish rational grades even when their float views are equal."""
 
-    lower_grade = Fraction(1, 2) - Fraction(1, 10**20)
-    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lower_grade))
-    maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: maximum_grade))
-    terms = (maximum, lower) if maximum_first else (lower, maximum)
+    lowerGrade = Fraction(1, 2) - Fraction(1, 10**20)
+    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lowerGrade))
+    maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: maximumGrade))
+    terms = (maximum, lower) if maximumFirst else (lower, maximum)
 
-    result = LinguisticScale(terms).Fuzzify(0.5, FuzzificationPolicy(tiePolicy=tie_policy))
+    result = LinguisticScale(terms).Fuzzify(0.5, FuzzificationPolicy(tiePolicy=tiePolicy))
 
-    assert float(lower_grade) == float(maximum_grade), "The fixture must expose float coercion loss."
-    assert result.confidence is maximum_grade, "Confidence must retain the original maximum grade."
+    assert float(lowerGrade) == float(maximumGrade), "The fixture must expose float coercion loss."
+    assert result.confidence is maximumGrade, "Confidence must retain the original maximum grade."
     assert result.tiedTerms == (maximum,), "Zero tolerance must exclude every unequal rational grade."
     assert result.selectedTerms == (maximum,), "Every tie policy must select the sole exact maximum."
     assert not result.isTie, "Float rounding must not create ambiguous classification evidence."
 
 
-@pytest.mark.parametrize("maximum_grade", [Fraction(1, 2), 0.5])
+@pytest.mark.parametrize('maximumGrade', [Fraction(1, 2), 0.5])
 @pytest.mark.parametrize(
-    ("tie_tolerance", "includes_lower"),
+    ('tieTolerance', 'includesLower'),
     [
         (Fraction(1, 10**20) - Fraction(1, 10**40), False),
         (Fraction(1, 10**20), True),
@@ -301,36 +301,36 @@ def test_LinguisticScaleFuzzifyPreservesExactRationalMaxima(
     ],
 )
 def test_LinguisticScaleFuzzifyPreservesInclusiveRationalToleranceBoundary(
-    maximum_grade,
-    tie_tolerance,
-    includes_lower,
+    maximumGrade,
+    tieTolerance,
+    includesLower,
 ):
     """Apply exact inclusive distances to rational and mixed numeric evidence."""
 
-    lower_grade = Fraction(1, 2) - Fraction(1, 10**20)
-    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lower_grade))
-    maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: maximum_grade))
-    policy = FuzzificationPolicy(tiePolicy="all", tieTolerance=tie_tolerance)
+    lowerGrade = Fraction(1, 2) - Fraction(1, 10**20)
+    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lowerGrade))
+    maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: maximumGrade))
+    policy = FuzzificationPolicy(tiePolicy="all", tieTolerance=tieTolerance)
 
     result = LinguisticScale((lower, maximum)).Fuzzify(0.5, policy)
-    expected_terms = (lower, maximum) if includes_lower else (maximum,)
+    expectedTerms = (lower, maximum) if includesLower else (maximum,)
 
-    assert result.tiedTerms == expected_terms, "Rational distance must retain the inclusive boundary."
-    assert result.selectedTerms == expected_terms, "The all policy must preserve exact tie evidence."
-    assert result.policy.tieTolerance is tie_tolerance, "Policy validation must not coerce tolerance."
+    assert result.tiedTerms == expectedTerms, "Rational distance must retain the inclusive boundary."
+    assert result.selectedTerms == expectedTerms, "The all policy must preserve exact tie evidence."
+    assert result.policy.tieTolerance is tieTolerance, "Policy validation must not coerce tolerance."
 
 
-@pytest.mark.parametrize("tie_policy", ["first", "last", "all"])
-def test_LinguisticScaleFuzzifyDistinguishesAdjacentFloatsAtZeroTolerance(tie_policy):
+@pytest.mark.parametrize('tiePolicy', ["first", "last", "all"])
+def test_LinguisticScaleFuzzifyDistinguishesAdjacentFloatsAtZeroTolerance(tiePolicy):
     """Keep distinct adjacent floating grades distinct without caller tolerance."""
 
-    lower_grade = math.nextafter(0.5, 0.0)
-    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lower_grade))
+    lowerGrade = math.nextafter(0.5, 0.0)
+    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lowerGrade))
     maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: 0.5))
 
     result = LinguisticScale((lower, maximum)).Fuzzify(
         0.5,
-        FuzzificationPolicy(tiePolicy=tie_policy),
+        FuzzificationPolicy(tiePolicy=tiePolicy),
     )
 
     assert result.tiedTerms == (maximum,), "Zero tolerance must preserve adjacent float differences."
@@ -338,40 +338,40 @@ def test_LinguisticScaleFuzzifyDistinguishesAdjacentFloatsAtZeroTolerance(tie_po
 
 
 @pytest.mark.parametrize(
-    ("lower_grade", "includes_lower"),
+    ('lowerGrade', 'includesLower'),
     [(0.7, True), (0.7 - 1e-10, False), (0.7 + 1e-10, True)],
 )
 def test_LinguisticScaleFuzzifyRetainsExplicitFloatingBoundaryPolicy(
-    lower_grade,
-    includes_lower,
+    lowerGrade,
+    includesLower,
 ):
     """Retain rounding accommodation only at an explicitly positive float tolerance."""
 
-    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lower_grade))
+    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lowerGrade))
     maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: 0.75))
 
     result = LinguisticScale((lower, maximum)).Fuzzify(
         0.5,
         FuzzificationPolicy(tiePolicy="all", tieTolerance=0.05),
     )
-    expected_terms = (lower, maximum) if includes_lower else (maximum,)
+    expectedTerms = (lower, maximum) if includesLower else (maximum,)
 
-    assert result.tiedTerms == expected_terms, "Float rounding must not replace the caller's tolerance."
+    assert result.tiedTerms == expectedTerms, "Float rounding must not replace the caller's tolerance."
 
 
 def test_FuzzificationResultRejectsRationalGradesCollapsedIntoFalseTies():
     """Reject supplied tie evidence that contradicts exact rational memberships."""
 
-    lower_grade = Fraction(1, 2) - Fraction(1, 10**20)
-    maximum_grade = Fraction(1, 2)
-    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lower_grade))
-    maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: maximum_grade))
-    memberships = (TermMembership(lower, lower_grade), TermMembership(maximum, maximum_grade))
+    lowerGrade = Fraction(1, 2) - Fraction(1, 10**20)
+    maximumGrade = Fraction(1, 2)
+    lower = LinguisticTerm("Lower", _BuildMembershipSet(lambda coordinate: lowerGrade))
+    maximum = LinguisticTerm("Maximum", _BuildMembershipSet(lambda coordinate: maximumGrade))
+    memberships = (TermMembership(lower, lowerGrade), TermMembership(maximum, maximumGrade))
 
     with pytest.raises(ValueError, match="tiedTerms do not match"):
         FuzzificationResult(
             memberships,
-            maximum_grade,
+            maximumGrade,
             FuzzificationPolicy(),
             (lower, maximum),
             (lower,),

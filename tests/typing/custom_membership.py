@@ -42,19 +42,19 @@ def MissingCoordinate() -> float:
     return 0.5
 
 
-def CheckConsumers(built_in: MembershipFunction, fuzzy_set: ScalarFuzzySet) -> None:
+def CheckConsumers(builtIn: MembershipFunction, fuzzySet: ScalarFuzzySet) -> None:
     """Check stock evaluators, bound methods, set fields, floats, and integers."""
 
     custom: MembershipCallable = BroadGrade
-    analytical: MembershipCallable = built_in
-    bound_method: MembershipCallable = built_in.Evaluate
-    set_evaluator: MembershipCallable = fuzzy_set.membershipFunction
+    analytical: MembershipCallable = builtIn
+    boundMethod: MembershipCallable = builtIn.Evaluate
+    setEvaluator: MembershipCallable = fuzzySet.membershipFunction
     custom(0.5)
     custom(1)
     analytical(0.5)
     analytical(1)
-    bound_method(0.5)
-    set_evaluator(1)
+    boundMethod(0.5)
+    setEvaluator(1)
 
 
 NARROW_CALLBACK: MembershipCallable = FloatOnlyGrade  # type: ignore[assignment]

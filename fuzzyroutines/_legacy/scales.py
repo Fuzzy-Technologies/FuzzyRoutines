@@ -50,16 +50,16 @@ class FuzzyScale():
         #     Minimum = <Hyperbolic(x, {"a": 7, "b": 4, "c": 0}), [0.0, 1.0]>
         #     Medium = <Bell(x, {"a": 0.35, "b": 0.5, "c": 0.6}), [0.0, 1.0]>
         #     High = <Triangle(x, {"a": 0.7, "b": 1, "c": 1}), [0.0, 1.0]>
-        all_levels_name = self._levels[0]['name']
-        all_levels = '\n    {}'.format(self._levels[0]['fSet'].__str__())
+        allLevelsName = self._levels[0]['name']
+        allLevels = '\n    {}'.format(self._levels[0]['fSet'].__str__())
 
         for level in self._levels[1:]:
-            all_levels_name += ', {}'.format(level['name'])
-            all_levels += '\n    {}'.format(str(level['fSet']))
+            allLevelsName += ', {}'.format(level['name'])
+            allLevels += '\n    {}'.format(str(level['fSet']))
 
-        scale_view = '{} = {{{}}}{}'.format(self._name, all_levels_name, all_levels)
+        scaleView = '{} = {{{}}}{}'.format(self._name, allLevelsName, allLevels)
 
-        return scale_view
+        return scaleView
 
     @property
     def name(self):
@@ -109,9 +109,9 @@ class FuzzyScale():
                 else:
                     raise Exception("Level of fuzzy scale must be 2-dim dictionary looks like {'name': 'level_name', 'fSet': FuzzySet_instance}!")
 
-            level_names = [level['name'].upper() for level in value]
+            levelNames = [level['name'].upper() for level in value]
 
-            if len(set(level_names)) != len(level_names):
+            if len(set(levelNames)) != len(levelNames):
                 raise ValueError("The scale contains level names that are not unique ignoring case!")
 
             self._levels = value  # set up new list of fuzzy levels
@@ -154,17 +154,17 @@ class FuzzyScale():
                 number.
         """
 
-        fuzzy_level = self._levels[0]
-        fuzzy_membership = fuzzy_level['fSet'].mFunction.mju(realValue)
+        fuzzyLevel = self._levels[0]
+        fuzzyMembership = fuzzyLevel['fSet'].mFunction.mju(realValue)
 
         for level in self._levels[1:]:
-            level_membership = level['fSet'].mFunction.mju(realValue)
+            levelMembership = level['fSet'].mFunction.mju(realValue)
 
-            if fuzzy_membership <= level_membership:
-                fuzzy_level = level
-                fuzzy_membership = level_membership
+            if fuzzyMembership <= levelMembership:
+                fuzzyLevel = level
+                fuzzyMembership = levelMembership
 
-        return fuzzy_level
+        return fuzzyLevel
 
     def GetLevelByName(self, levelName, exactMatching=True):
         """Look up a level by its complete exact or case-insensitive name.

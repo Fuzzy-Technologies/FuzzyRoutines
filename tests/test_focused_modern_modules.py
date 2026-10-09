@@ -6,6 +6,7 @@
 """Modern formula ownership, immutable geometry, and historical adapter evidence."""
 
 import importlib
+import inspect
 import math
 import subprocess
 import sys
@@ -85,7 +86,7 @@ def test_TriangleAndTrapezoidUseConventionalGeometricOrder():
     """Reject historical parameter order rather than silently interpreting it."""
 
     triangle = Triangle(left=0, peak=2, right=5)
-    trapezoid = Trapezoid(left=0, plateau_start=1, plateau_end=3, right=5)
+    trapezoid = Trapezoid(left=0, plateauStart=1, plateauEnd=3, right=5)
 
     assert tuple(triangle(x) for x in (0, 1, 2, 3.5, 5)) == (0, 0.5, 1, 0.5, 0)
     assert tuple(trapezoid(x) for x in (0, 0.5, 1, 3, 4, 5)) == (0, 0.5, 1, 1, 0.5, 0)
@@ -179,15 +180,51 @@ def test_NormalizedHistoricalSourceIsFrozenAndModernSourceHasExactHeight():
     assert Height(normalized) == Height(modern) == 1
 
 
+@pytest.mark.parametrize("constructor, family, extraParameters", [
+    (Bell, "bell", {}),
+    (Trapezoid, "trapezoid", {"right": 5}),
+])
+def test_PlateauCamelCaseKeywordsPreserveEarlierDevelopmentAliases(constructor, family, extraParameters):
+    """Retain old valid calls while documenting and storing canonical camelCase keys."""
+
+    canonical = constructor(left=0, plateauStart=1, plateauEnd=3, **extraParameters)
+    aliasParameters = {"left": 0, "plateau_start": 1, "plateau_end": 3, **extraParameters}
+    earlier = constructor(**aliasParameters)
+    direct = MembershipFunction(family, **aliasParameters)
+
+    assert tuple(canonical(x) for x in (0, 0.5, 1, 2, 3, 4, 5)) == tuple(earlier(x) for x in (0, 0.5, 1, 2, 3, 4, 5))
+    assert earlier.parameters == direct.parameters == canonical.parameters
+    assert "plateauStart" in inspect.signature(constructor).parameters
+    assert "plateau_start" not in inspect.signature(constructor).parameters
+    assert set(canonical.parameters) == {"left", "plateauStart", "plateauEnd", *extraParameters}
+    assert set(aliasParameters) == {"left", "plateau_start", "plateau_end", *extraParameters}
+
+
+@pytest.mark.parametrize("constructor, family, extraParameters", [
+    (Bell, "bell", {}),
+    (Trapezoid, "trapezoid", {"right": 5}),
+])
+def test_PlateauAliasesRejectAmbiguousKeywords(constructor, family, extraParameters):
+    """Reject duplicate spellings instead of silently choosing a parameter value."""
+
+    parameters = {"left": 0, "plateauStart": 1, "plateau_start": 2, "plateauEnd": 3, **extraParameters}
+
+    with pytest.raises(InvalidParameterError, match="name the same parameter"):
+        constructor(**parameters)
+
+    with pytest.raises(InvalidParameterError, match="name the same parameter"):
+        MembershipFunction(family, **parameters)
+
+
 def test_ModernPolicyImportsRetainExistingPublicClassIdentity():
     """Preserve historical modern import paths when relocating policy ownership."""
 
     root = importlib.import_module("fuzzyroutines")
-    previous_path = importlib.import_module("fuzzyroutines.fuzzysets")
+    previousPath = importlib.import_module("fuzzyroutines.fuzzysets")
 
     for policy in (NegationPolicy, TNormPolicy, SNormPolicy):
         assert getattr(root, policy.__name__) is policy
-        assert getattr(previous_path, policy.__name__) is policy
+        assert getattr(previousPath, policy.__name__) is policy
         assert policy.__module__ == "fuzzyroutines.operators"
 
 
@@ -212,11 +249,11 @@ from fuzzyroutines.membership import Triangle
 from fuzzyroutines.operators import TNormPolicy
 function = Triangle(0, 1, 2)
 universe = ContinuousUniverse()
-fuzzy_set = ScalarFuzzySet(universe, function)
+fuzzySet = ScalarFuzzySet(universe, function)
 assert DeriveProperties(function, universe).height == 1
-assert Height(fuzzy_set) == 1
-assert Height(Normalize(fuzzy_set)) == 1
-assert Centroid(fuzzy_set, IntegrationDomain(0, 2)) == 1
+assert Height(fuzzySet) == 1
+assert Height(Normalize(fuzzySet)) == 1
+assert Centroid(fuzzySet, IntegrationDomain(0, 2)) == 1
 assert TNormPolicy("algebraic").Evaluate(0.5, 0.5) == 0.25
 assert "fuzzyroutines.FuzzyRoutines" not in sys.modules
 '''

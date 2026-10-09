@@ -7,7 +7,7 @@
 
 from pathlib import Path
 
-from tools import compose_pages_site
+from tools import compose_pages_site as composePagesSite
 
 PROJECTROOT = Path(__file__).parents[1]
 WORKFLOWPATH = PROJECTROOT / ".github" / "workflows" / "api-reference.yml"
@@ -27,14 +27,14 @@ def CreateApiFixture(apiRoot):
     (apiRoot / "search" / "search_index.json").write_text("{}", encoding="utf-8")
 
 
-def test_PagesCompositionPublishesEnglishAndHonestLocaleFallbacks(tmp_path):
+def test_PagesCompositionPublishesEnglishAndHonestLocaleFallbacks(tmpPath):
     """Keep every advertised language route real and semantically honest."""
 
-    apiRoot = tmp_path / "generated-api"
-    outputRoot = tmp_path / "pages"
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
     CreateApiFixture(apiRoot)
 
-    compose_pages_site.ComposeSite(apiRoot, outputRoot)
+    composePagesSite.ComposeSite(apiRoot, outputRoot)
 
     englishPage = outputRoot / "api" / "latest" / "en" / "index.html"
     russianPage = outputRoot / "api" / "latest" / "ru" / "index.html"
@@ -50,15 +50,15 @@ def test_PagesCompositionPublishesEnglishAndHonestLocaleFallbacks(tmp_path):
         assert fallbackPage.is_file()
 
 
-def test_PagesCompositionRejectsIncompleteApiInputBeforeWriting(tmp_path):
+def test_PagesCompositionRejectsIncompleteApiInputBeforeWriting(tmpPath):
     """Fail closed rather than publishing a partial API reference."""
 
-    apiRoot = tmp_path / "incomplete-api"
-    outputRoot = tmp_path / "pages"
+    apiRoot = tmpPath / "incomplete-api"
+    outputRoot = tmpPath / "pages"
     apiRoot.mkdir()
 
     try:
-        compose_pages_site.ComposeSite(apiRoot, outputRoot)
+        composePagesSite.ComposeSite(apiRoot, outputRoot)
 
     except FileNotFoundError as error:
         assert "generated API reference is incomplete" in str(error)
@@ -69,14 +69,14 @@ def test_PagesCompositionRejectsIncompleteApiInputBeforeWriting(tmp_path):
     assert not outputRoot.exists()
 
 
-def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmp_path):
+def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):
     """Distinguish the moving latest route from immutable stable releases."""
 
-    apiRoot = tmp_path / "generated-api"
-    outputRoot = tmp_path / "pages"
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
     CreateApiFixture(apiRoot)
 
-    compose_pages_site.ComposeSite(apiRoot, outputRoot)
+    composePagesSite.ComposeSite(apiRoot, outputRoot)
     versionText = (
         outputRoot / "api" / "versions" / "index.html"
     ).read_text(encoding="utf-8")

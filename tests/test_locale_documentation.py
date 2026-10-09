@@ -187,12 +187,12 @@ def test_CurrentGlossariesUseReviewedMathematicalTerminology():
     assert "equals the set height" not in chineseGlossary
 
 
-def test_MissingCanonicalUnitHasActionableCompletenessDiagnostic(tmp_path):
+def test_MissingCanonicalUnitHasActionableCompletenessDiagnostic(tmpPath):
     """Name the absent stable ID and source when inventory is incomplete."""
 
-    _PrepareFixture(tmp_path, includeUnit=False)
+    _PrepareFixture(tmpPath, includeUnit=False)
 
-    report = ValidateLocales(tmp_path)
+    report = ValidateLocales(tmpPath)
     expectedDiagnostic = (
         "docs/i18n/units.toml: missing canonical unit page:index "
         "source=docs/site/content/en/index.md action=add exactly one manifest record"
@@ -201,33 +201,33 @@ def test_MissingCanonicalUnitHasActionableCompletenessDiagnostic(tmp_path):
     assert report.diagnostics == (expectedDiagnostic,)
 
 
-def test_PageIdentifierSurvivesAnExplicitManifestPathMove(tmp_path):
+def test_PageIdentifierSurvivesAnExplicitManifestPathMove(tmpPath):
     """Preserve a stable page ID when its canonical English path changes."""
 
-    originalPath = _PrepareFixture(tmp_path)
-    movedPath = tmp_path / "docs" / "site" / "content" / "en" / "guide.md"
+    originalPath = _PrepareFixture(tmpPath)
+    movedPath = tmpPath / "docs" / "site" / "content" / "en" / "guide.md"
     movedPath.write_text(originalPath.read_text(encoding="utf-8"), encoding="utf-8")
     originalPath.unlink()
-    manifestPath = tmp_path / "docs" / "i18n" / "units.toml"
+    manifestPath = tmpPath / "docs" / "i18n" / "units.toml"
     manifestText = manifestPath.read_text(encoding="utf-8").replace(
         "docs/site/content/en/index.md",
         "docs/site/content/en/guide.md",
     )
     manifestPath.write_text(manifestText, encoding="utf-8")
 
-    report = ValidateLocales(tmp_path)
+    report = ValidateLocales(tmpPath)
 
     assert report.diagnostics == ()
     assert "page:index" in report.states
 
 
-def test_ApprovedTranslationBecomesStaleAfterCanonicalEnglishChange(tmp_path):
+def test_ApprovedTranslationBecomesStaleAfterCanonicalEnglishChange(tmpPath):
     """Fail closed with exact hashes when approved English source drifts."""
 
-    sourcePath = _PrepareFixture(tmp_path, ruState="approved")
+    sourcePath = _PrepareFixture(tmpPath, ruState="approved")
     sourcePath.write_text("# Changed canonical English\n", encoding="utf-8")
 
-    report = ValidateLocales(tmp_path)
+    report = ValidateLocales(tmpPath)
 
     assert report.states["page:index"]["ru"] == "stale"
     assert any("canonical source drift" in value for value in report.diagnostics)
@@ -239,11 +239,11 @@ def test_ApprovedTranslationBecomesStaleAfterCanonicalEnglishChange(tmp_path):
     )
 
 
-def test_PublicClassFieldAnnotationParticipatesInCanonicalHash(tmp_path):
+def test_PublicClassFieldAnnotationParticipatesInCanonicalHash(tmpPath):
     """Make dataclass-like public field changes invalidate symbol translations."""
 
-    _PrepareFixture(tmp_path)
-    coveragePath = tmp_path / "docs" / "site" / "api-coverage.toml"
+    _PrepareFixture(tmpPath)
+    coveragePath = tmpPath / "docs" / "site" / "api-coverage.toml"
     _Write(
         coveragePath,
         '''schemaVersion = 1
@@ -254,7 +254,7 @@ source = "fixture.py"
 mode = "authored"
 ''',
     )
-    sourcePath = tmp_path / "fixture.py"
+    sourcePath = tmpPath / "fixture.py"
     _Write(
         sourcePath,
         '''class Record:
@@ -268,7 +268,7 @@ mode = "authored"
         "apiCoverageManifest": "docs/site/api-coverage.toml",
         "packageNames": ["fixture"],
     }
-    originalUnits = DiscoverCanonicalUnits(tmp_path, projectManifest)
+    originalUnits = DiscoverCanonicalUnits(tmpPath, projectManifest)
     originalUnit = next(
         unit for unit in originalUnits if unit.identifier == "symbol:fixture.Record"
     )
@@ -276,7 +276,7 @@ mode = "authored"
         sourcePath.read_text(encoding="utf-8").replace("value: int", "value: float"),
         encoding="utf-8",
     )
-    changedUnits = DiscoverCanonicalUnits(tmp_path, projectManifest)
+    changedUnits = DiscoverCanonicalUnits(tmpPath, projectManifest)
     changedUnit = next(
         unit for unit in changedUnits if unit.identifier == "symbol:fixture.Record"
     )
@@ -284,12 +284,12 @@ mode = "authored"
     assert CanonicalHash(originalUnit) != CanonicalHash(changedUnit)
 
 
-def test_ApprovedTranslationRequiresAllHumanReviewRoles(tmp_path):
+def test_ApprovedTranslationRequiresAllHumanReviewRoles(tmpPath):
     """Reject false approval without editorial and mathematical reviewers."""
 
-    _PrepareFixture(tmp_path, ruState="approved", includeReviews=False)
+    _PrepareFixture(tmpPath, ruState="approved", includeReviews=False)
 
-    report = ValidateLocales(tmp_path)
+    report = ValidateLocales(tmpPath)
 
     assert any(
         "ru approved state lacks review roles editorial, mathematical" in value
@@ -297,29 +297,29 @@ def test_ApprovedTranslationRequiresAllHumanReviewRoles(tmp_path):
     )
 
 
-def test_TranslationStateAndPathFailuresRemainExplicit(tmp_path):
+def test_TranslationStateAndPathFailuresRemainExplicit(tmpPath):
     """Reject malformed states and locale content without an accountable state."""
 
-    _PrepareFixture(tmp_path, ruState="unexpected")
+    _PrepareFixture(tmpPath, ruState="unexpected")
 
-    report = ValidateLocales(tmp_path)
+    report = ValidateLocales(tmpPath)
 
     assert any("invalid ru state 'unexpected'" in value for value in report.diagnostics)
 
 
-def test_GlossaryConceptInventoriesMustMatchAcrossLocales(tmp_path):
+def test_GlossaryConceptInventoriesMustMatchAcrossLocales(tmpPath):
     """Prevent locale glossaries from silently describing different concepts."""
 
-    _PrepareFixture(tmp_path)
+    _PrepareFixture(tmpPath)
     _Write(
-        tmp_path / "docs" / "i18n" / "glossaries" / "zh-CN.toml",
+        tmpPath / "docs" / "i18n" / "glossaries" / "zh-CN.toml",
         '''schemaVersion = 1
 locale = "zh-CN"
 terms = []
 ''',
     )
 
-    report = ValidateLocales(tmp_path)
+    report = ValidateLocales(tmpPath)
 
     assert "docs/i18n/glossaries: target locale concept IDs must match" in (
         report.diagnostics

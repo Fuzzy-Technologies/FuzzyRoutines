@@ -37,7 +37,7 @@ def Scalar(value: int | str) -> int | str:
 '''
 
 
-def _Prepare(project_root, source=ALIAS_SOURCE, selected="Scalar"):
+def _Prepare(projectRoot, source=ALIAS_SOURCE, selected="Scalar"):
     """Write an intentionally unimportable source and explicit alias export."""
 
     paths = {
@@ -58,8 +58,8 @@ mode = "authored"
 ''',
     }
 
-    for relative_path, content in paths.items():
-        path = project_root / relative_path
+    for relativePath, content in paths.items():
+        path = projectRoot / relativePath
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content, encoding="utf-8")
 
@@ -70,11 +70,11 @@ mode = "authored"
     }
 
 
-def test_TypeAliasesRetainCanonicalDocstringsAndExportIdentities(tmp_path):
+def test_TypeAliasesRetainCanonicalDocstringsAndExportIdentities(tmpPath):
     """Discover PEP 695 aliases without imports or private-name leakage."""
 
-    manifest = _Prepare(tmp_path)
-    units = {unit.identifier: unit for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"}
+    manifest = _Prepare(tmpPath)
+    units = {unit.identifier: unit for unit in DiscoverCanonicalUnits(tmpPath, manifest) if unit.kind == "symbol"}
 
     assert set(units) == {"symbol:fuzzyroutines.Scalar", "symbol:fuzzyroutines.membership.Scalar"}, (
         "Static discovery must include authored and exported aliases without private definitions"
@@ -87,47 +87,47 @@ def test_TypeAliasesRetainCanonicalDocstringsAndExportIdentities(tmp_path):
         )
         assert unit.sourcePath == "fuzzyroutines/membership.py", "Exports must retain canonical source ownership"
 
-    assert ValidateCoverage(projectRoot=tmp_path) == (), "A rendered and documented public alias must pass coverage"
+    assert ValidateCoverage(projectRoot=tmpPath) == (), "A rendered and documented public alias must pass coverage"
 
 
-def test_TypeAliasDefinitionAndDocumentationChangesInvalidateHashes(tmp_path):
+def test_TypeAliasDefinitionAndDocumentationChangesInvalidateHashes(tmpPath):
     """Include alias signatures and source contracts in translation freshness."""
 
-    manifest = _Prepare(tmp_path)
-    before = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"}
+    manifest = _Prepare(tmpPath)
+    before = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmpPath, manifest) if unit.kind == "symbol"}
 
     for source in (
         ALIAS_SOURCE.replace("float | int", "float | complex"),
         ALIAS_SOURCE.replace("numeric scalar", "finite scalar"),
     ):
-        _Prepare(tmp_path, source=source)
-        after = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"}
+        _Prepare(tmpPath, source=source)
+        after = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmpPath, manifest) if unit.kind == "symbol"}
         assert all(after[identifier] != digest for identifier, digest in before.items()), (
             "Changing alias signatures or documentation must invalidate both canonical hashes"
         )
 
 
-def test_UndocumentedOrUnrenderedTypeAliasesFailCoverage(tmp_path):
+def test_UndocumentedOrUnrenderedTypeAliasesFailCoverage(tmpPath):
     """Keep alias export support from bypassing documentation coverage."""
 
-    _Prepare(tmp_path, source=ALIAS_SOURCE.replace('"""Accept built-in numeric scalar annotations."""\n', ""))
-    errors = ValidateCoverage(projectRoot=tmp_path)
+    _Prepare(tmpPath, source=ALIAS_SOURCE.replace('"""Accept built-in numeric scalar annotations."""\n', ""))
+    errors = ValidateCoverage(projectRoot=tmpPath)
     assert any("fuzzyroutines.membership.Scalar has no source docstring" in error for error in errors), (
         "Public aliases without source documentation must fail coverage"
     )
 
-    _Prepare(tmp_path, selected="Missing")
-    errors = ValidateCoverage(projectRoot=tmp_path)
+    _Prepare(tmpPath, selected="Missing")
+    errors = ValidateCoverage(projectRoot=tmpPath)
     assert any("fuzzyroutines.membership.Scalar is public but absent" in error for error in errors), (
         "Public aliases omitted from reference selections must fail coverage"
     )
 
 
-def test_OverloadsRetainOneIdentityAndConcreteDocumentation(tmp_path):
+def test_OverloadsRetainOneIdentityAndConcreteDocumentation(tmpPath):
     """Select concrete contracts while preserving every overload signature."""
 
-    manifest = _Prepare(tmp_path, source=OVERLOAD_SOURCE)
-    units = [unit for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"]
+    manifest = _Prepare(tmpPath, source=OVERLOAD_SOURCE)
+    units = [unit for unit in DiscoverCanonicalUnits(tmpPath, manifest) if unit.kind == "symbol"]
     assert len(units) == 2, "Overload stubs must not duplicate authored or exported identities"
     assert {unit.identifier for unit in units} == {
         "symbol:fuzzyroutines.Scalar", "symbol:fuzzyroutines.membership.Scalar",
@@ -143,31 +143,31 @@ def test_OverloadsRetainOneIdentityAndConcreteDocumentation(tmp_path):
             "def Scalar(value: int | str) -> int | str",
         ], "Canonical hashes must retain ordered overload and implementation signatures"
 
-    assert ValidateCoverage(projectRoot=tmp_path) == (), "Documented overload implementations must pass coverage"
+    assert ValidateCoverage(projectRoot=tmpPath) == (), "Documented overload implementations must pass coverage"
 
 
-def test_OverloadOnlyChangesInvalidateCanonicalHashes(tmp_path):
+def test_OverloadOnlyChangesInvalidateCanonicalHashes(tmpPath):
     """Detect a changed overload even when the implementation stays identical."""
 
-    manifest = _Prepare(tmp_path, source=OVERLOAD_SOURCE)
-    before = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"}
-    _Prepare(tmp_path, source=OVERLOAD_SOURCE.replace("value: str) -> str", "value: bytes) -> bytes"))
-    after = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmp_path, manifest) if unit.kind == "symbol"}
+    manifest = _Prepare(tmpPath, source=OVERLOAD_SOURCE)
+    before = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmpPath, manifest) if unit.kind == "symbol"}
+    _Prepare(tmpPath, source=OVERLOAD_SOURCE.replace("value: str) -> str", "value: bytes) -> bytes"))
+    after = {unit.identifier: CanonicalHash(unit) for unit in DiscoverCanonicalUnits(tmpPath, manifest) if unit.kind == "symbol"}
     assert all(after[identifier] != digest for identifier, digest in before.items()), (
         "Overload-only edits must invalidate both exported and authored translation hashes"
     )
 
 
-def test_OverloadStubsCannotSubstituteForConcreteContracts(tmp_path):
+def test_OverloadStubsCannotSubstituteForConcreteContracts(tmpPath):
     """Reject missing concrete implementations and missing implementation docs."""
 
-    manifest = _Prepare(tmp_path, source=OVERLOAD_SOURCE.split("\ndef Scalar(value: int | str)")[0])
+    manifest = _Prepare(tmpPath, source=OVERLOAD_SOURCE.split("\ndef Scalar(value: int | str)")[0])
 
     with pytest.raises(ValueError, match="cannot find public definition Scalar"):
-        DiscoverCanonicalUnits(tmp_path, manifest)
+        DiscoverCanonicalUnits(tmpPath, manifest)
 
-    _Prepare(tmp_path, source=OVERLOAD_SOURCE.replace('    """Preserve the complete concrete implementation contract."""\n', ""))
-    errors = ValidateCoverage(projectRoot=tmp_path)
+    _Prepare(tmpPath, source=OVERLOAD_SOURCE.replace('    """Preserve the complete concrete implementation contract."""\n', ""))
+    errors = ValidateCoverage(projectRoot=tmpPath)
     assert any("fuzzyroutines.membership.Scalar has no source docstring" in error for error in errors), (
         "Stub docstrings must not hide an undocumented implementation"
     )

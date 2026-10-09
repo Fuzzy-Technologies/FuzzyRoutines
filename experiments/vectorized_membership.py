@@ -45,7 +45,7 @@ def EvaluateMembership(identifier: str, values: Any, **parameters: float) -> Any
         and makes no all-finite-input or performance guarantee.
     """
 
-    scalar_function = MFunction(identifier, **parameters)
+    scalarFunction = MFunction(identifier, **parameters)
 
     try:
         np = importlib.import_module("numpy")
@@ -71,7 +71,7 @@ def EvaluateMembership(identifier: str, values: Any, **parameters: float) -> Any
 
     try:
         with np.errstate(over="raise", invalid="raise", divide="raise", under="ignore"):
-            result = _Evaluate(np, scalar_function.name, coordinates, scalar_function.parameters)
+            result = _Evaluate(np, scalarFunction.name, coordinates, scalarFunction.parameters)
 
     except FloatingPointError as error:
         raise OverflowError("membership intermediate is not representable in binary64") from error
@@ -85,12 +85,12 @@ def EvaluateMembership(identifier: str, values: Any, **parameters: float) -> Any
 def _SquaredWidth(left: float, right: float) -> float:
     """Return a representable squared width without changing scalar failure modes."""
 
-    squared_width = (right - left) ** 2
+    squaredWidth = (right - left) ** 2
 
-    if squared_width == 0.0:
+    if squaredWidth == 0.0:
         raise ZeroDivisionError("membership squared width underflows to zero")
 
-    return squared_width
+    return squaredWidth
 
 
 def _Parabolic(np: Any, coordinates: Any, left: float, right: float) -> Any:
@@ -101,9 +101,9 @@ def _Parabolic(np: Any, coordinates: Any, left: float, right: float) -> Any:
     falling = (coordinates > (left + right) / 2) & (coordinates < right)
 
     if np.any(rising) or np.any(falling):
-        squared_width = _SquaredWidth(left, right)
-        result[rising] = 2 * (coordinates[rising] - left) ** 2 / squared_width
-        result[falling] = 1 - 2 * (coordinates[falling] - right) ** 2 / squared_width
+        squaredWidth = _SquaredWidth(left, right)
+        result[rising] = 2 * (coordinates[rising] - left) ** 2 / squaredWidth
+        result[falling] = 1 - 2 * (coordinates[falling] - right) ** 2 / squaredWidth
 
     result[coordinates >= right] = 1.0
 
@@ -126,9 +126,9 @@ def _Evaluate(np: Any, name: str, coordinates: Any, parameters: dict[str, Any]) 
     if name == "Exponential":
         # Scalar Gaussian intentionally accepts overflow to an infinite distance.
         with np.errstate(over="ignore"):
-            scaled_distance = (coordinates - a) / b
+            scaledDistance = (coordinates - a) / b
 
-            return np.exp(-0.5 * scaled_distance * scaled_distance)
+            return np.exp(-0.5 * scaledDistance * scaledDistance)
 
     if name == "Sigmoidal":
         # Separate branches keep every exponential argument non-positive.
@@ -160,15 +160,15 @@ def _Evaluate(np: Any, name: str, coordinates: Any, parameters: dict[str, Any]) 
         rising = coordinates < b
         result[rising] = _Parabolic(np, coordinates[rising], a, b)
         result[(coordinates >= b) & (coordinates <= c)] = 1
-        right_boundary = c + b - a
-        right_midpoint = (c + right_boundary) / 2
-        first_fall = (coordinates > c) & (coordinates <= right_midpoint)
-        second_fall = (coordinates > right_midpoint) & (coordinates < right_boundary)
+        rightBoundary = c + b - a
+        rightMidpoint = (c + rightBoundary) / 2
+        firstFall = (coordinates > c) & (coordinates <= rightMidpoint)
+        secondFall = (coordinates > rightMidpoint) & (coordinates < rightBoundary)
 
-        if np.any(first_fall) or np.any(second_fall):
-            squared_width = _SquaredWidth(c, right_boundary)
-            result[first_fall] = 1 - 2 * (coordinates[first_fall] - c) ** 2 / squared_width
-            result[second_fall] = 2 * (coordinates[second_fall] - right_boundary) ** 2 / squared_width
+        if np.any(firstFall) or np.any(secondFall):
+            squaredWidth = _SquaredWidth(c, rightBoundary)
+            result[firstFall] = 1 - 2 * (coordinates[firstFall] - c) ** 2 / squaredWidth
+            result[secondFall] = 2 * (coordinates[secondFall] - rightBoundary) ** 2 / squaredWidth
 
         return result
 

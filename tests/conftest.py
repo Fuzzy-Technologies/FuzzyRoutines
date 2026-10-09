@@ -29,12 +29,19 @@ class ReservedTcpPort:
         self.reservation.close()
 
 
-@pytest.fixture(autouse=True)
-def isolatedStateRoot(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
+@pytest.fixture(name="tmpPath")
+def TmpPath(request: pytest.FixtureRequest) -> Path:
+    """Expose pytest's isolated temporary directory through a camelCase binding."""
+
+    return request.getfixturevalue("tmp_path")
+
+
+@pytest.fixture(name="isolatedStateRoot", autouse=True)
+def IsolatedStateRoot(tmpPath: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
     """Give every test an isolated temporary and mutable-state root."""
 
-    stateRoot = tmp_path / "state"
-    tempRoot = tmp_path / "temp"
+    stateRoot = tmpPath / "state"
+    tempRoot = tmpPath / "temp"
     stateRoot.mkdir()
     tempRoot.mkdir()
     previousTempRoot = tempfile.tempdir
@@ -52,15 +59,15 @@ def isolatedStateRoot(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterat
         tempfile.tempdir = previousTempRoot
 
 
-@pytest.fixture
-def isolatedDatabasePath(isolatedStateRoot: Path) -> Path:
+@pytest.fixture(name="isolatedDatabasePath")
+def IsolatedDatabasePath(isolatedStateRoot: Path) -> Path:
     """Return a unique database path owned by the current test."""
 
     return isolatedStateRoot / "test.sqlite3"
 
 
-@pytest.fixture
-def reservedPortFactory() -> Iterator[Callable[[], ReservedTcpPort]]:
+@pytest.fixture(name="reservedPortFactory")
+def ReservedPortFactory() -> Iterator[Callable[[], ReservedTcpPort]]:
     """Reserve unique loopback TCP ports without a discover-then-bind race."""
 
     reservations: list[ReservedTcpPort] = []

@@ -24,64 +24,64 @@ from tempfile import TemporaryDirectory
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
-def ConsumerPaths(project_root: Path = PROJECT_ROOT) -> tuple[Path, ...]:
+def ConsumerPaths(projectRoot: Path = PROJECT_ROOT) -> tuple[Path, ...]:
     """Return every static consumer probe, including future additions.
 
     Args:
-        project_root: Checkout whose `tests/typing` directory supplies probes.
+        projectRoot: Checkout whose `tests/typing` directory supplies probes.
     """
 
-    return tuple(sorted((project_root / "tests" / "typing").glob("*.py")))
+    return tuple(sorted((projectRoot / "tests" / "typing").glob("*.py")))
 
 
-def CheckInstalled(project_root: Path = PROJECT_ROOT) -> int:
+def CheckInstalled(projectRoot: Path = PROJECT_ROOT) -> int:
     """Check isolated consumers against the active installed package.
 
     Args:
-        project_root: Checkout containing the checker configuration and probes.
+        projectRoot: Checkout containing the checker configuration and probes.
 
     Returns:
         Zero when the installed marker and every consumer contract pass;
         otherwise the failed subprocess status or one for an invalid boundary.
     """
 
-    with TemporaryDirectory(prefix="fuzzyroutines-typing-") as temporary_directory:
-        consumer_root = Path(temporary_directory)
-        checker_environment = os.environ.copy()
-        checker_environment.pop("MYPYPATH", None)
-        checker_environment.pop("PYTHONPATH", None)
-        installed_probe = subprocess.run(
+    with TemporaryDirectory(prefix="fuzzyroutines-typing-") as temporaryDirectory:
+        consumerRoot = Path(temporaryDirectory)
+        checkerEnvironment = os.environ.copy()
+        checkerEnvironment.pop("MYPYPATH", None)
+        checkerEnvironment.pop("PYTHONPATH", None)
+        installedProbe = subprocess.run(
             [
                 sys.executable,
                 "-I",
                 "-c",
                 "import fuzzyroutines; print(fuzzyroutines.__file__)",
             ],
-            cwd=consumer_root,
-            env=checker_environment,
+            cwd=consumerRoot,
+            env=checkerEnvironment,
             text=True,
             capture_output=True,
             check=False,
         )
 
-        if installed_probe.returncode:
-            print(installed_probe.stderr, file=sys.stderr, end="")
+        if installedProbe.returncode:
+            print(installedProbe.stderr, file=sys.stderr, end="")
 
-            return installed_probe.returncode
+            return installedProbe.returncode
 
-        package_path = Path(installed_probe.stdout.strip()).resolve()
+        packagePath = Path(installedProbe.stdout.strip()).resolve()
 
-        if package_path.is_relative_to(project_root.resolve()):
+        if packagePath.is_relative_to(projectRoot.resolve()):
             print("Installed typing gate resolved the source checkout", file=sys.stderr)
 
             return 1
 
-        if not package_path.with_name("py.typed").is_file():
+        if not packagePath.with_name("py.typed").is_file():
             print("Installed package is missing py.typed", file=sys.stderr)
 
             return 1
 
-        consumers = ConsumerPaths(project_root)
+        consumers = ConsumerPaths(projectRoot)
 
         if not consumers:
             print("No typing consumer probes were found", file=sys.stderr)
@@ -89,7 +89,7 @@ def CheckInstalled(project_root: Path = PROJECT_ROOT) -> int:
             return 1
 
         for consumer in consumers:
-            shutil.copyfile(consumer, consumer_root / consumer.name)
+            shutil.copyfile(consumer, consumerRoot / consumer.name)
 
         result = subprocess.run(
             [
@@ -98,19 +98,19 @@ def CheckInstalled(project_root: Path = PROJECT_ROOT) -> int:
                 "-m",
                 "mypy",
                 "--config-file",
-                str(project_root / "mypy.ini"),
+                str(projectRoot / "mypy.ini"),
                 "--no-incremental",
                 "--cache-dir",
-                str(consumer_root / "cache"),
-                *(str(consumer_root / consumer.name) for consumer in consumers),
+                str(consumerRoot / "cache"),
+                *(str(consumerRoot / consumer.name) for consumer in consumers),
             ],
-            cwd=consumer_root,
-            env=checker_environment,
+            cwd=consumerRoot,
+            env=checkerEnvironment,
             check=False,
         )
 
         if result.returncode == 0:
-            print(f"Installed modern typing consumers: PASS ({package_path})")
+            print(f"Installed modern typing consumers: PASS ({packagePath})")
 
         return result.returncode
 

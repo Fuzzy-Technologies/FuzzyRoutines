@@ -227,14 +227,14 @@ def _NodeUnit(
     identifier: str,
     sourcePath: str,
     node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef | ast.TypeAlias,
-    source_path: Path,
+    sourceFilePath: Path,
 ) -> CanonicalUnit:
     """Build one canonical symbol unit from an authored syntax node."""
 
     signature = ast.unparse(node) if isinstance(node, ast.TypeAlias) else (
         _ClassSignature(node)
         if isinstance(node, ast.ClassDef)
-        else _SourceFunctionSignature(source_path, node)
+        else _SourceFunctionSignature(sourceFilePath, node)
     )
 
     return CanonicalUnit(
@@ -242,7 +242,7 @@ def _NodeUnit(
         kind="symbol",
         sourcePath=sourcePath,
         signature=signature,
-        body=_SourceDocstring(source_path, node),
+        body=_SourceDocstring(sourceFilePath, node),
     )
 
 
@@ -324,12 +324,12 @@ def _AuthoredUnits(
         if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.TypeAlias)):
             continue
 
-        node_name = node.name.id if isinstance(node, ast.TypeAlias) else node.name
+        nodeName = node.name.id if isinstance(node, ast.TypeAlias) else node.name
 
-        if node_name.startswith("_") or _IsOverload(node):
+        if nodeName.startswith("_") or _IsOverload(node):
             continue
 
-        symbolName = f"{moduleName}.{node_name}"
+        symbolName = f"{moduleName}.{nodeName}"
         units.append(_NodeUnit(f"symbol:{symbolName}", relativePath, node, sourcePath))
 
         if not isinstance(node, ast.ClassDef):
@@ -430,14 +430,14 @@ def _ExportUnits(
 
 
 def _AdapterTargets(
-    module_name: str,
-    source_path: Path,
-    project_root: Path,
+    moduleName: str,
+    sourceFilePath: Path,
+    projectRoot: Path,
 ) -> tuple[tuple[str, str, Path], ...]:
     """Resolve explicit project-owned facade imports without importing code."""
 
-    syntax = ast.parse(_ReadCanonicalText(source_path), filename=str(source_path))
-    package_name = module_name.partition(".")[0]
+    syntax = ast.parse(_ReadCanonicalText(sourceFilePath), filename=str(sourceFilePath))
+    packageName = moduleName.partition(".")[0]
     targets = {}
 
     for node in syntax.body:
@@ -445,52 +445,52 @@ def _AdapterTargets(
             continue
 
         if node.level:
-            raise ValueError(f"{source_path}: adapter imports must use absolute module paths")
+            raise ValueError(f"{sourceFilePath}: adapter imports must use absolute module paths")
 
-        if not node.module or not node.module.startswith(package_name + "."):
+        if not node.module or not node.module.startswith(packageName + "."):
             continue
 
-        for imported_name in node.names:
-            public_name = imported_name.asname or imported_name.name
+        for importedName in node.names:
+            publicName = importedName.asname or importedName.name
 
-            if public_name == "*":
-                raise ValueError(f"{source_path}: adapter imports must name explicit symbols")
+            if publicName == "*":
+                raise ValueError(f"{sourceFilePath}: adapter imports must name explicit symbols")
 
-            if public_name.startswith("_"):
+            if publicName.startswith("_"):
                 continue
 
-            if public_name in targets:
-                raise ValueError(f"{source_path}: duplicate adapter export {public_name}")
+            if publicName in targets:
+                raise ValueError(f"{sourceFilePath}: duplicate adapter export {publicName}")
 
-            target_path = _FindModulePath(node.module, project_root)
-            _FindTopLevelNode(target_path, imported_name.name)
-            targets[public_name] = (public_name, imported_name.name, target_path)
+            targetPath = _FindModulePath(node.module, projectRoot)
+            _FindTopLevelNode(targetPath, importedName.name)
+            targets[publicName] = (publicName, importedName.name, targetPath)
 
     if not targets:
-        raise ValueError(f"{source_path}: adapter surface has no explicit public definitions")
+        raise ValueError(f"{sourceFilePath}: adapter surface has no explicit public definitions")
 
     return tuple(targets.values())
 
 
 def _AdapterUnits(
-    module_name: str,
-    source_path: Path,
-    project_root: Path,
+    moduleName: str,
+    sourceFilePath: Path,
+    projectRoot: Path,
 ) -> tuple[CanonicalUnit, ...]:
     """Keep facade symbol and member identities attached to adapter source."""
 
     units = []
 
-    for public_name, target_name, target_path in _AdapterTargets(
-        module_name, source_path, project_root,
+    for publicName, targetName, targetPath in _AdapterTargets(
+        moduleName, sourceFilePath, projectRoot,
     ):
-        source_prefix = f"symbol:{module_name}.{target_name}"
-        public_prefix = f"symbol:{module_name}.{public_name}"
+        sourcePrefix = f"symbol:{moduleName}.{targetName}"
+        publicPrefix = f"symbol:{moduleName}.{publicName}"
 
-        for unit in _AuthoredUnits(module_name, target_path, project_root):
-            if unit.identifier == source_prefix or unit.identifier.startswith(source_prefix + "."):
+        for unit in _AuthoredUnits(moduleName, targetPath, projectRoot):
+            if unit.identifier == sourcePrefix or unit.identifier.startswith(sourcePrefix + "."):
                 units.append(CanonicalUnit(
-                    identifier=public_prefix + unit.identifier[len(source_prefix):],
+                    identifier=publicPrefix + unit.identifier[len(sourcePrefix):],
                     kind=unit.kind,
                     sourcePath=unit.sourcePath,
                     signature=unit.signature,

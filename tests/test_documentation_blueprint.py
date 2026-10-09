@@ -23,10 +23,10 @@ FIXTUREROOT = (
 )
 
 
-def test_SecondProjectDryRunDoesNotImportFuzzyRoutines(tmp_path, monkeypatch):
+def test_SecondProjectDryRunDoesNotImportFuzzyRoutines(tmpPath, monkeypatch):
     """Validate a foreign package and locale set without runtime imports."""
 
-    projectRoot = tmp_path / "sampleproject"
+    projectRoot = tmpPath / "sampleproject"
     shutil.copytree(FIXTUREROOT, projectRoot)
     importedNames = []
     originalImport = builtins.__import__
@@ -69,10 +69,10 @@ def test_BlueprintManifestMakesEveryProjectInputExplicit():
     assert manifest["publicationPath"] == "/SampleProject"
 
 
-def test_BlueprintRejectsApiSurfacesOutsideDeclaredPackages(tmp_path):
+def test_BlueprintRejectsApiSurfacesOutsideDeclaredPackages(tmpPath):
     """Bind static discovery to the explicit package-name input."""
 
-    projectRoot = tmp_path / "sampleproject"
+    projectRoot = tmpPath / "sampleproject"
     shutil.copytree(FIXTUREROOT, projectRoot)
     coveragePath = projectRoot / "docs" / "site" / "api-coverage.toml"
     coveragePath.write_text(

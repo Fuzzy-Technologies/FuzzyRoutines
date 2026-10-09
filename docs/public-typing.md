@@ -40,8 +40,8 @@ def CustomMembership(coordinate: MembershipScalar) -> MembershipScalar:
 
 
 membership: MembershipCallable = CustomMembership
-fuzzy_set = ScalarFuzzySet(ContinuousUniverse(0, 1, True, True), membership)
-grade: MembershipScalar = fuzzy_set.Membership(0.5)
+fuzzySet = ScalarFuzzySet(ContinuousUniverse(0, 1, True, True), membership)
+grade: MembershipScalar = fuzzySet.Membership(0.5)
 ```
 
 Scalar results remain `MembershipScalar` so annotations do not require coercion

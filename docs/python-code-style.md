@@ -20,7 +20,7 @@ repository.
 ## Naming and compatibility
 
 - Functions, methods, and classes use `PascalCase`, including `Main()`.
-- New variables, parameters, and instance attributes use `snake_case`; a
+- Project-owned variables, parameters, and instance attributes use `camelCase`; a
   leading underscore is allowed for internal implementation details.
 - New constants use `UPPER_SNAKE_CASE`, with underscores between words.
 - Python dunder names, external API names, and test discovery are exceptions.
@@ -32,8 +32,21 @@ repository.
   historical facade. New local variables follow the current naming rules;
   changing an existing public signature needs compatibility review.
 
-These rules govern new and modified source. Existing test-function docstring
-coverage is a separate maintenance deliverable under
+These rules govern every tracked Python file and authored executable Python
+fixture or Markdown example. The maintainer-confirmed camelCase rule supersedes
+the snake_case variable rule in the previously supplied shared standard.
+
+Run `python -m pytest -q tests/test_python_naming.py` to check the entire naming
+scope. This check runs in the ordinary PR test suite. Its reviewed exceptions
+are Python dunders, field accessors, historical `mju` adapters, importlib
+`find_spec`, HTMLParser `handle_starttag`, setuptools `make_archive` and its
+imposed parameters, TarInfo/command fields, and Sphinx configuration bindings.
+Fixtures expose camelCase resources through PascalCase provider functions and
+explicit pytest `name=` bindings. Snake_case JSON/schema keys, family IDs, CLI
+flags, file names and compatibility alias strings are data, not local variables.
+Negative naming fixtures intentionally contain invalid examples.
+
+Existing test-function docstring coverage is a separate maintenance deliverable under
 [Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286);
 the [project audit](audits/2026-10-05-project-audit.md) records the baseline.
 
@@ -192,14 +205,14 @@ library APIs.
 ### Mathematical function
 
 ```python
-def WeakAlphaCut(fuzzy_set: ScalarFuzzySet, alpha: Real) -> DiscreteRegion:
+def WeakAlphaCut(fuzzySet: ScalarFuzzySet, alpha: Real) -> DiscreteRegion:
     r"""Return the weak alpha-cut of a discrete fuzzy set.
 
     The cut uses the inclusive boundary
     $A_\alpha = \{x \in X \mid \mu_A(x) \geq \alpha\}$.
 
     Args:
-        fuzzy_set: Set over an exhaustively enumerable discrete universe.
+        fuzzySet: Set over an exhaustively enumerable discrete universe.
         alpha: Membership threshold in the closed interval $[0, 1]$.
 
     Returns:
@@ -271,10 +284,10 @@ could not infer from the filename.
 def test_HigherAlphaCutIsNestedInsideLowerCut():
     """Keep weak cuts nested when the membership threshold increases."""
 
-    lower_cut = AlphaCut(fuzzy_set, 0.25)
-    higher_cut = AlphaCut(fuzzy_set, 0.75)
+    lowerCut = AlphaCut(fuzzy_set, 0.25)
+    higherCut = AlphaCut(fuzzy_set, 0.75)
 
-    assert set(higher_cut.points) <= set(lower_cut.points), (
+    assert set(higherCut.points) <= set(lowerCut.points), (
         "For beta >= alpha, A_beta must remain a subset of A_alpha."
     )
 ```

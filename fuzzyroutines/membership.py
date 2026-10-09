@@ -13,8 +13,9 @@ arithmetic and boundary behavior, including underflow in positive tails.
 
 import math
 import re
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from functools import wraps
 from numbers import Real
 from types import MappingProxyType, MethodType
 from typing import Protocol, cast
@@ -81,10 +82,10 @@ class MembershipCallable(Protocol):
         ...
 
 
-def _ValidateFamilyParameters(family_name: str, parameters: dict[str, MembershipScalar]) -> dict[str, float]:
+def _ValidateFamilyParameters(familyName: str, parameters: dict[str, MembershipScalar]) -> dict[str, float]:
     """Validate canonical analytical geometry without coercion or mutation."""
 
-    required_parameters = {
+    requiredParameters = {
         'Hyperbolic': ('a', 'b', 'c'),
         'Bell': ('a', 'b', 'c'),
         'Parabolic': ('a', 'b'),
@@ -93,54 +94,54 @@ def _ValidateFamilyParameters(family_name: str, parameters: dict[str, Membership
         'Exponential': ('a', 'b'),
         'Sigmoidal': ('a', 'b'),
         'Desirability': (),
-    }[family_name]
+    }[familyName]
 
-    if not isinstance(parameters, dict) or set(parameters) != set(required_parameters):
+    if not isinstance(parameters, dict) or set(parameters) != set(requiredParameters):
         raise ValueError(
             "{} membership function requires exactly these parameters: {}".format(
-                family_name,
-                ', '.join(required_parameters) if required_parameters else 'none',
+                familyName,
+                ', '.join(requiredParameters) if requiredParameters else 'none',
             )
         )
 
-    arithmetic_parameters = cast(dict[str, float], parameters)
+    arithmeticParameters = cast(dict[str, float], parameters)
 
-    for parameter_name in required_parameters:
-        parameter_value = parameters[parameter_name]
+    for parameterName in requiredParameters:
+        parameterValue = parameters[parameterName]
 
-        if (isinstance(parameter_value, bool) or not isinstance(parameter_value, Real)) or not math.isfinite(parameter_value):
+        if (isinstance(parameterValue, bool) or not isinstance(parameterValue, Real)) or not math.isfinite(parameterValue):
             raise ValueError(
-                f"{family_name} parameter {parameter_name!r} must be a finite real number"
+                f"{familyName} parameter {parameterName!r} must be a finite real number"
             )
 
-    if family_name == 'Hyperbolic':
-        if arithmetic_parameters['a'] <= 0 or arithmetic_parameters['b'] <= 0:
+    if familyName == 'Hyperbolic':
+        if arithmeticParameters['a'] <= 0 or arithmeticParameters['b'] <= 0:
             raise ValueError("Hyperbolic parameters must satisfy a > 0 and b > 0")
 
-    elif family_name == 'Bell':
-        if not arithmetic_parameters['a'] < arithmetic_parameters['b'] <= arithmetic_parameters['c']:
+    elif familyName == 'Bell':
+        if not arithmeticParameters['a'] < arithmeticParameters['b'] <= arithmeticParameters['c']:
             raise ValueError("Bell parameters must satisfy a < b <= c")
 
-    elif family_name == 'Parabolic':
-        if not arithmetic_parameters['a'] < arithmetic_parameters['b']:
+    elif familyName == 'Parabolic':
+        if not arithmeticParameters['a'] < arithmeticParameters['b']:
             raise ValueError("Parabolic parameters must satisfy a < b")
 
-    elif family_name == 'Triangle':
-        if not arithmetic_parameters['a'] < arithmetic_parameters['c'] <= arithmetic_parameters['b']:
+    elif familyName == 'Triangle':
+        if not arithmeticParameters['a'] < arithmeticParameters['c'] <= arithmeticParameters['b']:
             raise ValueError("Triangle parameters must satisfy a < c <= b")
 
-    elif family_name == 'Trapezium':
-        if not arithmetic_parameters['a'] < arithmetic_parameters['c'] <= arithmetic_parameters['d'] < arithmetic_parameters['b']:
+    elif familyName == 'Trapezium':
+        if not arithmeticParameters['a'] < arithmeticParameters['c'] <= arithmeticParameters['d'] < arithmeticParameters['b']:
             raise ValueError("Trapezium parameters must satisfy a < c <= d < b")
 
-    elif family_name == 'Exponential':
-        if arithmetic_parameters['b'] <= 0:
+    elif familyName == 'Exponential':
+        if arithmeticParameters['b'] <= 0:
             raise ValueError("Exponential parameter b must satisfy b > 0")
 
-    elif family_name == 'Sigmoidal' and arithmetic_parameters['a'] == 0:
+    elif familyName == 'Sigmoidal' and arithmeticParameters['a'] == 0:
         raise ValueError("Sigmoidal parameter a must be non-zero")
 
-    return dict(arithmetic_parameters)
+    return dict(arithmeticParameters)
 
 
 def _Hyperbolic(parameters: Mapping[str, float], x: float) -> float:
@@ -169,14 +170,14 @@ def _Bell(parameters: Mapping[str, float], x: float) -> float:
     if x <= c:
         return 1
 
-    right_boundary = c + b - a
-    right_midpoint = (c + right_boundary) / 2
+    rightBoundary = c + b - a
+    rightMidpoint = (c + rightBoundary) / 2
 
-    if x <= right_midpoint:
-        return 1 - (2 * (x - c) ** 2) / (right_boundary - c) ** 2
+    if x <= rightMidpoint:
+        return 1 - (2 * (x - c) ** 2) / (rightBoundary - c) ** 2
 
-    if x < right_boundary:
-        return (2 * (x - right_boundary) ** 2) / (right_boundary - c) ** 2
+    if x < rightBoundary:
+        return (2 * (x - rightBoundary) ** 2) / (rightBoundary - c) ** 2
 
     return 0
 
@@ -200,10 +201,10 @@ def _Parabolic(parameters: Mapping[str, float], x: float) -> float:
 
 
 def _DifferenceRatio(
-    numerator_left: float,
-    numerator_right: float,
-    denominator_left: float,
-    denominator_right: float,
+    numeratorLeft: float,
+    numeratorRight: float,
+    denominatorLeft: float,
+    denominatorRight: float,
 ) -> float:
     """Preserve a finite ramp ratio when an endpoint difference overflows.
 
@@ -212,14 +213,14 @@ def _DifferenceRatio(
     representable without changing the mathematical ratio.
     """
 
-    numerator = numerator_left - numerator_right
-    denominator = denominator_left - denominator_right
+    numerator = numeratorLeft - numeratorRight
+    denominator = denominatorLeft - denominatorRight
 
     if abs(numerator) != math.inf and abs(denominator) != math.inf:
         return numerator / denominator
 
-    return (numerator_left / 2 - numerator_right / 2) / (
-        denominator_left / 2 - denominator_right / 2
+    return (numeratorLeft / 2 - numeratorRight / 2) / (
+        denominatorLeft / 2 - denominatorRight / 2
     )
 
 
@@ -271,16 +272,16 @@ def _Exponential(parameters: Mapping[str, float], x: float) -> float:
     a = parameters['a']
     b = parameters['b']
     distance = x - a
-    scaled_distance = distance / b
+    scaledDistance = distance / b
 
     if abs(distance) == math.inf:
         # Overflowing subtraction has opposite-sign operands, so distributed
         # division cannot introduce cancellation between infinite terms.
-        scaled_distance = x / b - a / b
+        scaledDistance = x / b - a / b
 
     # Binary64 underflow may produce zero far from the centre; analytical
     # support is derived from the formula, never from this sampled value.
-    return math.exp(-0.5 * scaled_distance * scaled_distance)
+    return math.exp(-0.5 * scaledDistance * scaledDistance)
 
 
 def _Sigmoidal(parameters: Mapping[str, float], x: float) -> float:
@@ -332,14 +333,49 @@ _FORMULAS = {
 # The public family API below uses geometric names rather than this adapter map.
 _PARAMETER_MAP = {
     "hyperbolic": ("Hyperbolic", (("scale", "a"), ("exponent", "b"), ("cutoff", "c"))),
-    "bell": ("Bell", (("left", "a"), ("plateau_start", "b"), ("plateau_end", "c"))),
+    "bell": ("Bell", (("left", "a"), ('plateauStart', "b"), ('plateauEnd', "c"))),
     "s_shoulder": ("Parabolic", (("left", "a"), ("right", "b"))),
     "triangle": ("Triangle", (("left", "a"), ("peak", "c"), ("right", "b"))),
-    "trapezoid": ("Trapezium", (("left", "a"), ("plateau_start", "c"), ("plateau_end", "d"), ("right", "b"))),
+    "trapezoid": ("Trapezium", (("left", "a"), ('plateauStart', "c"), ('plateauEnd', "d"), ("right", "b"))),
     "gaussian": ("Exponential", (("center", "a"), ("scale", "b"))),
     "logistic": ("Sigmoidal", (("slope", "a"), ("midpoint", "b"))),
     "harrington_desirability": ("Desirability", ()),
 }
+
+
+def _NormalizePlateauAliases[Value](parameters: Mapping[str, Value]) -> dict[str, Value]:
+    """Copy geometric keywords and reject conflicting pre-refactor aliases."""
+
+    normalized = dict(parameters)
+
+    for alias, canonical in (("plateau_start", "plateauStart"), ("plateau_end", "plateauEnd")):
+        if alias not in normalized:
+            continue
+
+        if canonical in normalized:
+            raise InvalidParameterError(f"{alias} and {canonical} name the same parameter")
+
+        normalized[canonical] = normalized.pop(alias)
+
+    return normalized
+
+
+def _AcceptPlateauAliases[**Parameters, Result](
+    constructor: Callable[Parameters, Result],
+) -> Callable[Parameters, Result]:
+    """Keep earlier development keywords callable with a canonical camelCase signature."""
+
+    @wraps(constructor)
+    def Construct(*arguments: Parameters.args, **parameters: Parameters.kwargs) -> Result:
+        """Translate compatibility keywords before invoking the unchanged constructor."""
+
+        normalized = _NormalizePlateauAliases(parameters)
+        parameters.clear()
+        parameters.update(normalized)
+
+        return constructor(*arguments, **parameters)
+
+    return Construct
 
 
 @dataclass(frozen=True, slots=True)
@@ -347,7 +383,7 @@ class _AnalyticalSource:
     """Frozen validated formula source for exact regions and numerical moments."""
 
     name: str
-    parameter_items: tuple[tuple[str, MembershipScalar], ...]
+    parameterItems: tuple[tuple[str, MembershipScalar], ...]
 
     def __post_init__(self) -> None:
         """Reject unsupported families and freeze a validated parameter copy."""
@@ -355,14 +391,14 @@ class _AnalyticalSource:
         if self.name not in _FORMULAS:
             raise ValueError(f"unsupported analytical membership family: {self.name!r}")
 
-        parameters = _ValidateFamilyParameters(self.name, dict(self.parameter_items))
-        object.__setattr__(self, "parameter_items", tuple(sorted(parameters.items())))
+        parameters = _ValidateFamilyParameters(self.name, dict(self.parameterItems))
+        object.__setattr__(self, 'parameterItems', tuple(sorted(parameters.items())))
 
     @property
     def parameters(self) -> Mapping[str, MembershipScalar]:
         """Return a read-only view of the frozen analytical parameters."""
 
-        return MappingProxyType(dict(self.parameter_items))
+        return MappingProxyType(dict(self.parameterItems))
 
     def mju(self, coordinate: MembershipScalar) -> float:
         """Evaluate the frozen scalar formula at one finite real coordinate."""
@@ -389,11 +425,14 @@ class MembershipFunction:
     Notes:
         Positive analytical tails may underflow to zero when evaluated.
         Triangle permits `peak == right`, with grade one at that endpoint and
-        zero to its right. Bell's right foot is `plateau_end + plateau_start - left`.
+        zero to its right. Bell's right foot is `plateauEnd + plateauStart - left`.
+        Earlier development keywords `plateau_start` and `plateau_end` are
+        accepted as input aliases; the parameter mapping uses camelCase keys.
+        Supplying an alias and its canonical name together is invalid.
     """
 
     family: str
-    _parameter_items: tuple[tuple[str, MembershipScalar], ...]
+    _parameterItems: tuple[tuple[str, MembershipScalar], ...]
     _source: _AnalyticalSource
 
     def __init__(self, family: str, **parameters: MembershipScalar) -> None:
@@ -412,34 +451,35 @@ class MembershipFunction:
         if family not in _PARAMETER_MAP:
             raise InvalidParameterError(f"unknown membership-function family: {family!r}")
 
-        analytical_name, parameter_map = _PARAMETER_MAP[family]
+        parameters = _NormalizePlateauAliases(parameters)
+        analyticalName, parameterMap = _PARAMETER_MAP[family]
 
-        if set(parameters) != {name for name, _ in parameter_map}:
-            raise InvalidParameterError(f"{family} requires exactly these parameters: {tuple(name for name, _ in parameter_map)}")
+        if set(parameters) != {name for name, _ in parameterMap}:
+            raise InvalidParameterError(f"{family} requires exactly these parameters: {tuple(name for name, _ in parameterMap)}")
 
         try:
             source = _AnalyticalSource(
-                analytical_name,
-                tuple((key, parameters[name]) for name, key in parameter_map),
+                analyticalName,
+                tuple((key, parameters[name]) for name, key in parameterMap),
             )
 
         except ValueError as error:
-            modern_message = str(error)
+            modernMessage = str(error)
 
-            for name, key in parameter_map:
+            for name, key in parameterMap:
                 # Replace only standalone analytical keys, never letters inside words.
-                modern_message = re.sub(rf"\b{key}\b", name, modern_message)
+                modernMessage = re.sub(rf"\b{key}\b", name, modernMessage)
 
-            raise InvalidParameterError(modern_message) from error
+            raise InvalidParameterError(modernMessage) from error
         object.__setattr__(self, "family", family)
-        object.__setattr__(self, "_parameter_items", tuple(sorted(parameters.items())))
+        object.__setattr__(self, '_parameterItems', tuple(sorted(parameters.items())))
         object.__setattr__(self, "_source", source)
 
     @property
     def parameters(self) -> Mapping[str, MembershipScalar]:
         """Return the read-only modern parameter mapping."""
 
-        return MappingProxyType(dict(self._parameter_items))
+        return MappingProxyType(dict(self._parameterItems))
 
     def Evaluate(self, coordinate: MembershipScalar) -> MembershipScalar:
         """Return the scalar membership degree at a finite real coordinate.
@@ -517,16 +557,16 @@ def _GetAnalyticalSource(value: object) -> _AnalyticalSource | None:
         return None
 
     owner = value.__self__
-    evaluator_function = value.__func__
+    evaluatorFunction = value.__func__
 
     if isinstance(owner, MembershipFunction) and type(owner._source) is _AnalyticalSource:
-        if evaluator_function is MembershipFunction.Evaluate:
+        if evaluatorFunction is MembershipFunction.Evaluate:
             return owner._source
 
-        if evaluator_function is MembershipFunction.__call__ and _HasModernAnalyticalEvaluator(owner):
+        if evaluatorFunction is MembershipFunction.__call__ and _HasModernAnalyticalEvaluator(owner):
             return owner._source
 
-    if type(owner) is _AnalyticalSource and evaluator_function is _AnalyticalSource.mju:
+    if type(owner) is _AnalyticalSource and evaluatorFunction is _AnalyticalSource.mju:
         return owner
 
     if (
@@ -565,21 +605,22 @@ def Hyperbolic(
     return MembershipFunction("hyperbolic", scale=scale, exponent=exponent, cutoff=cutoff)
 
 
+@_AcceptPlateauAliases
 def Bell(
     left: MembershipScalar,
-    plateau_start: MembershipScalar,
-    plateau_end: MembershipScalar,
+    plateauStart: MembershipScalar,
+    plateauEnd: MembershipScalar,
 ) -> MembershipFunction:
     """Return finite flat-top quadratic bell with mirrored shoulders.
 
-    The finite real parameters must satisfy `left < plateau_start <= plateau_end`; booleans are
+    The finite real parameters must satisfy `left < plateauStart <= plateauEnd`; booleans are
     rejected. The returned callable is immutable and uses the family boundary
     conventions documented by `MembershipFunction`.
 
     Args:
         left: Left foot where membership is zero.
-        plateau_start: Included left endpoint of the grade-one plateau.
-        plateau_end: Included right endpoint of the grade-one plateau.
+        plateauStart: Included left endpoint of the grade-one plateau.
+        plateauEnd: Included right endpoint of the grade-one plateau.
 
     Returns:
         Validated immutable analytical membership function.
@@ -588,7 +629,7 @@ def Bell(
         ValueError: Parameters are non-real, non-finite, or violate the family contract.
     """
 
-    return MembershipFunction("bell", left=left, plateau_start=plateau_start, plateau_end=plateau_end)
+    return MembershipFunction("bell", left=left, plateauStart=plateauStart, plateauEnd=plateauEnd)
 
 
 def SShoulder(left: MembershipScalar, right: MembershipScalar) -> MembershipFunction:
@@ -634,22 +675,23 @@ def Triangle(left: MembershipScalar, peak: MembershipScalar, right: MembershipSc
     return MembershipFunction("triangle", left=left, peak=peak, right=right)
 
 
+@_AcceptPlateauAliases
 def Trapezoid(
     left: MembershipScalar,
-    plateau_start: MembershipScalar,
-    plateau_end: MembershipScalar,
+    plateauStart: MembershipScalar,
+    plateauEnd: MembershipScalar,
     right: MembershipScalar,
 ) -> MembershipFunction:
     """Return piecewise linear trapezoid with conventional left-to-right order.
 
-    The finite real parameters must satisfy `left < plateau_start <= plateau_end < right`; booleans are
+    The finite real parameters must satisfy `left < plateauStart <= plateauEnd < right`; booleans are
     rejected. The returned callable is immutable and uses the family boundary
     conventions documented by `MembershipFunction`.
 
     Args:
         left: Left foot where membership is zero.
-        plateau_start: Included left endpoint of the grade-one plateau.
-        plateau_end: Included right endpoint of the grade-one plateau.
+        plateauStart: Included left endpoint of the grade-one plateau.
+        plateauEnd: Included right endpoint of the grade-one plateau.
         right: Right boundary of the shape.
 
     Returns:
@@ -659,7 +701,7 @@ def Trapezoid(
         ValueError: Parameters are non-real, non-finite, or violate the family contract.
     """
 
-    return MembershipFunction("trapezoid", left=left, plateau_start=plateau_start, plateau_end=plateau_end, right=right)
+    return MembershipFunction("trapezoid", left=left, plateauStart=plateauStart, plateauEnd=plateauEnd, right=right)
 
 
 def Gaussian(center: MembershipScalar, scale: MembershipScalar) -> MembershipFunction:

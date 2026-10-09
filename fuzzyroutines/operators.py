@@ -192,49 +192,49 @@ def _EvaluateNegation(family: str, alpha: float | None, grade: float) -> float:
     return grade + 4 * (alpha - grade) / (1 + math.sqrt(discriminant))
 
 
-def _EvaluateTNorm(family: str, left_grade: float, right_grade: float) -> float:
+def _EvaluateTNorm(family: str, leftGrade: float, rightGrade: float) -> float:
     """Evaluate a prevalidated t-norm without allocating a policy."""
 
     if family == "logic":
-        return min(left_grade, right_grade)
+        return min(leftGrade, rightGrade)
 
     if family == "algebraic":
-        return left_grade * right_grade
+        return leftGrade * rightGrade
 
     if family == "boundary":
-        return max(left_grade + right_grade - 1, 0)
+        return max(leftGrade + rightGrade - 1, 0)
 
     if family != "drastic":
         raise InvalidParameterError(f"unknown t-norm family: {family!r}")
 
-    if left_grade == 1:
-        return right_grade
+    if leftGrade == 1:
+        return rightGrade
 
-    if right_grade == 1:
-        return left_grade
+    if rightGrade == 1:
+        return leftGrade
 
     return 0
 
 
-def _EvaluateSNorm(family: str, left_grade: float, right_grade: float) -> float:
+def _EvaluateSNorm(family: str, leftGrade: float, rightGrade: float) -> float:
     """Evaluate a prevalidated s-norm without allocating a policy."""
 
     if family == "logic":
-        return max(left_grade, right_grade)
+        return max(leftGrade, rightGrade)
 
     if family == "algebraic":
-        return left_grade + right_grade - left_grade * right_grade
+        return leftGrade + rightGrade - leftGrade * rightGrade
 
     if family == "boundary":
-        return min(left_grade + right_grade, 1)
+        return min(leftGrade + rightGrade, 1)
 
     if family != "drastic":
         raise InvalidParameterError(f"unknown s-norm family: {family!r}")
 
-    if left_grade == 0:
-        return right_grade
+    if leftGrade == 0:
+        return rightGrade
 
-    if right_grade == 0:
-        return left_grade
+    if rightGrade == 0:
+        return leftGrade
 
     return 1

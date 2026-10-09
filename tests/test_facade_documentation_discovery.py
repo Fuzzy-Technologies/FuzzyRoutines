@@ -34,19 +34,19 @@ def _Write(path, content):
     path.write_text(content, encoding="utf-8")
 
 
-def _Prepare(project_root, mode="adapters", imports=None, source=AUTHORED_SOURCE):
+def _Prepare(projectRoot, mode="adapters", imports=None, source=AUTHORED_SOURCE):
     """Prepare a facade and an intentionally unimportable adapter module."""
 
-    _Write(project_root / "fuzzyroutines/__init__.py", "__all__ = []\n")
-    _Write(project_root / "fuzzyroutines/_adapter.py", source)
-    facade_source = imports or "from fuzzyroutines._adapter import Visible, Function\n"
+    _Write(projectRoot / "fuzzyroutines/__init__.py", "__all__ = []\n")
+    _Write(projectRoot / "fuzzyroutines/_adapter.py", source)
+    facadeSource = imports or "from fuzzyroutines._adapter import Visible, Function\n"
 
     if mode == "authored":
-        facade_source = source
+        facadeSource = source
 
-    _Write(project_root / "fuzzyroutines/facade.py", facade_source)
-    _Write(project_root / "docs/site/content/en/api.md", "# API\n\n::: fuzzyroutines.facade\n")
-    _Write(project_root / "docs/site/api-coverage.toml", f'''schemaVersion = 1
+    _Write(projectRoot / "fuzzyroutines/facade.py", facadeSource)
+    _Write(projectRoot / "docs/site/content/en/api.md", "# API\n\n::: fuzzyroutines.facade\n")
+    _Write(projectRoot / "docs/site/api-coverage.toml", f'''schemaVersion = 1
 
 [[surfaces]]
 module = "fuzzyroutines"
@@ -70,59 +70,59 @@ reason = "Internal adapters are documented through their public facade aliases."
     }
 
 
-def test_ExtractionPreservesFacadeSymbolMemberIdsAndHashes(tmp_path):
+def test_ExtractionPreservesFacadeSymbolMemberIdsAndHashes(tmpPath):
     """Move implementation sources without resetting unchanged translation contracts."""
 
-    manifest = _Prepare(tmp_path, mode="authored")
-    before = DiscoverCanonicalUnits(tmp_path, manifest)
-    _Prepare(tmp_path)
-    after = DiscoverCanonicalUnits(tmp_path, manifest)
-    before_symbols = {unit.identifier: CanonicalHash(unit) for unit in before if unit.kind == "symbol"}
-    after_symbols = {unit.identifier: CanonicalHash(unit) for unit in after if unit.kind == "symbol"}
+    manifest = _Prepare(tmpPath, mode="authored")
+    before = DiscoverCanonicalUnits(tmpPath, manifest)
+    _Prepare(tmpPath)
+    after = DiscoverCanonicalUnits(tmpPath, manifest)
+    beforeSymbols = {unit.identifier: CanonicalHash(unit) for unit in before if unit.kind == "symbol"}
+    afterSymbols = {unit.identifier: CanonicalHash(unit) for unit in after if unit.kind == "symbol"}
 
-    assert after_symbols == before_symbols
-    assert "symbol:fuzzyroutines.facade.Visible.Evaluate" in after_symbols
+    assert afterSymbols == beforeSymbols
+    assert "symbol:fuzzyroutines.facade.Visible.Evaluate" in afterSymbols
     assert all(unit.sourcePath == "fuzzyroutines/_adapter.py" for unit in after if unit.kind == "symbol")
-    assert ValidateCoverage(projectRoot=tmp_path) == ()
+    assert ValidateCoverage(projectRoot=tmpPath) == ()
 
 
-def test_ExplicitRenamedAliasesIncludeOnlySelectedContracts(tmp_path):
+def test_ExplicitRenamedAliasesIncludeOnlySelectedContracts(tmpPath):
     """Follow renamed class aliases and exclude unselected authored definitions."""
 
-    manifest = _Prepare(tmp_path, imports="from fuzzyroutines._adapter import Visible as Renamed\n")
-    units = DiscoverCanonicalUnits(tmp_path, manifest)
+    manifest = _Prepare(tmpPath, imports="from fuzzyroutines._adapter import Visible as Renamed\n")
+    units = DiscoverCanonicalUnits(tmpPath, manifest)
     symbols = {unit.identifier for unit in units if unit.kind == "symbol"}
 
     assert symbols == {
         "symbol:fuzzyroutines.facade.Renamed",
         "symbol:fuzzyroutines.facade.Renamed.Evaluate",
     }
-    assert ValidateCoverage(projectRoot=tmp_path) == ()
+    assert ValidateCoverage(projectRoot=tmpPath) == ()
 
 
-def test_MissingAdapterMemberDocstringRemainsACoverageFailure(tmp_path):
+def test_MissingAdapterMemberDocstringRemainsACoverageFailure(tmpPath):
     """Keep adapter extraction from hiding missing public member documentation."""
 
-    _Prepare(tmp_path, source=AUTHORED_SOURCE.replace('        """Return the supplied grade."""\n', ""))
-    violations = ValidateCoverage(projectRoot=tmp_path)
+    _Prepare(tmpPath, source=AUTHORED_SOURCE.replace('        """Return the supplied grade."""\n', ""))
+    violations = ValidateCoverage(projectRoot=tmpPath)
 
     assert any("fuzzyroutines.facade.Visible.Evaluate has no source docstring" in error for error in violations)
     assert any("fuzzyroutines/_adapter.py:" in error for error in violations)
 
 
-@pytest.mark.parametrize("imports, diagnostic", [
+@pytest.mark.parametrize('imports,diagnostic', [
     ("from fuzzyroutines._adapter import *\n", "must name explicit symbols"),
     ("from fuzzyroutines._adapter import Missing\n", "cannot find public definition Missing"),
     ("from fuzzyroutines._adapter import Visible, Visible\n", "duplicate adapter export Visible"),
     ("from ._adapter import Visible\n", "must use absolute module paths"),
     ("from fuzzyroutines._adapter import Visible as _Hidden\n", "has no explicit public definitions"),
 ])
-def test_UnresolvableAdapterContractsFailClosed(tmp_path, imports, diagnostic):
+def test_UnresolvableAdapterContractsFailClosed(tmpPath, imports, diagnostic):
     """Reject ambiguous or absent facade contracts instead of losing coverage."""
 
-    manifest = _Prepare(tmp_path, imports=imports)
+    manifest = _Prepare(tmpPath, imports=imports)
 
     with pytest.raises(ValueError, match=diagnostic):
-        DiscoverCanonicalUnits(tmp_path, manifest)
+        DiscoverCanonicalUnits(tmpPath, manifest)
 
-    assert any(diagnostic in error for error in ValidateCoverage(projectRoot=tmp_path))
+    assert any(diagnostic in error for error in ValidateCoverage(projectRoot=tmpPath))

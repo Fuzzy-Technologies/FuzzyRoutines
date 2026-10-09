@@ -170,8 +170,13 @@ the compatibility policy.
 #### Naming and compatibility
 
 - Functions, methods, and classes use `PascalCase`, including `Main()`.
-- New variables, parameters, and instance attributes use `snake_case`.
+- Project-owned variables, parameters, and instance attributes use `camelCase`.
   Internal implementation details may have a leading underscore.
+- This maintainer-confirmed rule supersedes the snake_case variable rule in
+  the previously supplied shared standard. Audit all tracked Python files and
+  authored executable fixtures/examples with `tests/test_python_naming.py`.
+  External override signatures and historical compatibility boundaries have
+  explicit exceptions; ordinary local variables never inherit those exceptions.
 - New constants use `UPPER_SNAKE_CASE`, with underscores between words.
 - Required Python dunder names, external API/SDK/protobuf/library names, and
   test-discovery names are exceptions. Test files retain the `test_*.py`

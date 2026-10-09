@@ -84,8 +84,8 @@ def test_SerialModeUsesOneSequentialPhase():
     assert phases[0].markerExpression is None
 
 
-def test_JunitAggregationSeparatesFailuresTimeoutsAndSkips(tmp_path):
-    reportPath = tmp_path / "report.xml"
+def test_JunitAggregationSeparatesFailuresTimeoutsAndSkips(tmpPath):
+    reportPath = tmpPath / "report.xml"
     reportPath.write_text(
         """<?xml version="1.0" encoding="utf-8"?>
 <testsuites><testsuite>
@@ -123,8 +123,8 @@ def test_AggregateSchemaIsIndependentOfPhaseCompletionOrder():
     assert AggregateResults((second, first), 0.5) == expected
 
 
-def test_ParallelAndSerialPhasesRunInDifferentProcesses(tmp_path):
-    evidenceRoot = tmp_path / "evidence"
+def test_ParallelAndSerialPhasesRunInDifferentProcesses(tmpPath):
+    evidenceRoot = tmpPath / "evidence"
     evidenceRoot.mkdir()
     moduleTemplate = """
 import os
@@ -147,7 +147,7 @@ def test_RecordSerialProcess():
     (evidenceRoot / ("serial-" + str(os.getpid()))).write_text("serial", encoding="utf-8")
 """
     completedProcess = RunSyntheticSuite(
-        tmp_path,
+        tmpPath,
         {
             "test_worker_a.py": moduleTemplate.format(evidenceRoot=str(evidenceRoot)),
             "test_worker_b.py": moduleTemplate.format(evidenceRoot=str(evidenceRoot)),
@@ -172,9 +172,9 @@ def test_RecordSerialProcess():
     }
 
 
-def test_TimeoutIsReportedSeparatelyAndFailsTheRun(tmp_path):
+def test_TimeoutIsReportedSeparatelyAndFailsTheRun(tmpPath):
     completedProcess = RunSyntheticSuite(
-        tmp_path,
+        tmpPath,
         {"test_timeout.py": "import time\n\ndef test_Slow():\n    time.sleep(1)\n"},
         "--jobs",
         "1",
@@ -188,10 +188,10 @@ def test_TimeoutIsReportedSeparatelyAndFailsTheRun(tmp_path):
     assert summary["failed"] == 0
 
 
-def test_FailFastDoesNotRunTheLaterSerialPhase(tmp_path):
-    serialEvidence = tmp_path / "serial-ran"
+def test_FailFastDoesNotRunTheLaterSerialPhase(tmpPath):
+    serialEvidence = tmpPath / "serial-ran"
     completedProcess = RunSyntheticSuite(
-        tmp_path,
+        tmpPath,
         {
             "test_failure.py": "def test_Failure():\n    assert False, 'expected synthetic failure'\n",
             "test_serial.py": (
@@ -214,9 +214,9 @@ def test_FailFastDoesNotRunTheLaterSerialPhase(tmp_path):
     assert not serialEvidence.exists(), "Fail-fast must not hide the failure by starting a later phase."
 
 
-def test_CollectionErrorReturnsNonZeroProcessError(tmp_path):
+def test_CollectionErrorReturnsNonZeroProcessError(tmpPath):
     completedProcess = RunSyntheticSuite(
-        tmp_path,
+        tmpPath,
         {"test_broken.py": "def test_Broken(:\n    pass\n"},
         "--jobs",
         "1",

@@ -34,15 +34,15 @@ BUILD_TOOLS = ("build", "packaging", "pyproject_hooks", "setuptools")
 def SourceDateEpoch(environment: dict[str, str]) -> int | None:
     """Return a valid gzip-compatible source epoch or reject malformed input."""
 
-    epoch_text = environment.get("SOURCE_DATE_EPOCH")
+    epochText = environment.get("SOURCE_DATE_EPOCH")
 
-    if epoch_text is None:
+    if epochText is None:
         return None
 
-    if not epoch_text.isascii() or not epoch_text.isdecimal():
+    if not epochText.isascii() or not epochText.isdecimal():
         raise ValueError("SOURCE_DATE_EPOCH must be a nonnegative integer")
 
-    epoch = int(epoch_text)
+    epoch = int(epochText)
 
     if epoch > 0xFFFFFFFF:
         raise ValueError("SOURCE_DATE_EPOCH must fit the gzip 32-bit timestamp")
@@ -50,12 +50,12 @@ def SourceDateEpoch(environment: dict[str, str]) -> int | None:
     return epoch
 
 
-def WriteSourceArchive(source_directory: Path, archive_path: Path, epoch: int) -> str:
+def WriteSourceArchive(sourceDirectory: Path, archivePath: Path, epoch: int) -> str:
     """Archive the prepared sdist tree with stable metadata and intact payloads."""
 
-    source_directory = source_directory.resolve()
-    archive_path = archive_path.resolve()
-    archive_path.parent.mkdir(parents=True, exist_ok=True)
+    sourceDirectory = sourceDirectory.resolve()
+    archivePath = archivePath.resolve()
+    archivePath.parent.mkdir(parents=True, exist_ok=True)
 
     def NormalizeMember(member: tarfile.TarInfo) -> tarfile.TarInfo:
         """Remove host ownership and filesystem timestamp variation."""
@@ -80,29 +80,29 @@ def WriteSourceArchive(source_directory: Path, archive_path: Path, epoch: int) -
         return member
 
     with (
-        archive_path.open("wb") as raw_archive,
-        gzip.GzipFile(filename="", mode="wb", fileobj=raw_archive, mtime=epoch) as compressed,
+        archivePath.open("wb") as rawArchive,
+        gzip.GzipFile(filename="", mode="wb", fileobj=rawArchive, mtime=epoch) as compressed,
         tarfile.open(fileobj=compressed, mode="w", format=tarfile.PAX_FORMAT) as archive,
     ):
-        source_paths = (source_directory, *sorted(source_directory.rglob("*")))
+        sourcePaths = (sourceDirectory, *sorted(sourceDirectory.rglob("*")))
 
-        for source_path in source_paths:
-            archive.dereference = not source_path.is_symlink()
+        for sourcePath in sourcePaths:
+            archive.dereference = not sourcePath.is_symlink()
 
-            if source_path.is_symlink() and not source_path.resolve().is_relative_to(source_directory):
-                raise ValueError(f"Source archive symlink escapes the prepared tree: {source_path}")
+            if sourcePath.is_symlink() and not sourcePath.resolve().is_relative_to(sourceDirectory):
+                raise ValueError(f"Source archive symlink escapes the prepared tree: {sourcePath}")
 
-            archive_name = Path(source_directory.name) / source_path.relative_to(source_directory)
-            member = NormalizeMember(archive.gettarinfo(source_path, arcname=archive_name.as_posix()))
+            archiveName = Path(sourceDirectory.name) / sourcePath.relative_to(sourceDirectory)
+            member = NormalizeMember(archive.gettarinfo(sourcePath, arcname=archiveName.as_posix()))
 
             if member.isfile():
-                with source_path.open("rb") as payload:
+                with sourcePath.open("rb") as payload:
                     archive.addfile(member, payload)
 
             else:
                 archive.addfile(member)
 
-    return str(archive_path)
+    return str(archivePath)
 
 
 def ArtifactHashes(directory: Path) -> dict[str, str]:
@@ -117,19 +117,19 @@ def ArtifactHashes(directory: Path) -> dict[str, str]:
     return {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in (*wheels, *sdists)}
 
 
-def CompareArtifacts(first_directory: Path, second_directory: Path) -> dict[str, str]:
+def CompareArtifacts(firstDirectory: Path, secondDirectory: Path) -> dict[str, str]:
     """Reject filename or byte changes between independent distribution builds."""
 
-    first_hashes = ArtifactHashes(first_directory)
-    second_hashes = ArtifactHashes(second_directory)
+    firstHashes = ArtifactHashes(firstDirectory)
+    secondHashes = ArtifactHashes(secondDirectory)
 
-    if first_hashes != second_hashes:
+    if firstHashes != secondHashes:
         raise ValueError(
             "Independent distribution builds differ: "
-            f"first={first_hashes}, second={second_hashes}"
+            f"first={firstHashes}, second={secondHashes}"
         )
 
-    return first_hashes
+    return firstHashes
 
 
 class ReproducibleSdist(sdist):
@@ -147,42 +147,42 @@ class ReproducibleSdist(sdist):
                 base_name, format, root_dir, base_dir, owner, group
             )
 
-        archive_path = Path(str(base_name) + ".tar.gz")
+        archivePath = Path(str(base_name) + ".tar.gz")
 
         if self.dry_run:
-            return str(archive_path)
+            return str(archivePath)
 
-        source_directory = Path(root_dir or ".") / (base_dir or ".")
+        sourceDirectory = Path(root_dir or ".") / (base_dir or ".")
 
-        return WriteSourceArchive(source_directory, archive_path, epoch)
+        return WriteSourceArchive(sourceDirectory, archivePath, epoch)
 
 
 def BuildIndependentCandidate(
-    source_root: Path,
+    sourceRoot: Path,
     revision: str,
     workspace: Path,
     epoch: int,
-    timestamp_offset: int,
+    timestampOffset: int,
 ) -> Path:
     """Build an isolated Git export with deliberately different source mtimes."""
 
     workspace.mkdir()
-    export_path = workspace / "source.tar"
-    source_directory = workspace / "source"
-    source_directory.mkdir()
+    exportPath = workspace / "source.tar"
+    sourceDirectory = workspace / "source"
+    sourceDirectory.mkdir()
     subprocess.run(
-        ["git", "archive", "--format=tar", f"--output={export_path}", revision],
-        cwd=source_root,
+        ["git", "archive", "--format=tar", f"--output={exportPath}", revision],
+        cwd=sourceRoot,
         check=True,
     )
 
-    with tarfile.open(export_path) as exported_source:
-        exported_source.extractall(source_directory, filter="data")
+    with tarfile.open(exportPath) as exportedSource:
+        exportedSource.extractall(sourceDirectory, filter="data")
 
-    for source_path in source_directory.rglob("*"):
+    for sourcePath in sourceDirectory.rglob("*"):
         os.utime(
-            source_path,
-            (epoch + timestamp_offset, epoch + timestamp_offset),
+            sourcePath,
+            (epoch + timestampOffset, epoch + timestampOffset),
             follow_symlinks=False,
         )
 
@@ -191,7 +191,7 @@ def BuildIndependentCandidate(
     environment["PYTHONHASHSEED"] = "0"
     environment.pop("PYTHONPATH", None)
     environment.pop("MYPYPATH", None)
-    artifact_directory = workspace / "dist"
+    artifactDirectory = workspace / "dist"
     subprocess.run(
         [
             sys.executable,
@@ -199,41 +199,41 @@ def BuildIndependentCandidate(
             "build",
             "--no-isolation",
             "--outdir",
-            str(artifact_directory),
-            str(source_directory),
+            str(artifactDirectory),
+            str(sourceDirectory),
         ],
         cwd=workspace,
         env=environment,
         check=True,
     )
 
-    return artifact_directory
+    return artifactDirectory
 
 
-def BuildReproducibleArtifacts(source_root: Path, output_directory: Path) -> dict:
+def BuildReproducibleArtifacts(sourceRoot: Path, outputDirectory: Path) -> dict:
     """Build, compare, and preserve verified candidates and their source evidence."""
 
-    source_root = source_root.resolve()
-    output_directory = output_directory.resolve()
+    sourceRoot = sourceRoot.resolve()
+    outputDirectory = outputDirectory.resolve()
 
-    if output_directory.exists():
-        raise ValueError(f"Artifact output must be a new directory: {output_directory}")
+    if outputDirectory.exists():
+        raise ValueError(f"Artifact output must be a new directory: {outputDirectory}")
 
     revision = subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=source_root, text=True
+        ["git", "rev-parse", "HEAD"], cwd=sourceRoot, text=True
     ).strip()
     epoch = int(
         subprocess.check_output(
-            ["git", "show", "-s", "--format=%ct", revision], cwd=source_root, text=True
+            ["git", "show", "-s", "--format=%ct", revision], cwd=sourceRoot, text=True
         ).strip()
     )
     SourceDateEpoch({"SOURCE_DATE_EPOCH": str(epoch)})
 
     with tempfile.TemporaryDirectory(prefix="fuzzyroutines-reproducibility-") as temporary:
         workspace = Path(temporary)
-        first_directory = BuildIndependentCandidate(source_root, revision, workspace / "first", epoch, 1)
-        second_directory = BuildIndependentCandidate(source_root, revision, workspace / "second", epoch, 86400)
-        hashes = CompareArtifacts(first_directory, second_directory)
+        firstDirectory = BuildIndependentCandidate(sourceRoot, revision, workspace / "first", epoch, 1)
+        secondDirectory = BuildIndependentCandidate(sourceRoot, revision, workspace / "second", epoch, 86400)
+        hashes = CompareArtifacts(firstDirectory, secondDirectory)
         report = {
             "source_revision": revision,
             "source_date_epoch": epoch,
@@ -247,16 +247,16 @@ def BuildReproducibleArtifacts(source_root: Path, output_directory: Path) -> dic
                 for name, digest in hashes.items()
             },
         }
-        output_directory.mkdir(parents=True)
+        outputDirectory.mkdir(parents=True)
 
         for name in hashes:
-            shutil.copyfile(first_directory / name, output_directory / name)
+            shutil.copyfile(firstDirectory / name, outputDirectory / name)
 
-    (output_directory / "source-revision.txt").write_text(revision + "\n", encoding="utf-8")
-    (output_directory / "SHA256SUMS").write_text(
+    (outputDirectory / "source-revision.txt").write_text(revision + "\n", encoding="utf-8")
+    (outputDirectory / "SHA256SUMS").write_text(
         "".join(f"{digest}  {name}\n" for name, digest in hashes.items()), encoding="utf-8"
     )
-    (output_directory / "reproducibility.json").write_text(
+    (outputDirectory / "reproducibility.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
 
@@ -267,11 +267,11 @@ def Main(arguments: list[str] | None = None) -> int:
     """Build CI candidates and print a machine-readable reproducibility report."""
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source-root", type=Path, default=Path.cwd())
-    parser.add_argument("--output-directory", type=Path, required=True)
-    parsed_arguments = parser.parse_args(arguments)
+    parser.add_argument("--source-root", type=Path, default=Path.cwd(), dest = 'sourceRoot')
+    parser.add_argument("--output-directory", type=Path, required=True, dest = 'outputDirectory')
+    parsedArguments = parser.parse_args(arguments)
     report = BuildReproducibleArtifacts(
-        parsed_arguments.source_root, parsed_arguments.output_directory
+        parsedArguments.sourceRoot, parsedArguments.outputDirectory
     )
     print(json.dumps(report, indent=2, sort_keys=True))
 

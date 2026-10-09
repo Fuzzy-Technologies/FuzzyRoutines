@@ -53,54 +53,54 @@ def test_CurrentReleaseNotesDoNotDescribeTravisAsActive():
     assert not (PROJECTROOT / ".travis.yml").exists()
 
 
-def test_CoverageReportsMissingSymbolWithFileAndSymbol(tmp_path):
+def test_CoverageReportsMissingSymbolWithFileAndSymbol(tmpPath):
     """Make a newly undocumented public symbol actionable."""
 
-    _Write(tmp_path / "fuzzyroutines" / "__init__.py", '__all__ = ["Visible"]\n')
+    _Write(tmpPath / "fuzzyroutines" / "__init__.py", '__all__ = ["Visible"]\n')
     _Write(
-        tmp_path / "fuzzyroutines" / "surface.py",
+        tmpPath / "fuzzyroutines" / "surface.py",
         'def Visible():\n    """Return a visible value."""\n    return 1\n\n'
         'def Missing():\n    """Return a missing value."""\n    return 2\n',
     )
     _Write(
-        tmp_path / "docs" / "site" / "api-coverage.toml",
+        tmpPath / "docs" / "site" / "api-coverage.toml",
         'schemaVersion = 1\n\n[[surfaces]]\nmodule = "fuzzyroutines.surface"\n'
         'source = "fuzzyroutines/surface.py"\nmode = "authored"\n',
     )
     _Write(
-        tmp_path / "docs" / "site" / "content" / "en" / "api.md",
+        tmpPath / "docs" / "site" / "content" / "en" / "api.md",
         '# API\n\n::: fuzzyroutines.surface\n    options:\n'
         '      members:\n        - Visible\n',
     )
 
-    violations = ValidateCoverage(projectRoot=tmp_path)
+    violations = ValidateCoverage(projectRoot=tmpPath)
 
     assert any("fuzzyroutines/surface.py:5" in value for value in violations)
     assert any("fuzzyroutines.surface.Missing" in value for value in violations)
 
 
-def test_CoverageRejectsUnexplainedAndStaleExclusions(tmp_path):
+def test_CoverageRejectsUnexplainedAndStaleExclusions(tmpPath):
     """Prevent exclusion records from becoming an unreviewed escape hatch."""
 
-    _Write(tmp_path / "fuzzyroutines" / "__init__.py", '__all__ = []\n')
+    _Write(tmpPath / "fuzzyroutines" / "__init__.py", '__all__ = []\n')
     _Write(
-        tmp_path / "docs" / "site" / "api-coverage.toml",
+        tmpPath / "docs" / "site" / "api-coverage.toml",
         'schemaVersion = 1\n\n[[surfaces]]\nmodule = "fuzzyroutines"\n'
         'source = "fuzzyroutines/__init__.py"\nmode = "exports"\n\n'
         '[[exclusions]]\nsymbol = "fuzzyroutines.Gone"\nreason = "short"\n',
     )
-    _Write(tmp_path / "docs" / "site" / "content" / "en" / "index.md", "# API\n")
+    _Write(tmpPath / "docs" / "site" / "content" / "en" / "index.md", "# API\n")
 
-    violations = ValidateCoverage(projectRoot=tmp_path)
+    violations = ValidateCoverage(projectRoot=tmpPath)
 
     assert any("requires an actionable reason" in value for value in violations)
 
 
-def test_SourceLinksReportExactMissingFileAndAnchor(tmp_path):
+def test_SourceLinksReportExactMissingFileAndAnchor(tmpPath):
     """Report the authoring file and line for broken local links."""
 
-    sourcePath = tmp_path / "guide.md"
-    targetPath = tmp_path / "target.md"
+    sourcePath = tmpPath / "guide.md"
+    targetPath = tmpPath / "target.md"
     _Write(
         sourcePath,
         "# Guide\n\n[missing](absent.md)\n[anchor](target.md#absent)\n",
@@ -108,7 +108,7 @@ def test_SourceLinksReportExactMissingFileAndAnchor(tmp_path):
     _Write(targetPath, "# Present\n")
 
     violations = ValidateSourceLinks(
-        projectRoot=tmp_path,
+        projectRoot=tmpPath,
         markdownPaths=(sourcePath, targetPath),
     )
 
@@ -118,11 +118,11 @@ def test_SourceLinksReportExactMissingFileAndAnchor(tmp_path):
     )
 
 
-def test_RenderedLinksValidateExactGeneratedFragments(tmp_path):
+def test_RenderedLinksValidateExactGeneratedFragments(tmpPath):
     """Validate links against renderer-produced IDs rather than assumptions."""
 
-    siteRoot = tmp_path / "site"
-    referenceRoot = tmp_path / "source"
+    siteRoot = tmpPath / "site"
+    referenceRoot = tmpPath / "source"
     _Write(
         siteRoot / "index.html",
         '<a href="api/#present">ok</a><a href="api/#missing">bad</a>',
@@ -134,7 +134,7 @@ def test_RenderedLinksValidateExactGeneratedFragments(tmp_path):
     violations = ValidateRenderedLinks(
         siteRoot=siteRoot,
         referenceRoot=referenceRoot,
-        projectRoot=tmp_path,
+        projectRoot=tmpPath,
     )
 
     assert violations == (

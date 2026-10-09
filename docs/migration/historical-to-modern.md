@@ -98,11 +98,19 @@ deliberately preserved.
 
 The modern `Triangle(left, peak, right)` contract deliberately differs from
 historical `MFunction("triangle", a=left, b=right, c=peak)`. Modern
-`Trapezoid(left, plateau_start, plateau_end, right)` similarly differs from
+`Trapezoid(left, plateauStart, plateauEnd, right)` similarly differs from
 the historical `trapezium` keyword mapping. Do not transfer a positional tuple
 between the APIs without translating it explicitly. The shared scalar
 formulas retain the accepted historical boundaries, including `peak == right`
 for the existing high triangular term.
+
+Earlier v2 development snapshots named the plateau arguments `plateau_start`
+and `plateau_end`. The canonical names are now `plateauStart` and `plateauEnd`
+in `Bell`, `Trapezoid`, and `MembershipFunction`'s read-only parameter mapping.
+Both constructors and direct family construction still accept the old keyword
+spellings at runtime; specifying an alias together with its canonical spelling
+is rejected. Positional order, parameter meaning and numerical results are
+unchanged. New code and static typing use the canonical camelCase names.
 
 ## Fuzzy sets
 

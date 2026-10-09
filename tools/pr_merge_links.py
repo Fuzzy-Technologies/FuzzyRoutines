@@ -24,7 +24,7 @@ _CLOSING_CLAUSE = re.compile(
 _ISSUE_REF = re.compile(r"#(?P<number>[1-9][0-9]*)\b")
 
 
-def extract_issue_numbers(text: str) -> list[int]:
+def ExtractIssueNumbers(text: str) -> list[int]:
     """Return unique issue numbers explicitly attached to a closing keyword."""
 
     seen: set[int] = set()
@@ -40,7 +40,7 @@ def extract_issue_numbers(text: str) -> list[int]:
     return result
 
 
-def _lines(numbers: Iterable[int]) -> str:
+def _Lines(numbers: Iterable[int]) -> str:
     """Render issue numbers as deterministic newline-separated output."""
 
     return "\n".join(str(number) for number in numbers)
@@ -53,17 +53,17 @@ def ParseArguments(arguments=None):
     return parser.parse_args(arguments)
 
 
-def main(arguments=None) -> int:
+def Main(arguments=None) -> int:
     """Emit explicitly closing issue numbers from the active PR body."""
 
     ParseArguments(arguments)
     body = os.environ.get("PR_BODY", "")
-    numbers = extract_issue_numbers(body)
-    sys.stdout.write(_lines(numbers))
+    numbers = ExtractIssueNumbers(body)
+    sys.stdout.write(_Lines(numbers))
     if numbers:
         sys.stdout.write("\n")
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(Main())

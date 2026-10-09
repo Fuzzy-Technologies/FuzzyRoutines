@@ -154,13 +154,13 @@ def TNormCompose(*fuzzyNumbers, normType='logic'):
     if not fuzzyNumbers:
         raise ValueError("TNormCompose requires at least one fuzzy degree")
 
-    for operand_index, fuzzy_number in enumerate(fuzzyNumbers):
-        _RequireFuzzyDegree(fuzzy_number, f'fuzzyNumbers[{operand_index}]')
+    for operandIndex, fuzzyNumber in enumerate(fuzzyNumbers):
+        _RequireFuzzyDegree(fuzzyNumber, f'fuzzyNumbers[{operandIndex}]')
 
     result = fuzzyNumbers[0]
 
-    for fuzzy_number in fuzzyNumbers[1:]:
-        result = TNorm(result, fuzzy_number, normType)
+    for fuzzyNumber in fuzzyNumbers[1:]:
+        result = TNorm(result, fuzzyNumber, normType)
 
     return result
 
@@ -211,12 +211,12 @@ def SCoNormCompose(*fuzzyNumbers, normType='logic'):
     if not fuzzyNumbers:
         raise ValueError("SCoNormCompose requires at least one fuzzy degree")
 
-    for operand_index, fuzzy_number in enumerate(fuzzyNumbers):
-        _RequireFuzzyDegree(fuzzy_number, f'fuzzyNumbers[{operand_index}]')
+    for operandIndex, fuzzyNumber in enumerate(fuzzyNumbers):
+        _RequireFuzzyDegree(fuzzyNumber, f'fuzzyNumbers[{operandIndex}]')
 
     result = fuzzyNumbers[0]
 
-    for fuzzy_number in fuzzyNumbers[1:]:
-        result = SCoNorm(result, fuzzy_number, normType)
+    for fuzzyNumber in fuzzyNumbers[1:]:
+        result = SCoNorm(result, fuzzyNumber, normType)
 
     return result

@@ -37,7 +37,7 @@ from fuzzyroutines.relations import ComparisonDomain
 
 
 @pytest.mark.parametrize(
-    ("error_type", "builtin_type"),
+    ('errorType', 'builtinType'),
     [
         (InvalidParameterTypeError, TypeError),
         (InvalidParameterError, ValueError),
@@ -48,17 +48,17 @@ from fuzzyroutines.relations import ComparisonDomain
         (CentroidConvergenceError, ArithmeticError),
     ],
 )
-def test_ErrorCategoriesPreserveBuiltInHandlersAndSerialization(error_type, builtin_type):
+def test_ErrorCategoriesPreserveBuiltInHandlersAndSerialization(errorType, builtinType):
     """Domain categories remain compatible with built-in catches and pickles."""
 
-    error = error_type("invalid test input")
+    error = errorType("invalid test input")
     assert isinstance(error, FuzzyRoutinesError), "Owned errors must share the modern base category"
 
-    with pytest.raises(builtin_type) as captured:
+    with pytest.raises(builtinType) as captured:
         raise error
 
     restored = pickle.loads(pickle.dumps(captured.value))
-    assert type(restored) is error_type, "Serialization changed the error category"
+    assert type(restored) is errorType, "Serialization changed the error category"
     assert restored.args == error.args, "Serialization changed the exception message"
 
 
@@ -80,7 +80,7 @@ def test_ExceptionModuleDefinesOnlyExplicitPublicCategories():
 
 
 @pytest.mark.parametrize(
-    ("operation", "error_type"),
+    ("operation", 'errorType'),
     [
         (lambda: ContinuousUniverse(1.0, 0.0), InvalidDomainError),
         (lambda: IntegrationDomain(0.0, 0.0), InvalidDomainError),
@@ -96,26 +96,26 @@ def test_ExceptionModuleDefinesOnlyExplicitPublicCategories():
         (lambda: AlphaCut(None, 0.5), InvalidParameterTypeError),
     ],
 )
-def test_ModernBoundariesRaiseSpecificCategories(operation, error_type):
+def test_ModernBoundariesRaiseSpecificCategories(operation, errorType):
     """Each mathematical module uses the applicable owned validation category."""
 
-    with pytest.raises(error_type) as captured:
+    with pytest.raises(errorType) as captured:
         operation()
 
-    assert type(captured.value) is error_type, "The boundary changed the concrete exception type"
+    assert type(captured.value) is errorType, "The boundary changed the concrete exception type"
 
 
 def test_UniverseRelationshipsHaveDomainErrors():
     """Out-of-universe evaluation and mismatched set operations share a category."""
 
-    fuzzy_set = ScalarFuzzySet(DiscreteUniverse((0.0,)), lambda coordinate: 1.0)
-    other_set = ScalarFuzzySet(DiscreteUniverse((1.0,)), lambda coordinate: 1.0)
+    fuzzySet = ScalarFuzzySet(DiscreteUniverse((0.0,)), lambda coordinate: 1.0)
+    otherSet = ScalarFuzzySet(DiscreteUniverse((1.0,)), lambda coordinate: 1.0)
 
     with pytest.raises(InvalidDomainError):
-        fuzzy_set.Membership(1.0)
+        fuzzySet.Membership(1.0)
 
     with pytest.raises(InvalidDomainError):
-        Intersection(fuzzy_set, other_set, TNormPolicy("logic"))
+        Intersection(fuzzySet, otherSet, TNormPolicy("logic"))
 
     with pytest.raises(InvalidDomainError):
         IntegrationDomain(-1.0, 1.0).ValidateWithin(ContinuousUniverse(0.0, 1.0, True, True))
@@ -124,36 +124,36 @@ def test_UniverseRelationshipsHaveDomainErrors():
 def test_ZeroAreaAndZeroHeightUseUndefinedResultErrors():
     """Undefined results support numerical and existing ValueError handlers."""
 
-    continuous_set = ScalarFuzzySet(ContinuousUniverse(0.0, 1.0, True, True), lambda coordinate: 0.0)
-    discrete_set = ScalarFuzzySet(DiscreteUniverse((0.0,)), lambda coordinate: 0.0)
+    continuousSet = ScalarFuzzySet(ContinuousUniverse(0.0, 1.0, True, True), lambda coordinate: 0.0)
+    discreteSet = ScalarFuzzySet(DiscreteUniverse((0.0,)), lambda coordinate: 0.0)
 
     with pytest.raises(UndefinedResultError, match="zero membership area"):
-        Centroid(continuous_set, IntegrationDomain(0.0, 1.0))
+        Centroid(continuousSet, IntegrationDomain(0.0, 1.0))
 
     with pytest.raises(UndefinedResultError, match="zero-height"):
-        Normalize(discrete_set)
+        Normalize(discreteSet)
 
 
 def test_ConvergenceFailureRetainsExistingClassAndNumericalCategory():
     """The pre-existing convergence class remains the actual raised exception."""
 
-    fuzzy_set = ScalarFuzzySet(
+    fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, True, True),
         lambda coordinate: math.exp(coordinate) / math.e,
     )
 
     with pytest.raises(NumericalError) as captured:
-        Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0), CentroidPolicy(1e-16, 1e-16, 0))
+        Centroid(fuzzySet, IntegrationDomain(0.0, 1.0), CentroidPolicy(1e-16, 1e-16, 0))
 
     assert type(captured.value) is CentroidConvergenceError, "Numerical categorization replaced the convergence class"
 
 
-@pytest.mark.parametrize("error_type", [ValueError, UndefinedResultError, InvalidParameterError, RuntimeError, CentroidConvergenceError])
+@pytest.mark.parametrize('errorType', [ValueError, UndefinedResultError, InvalidParameterError, RuntimeError, CentroidConvergenceError])
 @pytest.mark.parametrize("boundary", ["modern", "historical"])
-def test_CallbackFailuresPropagateTheSameObject(error_type, boundary):
+def test_CallbackFailuresPropagateTheSameObject(errorType, boundary):
     """Even an evaluator's own domain error must escape adapter translation."""
 
-    error = error_type("user evaluator failed")
+    error = errorType("user evaluator failed")
 
     def FailingMembership(coordinate):
         """Raise a retained user-owned error from a custom evaluator."""
@@ -161,39 +161,39 @@ def test_CallbackFailuresPropagateTheSameObject(error_type, boundary):
         raise error
 
     if boundary == "modern":
-        fuzzy_set = ScalarFuzzySet(ContinuousUniverse(0.0, 1.0, True, True), FailingMembership)
-        operation = lambda: Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0))
+        fuzzySet = ScalarFuzzySet(ContinuousUniverse(0.0, 1.0, True, True), FailingMembership)
+        operation = lambda: Centroid(fuzzySet, IntegrationDomain(0.0, 1.0))
 
     else:
         function = MFunction("desirability")
         function.mju = FailingMembership
-        fuzzy_set = FuzzySet(function, (0.0, 1.0))
-        operation = fuzzy_set.Defuz
+        fuzzySet = FuzzySet(function, (0.0, 1.0))
+        operation = fuzzySet.Defuz
 
-    with pytest.raises(error_type) as captured:
+    with pytest.raises(errorType) as captured:
         operation()
 
     assert captured.value is error, "The operation replaced the evaluator's exception object"
 
 
 @pytest.mark.parametrize(
-    ("interval", "error_type"),
+    ("interval", 'errorType'),
     [([0.0, 1.0], TypeError), ((True, 1.0), TypeError), ((0.0,), ValueError), ((1.0, 0.0), ValueError), ((0.0, math.inf), ValueError)],
 )
-def test_HistoricalDomainChecksPreserveConcreteBuiltInTypes(interval, error_type):
+def test_HistoricalDomainChecksPreserveConcreteBuiltInTypes(interval, errorType):
     """Only known constructor failures translate to historical concrete errors."""
 
-    with pytest.raises(error_type) as captured:
+    with pytest.raises(errorType) as captured:
         FuzzySet(MFunction("desirability"), interval)
 
-    assert type(captured.value) is error_type, "The boundary changed the concrete exception type"
-    fuzzy_set = FuzzySet(MFunction("desirability"))
+    assert type(captured.value) is errorType, "The boundary changed the concrete exception type"
+    fuzzySet = FuzzySet(MFunction("desirability"))
 
-    with pytest.raises(error_type) as captured:
-        fuzzy_set.supportSet = interval
+    with pytest.raises(errorType) as captured:
+        fuzzySet.supportSet = interval
 
-    assert type(captured.value) is error_type, "The boundary changed the concrete exception type"
-    assert fuzzy_set.supportSet == (0.0, 1.0), "Invalid assignment changed the historical interval"
+    assert type(captured.value) is errorType, "The boundary changed the concrete exception type"
+    assert fuzzySet.supportSet == (0.0, 1.0), "Invalid assignment changed the historical interval"
 
 
 def test_HistoricalGeometryChecksRemainConcreteValueError():
@@ -209,10 +209,10 @@ def test_HistoricalUndefinedCentroidRemainsConcreteValueError():
     """The adapter chooses its result error inside the engine without catching callbacks."""
 
     function = MFunction("triangle", a=0.0, b=1.0, c=0.5)
-    fuzzy_set = FuzzySet(function, (2.0, 3.0))
+    fuzzySet = FuzzySet(function, (2.0, 3.0))
 
     with pytest.raises(ValueError, match="zero membership area") as captured:
-        fuzzy_set.Defuz()
+        fuzzySet.Defuz()
 
     assert type(captured.value) is ValueError, "Historical validation lost concrete ValueError compatibility"
 
@@ -223,10 +223,10 @@ def test_HistoricalAdaptiveFailureRetainsConvergenceClass():
 
     function = MFunction("desirability")
     function.mju = lambda coordinate: 1.0 if coordinate < 0.123456789 else 0.0
-    fuzzy_set = FuzzySet(function, (0.0, 1.0))
+    fuzzySet = FuzzySet(function, (0.0, 1.0))
 
     with pytest.raises(CentroidConvergenceError) as captured:
-        fuzzy_set.Defuz()
+        fuzzySet.Defuz()
 
     assert type(captured.value) is CentroidConvergenceError, "Numerical categorization replaced the convergence class"
 
@@ -252,10 +252,10 @@ def test_HistoricalConstructionDoesNotInvokeOverriddenSupportSetter():
 
             raise RuntimeError("custom support setter called")
 
-    fuzzy_set = CustomFuzzySet(MFunction("desirability"), (0.25, 0.75))
-    assert fuzzy_set.supportSet == (0.25, 0.75), "Construction did not initialize the inherited domain getter"
+    fuzzySet = CustomFuzzySet(MFunction("desirability"), (0.25, 0.75))
+    assert fuzzySet.supportSet == (0.25, 0.75), "Construction did not initialize the inherited domain getter"
 
     with pytest.raises(RuntimeError, match="custom support setter called"):
-        fuzzy_set.supportSet = (0.0, 1.0)
+        fuzzySet.supportSet = (0.0, 1.0)
 
-    assert fuzzy_set.supportSet == (0.25, 0.75), "The overridden setter changed the initialized base domain"
+    assert fuzzySet.supportSet == (0.25, 0.75), "The overridden setter changed the initialized base domain"

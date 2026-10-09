@@ -37,7 +37,7 @@ def ParseArguments(arguments=None):
         required=True,
         type=Path,
         help="new directory that receives captured stdout and JSON reports",
-    )
+    dest = 'artifactDirectory')
     return parser.parse_args(arguments)
 
 
@@ -167,7 +167,7 @@ def Main(arguments=None):
     """Execute clean-install evidence and return zero after a complete pass."""
 
     parsedArguments = ParseArguments(arguments)
-    artifactDirectory = parsedArguments.artifact_directory.resolve()
+    artifactDirectory = parsedArguments.artifactDirectory.resolve()
     repositoryEntries = frozenset(path.name for path in PROJECTROOT.iterdir())
     artifactDirectory.mkdir(parents=True, exist_ok=False)
     environment = BuildEnvironment()

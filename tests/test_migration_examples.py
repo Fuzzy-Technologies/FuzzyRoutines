@@ -54,10 +54,10 @@ def _RunExample(exampleName, workingDirectory):
     return json.loads(result.stdout)
 
 
-def test_HistoricalCompatibilityExampleCoversEveryMigrationArea(tmp_path):
+def test_HistoricalCompatibilityExampleCoversEveryMigrationArea(tmpPath):
     """Keep all five protected historical paths executable together."""
 
-    result = _RunExample("historical_compatibility.py", tmp_path)
+    result = _RunExample("historical_compatibility.py", tmpPath)
 
     assert set(result) == {
         "defuzzification",
@@ -76,10 +76,10 @@ def test_HistoricalCompatibilityExampleCoversEveryMigrationArea(tmp_path):
     assert abs(result["defuzzification"] - 0.5) < 1e-12
 
 
-def test_ModernSupportedExampleDoesNotDependOnFutureApis(tmp_path):
+def test_ModernSupportedExampleDoesNotDependOnFutureApis(tmpPath):
     """Exercise only modern paths already exported by the installed package."""
 
-    result = _RunExample("modern_supported.py", tmp_path)
+    result = _RunExample("modern_supported.py", tmpPath)
 
     assert result == {
         "fuzzySet": 0.5,

@@ -62,12 +62,12 @@ class MFunction(_membership._LegacyAnalyticalAdapter):
         right foot.
         """
 
-        validated_parameters = _membership._ValidateFamilyParameters(self.mju.__name__, parameters)
+        validatedParameters = _membership._ValidateFamilyParameters(self.mju.__name__, parameters)
 
-        for parameter_name, parameter_value in validated_parameters.items():
-            _RequireFiniteReal(parameter_value, parameter_name)
+        for parameterName, parameterValue in validatedParameters.items():
+            _RequireFiniteReal(parameterValue, parameterName)
 
-        return validated_parameters
+        return validatedParameters
 
     def _AnalyticalSnapshot(self):
         """Freeze current validated parameters for modern analytical operations."""
@@ -82,12 +82,12 @@ class MFunction(_membership._LegacyAnalyticalAdapter):
     def _HasAnalyticalEvaluator(self):
         """Verify the registered bound evaluator is a canonical legacy formula."""
 
-        evaluator_name = getattr(self.mju, "__name__", None)
-        canonical_evaluator = getattr(MFunction, evaluator_name, None) if evaluator_name else None
+        evaluatorName = getattr(self.mju, "__name__", None)
+        canonicalEvaluator = getattr(MFunction, evaluatorName, None) if evaluatorName else None
 
         return (
             getattr(self.mju, "__self__", None) is self
-            and getattr(self.mju, "__func__", None) is canonical_evaluator
+            and getattr(self.mju, "__func__", None) is canonicalEvaluator
             and self.mju in self._functions.values()
             and type(self)._AnalyticalSnapshot is MFunction._AnalyticalSnapshot
             and type(self)._ValidateParameters is MFunction._ValidateParameters
@@ -103,11 +103,11 @@ class MFunction(_membership._LegacyAnalyticalAdapter):
         """Return the historical human-readable function representation."""
 
         # return view of function: Function_name(**parameters). Example: Bell(x, {"a": 0.6, "b": 0.66, "c": 0.77}
-        function_view = '{}({})'.format(self.name, 'y' if self.name == 'Desirability' else 'x, {}'.format(
+        functionView = '{}({})'.format(self.name, 'y' if self.name == 'Desirability' else 'x, {}'.format(
             '{' + ', '.join('"{}": {}'.format(*val) for val in [(k, self._parameters[k])
                                                                 for k in sorted(self._parameters)]) + '}'))
 
-        return function_view
+        return functionView
 
     @property
     def parameters(self):

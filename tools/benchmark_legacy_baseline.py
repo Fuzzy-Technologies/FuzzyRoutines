@@ -32,23 +32,23 @@ except ModuleNotFoundError as error:
     from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, UniversalFuzzyScale
 
 
-def build_bell_membership():
+def BuildBellMembership():
     """Build the representative historical bell membership function."""
 
     return MFunction("bell", a=0.17, b=0.23, c=0.34)
 
 
-def build_fuzzy_set():
+def BuildFuzzySet():
     """Build the representative historical set and compute its centroid."""
 
     return FuzzySet(
-        membershipFunction=build_bell_membership(),
+        membershipFunction=BuildBellMembership(),
         supportSet=(0.17, 0.40),
         linguisticName="LegacyBenchmark",
     )
 
 
-def measure(operation, iterations, repeats):
+def Measure(operation, iterations, repeats):
     """Return per-operation wall-clock samples in microseconds."""
     operation()
     samples = []
@@ -72,10 +72,10 @@ def measure(operation, iterations, repeats):
     }
 
 
-def build_report(repeats):
+def BuildReport(repeats):
     """Build the complete historical timing and host-environment report."""
 
-    membership = build_bell_membership()
+    membership = BuildBellMembership()
     scale = UniversalFuzzyScale()
     lookup = scale.Fuzzy(0.5)
 
@@ -83,22 +83,22 @@ def build_report(repeats):
         raise RuntimeError("Unexpected UniversalFuzzyScale lookup result")
 
     benchmarks = {
-        "bell_membership_evaluation": measure(
+        "bell_membership_evaluation": Measure(
             lambda: membership.mju(0.22),
             iterations=200000,
             repeats=repeats,
         ),
-        "fuzzy_set_construction_and_centroid": measure(
-            build_fuzzy_set,
+        "fuzzy_set_construction_and_centroid": Measure(
+            BuildFuzzySet,
             iterations=100,
             repeats=repeats,
         ),
-        "universal_scale_construction": measure(
+        "universal_scale_construction": Measure(
             UniversalFuzzyScale,
             iterations=25,
             repeats=repeats,
         ),
-        "universal_scale_lookup": measure(
+        "universal_scale_lookup": Measure(
             lambda: scale.Fuzzy(0.5),
             iterations=100000,
             repeats=repeats,
@@ -115,7 +115,7 @@ def build_report(repeats):
     }
 
 
-def parse_arguments(arguments=None):
+def ParseArguments(arguments=None):
     """Parse repeat count and optional explicit output path."""
 
     parser = argparse.ArgumentParser(description=__doc__)
@@ -132,25 +132,25 @@ def parse_arguments(arguments=None):
     return parser.parse_args(arguments)
 
 
-def main(arguments=None):
+def Main(arguments=None):
     """Emit the baseline report and return zero after successful output."""
 
-    arguments = parse_arguments(arguments)
+    arguments = ParseArguments(arguments)
 
     if arguments.repeats < 3:
         raise ValueError("--repeats must be at least 3")
 
-    report = build_report(arguments.repeats)
+    report = BuildReport(arguments.repeats)
     rendered = json.dumps(report, indent=2, sort_keys=True)
     print(rendered)
 
     if arguments.output:
-        with open(arguments.output, "w", encoding="utf-8") as output_file:
-            output_file.write(rendered)
-            output_file.write("\n")
+        with open(arguments.output, "w", encoding="utf-8") as outputFile:
+            outputFile.write(rendered)
+            outputFile.write("\n")
 
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(Main())
