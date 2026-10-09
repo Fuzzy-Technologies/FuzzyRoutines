@@ -138,7 +138,11 @@ def test_TranslatedRealApiRetainsConstructorContracts(tmpPath):
     assert str(constructor.parameters["family"].annotation) == "str"
 
 
-def test_OnePageLocaleBuildRendersTranslatedApiAndPreservesStableAnchors(tmpPath):
+@pytest.mark.parametrize("locale,pageTitle,description", (
+    ("ru", "Расчёт", "Вычислить значение без изменения входных данных."),
+    ("zh-CN", "计算", "使用隶属函数计算温度的隶属度。"),
+))
+def test_OnePageLocaleBuildRendersTranslatedApiAndPreservesStableAnchors(tmpPath, locale, pageTitle, description):
     """Exercise real MkDocs/Griffe wiring on one small page instead of a full local gate."""
 
     pytest.importorskip("mkdocs")
@@ -170,28 +174,30 @@ plugins:
           options:
             show_root_heading: true
 ''', encoding="utf-8")
-    pageTranslation = sourceRoot / "docs/site/content/ru/index.md"
+    pageTranslation = sourceRoot / f"docs/site/content/{locale}/index.md"
     pageTranslation.parent.mkdir(parents=True)
-    pageTranslation.write_text("# Расчёт {#calculation}\n\n![Общая фигура](../en/assets/figure.svg)\n\n::: sample.Calculate\n", encoding="utf-8")
+    pageTranslation.write_text(f"# {pageTitle} {{#calculation}}\n\n![{pageTitle}](../en/assets/figure.svg)\n\n::: sample.Calculate\n", encoding="utf-8")
     symbolTranslation = sourceRoot / "docs/i18n/ru-calculate.md"
     symbolTranslation.parent.mkdir()
-    symbolTranslation.write_text("Вычислить значение без изменения входных данных.", encoding="utf-8")
+    symbolTranslation.write_text(description, encoding="utf-8")
     units = (
         CanonicalUnit("page:index", "page", "docs/site/content/en/index.md", "", "# Calculation\n\n::: sample.Calculate\n"),
         CanonicalUnit("symbol:sample.Calculate", "symbol", "sample.py", "", "Canonical explanation."),
     )
     records = {
-        unit.identifier: {"translations": {"ru": {"path": path.relative_to(sourceRoot).as_posix(), "state": "draft"}}}
+        unit.identifier: {"translations": {locale: {"path": path.relative_to(sourceRoot).as_posix(), "state": "draft"}}}
         for unit, path in zip(units, (pageTranslation, symbolTranslation), strict=True)
     }
-    report = ValidationReport((), {unit.identifier: {"ru": "draft"} for unit in units})
+    report = ValidationReport((), {unit.identifier: {locale: "draft"} for unit in units})
     outputRoot = tmpPath / "output"
-    BuildLocale(sourceRoot, outputRoot, "ru", {"branding": {"assetRoot": "docs/site/content/en/assets"}}, units, records, report)
-    rendered = (outputRoot / "ru/site/index.html").read_text(encoding="utf-8")
+    BuildLocale(sourceRoot, outputRoot, locale, {"branding": {"assetRoot": "docs/site/content/en/assets"}}, units, records, report)
+    rendered = (outputRoot / locale / "site/index.html").read_text(encoding="utf-8")
     assert 'id="calculation"' in rendered
     assert 'id="sample.Calculate"' in rendered
-    assert "Вычислить значение без изменения входных данных." in rendered
-    assert "Предварительная версия для рецензирования" in rendered
+    assert description in rendered
+    assert ("Версия для рецензирования" if locale == "ru" else "审阅版本") in rendered
     assert 'src="assets/figure.svg"' in rendered
-    search = json.loads((outputRoot / "ru/site/search/search_index.json").read_text(encoding="utf-8"))
-    assert any("Вычислить значение" in item["text"] for item in search["docs"])
+    search = json.loads((outputRoot / locale / "site/search/search_index.json").read_text(encoding="utf-8"))
+    assert any(description in item["text"].replace("\u200b", "") for item in search["docs"])
+    if locale == "zh-CN":
+        assert any("\u200b隶属\u200b" in item["text"] for item in search["docs"])

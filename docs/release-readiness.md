@@ -96,6 +96,11 @@ recipes and review corrections under #294. AI-assisted English preparation
 does not approve missing Russian or Chinese translations or check final
 release-candidate boxes.
 
+The [multilingual implementation review](audits/2026-10-09-multilingual-review.md)
+records the complete 257-unit Russian/Chinese drafts, canonical corrections,
+rendered findings and the remaining hash-bound human reviews. Complete draft
+coverage is not approval.
+
 The maintainer requires complete English, Russian and Simplified Chinese user
 documentation for the first stable release. English fallback pages are useful
 during development but do not satisfy this release criterion. Follow

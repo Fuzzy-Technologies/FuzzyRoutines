@@ -23,6 +23,7 @@ def on_page_markdown(markdown, *, page, config, files):
     banner = config.extra.get("localePreviewBanner", "")
 
     if banner:
-        return f"!!! warning\n\n    {banner}\n\n{markdown}"
+        title = config.extra.get("localePreviewTitle", "Review preview")
+        return f'!!! warning "{title}"\n\n    {banner}\n\n{markdown}'
 
     return markdown

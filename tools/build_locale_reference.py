@@ -28,8 +28,8 @@ PROJECTROOT = Path(__file__).resolve().parents[1]
 CONTENTROOT = "docs/site/content/en"
 LANGUAGES = {"en": "en", "ru": "ru", "zh-CN": "zh"}
 CATEGORIES = {
-    "ru": {"Worked scenarios": "Практические сценарии", "API reference": "Справочник API", "Modern API": "Современный API", "Historical API": "Исторический API", "Mathematics": "Математические основы", "Migration": "Миграция", "API contracts": "Контракты API"},
-    "zh-CN": {"Worked scenarios": "应用场景", "API reference": "API 参考", "Modern API": "现代 API", "Historical API": "历史 API", "Mathematics": "数学基础", "Migration": "迁移", "API contracts": "API 契约"},
+    "ru": {"Worked scenarios": "Практические сценарии", "API reference": "Справочник API", "Modern API": "Современный API", "Historical API": "Исторический API", "Mathematics": "Математические основы", "Migration": "Миграция", "API contracts": "Контракты API", "Product overview": "О проекте", "Languages and versions": "Языки и версии"},
+    "zh-CN": {"Worked scenarios": "应用场景", "API reference": "API 参考", "Modern API": "现代 API", "Historical API": "历史 API", "Mathematics": "数学基础", "Migration": "迁移", "API contracts": "API 契约", "Product overview": "项目概览", "Languages and versions": "语言与版本"},
 }
 PREVIEWBANNERS = {
     "ru": "Предварительная версия для рецензирования. Переводы ещё не утверждены; отсутствующие разделы показаны на английском. Это не принятая русская документация релиза.",
@@ -212,6 +212,7 @@ def BuildLocale(projectRoot, outputRoot, locale, project, units, records, report
         "localeRoot": "/FuzzyRoutines/api/latest",
         "localePreviewBanner": "" if evidence["approved"] else PREVIEWBANNERS[locale],
     }
+    settings["extra"]["localePreviewTitle"] = {"ru": "Версия для рецензирования", "zh-CN": "审阅版本"}.get(locale, "Review preview")
     settings["markdown_extensions"].append("admonition")
 
     for plugin in settings["plugins"]:
@@ -236,6 +237,10 @@ def BuildLocale(projectRoot, outputRoot, locale, project, units, records, report
     for artifact in ("objects.inv", "search/search_index.json"):
         if not (siteRoot / artifact).is_file():
             raise AssertionError(f"missing {locale} artifact: {artifact}")
+
+    searchIndex = json.loads((siteRoot / "search/search_index.json").read_text(encoding="utf-8"))
+    if locale == "zh-CN" and not any("\u200b" in entry["text"] for entry in searchIndex["docs"]):
+        raise AssertionError("Chinese search needs segmented text; install the pinned jieba documentation dependency")
 
     sourceAssets = projectRoot / project["branding"]["assetRoot"]
     for asset in sourceAssets.rglob("*"):
