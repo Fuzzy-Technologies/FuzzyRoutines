@@ -117,6 +117,13 @@ def CanonicalHash(unit: CanonicalUnit) -> str:
     return f"sha256:{hashlib.sha256(payload).hexdigest()}"
 
 
+def TranslationHash(text: str) -> str:
+    """Bind review evidence to the exact normalized translation, not just its source."""
+
+    normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+    return f"sha256:{hashlib.sha256(normalized.encode()).hexdigest()}"
+
+
 def _PageIdentifier(path: Path, contentRoot: Path) -> str:
     """Derive the default stable page ID for a newly discovered English page."""
 
@@ -526,6 +533,16 @@ def DiscoverCanonicalUnits(
             )
         )
 
+    for page in projectManifest.get("externalPages", ()):
+        sourcePath = page["sourcePath"]
+        units.append(CanonicalUnit(
+            identifier=page["id"],
+            kind="page",
+            sourcePath=sourcePath,
+            signature="",
+            body=_ReadCanonicalText(projectRoot / sourcePath),
+        ))
+
     coveragePath = projectRoot / projectManifest["apiCoverageManifest"]
     coverage = tomllib.loads(_ReadCanonicalText(coveragePath))
     exclusions = {
@@ -782,6 +799,8 @@ def _TranslationDiagnostic(
 def ValidateLocales(
     projectRoot: Path = PROJECTROOT,
     projectManifestPath: Path | None = None,
+    *,
+    requireApproved: bool = False,
 ) -> ValidationReport:
     """Validate canonical inventory, source hashes, review state, and glossaries."""
 
@@ -924,6 +943,9 @@ def ValidateLocales(
 
             states[identifier][locale] = state
 
+            if requireApproved and state != "approved":
+                diagnostics.append(f"{recordLabel}: {locale} release requires approved, got {state}")
+
             if state == "missing":
                 if translationPath or reviews:
                     diagnostics.append(
@@ -953,6 +975,12 @@ def ValidateLocales(
                     )
                 )
 
+            translationSourceHash = translation.get("sourceHash")
+
+            if translationSourceHash is not None and translationSourceHash != currentHash:
+                states[identifier][locale] = "stale"
+                diagnostics.append(f"{recordLabel}: {locale} translation sourceHash is stale")
+
             if state != "approved":
                 continue
 
@@ -968,6 +996,13 @@ def ValidateLocales(
                 reviewLabel = f"{recordLabel}:{locale}:reviews[{reviewIndex}]"
                 role = review.get("role", "")
                 reviewHash = review.get("reviewedSourceHash", "")
+                reviewedTranslationHash = review.get("reviewedTranslationHash", "")
+
+                if resolvedTranslation.is_file() and reviewedTranslationHash != TranslationHash(
+                    _ReadCanonicalText(resolvedTranslation)
+                ):
+                    states[identifier][locale] = "stale"
+                    diagnostics.append(f"{reviewLabel}: translation changed or reviewedTranslationHash is missing")
 
                 if role in reviewedRoles:
                     diagnostics.append(f"{reviewLabel}: duplicate review role {role}")
@@ -1034,6 +1069,7 @@ def ParseArguments(arguments=None):
     parser.add_argument("--project-root", dest="projectRoot", type=Path, default=PROJECTROOT)
     parser.add_argument("--project-manifest", dest="projectManifest", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--require-approved", dest="requireApproved", action="store_true")
 
     return parser.parse_args(arguments)
 
@@ -1092,7 +1128,9 @@ def Main(arguments=None):
 
         return 0
 
-    report = ValidateLocales(options.projectRoot, projectManifestPath)
+    report = ValidateLocales(
+        options.projectRoot, projectManifestPath, requireApproved=options.requireApproved,
+    )
 
     if options.output:
         _WriteReport(report, options.output)

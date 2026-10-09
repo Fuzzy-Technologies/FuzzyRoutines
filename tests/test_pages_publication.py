@@ -5,6 +5,7 @@
 
 """Deterministic contracts for GitHub Pages composition and publication."""
 
+import json
 from pathlib import Path
 
 from tools import compose_pages_site as composePagesSite
@@ -67,6 +68,22 @@ def test_PagesCompositionRejectsIncompleteApiInputBeforeWriting(tmpPath):
         raise AssertionError("incomplete API input must fail Pages composition")
 
     assert not outputRoot.exists()
+
+
+def test_DraftLocalesAreAvailableOnlyInAnExplicitReviewArtifact(tmpPath):
+    """Production composition must not replace honest fallbacks with unapproved prose."""
+
+    apiRoot = tmpPath / "english"
+    CreateApiFixture(apiRoot)
+    localeRoot = tmpPath / "locales"
+    CreateApiFixture(localeRoot / "ru/site")
+    (localeRoot / "ru/evidence.json").write_text(json.dumps({"approved": False}), encoding="utf-8")
+    publicRoot = tmpPath / "public"
+    reviewRoot = tmpPath / "review"
+    composePagesSite.ComposeSite(apiRoot, publicRoot, localeRoot)
+    composePagesSite.ComposeSite(apiRoot, reviewRoot, localeRoot, includeDrafts=True)
+    assert "Reviewed documentation is not available" in (publicRoot / "api/latest/ru/index.html").read_text(encoding="utf-8")
+    assert (reviewRoot / "api/latest/ru/index.html").read_text(encoding="utf-8") == "<html>English API</html>"
 
 
 def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):

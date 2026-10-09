@@ -11,6 +11,7 @@ from tools.locale_documentation import (
     CanonicalHash,
     CanonicalUnit,
     DiscoverCanonicalUnits,
+    TranslationHash,
     ValidateLocales,
 )
 
@@ -96,6 +97,7 @@ zh-CN = "docs/i18n/glossaries/zh-CN.toml"
         body=sourceText,
     )
     sourceHash = CanonicalHash(unit)
+    translationHash = TranslationHash("# Русский перевод\n")
     records = ""
 
     if includeUnit:
@@ -114,12 +116,14 @@ zh-CN = "docs/i18n/glossaries/zh-CN.toml"
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "{sourceHash}"
+reviewedTranslationHash = "{translationHash}"
 reviewer = "editor"
 reviewedAt = "2026-09-24T00:00:00Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "{sourceHash}"
+reviewedTranslationHash = "{translationHash}"
 reviewer = "reviewer"
 reviewedAt = "2026-09-24T00:00:00Z"
 '''
@@ -153,6 +157,28 @@ def test_CurrentLocaleManifestsMatchCanonicalEnglishInventory():
     assert ValidateLocales(PROJECTROOT).diagnostics == ()
 
 
+def test_ReleaseGateRejectsMissingOrDraftTranslations(tmpPath):
+    """Ordinary development validation must not imply stable multilingual readiness."""
+
+    _PrepareFixture(tmpPath, ruState="draft")
+    assert not ValidateLocales(tmpPath).diagnostics
+    report = ValidateLocales(tmpPath, requireApproved=True)
+    assert any("ru release requires approved, got draft" in item for item in report.diagnostics)
+    assert any("zh-CN release requires approved, got missing" in item for item in report.diagnostics)
+
+
+def test_TranslationEditInvalidatesHumanReviewEvenWhenEnglishIsUnchanged(tmpPath):
+    """Approval must bind translated wording as well as its English source."""
+
+    _PrepareFixture(tmpPath, ruState="approved")
+    assert not ValidateLocales(tmpPath).diagnostics
+    translation = tmpPath / "docs/site/content/ru/index.md"
+    translation.write_text("# Изменённый перевод\n", encoding="utf-8")
+    report = ValidateLocales(tmpPath)
+    assert report.states["page:index"]["ru"] == "stale"
+    assert any("translation changed" in item for item in report.diagnostics)
+
+
 def test_CurrentGlossariesUseReviewedMathematicalTerminology():
     """Protect the reviewed Russian and Simplified Chinese terminology."""
 
@@ -165,7 +191,7 @@ def test_CurrentGlossariesUseReviewedMathematicalTerminology():
 
     for requiredTerm in (
         'preferred = "универсальное множество"',
-        'preferred = "носитель нечёткого множества"',
+        'preferred = "множество поддержки"',
         'preferred = "ядро нечёткого множества"',
         'preferred = "область интегрирования"',
     ):

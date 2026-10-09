@@ -20,3 +20,99 @@ assetRoot = "docs/site/content/en/assets"
 [glossaries]
 ru = "docs/i18n/glossaries/ru.toml"
 zh-CN = "docs/i18n/glossaries/zh-CN.toml"
+
+[[externalPages]]
+id = "page:mathematics.model"
+sourcePath = "docs/MATHEMATICAL_MODEL.md"
+destination = "mathematics/model.md"
+title = "Canonical Mathematical Model"
+
+[[externalPages]]
+id = "page:mathematics.alpha-cuts"
+sourcePath = "docs/mathematics/alpha-cuts.md"
+destination = "mathematics/alpha-cuts.md"
+title = "Alpha-cut contract"
+
+[[externalPages]]
+id = "page:mathematics.centroid-defuzzification"
+sourcePath = "docs/mathematics/centroid-defuzzification.md"
+destination = "mathematics/centroid-defuzzification.md"
+title = "Centroid defuzzification"
+
+[[externalPages]]
+id = "page:mathematics.finite-number-policy"
+sourcePath = "docs/mathematics/finite-number-policy.md"
+destination = "mathematics/finite-number-policy.md"
+title = "Finite scalar input policy"
+
+[[externalPages]]
+id = "page:mathematics.fuzzy-set-convexity"
+sourcePath = "docs/mathematics/fuzzy-set-convexity.md"
+destination = "mathematics/fuzzy-set-convexity.md"
+title = "Fuzzy-Set Convexity"
+
+[[externalPages]]
+id = "page:mathematics.fuzzy-set-normalization"
+sourcePath = "docs/mathematics/fuzzy-set-normalization.md"
+destination = "mathematics/fuzzy-set-normalization.md"
+title = "Fuzzy-Set Height and Normalization"
+
+[[externalPages]]
+id = "page:mathematics.fuzzy-set-operations"
+sourcePath = "docs/mathematics/fuzzy-set-operations.md"
+destination = "mathematics/fuzzy-set-operations.md"
+title = "Explicit Fuzzy-Set Operations"
+
+[[externalPages]]
+id = "page:mathematics.fuzzy-set-relations"
+sourcePath = "docs/mathematics/fuzzy-set-relations.md"
+destination = "mathematics/fuzzy-set-relations.md"
+title = "Fuzzy-Set Equality and Inclusion"
+
+[[externalPages]]
+id = "page:mathematics.linguistic-term-model"
+sourcePath = "docs/mathematics/linguistic-term-model.md"
+destination = "mathematics/linguistic-term-model.md"
+title = "Typed Linguistic-Term Representation"
+
+[[externalPages]]
+id = "page:mathematics.membership-function-contracts"
+sourcePath = "docs/mathematics/membership-function-contracts.md"
+destination = "mathematics/membership-function-contracts.md"
+title = "Membership-Function Formula and Parameter Contracts"
+
+[[externalPages]]
+id = "page:mathematics.numerical-edge-policy"
+sourcePath = "docs/mathematics/numerical-edge-policy.md"
+destination = "mathematics/numerical-edge-policy.md"
+title = "Numerical edge-case policy"
+
+[[externalPages]]
+id = "page:mathematics.parabolic-negation-derivation"
+sourcePath = "docs/mathematics/parabolic-negation-derivation.md"
+destination = "mathematics/parabolic-negation-derivation.md"
+title = "Analytical Derivation of the Legacy Parabolic Negation"
+
+[[externalPages]]
+id = "page:mathematics.source-algorithm-invariants"
+sourcePath = "docs/mathematics/source-algorithm-invariants.md"
+destination = "mathematics/source-algorithm-invariants.md"
+title = "Source Formula and Algorithm Invariants"
+
+[[externalPages]]
+id = "page:mathematics.universe-support-contract"
+sourcePath = "docs/mathematics/universe-support-contract.md"
+destination = "mathematics/universe-support-contract.md"
+title = "Universe and Support Contract"
+
+[[externalPages]]
+id = "page:migration.1.0.3-to-2.0.0"
+sourcePath = "docs/migration/1.0.3-to-2.0.0.md"
+destination = "migration/1.0.3-to-2.0.0.md"
+title = "Migration notes: 1.0.3 to the planned 2.0.0 release"
+
+[[externalPages]]
+id = "page:migration.historical-to-modern"
+sourcePath = "docs/migration/historical-to-modern.md"
+destination = "migration/historical-to-modern.md"
+title = "Historical-to-Modern API Migration Examples"

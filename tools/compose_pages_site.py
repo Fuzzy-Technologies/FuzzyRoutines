@@ -13,6 +13,7 @@ exist; they never masquerade English content as translated documentation.
 
 import argparse
 import html
+import json
 import shutil
 import tomllib
 from pathlib import Path
@@ -49,6 +50,8 @@ def ParseArguments(arguments=None):
         default=DEFAULTOUTPUT,
         help="Disposable Pages artifact root.",
     )
+    parser.add_argument("--locale-root", dest="localeRoot", type=Path)
+    parser.add_argument("--include-drafts", dest="includeDrafts", action="store_true")
     return parser.parse_args(arguments)
 
 
@@ -232,7 +235,7 @@ SPDX-License-Identifier: Apache-2.0
     (versionsRoot / "index.html").write_text(pageText, encoding="utf-8")
 
 
-def ComposeSite(apiSite, outputRoot):
+def ComposeSite(apiSite, outputRoot, localeRoot=None, *, includeDrafts=False):
     """Create and verify one complete disposable Pages directory."""
 
     apiSite = apiSite.resolve()
@@ -248,6 +251,17 @@ def ComposeSite(apiSite, outputRoot):
     shutil.copytree(apiSite, englishRoot)
 
     for locale, (languageName, statusText) in LOCALES.items():
+        localeSite = localeRoot / locale / "site" if localeRoot else None
+        evidencePath = localeRoot / locale / "evidence.json" if localeRoot else None
+
+        if localeSite and evidencePath.is_file():
+            evidence = json.loads(evidencePath.read_text(encoding="utf-8"))
+
+            if evidence["approved"] or includeDrafts:
+                ValidateApiSite(localeSite)
+                shutil.copytree(localeSite, apiRoot / "latest" / locale)
+                continue
+
         WriteLocaleFallback(
             apiRoot / "latest" / locale,
             locale,
@@ -276,7 +290,10 @@ def Main(arguments=None):
     """Compose the Pages site and report its verified disposable location."""
 
     options = ParseArguments(arguments)
-    outputRoot = ComposeSite(options.apiSite, options.outputRoot)
+    outputRoot = ComposeSite(
+        options.apiSite, options.outputRoot, options.localeRoot,
+        includeDrafts=options.includeDrafts,
+    )
     print(f"GitHub Pages composition: PASS ({outputRoot})")
     return 0
 
