@@ -26,6 +26,7 @@ from pathlib import Path
 PROJECTROOT = Path(__file__).resolve().parents[1]
 EXAMPLEROOT = PROJECTROOT / "examples" / "migration"
 COMPATIBILITYGUIDE = PROJECTROOT / "docs" / "COMPATIBILITY.md"
+CANONICALROOT = PROJECTROOT / "docs" / "site" / "content" / "en"
 
 
 def ParseArguments(arguments=None):
@@ -163,6 +164,46 @@ def RunCompatibilityGuideExamples(artifactDirectory, environment):
     return results
 
 
+def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT):
+    """Discover every canonical English Python fence in deterministic page order."""
+
+    examples = {}
+    for pagePath in sorted(contentRoot.rglob("*.md")):
+        relativePath = pagePath.relative_to(contentRoot).with_suffix("")
+        pageName = "-".join(relativePath.parts)
+        snippets = re.findall(r"```python\n(.*?)```", pagePath.read_text(encoding="utf-8"), flags=re.DOTALL)
+        for snippetIndex, snippet in enumerate(snippets, start=1):
+            examples[f"canonical-{pageName}-{snippetIndex}"] = snippet
+    if not examples:
+        raise RuntimeError("canonical English documentation contains no Python examples")
+    return examples
+
+
+def RunCanonicalGuideExamples(artifactDirectory, environment):
+    """Execute every English snippet and all eight scenarios against an installed artifact."""
+
+    results = {}
+    for name, snippet in LoadCanonicalGuideExamples().items():
+        results[name] = RunCommand(
+            name,
+            [sys.executable, "-I", "-c", snippet + "\nprint('canonical example: PASS')\n"],
+            artifactDirectory,
+            environment,
+            expectJson=False,
+        )
+    report = RunCommand(
+        "worked-scenarios",
+        [sys.executable, "-I", str(PROJECTROOT / "examples" / "guide.py")],
+        artifactDirectory,
+        environment,
+    )
+    expectedScenarios = {"temperature", "risk", "sensors", "alarm", "alpha-cuts", "centroid", "scale-audit", "custom"}
+    if set(report) != expectedScenarios:
+        raise RuntimeError("worked-scenarios did not execute the complete documented scenario set")
+    results["worked-scenarios"] = sorted(report)
+    return results
+
+
 def Main(arguments=None):
     """Execute clean-install evidence and return zero after a complete pass."""
 
@@ -174,6 +215,7 @@ def Main(arguments=None):
     packagePath = VerifyPackageOrigin(artifactDirectory, environment)
 
     results = {
+        "canonical-guide-examples": RunCanonicalGuideExamples(artifactDirectory, environment),
         "compatibility-guide-examples": RunCompatibilityGuideExamples(
             artifactDirectory,
             environment,

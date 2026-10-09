@@ -3,13 +3,18 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# FuzzyRoutines API reference
+# FuzzyRoutines documentation
 
 ![FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory](assets/brand/fuzzyroutines-alice.png){ .fr-project-art }
 
-This is the canonical English reference for the installed FuzzyRoutines
-package. It is generated from Python annotations and English Google-style
-docstrings using static Griffe discovery.
+Start with the [quick start](quick-start.md) to install the modern API and
+classify a physical measurement. The [eight worked scenarios](guides/index.md)
+explain inputs, policies, calculations, expected results, and figures. Browse
+the [membership gallery](guides/membership-families.md) to choose a curve, or
+use the [practical API recipes](guides/api-recipes.md) for smaller operations.
+
+The canonical English API reference is generated from installed-package Python
+annotations and English Google-style docstrings using static Griffe discovery.
 
 Start with the [modern API](api/modern/index.md) for new code. Use the
 [historical compatibility facade](api/legacy/index.md) only when maintaining

@@ -49,6 +49,10 @@ engine's zero-area and nonfinite-result checks. It preserves callback errors
 and `CentroidConvergenceError` unchanged. Other historical validation contracts,
 including documented generic `Exception` errors, remain protected.
 
+## Worked examples
+
+[Undefined-result handling](../../guides/api-recipes.md#handle-a-mathematically-undefined-result) handles zero membership area.
+
 ::: fuzzyroutines.exceptions
     options:
       members:

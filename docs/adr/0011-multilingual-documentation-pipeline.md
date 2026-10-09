@@ -69,6 +69,21 @@ Russian and Simplified Chinese text lives outside Python source. Generated HTML,
 generated search indexes, and generated fallback pages remain disposable build
 outputs under `_build/` and are never edited or committed.
 
+### Shared scientific figures
+
+Scientific figures use one canonical SVG set with English text inside the
+images: titles, axis labels, legends, annotations, and units. English, Russian,
+and Simplified Chinese documentation reuse these same bytes. There are no
+translated SVG variants or separate generation runs per locale.
+
+Captions, surrounding explanations, and descriptive Markdown alternatives are
+translated and reviewed with their pages. They explain the English labels and
+give the numerical conclusions without requiring the reader to see the image.
+Locale builds may copy the canonical files into their output directories; the
+rendered-language parity gate must verify that those copies match the source.
+English text embedded in a shared figure is intentional, not a missing prose
+translation. Scientific accuracy remains subject to the same review rules.
+
 ### Stable identity
 
 Every translatable unit has one permanent ASCII identifier:

@@ -5,6 +5,10 @@ SPDX-License-Identifier: Apache-2.0
 
 # Fuzzy sets
 
+## Worked examples
+
+[Warning zones](../../guides/alarm.md) composes sets; the [custom model](../../guides/custom.md) normalizes finite data.
+
 ::: fuzzyroutines.fuzzysets
     options:
       members:

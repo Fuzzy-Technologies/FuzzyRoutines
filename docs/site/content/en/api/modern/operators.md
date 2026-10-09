@@ -10,6 +10,10 @@ their scalar formulas. Existing imports from `fuzzyroutines.fuzzysets` retain
 the same policy class objects. Set algebra uses these policies without global
 configuration.
 
+## Worked examples
+
+[Sensor criteria](../../guides/sensors.md) compares combinations; [operator recipes](../../guides/api-recipes.md#choose-scalar-operator-families-deliberately) executes every family.
+
 ::: fuzzyroutines.operators
     options:
       members:

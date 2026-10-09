@@ -53,6 +53,7 @@ fuzzySet = ScalarFuzzySet(
     membershipFunction,
 )
 centroid = Centroid(fuzzySet, IntegrationDomain(0.0, 1.0))
+assert abs(centroid - 2 / 3) < 1e-12
 ```
 
 The centroid is `2 / 3`, using adaptive numerical integration over the explicit
@@ -78,6 +79,10 @@ Imported-module diagnostics are intentionally hidden by `--follow-imports
 silent`; this is a consumer contract check, not the project-wide typing gate
 planned in Task #95. Runtime finiteness, boolean exclusion, and grade range
 cannot be proved by these annotations.
+
+## Worked examples
+
+The [membership gallery](../../guides/membership-families.md) shows every family; the [custom model](../../guides/custom.md) uses a typed callable.
 
 ::: fuzzyroutines.membership
     options:
