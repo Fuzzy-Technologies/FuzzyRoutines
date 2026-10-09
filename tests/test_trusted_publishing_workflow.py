@@ -97,3 +97,17 @@ def test_RunbookDefinesExternalProtectionWithoutSecrets():
         assert requiredText in runbookText
 
     assert "Do not create a `PYPI_TOKEN`" in runbookText
+
+
+def test_PostPublicationVerificationHasNoPublishingIdentity():
+    """Only a successful publish enables the read-only consumer verification matrix."""
+
+    verification = WorkflowText().split("  verify-published:", maxsplit=1)[1]
+    assert "if: needs.publish-pypi.result == 'success'" in verification
+    assert "needs: publish-pypi" in verification
+    assert "permissions:\n      contents: read" in verification
+    assert "id-token:" not in verification
+    assert "--require-hashes -r published-evidence/requirements-published.txt" in verification
+    assert "--index-url https://pypi.org/simple" in verification
+    assert "tools/verify_installed_executables.py" in verification
+    assert 'python-version: ["3.13", "3.14"]' in verification

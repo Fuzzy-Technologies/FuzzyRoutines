@@ -35,6 +35,11 @@ Existing users should read the
 
 #### Added
 
+- Protected PyPI publication is followed by actual wheel/sdist byte comparison
+  with approved CI candidates, hash-pinned clean installation from the public
+  index, and installed examples on both supported Python versions. PR and
+  manual dry runs cannot reach publication or this post-publication matrix.
+
 - Canonical English quick start and eight worked scenarios explain physical
   inputs, model assumptions, intermediate grades, policy choices, exact versus
   sampled results, and independently verified area moments. Ten reproducible
