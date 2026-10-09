@@ -3883,14 +3883,18 @@ sourceHash = "sha256:126c9ce07b5ce5a1647364910bae4e68e66df0624ad23f0979d0527c462
 id = "page:mathematics.centroid-defuzzification"
 kind = "page"
 sourcePath = "docs/mathematics/centroid-defuzzification.md"
-sourceHash = "sha256:3992f0018eb9e2e23e121550b78efc7d5934091cc55c7564c0c0a122f5b4adff"
+sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/mathematics/centroid-defuzzification.md"
+sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/centroid-defuzzification.md"
+sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
 
 [[units]]
 id = "page:mathematics.finite-number-policy"
@@ -3917,10 +3921,14 @@ sourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b09077
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/mathematics/fuzzy-set-convexity.md"
+sourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/fuzzy-set-convexity.md"
+sourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a"
 
 [[units]]
 id = "page:mathematics.fuzzy-set-normalization"
@@ -3981,23 +3989,31 @@ sourceHash = "sha256:43a316c52cf6ace0a90f6a9e4bb12c750d2f0b76dd11d5036af28437d01
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/mathematics/linguistic-term-model.md"
+sourceHash = "sha256:43a316c52cf6ace0a90f6a9e4bb12c750d2f0b76dd11d5036af28437d01edada"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/linguistic-term-model.md"
+sourceHash = "sha256:43a316c52cf6ace0a90f6a9e4bb12c750d2f0b76dd11d5036af28437d01edada"
 
 [[units]]
 id = "page:mathematics.membership-function-contracts"
 kind = "page"
 sourcePath = "docs/mathematics/membership-function-contracts.md"
-sourceHash = "sha256:3075a58c11cd37680547d6a13ea61f90f36ba837f6048cd895df4f37e6cfd364"
+sourceHash = "sha256:e12bce6edda6f8cebc01f20111c4f9fe1b9728b748b555dcd3007ac0c2b27053"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/mathematics/membership-function-contracts.md"
+sourceHash = "sha256:e12bce6edda6f8cebc01f20111c4f9fe1b9728b748b555dcd3007ac0c2b27053"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/membership-function-contracts.md"
+sourceHash = "sha256:e12bce6edda6f8cebc01f20111c4f9fe1b9728b748b555dcd3007ac0c2b27053"
 
 [[units]]
 id = "page:mathematics.model"
@@ -4041,10 +4057,14 @@ sourceHash = "sha256:cc84da31c9b4780bd2af15ce3cb756a3e8dfceab555860aa2c89e2a75ed
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/mathematics/parabolic-negation-derivation.md"
+sourceHash = "sha256:cc84da31c9b4780bd2af15ce3cb756a3e8dfceab555860aa2c89e2a75ed048e7"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/parabolic-negation-derivation.md"
+sourceHash = "sha256:cc84da31c9b4780bd2af15ce3cb756a3e8dfceab555860aa2c89e2a75ed048e7"
 
 [[units]]
 id = "page:mathematics.source-algorithm-invariants"
@@ -4054,10 +4074,14 @@ sourceHash = "sha256:ea8eab9de491df209ef41a4cae121eed67a46049cfbdf9b264f55fc0cbf
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/mathematics/source-algorithm-invariants.md"
+sourceHash = "sha256:ea8eab9de491df209ef41a4cae121eed67a46049cfbdf9b264f55fc0cbfe25a4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/source-algorithm-invariants.md"
+sourceHash = "sha256:ea8eab9de491df209ef41a4cae121eed67a46049cfbdf9b264f55fc0cbfe25a4"
 
 [[units]]
 id = "page:mathematics.universe-support-contract"
@@ -4080,14 +4104,18 @@ sourceHash = "sha256:f7cdde7d2d4e60ab8d7e13cf95381f783eda89e27628e9c05a28ad9707a
 id = "page:migration.1.0.3-to-2.0.0"
 kind = "page"
 sourcePath = "docs/migration/1.0.3-to-2.0.0.md"
-sourceHash = "sha256:2fdd5b0b1e80858cf66e8a9fab3be00328628207aa13362318687ed42ea6d13f"
+sourceHash = "sha256:67e0a93b4f6af4de2c9d11c17b9a09166fc5e47fc034274666a7019fbea9a73e"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/migration/1.0.3-to-2.0.0.md"
+sourceHash = "sha256:67e0a93b4f6af4de2c9d11c17b9a09166fc5e47fc034274666a7019fbea9a73e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/migration/1.0.3-to-2.0.0.md"
+sourceHash = "sha256:67e0a93b4f6af4de2c9d11c17b9a09166fc5e47fc034274666a7019fbea9a73e"
 
 [[units]]
 id = "page:migration.historical-to-modern"
@@ -4097,10 +4125,14 @@ sourceHash = "sha256:f42e5330774598e2e771473f047cc77c82aea2db207f82164270c6430d5
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/migration/historical-to-modern.md"
+sourceHash = "sha256:f42e5330774598e2e771473f047cc77c82aea2db207f82164270c6430d5b2360"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/migration/historical-to-modern.md"
+sourceHash = "sha256:f42e5330774598e2e771473f047cc77c82aea2db207f82164270c6430d5b2360"
 
 [[units]]
 id = "module:fuzzyroutines"

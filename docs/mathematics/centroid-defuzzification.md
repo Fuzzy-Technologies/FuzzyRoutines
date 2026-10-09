@@ -22,11 +22,11 @@ non-finite denominator has no centroid and raises `ValueError`.
 
 `Centroid` selects a method from evidence carried by the membership callable:
 
-| Membership source                        | Method                                                                        |
-| ---------------------------------------- | ----------------------------------------------------------------------------- |
-| Triangle, trapezium, parabolic, bell     | Analytical piecewise-polynomial area and first moment                         |
-| Gaussian-shaped exponential              | Analytical `erf`/`erfc` area and stable exponential boundary difference       |
-| Other `MFunction` or generic callable    | Deterministic adaptive Simpson integration of area and first moment           |
+| Membership source                             | Method                                                                        |
+| --------------------------------------------- | ----------------------------------------------------------------------------- |
+| Triangle, trapezium, parabolic, bell          | Analytical piecewise-polynomial area and first moment                         |
+| Gaussian-shaped exponential                   | Analytical `erf`/`erfc` area and stable exponential boundary difference       |
+| Other analytical families or generic callable | Deterministic adaptive Simpson integration of area and first moment           |
 
 The Gaussian path uses complementary error functions for same-sided tails.
 Writing $u=(l-c)/s$ and $v=(r-c)/s$ for centre $c$ and positive scale $s$, its
