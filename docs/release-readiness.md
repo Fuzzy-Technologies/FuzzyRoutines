@@ -46,6 +46,12 @@ environment reviewers, tag rules, or activation switch; use the
 
 ## Audit follow-ups
 
+The [2026-10-09 all-module audit](audits/2026-10-09-math-coverage-review.md)
+records per-module branch coverage, independent-reference evidence, newly
+covered public boundaries and exact sequential/process test parity on both
+supported Python versions. Its measured revision and justified remaining gaps
+are explicit; final candidate acceptance still requires its own CI evidence.
+
 The [2026-10-05 project audit](audits/2026-10-05-project-audit.md) records the
 baseline, source and ADR inventory, reproduced defects, usability assessment,
 and verification limits.

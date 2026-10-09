@@ -251,3 +251,36 @@ def test_CollectionErrorReturnsNonZeroProcessError(tmpPath):
 
     assert completedProcess.returncode != 0
     assert summary["process_errors"] >= 1
+
+
+def test_CollectionSkipsCountOnceAndMatchSequentialExecution(tmpPath):
+    """A skipped module collected by both phases is one skipped unit, not two."""
+
+    files = {
+        "test_pass.py": "def test_Passes():\n    assert 2 + 2 == 4\n",
+        "test_optional.py": "import pytest\npytest.skip('optional fixture', allow_module_level=True)\n",
+    }
+    evidenceDirectory = tmpPath / "reports"
+    suiteDirectory = tmpPath / "suite"
+    parallel = RunSyntheticSuite(suiteDirectory, files, "--jobs", "2", "--evidence-directory", str(evidenceDirectory))
+    serial = RunSyntheticSuite(suiteDirectory, files, "--serial")
+    parallelSummary = ParseSummary(parallel)
+    serialSummary = ParseSummary(serial)
+
+    assert parallel.returncode == serial.returncode == 0
+    assert parallelSummary["skipped"] == serialSummary["skipped"] == 1
+    assert parallelSummary["total"] == serialSummary["total"] == 2
+    assert sorted(path.name for path in evidenceDirectory.iterdir()) == ["parallel.xml", "serial.xml"]
+
+
+def test_ExistingEvidenceDirectoryIsNotOverwritten(tmpPath):
+    """Reject reuse before executing tests or replacing existing evidence."""
+
+    evidenceDirectory = tmpPath / "evidence"
+    evidenceDirectory.mkdir()
+    sentinel = evidenceDirectory / "keep.txt"
+    sentinel.write_text("keep", encoding="utf-8")
+    result = RunSyntheticSuite(tmpPath / "suite", {"test_fail.py": "raise AssertionError('must not collect')\n"}, "--evidence-directory", str(evidenceDirectory))
+
+    assert result.returncode == 2 and "evidence directory error" in result.stderr
+    assert sentinel.read_text() == "keep" and "TEST_PHASE" not in result.stdout

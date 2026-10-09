@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -61,6 +62,7 @@ class PhaseResult:
     timeout: int
     duration: float
     processErrors: int
+    collectionSkips: tuple[str, ...] = ()
 
 
 def LoadProjectConfiguration(projectRoot: Path) -> RunnerConfiguration:
@@ -228,6 +230,20 @@ def ParseJunitReport(reportPath: Path) -> dict[str, int]:
     return counters
 
 
+def CollectionSkipIds(reportPath: Path) -> tuple[str, ...]:
+    """Identify collection-level skips repeated by pytest before marker filtering."""
+
+    if not reportPath.is_file():
+        return ()
+
+    root = ElementTree.parse(reportPath).getroot()
+    return tuple(
+        case.get("name", "")
+        for case in root.iter("testcase")
+        if not case.get("classname") and case.get("name") and case.find("skipped") is not None
+    )
+
+
 def RunPhase(
     phase: ExecutionPhase,
     sessionRoot: Path,
@@ -235,6 +251,7 @@ def RunPhase(
     failFast: bool,
     testTargets: tuple[str, ...],
     projectRoot: Path,
+    evidenceDirectory: Path | None = None,
 ) -> PhaseResult:
     """Execute one pytest phase and return structured result evidence."""
 
@@ -264,6 +281,10 @@ def RunPhase(
     startedAt = time.monotonic()
     completedProcess = subprocess.run(command, cwd=projectRoot, env=environment, check=False)
     duration = time.monotonic() - startedAt
+
+    if evidenceDirectory is not None and reportPath.is_file():
+        shutil.copy2(reportPath, evidenceDirectory / f"{phase.name}.xml")
+
     counters = ParseJunitReport(reportPath)
     processErrors = counters.pop("process_errors")
 
@@ -280,6 +301,7 @@ def RunPhase(
         returnCode=completedProcess.returncode,
         duration=duration,
         processErrors=processErrors,
+        collectionSkips=CollectionSkipIds(reportPath),
         **counters,
     )
 
@@ -287,14 +309,17 @@ def RunPhase(
 def AggregateResults(results: tuple[PhaseResult, ...], duration: float) -> dict[str, int | float]:
     """Aggregate phase evidence into a stable machine-readable schema."""
 
+    collectionSkips = [name for result in results for name in result.collectionSkips]
+    repeatedSkips = len(collectionSkips) - len(set(collectionSkips))
+
     return {
         "duration": round(duration, 3),
         "failed": sum(result.failed for result in results),
         "passed": sum(result.passed for result in results),
         "process_errors": sum(result.processErrors for result in results),
-        "skipped": sum(result.skipped for result in results),
+        "skipped": sum(result.skipped for result in results) - repeatedSkips,
         "timeout": sum(result.timeout for result in results),
-        "total": sum(result.total for result in results),
+        "total": sum(result.total for result in results) - repeatedSkips,
     }
 
 
@@ -311,6 +336,7 @@ def ParseArguments(arguments: list[str] | None, configuration: RunnerConfigurati
     )
     parser.add_argument("--serial", action="store_true", dest="serialOnly", help="run the entire suite serially")
     parser.add_argument("--fail-fast", action="store_true", dest="failFast", help="stop after the first failure")
+    parser.add_argument("--evidence-directory", type=Path, dest="evidenceDirectory", help="retain phase JUnit XML in a new explicit directory")
     parser.add_argument("testTargets", nargs="*", help="optional pytest paths or node identifiers")
     parsedArguments = parser.parse_args(arguments)
 
@@ -342,6 +368,15 @@ def Main(arguments: list[str] | None = None) -> int:
         return 2
 
     parsedArguments = ParseArguments(arguments, configuration)
+
+    if parsedArguments.evidenceDirectory is not None:
+        try:
+            parsedArguments.evidenceDirectory.mkdir(parents=True, exist_ok=False)
+
+        except OSError as exception:
+            print(f"test runner evidence directory error: {exception}", file=sys.stderr)
+            return 2
+
     phases = BuildPhases(parsedArguments.serialOnly, parsedArguments.resolvedJobs)
     results: list[PhaseResult] = []
     startedAt = time.monotonic()
@@ -357,6 +392,7 @@ def Main(arguments: list[str] | None = None) -> int:
                 failFast=parsedArguments.failFast,
                 testTargets=tuple(parsedArguments.testTargets),
                 projectRoot=projectRoot,
+                evidenceDirectory=parsedArguments.evidenceDirectory,
             )
             results.append(result)
 

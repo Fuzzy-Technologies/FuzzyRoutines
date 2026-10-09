@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+name: Mathematical coverage and execution parity
+
+on:
+  pull_request:
+    branches: [develop, master]
+  push:
+    branches: [develop, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    name: Python ${{ matrix.python }} module coverage and process parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.13', '3.14']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install measurement dependencies
+        run: python -m pip install -r requirements.txt coverage==7.16.2
+      - name: Measure all library lines and branches sequentially
+        run: |
+          mkdir -p _build/math-audit
+          python -m coverage run --branch --source=fuzzyroutines --omit=fuzzyroutines/Examples.py -m pytest -q --junitxml=_build/math-audit/sequential.xml
+          python -m coverage report --show-missing
+          python -m coverage json -o _build/math-audit/coverage.json
+      - name: Verify actual process execution and per-test outcome parity
+        run: |
+          python -m tools.test_runner --jobs auto --timeout 60 --evidence-directory _build/math-audit/parallel
+          python -m tools.release_test_audit \
+            --coverage _build/math-audit/coverage.json \
+            --serial _build/math-audit/sequential.xml \
+            --parallel-directory _build/math-audit/parallel \
+            --output _build/math-audit/release-test-audit.json
+      - name: Upload exact-revision evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: math-audit-python-${{ matrix.python }}-${{ github.sha }}
+          path: _build/math-audit
+          if-no-files-found: error
