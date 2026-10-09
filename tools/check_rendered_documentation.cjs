@@ -28,7 +28,7 @@ async function Main() {
   fs.mkdirSync(outputRoot, {recursive: true});
   const browser = await chromium.launch({headless: true});
   const context = await browser.newContext();
-  const evidence = {sourceRevision: process.env.GITHUB_SHA || null, browser: browser.version(), pages: [], figures: [], errors: []};
+  const evidence = {sourceRevision: process.env.GITHUB_SHA || null, browser: browser.version(), offlineRepositoryMetadata: true, pages: [], figures: [], errors: []};
   await context.route('**/*', async route => {
     const url = new URL(route.request().url());
     if (url.origin === origin) return ServeFile(route, previewRoot, decodeURIComponent(url.pathname).replace(/^\/FuzzyRoutines\//, '/'));
@@ -37,6 +37,12 @@ async function Main() {
     }
     // Use installed system fonts, including Noto CJK, without CDN requests.
     if (url.hostname === 'fonts.googleapis.com') return route.fulfill({contentType: 'text/css', body: ''});
+    // Repository badges are optional metadata, unavailable in this offline review.
+    // Return a real HTTP error instead of a failed transport or invented release.
+    if (url.origin === 'https://api.github.com' &&
+        ['/repos/Fuzzy-Technologies/FuzzyRoutines', '/repos/Fuzzy-Technologies/FuzzyRoutines/releases/latest'].includes(url.pathname)) {
+      return route.fulfill({status: 503, headers: {'access-control-allow-origin': '*'}, contentType: 'application/json', body: '{"message":"Repository metadata unavailable in offline browser review"}'});
+    }
     return route.abort('blockedbyclient');
   });
   try {
