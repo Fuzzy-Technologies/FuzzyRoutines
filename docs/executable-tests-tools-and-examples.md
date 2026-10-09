@@ -44,8 +44,20 @@ python -m tools.test_runner --jobs auto --timeout 60
 
 The runner creates its JUnit files and temporary directories below an
 operating-system temporary directory and removes the complete session after
-the run. It returns `0` only when all parallel and serial phases pass, `1` for
+the run. Optional `--evidence-directory PATH` retains phase JUnit XML in a new
+explicit directory and rejects an existing directory. Collection-level module
+skips, observed before marker filtering in both phases, count once in the
+aggregate summary. It returns `0` only when all parallel and serial phases pass, `1` for
 test failures or process errors, and `2` for invalid runner configuration.
+
+The mathematical coverage workflow measures every library module with
+`coverage.py` branch tracing on CPython 3.13 and 3.14. It then compares actual
+sequential and process-based JUnit test identities and outcomes using
+`tools/release_test_audit.py`. Equal totals alone cannot establish parity.
+Duplicate executed tests, changed outcomes, missing module reports and line-only
+coverage fail. JSON evidence includes missing lines and branches for review;
+percentages do not establish mathematical correctness. These full runs belong
+to CI; routine development continues to use affected tests only.
 
 ## Worked user scenarios and figures
 

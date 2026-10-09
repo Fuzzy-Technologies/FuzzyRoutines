@@ -80,6 +80,11 @@ supported operation-by-operation migration.
 
 #### Fixed
 
+- The process test runner counts collection-level skipped modules once across
+  parallel/serial phases. Optional retained JUnit evidence supports an exact
+  sequential/process test-identity comparison; new CI measures line and branch
+  coverage for every mathematical module on both supported Python versions.
+
 - Scalar operators reject non-finite, Boolean, non-numeric, and out-of-range
   fuzzy degrees; valid grades lie in `[0, 1]`. Built-in membership coordinates
   must be finite non-Boolean real scalars and may lie outside `[0, 1]`.
