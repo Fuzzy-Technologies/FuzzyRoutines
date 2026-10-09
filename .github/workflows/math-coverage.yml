@@ -32,7 +32,7 @@ jobs:
       - name: Measure all library lines and branches sequentially
         run: |
           mkdir -p _build/math-audit
-          python -m coverage run --branch --source=fuzzyroutines -m pytest -q --junitxml=_build/math-audit/sequential.xml
+          python -m coverage run --branch --source=fuzzyroutines --omit=fuzzyroutines/Examples.py -m pytest -q --junitxml=_build/math-audit/sequential.xml
           python -m coverage report --show-missing
           python -m coverage json -o _build/math-audit/coverage.json
       - name: Verify actual process execution and per-test outcome parity

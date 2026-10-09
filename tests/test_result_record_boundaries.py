@@ -25,6 +25,7 @@ from fuzzyroutines import (
     EqualOnDomain,
     FuzzificationPolicy,
     Gaussian,
+    Height,
     IntegrationDomain,
     Intersection,
     LinguisticScale,
@@ -146,6 +147,7 @@ def test_DiagnosticsPreserveGridEndpointsOrderThresholdAndTermIdentity(records, 
     lambda: DiscreteRegion((1, 1)),
     lambda: ContinuousUniverse(0, 1, leftClosed=1),
     lambda: FuzzificationPolicy(tieTolerance=True),
+    lambda: ScaleDiagnosticsPolicy(membershipThreshold=True),
     lambda: TermMembership(object(), 0.5),
     lambda: MembershipFunction("unknown"),
     lambda: CentroidPolicy(relativeTolerance=0),
@@ -157,12 +159,13 @@ def test_InvalidRegionsAndPoliciesFailAtConstruction(case):
         case()
 
 
-def test_GaussianHalfLineLimitHasAnIndependentClosedFormCentroid():
+@pytest.mark.parametrize("sigma", (1.0, 1e-100))
+def test_GaussianHalfLineLimitHasAnIndependentClosedFormCentroid(sigma):
     """An extreme finite half-window approaches the exact half-normal first moment."""
 
-    fuzzySet = ScalarFuzzySet(ContinuousUniverse(), Gaussian(0, 1))
+    fuzzySet = ScalarFuzzySet(ContinuousUniverse(), Gaussian(0, sigma))
     result = Centroid(fuzzySet, IntegrationDomain(-1e300, 0))
-    assert isclose(result, -sqrt(2 / pi), rel_tol=2e-15)
+    assert isclose(result, -sigma * sqrt(2 / pi), rel_tol=2e-15)
 
 
 def test_UnrepresentablySmallGaussianMassFailsInsteadOfInventingACentroid():
@@ -208,6 +211,14 @@ def test_ContinuousRenormalizationPreservesGradesAndRejectsAnEmptyRestriction():
     restricted = ScalarFuzzySet(ContinuousUniverse(3, 4), normalized.membershipFunction)
     with pytest.raises(UndefinedResultError, match="zero-height"):
         Normalize(restricted)
+
+
+def test_ContinuousNormalizedModelUsesExhaustiveHeightOnADiscreteUniverse():
+    """Changing the universe must replace continuous maximum evidence with enumeration."""
+
+    normalized = Normalize(ScalarFuzzySet(ContinuousUniverse(0, 2), Triangle(0, 1, 2)))
+    discreteSet = ScalarFuzzySet(DiscreteUniverse((0.25, 1.5)), normalized.membershipFunction)
+    assert Height(discreteSet) == 0.5
 
 
 def test_HistoricalRepresentationsRetainNamesParametersAndEveryLevel():
