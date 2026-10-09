@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Compatibility and migration
 
-- Status: current `develop` contract for `2.0.0.dev0`
+- Status: prepared contract for the `2.0.0` release candidate
 - Governing decision: [ADR-0001](adr/0001-backward-compatibility-contract.md)
 - Observed 1.0.3 surface: [legacy public API snapshot](compatibility/legacy-public-api-1.0.3.md)
 - Implemented v2 surface: [public API inventory](public-api-documentation-inventory.md)

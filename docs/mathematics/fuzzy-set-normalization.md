@@ -37,8 +37,9 @@ second collection of membership-family formulas:
 
 - a `DiscreteUniverse` is finite and is evaluated exhaustively at every
   declared coordinate;
-- a `ContinuousUniverse` is supported when the set directly uses the bound
-  `mju` method of an analytical `MFunction`; height then comes from
+- a `ContinuousUniverse` is supported when the set uses a modern analytical
+  `MembershipFunction` or a supported historical `MFunction` evaluator;
+  height then comes from
   `DeriveProperties` and its exact family geometry;
 - a normalized result retains internal exact height-one evidence;
 - an arbitrary continuous callable is rejected because its global supremum
@@ -52,8 +53,8 @@ unbounded universe.
 
 ## Precision
 
-`Height` returns the exact contract value represented by the active numeric
-backend. `IsNormal(fuzzySet, tolerance=1e-12)` compares that value to one with
+`Height` returns the exact contract value in the scalar numeric representation.
+`IsNormal(fuzzySet, tolerance=1e-12)` compares that value to one with
 zero relative tolerance and the caller-visible absolute tolerance. Boolean,
 negative, and non-finite tolerances are rejected. Tolerance affects only the
 normality predicate; it never turns a small positive height into zero and never
@@ -71,7 +72,7 @@ the source. For a discrete universe, source grades are evaluated once in
 universe order and the normalized result uses that exhaustive immutable
 snapshot. For a continuous analytical source, the canonical family identifier
 and an immutable parameter tuple are captured at normalization time. Lazy
-evaluation reconstructs the existing `MFunction` implementation from that
+evaluation uses the shared analytical formula core with that frozen
 snapshot and scales it by the exact derived height. Later mutation of the
 source `MFunction.parameters` therefore cannot invalidate the normalized
 result's height-one evidence.

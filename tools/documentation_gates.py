@@ -706,6 +706,8 @@ def ValidateRenderedLinks(
     siteRoot: Path = SITEROOT,
     referenceRoot: Path = REFERENCEROOT,
     projectRoot: Path = PROJECTROOT,
+    *,
+    deploymentPath: str | None = None,
 ) -> tuple[str, ...]:
     """Return broken local hrefs and fragments from the exact rendered site."""
 
@@ -725,7 +727,7 @@ def ValidateRenderedLinks(
         pages[htmlPath.resolve()] = parser
 
     errors = list(duplicateErrors)
-    siteUrlPath = _SiteUrlPath(projectRoot)
+    siteUrlPath = (deploymentPath.rstrip("/") + "/") if deploymentPath else _SiteUrlPath(projectRoot)
 
     for htmlPath, parser in pages.items():
         sourcePath = _RenderedSourcePath(htmlPath, siteRoot, referenceRoot)
@@ -826,6 +828,7 @@ def ParseArguments(arguments=None):
         ),
     )
     parser.add_argument("--site-root", dest="siteRoot", type=Path, default=SITEROOT)
+    parser.add_argument("--deployment-path", dest="deploymentPath")
     return parser.parse_args(arguments)
 
 
@@ -838,7 +841,7 @@ def Main(arguments=None):
         "test-docstrings": lambda: ValidateTestDocumentation(),
         "locales": lambda: ValidateLocales().diagnostics,
         "source-links": lambda: ValidateSourceLinks(),
-        "rendered-links": lambda: ValidateRenderedLinks(options.siteRoot),
+        "rendered-links": lambda: ValidateRenderedLinks(options.siteRoot, deploymentPath=options.deploymentPath),
         "generated-policy": lambda: ValidateGeneratedPolicy(),
     }
     selectedNames = tuple(validators) if options.command == "all" else (options.command,)

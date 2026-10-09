@@ -23,6 +23,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import tomllib
 import tracemalloc
 import venv
 import zipfile
@@ -343,7 +344,7 @@ def GetEnvironment():
             "affinity": sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None,
             "physical_memory_bytes": os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES"),
             "cgroup": cgroup, "git_commit": commit, "git_dirty": bool(status.strip()),
-            "package_version": "2.0.0.dev0 (source tree)",
+            "package_version": tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["version"] + " (source tree)",
             "source_sha256": {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
                               for path in paths},
             "thread_environment": {key: os.environ.get(key) for key in

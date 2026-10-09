@@ -180,6 +180,21 @@ def test_SourceLinksReportExactMissingFileAndAnchor(tmpPath):
     )
 
 
+def test_ComposedLocaleLinksAreCheckedWithinTheWholeDeployment(tmpPath):
+    """Validate cross-language routes without silently treating them as external URLs."""
+
+    english = tmpPath / "site/api/latest/en"
+    russian = tmpPath / "site/api/latest/ru"
+    english.mkdir(parents=True)
+    russian.mkdir(parents=True)
+    (english / "index.html").write_text('<a href="/FuzzyRoutines/api/latest/ru/#same">Russian</a>', encoding="utf-8")
+    target = russian / "index.html"
+    target.write_text('<h1 id="same">Русский</h1>', encoding="utf-8")
+    assert not ValidateRenderedLinks(tmpPath / "site", projectRoot=tmpPath, deploymentPath="/FuzzyRoutines")
+    target.unlink()
+    assert any("missing rendered target" in value for value in ValidateRenderedLinks(tmpPath / "site", projectRoot=tmpPath, deploymentPath="/FuzzyRoutines"))
+
+
 def test_RenderedLinksValidateExactGeneratedFragments(tmpPath):
     """Validate links against renderer-produced IDs rather than assumptions."""
 

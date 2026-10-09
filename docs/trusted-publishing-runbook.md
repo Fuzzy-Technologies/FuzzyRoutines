@@ -98,6 +98,25 @@ The dry run must show all of the following:
 6. After publication, record the immutable tag, workflow run, attestation,
    artifact hashes, and PyPI release URL in the release issue.
 
+The workflow's post-publication matrix verifies the published release on both
+supported interpreters. `tools/verify_pypi_release.py` uses PyPI's
+[release JSON API](https://docs.pypi.org/api/json/#get-a-release) to require the
+exact approved filenames, sizes and SHA-256 hashes, then downloads both files
+and hashes their actual bytes. Initial release/file-list visibility is retried
+for a bounded interval; a contradictory version, hash, size or yanked artifact
+fails immediately. Metadata alone is not treated as byte verification.
+
+Each matrix job then creates a fresh environment and installs the version from
+`https://pypi.org/simple` with pip hash checking against the approved wheel.
+The existing installed-executable verifier checks package origin, compatibility
+examples, the canonical quick start, all guide snippets, eight scenarios and
+benchmark entry points. Evidence is retained in
+`published-pypi-verification-3.13` and `published-pypi-verification-3.14`.
+These jobs cannot run on PR/manual dry runs or when publishing is disabled.
+Publication is not accepted until the post-publication jobs also pass; a
+failure does not automatically retry uploads, replace files or publish another
+version.
+
 Never rerun publication for an existing PyPI version. Investigate a failed
 release, increment the version through a new reviewed change when required, and
 create a new protected annotated tag.

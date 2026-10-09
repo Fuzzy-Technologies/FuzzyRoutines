@@ -7,8 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 
 This page records the public boundary of the active `develop` branch. It
 separates implemented and tested behavior from the FuzzyRoutines 2 roadmap. The
-first stable modernization release remains planned as `2.0.0`; current package
-metadata uses `2.0.0.dev0`.
+first stable modernization candidate uses package metadata `2.0.0`.
+The candidate is not publication evidence: human acceptance, protected release
+execution and post-publication verification remain pending.
 
 The [release version review](release-version-decision.md) reaffirms that stable
 target from observable compatibility impact. The

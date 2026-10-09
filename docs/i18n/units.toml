@@ -11,10 +11,14 @@ sourceHash = "sha256:b9d5190bd09f4d8fc4bac210312ee7abc1a38bad901d655afd57bb85104
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/index.md"
+sourceHash = "sha256:b9d5190bd09f4d8fc4bac210312ee7abc1a38bad901d655afd57bb8510438a04"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/index.md"
+sourceHash = "sha256:b9d5190bd09f4d8fc4bac210312ee7abc1a38bad901d655afd57bb8510438a04"
 
 [[units]]
 id = "page:api.legacy"
@@ -24,10 +28,14 @@ sourceHash = "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f11165063
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/legacy/index.md"
+sourceHash = "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f1116506317e98"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/legacy/index.md"
+sourceHash = "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f1116506317e98"
 
 [[units]]
 id = "page:api.modern"
@@ -37,10 +45,14 @@ sourceHash = "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbe
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/index.md"
+sourceHash = "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbed2314"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/index.md"
+sourceHash = "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbed2314"
 
 [[units]]
 id = "page:api.modern.alphacuts"
@@ -50,10 +62,14 @@ sourceHash = "sha256:2cb68aa5699f4039c622ddeede294f7e14d9486f42ba38559dd46f43d38
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/alphacuts.md"
+sourceHash = "sha256:2cb68aa5699f4039c622ddeede294f7e14d9486f42ba38559dd46f43d380c2b0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/alphacuts.md"
+sourceHash = "sha256:2cb68aa5699f4039c622ddeede294f7e14d9486f42ba38559dd46f43d380c2b0"
 
 [[units]]
 id = "page:api.modern.defuzzification"
@@ -63,10 +79,14 @@ sourceHash = "sha256:df7da6cbba26f7fa4e1ed86b84b42217d16e68015beabd5eef097c14be9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/defuzzification.md"
+sourceHash = "sha256:df7da6cbba26f7fa4e1ed86b84b42217d16e68015beabd5eef097c14be99ad8e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/defuzzification.md"
+sourceHash = "sha256:df7da6cbba26f7fa4e1ed86b84b42217d16e68015beabd5eef097c14be99ad8e"
 
 [[units]]
 id = "page:api.modern.domain"
@@ -76,10 +96,14 @@ sourceHash = "sha256:2fe934b8af992e18b81ca54ea9f5e741c156eb1289d41014f53c2a7b04b
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/domain.md"
+sourceHash = "sha256:2fe934b8af992e18b81ca54ea9f5e741c156eb1289d41014f53c2a7b04ba5968"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/domain.md"
+sourceHash = "sha256:2fe934b8af992e18b81ca54ea9f5e741c156eb1289d41014f53c2a7b04ba5968"
 
 [[units]]
 id = "page:api.modern.exceptions"
@@ -89,10 +113,14 @@ sourceHash = "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/exceptions.md"
+sourceHash = "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573ed6ba"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/exceptions.md"
+sourceHash = "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573ed6ba"
 
 [[units]]
 id = "page:api.modern.fuzzysets"
@@ -102,10 +130,14 @@ sourceHash = "sha256:d2a592c8d08f50c097ec36d3f2ca83229009120ed815903974d4af8bab6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/fuzzysets.md"
+sourceHash = "sha256:d2a592c8d08f50c097ec36d3f2ca83229009120ed815903974d4af8bab67fb8a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/fuzzysets.md"
+sourceHash = "sha256:d2a592c8d08f50c097ec36d3f2ca83229009120ed815903974d4af8bab67fb8a"
 
 [[units]]
 id = "page:api.modern.linguistic"
@@ -115,10 +147,14 @@ sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e69
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/linguistic.md"
+sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/linguistic.md"
+sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
 
 [[units]]
 id = "page:api.modern.membership"
@@ -128,10 +164,14 @@ sourceHash = "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/membership.md"
+sourceHash = "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e185d6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/membership.md"
+sourceHash = "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e185d6"
 
 [[units]]
 id = "page:api.modern.operators"
@@ -141,10 +181,14 @@ sourceHash = "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/operators.md"
+sourceHash = "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1aee668"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/operators.md"
+sourceHash = "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1aee668"
 
 [[units]]
 id = "page:api.modern.package"
@@ -154,10 +198,14 @@ sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce4251
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/package.md"
+sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/package.md"
+sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
 
 [[units]]
 id = "page:api.modern.properties"
@@ -167,10 +215,14 @@ sourceHash = "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/properties.md"
+sourceHash = "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe7f2d2"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/properties.md"
+sourceHash = "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe7f2d2"
 
 [[units]]
 id = "page:api.modern.relations"
@@ -180,10 +232,14 @@ sourceHash = "sha256:d2b141405bca88377c5f5651d86a4afcda7d320c3d6161a1903dd3aa48f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/relations.md"
+sourceHash = "sha256:d2b141405bca88377c5f5651d86a4afcda7d320c3d6161a1903dd3aa48f010c1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/relations.md"
+sourceHash = "sha256:d2b141405bca88377c5f5651d86a4afcda7d320c3d6161a1903dd3aa48f010c1"
 
 [[units]]
 id = "page:index"
@@ -193,10 +249,14 @@ sourceHash = "sha256:bca1c1871d076e7faa7be5d4eaea28103b73b6401a52cc39af1793c30da
 reviewClass = "editorial"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/index.md"
+sourceHash = "sha256:bca1c1871d076e7faa7be5d4eaea28103b73b6401a52cc39af1793c30daa8d39"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/index.md"
+sourceHash = "sha256:bca1c1871d076e7faa7be5d4eaea28103b73b6401a52cc39af1793c30daa8d39"
 
 [[units]]
 id = "symbol:fuzzyroutines.AlphaCut"
@@ -206,10 +266,14 @@ sourceHash = "sha256:ecb6a322ab9edc837630632dbcb0f1113dc7f58262c4a66ec48d3e59cd8
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.AlphaCut.md"
+sourceHash = "sha256:ecb6a322ab9edc837630632dbcb0f1113dc7f58262c4a66ec48d3e59cd8d3c41"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.AlphaCut.md"
+sourceHash = "sha256:ecb6a322ab9edc837630632dbcb0f1113dc7f58262c4a66ec48d3e59cd8d3c41"
 
 [[units]]
 id = "symbol:fuzzyroutines.Centroid"
@@ -219,10 +283,14 @@ sourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.Centroid.md"
+sourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.Centroid.md"
+sourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
 
 [[units]]
 id = "symbol:fuzzyroutines.CentroidConvergenceError"
@@ -232,10 +300,14 @@ sourceHash = "sha256:0a09150d3e614174b69041b9f0724701c989c1db13d6947b0bdd82f9bb0
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.CentroidConvergenceError.md"
+sourceHash = "sha256:0a09150d3e614174b69041b9f0724701c989c1db13d6947b0bdd82f9bb079ed5"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.CentroidConvergenceError.md"
+sourceHash = "sha256:0a09150d3e614174b69041b9f0724701c989c1db13d6947b0bdd82f9bb079ed5"
 
 [[units]]
 id = "symbol:fuzzyroutines.CentroidPolicy"
@@ -245,10 +317,14 @@ sourceHash = "sha256:0fcba50f0cc456a6292422ab137b1f57e913b531a0fa5d346c55464094d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.CentroidPolicy.md"
+sourceHash = "sha256:0fcba50f0cc456a6292422ab137b1f57e913b531a0fa5d346c55464094df9458"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.CentroidPolicy.md"
+sourceHash = "sha256:0fcba50f0cc456a6292422ab137b1f57e913b531a0fa5d346c55464094df9458"
 
 [[units]]
 id = "symbol:fuzzyroutines.ComparisonDomain"
@@ -258,10 +334,14 @@ sourceHash = "sha256:56d57e410fd1c3b88ca8c43df1143a8fd6974d2cb12e62800569fdc6643
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.ComparisonDomain.md"
+sourceHash = "sha256:56d57e410fd1c3b88ca8c43df1143a8fd6974d2cb12e62800569fdc6643ffe0e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.ComparisonDomain.md"
+sourceHash = "sha256:56d57e410fd1c3b88ca8c43df1143a8fd6974d2cb12e62800569fdc6643ffe0e"
 
 [[units]]
 id = "symbol:fuzzyroutines.ComparisonPolicy"
@@ -271,10 +351,14 @@ sourceHash = "sha256:4289b6b905e4a0af9826aee94a7492f76c1b7bc07a264e58b164a6267fe
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.ComparisonPolicy.md"
+sourceHash = "sha256:4289b6b905e4a0af9826aee94a7492f76c1b7bc07a264e58b164a6267fe5ccda"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.ComparisonPolicy.md"
+sourceHash = "sha256:4289b6b905e4a0af9826aee94a7492f76c1b7bc07a264e58b164a6267fe5ccda"
 
 [[units]]
 id = "symbol:fuzzyroutines.Complement"
@@ -284,10 +368,14 @@ sourceHash = "sha256:231cda0cf9d1cd0ae5c6252e344b892d60e5a3304fd4fd4e5aba20b5f17
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Complement.md"
+sourceHash = "sha256:231cda0cf9d1cd0ae5c6252e344b892d60e5a3304fd4fd4e5aba20b5f170420c"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Complement.md"
+sourceHash = "sha256:231cda0cf9d1cd0ae5c6252e344b892d60e5a3304fd4fd4e5aba20b5f170420c"
 
 [[units]]
 id = "symbol:fuzzyroutines.ContinuousFuzzyProperties"
@@ -297,10 +385,14 @@ sourceHash = "sha256:c05ee0b170a3ddf232e462c4dd1e313ac6a6c830c94861547ca8e06499c
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousFuzzyProperties.md"
+sourceHash = "sha256:c05ee0b170a3ddf232e462c4dd1e313ac6a6c830c94861547ca8e06499cf95b6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousFuzzyProperties.md"
+sourceHash = "sha256:c05ee0b170a3ddf232e462c4dd1e313ac6a6c830c94861547ca8e06499cf95b6"
 
 [[units]]
 id = "symbol:fuzzyroutines.ContinuousInterval"
@@ -310,10 +402,14 @@ sourceHash = "sha256:f52028e7bb38995dff4cc850131ff94bc69ffef66f46540f11557bac934
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousInterval.md"
+sourceHash = "sha256:f52028e7bb38995dff4cc850131ff94bc69ffef66f46540f11557bac934b54e3"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousInterval.md"
+sourceHash = "sha256:f52028e7bb38995dff4cc850131ff94bc69ffef66f46540f11557bac934b54e3"
 
 [[units]]
 id = "symbol:fuzzyroutines.ContinuousRegion"
@@ -323,10 +419,14 @@ sourceHash = "sha256:b11e4cc978016fd7c845d4d3820ac58f786ed15f2e7ea9b329e3d15123c
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousRegion.md"
+sourceHash = "sha256:b11e4cc978016fd7c845d4d3820ac58f786ed15f2e7ea9b329e3d15123cbed8d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousRegion.md"
+sourceHash = "sha256:b11e4cc978016fd7c845d4d3820ac58f786ed15f2e7ea9b329e3d15123cbed8d"
 
 [[units]]
 id = "symbol:fuzzyroutines.ContinuousUniverse"
@@ -336,10 +436,14 @@ sourceHash = "sha256:6a877df1b307d65d0d604b11c954fbc5e44b228d9a80d0776a70c14151f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.ContinuousUniverse.md"
+sourceHash = "sha256:6a877df1b307d65d0d604b11c954fbc5e44b228d9a80d0776a70c14151fe6dfc"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.ContinuousUniverse.md"
+sourceHash = "sha256:6a877df1b307d65d0d604b11c954fbc5e44b228d9a80d0776a70c14151fe6dfc"
 
 [[units]]
 id = "symbol:fuzzyroutines.DeriveProperties"
@@ -349,10 +453,14 @@ sourceHash = "sha256:046243351f29d9e4c48bc414ed52a711e3900e0c7819341d227d0c9cc62
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DeriveProperties.md"
+sourceHash = "sha256:046243351f29d9e4c48bc414ed52a711e3900e0c7819341d227d0c9cc629311c"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DeriveProperties.md"
+sourceHash = "sha256:046243351f29d9e4c48bc414ed52a711e3900e0c7819341d227d0c9cc629311c"
 
 [[units]]
 id = "symbol:fuzzyroutines.Difference"
@@ -362,10 +470,14 @@ sourceHash = "sha256:391d1f8f095b1e891962131f48b6018b5f742c98497c720552376a1d124
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Difference.md"
+sourceHash = "sha256:391d1f8f095b1e891962131f48b6018b5f742c98497c720552376a1d12453b61"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Difference.md"
+sourceHash = "sha256:391d1f8f095b1e891962131f48b6018b5f742c98497c720552376a1d12453b61"
 
 [[units]]
 id = "symbol:fuzzyroutines.DiscreteFuzzyProperties"
@@ -375,10 +487,14 @@ sourceHash = "sha256:0e5bae026a083a589caa0d5a39fd59869cd5155a247249284da190ba4ea
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DiscreteFuzzyProperties.md"
+sourceHash = "sha256:0e5bae026a083a589caa0d5a39fd59869cd5155a247249284da190ba4ea7b322"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DiscreteFuzzyProperties.md"
+sourceHash = "sha256:0e5bae026a083a589caa0d5a39fd59869cd5155a247249284da190ba4ea7b322"
 
 [[units]]
 id = "symbol:fuzzyroutines.DiscreteRegion"
@@ -388,10 +504,14 @@ sourceHash = "sha256:d7c4ffc796b5fbc24341f3c2e3edf9dd8631032ec2294e5918891ff5dbf
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DiscreteRegion.md"
+sourceHash = "sha256:d7c4ffc796b5fbc24341f3c2e3edf9dd8631032ec2294e5918891ff5dbf794f9"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DiscreteRegion.md"
+sourceHash = "sha256:d7c4ffc796b5fbc24341f3c2e3edf9dd8631032ec2294e5918891ff5dbf794f9"
 
 [[units]]
 id = "symbol:fuzzyroutines.DiscreteUniverse"
@@ -401,10 +521,14 @@ sourceHash = "sha256:ce0c8f40a65d10d363d951f42ae3d023d15a3f47bc4d6ab385611f71527
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.DiscreteUniverse.md"
+sourceHash = "sha256:ce0c8f40a65d10d363d951f42ae3d023d15a3f47bc4d6ab385611f71527ca891"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.DiscreteUniverse.md"
+sourceHash = "sha256:ce0c8f40a65d10d363d951f42ae3d023d15a3f47bc4d6ab385611f71527ca891"
 
 [[units]]
 id = "symbol:fuzzyroutines.EqualOnDomain"
@@ -414,10 +538,14 @@ sourceHash = "sha256:923325d9ecdbc83f6997095f01dfd15a402e98e6e8d957f5f65345416af
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.EqualOnDomain.md"
+sourceHash = "sha256:923325d9ecdbc83f6997095f01dfd15a402e98e6e8d957f5f65345416affa5b8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.EqualOnDomain.md"
+sourceHash = "sha256:923325d9ecdbc83f6997095f01dfd15a402e98e6e8d957f5f65345416affa5b8"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzificationPolicy"
@@ -427,10 +555,14 @@ sourceHash = "sha256:59780df0bf471db7949f780f5e1191f5c7435d654307bdb325ce5b4d3c4
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.FuzzificationPolicy.md"
+sourceHash = "sha256:59780df0bf471db7949f780f5e1191f5c7435d654307bdb325ce5b4d3c422c09"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.FuzzificationPolicy.md"
+sourceHash = "sha256:59780df0bf471db7949f780f5e1191f5c7435d654307bdb325ce5b4d3c422c09"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzificationResult"
@@ -440,10 +572,14 @@ sourceHash = "sha256:40d74a854ff0226b176ff17d2773096eda9748c68859b5c8a61351f71a1
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.FuzzificationResult.md"
+sourceHash = "sha256:40d74a854ff0226b176ff17d2773096eda9748c68859b5c8a61351f71a1a6baa"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.FuzzificationResult.md"
+sourceHash = "sha256:40d74a854ff0226b176ff17d2773096eda9748c68859b5c8a61351f71a1a6baa"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.DiapasonParser"
@@ -453,10 +589,14 @@ sourceHash = "sha256:d623403639581adac57487435c5ffaf4a3cbe5a6b61b73dd0984f2a27d6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.utilities.DiapasonParser.md"
+sourceHash = "sha256:d623403639581adac57487435c5ffaf4a3cbe5a6b61b73dd0984f2a27d67b582"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.utilities.DiapasonParser.md"
+sourceHash = "sha256:d623403639581adac57487435c5ffaf4a3cbe5a6b61b73dd0984f2a27d67b582"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyAND"
@@ -466,10 +606,14 @@ sourceHash = "sha256:11aefd38bd0cdef3b291f22c0219e77df3e343893eb5f347986ba293314
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.FuzzyAND.md"
+sourceHash = "sha256:11aefd38bd0cdef3b291f22c0219e77df3e343893eb5f347986ba2933147d44e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.FuzzyAND.md"
+sourceHash = "sha256:11aefd38bd0cdef3b291f22c0219e77df3e343893eb5f347986ba2933147d44e"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyNOT"
@@ -479,10 +623,14 @@ sourceHash = "sha256:a08799c73b2b54cb5fd38f32d383bb90dce97ab4840b9071d463099e5cc
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.FuzzyNOT.md"
+sourceHash = "sha256:a08799c73b2b54cb5fd38f32d383bb90dce97ab4840b9071d463099e5ccb76e0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.FuzzyNOT.md"
+sourceHash = "sha256:a08799c73b2b54cb5fd38f32d383bb90dce97ab4840b9071d463099e5ccb76e0"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyNOTParabolic"
@@ -492,10 +640,14 @@ sourceHash = "sha256:583ee9648c1ceff8da74785d8ef67ab1c71b947d820fcdc8747f3df27ee
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.FuzzyNOTParabolic.md"
+sourceHash = "sha256:583ee9648c1ceff8da74785d8ef67ab1c71b947d820fcdc8747f3df27ee21c67"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.FuzzyNOTParabolic.md"
+sourceHash = "sha256:583ee9648c1ceff8da74785d8ef67ab1c71b947d820fcdc8747f3df27ee21c67"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyOR"
@@ -505,10 +657,14 @@ sourceHash = "sha256:98ca659b2be20af7b2b7964c0f6779222fd51e5e894e475e4a66f1028d4
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.FuzzyOR.md"
+sourceHash = "sha256:98ca659b2be20af7b2b7964c0f6779222fd51e5e894e475e4a66f1028d477036"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.FuzzyOR.md"
+sourceHash = "sha256:98ca659b2be20af7b2b7964c0f6779222fd51e5e894e475e4a66f1028d477036"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale"
@@ -518,10 +674,14 @@ sourceHash = "sha256:f615bf8409edfae81e814b4be6a7ac0dbb6a8654a8ab41a760728d3494f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.FuzzyScale.md"
+sourceHash = "sha256:f615bf8409edfae81e814b4be6a7ac0dbb6a8654a8ab41a760728d3494f379d3"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.FuzzyScale.md"
+sourceHash = "sha256:f615bf8409edfae81e814b4be6a7ac0dbb6a8654a8ab41a760728d3494f379d3"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.Fuzzy"
@@ -531,10 +691,14 @@ sourceHash = "sha256:40cd53e749dd85638db8b0e35f48972bf7b3b7b9a15b5656df01174a8c6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.FuzzyScale.Fuzzy.md"
+sourceHash = "sha256:40cd53e749dd85638db8b0e35f48972bf7b3b7b9a15b5656df01174a8c6bc276"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.FuzzyScale.Fuzzy.md"
+sourceHash = "sha256:40cd53e749dd85638db8b0e35f48972bf7b3b7b9a15b5656df01174a8c6bc276"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.GetLevelByName"
@@ -544,10 +708,14 @@ sourceHash = "sha256:be2594e4c6775a98fcbc33a1390780b021c4660dd896ca1e58896b979f7
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.FuzzyScale.GetLevelByName.md"
+sourceHash = "sha256:be2594e4c6775a98fcbc33a1390780b021c4660dd896ca1e58896b979f7d0c08"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.FuzzyScale.GetLevelByName.md"
+sourceHash = "sha256:be2594e4c6775a98fcbc33a1390780b021c4660dd896ca1e58896b979f7d0c08"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.levels"
@@ -557,10 +725,14 @@ sourceHash = "sha256:7429fbb46b2cdf8df14775d7667f1ee98082f2aedcedfefca7ca8cffc86
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.FuzzyScale.levels.md"
+sourceHash = "sha256:7429fbb46b2cdf8df14775d7667f1ee98082f2aedcedfefca7ca8cffc86e925b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.FuzzyScale.levels.md"
+sourceHash = "sha256:7429fbb46b2cdf8df14775d7667f1ee98082f2aedcedfefca7ca8cffc86e925b"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.name"
@@ -570,10 +742,14 @@ sourceHash = "sha256:0dd5b36146905f65b4b4a3f4b90ca464f4b9ac66c32949a8a2bd26d15c0
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.FuzzyScale.name.md"
+sourceHash = "sha256:0dd5b36146905f65b4b4a3f4b90ca464f4b9ac66c32949a8a2bd26d15c06e72d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.FuzzyScale.name.md"
+sourceHash = "sha256:0dd5b36146905f65b4b4a3f4b90ca464f4b9ac66c32949a8a2bd26d15c06e72d"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet"
@@ -583,10 +759,14 @@ sourceHash = "sha256:ed4ba1ed35eb3912a13d90c4cc539bea28e512d32486f04fe6213a784f8
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.sets.FuzzySet.md"
+sourceHash = "sha256:ed4ba1ed35eb3912a13d90c4cc539bea28e512d32486f04fe6213a784f8681f2"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.sets.FuzzySet.md"
+sourceHash = "sha256:ed4ba1ed35eb3912a13d90c4cc539bea28e512d32486f04fe6213a784f8681f2"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.Defuz"
@@ -596,10 +776,14 @@ sourceHash = "sha256:92db8d812a36907e50e83244d1e15c9f80c7ec79078a28b1d0811472b82
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.sets.FuzzySet.Defuz.md"
+sourceHash = "sha256:92db8d812a36907e50e83244d1e15c9f80c7ec79078a28b1d0811472b82f0c10"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.sets.FuzzySet.Defuz.md"
+sourceHash = "sha256:92db8d812a36907e50e83244d1e15c9f80c7ec79078a28b1d0811472b82f0c10"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.defuzValue"
@@ -609,10 +793,14 @@ sourceHash = "sha256:83c4c4219f897ff4c28aa88758534d131b6ad6f083008cd0627bf25484f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.sets.FuzzySet.defuzValue.md"
+sourceHash = "sha256:83c4c4219f897ff4c28aa88758534d131b6ad6f083008cd0627bf25484f34bb1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.sets.FuzzySet.defuzValue.md"
+sourceHash = "sha256:83c4c4219f897ff4c28aa88758534d131b6ad6f083008cd0627bf25484f34bb1"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.mFunction"
@@ -622,10 +810,14 @@ sourceHash = "sha256:fb5f1bb5794dae5f396758e09df910540ddec604e6cbf56d9fff1c7bba8
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.sets.FuzzySet.mFunction.md"
+sourceHash = "sha256:fb5f1bb5794dae5f396758e09df910540ddec604e6cbf56d9fff1c7bba81df2b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.sets.FuzzySet.mFunction.md"
+sourceHash = "sha256:fb5f1bb5794dae5f396758e09df910540ddec604e6cbf56d9fff1c7bba81df2b"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.name"
@@ -635,10 +827,14 @@ sourceHash = "sha256:daf496678d8077e2ea2e70a35b65519a7b781b493324f9019ee38e02493
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.sets.FuzzySet.name.md"
+sourceHash = "sha256:daf496678d8077e2ea2e70a35b65519a7b781b493324f9019ee38e024939620f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.sets.FuzzySet.name.md"
+sourceHash = "sha256:daf496678d8077e2ea2e70a35b65519a7b781b493324f9019ee38e024939620f"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.supportSet"
@@ -648,10 +844,14 @@ sourceHash = "sha256:7f73e60efcb4f9327a392da8aa40be307a8e404261f7eafdc6feff4e68a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.sets.FuzzySet.supportSet.md"
+sourceHash = "sha256:7f73e60efcb4f9327a392da8aa40be307a8e404261f7eafdc6feff4e68a771e7"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.sets.FuzzySet.supportSet.md"
+sourceHash = "sha256:7f73e60efcb4f9327a392da8aa40be307a8e404261f7eafdc6feff4e68a771e7"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.IsCorrectFuzzyNumberValue"
@@ -661,10 +861,14 @@ sourceHash = "sha256:628318190b48201cda8b2cade6eb076024c9abc66a2aee6d27056389c81
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.utilities.IsCorrectFuzzyNumberValue.md"
+sourceHash = "sha256:628318190b48201cda8b2cade6eb076024c9abc66a2aee6d27056389c8188399"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.utilities.IsCorrectFuzzyNumberValue.md"
+sourceHash = "sha256:628318190b48201cda8b2cade6eb076024c9abc66a2aee6d27056389c8188399"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.IsNumber"
@@ -674,10 +878,14 @@ sourceHash = "sha256:d999f7ddaaeac83100028206835fba8051bc7cd76bce10af29f6b89413d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.utilities.IsNumber.md"
+sourceHash = "sha256:d999f7ddaaeac83100028206835fba8051bc7cd76bce10af29f6b89413d2d6af"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.utilities.IsNumber.md"
+sourceHash = "sha256:d999f7ddaaeac83100028206835fba8051bc7cd76bce10af29f6b89413d2d6af"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction"
@@ -687,10 +895,14 @@ sourceHash = "sha256:23232357e23c0e5b7e89ef4796564c0a9d359f674ea084d07ddb78f01b4
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.md"
+sourceHash = "sha256:23232357e23c0e5b7e89ef4796564c0a9d359f674ea084d07ddb78f01b4e112f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.md"
+sourceHash = "sha256:23232357e23c0e5b7e89ef4796564c0a9d359f674ea084d07ddb78f01b4e112f"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Bell"
@@ -700,10 +912,14 @@ sourceHash = "sha256:a1c9d8eca710faec3e7cd60a14ad5b5350eb214abfe202e6c2f48cc0d5e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Bell.md"
+sourceHash = "sha256:a1c9d8eca710faec3e7cd60a14ad5b5350eb214abfe202e6c2f48cc0d5e5ed55"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Bell.md"
+sourceHash = "sha256:a1c9d8eca710faec3e7cd60a14ad5b5350eb214abfe202e6c2f48cc0d5e5ed55"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Desirability"
@@ -713,10 +929,14 @@ sourceHash = "sha256:5b7054a461770ecfd12e310d988f08320cacb5d00a8909aecdb598d7bb3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Desirability.md"
+sourceHash = "sha256:5b7054a461770ecfd12e310d988f08320cacb5d00a8909aecdb598d7bb374854"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Desirability.md"
+sourceHash = "sha256:5b7054a461770ecfd12e310d988f08320cacb5d00a8909aecdb598d7bb374854"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Exponential"
@@ -726,10 +946,14 @@ sourceHash = "sha256:0b2d17d0db0145c93ffbc500ffed6d9d7bf62758a2fd764210793e9b404
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Exponential.md"
+sourceHash = "sha256:0b2d17d0db0145c93ffbc500ffed6d9d7bf62758a2fd764210793e9b40465db0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Exponential.md"
+sourceHash = "sha256:0b2d17d0db0145c93ffbc500ffed6d9d7bf62758a2fd764210793e9b40465db0"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Hyperbolic"
@@ -739,10 +963,14 @@ sourceHash = "sha256:586482e2cf28c9423f9e1781aa058ce1f19275d085736b9478c15ad9b1f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Hyperbolic.md"
+sourceHash = "sha256:586482e2cf28c9423f9e1781aa058ce1f19275d085736b9478c15ad9b1f01bde"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Hyperbolic.md"
+sourceHash = "sha256:586482e2cf28c9423f9e1781aa058ce1f19275d085736b9478c15ad9b1f01bde"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Parabolic"
@@ -752,10 +980,14 @@ sourceHash = "sha256:666c23a8193dae02e3078585c00698e81e42ac5ba34b71ec25b3733f101
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Parabolic.md"
+sourceHash = "sha256:666c23a8193dae02e3078585c00698e81e42ac5ba34b71ec25b3733f101f6f13"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Parabolic.md"
+sourceHash = "sha256:666c23a8193dae02e3078585c00698e81e42ac5ba34b71ec25b3733f101f6f13"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Sigmoidal"
@@ -765,10 +997,14 @@ sourceHash = "sha256:4e5df78b0c14490121918c2047c26206c592caa957577ac525a6d4dde11
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Sigmoidal.md"
+sourceHash = "sha256:4e5df78b0c14490121918c2047c26206c592caa957577ac525a6d4dde118c901"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Sigmoidal.md"
+sourceHash = "sha256:4e5df78b0c14490121918c2047c26206c592caa957577ac525a6d4dde118c901"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Trapezium"
@@ -778,10 +1014,14 @@ sourceHash = "sha256:8c696636bc2a3d86f7660af9dc0991d18cad05ed952944d6224cb44769c
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Trapezium.md"
+sourceHash = "sha256:8c696636bc2a3d86f7660af9dc0991d18cad05ed952944d6224cb44769c7a1c6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Trapezium.md"
+sourceHash = "sha256:8c696636bc2a3d86f7660af9dc0991d18cad05ed952944d6224cb44769c7a1c6"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Triangle"
@@ -791,10 +1031,14 @@ sourceHash = "sha256:d68a49c8ba7a4f5b0e8f4d2ad9e100a44b1c954f2d7e630e8e2aa3e4f3f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.Triangle.md"
+sourceHash = "sha256:d68a49c8ba7a4f5b0e8f4d2ad9e100a44b1c954f2d7e630e8e2aa3e4f3f0c191"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.Triangle.md"
+sourceHash = "sha256:d68a49c8ba7a4f5b0e8f4d2ad9e100a44b1c954f2d7e630e8e2aa3e4f3f0c191"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.name"
@@ -804,10 +1048,14 @@ sourceHash = "sha256:124b74989182e657a3012c6209cdc1fad280a994752a6c2633f2f41f55d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.name.md"
+sourceHash = "sha256:124b74989182e657a3012c6209cdc1fad280a994752a6c2633f2f41f55d8579d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.name.md"
+sourceHash = "sha256:124b74989182e657a3012c6209cdc1fad280a994752a6c2633f2f41f55d8579d"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.MFunction.parameters"
@@ -817,10 +1065,14 @@ sourceHash = "sha256:a442a45c5d954720ab76763ba7393b7cceace4cf777e4c674cde251a627
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.membership.MFunction.parameters.md"
+sourceHash = "sha256:a442a45c5d954720ab76763ba7393b7cceace4cf777e4c674cde251a6278a7b4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.membership.MFunction.parameters.md"
+sourceHash = "sha256:a442a45c5d954720ab76763ba7393b7cceace4cf777e4c674cde251a6278a7b4"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.SCoNorm"
@@ -830,10 +1082,14 @@ sourceHash = "sha256:ed90501fd7144b4d00c0601e0fe2707ece17afe0bd05bd1543ca3b4b0ec
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.SCoNorm.md"
+sourceHash = "sha256:ed90501fd7144b4d00c0601e0fe2707ece17afe0bd05bd1543ca3b4b0ec4e462"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.SCoNorm.md"
+sourceHash = "sha256:ed90501fd7144b4d00c0601e0fe2707ece17afe0bd05bd1543ca3b4b0ec4e462"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.SCoNormCompose"
@@ -843,10 +1099,14 @@ sourceHash = "sha256:a572fa9e51de603dd0f94c5ca39f543f7090bda3be1ad1d4093d7c0a1a1
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.SCoNormCompose.md"
+sourceHash = "sha256:a572fa9e51de603dd0f94c5ca39f543f7090bda3be1ad1d4093d7c0a1a10188a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.SCoNormCompose.md"
+sourceHash = "sha256:a572fa9e51de603dd0f94c5ca39f543f7090bda3be1ad1d4093d7c0a1a10188a"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.TNorm"
@@ -856,10 +1116,14 @@ sourceHash = "sha256:7760b339c7be1fbb83d852349bb581907821aa86193e302b87a19494e2e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.TNorm.md"
+sourceHash = "sha256:7760b339c7be1fbb83d852349bb581907821aa86193e302b87a19494e2ec80ff"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.TNorm.md"
+sourceHash = "sha256:7760b339c7be1fbb83d852349bb581907821aa86193e302b87a19494e2ec80ff"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.TNormCompose"
@@ -869,10 +1133,14 @@ sourceHash = "sha256:dd32e97be9820abd2c449071984d0a97594203a8f381f16b22e1a8f2763
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.operators.TNormCompose.md"
+sourceHash = "sha256:dd32e97be9820abd2c449071984d0a97594203a8f381f16b22e1a8f2763e6da0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.operators.TNormCompose.md"
+sourceHash = "sha256:dd32e97be9820abd2c449071984d0a97594203a8f381f16b22e1a8f2763e6da0"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale"
@@ -882,10 +1150,14 @@ sourceHash = "sha256:728ab821120f12df7d472e3bd2b17af295b826c886a39beb0c933b839c1
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.UniversalFuzzyScale.md"
+sourceHash = "sha256:728ab821120f12df7d472e3bd2b17af295b826c886a39beb0c933b839c13c025"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.UniversalFuzzyScale.md"
+sourceHash = "sha256:728ab821120f12df7d472e3bd2b17af295b826c886a39beb0c933b839c13c025"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levels"
@@ -895,10 +1167,14 @@ sourceHash = "sha256:b33482f25694a973cbb9f208247aa8c6fc8d871b2aba80197d4e1ff8854
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.UniversalFuzzyScale.levels.md"
+sourceHash = "sha256:b33482f25694a973cbb9f208247aa8c6fc8d871b2aba80197d4e1ff885405a5e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.UniversalFuzzyScale.levels.md"
+sourceHash = "sha256:b33482f25694a973cbb9f208247aa8c6fc8d871b2aba80197d4e1ff885405a5e"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levelsNames"
@@ -908,10 +1184,14 @@ sourceHash = "sha256:9232aae176dcec51cd5a1022e307e7ca76afdaff4de7e786bf5afb440eb
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.UniversalFuzzyScale.levelsNames.md"
+sourceHash = "sha256:9232aae176dcec51cd5a1022e307e7ca76afdaff4de7e786bf5afb440ebb2c09"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.UniversalFuzzyScale.levelsNames.md"
+sourceHash = "sha256:9232aae176dcec51cd5a1022e307e7ca76afdaff4de7e786bf5afb440ebb2c09"
 
 [[units]]
 id = "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levelsNamesUpper"
@@ -921,10 +1201,14 @@ sourceHash = "sha256:4f75a924a42314c95599e5521a1cf0f50d0c028048cc2afab9189d04ff2
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines._legacy.scales.UniversalFuzzyScale.levelsNamesUpper.md"
+sourceHash = "sha256:4f75a924a42314c95599e5521a1cf0f50d0c028048cc2afab9189d04ff2c6a36"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines._legacy.scales.UniversalFuzzyScale.levelsNamesUpper.md"
+sourceHash = "sha256:4f75a924a42314c95599e5521a1cf0f50d0c028048cc2afab9189d04ff2c6a36"
 
 [[units]]
 id = "symbol:fuzzyroutines.Height"
@@ -934,10 +1218,14 @@ sourceHash = "sha256:dbeaad0c392550f62c3672203f0cdf5a88b4eb6027f4965eeec307c74d5
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Height.md"
+sourceHash = "sha256:dbeaad0c392550f62c3672203f0cdf5a88b4eb6027f4965eeec307c74d5be4fc"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Height.md"
+sourceHash = "sha256:dbeaad0c392550f62c3672203f0cdf5a88b4eb6027f4965eeec307c74d5be4fc"
 
 [[units]]
 id = "symbol:fuzzyroutines.IncludedOnDomain"
@@ -947,10 +1235,14 @@ sourceHash = "sha256:547ccb2b7e3fa545cd483cb53faa934c03f05a3fada2da418a961e7144d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.IncludedOnDomain.md"
+sourceHash = "sha256:547ccb2b7e3fa545cd483cb53faa934c03f05a3fada2da418a961e7144d52840"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.IncludedOnDomain.md"
+sourceHash = "sha256:547ccb2b7e3fa545cd483cb53faa934c03f05a3fada2da418a961e7144d52840"
 
 [[units]]
 id = "symbol:fuzzyroutines.IntegrationDomain"
@@ -960,10 +1252,14 @@ sourceHash = "sha256:d474de660f4917b27ff7e7d5e32b5bec3657628c44b815310cb2fc9efa7
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.IntegrationDomain.md"
+sourceHash = "sha256:d474de660f4917b27ff7e7d5e32b5bec3657628c44b815310cb2fc9efa758cc8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.IntegrationDomain.md"
+sourceHash = "sha256:d474de660f4917b27ff7e7d5e32b5bec3657628c44b815310cb2fc9efa758cc8"
 
 [[units]]
 id = "symbol:fuzzyroutines.Intersection"
@@ -973,10 +1269,14 @@ sourceHash = "sha256:c74b03e1f6f6a567d5859bc5a4bee7e21e9b7a971bfd22fb90a32b569c5
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Intersection.md"
+sourceHash = "sha256:c74b03e1f6f6a567d5859bc5a4bee7e21e9b7a971bfd22fb90a32b569c54d156"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Intersection.md"
+sourceHash = "sha256:c74b03e1f6f6a567d5859bc5a4bee7e21e9b7a971bfd22fb90a32b569c54d156"
 
 [[units]]
 id = "symbol:fuzzyroutines.IsNormal"
@@ -986,10 +1286,14 @@ sourceHash = "sha256:b249f5bec5da405c1b2150991bcb5767cdc2d4aaa316bab813c3be00d80
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.IsNormal.md"
+sourceHash = "sha256:b249f5bec5da405c1b2150991bcb5767cdc2d4aaa316bab813c3be00d800b240"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.IsNormal.md"
+sourceHash = "sha256:b249f5bec5da405c1b2150991bcb5767cdc2d4aaa316bab813c3be00d800b240"
 
 [[units]]
 id = "symbol:fuzzyroutines.LinguisticScale"
@@ -999,10 +1303,14 @@ sourceHash = "sha256:848cdf58c4c0c8ed025fbb7d2cc50392a910e706111ff87e3b44b4917c5
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.LinguisticScale.md"
+sourceHash = "sha256:848cdf58c4c0c8ed025fbb7d2cc50392a910e706111ff87e3b44b4917c5e77dc"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.LinguisticScale.md"
+sourceHash = "sha256:848cdf58c4c0c8ed025fbb7d2cc50392a910e706111ff87e3b44b4917c5e77dc"
 
 [[units]]
 id = "symbol:fuzzyroutines.LinguisticTerm"
@@ -1012,10 +1320,14 @@ sourceHash = "sha256:883a7a29e09e99e34dfcec2f5621290a56979e9ac4eec44ec651f494d3a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.LinguisticTerm.md"
+sourceHash = "sha256:883a7a29e09e99e34dfcec2f5621290a56979e9ac4eec44ec651f494d3a06411"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.LinguisticTerm.md"
+sourceHash = "sha256:883a7a29e09e99e34dfcec2f5621290a56979e9ac4eec44ec651f494d3a06411"
 
 [[units]]
 id = "symbol:fuzzyroutines.NegationPolicy"
@@ -1025,10 +1337,14 @@ sourceHash = "sha256:6675a76125e38ddc1e2f1b9685a1785b86ffcfbda4b1170a3457a69291d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.NegationPolicy.md"
+sourceHash = "sha256:6675a76125e38ddc1e2f1b9685a1785b86ffcfbda4b1170a3457a69291dede3d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.NegationPolicy.md"
+sourceHash = "sha256:6675a76125e38ddc1e2f1b9685a1785b86ffcfbda4b1170a3457a69291dede3d"
 
 [[units]]
 id = "symbol:fuzzyroutines.Normalize"
@@ -1038,10 +1354,14 @@ sourceHash = "sha256:8436767afea75085984d8620d3797ba9e330bd708e8181bbd8ffd889701
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Normalize.md"
+sourceHash = "sha256:8436767afea75085984d8620d3797ba9e330bd708e8181bbd8ffd8897015de08"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Normalize.md"
+sourceHash = "sha256:8436767afea75085984d8620d3797ba9e330bd708e8181bbd8ffd8897015de08"
 
 [[units]]
 id = "symbol:fuzzyroutines.SNormPolicy"
@@ -1051,10 +1371,14 @@ sourceHash = "sha256:1514276cc2dd52d4fde98ee4b43dc0887adeb780a01d18d66d4280025ab
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.SNormPolicy.md"
+sourceHash = "sha256:1514276cc2dd52d4fde98ee4b43dc0887adeb780a01d18d66d4280025ab0a697"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.SNormPolicy.md"
+sourceHash = "sha256:1514276cc2dd52d4fde98ee4b43dc0887adeb780a01d18d66d4280025ab0a697"
 
 [[units]]
 id = "symbol:fuzzyroutines.SampleAlphaCut"
@@ -1064,10 +1388,14 @@ sourceHash = "sha256:5f86c50347415650648624ae4ba028ba421860388bd01b3d92433735abf
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.SampleAlphaCut.md"
+sourceHash = "sha256:5f86c50347415650648624ae4ba028ba421860388bd01b3d92433735abf62c8b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.SampleAlphaCut.md"
+sourceHash = "sha256:5f86c50347415650648624ae4ba028ba421860388bd01b3d92433735abf62c8b"
 
 [[units]]
 id = "symbol:fuzzyroutines.SampleProperties"
@@ -1077,10 +1405,14 @@ sourceHash = "sha256:6a210a04528b9a4ab9cada6a4a81af79476f39d4f3a795a0e08785f9bc0
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.SampleProperties.md"
+sourceHash = "sha256:6a210a04528b9a4ab9cada6a4a81af79476f39d4f3a795a0e08785f9bc02301e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.SampleProperties.md"
+sourceHash = "sha256:6a210a04528b9a4ab9cada6a4a81af79476f39d4f3a795a0e08785f9bc02301e"
 
 [[units]]
 id = "symbol:fuzzyroutines.SampledAlphaCut"
@@ -1090,10 +1422,14 @@ sourceHash = "sha256:0d3db0498e523ebbaa77ec0d943a029a2e30db60e28d6ae485df099a731
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.SampledAlphaCut.md"
+sourceHash = "sha256:0d3db0498e523ebbaa77ec0d943a029a2e30db60e28d6ae485df099a7311fedf"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.SampledAlphaCut.md"
+sourceHash = "sha256:0d3db0498e523ebbaa77ec0d943a029a2e30db60e28d6ae485df099a7311fedf"
 
 [[units]]
 id = "symbol:fuzzyroutines.SampledFuzzyProperties"
@@ -1103,10 +1439,14 @@ sourceHash = "sha256:71dbe70ac7ac4b2ddf433052c207947cd4fc70512360eb02c910d74311e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.SampledFuzzyProperties.md"
+sourceHash = "sha256:71dbe70ac7ac4b2ddf433052c207947cd4fc70512360eb02c910d74311e20def"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.SampledFuzzyProperties.md"
+sourceHash = "sha256:71dbe70ac7ac4b2ddf433052c207947cd4fc70512360eb02c910d74311e20def"
 
 [[units]]
 id = "symbol:fuzzyroutines.ScalarFuzzySet"
@@ -1116,10 +1456,14 @@ sourceHash = "sha256:1cb94bed10f53245ecf0ab10af44941ca62237c57eac5af0581c94f9af9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.ScalarFuzzySet.md"
+sourceHash = "sha256:1cb94bed10f53245ecf0ab10af44941ca62237c57eac5af0581c94f9af96e238"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.ScalarFuzzySet.md"
+sourceHash = "sha256:1cb94bed10f53245ecf0ab10af44941ca62237c57eac5af0581c94f9af96e238"
 
 [[units]]
 id = "symbol:fuzzyroutines.ScaleDiagnosticPoint"
@@ -1129,10 +1473,14 @@ sourceHash = "sha256:c8376deea2b8fef813168b1b3046044749965796a197d1eabd7a7250489
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.md"
+sourceHash = "sha256:c8376deea2b8fef813168b1b3046044749965796a197d1eabd7a72504899613d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.md"
+sourceHash = "sha256:c8376deea2b8fef813168b1b3046044749965796a197d1eabd7a72504899613d"
 
 [[units]]
 id = "symbol:fuzzyroutines.ScaleDiagnosticsPolicy"
@@ -1142,10 +1490,14 @@ sourceHash = "sha256:820722943947e72f85bb9c3dd9ff2ed98dcdd6bc7df04000cbce352a234
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsPolicy.md"
+sourceHash = "sha256:820722943947e72f85bb9c3dd9ff2ed98dcdd6bc7df04000cbce352a23421541"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsPolicy.md"
+sourceHash = "sha256:820722943947e72f85bb9c3dd9ff2ed98dcdd6bc7df04000cbce352a23421541"
 
 [[units]]
 id = "symbol:fuzzyroutines.ScaleDiagnosticsResult"
@@ -1155,10 +1507,14 @@ sourceHash = "sha256:ac73bb6343df28721ce440e816ddd179de9f7c15d5d77d94f16c5baf97f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.md"
+sourceHash = "sha256:ac73bb6343df28721ce440e816ddd179de9f7c15d5d77d94f16c5baf97f08dc9"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.md"
+sourceHash = "sha256:ac73bb6343df28721ce440e816ddd179de9f7c15d5d77d94f16c5baf97f08dc9"
 
 [[units]]
 id = "symbol:fuzzyroutines.TNormPolicy"
@@ -1168,10 +1524,14 @@ sourceHash = "sha256:6d8348b6f7acd0668a9572ccfd8390898bdaa537cce80b447a31b89683f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.TNormPolicy.md"
+sourceHash = "sha256:6d8348b6f7acd0668a9572ccfd8390898bdaa537cce80b447a31b89683f8060e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.TNormPolicy.md"
+sourceHash = "sha256:6d8348b6f7acd0668a9572ccfd8390898bdaa537cce80b447a31b89683f8060e"
 
 [[units]]
 id = "symbol:fuzzyroutines.TermMembership"
@@ -1181,10 +1541,14 @@ sourceHash = "sha256:a52c53c30f0ff281af961ae32e25f2c051921b42609451f4980927b4b82
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.TermMembership.md"
+sourceHash = "sha256:a52c53c30f0ff281af961ae32e25f2c051921b42609451f4980927b4b82e8eec"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.TermMembership.md"
+sourceHash = "sha256:a52c53c30f0ff281af961ae32e25f2c051921b42609451f4980927b4b82e8eec"
 
 [[units]]
 id = "symbol:fuzzyroutines.Union"
@@ -1194,10 +1558,14 @@ sourceHash = "sha256:3bb9102a4291ee2ccb2640eae3391a77dfab12618cb820f8fb0490a97d6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Union.md"
+sourceHash = "sha256:3bb9102a4291ee2ccb2640eae3391a77dfab12618cb820f8fb0490a97d6f8e0d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Union.md"
+sourceHash = "sha256:3bb9102a4291ee2ccb2640eae3391a77dfab12618cb820f8fb0490a97d6f8e0d"
 
 [[units]]
 id = "symbol:fuzzyroutines.alphacuts.AlphaCut"
@@ -1207,10 +1575,14 @@ sourceHash = "sha256:442721d23b9ec9178663190ae35ca26b2f1fbd58f80e9ad0d3877235570
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.AlphaCut.md"
+sourceHash = "sha256:442721d23b9ec9178663190ae35ca26b2f1fbd58f80e9ad0d38772355703dbab"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.AlphaCut.md"
+sourceHash = "sha256:442721d23b9ec9178663190ae35ca26b2f1fbd58f80e9ad0d38772355703dbab"
 
 [[units]]
 id = "symbol:fuzzyroutines.alphacuts.SampleAlphaCut"
@@ -1220,10 +1592,14 @@ sourceHash = "sha256:b6902b65388bfac5d8cd2894ddf1f8c9c5c68871881de314caf537ab3e6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.SampleAlphaCut.md"
+sourceHash = "sha256:b6902b65388bfac5d8cd2894ddf1f8c9c5c68871881de314caf537ab3e63da7a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.SampleAlphaCut.md"
+sourceHash = "sha256:b6902b65388bfac5d8cd2894ddf1f8c9c5c68871881de314caf537ab3e63da7a"
 
 [[units]]
 id = "symbol:fuzzyroutines.alphacuts.SampledAlphaCut"
@@ -1233,10 +1609,14 @@ sourceHash = "sha256:a4d4da0bb93b02e35f5691576790ea6352eeb62931c48b25b61c9bac70a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.SampledAlphaCut.md"
+sourceHash = "sha256:a4d4da0bb93b02e35f5691576790ea6352eeb62931c48b25b61c9bac70a9646f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.SampledAlphaCut.md"
+sourceHash = "sha256:a4d4da0bb93b02e35f5691576790ea6352eeb62931c48b25b61c9bac70a9646f"
 
 [[units]]
 id = "symbol:fuzzyroutines.alphacuts.SampledAlphaCut.isExact"
@@ -1246,10 +1626,14 @@ sourceHash = "sha256:283484298573ecd33f28ffdf5b141dc556a2d8a779be0353e353dd9a1a2
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.SampledAlphaCut.isExact.md"
+sourceHash = "sha256:283484298573ecd33f28ffdf5b141dc556a2d8a779be0353e353dd9a1a241743"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.SampledAlphaCut.isExact.md"
+sourceHash = "sha256:283484298573ecd33f28ffdf5b141dc556a2d8a779be0353e353dd9a1a241743"
 
 [[units]]
 id = "symbol:fuzzyroutines.defuzzification.Centroid"
@@ -1259,10 +1643,14 @@ sourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb16
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.Centroid.md"
+sourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.Centroid.md"
+sourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
 
 [[units]]
 id = "symbol:fuzzyroutines.defuzzification.CentroidConvergenceError"
@@ -1272,10 +1660,14 @@ sourceHash = "sha256:58472f5e4fc2cf869fc00578f1300e757530f2a4c73902162f0ae1e300c
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.CentroidConvergenceError.md"
+sourceHash = "sha256:58472f5e4fc2cf869fc00578f1300e757530f2a4c73902162f0ae1e300c49ece"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.CentroidConvergenceError.md"
+sourceHash = "sha256:58472f5e4fc2cf869fc00578f1300e757530f2a4c73902162f0ae1e300c49ece"
 
 [[units]]
 id = "symbol:fuzzyroutines.defuzzification.CentroidPolicy"
@@ -1285,10 +1677,14 @@ sourceHash = "sha256:5322d743920c8aceff7a318ddf85967bf1f731abc0976e5d25c608051df
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.CentroidPolicy.md"
+sourceHash = "sha256:5322d743920c8aceff7a318ddf85967bf1f731abc0976e5d25c608051dfa7d7a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.CentroidPolicy.md"
+sourceHash = "sha256:5322d743920c8aceff7a318ddf85967bf1f731abc0976e5d25c608051dfa7d7a"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.ContinuousUniverse"
@@ -1298,10 +1694,14 @@ sourceHash = "sha256:c1f3840506ae5a8aaebb315f1ad84cc81a677ff638f7a3cd19eaa9f0dda
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.ContinuousUniverse.md"
+sourceHash = "sha256:c1f3840506ae5a8aaebb315f1ad84cc81a677ff638f7a3cd19eaa9f0dda8d01a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.ContinuousUniverse.md"
+sourceHash = "sha256:c1f3840506ae5a8aaebb315f1ad84cc81a677ff638f7a3cd19eaa9f0dda8d01a"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.ContinuousUniverse.Contains"
@@ -1311,10 +1711,14 @@ sourceHash = "sha256:5b9d499544042f156410d4dfe8e2f9899e48f5c7a3ad1d858bc67a6d56a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.ContinuousUniverse.Contains.md"
+sourceHash = "sha256:5b9d499544042f156410d4dfe8e2f9899e48f5c7a3ad1d858bc67a6d56a555bc"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.ContinuousUniverse.Contains.md"
+sourceHash = "sha256:5b9d499544042f156410d4dfe8e2f9899e48f5c7a3ad1d858bc67a6d56a555bc"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.ContinuousUniverse.isBounded"
@@ -1324,10 +1728,14 @@ sourceHash = "sha256:bb6fa4c93e1bcae2ae54ab0d7e47f38bb14bd12a97175921a34d3ba3eb9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.ContinuousUniverse.isBounded.md"
+sourceHash = "sha256:bb6fa4c93e1bcae2ae54ab0d7e47f38bb14bd12a97175921a34d3ba3eb96d379"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.ContinuousUniverse.isBounded.md"
+sourceHash = "sha256:bb6fa4c93e1bcae2ae54ab0d7e47f38bb14bd12a97175921a34d3ba3eb96d379"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.DiscreteUniverse"
@@ -1337,10 +1745,14 @@ sourceHash = "sha256:39ef05be933f2b64a219f5060937b7d2e587a2701d726e1bc8e237081c3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.DiscreteUniverse.md"
+sourceHash = "sha256:39ef05be933f2b64a219f5060937b7d2e587a2701d726e1bc8e237081c3cd833"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.DiscreteUniverse.md"
+sourceHash = "sha256:39ef05be933f2b64a219f5060937b7d2e587a2701d726e1bc8e237081c3cd833"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.DiscreteUniverse.Contains"
@@ -1350,10 +1762,14 @@ sourceHash = "sha256:83ce95da3d453b623203298415e693ab9e173b5b2d5064abaf3b6b66f75
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.DiscreteUniverse.Contains.md"
+sourceHash = "sha256:83ce95da3d453b623203298415e693ab9e173b5b2d5064abaf3b6b66f75db751"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.DiscreteUniverse.Contains.md"
+sourceHash = "sha256:83ce95da3d453b623203298415e693ab9e173b5b2d5064abaf3b6b66f75db751"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.IntegrationDomain"
@@ -1363,10 +1779,14 @@ sourceHash = "sha256:f1fb6b0f00e8220d8766d089a77d09aeac17947e7a59602d1c59d55c4fb
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.IntegrationDomain.md"
+sourceHash = "sha256:f1fb6b0f00e8220d8766d089a77d09aeac17947e7a59602d1c59d55c4fbc657e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.IntegrationDomain.md"
+sourceHash = "sha256:f1fb6b0f00e8220d8766d089a77d09aeac17947e7a59602d1c59d55c4fbc657e"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.IntegrationDomain.Contains"
@@ -1376,10 +1796,14 @@ sourceHash = "sha256:7da7cfd1289d000ecc468ede0b74ad56f7c0a79c5356f466eaa5e90da97
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.IntegrationDomain.Contains.md"
+sourceHash = "sha256:7da7cfd1289d000ecc468ede0b74ad56f7c0a79c5356f466eaa5e90da97b8b36"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.IntegrationDomain.Contains.md"
+sourceHash = "sha256:7da7cfd1289d000ecc468ede0b74ad56f7c0a79c5356f466eaa5e90da97b8b36"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval"
@@ -1389,10 +1813,14 @@ sourceHash = "sha256:a7418f6354ea34d1d337df3736635fe6cc46592dcd546660cfbc2a8500f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval.md"
+sourceHash = "sha256:a7418f6354ea34d1d337df3736635fe6cc46592dcd546660cfbc2a8500f6a23a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval.md"
+sourceHash = "sha256:a7418f6354ea34d1d337df3736635fe6cc46592dcd546660cfbc2a8500f6a23a"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval"
@@ -1402,10 +1830,14 @@ sourceHash = "sha256:3069e7d4da243ccf456192a58edddb861f096341668ad2568f584a530c6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval.md"
+sourceHash = "sha256:3069e7d4da243ccf456192a58edddb861f096341668ad2568f584a530c61eed0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval.md"
+sourceHash = "sha256:3069e7d4da243ccf456192a58edddb861f096341668ad2568f584a530c61eed0"
 
 [[units]]
 id = "symbol:fuzzyroutines.domain.IntegrationDomain.ValidateWithin"
@@ -1415,10 +1847,14 @@ sourceHash = "sha256:a0b1e4a0ec65df315da2d8d63c5994f7b15aeef38b22ed0a5c60b7c08f7
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.IntegrationDomain.ValidateWithin.md"
+sourceHash = "sha256:a0b1e4a0ec65df315da2d8d63c5994f7b15aeef38b22ed0a5c60b7c08f753eff"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.IntegrationDomain.ValidateWithin.md"
+sourceHash = "sha256:a0b1e4a0ec65df315da2d8d63c5994f7b15aeef38b22ed0a5c60b7c08f753eff"
 
 [[units]]
 id = "symbol:fuzzyroutines.exceptions.FuzzyRoutinesError"
@@ -1428,10 +1864,14 @@ sourceHash = "sha256:931262fc14fbc4674531080d18fc93dc45b941beccb95260a46fecd282a
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.exceptions.FuzzyRoutinesError.md"
+sourceHash = "sha256:931262fc14fbc4674531080d18fc93dc45b941beccb95260a46fecd282a62f35"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.exceptions.FuzzyRoutinesError.md"
+sourceHash = "sha256:931262fc14fbc4674531080d18fc93dc45b941beccb95260a46fecd282a62f35"
 
 [[units]]
 id = "symbol:fuzzyroutines.exceptions.InvalidDomainError"
@@ -1441,10 +1881,14 @@ sourceHash = "sha256:ab26e30965783534e55f75e7130b79973bf90c90f80c9409d5ebb7301d6
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.exceptions.InvalidDomainError.md"
+sourceHash = "sha256:ab26e30965783534e55f75e7130b79973bf90c90f80c9409d5ebb7301d6807ab"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.exceptions.InvalidDomainError.md"
+sourceHash = "sha256:ab26e30965783534e55f75e7130b79973bf90c90f80c9409d5ebb7301d6807ab"
 
 [[units]]
 id = "symbol:fuzzyroutines.exceptions.InvalidParameterError"
@@ -1454,10 +1898,14 @@ sourceHash = "sha256:68eec67c11116e32d5b8adc98840e204b78bac1417ac19cb2ab011418b8
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.exceptions.InvalidParameterError.md"
+sourceHash = "sha256:68eec67c11116e32d5b8adc98840e204b78bac1417ac19cb2ab011418b891b46"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.exceptions.InvalidParameterError.md"
+sourceHash = "sha256:68eec67c11116e32d5b8adc98840e204b78bac1417ac19cb2ab011418b891b46"
 
 [[units]]
 id = "symbol:fuzzyroutines.exceptions.InvalidParameterTypeError"
@@ -1467,10 +1915,14 @@ sourceHash = "sha256:f4d59c7129524d6f4fafdf1105d74102103002feb30c91edd2a314c5f33
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.exceptions.InvalidParameterTypeError.md"
+sourceHash = "sha256:f4d59c7129524d6f4fafdf1105d74102103002feb30c91edd2a314c5f336d1a8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.exceptions.InvalidParameterTypeError.md"
+sourceHash = "sha256:f4d59c7129524d6f4fafdf1105d74102103002feb30c91edd2a314c5f336d1a8"
 
 [[units]]
 id = "symbol:fuzzyroutines.exceptions.NumericalError"
@@ -1480,10 +1932,14 @@ sourceHash = "sha256:602d0ee237f4cfe7bb701bc7963427bf8f37e3e119ceb988d3317d60702
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.exceptions.NumericalError.md"
+sourceHash = "sha256:602d0ee237f4cfe7bb701bc7963427bf8f37e3e119ceb988d3317d607020f6e6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.exceptions.NumericalError.md"
+sourceHash = "sha256:602d0ee237f4cfe7bb701bc7963427bf8f37e3e119ceb988d3317d607020f6e6"
 
 [[units]]
 id = "symbol:fuzzyroutines.exceptions.UndefinedResultError"
@@ -1493,10 +1949,15 @@ sourceHash = "sha256:4e93e8e7587670b53e44525e518c6f1575c6d1d009dd82ac8be886ed8fc
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.exceptions.UndefinedResultError.md"
+sourceHash = "sha256:4e93e8e7587670b53e44525e518c6f1575c6d1d009dd82ac8be886ed8fcb8e85"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.exceptions.UndefinedResultError.md"
+sourceHash = "sha256:4e93e8e7587670b53e44525e518c6f1575c6d1d009dd82ac8be886ed8fcb8e85"
+
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Complement"
 kind = "symbol"
@@ -1505,10 +1966,14 @@ sourceHash = "sha256:5aac8f5209aafae85580276033e20f92497caa1e55b77d4efcc0609f162
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Complement.md"
+sourceHash = "sha256:5aac8f5209aafae85580276033e20f92497caa1e55b77d4efcc0609f1623b699"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Complement.md"
+sourceHash = "sha256:5aac8f5209aafae85580276033e20f92497caa1e55b77d4efcc0609f1623b699"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Difference"
@@ -1518,10 +1983,14 @@ sourceHash = "sha256:b1f35adb8f0a6624397c5827d40f3ef44423db7d498833997c2f6d7e676
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Difference.md"
+sourceHash = "sha256:b1f35adb8f0a6624397c5827d40f3ef44423db7d498833997c2f6d7e676e8f95"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Difference.md"
+sourceHash = "sha256:b1f35adb8f0a6624397c5827d40f3ef44423db7d498833997c2f6d7e676e8f95"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Height"
@@ -1531,10 +2000,14 @@ sourceHash = "sha256:a88db233677cc89ed1acd5b509f8213a24998bac1d49d8c5cd446786739
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Height.md"
+sourceHash = "sha256:a88db233677cc89ed1acd5b509f8213a24998bac1d49d8c5cd44678673965823"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Height.md"
+sourceHash = "sha256:a88db233677cc89ed1acd5b509f8213a24998bac1d49d8c5cd44678673965823"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Intersection"
@@ -1544,10 +2017,14 @@ sourceHash = "sha256:bde0a50739ff83faecf3d35a12ff358163b5c5576433d0d7f8c45281ad9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Intersection.md"
+sourceHash = "sha256:bde0a50739ff83faecf3d35a12ff358163b5c5576433d0d7f8c45281ad9e3792"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Intersection.md"
+sourceHash = "sha256:bde0a50739ff83faecf3d35a12ff358163b5c5576433d0d7f8c45281ad9e3792"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.IsNormal"
@@ -1557,10 +2034,14 @@ sourceHash = "sha256:acc011cc1be9bc3393ad4223ebd9719bfa094e043be2769fb4da50ddc8e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.IsNormal.md"
+sourceHash = "sha256:acc011cc1be9bc3393ad4223ebd9719bfa094e043be2769fb4da50ddc8e10a10"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.IsNormal.md"
+sourceHash = "sha256:acc011cc1be9bc3393ad4223ebd9719bfa094e043be2769fb4da50ddc8e10a10"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Normalize"
@@ -1570,10 +2051,14 @@ sourceHash = "sha256:8fcb31870fa613efd0e6ebb2c8cab24dce5970b8aade7ecd7f5058ff707
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Normalize.md"
+sourceHash = "sha256:8fcb31870fa613efd0e6ebb2c8cab24dce5970b8aade7ecd7f5058ff70747405"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Normalize.md"
+sourceHash = "sha256:8fcb31870fa613efd0e6ebb2c8cab24dce5970b8aade7ecd7f5058ff70747405"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.ScalarFuzzySet"
@@ -1583,10 +2068,14 @@ sourceHash = "sha256:f61c09cdf632a8ac01f2678efea6bd035834de93d4f41ab51ce483dfefa
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.ScalarFuzzySet.md"
+sourceHash = "sha256:f61c09cdf632a8ac01f2678efea6bd035834de93d4f41ab51ce483dfefa09575"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.ScalarFuzzySet.md"
+sourceHash = "sha256:f61c09cdf632a8ac01f2678efea6bd035834de93d4f41ab51ce483dfefa09575"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership"
@@ -1596,10 +2085,14 @@ sourceHash = "sha256:6d51bfd902c91e6680f1be6795ea0dfc842744b8489a575d3c2505d08fa
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership.md"
+sourceHash = "sha256:6d51bfd902c91e6680f1be6795ea0dfc842744b8489a575d3c2505d08fa0de7f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership.md"
+sourceHash = "sha256:6d51bfd902c91e6680f1be6795ea0dfc842744b8489a575d3c2505d08fa0de7f"
 
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Union"
@@ -1609,10 +2102,14 @@ sourceHash = "sha256:447e5d47a1c1af1b08b6e39b600c44444875be79be73aeb79c7c6004533
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.Union.md"
+sourceHash = "sha256:447e5d47a1c1af1b08b6e39b600c44444875be79be73aeb79c7c6004533253cd"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.Union.md"
+sourceHash = "sha256:447e5d47a1c1af1b08b6e39b600c44444875be79be73aeb79c7c6004533253cd"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.FuzzificationPolicy"
@@ -1622,10 +2119,14 @@ sourceHash = "sha256:54c775b80a7a1c8d0653ba3eeb8a5489a08af0f7412ca1f95e8e1147123
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.FuzzificationPolicy.md"
+sourceHash = "sha256:54c775b80a7a1c8d0653ba3eeb8a5489a08af0f7412ca1f95e8e1147123f57f1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.FuzzificationPolicy.md"
+sourceHash = "sha256:54c775b80a7a1c8d0653ba3eeb8a5489a08af0f7412ca1f95e8e1147123f57f1"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.FuzzificationResult"
@@ -1635,10 +2136,14 @@ sourceHash = "sha256:3beff07dfc28f8e4f960bf55f2ce265666303ec299a68c6b170b03a8ab0
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.FuzzificationResult.md"
+sourceHash = "sha256:3beff07dfc28f8e4f960bf55f2ce265666303ec299a68c6b170b03a8ab0fdbb2"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.FuzzificationResult.md"
+sourceHash = "sha256:3beff07dfc28f8e4f960bf55f2ce265666303ec299a68c6b170b03a8ab0fdbb2"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.FuzzificationResult.isMatch"
@@ -1648,10 +2153,14 @@ sourceHash = "sha256:245bbb18792f606a0320f88381e62770106e77972d0f0323300040b81e4
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.FuzzificationResult.isMatch.md"
+sourceHash = "sha256:245bbb18792f606a0320f88381e62770106e77972d0f0323300040b81e4bad5a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.FuzzificationResult.isMatch.md"
+sourceHash = "sha256:245bbb18792f606a0320f88381e62770106e77972d0f0323300040b81e4bad5a"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.FuzzificationResult.isTie"
@@ -1661,10 +2170,14 @@ sourceHash = "sha256:a6512dee7da4b6f0f814f6ea22ae81a172c2d3f63264c2080b7327280f5
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.FuzzificationResult.isTie.md"
+sourceHash = "sha256:a6512dee7da4b6f0f814f6ea22ae81a172c2d3f63264c2080b7327280f568651"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.FuzzificationResult.isTie.md"
+sourceHash = "sha256:a6512dee7da4b6f0f814f6ea22ae81a172c2d3f63264c2080b7327280f568651"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale"
@@ -1674,10 +2187,14 @@ sourceHash = "sha256:7fe5327b5627278bf690538819948769e512cb393b5b0ba34deea5f7819
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.LinguisticScale.md"
+sourceHash = "sha256:7fe5327b5627278bf690538819948769e512cb393b5b0ba34deea5f78192682c"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.LinguisticScale.md"
+sourceHash = "sha256:7fe5327b5627278bf690538819948769e512cb393b5b0ba34deea5f78192682c"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale.Diagnose"
@@ -1687,10 +2204,14 @@ sourceHash = "sha256:cffb1731fa865f644867521b3001677c5def75556f14b9504a30c357a30
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.LinguisticScale.Diagnose.md"
+sourceHash = "sha256:cffb1731fa865f644867521b3001677c5def75556f14b9504a30c357a301aea1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.LinguisticScale.Diagnose.md"
+sourceHash = "sha256:cffb1731fa865f644867521b3001677c5def75556f14b9504a30c357a301aea1"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale.Fuzzify"
@@ -1700,10 +2221,14 @@ sourceHash = "sha256:c7755a5772dde0e9f2019575694bc77eb04e89821592927c930ac7d9a6d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.LinguisticScale.Fuzzify.md"
+sourceHash = "sha256:c7755a5772dde0e9f2019575694bc77eb04e89821592927c930ac7d9a6dff64d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.LinguisticScale.Fuzzify.md"
+sourceHash = "sha256:c7755a5772dde0e9f2019575694bc77eb04e89821592927c930ac7d9a6dff64d"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.LinguisticScale.GetTermByName"
@@ -1713,10 +2238,14 @@ sourceHash = "sha256:6adcb23be8cb154ba5645edc63da9ec07c78ae3c7dd3bbce0e57c89b377
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.LinguisticScale.GetTermByName.md"
+sourceHash = "sha256:6adcb23be8cb154ba5645edc63da9ec07c78ae3c7dd3bbce0e57c89b377efa5e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.LinguisticScale.GetTermByName.md"
+sourceHash = "sha256:6adcb23be8cb154ba5645edc63da9ec07c78ae3c7dd3bbce0e57c89b377efa5e"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.LinguisticTerm"
@@ -1726,10 +2255,14 @@ sourceHash = "sha256:ee601bce05c76360a791dc980f248ef4ce3ff8c08e5e462a92e31a3f10b
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.LinguisticTerm.md"
+sourceHash = "sha256:ee601bce05c76360a791dc980f248ef4ce3ff8c08e5e462a92e31a3f10bdfcb6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.LinguisticTerm.md"
+sourceHash = "sha256:ee601bce05c76360a791dc980f248ef4ce3ff8c08e5e462a92e31a3f10bdfcb6"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint"
@@ -1739,10 +2272,14 @@ sourceHash = "sha256:0b30c010e0b789db768515b7341196689b2166cda6851d212cc195aa4b2
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.md"
+sourceHash = "sha256:0b30c010e0b789db768515b7341196689b2166cda6851d212cc195aa4b248d48"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.md"
+sourceHash = "sha256:0b30c010e0b789db768515b7341196689b2166cda6851d212cc195aa4b248d48"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms"
@@ -1752,10 +2289,14 @@ sourceHash = "sha256:e51f94d8908a0408716c136261b2e05d8a7b666acc379863b1c2043a31f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms.md"
+sourceHash = "sha256:e51f94d8908a0408716c136261b2e05d8a7b666acc379863b1c2043a31f3ad80"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms.md"
+sourceHash = "sha256:e51f94d8908a0408716c136261b2e05d8a7b666acc379863b1c2043a31f3ad80"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap"
@@ -1765,10 +2306,14 @@ sourceHash = "sha256:7921f3e01a74c99469a99e53ceb6fefcce1a3998c887976a16bf8942d24
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap.md"
+sourceHash = "sha256:7921f3e01a74c99469a99e53ceb6fefcce1a3998c887976a16bf8942d244c97d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap.md"
+sourceHash = "sha256:7921f3e01a74c99469a99e53ceb6fefcce1a3998c887976a16bf8942d244c97d"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.isOverlap"
@@ -1778,10 +2323,14 @@ sourceHash = "sha256:e05a752b1756672e54b9776f99c84b1b1386cd9f4633d070840730ec7a9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.isOverlap.md"
+sourceHash = "sha256:e05a752b1756672e54b9776f99c84b1b1386cd9f4633d070840730ec7a94a8de"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.isOverlap.md"
+sourceHash = "sha256:e05a752b1756672e54b9776f99c84b1b1386cd9f4633d070840730ec7a94a8de"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.maximumMembership"
@@ -1791,10 +2340,14 @@ sourceHash = "sha256:d21228007a2a563a3de6767604109a8f845f8340bb6efd81d4613ef7cf0
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.maximumMembership.md"
+sourceHash = "sha256:d21228007a2a563a3de6767604109a8f845f8340bb6efd81d4613ef7cf010fba"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.maximumMembership.md"
+sourceHash = "sha256:d21228007a2a563a3de6767604109a8f845f8340bb6efd81d4613ef7cf010fba"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.membershipSum"
@@ -1804,10 +2357,14 @@ sourceHash = "sha256:2b049914f437c12984eade6e60a6d799d1ddfcbfd2eb48841c31657004f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.membershipSum.md"
+sourceHash = "sha256:2b049914f437c12984eade6e60a6d799d1ddfcbfd2eb48841c31657004f72564"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.membershipSum.md"
+sourceHash = "sha256:2b049914f437c12984eade6e60a6d799d1ddfcbfd2eb48841c31657004f72564"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.partitionError"
@@ -1817,10 +2374,14 @@ sourceHash = "sha256:bfaa941a2ace02e392d5fd305ef6a451dfc237cbfee505c112008283f61
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticPoint.partitionError.md"
+sourceHash = "sha256:bfaa941a2ace02e392d5fd305ef6a451dfc237cbfee505c112008283f6199ab1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticPoint.partitionError.md"
+sourceHash = "sha256:bfaa941a2ace02e392d5fd305ef6a451dfc237cbfee505c112008283f6199ab1"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsPolicy"
@@ -1830,10 +2391,14 @@ sourceHash = "sha256:f22f08bc819a63300fa75b63d8e3e395dd64873475145278261199bba55
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsPolicy.md"
+sourceHash = "sha256:f22f08bc819a63300fa75b63d8e3e395dd64873475145278261199bba55c0469"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsPolicy.md"
+sourceHash = "sha256:f22f08bc819a63300fa75b63d8e3e395dd64873475145278261199bba55c0469"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult"
@@ -1843,10 +2408,14 @@ sourceHash = "sha256:d6b0ade2434158a538d7f1d62f977839295d51b9215eb68056c8ea82b8e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.md"
+sourceHash = "sha256:d6b0ade2434158a538d7f1d62f977839295d51b9215eb68056c8ea82b8e1c89e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.md"
+sourceHash = "sha256:d6b0ade2434158a538d7f1d62f977839295d51b9215eb68056c8ea82b8e1c89e"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapFraction"
@@ -1856,10 +2425,14 @@ sourceHash = "sha256:5e2f2fede7e880cdc91084d702da9fabb0271fd2bf5f0a4e429b7e9919c
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapFraction.md"
+sourceHash = "sha256:5e2f2fede7e880cdc91084d702da9fabb0271fd2bf5f0a4e429b7e9919c8a4c3"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapFraction.md"
+sourceHash = "sha256:5e2f2fede7e880cdc91084d702da9fabb0271fd2bf5f0a4e429b7e9919c8a4c3"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapPoints"
@@ -1869,10 +2442,14 @@ sourceHash = "sha256:0f1f35bdd6923711775161e9e2bab9b352a6ff44059a2217087cef305da
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapPoints.md"
+sourceHash = "sha256:0f1f35bdd6923711775161e9e2bab9b352a6ff44059a2217087cef305da4ae5e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapPoints.md"
+sourceHash = "sha256:0f1f35bdd6923711775161e9e2bab9b352a6ff44059a2217087cef305da4ae5e"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.isPartitionWithinTolerance"
@@ -1882,10 +2459,14 @@ sourceHash = "sha256:ad035a30a1a9daf771023c101aae85dbec513b0fcfc06ca4a625d636a8f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.isPartitionWithinTolerance.md"
+sourceHash = "sha256:ad035a30a1a9daf771023c101aae85dbec513b0fcfc06ca4a625d636a8fb02c6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.isPartitionWithinTolerance.md"
+sourceHash = "sha256:ad035a30a1a9daf771023c101aae85dbec513b0fcfc06ca4a625d636a8fb02c6"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumActiveTermCount"
@@ -1895,10 +2476,14 @@ sourceHash = "sha256:9c9fa5c1b75bc792ac4e9cfea60a67edc1338758a774937a83e3e68f319
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumActiveTermCount.md"
+sourceHash = "sha256:9c9fa5c1b75bc792ac4e9cfea60a67edc1338758a774937a83e3e68f319391ba"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumActiveTermCount.md"
+sourceHash = "sha256:9c9fa5c1b75bc792ac4e9cfea60a67edc1338758a774937a83e3e68f319391ba"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumCoverage"
@@ -1908,10 +2493,14 @@ sourceHash = "sha256:aa9c92c6d31afe709478886fcbbfaf37c5fade7ab6cfa2d7ef1c5de917a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumCoverage.md"
+sourceHash = "sha256:aa9c92c6d31afe709478886fcbbfaf37c5fade7ab6cfa2d7ef1c5de917ad167a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumCoverage.md"
+sourceHash = "sha256:aa9c92c6d31afe709478886fcbbfaf37c5fade7ab6cfa2d7ef1c5de917ad167a"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumPartitionError"
@@ -1921,10 +2510,14 @@ sourceHash = "sha256:025ff3a539b37b3b25c8d0752969d26d89e35c96d6734dc30829b650c3d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumPartitionError.md"
+sourceHash = "sha256:025ff3a539b37b3b25c8d0752969d26d89e35c96d6734dc30829b650c3dec506"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumPartitionError.md"
+sourceHash = "sha256:025ff3a539b37b3b25c8d0752969d26d89e35c96d6734dc30829b650c3dec506"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanCoverage"
@@ -1934,10 +2527,14 @@ sourceHash = "sha256:17a2fcdd209de2c8ad011097303a123d3c1ef3663763a02f975e1dc2bf2
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanCoverage.md"
+sourceHash = "sha256:17a2fcdd209de2c8ad011097303a123d3c1ef3663763a02f975e1dc2bf2092a8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanCoverage.md"
+sourceHash = "sha256:17a2fcdd209de2c8ad011097303a123d3c1ef3663763a02f975e1dc2bf2092a8"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanPartitionError"
@@ -1947,10 +2544,14 @@ sourceHash = "sha256:41cf64a58b514892a8dbade7529d1c6d09dbf62c360986d46cd645e5ad0
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanPartitionError.md"
+sourceHash = "sha256:41cf64a58b514892a8dbade7529d1c6d09dbf62c360986d46cd645e5ad0a5a09"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanPartitionError.md"
+sourceHash = "sha256:41cf64a58b514892a8dbade7529d1c6d09dbf62c360986d46cd645e5ad0a5a09"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.minimumCoverage"
@@ -1960,10 +2561,14 @@ sourceHash = "sha256:bdd7650170b4bed082c10f5e8eadf9c8af82c007b858fc6c6bcfe4871b2
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.minimumCoverage.md"
+sourceHash = "sha256:bdd7650170b4bed082c10f5e8eadf9c8af82c007b858fc6c6bcfe4871b2570e0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.minimumCoverage.md"
+sourceHash = "sha256:bdd7650170b4bed082c10f5e8eadf9c8af82c007b858fc6c6bcfe4871b2570e0"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapFraction"
@@ -1973,10 +2578,14 @@ sourceHash = "sha256:8a1094a13a4a47cea016f724d02d2866b3ba39aa78799f078e644b3f815
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapFraction.md"
+sourceHash = "sha256:8a1094a13a4a47cea016f724d02d2866b3ba39aa78799f078e644b3f815cd7a8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapFraction.md"
+sourceHash = "sha256:8a1094a13a4a47cea016f724d02d2866b3ba39aa78799f078e644b3f815cd7a8"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapPoints"
@@ -1986,10 +2595,14 @@ sourceHash = "sha256:0b61a6ae7d29f4efe34787436b674a28f3a40f9272eba13116020959ae9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapPoints.md"
+sourceHash = "sha256:0b61a6ae7d29f4efe34787436b674a28f3a40f9272eba13116020959ae92ee7a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapPoints.md"
+sourceHash = "sha256:0b61a6ae7d29f4efe34787436b674a28f3a40f9272eba13116020959ae92ee7a"
 
 [[units]]
 id = "symbol:fuzzyroutines.linguistic.TermMembership"
@@ -1999,10 +2612,14 @@ sourceHash = "sha256:cd402f54d170b3322c1b3ec6689eb4aa7d0c5df0b60e7739fc50d2b63db
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.TermMembership.md"
+sourceHash = "sha256:cd402f54d170b3322c1b3ec6689eb4aa7d0c5df0b60e7739fc50d2b63db12ebc"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.TermMembership.md"
+sourceHash = "sha256:cd402f54d170b3322c1b3ec6689eb4aa7d0c5df0b60e7739fc50d2b63db12ebc"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.Bell"
@@ -2012,10 +2629,14 @@ sourceHash = "sha256:34b5e7e04fd4f7faf46bf1703b32a24be7ee491e24311801c117832bd21
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Bell.md"
+sourceHash = "sha256:34b5e7e04fd4f7faf46bf1703b32a24be7ee491e24311801c117832bd21a9c95"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Bell.md"
+sourceHash = "sha256:34b5e7e04fd4f7faf46bf1703b32a24be7ee491e24311801c117832bd21a9c95"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.Gaussian"
@@ -2025,10 +2646,14 @@ sourceHash = "sha256:4173db52e7a90a009889b0e982f8ca330b030bea24782e99ba9e687404f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Gaussian.md"
+sourceHash = "sha256:4173db52e7a90a009889b0e982f8ca330b030bea24782e99ba9e687404f61e37"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Gaussian.md"
+sourceHash = "sha256:4173db52e7a90a009889b0e982f8ca330b030bea24782e99ba9e687404f61e37"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.HarringtonDesirability"
@@ -2038,10 +2663,14 @@ sourceHash = "sha256:b88fbdae5d8bd75df64e1f136e591c2cd75e578277ddc18b67c116ce202
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.HarringtonDesirability.md"
+sourceHash = "sha256:b88fbdae5d8bd75df64e1f136e591c2cd75e578277ddc18b67c116ce20241ad9"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.HarringtonDesirability.md"
+sourceHash = "sha256:b88fbdae5d8bd75df64e1f136e591c2cd75e578277ddc18b67c116ce20241ad9"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.Hyperbolic"
@@ -2051,10 +2680,14 @@ sourceHash = "sha256:dc4b5157d980391ac0c795f1612425667f5770b7290675543498c02aec2
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Hyperbolic.md"
+sourceHash = "sha256:dc4b5157d980391ac0c795f1612425667f5770b7290675543498c02aec29069b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Hyperbolic.md"
+sourceHash = "sha256:dc4b5157d980391ac0c795f1612425667f5770b7290675543498c02aec29069b"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.Logistic"
@@ -2064,23 +2697,31 @@ sourceHash = "sha256:c2eb75ace8e5f11e99b1aac45337d6f3463741910a5fe4e6e07e2029175
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Logistic.md"
+sourceHash = "sha256:c2eb75ace8e5f11e99b1aac45337d6f3463741910a5fe4e6e07e2029175fa0a3"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Logistic.md"
+sourceHash = "sha256:c2eb75ace8e5f11e99b1aac45337d6f3463741910a5fe4e6e07e2029175fa0a3"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.MembershipFunction"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:789724adfeddb338e3abea36c983d1d4447912a65b2be1974047d860172661b7"
+sourceHash = "sha256:29df5354ed777d3fe170e3dbe7cfabba4fd1cbb0dab491cc145db286922ae996"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipFunction.md"
+sourceHash = "sha256:29df5354ed777d3fe170e3dbe7cfabba4fd1cbb0dab491cc145db286922ae996"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipFunction.md"
+sourceHash = "sha256:29df5354ed777d3fe170e3dbe7cfabba4fd1cbb0dab491cc145db286922ae996"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.MembershipFunction.Evaluate"
@@ -2090,10 +2731,14 @@ sourceHash = "sha256:769bc1c27d3d5d476ef11edf2f18b32637487da59dd926a893c2e02a1cf
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipFunction.Evaluate.md"
+sourceHash = "sha256:769bc1c27d3d5d476ef11edf2f18b32637487da59dd926a893c2e02a1cf41d9b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipFunction.Evaluate.md"
+sourceHash = "sha256:769bc1c27d3d5d476ef11edf2f18b32637487da59dd926a893c2e02a1cf41d9b"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.MembershipFunction.parameters"
@@ -2103,10 +2748,14 @@ sourceHash = "sha256:98b0a34a266200f11012936c85b7be445d014e22ae37b19734592ffa739
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipFunction.parameters.md"
+sourceHash = "sha256:98b0a34a266200f11012936c85b7be445d014e22ae37b19734592ffa739a91d6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipFunction.parameters.md"
+sourceHash = "sha256:98b0a34a266200f11012936c85b7be445d014e22ae37b19734592ffa739a91d6"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.SShoulder"
@@ -2116,10 +2765,14 @@ sourceHash = "sha256:a4eed302fc6ad3e5e29f4c176e7a027e06baaa61c31b193b0886e14a222
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.SShoulder.md"
+sourceHash = "sha256:a4eed302fc6ad3e5e29f4c176e7a027e06baaa61c31b193b0886e14a22208671"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.SShoulder.md"
+sourceHash = "sha256:a4eed302fc6ad3e5e29f4c176e7a027e06baaa61c31b193b0886e14a22208671"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.Trapezoid"
@@ -2129,10 +2782,14 @@ sourceHash = "sha256:12f1a317b2879ff6425e7d61efeff55f0e211b0648b97ea6e5ebc9b7505
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Trapezoid.md"
+sourceHash = "sha256:12f1a317b2879ff6425e7d61efeff55f0e211b0648b97ea6e5ebc9b7505b33d3"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Trapezoid.md"
+sourceHash = "sha256:12f1a317b2879ff6425e7d61efeff55f0e211b0648b97ea6e5ebc9b7505b33d3"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.Triangle"
@@ -2142,10 +2799,14 @@ sourceHash = "sha256:469a2242f3b73e78128b0b1b81f8caad95008dc47b423900118b518fb4c
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Triangle.md"
+sourceHash = "sha256:469a2242f3b73e78128b0b1b81f8caad95008dc47b423900118b518fb4caa68e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Triangle.md"
+sourceHash = "sha256:469a2242f3b73e78128b0b1b81f8caad95008dc47b423900118b518fb4caa68e"
 
 [[units]]
 id = "symbol:fuzzyroutines.operators.NegationPolicy"
@@ -2155,10 +2816,14 @@ sourceHash = "sha256:c5a736ee688c14b4fd5085d6fb3facc5dae642f3beaa351b6424124d999
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.NegationPolicy.md"
+sourceHash = "sha256:c5a736ee688c14b4fd5085d6fb3facc5dae642f3beaa351b6424124d9992e36a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.NegationPolicy.md"
+sourceHash = "sha256:c5a736ee688c14b4fd5085d6fb3facc5dae642f3beaa351b6424124d9992e36a"
 
 [[units]]
 id = "symbol:fuzzyroutines.operators.NegationPolicy.Evaluate"
@@ -2168,10 +2833,14 @@ sourceHash = "sha256:ad4f8df13d573de59a93e7bb45a1a3e38197d3aff234cf099d3dd4cda6e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.NegationPolicy.Evaluate.md"
+sourceHash = "sha256:ad4f8df13d573de59a93e7bb45a1a3e38197d3aff234cf099d3dd4cda6efdea8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.NegationPolicy.Evaluate.md"
+sourceHash = "sha256:ad4f8df13d573de59a93e7bb45a1a3e38197d3aff234cf099d3dd4cda6efdea8"
 
 [[units]]
 id = "symbol:fuzzyroutines.operators.SNormPolicy"
@@ -2181,10 +2850,14 @@ sourceHash = "sha256:4b9d7aa20f27ea44715181edf86f12736ef185eb483b7e1ec53e8e43c94
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.SNormPolicy.md"
+sourceHash = "sha256:4b9d7aa20f27ea44715181edf86f12736ef185eb483b7e1ec53e8e43c9458d6a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.SNormPolicy.md"
+sourceHash = "sha256:4b9d7aa20f27ea44715181edf86f12736ef185eb483b7e1ec53e8e43c9458d6a"
 
 [[units]]
 id = "symbol:fuzzyroutines.operators.SNormPolicy.Evaluate"
@@ -2194,10 +2867,14 @@ sourceHash = "sha256:2a43f6dcdce2d868928d1a8d75a575bcac30c9d17075ca9a53d892f4822
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.SNormPolicy.Evaluate.md"
+sourceHash = "sha256:2a43f6dcdce2d868928d1a8d75a575bcac30c9d17075ca9a53d892f4822b0ad7"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.SNormPolicy.Evaluate.md"
+sourceHash = "sha256:2a43f6dcdce2d868928d1a8d75a575bcac30c9d17075ca9a53d892f4822b0ad7"
 
 [[units]]
 id = "symbol:fuzzyroutines.operators.TNormPolicy"
@@ -2207,10 +2884,14 @@ sourceHash = "sha256:a25076b23a756ffe085f5a3c7b7ba16c6f18b91df2531440b5b5cfa3e32
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.TNormPolicy.md"
+sourceHash = "sha256:a25076b23a756ffe085f5a3c7b7ba16c6f18b91df2531440b5b5cfa3e3224ec4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.TNormPolicy.md"
+sourceHash = "sha256:a25076b23a756ffe085f5a3c7b7ba16c6f18b91df2531440b5b5cfa3e3224ec4"
 
 [[units]]
 id = "symbol:fuzzyroutines.operators.TNormPolicy.Evaluate"
@@ -2220,10 +2901,14 @@ sourceHash = "sha256:09ee1b737766dae8409c44830c618c9d3b1ee21e1e2d788e0db840df7f3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.TNormPolicy.Evaluate.md"
+sourceHash = "sha256:09ee1b737766dae8409c44830c618c9d3b1ee21e1e2d788e0db840df7f375f8e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.TNormPolicy.Evaluate.md"
+sourceHash = "sha256:09ee1b737766dae8409c44830c618c9d3b1ee21e1e2d788e0db840df7f375f8e"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousFuzzyProperties"
@@ -2233,10 +2918,14 @@ sourceHash = "sha256:e6f7796380b7026850d089320f30f190e522486c8cdc8bb4d41006b74cc
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousFuzzyProperties.md"
+sourceHash = "sha256:e6f7796380b7026850d089320f30f190e522486c8cdc8bb4d41006b74ccaf54c"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousFuzzyProperties.md"
+sourceHash = "sha256:e6f7796380b7026850d089320f30f190e522486c8cdc8bb4d41006b74ccaf54c"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousFuzzyProperties.isExact"
@@ -2246,10 +2935,14 @@ sourceHash = "sha256:fe4ddecec4c4484366f502bfb9b4ec8fd99d63d6923ceb420bedd5b0159
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousFuzzyProperties.isExact.md"
+sourceHash = "sha256:fe4ddecec4c4484366f502bfb9b4ec8fd99d63d6923ceb420bedd5b01599d867"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousFuzzyProperties.isExact.md"
+sourceHash = "sha256:fe4ddecec4c4484366f502bfb9b4ec8fd99d63d6923ceb420bedd5b01599d867"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousInterval"
@@ -2259,10 +2952,14 @@ sourceHash = "sha256:c787d59943c739d5864ea60d0fd4fc6dd97ebc766fc5e8babdc645610b1
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousInterval.md"
+sourceHash = "sha256:c787d59943c739d5864ea60d0fd4fc6dd97ebc766fc5e8babdc645610b1b2355"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousInterval.md"
+sourceHash = "sha256:c787d59943c739d5864ea60d0fd4fc6dd97ebc766fc5e8babdc645610b1b2355"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousInterval.Contains"
@@ -2272,10 +2969,14 @@ sourceHash = "sha256:08367eb6ac60e993b3d722198d94bc68579fc990c63e5f76f61619494d2
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousInterval.Contains.md"
+sourceHash = "sha256:08367eb6ac60e993b3d722198d94bc68579fc990c63e5f76f61619494d266210"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousInterval.Contains.md"
+sourceHash = "sha256:08367eb6ac60e993b3d722198d94bc68579fc990c63e5f76f61619494d266210"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousInterval.isSingleton"
@@ -2285,10 +2986,14 @@ sourceHash = "sha256:8d60c81c54553f2c1bb967e6a6dcd44e5740b50f8344195ff52e490502e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousInterval.isSingleton.md"
+sourceHash = "sha256:8d60c81c54553f2c1bb967e6a6dcd44e5740b50f8344195ff52e490502eba045"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousInterval.isSingleton.md"
+sourceHash = "sha256:8d60c81c54553f2c1bb967e6a6dcd44e5740b50f8344195ff52e490502eba045"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousRegion"
@@ -2298,10 +3003,14 @@ sourceHash = "sha256:12ffffaf7e23aa2dadbec37542bbf7b272406810ab90fa46b02f45783fe
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousRegion.md"
+sourceHash = "sha256:12ffffaf7e23aa2dadbec37542bbf7b272406810ab90fa46b02f45783fec8201"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousRegion.md"
+sourceHash = "sha256:12ffffaf7e23aa2dadbec37542bbf7b272406810ab90fa46b02f45783fec8201"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousRegion.Contains"
@@ -2311,10 +3020,14 @@ sourceHash = "sha256:eb2062c4200c61e2a01ad541fbdcc7812bd430f61f07c8724249b92b9ad
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousRegion.Contains.md"
+sourceHash = "sha256:eb2062c4200c61e2a01ad541fbdcc7812bd430f61f07c8724249b92b9ad23e55"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousRegion.Contains.md"
+sourceHash = "sha256:eb2062c4200c61e2a01ad541fbdcc7812bd430f61f07c8724249b92b9ad23e55"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.ContinuousRegion.isEmpty"
@@ -2324,10 +3037,14 @@ sourceHash = "sha256:da93dc8c9b8b66e42fe1190fb12f7f38108978d531d3a1ddcc983a121af
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.ContinuousRegion.isEmpty.md"
+sourceHash = "sha256:da93dc8c9b8b66e42fe1190fb12f7f38108978d531d3a1ddcc983a121af598d4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.ContinuousRegion.isEmpty.md"
+sourceHash = "sha256:da93dc8c9b8b66e42fe1190fb12f7f38108978d531d3a1ddcc983a121af598d4"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.DeriveProperties"
@@ -2337,10 +3054,14 @@ sourceHash = "sha256:c5e405a3daf606673d60247d5f7e92250eed6e99efae90c6cdbe7fe2946
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DeriveProperties.md"
+sourceHash = "sha256:c5e405a3daf606673d60247d5f7e92250eed6e99efae90c6cdbe7fe2946fd113"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DeriveProperties.md"
+sourceHash = "sha256:c5e405a3daf606673d60247d5f7e92250eed6e99efae90c6cdbe7fe2946fd113"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.DiscreteFuzzyProperties"
@@ -2350,10 +3071,14 @@ sourceHash = "sha256:64b9ef21eda5236bdeb48851f1b8fe4cd83e620c04bac8c4a22b6b0ec28
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DiscreteFuzzyProperties.md"
+sourceHash = "sha256:64b9ef21eda5236bdeb48851f1b8fe4cd83e620c04bac8c4a22b6b0ec28d9a1f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DiscreteFuzzyProperties.md"
+sourceHash = "sha256:64b9ef21eda5236bdeb48851f1b8fe4cd83e620c04bac8c4a22b6b0ec28d9a1f"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.DiscreteFuzzyProperties.isExact"
@@ -2363,10 +3088,14 @@ sourceHash = "sha256:be5fc70931e2033f0c2c91e190dac4d3a87fdabcf5c4bf200e72bb24aae
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DiscreteFuzzyProperties.isExact.md"
+sourceHash = "sha256:be5fc70931e2033f0c2c91e190dac4d3a87fdabcf5c4bf200e72bb24aae457b2"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DiscreteFuzzyProperties.isExact.md"
+sourceHash = "sha256:be5fc70931e2033f0c2c91e190dac4d3a87fdabcf5c4bf200e72bb24aae457b2"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.DiscreteRegion"
@@ -2376,10 +3105,14 @@ sourceHash = "sha256:f0635b27e8505d4bf48ac84d302fb24799435e71a252381e0c13b1f4e69
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DiscreteRegion.md"
+sourceHash = "sha256:f0635b27e8505d4bf48ac84d302fb24799435e71a252381e0c13b1f4e69e4c7b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DiscreteRegion.md"
+sourceHash = "sha256:f0635b27e8505d4bf48ac84d302fb24799435e71a252381e0c13b1f4e69e4c7b"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.DiscreteRegion.Contains"
@@ -2389,10 +3122,14 @@ sourceHash = "sha256:7002b174bf7d1bbb10f2ecbb8230283a03370ec91480e170ad1ef50eac6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DiscreteRegion.Contains.md"
+sourceHash = "sha256:7002b174bf7d1bbb10f2ecbb8230283a03370ec91480e170ad1ef50eac6db16f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DiscreteRegion.Contains.md"
+sourceHash = "sha256:7002b174bf7d1bbb10f2ecbb8230283a03370ec91480e170ad1ef50eac6db16f"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.DiscreteRegion.isEmpty"
@@ -2402,10 +3139,14 @@ sourceHash = "sha256:1de97b536020671c8aef604c9d1e75c5342f168365977e84a936ad13d84
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.DiscreteRegion.isEmpty.md"
+sourceHash = "sha256:1de97b536020671c8aef604c9d1e75c5342f168365977e84a936ad13d84813a4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.DiscreteRegion.isEmpty.md"
+sourceHash = "sha256:1de97b536020671c8aef604c9d1e75c5342f168365977e84a936ad13d84813a4"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.SampleProperties"
@@ -2415,10 +3156,14 @@ sourceHash = "sha256:3f42fbd697db95700cf3ba47c5cb35722f06a7e486534d0bab0bc43d16a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.SampleProperties.md"
+sourceHash = "sha256:3f42fbd697db95700cf3ba47c5cb35722f06a7e486534d0bab0bc43d16a9412b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.SampleProperties.md"
+sourceHash = "sha256:3f42fbd697db95700cf3ba47c5cb35722f06a7e486534d0bab0bc43d16a9412b"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.SampledFuzzyProperties"
@@ -2428,10 +3173,14 @@ sourceHash = "sha256:d1bc144d778bce93772e6ca6b129999a37b3429f0c3ea9428b8d5d1ad72
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.SampledFuzzyProperties.md"
+sourceHash = "sha256:d1bc144d778bce93772e6ca6b129999a37b3429f0c3ea9428b8d5d1ad72f1c5c"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.SampledFuzzyProperties.md"
+sourceHash = "sha256:d1bc144d778bce93772e6ca6b129999a37b3429f0c3ea9428b8d5d1ad72f1c5c"
 
 [[units]]
 id = "symbol:fuzzyroutines.properties.SampledFuzzyProperties.isExact"
@@ -2441,10 +3190,14 @@ sourceHash = "sha256:7290464d47af683bf22fcf0ad06d741a10b43c3f08222e67cd9d35fae1d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.SampledFuzzyProperties.isExact.md"
+sourceHash = "sha256:7290464d47af683bf22fcf0ad06d741a10b43c3f08222e67cd9d35fae1d444be"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.SampledFuzzyProperties.isExact.md"
+sourceHash = "sha256:7290464d47af683bf22fcf0ad06d741a10b43c3f08222e67cd9d35fae1d444be"
 
 [[units]]
 id = "symbol:fuzzyroutines.relations.ComparisonDomain"
@@ -2454,10 +3207,14 @@ sourceHash = "sha256:fa81f3c6b5028deb4ef3c48a41a2a2a39954996dfecfc39cf5d051611ec
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.ComparisonDomain.md"
+sourceHash = "sha256:fa81f3c6b5028deb4ef3c48a41a2a2a39954996dfecfc39cf5d051611ecabe7b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.ComparisonDomain.md"
+sourceHash = "sha256:fa81f3c6b5028deb4ef3c48a41a2a2a39954996dfecfc39cf5d051611ecabe7b"
 
 [[units]]
 id = "symbol:fuzzyroutines.relations.ComparisonDomain.ValidateWithin"
@@ -2467,10 +3224,14 @@ sourceHash = "sha256:7402314f08061f31e3bde325fee25bdf888f73dc1fe3748024d7f09916a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.ComparisonDomain.ValidateWithin.md"
+sourceHash = "sha256:7402314f08061f31e3bde325fee25bdf888f73dc1fe3748024d7f09916af4f12"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.ComparisonDomain.ValidateWithin.md"
+sourceHash = "sha256:7402314f08061f31e3bde325fee25bdf888f73dc1fe3748024d7f09916af4f12"
 
 [[units]]
 id = "symbol:fuzzyroutines.relations.ComparisonPolicy"
@@ -2480,10 +3241,14 @@ sourceHash = "sha256:d68a56234c1e0f841318e638bfb1b56fd3181ffc4cb437a2cc06df5602a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.ComparisonPolicy.md"
+sourceHash = "sha256:d68a56234c1e0f841318e638bfb1b56fd3181ffc4cb437a2cc06df5602ace5e6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.ComparisonPolicy.md"
+sourceHash = "sha256:d68a56234c1e0f841318e638bfb1b56fd3181ffc4cb437a2cc06df5602ace5e6"
 
 [[units]]
 id = "symbol:fuzzyroutines.relations.ComparisonPolicy.Equal"
@@ -2493,10 +3258,14 @@ sourceHash = "sha256:0dc5ecd8a5cf371a98d9dab1fbeff119bc1b21d90eb05d07f604c1809e6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.ComparisonPolicy.Equal.md"
+sourceHash = "sha256:0dc5ecd8a5cf371a98d9dab1fbeff119bc1b21d90eb05d07f604c1809e6ec730"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.ComparisonPolicy.Equal.md"
+sourceHash = "sha256:0dc5ecd8a5cf371a98d9dab1fbeff119bc1b21d90eb05d07f604c1809e6ec730"
 
 [[units]]
 id = "symbol:fuzzyroutines.relations.ComparisonPolicy.Included"
@@ -2506,10 +3275,14 @@ sourceHash = "sha256:7d0684f26457c153127a4169823a07ef35eb0bbd5660cafa66fbeea36dd
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.ComparisonPolicy.Included.md"
+sourceHash = "sha256:7d0684f26457c153127a4169823a07ef35eb0bbd5660cafa66fbeea36dd69b1e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.ComparisonPolicy.Included.md"
+sourceHash = "sha256:7d0684f26457c153127a4169823a07ef35eb0bbd5660cafa66fbeea36dd69b1e"
 
 [[units]]
 id = "symbol:fuzzyroutines.relations.EqualOnDomain"
@@ -2519,10 +3292,14 @@ sourceHash = "sha256:b8bc2cb7f8a282433fbb2b722de4e6f405a59f48b62a903ff5f0c9d0c10
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.EqualOnDomain.md"
+sourceHash = "sha256:b8bc2cb7f8a282433fbb2b722de4e6f405a59f48b62a903ff5f0c9d0c10e6378"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.EqualOnDomain.md"
+sourceHash = "sha256:b8bc2cb7f8a282433fbb2b722de4e6f405a59f48b62a903ff5f0c9d0c10e6378"
 
 [[units]]
 id = "symbol:fuzzyroutines.relations.IncludedOnDomain"
@@ -2532,10 +3309,15 @@ sourceHash = "sha256:7ff99109e4afac7419058976f735c68acf58716e0bc278565894448008e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.IncludedOnDomain.md"
+sourceHash = "sha256:7ff99109e4afac7419058976f735c68acf58716e0bc278565894448008ef7807"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.IncludedOnDomain.md"
+sourceHash = "sha256:7ff99109e4afac7419058976f735c68acf58716e0bc278565894448008ef7807"
+
 [[units]]
 id = "symbol:fuzzyroutines.membership.MembershipCallable"
 kind = "symbol"
@@ -2544,11 +3326,14 @@ sourceHash = "sha256:73f1a324a0c31f5430a1e2e707c266b87fde40137eed1fb09865cd2adc5
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipCallable.md"
+sourceHash = "sha256:73f1a324a0c31f5430a1e2e707c266b87fde40137eed1fb09865cd2adc567ebf"
 
 [units.translations.zh-CN]
-state = "missing"
-
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipCallable.md"
+sourceHash = "sha256:73f1a324a0c31f5430a1e2e707c266b87fde40137eed1fb09865cd2adc567ebf"
 
 [[units]]
 id = "symbol:fuzzyroutines.Bell"
@@ -2558,10 +3343,14 @@ sourceHash = "sha256:832edaf9cf8b105c4218049c40b74d9b1ff3e9d8f182523c53820d93dfe
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Bell.md"
+sourceHash = "sha256:832edaf9cf8b105c4218049c40b74d9b1ff3e9d8f182523c53820d93dfe89ae0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Bell.md"
+sourceHash = "sha256:832edaf9cf8b105c4218049c40b74d9b1ff3e9d8f182523c53820d93dfe89ae0"
 
 [[units]]
 id = "symbol:fuzzyroutines.Gaussian"
@@ -2571,10 +3360,14 @@ sourceHash = "sha256:282667a1eb27c9787918c3770c9dbe928a4d4fb671a664dbe8c41baf27a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Gaussian.md"
+sourceHash = "sha256:282667a1eb27c9787918c3770c9dbe928a4d4fb671a664dbe8c41baf27a109aa"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Gaussian.md"
+sourceHash = "sha256:282667a1eb27c9787918c3770c9dbe928a4d4fb671a664dbe8c41baf27a109aa"
 
 [[units]]
 id = "symbol:fuzzyroutines.HarringtonDesirability"
@@ -2584,10 +3377,14 @@ sourceHash = "sha256:8f8fc7c263762e55ccdbe5dd6ca9b71cad38c1b705fd32954a152f7080c
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.HarringtonDesirability.md"
+sourceHash = "sha256:8f8fc7c263762e55ccdbe5dd6ca9b71cad38c1b705fd32954a152f7080c6daf2"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.HarringtonDesirability.md"
+sourceHash = "sha256:8f8fc7c263762e55ccdbe5dd6ca9b71cad38c1b705fd32954a152f7080c6daf2"
 
 [[units]]
 id = "symbol:fuzzyroutines.Hyperbolic"
@@ -2597,10 +3394,14 @@ sourceHash = "sha256:92d1f0c78f74ac112cc107db171de032b0bfd19878f3debdf03f31b7dc5
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Hyperbolic.md"
+sourceHash = "sha256:92d1f0c78f74ac112cc107db171de032b0bfd19878f3debdf03f31b7dc5b8da4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Hyperbolic.md"
+sourceHash = "sha256:92d1f0c78f74ac112cc107db171de032b0bfd19878f3debdf03f31b7dc5b8da4"
 
 [[units]]
 id = "symbol:fuzzyroutines.Logistic"
@@ -2610,10 +3411,14 @@ sourceHash = "sha256:923f01002c666c3b154ad67cbabbcc605efee2d6b494a1e78b30259c9b6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Logistic.md"
+sourceHash = "sha256:923f01002c666c3b154ad67cbabbcc605efee2d6b494a1e78b30259c9b651c1e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Logistic.md"
+sourceHash = "sha256:923f01002c666c3b154ad67cbabbcc605efee2d6b494a1e78b30259c9b651c1e"
 
 [[units]]
 id = "symbol:fuzzyroutines.MembershipCallable"
@@ -2623,23 +3428,31 @@ sourceHash = "sha256:cd36f745573e6139f1293efaea48733801993480f4cdb4fa1762a60a3e3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipCallable.md"
+sourceHash = "sha256:cd36f745573e6139f1293efaea48733801993480f4cdb4fa1762a60a3e3cb305"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipCallable.md"
+sourceHash = "sha256:cd36f745573e6139f1293efaea48733801993480f4cdb4fa1762a60a3e3cb305"
 
 [[units]]
 id = "symbol:fuzzyroutines.MembershipFunction"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:8592603c9fbc0275f39d07fdc28043e85e216ddc1d0326fd737aaaac98ec5f5d"
+sourceHash = "sha256:79ec75626dbc4c452522f7d0db485290dcff8d34dc8e6f224d475fb970632a4b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipFunction.md"
+sourceHash = "sha256:79ec75626dbc4c452522f7d0db485290dcff8d34dc8e6f224d475fb970632a4b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipFunction.md"
+sourceHash = "sha256:79ec75626dbc4c452522f7d0db485290dcff8d34dc8e6f224d475fb970632a4b"
 
 [[units]]
 id = "symbol:fuzzyroutines.MembershipScalar"
@@ -2649,10 +3462,14 @@ sourceHash = "sha256:6b5ec5792357a433f282bdc88419042b646090628dd10742b65e31cb163
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipScalar.md"
+sourceHash = "sha256:6b5ec5792357a433f282bdc88419042b646090628dd10742b65e31cb163d95d8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipScalar.md"
+sourceHash = "sha256:6b5ec5792357a433f282bdc88419042b646090628dd10742b65e31cb163d95d8"
 
 [[units]]
 id = "symbol:fuzzyroutines.SShoulder"
@@ -2662,10 +3479,14 @@ sourceHash = "sha256:5721ca93afb5dd6e3f3473c76156bdea6b5e4e82335e241a72746a5cd46
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.SShoulder.md"
+sourceHash = "sha256:5721ca93afb5dd6e3f3473c76156bdea6b5e4e82335e241a72746a5cd46730a4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.SShoulder.md"
+sourceHash = "sha256:5721ca93afb5dd6e3f3473c76156bdea6b5e4e82335e241a72746a5cd46730a4"
 
 [[units]]
 id = "symbol:fuzzyroutines.Trapezoid"
@@ -2675,10 +3496,14 @@ sourceHash = "sha256:09a08f7263b2b84038dce520c85c06e0722248b18eccb28ae4376ce065a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Trapezoid.md"
+sourceHash = "sha256:09a08f7263b2b84038dce520c85c06e0722248b18eccb28ae4376ce065a1877a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Trapezoid.md"
+sourceHash = "sha256:09a08f7263b2b84038dce520c85c06e0722248b18eccb28ae4376ce065a1877a"
 
 [[units]]
 id = "symbol:fuzzyroutines.Triangle"
@@ -2688,10 +3513,14 @@ sourceHash = "sha256:af8829f7c333c896ec2715a5ccc4bf289a5c241e1c48b6ec150adb6c7bd
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.Triangle.md"
+sourceHash = "sha256:af8829f7c333c896ec2715a5ccc4bf289a5c241e1c48b6ec150adb6c7bd97f94"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.Triangle.md"
+sourceHash = "sha256:af8829f7c333c896ec2715a5ccc4bf289a5c241e1c48b6ec150adb6c7bd97f94"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.MembershipScalar"
@@ -2701,10 +3530,14 @@ sourceHash = "sha256:ef9a8bb2f9f79e362679d96fc2d494231773bc40f588b74a6aedc902999
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipScalar.md"
+sourceHash = "sha256:ef9a8bb2f9f79e362679d96fc2d494231773bc40f588b74a6aedc90299911f8e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipScalar.md"
+sourceHash = "sha256:ef9a8bb2f9f79e362679d96fc2d494231773bc40f588b74a6aedc90299911f8e"
 
 [[units]]
 id = "page:guides"
@@ -2714,10 +3547,14 @@ sourceHash = "sha256:ec221b2bc213c0962c9d2d350fa9318e0df37c80c950bb47e51bc2e9f7d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/index.md"
+sourceHash = "sha256:ec221b2bc213c0962c9d2d350fa9318e0df37c80c950bb47e51bc2e9f7d12674"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/index.md"
+sourceHash = "sha256:ec221b2bc213c0962c9d2d350fa9318e0df37c80c950bb47e51bc2e9f7d12674"
 
 [[units]]
 id = "page:guides.alarm"
@@ -2727,10 +3564,14 @@ sourceHash = "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e9817
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/alarm.md"
+sourceHash = "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e981737593"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/alarm.md"
+sourceHash = "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e981737593"
 
 [[units]]
 id = "page:guides.alpha-cuts"
@@ -2740,10 +3581,14 @@ sourceHash = "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/alpha-cuts.md"
+sourceHash = "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9f03d5"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/alpha-cuts.md"
+sourceHash = "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9f03d5"
 
 [[units]]
 id = "page:guides.api-recipes"
@@ -2753,10 +3598,14 @@ sourceHash = "sha256:6c9d01e1983d0b6081a4a944c3cd2ec357e076cb4b4ab42556ec50ee1eb
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/api-recipes.md"
+sourceHash = "sha256:6c9d01e1983d0b6081a4a944c3cd2ec357e076cb4b4ab42556ec50ee1eb50654"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/api-recipes.md"
+sourceHash = "sha256:6c9d01e1983d0b6081a4a944c3cd2ec357e076cb4b4ab42556ec50ee1eb50654"
 
 [[units]]
 id = "page:guides.centroid"
@@ -2766,10 +3615,14 @@ sourceHash = "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/centroid.md"
+sourceHash = "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab64cd01"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/centroid.md"
+sourceHash = "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab64cd01"
 
 [[units]]
 id = "page:guides.custom"
@@ -2779,10 +3632,14 @@ sourceHash = "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/custom.md"
+sourceHash = "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc0498a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/custom.md"
+sourceHash = "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc0498a"
 
 [[units]]
 id = "page:guides.figures"
@@ -2792,10 +3649,14 @@ sourceHash = "sha256:53ab89fd33a660ecf9651a659c6c1d73fc3bcd1e3b5cf0195476a318441
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/figures.md"
+sourceHash = "sha256:53ab89fd33a660ecf9651a659c6c1d73fc3bcd1e3b5cf0195476a31844112b19"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/figures.md"
+sourceHash = "sha256:53ab89fd33a660ecf9651a659c6c1d73fc3bcd1e3b5cf0195476a31844112b19"
 
 [[units]]
 id = "page:guides.membership-families"
@@ -2805,10 +3666,14 @@ sourceHash = "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f2428
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/membership-families.md"
+sourceHash = "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f24286ee00"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/membership-families.md"
+sourceHash = "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f24286ee00"
 
 [[units]]
 id = "page:guides.risk"
@@ -2818,10 +3683,14 @@ sourceHash = "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/risk.md"
+sourceHash = "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311bac4e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/risk.md"
+sourceHash = "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311bac4e"
 
 [[units]]
 id = "page:guides.scale-audit"
@@ -2831,10 +3700,14 @@ sourceHash = "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae8
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/scale-audit.md"
+sourceHash = "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae884f4a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/scale-audit.md"
+sourceHash = "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae884f4a"
 
 [[units]]
 id = "page:guides.sensors"
@@ -2844,10 +3717,14 @@ sourceHash = "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/sensors.md"
+sourceHash = "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe308c1f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/sensors.md"
+sourceHash = "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe308c1f"
 
 [[units]]
 id = "page:guides.temperature"
@@ -2857,23 +3734,31 @@ sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/temperature.md"
+sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0ecc1c8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/temperature.md"
+sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0ecc1c8"
 
 [[units]]
 id = "page:quick-start"
 kind = "page"
 sourcePath = "docs/site/content/en/quick-start.md"
-sourceHash = "sha256:80453d196a050bd4d42fdca05bf42ed6cd700bf739fac982eaf17080ab4e348c"
+sourceHash = "sha256:7c1b5ce1e4a525a8140169843d2909be0db80c5ae055b17d8b25a01be98b7d39"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/quick-start.md"
+sourceHash = "sha256:7c1b5ce1e4a525a8140169843d2909be0db80c5ae055b17d8b25a01be98b7d39"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/quick-start.md"
+sourceHash = "sha256:7c1b5ce1e4a525a8140169843d2909be0db80c5ae055b17d8b25a01be98b7d39"
 
 [[units]]
 id = "page:guides.errors"
@@ -2883,10 +3768,14 @@ sourceHash = "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c24
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/errors.md"
+sourceHash = "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c241ddb1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/errors.md"
+sourceHash = "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c241ddb1"
 
 [[units]]
 id = "page:guides.example-index"
@@ -2896,10 +3785,14 @@ sourceHash = "sha256:b51022ed8446aacbc6376d779dffdc63a02168bac5c79ae4c4e00a0c88e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/example-index.md"
+sourceHash = "sha256:b51022ed8446aacbc6376d779dffdc63a02168bac5c79ae4c4e00a0c88e87931"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/example-index.md"
+sourceHash = "sha256:b51022ed8446aacbc6376d779dffdc63a02168bac5c79ae4c4e00a0c88e87931"
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -2909,10 +3802,14 @@ sourceHash = "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/historical-recipes.md"
+sourceHash = "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de688d41"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/historical-recipes.md"
+sourceHash = "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de688d41"
 
 [[units]]
 id = "page:guides.operators"
@@ -2922,10 +3819,14 @@ sourceHash = "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/operators.md"
+sourceHash = "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3225f5"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/operators.md"
+sourceHash = "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3225f5"
 
 [[units]]
 id = "page:guides.results"
@@ -2935,10 +3836,14 @@ sourceHash = "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/results.md"
+sourceHash = "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01081c6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/results.md"
+sourceHash = "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01081c6"
 
 [[units]]
 id = "page:guides.workflow"
@@ -2948,7 +3853,521 @@ sourceHash = "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/workflow.md"
+sourceHash = "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3f2356"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/workflow.md"
+sourceHash = "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3f2356"
+
+[[units]]
+id = "page:mathematics.alpha-cuts"
+kind = "page"
+sourcePath = "docs/mathematics/alpha-cuts.md"
+sourceHash = "sha256:126c9ce07b5ce5a1647364910bae4e68e66df0624ad23f0979d0527c462ded5c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/alpha-cuts.md"
+sourceHash = "sha256:126c9ce07b5ce5a1647364910bae4e68e66df0624ad23f0979d0527c462ded5c"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/alpha-cuts.md"
+sourceHash = "sha256:126c9ce07b5ce5a1647364910bae4e68e66df0624ad23f0979d0527c462ded5c"
+
+[[units]]
+id = "page:mathematics.centroid-defuzzification"
+kind = "page"
+sourcePath = "docs/mathematics/centroid-defuzzification.md"
+sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/centroid-defuzzification.md"
+sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/centroid-defuzzification.md"
+sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
+
+[[units]]
+id = "page:mathematics.finite-number-policy"
+kind = "page"
+sourcePath = "docs/mathematics/finite-number-policy.md"
+sourceHash = "sha256:b540b154c6b228eb8b8e15ff0cc36bfaf380121f022ad4b345e4313f4aa1f8eb"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/finite-number-policy.md"
+sourceHash = "sha256:b540b154c6b228eb8b8e15ff0cc36bfaf380121f022ad4b345e4313f4aa1f8eb"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/finite-number-policy.md"
+sourceHash = "sha256:b540b154c6b228eb8b8e15ff0cc36bfaf380121f022ad4b345e4313f4aa1f8eb"
+
+[[units]]
+id = "page:mathematics.fuzzy-set-convexity"
+kind = "page"
+sourcePath = "docs/mathematics/fuzzy-set-convexity.md"
+sourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/fuzzy-set-convexity.md"
+sourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/fuzzy-set-convexity.md"
+sourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a"
+
+[[units]]
+id = "page:mathematics.fuzzy-set-normalization"
+kind = "page"
+sourcePath = "docs/mathematics/fuzzy-set-normalization.md"
+sourceHash = "sha256:f348d817cd4dd739c47712fa2c2010151af8a2acad012ec45b8a1eb7721cf4fc"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/fuzzy-set-normalization.md"
+sourceHash = "sha256:f348d817cd4dd739c47712fa2c2010151af8a2acad012ec45b8a1eb7721cf4fc"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/fuzzy-set-normalization.md"
+sourceHash = "sha256:f348d817cd4dd739c47712fa2c2010151af8a2acad012ec45b8a1eb7721cf4fc"
+
+[[units]]
+id = "page:mathematics.fuzzy-set-operations"
+kind = "page"
+sourcePath = "docs/mathematics/fuzzy-set-operations.md"
+sourceHash = "sha256:20b5162f0aafce7787447062f7cb76c66086497188b1328a96b208d6c4786a29"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/fuzzy-set-operations.md"
+sourceHash = "sha256:20b5162f0aafce7787447062f7cb76c66086497188b1328a96b208d6c4786a29"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/fuzzy-set-operations.md"
+sourceHash = "sha256:20b5162f0aafce7787447062f7cb76c66086497188b1328a96b208d6c4786a29"
+
+[[units]]
+id = "page:mathematics.fuzzy-set-relations"
+kind = "page"
+sourcePath = "docs/mathematics/fuzzy-set-relations.md"
+sourceHash = "sha256:d3801584d3d407fa9d6418065504e8c4e8e1c9d5bcddf7ebfe40274c44ab4f1d"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/fuzzy-set-relations.md"
+sourceHash = "sha256:d3801584d3d407fa9d6418065504e8c4e8e1c9d5bcddf7ebfe40274c44ab4f1d"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/fuzzy-set-relations.md"
+sourceHash = "sha256:d3801584d3d407fa9d6418065504e8c4e8e1c9d5bcddf7ebfe40274c44ab4f1d"
+
+[[units]]
+id = "page:mathematics.linguistic-term-model"
+kind = "page"
+sourcePath = "docs/mathematics/linguistic-term-model.md"
+sourceHash = "sha256:43a316c52cf6ace0a90f6a9e4bb12c750d2f0b76dd11d5036af28437d01edada"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/linguistic-term-model.md"
+sourceHash = "sha256:43a316c52cf6ace0a90f6a9e4bb12c750d2f0b76dd11d5036af28437d01edada"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/linguistic-term-model.md"
+sourceHash = "sha256:43a316c52cf6ace0a90f6a9e4bb12c750d2f0b76dd11d5036af28437d01edada"
+
+[[units]]
+id = "page:mathematics.membership-function-contracts"
+kind = "page"
+sourcePath = "docs/mathematics/membership-function-contracts.md"
+sourceHash = "sha256:e12bce6edda6f8cebc01f20111c4f9fe1b9728b748b555dcd3007ac0c2b27053"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/membership-function-contracts.md"
+sourceHash = "sha256:e12bce6edda6f8cebc01f20111c4f9fe1b9728b748b555dcd3007ac0c2b27053"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/membership-function-contracts.md"
+sourceHash = "sha256:e12bce6edda6f8cebc01f20111c4f9fe1b9728b748b555dcd3007ac0c2b27053"
+
+[[units]]
+id = "page:mathematics.model"
+kind = "page"
+sourcePath = "docs/MATHEMATICAL_MODEL.md"
+sourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/model.md"
+sourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/model.md"
+sourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
+
+[[units]]
+id = "page:mathematics.numerical-edge-policy"
+kind = "page"
+sourcePath = "docs/mathematics/numerical-edge-policy.md"
+sourceHash = "sha256:8d87163a6dbccef9a8703a6eadf36ca18488e06f00a90e183984ed98329799cb"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/numerical-edge-policy.md"
+sourceHash = "sha256:8d87163a6dbccef9a8703a6eadf36ca18488e06f00a90e183984ed98329799cb"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/numerical-edge-policy.md"
+sourceHash = "sha256:8d87163a6dbccef9a8703a6eadf36ca18488e06f00a90e183984ed98329799cb"
+
+[[units]]
+id = "page:mathematics.parabolic-negation-derivation"
+kind = "page"
+sourcePath = "docs/mathematics/parabolic-negation-derivation.md"
+sourceHash = "sha256:cc84da31c9b4780bd2af15ce3cb756a3e8dfceab555860aa2c89e2a75ed048e7"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/parabolic-negation-derivation.md"
+sourceHash = "sha256:cc84da31c9b4780bd2af15ce3cb756a3e8dfceab555860aa2c89e2a75ed048e7"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/parabolic-negation-derivation.md"
+sourceHash = "sha256:cc84da31c9b4780bd2af15ce3cb756a3e8dfceab555860aa2c89e2a75ed048e7"
+
+[[units]]
+id = "page:mathematics.source-algorithm-invariants"
+kind = "page"
+sourcePath = "docs/mathematics/source-algorithm-invariants.md"
+sourceHash = "sha256:ea8eab9de491df209ef41a4cae121eed67a46049cfbdf9b264f55fc0cbfe25a4"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/source-algorithm-invariants.md"
+sourceHash = "sha256:ea8eab9de491df209ef41a4cae121eed67a46049cfbdf9b264f55fc0cbfe25a4"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/source-algorithm-invariants.md"
+sourceHash = "sha256:ea8eab9de491df209ef41a4cae121eed67a46049cfbdf9b264f55fc0cbfe25a4"
+
+[[units]]
+id = "page:mathematics.universe-support-contract"
+kind = "page"
+sourcePath = "docs/mathematics/universe-support-contract.md"
+sourceHash = "sha256:f7cdde7d2d4e60ab8d7e13cf95381f783eda89e27628e9c05a28ad9707ad0954"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/mathematics/universe-support-contract.md"
+sourceHash = "sha256:f7cdde7d2d4e60ab8d7e13cf95381f783eda89e27628e9c05a28ad9707ad0954"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/mathematics/universe-support-contract.md"
+sourceHash = "sha256:f7cdde7d2d4e60ab8d7e13cf95381f783eda89e27628e9c05a28ad9707ad0954"
+
+[[units]]
+id = "page:migration.1.0.3-to-2.0.0"
+kind = "page"
+sourcePath = "docs/migration/1.0.3-to-2.0.0.md"
+sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/migration/1.0.3-to-2.0.0.md"
+sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/migration/1.0.3-to-2.0.0.md"
+sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+
+[[units]]
+id = "page:migration.historical-to-modern"
+kind = "page"
+sourcePath = "docs/migration/historical-to-modern.md"
+sourceHash = "sha256:f42e5330774598e2e771473f047cc77c82aea2db207f82164270c6430d5b2360"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/migration/historical-to-modern.md"
+sourceHash = "sha256:f42e5330774598e2e771473f047cc77c82aea2db207f82164270c6430d5b2360"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/migration/historical-to-modern.md"
+sourceHash = "sha256:f42e5330774598e2e771473f047cc77c82aea2db207f82164270c6430d5b2360"
+
+[[units]]
+id = "module:fuzzyroutines"
+kind = "module"
+sourcePath = "fuzzyroutines/__init__.py"
+sourceHash = "sha256:7498f92d4ee713f0c6203cea02c65661d8d6e54a09a2c1b22544c527e8751ac8"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.md"
+sourceHash = "sha256:7498f92d4ee713f0c6203cea02c65661d8d6e54a09a2c1b22544c527e8751ac8"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.md"
+sourceHash = "sha256:7498f92d4ee713f0c6203cea02c65661d8d6e54a09a2c1b22544c527e8751ac8"
+
+[[units]]
+id = "module:fuzzyroutines.FuzzyRoutines"
+kind = "module"
+sourcePath = "fuzzyroutines/FuzzyRoutines.py"
+sourceHash = "sha256:8b4af731bd7f613019f442261c9c1cfb3f22d86527566c467d9ac30296a32e07"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.FuzzyRoutines.md"
+sourceHash = "sha256:8b4af731bd7f613019f442261c9c1cfb3f22d86527566c467d9ac30296a32e07"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.FuzzyRoutines.md"
+sourceHash = "sha256:8b4af731bd7f613019f442261c9c1cfb3f22d86527566c467d9ac30296a32e07"
+
+[[units]]
+id = "module:fuzzyroutines.alphacuts"
+kind = "module"
+sourcePath = "fuzzyroutines/alphacuts.py"
+sourceHash = "sha256:4d88e6ac30cb505b67e92fa96467edfa7c2785438a79d623828baf516a82264f"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.alphacuts.md"
+sourceHash = "sha256:4d88e6ac30cb505b67e92fa96467edfa7c2785438a79d623828baf516a82264f"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.alphacuts.md"
+sourceHash = "sha256:4d88e6ac30cb505b67e92fa96467edfa7c2785438a79d623828baf516a82264f"
+
+[[units]]
+id = "module:fuzzyroutines.defuzzification"
+kind = "module"
+sourcePath = "fuzzyroutines/defuzzification.py"
+sourceHash = "sha256:4b96b2e8605994707d1b488652d0554f93caa40c1ed077fb35036c95cc21af57"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.md"
+sourceHash = "sha256:4b96b2e8605994707d1b488652d0554f93caa40c1ed077fb35036c95cc21af57"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.md"
+sourceHash = "sha256:4b96b2e8605994707d1b488652d0554f93caa40c1ed077fb35036c95cc21af57"
+
+[[units]]
+id = "module:fuzzyroutines.domain"
+kind = "module"
+sourcePath = "fuzzyroutines/domain.py"
+sourceHash = "sha256:a0d7b9fde8473453c0f294811e6e452f533954b24fefdc69115cd9a3c5ef19fc"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.domain.md"
+sourceHash = "sha256:a0d7b9fde8473453c0f294811e6e452f533954b24fefdc69115cd9a3c5ef19fc"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.domain.md"
+sourceHash = "sha256:a0d7b9fde8473453c0f294811e6e452f533954b24fefdc69115cd9a3c5ef19fc"
+
+[[units]]
+id = "module:fuzzyroutines.exceptions"
+kind = "module"
+sourcePath = "fuzzyroutines/exceptions.py"
+sourceHash = "sha256:3102490786fccb08169491532eb628d0c91fdaa3ef226960ea7d6ca78f8358b5"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.exceptions.md"
+sourceHash = "sha256:3102490786fccb08169491532eb628d0c91fdaa3ef226960ea7d6ca78f8358b5"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.exceptions.md"
+sourceHash = "sha256:3102490786fccb08169491532eb628d0c91fdaa3ef226960ea7d6ca78f8358b5"
+
+[[units]]
+id = "module:fuzzyroutines.fuzzysets"
+kind = "module"
+sourcePath = "fuzzyroutines/fuzzysets.py"
+sourceHash = "sha256:4c2b2a59efc196f10536851dedac8c22789793a88186ad520fa58fa3c927c1f3"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.fuzzysets.md"
+sourceHash = "sha256:4c2b2a59efc196f10536851dedac8c22789793a88186ad520fa58fa3c927c1f3"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.fuzzysets.md"
+sourceHash = "sha256:4c2b2a59efc196f10536851dedac8c22789793a88186ad520fa58fa3c927c1f3"
+
+[[units]]
+id = "module:fuzzyroutines.linguistic"
+kind = "module"
+sourcePath = "fuzzyroutines/linguistic.py"
+sourceHash = "sha256:96cb9619b6f611c210cfdb691e43e98710498a7087fb344ae02d1362763ac061"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.linguistic.md"
+sourceHash = "sha256:96cb9619b6f611c210cfdb691e43e98710498a7087fb344ae02d1362763ac061"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.linguistic.md"
+sourceHash = "sha256:96cb9619b6f611c210cfdb691e43e98710498a7087fb344ae02d1362763ac061"
+
+[[units]]
+id = "module:fuzzyroutines.membership"
+kind = "module"
+sourcePath = "fuzzyroutines/membership.py"
+sourceHash = "sha256:4fe6efe8eb3ba11dbc15cec23e038404f677b39a607eee972d0f9836e527bb39"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.membership.md"
+sourceHash = "sha256:4fe6efe8eb3ba11dbc15cec23e038404f677b39a607eee972d0f9836e527bb39"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.md"
+sourceHash = "sha256:4fe6efe8eb3ba11dbc15cec23e038404f677b39a607eee972d0f9836e527bb39"
+
+[[units]]
+id = "module:fuzzyroutines.operators"
+kind = "module"
+sourcePath = "fuzzyroutines/operators.py"
+sourceHash = "sha256:eb899d29e91d19e36c5cb2cb0eaf5b0cdbd117d2be4565259f646e4af6e19c5b"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.operators.md"
+sourceHash = "sha256:eb899d29e91d19e36c5cb2cb0eaf5b0cdbd117d2be4565259f646e4af6e19c5b"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.operators.md"
+sourceHash = "sha256:eb899d29e91d19e36c5cb2cb0eaf5b0cdbd117d2be4565259f646e4af6e19c5b"
+
+[[units]]
+id = "module:fuzzyroutines.properties"
+kind = "module"
+sourcePath = "fuzzyroutines/properties.py"
+sourceHash = "sha256:7c989f09299cd314c66cc9a70d48d0e4cfc44d10eb3046f18c5b22b0bd9805e7"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.properties.md"
+sourceHash = "sha256:7c989f09299cd314c66cc9a70d48d0e4cfc44d10eb3046f18c5b22b0bd9805e7"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.properties.md"
+sourceHash = "sha256:7c989f09299cd314c66cc9a70d48d0e4cfc44d10eb3046f18c5b22b0bd9805e7"
+
+[[units]]
+id = "module:fuzzyroutines.relations"
+kind = "module"
+sourcePath = "fuzzyroutines/relations.py"
+sourceHash = "sha256:708b5dcd6e6626a6d8ca04b4f99535e62e6f6129c300032c0612df93a637fbd0"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.relations.md"
+sourceHash = "sha256:708b5dcd6e6626a6d8ca04b4f99535e62e6f6129c300032c0612df93a637fbd0"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.md"
+sourceHash = "sha256:708b5dcd6e6626a6d8ca04b4f99535e62e6f6129c300032c0612df93a637fbd0"
+
+[[units]]
+id = "page:contracts.compatibility"
+kind = "page"
+sourcePath = "docs/COMPATIBILITY.md"
+sourceHash = "sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6512b9"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/contracts/compatibility.md"
+sourceHash = "sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6512b9"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/contracts/compatibility.md"
+sourceHash = "sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6512b9"
+
+[[units]]
+id = "page:contracts.public-typing"
+kind = "page"
+sourcePath = "docs/public-typing.md"
+sourceHash = "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/contracts/public-typing.md"
+sourceHash = "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/contracts/public-typing.md"
+sourceHash = "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d"

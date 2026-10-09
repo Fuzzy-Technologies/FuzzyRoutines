@@ -5,11 +5,12 @@ SPDX-License-Identifier: Apache-2.0
 
 # Packaging and release notes
 
-## 2.0.0 development baseline
+## 2.0.0 release candidate
 
 The build baseline is intentionally separate from the mathematical
 modernisation work. It adopts the PEP 517/518 build interface and stores the
-canonical development version, `2.0.0.dev0`, in `pyproject.toml`.
+candidate version, `2.0.0`, in `pyproject.toml`. Publication remains subject
+to final human acceptance and the protected release workflow.
 
 The [version decision](release-version-decision.md) reaffirms `2.0.0` as the
 first stable target under ADR-0006, based on the CPython support floor and
@@ -39,7 +40,7 @@ requirements and a new output directory:
 python -m pip install -r requirements-build.txt
 python -m tools.reproducible_artifacts --output-directory dist
 (cd dist && sha256sum --check SHA256SUMS)
-python -m pip install --force-reinstall dist/fuzzyroutines-2.0.0.dev0-py3-none-any.whl
+python -m pip install --force-reinstall dist/fuzzyroutines-2.0.0-py3-none-any.whl
 python -c "from fuzzyroutines.FuzzyRoutines import MFunction; print(MFunction('triangle', a=0, b=1, c=0.5))"
 python -m tools.check_license_headers
 ```

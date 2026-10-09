@@ -7,8 +7,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fuzzyroutines"
-version = "2.0.0.dev0"
-description = "Routines for fuzzy logic operators, fuzzy datasets, and fuzzy scales."
+version = "2.0.0"
+description = "Scalar fuzzy sets, membership functions, linguistic scales, and explicit fuzzy operators."
 readme = "README.md"
 requires-python = ">=3.13"
 license = "Apache-2.0"
@@ -17,7 +17,7 @@ authors = [
   {name = "Timur Gilmullin", email = "tim55667757@gmail.com"},
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Environment :: Console",
   "Intended Audience :: Science/Research",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",

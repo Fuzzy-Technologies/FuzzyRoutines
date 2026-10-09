@@ -24,7 +24,10 @@ No global epsilon is permitted. Each operation owns an explicit numerical contra
 
 A membership configuration is invalid when its required widths or ordered breakpoints are degenerate. Construction must raise ValueError before evaluation rather than rely on division by zero, a zero result, or a later cache failure.
 
-Centroid defuzzification has no value for a zero-area membership over its support. It must raise ValueError; returning a support midpoint, zero, NaN, infinity, or a cached predecessor is forbidden.
+Centroid defuzzification has no value when membership area on the declared
+integration domain is zero. It must raise `ValueError` (the modern
+`UndefinedResultError` preserves this catch contract); returning an interval
+midpoint, zero, NaN, infinity, or a cached predecessor is forbidden.
 
 Integration accuracy is an algorithm setting owned by the integration method. It is not a mutable membership-function configuration parameter and no hard-coded point count constitutes a correctness claim.
 

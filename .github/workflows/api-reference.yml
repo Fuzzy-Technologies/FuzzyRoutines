@@ -21,7 +21,7 @@ jobs:
   build-reference:
     name: Python 3.14 installed-package documentation
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
       - name: Check out repository
@@ -38,7 +38,17 @@ jobs:
         run: python tools/build_api_reference.py
 
       - name: Compose complete GitHub Pages site
-        run: python tools/compose_pages_site.py
+        run: python tools/compose_pages_site.py --locale-root _build/api-reference/locales
+
+      - name: Exercise static locale rendering boundaries
+        run: |
+          _build/api-reference/environment/bin/python -m pip install pytest
+          _build/api-reference/environment/bin/python -m pytest -q tests/test_locale_reference.py
+
+      - name: Compose explicitly labelled translation review preview
+        run: >-
+          python tools/compose_pages_site.py --locale-root _build/api-reference/locales
+          --include-drafts --output _build/pages/review
 
       - name: Record generated-file inventory
         shell: bash
@@ -58,13 +68,14 @@ jobs:
             _build/api-reference/build-evidence.json
             _build/api-reference/generated-files.txt
             _build/api-reference/site
+            _build/api-reference/locales/*/evidence.json
           if-no-files-found: error
 
       - name: Upload previewable Pages content
         uses: actions/upload-artifact@v4
         with:
           name: fuzzyroutines-pages-preview
-          path: _build/pages/site
+          path: _build/pages/review
           if-no-files-found: error
 
       - name: Upload official Pages artifact

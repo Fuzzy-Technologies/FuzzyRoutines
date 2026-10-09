@@ -1,0 +1,16 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
+返回有限坐标是否属于此离散区域。
+
+Args:
+    coordinate: 要检验的有限实数坐标。
+
+Returns:
+    `coordinate` 是 `points` 中的一个元素时返回 `True`。
+
+Raises:
+    TypeError: 坐标不是实数标量。
+    ValueError: 坐标不是有限值。

@@ -3,10 +3,13 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Extract explicitly closing same-repository issue references from PR text.
+"""Extract standalone closing directives from PR Markdown.
 
 The command reads `PR_BODY`, prints one deduplicated issue number per line,
 creates no artifacts, and returns zero even when no closing reference exists.
+Only standalone directive lines (optionally bulleted) count. Prose, quoted
+text, code blocks, and references after a directive's issue list never close
+additional tasks.
 """
 
 from __future__ import annotations
@@ -18,20 +21,45 @@ import sys
 from collections.abc import Iterable
 
 _CLOSING_CLAUSE = re.compile(
-    r"\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|implement(?:s|ed)?)\b(?P<tail>[^\n]*)",
+    r"^[ ]{0,3}(?:[-*+]\s+)?"
+    r"(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|implement(?:s|ed)?)"
+    r"\s*:?[ \t]+(?P<references>#[1-9][0-9]*"
+    r"(?:[ \t]*(?:,|and|&)[ \t]*#[1-9][0-9]*)*)"
+    r"(?=$|[ \t.;])",
     re.IGNORECASE,
 )
 _ISSUE_REF = re.compile(r"#(?P<number>[1-9][0-9]*)\b")
+_CODE_FENCE = re.compile(r"^[ ]{0,3}(?P<fence>`{3,}|~{3,})")
 
 
 def ExtractIssueNumbers(text: str) -> list[int]:
-    """Return unique issue numbers explicitly attached to a closing keyword."""
+    """Return unique issue numbers from explicit non-code closing directives."""
 
     seen: set[int] = set()
     result: list[int] = []
+    fenceMarker = ""
+    fenceLength = 0
 
-    for clause in _CLOSING_CLAUSE.finditer(text or ""):
-        for match in _ISSUE_REF.finditer(clause.group("tail")):
+    for line in (text or "").splitlines():
+        fenceMatch = _CODE_FENCE.match(line)
+        if fenceMatch:
+            marker = fenceMatch.group("fence")
+            if not fenceMarker:
+                fenceMarker, fenceLength = marker[0], len(marker)
+
+            elif (
+                marker[0] == fenceMarker
+                and len(marker) >= fenceLength
+                and not line[fenceMatch.end():].strip()
+            ):
+                fenceMarker = ""
+            continue
+        if fenceMarker:
+            continue
+        clause = _CLOSING_CLAUSE.match(line)
+        if clause is None:
+            continue
+        for match in _ISSUE_REF.finditer(clause.group("references")):
             number = int(match.group("number"))
             if number not in seen:
                 seen.add(number)

@@ -75,7 +75,7 @@ jobs:
           import fuzzyroutines
           from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
-          assert version("fuzzyroutines") == "2.0.0.dev0"
+          assert version("fuzzyroutines") == "2.0.0"
           assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzySet is not None
@@ -108,7 +108,7 @@ jobs:
           import fuzzyroutines
           from fuzzyroutines.FuzzyRoutines import FuzzyScale, MFunction
 
-          assert version("fuzzyroutines") == "2.0.0.dev0"
+          assert version("fuzzyroutines") == "2.0.0"
           assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzyScale is not None

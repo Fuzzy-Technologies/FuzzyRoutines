@@ -7,7 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 
 - Status: Contract reference for Tasks #9 and #67
 - Related ADR: [ADR-0002](../adr/0002-universe-support-semantics.md)
-- Current executable surface: `fuzzyroutines.FuzzyRoutines.FuzzySet`
+- Current executable surfaces: `fuzzyroutines.domain`,
+  `fuzzyroutines.properties`, and the historical
+  `fuzzyroutines.FuzzyRoutines.FuzzySet` adapter
 
 ## Canonical vocabulary
 
@@ -34,7 +36,7 @@ asserts positive support or support closure.
 
 Changing `FuzzySet.supportSet` must change the interval used by legacy
 defuzzification without changing the membership evaluator. The compatibility
-tests freeze this behavior until the facade delegates to the modern domain
+tests protect this behavior while the facade delegates to the modern domain
 model.
 
 ## Representation rule
@@ -77,8 +79,8 @@ getter and setter retain the historical tuple shape.
 `DeriveProperties(membershipFunction, universe)` returns one of two exact
 result types:
 
-- `ContinuousFuzzyProperties` uses analytical geometry declared by the known
-  `MFunction` family and represents sets as immutable unions of
+- `ContinuousFuzzyProperties` uses analytical geometry declared by a modern
+  `MembershipFunction` or a known historical `MFunction` family and represents sets as immutable unions of
   `ContinuousInterval` components;
 - `DiscreteFuzzyProperties` evaluates every coordinate in a declared
   `DiscreteUniverse`. In the discrete topology every subset is closed, so its

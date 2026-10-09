@@ -11,6 +11,9 @@ from tools.locale_documentation import (
     CanonicalHash,
     CanonicalUnit,
     DiscoverCanonicalUnits,
+    ProtectedApiContract,
+    ProtectedPageParts,
+    TranslationHash,
     ValidateLocales,
 )
 
@@ -96,6 +99,7 @@ zh-CN = "docs/i18n/glossaries/zh-CN.toml"
         body=sourceText,
     )
     sourceHash = CanonicalHash(unit)
+    translationHash = TranslationHash("# Русский перевод\n")
     records = ""
 
     if includeUnit:
@@ -114,12 +118,14 @@ zh-CN = "docs/i18n/glossaries/zh-CN.toml"
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "{sourceHash}"
+reviewedTranslationHash = "{translationHash}"
 reviewer = "editor"
 reviewedAt = "2026-09-24T00:00:00Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "{sourceHash}"
+reviewedTranslationHash = "{translationHash}"
 reviewer = "reviewer"
 reviewedAt = "2026-09-24T00:00:00Z"
 '''
@@ -153,6 +159,50 @@ def test_CurrentLocaleManifestsMatchCanonicalEnglishInventory():
     assert ValidateLocales(PROJECTROOT).diagnostics == ()
 
 
+def test_ReleaseGateRejectsMissingOrDraftTranslations(tmpPath):
+    """Ordinary development validation must not imply stable multilingual readiness."""
+
+    _PrepareFixture(tmpPath, ruState="draft")
+    assert not ValidateLocales(tmpPath).diagnostics
+    report = ValidateLocales(tmpPath, requireApproved=True)
+    assert any("ru release requires approved, got draft" in item for item in report.diagnostics)
+    assert any("zh-CN release requires approved, got missing" in item for item in report.diagnostics)
+
+
+def test_TranslationEditInvalidatesHumanReviewEvenWhenEnglishIsUnchanged(tmpPath):
+    """Approval must bind translated wording as well as its English source."""
+
+    _PrepareFixture(tmpPath, ruState="approved")
+    assert not ValidateLocales(tmpPath).diagnostics
+    translation = tmpPath / "docs/site/content/ru/index.md"
+    translation.write_text("# Изменённый перевод\n", encoding="utf-8")
+    report = ValidateLocales(tmpPath)
+    assert report.states["page:index"]["ru"] == "stale"
+    assert any("translation changed" in item for item in report.diagnostics)
+
+
+def test_TranslationProtectionDetectsChangedCodeAndFormulaButAllowsProse():
+    """A fluent translation must not silently alter executable examples or equations."""
+
+    source = "# English\nValue $x/2$\n\n$$\na+b\n$$\n\n```python\nvalue = 1\n```\n"
+    translated = source.replace("English", "Русский").replace("Value", "Значение")
+    assert ProtectedPageParts(source) == ProtectedPageParts(translated)
+    assert ProtectedPageParts(source) != ProtectedPageParts(translated.replace("x/2", "x/3"))
+    assert ProtectedPageParts(source) != ProtectedPageParts(translated.replace("value = 1", "value = 2"))
+
+
+def test_ApiTranslationProtectsIndentedExamplesAndEveryDocumentedField():
+    """Indented docstring examples and contract names need the same protection as pages."""
+
+    source = 'English.\n\nArgs:\n    **parameters: Input.\n\nAttributes:\n    value: Result.\n\nRaises:\n    ValueError: Invalid.\n\nExamples:\n    ```python\n    value = 1\n    ```\n'
+    translated = source.replace("English.", "Русский текст.").replace("Input.", "Параметры.")
+    assert ProtectedApiContract(source) == ProtectedApiContract(translated)
+    assert ProtectedApiContract(source) != ProtectedApiContract(translated.replace("**parameters:", "**параметры:"))
+    assert ProtectedApiContract(source) != ProtectedApiContract(translated.replace("ValueError:", "TypeError:"))
+    assert ProtectedPageParts(source) == ProtectedPageParts(translated)
+    assert ProtectedPageParts(source) != ProtectedPageParts(translated.replace("value = 1", "value = 2"))
+
+
 def test_CurrentGlossariesUseReviewedMathematicalTerminology():
     """Protect the reviewed Russian and Simplified Chinese terminology."""
 
@@ -165,7 +215,7 @@ def test_CurrentGlossariesUseReviewedMathematicalTerminology():
 
     for requiredTerm in (
         'preferred = "универсальное множество"',
-        'preferred = "носитель нечёткого множества"',
+        'preferred = "множество поддержки"',
         'preferred = "ядро нечёткого множества"',
         'preferred = "область интегрирования"',
     ):
@@ -282,6 +332,25 @@ mode = "authored"
     )
 
     assert CanonicalHash(originalUnit) != CanonicalHash(changedUnit)
+
+
+def test_ModuleOverviewHashIsOptInAndIndependentOfCallableInventory(tmpPath):
+    """Overview-only edits must invalidate translations without inventing API symbols."""
+
+    _PrepareFixture(tmpPath)
+    _Write(tmpPath / "docs/site/api-coverage.toml", 'schemaVersion = 1\n[[surfaces]]\nmodule = "fixture"\nsource = "fixture.py"\nmode = "authored"\n')
+    sourcePath = tmpPath / "fixture.py"
+    _Write(sourcePath, '"""Canonical overview."""\n\ndef Calculate():\n    """Return a value."""\n    return 1\n')
+    projectManifest = {"contentRoot": "docs/site/content", "apiCoverageManifest": "docs/site/api-coverage.toml", "packageNames": ["fixture"]}
+    defaultUnits = DiscoverCanonicalUnits(tmpPath, projectManifest)
+    assert all(unit.kind != "module" for unit in defaultUnits)
+    projectManifest["includeModuleDocstrings"] = True
+    originalUnits = {unit.identifier: unit for unit in DiscoverCanonicalUnits(tmpPath, projectManifest)}
+    assert {unit.identifier for unit in defaultUnits} == set(originalUnits) - {"module:fixture"}
+    sourcePath.write_text(sourcePath.read_text().replace("Canonical overview.", "Changed overview."))
+    changedUnits = {unit.identifier: unit for unit in DiscoverCanonicalUnits(tmpPath, projectManifest)}
+    assert CanonicalHash(originalUnits["module:fixture"]) != CanonicalHash(changedUnits["module:fixture"])
+    assert CanonicalHash(originalUnits["symbol:fixture.Calculate"]) == CanonicalHash(changedUnits["symbol:fixture.Calculate"])
 
 
 def test_ApprovedTranslationRequiresAllHumanReviewRoles(tmpPath):

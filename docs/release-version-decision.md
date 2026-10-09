@@ -6,15 +6,15 @@ SPDX-License-Identifier: Apache-2.0
 # First modernization release version decision
 
 - Decision: retain **`2.0.0` as the planned first stable modernization version**.
-- Current development metadata: **`2.0.0.dev0`**, owned by
+- Proposed stable candidate metadata: **`2.0.0`**, owned by
   [`pyproject.toml`](../pyproject.toml).
 - Planning: [Task #119](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/119)
   under [Feature #37](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/37).
 - Governing policy: [ADR-0006](adr/0006-packaging-versioning-release-policy.md).
 
 This review reaffirms the accepted version policy against the implemented
-public impact. It neither bumps the development version nor announces a
-published release. The final human gate remains
+public impact. The candidate PR proposes the metadata transition; that proposal does not
+announce a published release or supply human approval. The final human gate remains
 [Task #121](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/121).
 
 ## Baseline and observable impact
