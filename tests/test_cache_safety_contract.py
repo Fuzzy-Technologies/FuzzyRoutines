@@ -10,6 +10,8 @@ from fuzzyroutines.FuzzyRoutines import MFunction
 
 
 def test_ScalarFuzzySetMembershipObservesCallableStateChanges():
+    """Verify that scalar fuzzy set membership observes callable state changes."""
+
     state = {"grade": 0.25}
     fuzzySet = ScalarFuzzySet(
         DiscreteUniverse((0.0,)),
@@ -26,6 +28,8 @@ def test_ScalarFuzzySetMembershipObservesCallableStateChanges():
 
 
 def test_DerivePropertiesObservesMembershipParameterChanges():
+    """Verify that derive properties observes membership parameter changes."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     universe = DiscreteUniverse((0.0, 0.5, 1.0))
 

@@ -41,6 +41,8 @@ INVALIDCASES = (
 
 @pytest.mark.parametrize(("identifier", "parameters"), VALIDCASES)
 def test_MembershipFunctionAcceptsValidatedParameters(identifier, parameters):
+    """Verify that membership function accepts validated parameters."""
+
     membershipFunction = MFunction(identifier, **parameters)
 
     assert membershipFunction.parameters == parameters
@@ -48,12 +50,16 @@ def test_MembershipFunctionAcceptsValidatedParameters(identifier, parameters):
 
 @pytest.mark.parametrize(("identifier", "parameters", "message"), INVALIDCASES)
 def test_MembershipFunctionRejectsInvalidParameterGeometry(identifier, parameters, message):
+    """Verify that membership function rejects invalid parameter geometry."""
+
     with pytest.raises(ValueError, match=message):
         MFunction(identifier, **parameters)
 
 
 @pytest.mark.parametrize("invalidValue", [True, False, math.nan, math.inf, -math.inf])
 def test_MembershipFunctionRejectsNonFiniteAndBooleanParameters(invalidValue):
+    """Verify that membership function rejects nonfinite and boolean parameters."""
+
     with pytest.raises(ValueError, match="finite real number"):
         MFunction("parabolic", a=0.0, b=invalidValue)
 
@@ -67,16 +73,22 @@ def test_MembershipFunctionRejectsNonFiniteAndBooleanParameters(invalidValue):
     ],
 )
 def test_MembershipFunctionRequiresExactParameterSet(identifier, parameters):
+    """Verify that membership function requires exact parameter set."""
+
     with pytest.raises(ValueError, match="requires exactly"):
         MFunction(identifier, **parameters)
 
 
 def test_MembershipFunctionRejectsUnknownIdentifier():
+    """Verify that membership function rejects unknown identifier."""
+
     with pytest.raises(ValueError, match="unknown membership-function identifier"):
         MFunction("unknown", a=0.0)
 
 
 def test_MembershipFunctionParameterSetterIsTransactional():
+    """Verify that membership function parameter setter is transactional."""
+
     membershipFunction = MFunction("parabolic", a=0.0, b=1.0)
 
     with pytest.raises(ValueError, match="a < b"):

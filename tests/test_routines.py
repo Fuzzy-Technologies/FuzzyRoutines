@@ -10,8 +10,11 @@ from fuzzyroutines.FuzzyRoutines import *
 
 
 class TestBaseMethods():
+    """Preserve historical scalar helpers, fuzzy operators and composition contracts."""
 
     def test_DiapasonParser(self):
+        """Parse valid interval endpoints and reject malformed historical interval syntax."""
+
         testData = [
             # positive tests:
             ["1", [1]],
@@ -31,6 +34,8 @@ class TestBaseMethods():
             assert DiapasonParser(test[0]) == test[1], 'Input: [ {} ] expected output: [ {} ]'.format(test[0], test[1])
 
     def test_IsNumber(self):
+        """Recognize supported numeric values and reject nonnumeric input values."""
+
         testData = [
             # positive tests:
             [-1, True],
@@ -51,6 +56,8 @@ class TestBaseMethods():
             assert IsNumber(test[0]) is test[1], 'Input: [ {} ] expected output: [ {} ]'.format(test[0], test[1])
 
     def test_IsCorrectFuzzyNumberValue(self):
+        """Accept fuzzy grades in the unit interval and reject invalid values."""
+
         testData = [
             # positive tests:
             [0, True],
@@ -71,7 +78,10 @@ class TestBaseMethods():
             assert IsCorrectFuzzyNumberValue(test[0]) is test[1], 'Input: [ {} ] expected output: [ {} ]'.format(test[0], test[1])
 
     def test_FuzzyNOT(self):
+        """Compare the historical parameterized complement with fixed reference values."""
+
         # positive tests:
+
         testDataPositive = [
             [0., 0.5, 1.],
             [0.5, 0.5, 0.5],
@@ -87,7 +97,10 @@ class TestBaseMethods():
                 FuzzyNOT(fuzzyNumber, alpha=alpha)
 
     def test_FuzzyNOTParabolic(self):
+        """Compare parabolic complement values with the historical reference grid."""
+
         # positive tests:
+
         testDataPositive = [
             [0., 0.5, 0.001, 1.],
             [0.5, 0.5, 0.001, 0.5],
@@ -107,7 +120,10 @@ class TestBaseMethods():
                 FuzzyNOTParabolic(fuzzyNumber, alpha=0.5, epsilon=0.001)
 
     def test_FuzzyAND(self):
+        """Preserve the historical minimum conjunction over the reference input grid."""
+
         # positive tests:
+
         testDataPositive = [
             [0., 0., 0.],
             [0., 1., 0.],
@@ -131,7 +147,10 @@ class TestBaseMethods():
                 FuzzyAND(test[0], test[1])
 
     def test_FuzzyOR(self):
+        """Preserve the historical maximum disjunction over the reference input grid."""
+
         # positive tests:
+
         testDataPositive = [
             [0., 0., 0.],
             [0., 1., 1.],
@@ -155,7 +174,10 @@ class TestBaseMethods():
                 FuzzyOR(test[0], test[1])
 
     def test_TNorm(self):
+        """Compare every historical t-norm family with fixed scalar reference values."""
+
         # positive tests:
+
         testDataPositive = [
             [0., 0., 'logic', 0.],
             [0., 1., 'logic', 0.],
@@ -221,7 +243,10 @@ class TestBaseMethods():
                 TNorm(test[0], test[1], normType=test[2])
 
     def test_TNormCompose(self):
+        """Verify left-fold t-norm composition against fixed historical reference values."""
+
         # positive tests:
+
         testDataPositive = [
             [0.1, 0.2, 0.3, 'logic', 0.1],
             [0.1, 0.2, 0.3, 'algebraic', 0.006],
@@ -243,7 +268,10 @@ class TestBaseMethods():
                 TNormCompose(test[0])
 
     def test_SCoNorm(self):
+        """Compare every historical s-conorm family with fixed scalar reference values."""
+
         # positive tests:
+
         testDataPositive = [
             [0., 0., 'logic', 0.],
             [0., 1., 'logic', 1.],
@@ -309,7 +337,12 @@ class TestBaseMethods():
                 SCoNorm(test[0], test[1], normType=test[2])
 
     def test_SCoNormCompose(self):
+        """Verify left-fold s-conorm composition against fixed historical reference
+        values.
+        """
+
         # positive tests:
+
         testDataPositive = [
             [0.1, 0.2, 0.3, 'logic', 0.3],
             [0.1, 0.5, 0.5, 'algebraic', 0.775],

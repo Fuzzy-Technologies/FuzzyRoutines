@@ -27,6 +27,8 @@ FUZZYCASES = (
 
 
 def test_UniversalFuzzyScalePresetStructureAndCentroids():
+    """Preserve declared universal-scale levels, ordering and centroid reference values."""
+
     scale = UniversalFuzzyScale()
 
     assert scale.name == "FuzzyScale", "The historical preset name is part of its regression contract."
@@ -53,6 +55,8 @@ def test_UniversalFuzzyScalePresetStructureAndCentroids():
 
 @pytest.mark.parametrize(("realValue", "expectedName"), FUZZYCASES)
 def test_UniversalFuzzyScaleFuzzySelection(realValue, expectedName):
+    """Preserve universal-scale winning labels on the fixed historical input grid."""
+
     scale = UniversalFuzzyScale()
 
     actualLevel = scale.Fuzzy(realValue)
@@ -64,6 +68,8 @@ def test_UniversalFuzzyScaleFuzzySelection(realValue, expectedName):
 
 
 def test_UniversalFuzzyScaleLevelNamesRemainAvailable():
+    """Verify that universal fuzzy scale level names remain available."""
+
     scale = UniversalFuzzyScale()
 
     assert set(scale.levelsNames) == {"Min", "Low", "Med", "High", "Max"}, (

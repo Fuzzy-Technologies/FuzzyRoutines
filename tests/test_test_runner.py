@@ -28,6 +28,8 @@ PROJECTROOT = Path(__file__).resolve().parents[1]
 
 
 def RunSyntheticSuite(tmpPath: Path, testFiles: dict[str, str], *arguments: str) -> subprocess.CompletedProcess[str]:
+    """Create a temporary fixture suite and capture the actual process runner result."""
+
     for relativePath, content in testFiles.items():
         testPath = tmpPath / relativePath
         testPath.parent.mkdir(parents=True, exist_ok=True)
@@ -45,6 +47,8 @@ def RunSyntheticSuite(tmpPath: Path, testFiles: dict[str, str], *arguments: str)
 
 
 def ParseSummary(completedProcess: subprocess.CompletedProcess[str]) -> dict[str, int | float]:
+    """Require one machine-readable runner summary and return its parsed counters."""
+
     summaryLines = [line for line in completedProcess.stdout.splitlines() if line.startswith("TEST_SUMMARY ")]
     assert len(summaryLines) == 1, (
         "The runner must emit exactly one machine-readable TEST_SUMMARY line.\n"
@@ -59,17 +63,23 @@ def ParseSummary(completedProcess: subprocess.CompletedProcess[str]) -> dict[str
     ((None, 1), (1, 1), (4, 4), (64, 12)),
 )
 def test_AutoWorkersRespectCpuAvailabilityAndConfiguredCap(cpuCount, expectedWorkers, monkeypatch):
+    """Limit automatic worker selection by available CPUs and the project cap."""
+
     monkeypatch.setattr(os, "cpu_count", lambda: cpuCount)
     assert ResolveJobs("auto", maxWorkers=12) == expectedWorkers
 
 
 @pytest.mark.parametrize("requestedJobs", ("0", "-1", "thirteen", "13"))
 def test_InvalidWorkerRequestsFailClosed(requestedJobs):
+    """Verify that invalid worker requests fail closed."""
+
     with pytest.raises(ValueError, match="positive integer|configured maximum"):
         ResolveJobs(requestedJobs, maxWorkers=12, cpuCount=64)
 
 
 def test_DefaultPhasesSeparateParallelSafeAndSerialTests():
+    """Verify that default phases separate parallel safe and serial tests."""
+
     assert BuildPhases(serialOnly=False, workers=4) == (
         ExecutionPhase("parallel", "not serial", 4),
         ExecutionPhase("serial", "serial", 0),
@@ -77,6 +87,8 @@ def test_DefaultPhasesSeparateParallelSafeAndSerialTests():
 
 
 def test_SerialModeUsesOneSequentialPhase():
+    """Verify that serial mode uses one sequential phase."""
+
     phases = BuildPhases(serialOnly=True, workers=4)
     assert len(phases) == 1
     assert phases[0].name == "serial-all"
@@ -85,6 +97,8 @@ def test_SerialModeUsesOneSequentialPhase():
 
 
 def test_JunitAggregationSeparatesFailuresTimeoutsAndSkips(tmpPath):
+    """Verify that JUnit aggregation separates failures timeouts and skips."""
+
     reportPath = tmpPath / "report.xml"
     reportPath.write_text(
         """<?xml version="1.0" encoding="utf-8"?>
@@ -108,6 +122,8 @@ def test_JunitAggregationSeparatesFailuresTimeoutsAndSkips(tmpPath):
 
 
 def test_AggregateSchemaIsIndependentOfPhaseCompletionOrder():
+    """Verify that aggregate schema is independent of phase completion order."""
+
     first = PhaseResult("parallel", 0, 3, 2, 0, 1, 0, 0.2, 0)
     second = PhaseResult("serial", 1, 2, 0, 1, 0, 1, 0.1, 0)
     expected = {
@@ -124,6 +140,8 @@ def test_AggregateSchemaIsIndependentOfPhaseCompletionOrder():
 
 
 def test_ParallelAndSerialPhasesRunInDifferentProcesses(tmpPath):
+    """Verify that parallel and serial phases run in different processes."""
+
     evidenceRoot = tmpPath / "evidence"
     evidenceRoot.mkdir()
     moduleTemplate = """
@@ -173,6 +191,8 @@ def test_RecordSerialProcess():
 
 
 def test_TimeoutIsReportedSeparatelyAndFailsTheRun(tmpPath):
+    """Verify that timeout is reported separately and fails the run."""
+
     completedProcess = RunSyntheticSuite(
         tmpPath,
         {"test_timeout.py": "import time\n\ndef test_Slow():\n    time.sleep(1)\n"},
@@ -189,6 +209,8 @@ def test_TimeoutIsReportedSeparatelyAndFailsTheRun(tmpPath):
 
 
 def test_FailFastDoesNotRunTheLaterSerialPhase(tmpPath):
+    """Verify that fail fast does not run the later serial phase."""
+
     serialEvidence = tmpPath / "serial-ran"
     completedProcess = RunSyntheticSuite(
         tmpPath,
@@ -215,6 +237,8 @@ def test_FailFastDoesNotRunTheLaterSerialPhase(tmpPath):
 
 
 def test_CollectionErrorReturnsNonZeroProcessError(tmpPath):
+    """Verify that collection error returns nonzero process error."""
+
     completedProcess = RunSyntheticSuite(
         tmpPath,
         {"test_broken.py": "def test_Broken(:\n    pass\n"},

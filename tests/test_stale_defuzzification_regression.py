@@ -11,6 +11,8 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
 
 def test_DefuzReflectsCurrentMembershipParameters():
+    """Recompute the legacy centroid after membership parameters change."""
+
     membershipFunction = MFunction("parabolic", a=0.0, b=1.0)
     fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 1.0))
 
@@ -27,6 +29,8 @@ def test_DefuzReflectsCurrentMembershipParameters():
 
 
 def test_DefuzReflectsCurrentSupportSet():
+    """Recompute the legacy centroid after its integration window changes."""
+
     fuzzySet = FuzzySet(
         MFunction("parabolic", a=0.0, b=1.0),
         supportSet=(0.0, 1.0),

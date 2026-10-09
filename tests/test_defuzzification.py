@@ -33,6 +33,8 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
     ),
 )
 def test_AnalyticalFamiliesMatchIndependentReferences(identifier, parameters, domain, expected):
+    """Compare analytical centroids with fixed independent integral references."""
+
     membershipFunction = MFunction(identifier, **parameters)
     fuzzySet = ScalarFuzzySet(ContinuousUniverse(), membershipFunction.mju)
 
@@ -149,6 +151,8 @@ def test_GaussianFallbackPreservesConfiguredNonConvergence():
 
 
 def test_AdaptiveCallableMatchesPolynomialReference():
+    """Verify that adaptive callable matches polynomial reference."""
+
     fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, True, True),
         lambda coordinate: coordinate**3,
@@ -161,6 +165,8 @@ def test_AdaptiveCallableMatchesPolynomialReference():
 
 
 def test_AdaptiveLowMembershipDoesNotBecomeZeroArea():
+    """Verify that adaptive low membership does not become zero-area."""
+
     fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, True, True),
         lambda coordinate: 1e-14 * (1 + coordinate),
@@ -172,6 +178,8 @@ def test_AdaptiveLowMembershipDoesNotBecomeZeroArea():
 
 
 def test_NarrowAnalyticalTriangleIsNotMissedBySampling():
+    """Verify that narrow analytical triangle is not missed by sampling."""
+
     left = 0.123456789
     apex = left + 4e-10
     right = left + 1e-9
@@ -184,6 +192,8 @@ def test_NarrowAnalyticalTriangleIsNotMissedBySampling():
 
 
 def test_CentroidReadsCurrentParametersAndDomainWithoutStaleCache():
+    """Verify that centroid reads current parameters and domain without stale cache."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 2.0))
     initial = fuzzySet.Defuz()
@@ -197,6 +207,8 @@ def test_CentroidReadsCurrentParametersAndDomainWithoutStaleCache():
 
 
 def test_LegacyAccuracyDoesNotControlCentroidPrecision():
+    """Verify that legacy accuracy does not control centroid precision."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.2)
     fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 1.0))
     reference = fuzzySet.Defuz()
@@ -207,6 +219,8 @@ def test_LegacyAccuracyDoesNotControlCentroidPrecision():
 
 
 def test_ZeroAreaRaisesDocumentedValueError():
+    """Verify that zero-area raises documented ValueError."""
+
     fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, True, True),
         lambda coordinate: 0.0,
@@ -217,6 +231,8 @@ def test_ZeroAreaRaisesDocumentedValueError():
 
 
 def test_NonConvergenceRaisesSpecificErrorWithoutFixedGridFallback():
+    """Verify that nonconvergence raises specific error without fixed grid fallback."""
+
     fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, True, True),
         lambda coordinate: math.exp(coordinate) / math.e,
@@ -232,6 +248,8 @@ def test_NonConvergenceRaisesSpecificErrorWithoutFixedGridFallback():
 
 
 def test_CentroidRejectsDomainOutsideUniverse():
+    """Verify that centroid rejects domain outside universe."""
+
     fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, True, True),
         lambda coordinate: 1.0,
@@ -242,6 +260,8 @@ def test_CentroidRejectsDomainOutsideUniverse():
 
 
 def test_CentroidRejectsDiscreteUniverse():
+    """Verify that centroid rejects discrete universe."""
+
     fuzzySet = ScalarFuzzySet(DiscreteUniverse((0.0, 1.0)), lambda coordinate: 1.0)
 
     with pytest.raises(TypeError, match="ContinuousUniverse"):
@@ -258,5 +278,7 @@ def test_CentroidRejectsDiscreteUniverse():
     ),
 )
 def test_CentroidPolicyRejectsInvalidConfiguration(arguments):
+    """Verify that centroid policy rejects invalid configuration."""
+
     with pytest.raises((TypeError, ValueError)):
         CentroidPolicy(**arguments)

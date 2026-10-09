@@ -16,6 +16,8 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
 
 def test_ContinuousUniverseRepresentsTheRealLineExplicitly():
+    """Verify that continuous universe represents the real line explicitly."""
+
     universe = ContinuousUniverse()
 
     assert universe.isBounded is False, "The real line must remain explicitly unbounded."
@@ -38,6 +40,8 @@ def test_ContinuousUniversePreservesEndpointClosure(
     expectedAtLeft,
     expectedAtRight,
 ):
+    """Verify that continuous universe preserves endpoint closure."""
+
     universe = ContinuousUniverse(0.0, 1.0, leftClosed, rightClosed)
 
     assert universe.Contains(0.0) is expectedAtLeft, "Left-endpoint membership must follow leftClosed."
@@ -56,11 +60,15 @@ def test_ContinuousUniversePreservesEndpointClosure(
     ],
 )
 def test_ContinuousUniverseRejectsInvalidBounds(constructorArguments):
+    """Verify that continuous universe rejects invalid bounds."""
+
     with pytest.raises((TypeError, ValueError)):
         ContinuousUniverse(*constructorArguments)
 
 
 def test_ContinuousUniverseRejectsClosedUnboundedEndpoints():
+    """Verify that continuous universe rejects closed unbounded endpoints."""
+
     with pytest.raises(ValueError, match="unbounded left endpoint"):
         ContinuousUniverse(left=None, right=1.0, leftClosed=True)
 
@@ -69,6 +77,8 @@ def test_ContinuousUniverseRejectsClosedUnboundedEndpoints():
 
 
 def test_DiscreteUniverseRequiresExplicitOrderedDistinctFinitePoints():
+    """Verify that discrete universe requires explicit ordered distinct finite points."""
+
     universe = DiscreteUniverse((-1, 0.5, 2))
 
     assert universe.points == (-1, 0.5, 2), "Discrete coordinates must preserve declared values."
@@ -82,6 +92,8 @@ def test_DiscreteUniverseRequiresExplicitOrderedDistinctFinitePoints():
 
 
 def test_IntegrationDomainIsFiniteClosedAndOrdered():
+    """Verify that integration domain is finite closed and ordered."""
+
     domain = IntegrationDomain(-2, 3)
 
     assert domain.Contains(-2.0), "A numerical integration domain includes its left endpoint."
@@ -94,6 +106,8 @@ def test_IntegrationDomainIsFiniteClosedAndOrdered():
 
 
 def test_DomainTypesAcceptAndPreserveStandardRealScalars():
+    """Verify that domain types accept and preserve standard real scalars."""
+
     left = Fraction(1, 10)
     right = Fraction(9, 10)
     domain = IntegrationDomain(left, right)
@@ -103,6 +117,8 @@ def test_DomainTypesAcceptAndPreserveStandardRealScalars():
 
 
 def test_IntegrationDomainValidatesContainmentInContinuousUniverse():
+    """Verify that integration domain validates containment in continuous universe."""
+
     universe = ContinuousUniverse(0.0, 10.0, leftClosed=True, rightClosed=True)
     domain = IntegrationDomain(1.0, 9.0)
 
@@ -121,6 +137,8 @@ def test_IntegrationDomainValidatesContainmentInContinuousUniverse():
 
 
 def test_DomainTypesAreImmutableValueObjects():
+    """Verify that domain types are immutable value objects."""
+
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
 
     with pytest.raises(FrozenInstanceError):
@@ -128,6 +146,8 @@ def test_DomainTypesAreImmutableValueObjects():
 
 
 def test_LegacyIntervalAdapterPreservesTupleShapeAndValues():
+    """Verify that legacy interval adapter preserves tuple shape and values."""
+
     domain = IntegrationDomain.FromLegacyInterval((-1, 2))
 
     assert domain.ToLegacyInterval() == (-1, 2), "Legacy mapping must preserve both interval endpoints."
@@ -141,6 +161,8 @@ def test_LegacyIntervalAdapterPreservesTupleShapeAndValues():
 
 
 def test_LegacyFuzzySetDelegatesSupportSetToIntegrationDomain():
+    """Verify that legacy fuzzy set delegates support set to integration domain."""
+
     fuzzySet = FuzzySet(MFunction("gaussian", a=0.0, b=1.0), supportSet=(-2, 2))
 
     assert isinstance(fuzzySet._integrationDomain, IntegrationDomain), (
@@ -157,6 +179,8 @@ def test_LegacyFuzzySetDelegatesSupportSetToIntegrationDomain():
 
 
 def test_LegacySupportSetRejectsInvalidMutationWithoutChangingState():
+    """Verify that legacy support set rejects invalid mutation without changing state."""
+
     fuzzySet = FuzzySet(MFunction("gaussian", a=0.0, b=1.0), supportSet=(-2.0, 2.0))
 
     with pytest.raises(ValueError):

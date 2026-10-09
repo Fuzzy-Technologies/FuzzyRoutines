@@ -27,6 +27,8 @@ INVARIANTDOCUMENT = PROJECTROOT / "docs" / "mathematics" / "source-algorithm-inv
 
 
 def test_SourceInvariantMapKeepsCanonicalLocalReferencesResolvable():
+    """Verify that source invariant map keeps canonical local references resolvable."""
+
     document = INVARIANTDOCUMENT.read_text(encoding="utf-8")
     targets = re.findall(r"\[[^]]+\]\(([^)]+)\)", document)
 
@@ -41,6 +43,8 @@ def test_SourceInvariantMapKeepsCanonicalLocalReferencesResolvable():
 @pytest.mark.parametrize("alpha", [0.25, 0.5, 0.75])
 @pytest.mark.parametrize("grade", [0.0, 0.125, 0.5, 0.875, 1.0])
 def test_ParabolicNegationSatisfiesItsImplicitEquation(alpha, grade):
+    """Verify that parabolic negation satisfies its implicit equation."""
+
     result = FuzzyNOTParabolic(grade, alpha)
 
     leftSide = 2 * alpha - grade - result
@@ -56,11 +60,15 @@ def test_ParabolicNegationSatisfiesItsImplicitEquation(alpha, grade):
 
 @pytest.mark.parametrize("invalidAlpha", [math.nan, -math.inf, 0.249999, 0.750001, math.inf])
 def test_ParabolicNegationRejectsValuesOutsideDerivedAlphaDomain(invalidAlpha):
+    """Verify that parabolic negation rejects values outside derived alpha domain."""
+
     with pytest.raises(ValueError):
         FuzzyNOTParabolic(0.5, invalidAlpha)
 
 
 def test_LogisticStableBranchesMatchReferenceAndSaturateWithoutOverflow():
+    """Verify that logistic stable branches match reference and saturate without overflow."""
+
     membershipFunction = MFunction("logistic", a=2.0, b=1.0)
 
     assert membershipFunction.mju(1.0) == 0.5
@@ -149,6 +157,10 @@ def test_ExtremeRationalParametersRetainTheirExactDifferenceArithmetic():
 
 
 def test_HarringtonGuardMatchesFormulaAtBoundaryAndRejectsInvalidDomain():
+    """Verify that harrington guard matches formula at boundary and rejects invalid
+    domain.
+    """
+
     membershipFunction = MFunction("harringtonDesirability")
     overflowBoundary = -math.log(float.fromhex("0x1.fffffffffffffp+1023"))
 
@@ -173,6 +185,8 @@ def test_HistoricalDirectFormulasExposeExtremeIntermediateOverflow(
     parameters,
     coordinate,
 ):
+    """Verify that historical direct formulas expose extreme intermediate overflow."""
+
     membershipFunction = MFunction(functionName, **parameters)
 
     with pytest.raises(OverflowError):
@@ -180,6 +194,8 @@ def test_HistoricalDirectFormulasExposeExtremeIntermediateOverflow(
 
 
 def test_UniformSamplingRetainsExactEndpointsAndWeakBoundary():
+    """Verify that uniform sampling retains exact endpoints and weak boundary."""
+
     universe = ContinuousUniverse(0.1, 0.9, leftClosed=True, rightClosed=True)
     fuzzySet = ScalarFuzzySet(universe, lambda coordinate: coordinate)
     analysisDomain = IntegrationDomain(0.1, 0.9)
@@ -197,6 +213,8 @@ def test_UniformSamplingRetainsExactEndpointsAndWeakBoundary():
 
 @pytest.mark.parametrize("invalidCount", [True, 1, 2.5])
 def test_UniformSamplingRejectsInvalidResolution(invalidCount):
+    """Verify that uniform sampling rejects invalid resolution."""
+
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
     fuzzySet = ScalarFuzzySet(universe, lambda coordinate: coordinate)
 

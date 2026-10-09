@@ -66,16 +66,69 @@ reviewed fixes and affected-test evidence before stable approval:
   extreme finite membership inputs can trigger avoidable overflow in accepted
   triangular, trapezoidal, Gaussian, and logistic families.
 
-These follow-ups are pending review. Do not check the correctness or
-no-unresolved-regression items solely because a fix branch exists; verify the
-merged fixes and CI evidence on the exact release candidate.
+These repairs are merged into `develop`: exact rational fuzzification in
+[PR #287](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/287),
+Gaussian centroid corrections in
+[PR #289](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/289), and
+evaluator-certificate and extreme-coordinate membership corrections in
+[PR #291](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/291).
+Their merged development evidence does not by itself check the final
+correctness or no-unresolved-regression items: verify the repairs and full CI
+on the exact release candidate.
 
 Documentation maintenance has separate follow-ups:
 [Task #280](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/280)
 for explained visual examples and
 [Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286)
 for missing test-function docstrings. They remain reviewable documentation
-work and do not substitute for correcting the numerical blockers.
+work and do not substitute for final numerical acceptance.
+
+## Complete three-language documentation for 2.0.0
+
+The maintainer requires complete English, Russian and Simplified Chinese user
+documentation for the first stable release. English fallback pages are useful
+during development but do not satisfy this release criterion. Follow
+[ADR-0011](adr/0011-multilingual-documentation-pipeline.md) for hash-bound
+translation state and human review; automated or AI-assisted passes must not
+invent human/native-speaker approval.
+
+Complete the work in this order:
+
+1. Finalize canonical English under
+   [Task #294](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/294).
+   Record engineering, mathematical/scientific, data-science and reader/editor
+   findings. Make installation, domains, assumptions, outputs and limitations
+   understandable without reading the implementation.
+2. Complete the visual examples under
+   [Task #280](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/280):
+   a prominent pip-install quick start, supported API examples, at least six
+   distinct end-to-end scenarios and deterministic membership/operator/centroid
+   graphs. Show inputs, units, intermediate values, outputs and interpretations;
+   execute examples from installed distributions in CI.
+3. Translate the finalized corpus under
+   [Task #295](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/295)
+   for Russian and
+   [Task #296](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/296)
+   for Simplified Chinese. Review each translated language separately for
+   scientific meaning, terminology, natural prose and usability.
+4. Verify complete, current locale coverage and actual rendered pages under
+   [Task #297](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/297).
+   Record desktop/mobile navigation, language switching, search, formulas,
+   figures, captions, accessible descriptions and installed-example evidence.
+
+[Task #298](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/298)
+owns the final all-module mathematics, meaningful per-module line/branch
+coverage and process-based parallel-test audit. The historical legacy-only
+coverage report cannot establish coverage adequacy for the modern modules.
+
+[Task #299](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/299)
+owns protected CI-only PyPI publication and verification of the published
+installation. Coordinate the approved promotion, annotated tag and final
+GitHub Release with Task #121. A successful PR dry run is workflow evidence;
+it does not mean the stable artifacts have been published to PyPI.
+
+The maintainer target is 2026-10-09 ahead of the conference week. The target
+does not waive any review, correctness, documentation or publication gate.
 
 ## Mandatory evidence
 
@@ -87,6 +140,11 @@ work and do not substitute for correcting the numerical blockers.
 - [ ] Packaging: independent wheel and source distribution builds have matching bytes; clean installation, metadata validation, and supply-chain evidence are attached.
 - [ ] Licensing: Apache-2.0 metadata, `LICENSE`, `NOTICE`, SPDX headers, provenance audit, and packaged artifacts agree.
 - [ ] Documentation: README, API/mathematics documents, compatibility notes, and links have been reviewed for accuracy and accessibility.
+- [ ] Canonical English: engineering, mathematical/scientific, data-science and reader/editor findings are resolved; every supported public API has a usable example or a justified tested alias link.
+- [ ] Russian and Simplified Chinese: every required user-documentation unit is translated, current and individually scientifically/editorially reviewed; no missing/stale fallback is accepted.
+- [ ] Practical examples: the pip-install quick start, at least six complete end-to-end scenarios and their numerical results/figures execute from installed artifacts in CI.
+- [ ] Rendered documentation: all three languages have reviewed navigation, search, formulas, links, localized figures/captions and desktop/mobile readability evidence.
+- [ ] Mathematical audit: every supported module has an accepted contract, independent reference/invariant evidence and assessed line/branch coverage; process-based parallel execution is verified on the candidate.
 - [ ] Performance: reproducible benchmark evidence is attached; no performance claim is made without raw measurements and environment metadata.
 - [ ] Security and publishing: release credentials, provenance, and publishing configuration have been explicitly reviewed by an authorized maintainer.
 
@@ -96,5 +154,6 @@ work and do not substitute for correcting the numerical blockers.
 - [ ] No known invalid legacy behavior is presented as supported compatibility.
 - [ ] All required GitHub Actions are green for the exact release commit.
 - [ ] A human maintainer has approved the release decision and version number.
+- [ ] The approved wheel and sdist are actually published to PyPI through protected CI, match the approved hashes, and pass clean pip-install quick-start and compatibility checks.
 
 A release is approved only when every item above has evidence and the final human approval is recorded in the release issue or pull request.

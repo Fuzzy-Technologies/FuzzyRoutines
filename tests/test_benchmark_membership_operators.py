@@ -31,6 +31,8 @@ EXPECTEDWORKLOADS = {
 
 
 def test_BenchmarkReportCapturesAllRequiredScalarWorkloads():
+    """Verify that benchmark report captures all required scalar workloads."""
+
     report = BuildBenchmarkReport(iterations=1, repeats=7, warmups=1)
 
     assert report["benchmark"] == "fuzzyroutines-membership-and-operator-scalar"
@@ -65,6 +67,8 @@ def test_BenchmarkReportRejectsNonReproducibleConfiguration(
     warmups,
     message,
 ):
+    """Verify that benchmark report rejects non reproducible configuration."""
+
     with pytest.raises(ValueError, match=message):
         BuildBenchmarkReport(
             iterations=iterations,

@@ -11,6 +11,8 @@ from tools.report_universal_scale_coverage import BuildCoverageReport
 
 
 def test_UniversalFuzzyScaleCoverageReportIdentifiesWeakIntervals():
+    """Verify that universal fuzzy scale coverage report identifies weak intervals."""
+
     report = BuildCoverageReport(gridPoints=1001, weakThreshold=0.5)
 
     assert report["preset"] == "UniversalFuzzyScale"
@@ -43,5 +45,7 @@ def test_UniversalFuzzyScaleCoverageReportRejectsInvalidConfiguration(
     weakThreshold,
     message,
 ):
+    """Verify that universal fuzzy scale coverage report rejects invalid configuration."""
+
     with pytest.raises(ValueError, match=message):
         BuildCoverageReport(gridPoints=gridPoints, weakThreshold=weakThreshold)

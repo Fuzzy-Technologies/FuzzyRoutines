@@ -37,6 +37,10 @@ def BuildContinuousSet(membershipFunction):
 
 
 def test_ExactDiscreteEqualityIsExhaustiveAcrossNonIdenticalRepresentations():
+    """Verify that exact discrete equality is exhaustive across non identical
+    representations.
+    """
+
     leftSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.5, 1.0))
     rightSet = ScalarFuzzySet(leftSet.universe, lambda coordinate: coordinate)
 
@@ -46,6 +50,10 @@ def test_ExactDiscreteEqualityIsExhaustiveAcrossNonIdenticalRepresentations():
 
 
 def test_PythonObjectEqualityDoesNotMasqueradeAsMathematicalSetEquality():
+    """Verify that python object equality does not masquerade as mathematical set
+    equality.
+    """
+
     universe = DiscreteUniverse((0.0, 1.0))
     membershipFunction = lambda coordinate: coordinate
     leftSet = ScalarFuzzySet(universe, membershipFunction)
@@ -59,6 +67,8 @@ def test_PythonObjectEqualityDoesNotMasqueradeAsMathematicalSetEquality():
 
 
 def test_ExactDiscreteEqualityRejectsOneDifferentGrade():
+    """Verify that exact discrete equality rejects one different grade."""
+
     leftSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.5, 1.0))
     rightSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.4, 1.0))
 
@@ -68,6 +78,8 @@ def test_ExactDiscreteEqualityRejectsOneDifferentGrade():
 
 
 def test_ExactDiscreteInclusionUsesThePointwiseFuzzyRelation():
+    """Verify that exact discrete inclusion uses the pointwise fuzzy relation."""
+
     subset = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.25, 0.75))
     superset = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.5, 1.0))
     policy = ComparisonPolicy("exact")
@@ -77,6 +89,8 @@ def test_ExactDiscreteInclusionUsesThePointwiseFuzzyRelation():
 
 
 def test_ExactDiscreteRelationsSatisfyReflexivityAndAntisymmetry():
+    """Verify that exact discrete relations satisfy reflexivity and antisymmetry."""
+
     firstSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.4, 1.0))
     equivalentSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.4, 1.0))
     policy = ComparisonPolicy("exact")
@@ -91,6 +105,8 @@ def test_ExactDiscreteRelationsSatisfyReflexivityAndAntisymmetry():
 
 
 def test_ToleranceEqualityAcceptsOnlyDifferencesInsideTheExplicitPolicy():
+    """Verify that tolerance equality accepts only differences inside the explicit policy."""
+
     leftSet = BuildDiscreteSet((0.0, 1.0), (0.25, 0.75))
     closeSet = BuildDiscreteSet((0.0, 1.0), (0.2500001, 0.7499999))
     distantSet = BuildDiscreteSet((0.0, 1.0), (0.251, 0.749))
@@ -101,6 +117,8 @@ def test_ToleranceEqualityAcceptsOnlyDifferencesInsideTheExplicitPolicy():
 
 
 def test_RelativeToleranceIsAppliedWhenExplicitlyConfigured():
+    """Verify that relative tolerance is applied when explicitly configured."""
+
     leftSet = BuildDiscreteSet((0.0, 1.0), (0.5, 1.0))
     closeSet = BuildDiscreteSet((0.0, 1.0), (0.5004, 0.9996))
     distantSet = BuildDiscreteSet((0.0, 1.0), (0.501, 0.999))
@@ -111,6 +129,8 @@ def test_RelativeToleranceIsAppliedWhenExplicitlyConfigured():
 
 
 def test_ToleranceInclusionAllowsOnlyNumericallyCloseViolations():
+    """Verify that tolerance inclusion allows only numerically close violations."""
+
     nominalSet = BuildDiscreteSet((0.0, 1.0), (0.25, 0.75))
     closeHigherSet = BuildDiscreteSet((0.0, 1.0), (0.2500001, 0.7500001))
     distantHigherSet = BuildDiscreteSet((0.0, 1.0), (0.251, 0.751))
@@ -121,6 +141,8 @@ def test_ToleranceInclusionAllowsOnlyNumericallyCloseViolations():
 
 
 def test_ContinuousRelationsRequireAnExplicitComparisonDomain():
+    """Verify that continuous relations require an explicit comparison domain."""
+
     leftSet = BuildContinuousSet(lambda coordinate: coordinate)
     rightSet = BuildContinuousSet(lambda coordinate: coordinate)
 
@@ -132,6 +154,10 @@ def test_ContinuousRelationsRequireAnExplicitComparisonDomain():
 
 
 def test_ContinuousEqualityComparesEquivalentBehaviorOnlyOnDeclaredPoints():
+    """Verify that continuous equality compares equivalent behavior only on declared
+    points.
+    """
+
     leftSet = BuildContinuousSet(lambda coordinate: coordinate * coordinate)
     rightSet = BuildContinuousSet(lambda coordinate: coordinate**2)
     comparisonDomain = ComparisonDomain((0.0, 0.25, 0.5, 0.75, 1.0))
@@ -145,6 +171,8 @@ def test_ContinuousEqualityComparesEquivalentBehaviorOnlyOnDeclaredPoints():
 
 
 def test_ContinuousInclusionEvaluatesEveryDeclaredPoint():
+    """Verify that continuous inclusion evaluates every declared point."""
+
     subset = BuildContinuousSet(lambda coordinate: coordinate / 2)
     superset = BuildContinuousSet(lambda coordinate: coordinate)
     comparisonDomain = ComparisonDomain((0.0, 0.25, 0.5, 0.75, 1.0))
@@ -174,16 +202,24 @@ def test_ContinuousInclusionEvaluatesEveryDeclaredPoint():
     ],
 )
 def test_ComparisonDomainRejectsEmptyUnorderedDuplicateOrNonFinitePoints(points):
+    """Verify that comparison domain rejects empty unordered duplicate or nonfinite
+    points.
+    """
+
     with pytest.raises((TypeError, ValueError)):
         ComparisonDomain(points)
 
 
 def test_ComparisonDomainRequiresAnExplicitTuple():
+    """Verify that comparison domain requires an explicit tuple."""
+
     with pytest.raises(TypeError, match="tuple"):
         ComparisonDomain([0.0, 1.0])
 
 
 def test_ComparisonDomainMustLieInsideTheContinuousUniverse():
+    """Verify that comparison domain must lie inside the continuous universe."""
+
     leftSet = BuildContinuousSet(lambda coordinate: coordinate)
     rightSet = BuildContinuousSet(lambda coordinate: coordinate)
 
@@ -197,6 +233,8 @@ def test_ComparisonDomainMustLieInsideTheContinuousUniverse():
 
 
 def test_DiscreteRelationsRejectPartialComparisonDomains():
+    """Verify that discrete relations reject partial comparison domains."""
+
     leftSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.5, 1.0))
     rightSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.5, 1.0))
 
@@ -210,6 +248,8 @@ def test_DiscreteRelationsRejectPartialComparisonDomains():
 
 
 def test_RelationsFailClosedForDifferentUniverses():
+    """Verify that relations fail closed for different universes."""
+
     leftSet = BuildDiscreteSet((0.0, 1.0), (0.0, 1.0))
     rightSet = BuildDiscreteSet((0.0, 0.5, 1.0), (0.0, 0.5, 1.0))
 
@@ -241,11 +281,15 @@ def test_ComparisonPolicyRejectsAmbiguousOrInvalidConfiguration(
     relativeTolerance,
     errorType,
 ):
+    """Verify that comparison policy rejects ambiguous or invalid configuration."""
+
     with pytest.raises(errorType):
         ComparisonPolicy(mode, absoluteTolerance, relativeTolerance)
 
 
 def test_RelationsRequireAnExplicitComparisonPolicyObject():
+    """Verify that relations require an explicit comparison policy object."""
+
     leftSet = BuildDiscreteSet((0.0, 1.0), (0.0, 1.0))
     rightSet = BuildDiscreteSet((0.0, 1.0), (0.0, 1.0))
 
@@ -258,6 +302,8 @@ def test_RelationsRequireAnExplicitComparisonPolicyObject():
 
 @pytest.mark.parametrize("invalidGrade", [-0.1, 1.1, math.nan, math.inf, True])
 def test_ComparisonPolicyRejectsInvalidDirectGradeEvaluation(invalidGrade):
+    """Verify that comparison policy rejects invalid direct grade evaluation."""
+
     policy = ComparisonPolicy("exact")
 
     with pytest.raises((TypeError, ValueError)):

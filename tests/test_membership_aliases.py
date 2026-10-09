@@ -21,6 +21,8 @@ GRIDVALUES = (-1.0, 0.0, 0.2, 0.5, 0.8, 1.0, 2.0)
 
 @pytest.mark.parametrize(("alias", "historicalIdentifier", "parameters"), ALIASCASES)
 def test_CompatibilityRegistryNamesShareOneImplementation(alias, historicalIdentifier, parameters):
+    """Verify that compatibility registry names share one implementation."""
+
     aliasFunction = MFunction(alias, **parameters)
     historicalFunction = MFunction(historicalIdentifier, **parameters)
 
@@ -43,5 +45,7 @@ def test_CompatibilityRegistryNamesShareOneImplementation(alias, historicalIdent
     ],
 )
 def test_CompatibilityRegistryNameSharesParameterValidation(alias, parameters, message):
+    """Verify that compatibility registry name shares parameter validation."""
+
     with pytest.raises(ValueError, match=message):
         MFunction(alias, **parameters)

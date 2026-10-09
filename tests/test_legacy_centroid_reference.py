@@ -65,6 +65,8 @@ def _LegacyCentroid(membershipFunction, supportSet):
 
 @pytest.mark.parametrize(("identifier", "parameters", "supportSet", "expectedValue"), REFERENCECASES)
 def test_LegacyCentroidReferenceValues(identifier, parameters, supportSet, expectedValue):
+    """Preserve legacy centroid results on the fixed historical reference domains."""
+
     membershipFunction = MFunction(identifier, **parameters)
     fuzzySet = FuzzySet(membershipFunction, supportSet=supportSet)
 

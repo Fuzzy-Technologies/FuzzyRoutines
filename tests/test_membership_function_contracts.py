@@ -52,6 +52,8 @@ GRIDVALUES = tuple(index / 20.0 for index in range(-20, 61))
 
 @pytest.mark.parametrize(("identifier", "parameters", "inputValue", "expectedValue"), REFERENCECASES)
 def test_MembershipFunctionReferenceValues(identifier, parameters, inputValue, expectedValue):
+    """Compare each membership family with fixed independent coordinate/grade references."""
+
     membershipFunction = MFunction(identifier, **parameters)
 
     actualValue = membershipFunction.mju(inputValue)
@@ -63,6 +65,8 @@ def test_MembershipFunctionReferenceValues(identifier, parameters, inputValue, e
 
 @pytest.mark.parametrize(("identifier", "parameters"), RANGECASES)
 def test_MembershipFunctionValuesRemainWithinUnitInterval(identifier, parameters):
+    """Verify that membership function values remain within unit interval."""
+
     membershipFunction = MFunction(identifier, **parameters)
 
     for inputValue in GRIDVALUES:
@@ -74,6 +78,8 @@ def test_MembershipFunctionValuesRemainWithinUnitInterval(identifier, parameters
 
 
 def test_HyperbolicMembershipIsNonIncreasingAfterItsCutoff():
+    """Verify that hyperbolic membership is non increasing after its cutoff."""
+
     membershipFunction = MFunction("hyperbolic", a=2.0, b=2.0, c=0.0)
 
     values = [membershipFunction.mju(inputValue) for inputValue in GRIDVALUES if inputValue >= 0.0]
@@ -84,6 +90,8 @@ def test_HyperbolicMembershipIsNonIncreasingAfterItsCutoff():
 
 
 def test_ParabolicMembershipIsNonDecreasing():
+    """Verify that parabolic membership is non decreasing."""
+
     membershipFunction = MFunction("parabolic", a=0.2, b=0.8)
 
     values = [membershipFunction.mju(inputValue) for inputValue in GRIDVALUES]
@@ -92,6 +100,8 @@ def test_ParabolicMembershipIsNonDecreasing():
 
 
 def test_TriangleWithApexAtRightFootIncludesItsApex():
+    """Verify that triangle with apex at right foot includes its apex."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=1.0)
 
     assert membershipFunction.mju(1.0) == 1.0, (
@@ -103,6 +113,8 @@ def test_TriangleWithApexAtRightFootIncludesItsApex():
 
 
 def test_SymmetricMembershipFamiliesAreMirrorSymmetric():
+    """Verify that symmetric membership families are mirror symmetric."""
+
     bellFunction = MFunction("bell", a=0.0, b=0.25, c=0.5)
     exponentialFunction = MFunction("exponential", a=0.5, b=0.25)
     triangleFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
@@ -126,6 +138,10 @@ def test_SymmetricMembershipFamiliesAreMirrorSymmetric():
 
 
 def test_SigmoidalAndDesirabilityMembershipsIncreaseForTheirDeclaredParameters():
+    """Verify that sigmoidal and desirability memberships increase for their declared
+    parameters.
+    """
+
     sigmoidalFunction = MFunction("sigmoidal", a=2.0, b=0.5)
     desirabilityFunction = MFunction("desirability")
 
@@ -141,6 +157,8 @@ def test_SigmoidalAndDesirabilityMembershipsIncreaseForTheirDeclaredParameters()
 
 
 def test_CanonicalMathematicalModelUsesGitHubCompatibleMathMarkup():
+    """Verify that canonical mathematical model uses git hub compatible math markup."""
+
     repositoryRoot = Path(__file__).resolve().parents[1]
     documentPath = repositoryRoot / "docs" / "MATHEMATICAL_MODEL.md"
     document = documentPath.read_text(encoding="utf-8")

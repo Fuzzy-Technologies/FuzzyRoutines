@@ -9,10 +9,14 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, UniversalFuzzyScale
 
 
 def test_UniversalScaleConstructsOnlyRetainedLevels(monkeypatch):
+    """Verify that universal scale constructs only retained levels."""
+
     constructionCount = 0
     originalInitializer = FuzzySet.__init__
 
     def CountedInitializer(self, *arguments, **keywordArguments):
+        """Count actual fuzzy-set construction while preserving the original initializer."""
+
         nonlocal constructionCount
         constructionCount += 1
         originalInitializer(self, *arguments, **keywordArguments)

@@ -37,6 +37,8 @@ def BuildContinuousSet(membershipFunction):
 
 
 def test_StandardComplementUsesExplicitOneMinusMembershipPolicy():
+    """Verify that standard complement uses explicit one minus membership policy."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
 
     complement = Complement(fuzzySet, NegationPolicy("standard"))
@@ -49,6 +51,8 @@ def test_StandardComplementUsesExplicitOneMinusMembershipPolicy():
 
 @pytest.mark.parametrize(("family", "alpha"), [("parametric", 0.3), ("parabolic", 0.7)])
 def test_ParameterizedComplementsMatchAcceptedLegacyScalarContracts(family, alpha):
+    """Verify that parameterized complements match accepted legacy scalar contracts."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
     policy = NegationPolicy(family, alpha)
     expectedOperator = FuzzyNOT if family == "parametric" else FuzzyNOTParabolic
@@ -76,11 +80,15 @@ def test_ParameterizedComplementsMatchAcceptedLegacyScalarContracts(family, alph
     ],
 )
 def test_NegationPoliciesRejectIncompleteOrInvalidConfiguration(family, alpha, errorType):
+    """Verify that negation policies reject incomplete or invalid configuration."""
+
     with pytest.raises(errorType):
         NegationPolicy(family, alpha)
 
 
 def test_ComplementRequiresAnExplicitPolicyObject():
+    """Verify that complement requires an explicit policy object."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
 
     with pytest.raises(TypeError, match="NegationPolicy"):
@@ -89,6 +97,8 @@ def test_ComplementRequiresAnExplicitPolicyObject():
 
 @pytest.mark.parametrize("family", FAMILIES)
 def test_SetIntersectionAndUnionMatchAcceptedScalarFamilies(family):
+    """Verify that set intersection and union match accepted scalar families."""
+
     leftSet = BuildContinuousSet(lambda coordinate: coordinate)
     rightSet = BuildContinuousSet(lambda coordinate: 1.0 - coordinate)
     intersection = Intersection(leftSet, rightSet, TNormPolicy(family))
@@ -111,6 +121,8 @@ def test_SetIntersectionAndUnionMatchAcceptedScalarFamilies(family):
 
 
 def test_BinaryOperationsRequireExplicitPolicyObjects():
+    """Verify that binary operations require explicit policy objects."""
+
     leftSet = BuildContinuousSet(lambda coordinate: coordinate)
     rightSet = BuildContinuousSet(lambda coordinate: 1.0 - coordinate)
 
@@ -123,11 +135,15 @@ def test_BinaryOperationsRequireExplicitPolicyObjects():
 
 @pytest.mark.parametrize("policyType", [TNormPolicy, SNormPolicy])
 def test_BinaryPoliciesRejectUnknownFamilies(policyType):
+    """Verify that binary policies reject unknown families."""
+
     with pytest.raises(ValueError, match="unknown"):
         policyType("unknown")
 
 
 def test_BinaryOperationsFailClosedForDifferentUniverses():
+    """Verify that binary operations fail closed for different universes."""
+
     closedUniverseSet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True),
         lambda coordinate: coordinate,
@@ -145,6 +161,8 @@ def test_BinaryOperationsFailClosedForDifferentUniverses():
 
 
 def test_DiscreteSetOperationsPreserveTheDeclaredUniverse():
+    """Verify that discrete set operations preserve the declared universe."""
+
     universe = DiscreteUniverse((0.0, 0.5, 1.0))
     leftSet = ScalarFuzzySet(universe, lambda coordinate: coordinate)
     rightSet = ScalarFuzzySet(universe, lambda coordinate: 1.0 - coordinate)
@@ -159,6 +177,8 @@ def test_DiscreteSetOperationsPreserveTheDeclaredUniverse():
 
 
 def test_SetMembershipRejectsCoordinatesOutsideItsUniverse():
+    """Verify that set membership rejects coordinates outside its universe."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
 
     with pytest.raises(ValueError, match="belong"):
@@ -170,6 +190,8 @@ def test_SetMembershipRejectsCoordinatesOutsideItsUniverse():
 
 @pytest.mark.parametrize("invalidGrade", [-0.1, 1.1, math.nan, math.inf, True])
 def test_SetMembershipRejectsInvalidGrades(invalidGrade):
+    """Verify that set membership rejects invalid grades."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: invalidGrade)
 
     with pytest.raises((TypeError, ValueError)):
@@ -178,6 +200,8 @@ def test_SetMembershipRejectsInvalidGrades(invalidGrade):
 
 @pytest.mark.parametrize("family", FAMILIES)
 def test_SetOperationsAreCommutativeAndAssociative(family):
+    """Verify that set operations are commutative and associative."""
+
     firstSet = BuildContinuousSet(lambda coordinate: coordinate)
     secondSet = BuildContinuousSet(lambda coordinate: 0.25)
     thirdSet = BuildContinuousSet(lambda coordinate: 1.0 - coordinate / 2)
@@ -223,6 +247,8 @@ def test_SetOperationsAreCommutativeAndAssociative(family):
 
 @pytest.mark.parametrize("family", FAMILIES)
 def test_SetOperationsSatisfyBoundaryAndDeMorganLaws(family):
+    """Verify that set operations satisfy boundary and De Morgan laws."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
     otherSet = BuildContinuousSet(lambda coordinate: 0.25 + coordinate / 2)
     zeroSet = BuildContinuousSet(lambda coordinate: 0.0)
@@ -275,6 +301,8 @@ def test_SetOperationsSatisfyBoundaryAndDeMorganLaws(family):
 
 
 def test_OperationsDoNotMutateTheirOperands():
+    """Verify that operations do not mutate their operands."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
     otherSet = BuildContinuousSet(lambda coordinate: 1.0 - coordinate)
     originalGrades = tuple(fuzzySet.Membership(coordinate) for coordinate in GRID)
@@ -308,6 +336,8 @@ def test_DifferenceMatchesExplicitIntersectionWithComplement(
     negationFamily,
     alpha,
 ):
+    """Verify that difference matches explicit intersection with complement."""
+
     leftSet = BuildContinuousSet(lambda coordinate: 0.2 + coordinate / 2)
     rightSet = BuildContinuousSet(lambda coordinate: 0.8 - coordinate / 2)
     tNormPolicy = TNormPolicy(tNormFamily)
@@ -328,6 +358,8 @@ def test_DifferenceMatchesExplicitIntersectionWithComplement(
 
 
 def test_DifferenceIsDirectionalRatherThanCommutative():
+    """Verify that difference is directional rather than commutative."""
+
     leftSet = BuildContinuousSet(lambda coordinate: 0.8)
     rightSet = BuildContinuousSet(lambda coordinate: 0.2)
     tNormPolicy = TNormPolicy("logic")
@@ -344,6 +376,8 @@ def test_DifferenceIsDirectionalRatherThanCommutative():
 
 
 def test_DifferenceMatchesClassicalSetDifferenceForCrispGrades():
+    """Verify that difference matches classical set difference for crisp grades."""
+
     universe = DiscreteUniverse((0.0, 1.0, 2.0))
     leftSet = ScalarFuzzySet(universe, {0.0: 1.0, 1.0: 1.0, 2.0: 0.0}.__getitem__)
     rightSet = ScalarFuzzySet(universe, {0.0: 0.0, 1.0: 1.0, 2.0: 1.0}.__getitem__)
@@ -361,6 +395,8 @@ def test_DifferenceMatchesClassicalSetDifferenceForCrispGrades():
 
 
 def test_FuzzySelfDifferenceDoesNotClaimClassicalEmptiness():
+    """Verify that fuzzy self difference does not claim classical emptiness."""
+
     fuzzySet = BuildContinuousSet(lambda coordinate: coordinate)
 
     difference = Difference(
@@ -376,6 +412,8 @@ def test_FuzzySelfDifferenceDoesNotClaimClassicalEmptiness():
 
 
 def test_DifferenceRequiresExplicitPolicyObjects():
+    """Verify that difference requires explicit policy objects."""
+
     leftSet = BuildContinuousSet(lambda coordinate: coordinate)
     rightSet = BuildContinuousSet(lambda coordinate: 1.0 - coordinate)
 
@@ -387,6 +425,8 @@ def test_DifferenceRequiresExplicitPolicyObjects():
 
 
 def test_DifferenceFailsClosedForDifferentUniverses():
+    """Verify that difference fails closed for different universes."""
+
     closedUniverseSet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True),
         lambda coordinate: coordinate,
@@ -406,6 +446,8 @@ def test_DifferenceFailsClosedForDifferentUniverses():
 
 
 def test_DifferencePreservesTheDeclaredUniverse():
+    """Verify that difference preserves the declared universe."""
+
     universe = DiscreteUniverse((0.0, 0.5, 1.0))
     leftSet = ScalarFuzzySet(universe, lambda coordinate: coordinate)
     rightSet = ScalarFuzzySet(universe, lambda coordinate: 1.0 - coordinate)

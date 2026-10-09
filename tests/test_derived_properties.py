@@ -22,6 +22,8 @@ from fuzzyroutines.FuzzyRoutines import MFunction
 
 
 def test_TrianglePropertiesDistinguishSupportClosureCoreAndBoundary():
+    """Verify that triangle properties distinguish support closure core and boundary."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
 
     properties = DeriveProperties(membershipFunction, ContinuousUniverse())
@@ -39,6 +41,8 @@ def test_TrianglePropertiesDistinguishSupportClosureCoreAndBoundary():
 
 
 def test_GaussianSupportRemainsRealLineDespiteFloatingPointUnderflow():
+    """Verify that gaussian support remains real line despite floating point underflow."""
+
     membershipFunction = MFunction("gaussian", a=0.0, b=1.0)
 
     properties = DeriveProperties(membershipFunction, ContinuousUniverse())
@@ -53,6 +57,8 @@ def test_GaussianSupportRemainsRealLineDespiteFloatingPointUnderflow():
 
 
 def test_ShoulderPropertiesRetainUnboundedSupportAndCore():
+    """Verify that shoulder properties retain unbounded support and core."""
+
     membershipFunction = MFunction("sShoulder", a=0.0, b=1.0)
 
     properties = DeriveProperties(membershipFunction, ContinuousUniverse())
@@ -64,6 +70,8 @@ def test_ShoulderPropertiesRetainUnboundedSupportAndCore():
 
 
 def test_LogisticCanHaveHeightOneWithAnEmptyCore():
+    """Verify that logistic can have height one with an empty core."""
+
     membershipFunction = MFunction("logistic", a=2.0, b=0.0)
 
     properties = DeriveProperties(membershipFunction, ContinuousUniverse())
@@ -74,6 +82,8 @@ def test_LogisticCanHaveHeightOneWithAnEmptyCore():
 
 
 def test_BoundedLogisticUniverseProducesANonNormalSet():
+    """Verify that bounded logistic universe produces a nonnormal set."""
+
     membershipFunction = MFunction("logistic", a=2.0, b=0.0)
     universe = ContinuousUniverse(-1.0, 1.0, leftClosed=True, rightClosed=True)
 
@@ -85,6 +95,8 @@ def test_BoundedLogisticUniverseProducesANonNormalSet():
 
 
 def test_UniverseOutsideTriangleProducesTheEmptyFuzzySet():
+    """Verify that universe outside triangle produces the empty fuzzy set."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     universe = ContinuousUniverse(3.0, 4.0, leftClosed=True, rightClosed=True)
 
@@ -98,6 +110,8 @@ def test_UniverseOutsideTriangleProducesTheEmptyFuzzySet():
 
 
 def test_RelativeSupportClosureDoesNotImportAnExternalLimitPoint():
+    """Verify that relative support closure does not import an external limit point."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     universe = ContinuousUniverse(2.0, 3.0, leftClosed=True, rightClosed=True)
 
@@ -110,6 +124,8 @@ def test_RelativeSupportClosureDoesNotImportAnExternalLimitPoint():
 
 
 def test_OpenUniverseClipsRegionsWithoutLosingSupremum():
+    """Verify that open universe clips regions without losing supremum."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=False, rightClosed=False)
 
@@ -122,6 +138,8 @@ def test_OpenUniverseClipsRegionsWithoutLosingSupremum():
 
 
 def test_DiscreteUniversePropertiesAreExactAtEveryDeclaredCoordinate():
+    """Verify that discrete universe properties are exact at every declared coordinate."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     universe = DiscreteUniverse((0.0, 0.5, 1.0, 1.5, 2.0, 3.0))
 
@@ -138,6 +156,8 @@ def test_DiscreteUniversePropertiesAreExactAtEveryDeclaredCoordinate():
 
 
 def test_SampledContinuousQueryCarriesApproximationProvenance():
+    """Verify that sampled continuous query carries approximation provenance."""
+
     membershipFunction = MFunction("gaussian", a=0.0, b=1.0)
     analysisDomain = IntegrationDomain(-2.0, 2.0)
 
@@ -154,6 +174,8 @@ def test_SampledContinuousQueryCarriesApproximationProvenance():
 
 @pytest.mark.parametrize("sampleCount", [True, 1.5, "5"])
 def test_SampledContinuousQueryRejectsNonIntegerCounts(sampleCount):
+    """Verify that sampled continuous query rejects noninteger counts."""
+
     with pytest.raises(TypeError, match="sampleCount"):
         SampleProperties(
             MFunction("gaussian", a=0.0, b=1.0),
@@ -163,6 +185,8 @@ def test_SampledContinuousQueryRejectsNonIntegerCounts(sampleCount):
 
 
 def test_SampledContinuousQueryRequiresAtLeastTwoPoints():
+    """Verify that sampled continuous query requires at least two points."""
+
     with pytest.raises(ValueError, match="at least two"):
         SampleProperties(
             MFunction("gaussian", a=0.0, b=1.0),
@@ -172,6 +196,8 @@ def test_SampledContinuousQueryRequiresAtLeastTwoPoints():
 
 
 def test_AllAnalyticalFamiliesReturnValidDerivedPartitions():
+    """Verify that all analytical families return valid derived partitions."""
+
     cases = (
         MFunction("hyperbolic", a=2.0, b=2.0, c=0.0),
         MFunction("bell", a=0.0, b=0.25, c=0.5),
@@ -195,6 +221,8 @@ def test_AllAnalyticalFamiliesReturnValidDerivedPartitions():
 
 
 def test_ContinuousIntervalsRejectEmptyOrInvalidComponents():
+    """Verify that continuous intervals reject empty or invalid components."""
+
     with pytest.raises(ValueError, match="singleton"):
         ContinuousInterval(1.0, 1.0)
 
@@ -206,11 +234,15 @@ def test_ContinuousIntervalsRejectEmptyOrInvalidComponents():
 
 
 def test_DerivationRejectsUnknownUniverseObjects():
+    """Verify that derivation rejects unknown universe objects."""
+
     with pytest.raises(TypeError, match="universe"):
         DeriveProperties(MFunction("gaussian", a=0.0, b=1.0), object())
 
 
 def test_DerivationDoesNotTreatNaNAsAValidMembershipGrade():
+    """Verify that derivation does not treat NaN as a valid membership grade."""
+
     membershipFunction = MFunction("gaussian", a=0.0, b=1.0)
     membershipFunction.mju = lambda coordinate: math.nan
 

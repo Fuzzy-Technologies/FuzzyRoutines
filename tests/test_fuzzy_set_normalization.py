@@ -21,6 +21,8 @@ from fuzzyroutines.FuzzyRoutines import MFunction
 
 
 def test_DiscreteHeightEvaluatesEveryDeclaredCoordinateExactlyOnce():
+    """Verify that discrete height evaluates every declared coordinate exactly once."""
+
     universe = DiscreteUniverse((-1.0, 0.0, 1.0, 2.0))
     evaluations = []
 
@@ -39,6 +41,10 @@ def test_DiscreteHeightEvaluatesEveryDeclaredCoordinateExactlyOnce():
 
 
 def test_DiscreteNormalizationProducesExactHeightOneWithoutMutatingSource():
+    """Verify that discrete normalization produces exact height one without mutating
+    source.
+    """
+
     universe = DiscreteUniverse((0.0, 1.0, 2.0))
     fuzzySet = ScalarFuzzySet(universe, lambda coordinate: (0.2, 0.4, 0.1)[int(coordinate)])
     originalGrades = tuple(fuzzySet.Membership(point) for point in universe.points)
@@ -63,6 +69,8 @@ def test_DiscreteNormalizationProducesExactHeightOneWithoutMutatingSource():
 
 
 def test_DiscreteNormalizationSnapshotsEveryGradeExactlyOnce():
+    """Verify that discrete normalization snapshots every grade exactly once."""
+
     universe = DiscreteUniverse((0.0, 1.0, 2.0))
     evaluationCount = 0
 
@@ -86,6 +94,8 @@ def test_DiscreteNormalizationSnapshotsEveryGradeExactlyOnce():
 
 
 def test_DiscreteNormalizationEvidenceDoesNotEscapeItsUniverse():
+    """Verify that discrete normalization evidence does not escape its universe."""
+
     sourceUniverse = DiscreteUniverse((0.0, 1.0))
     sourceSet = ScalarFuzzySet(
         sourceUniverse,
@@ -115,6 +125,8 @@ def test_DiscreteNormalizationEvidenceDoesNotEscapeItsUniverse():
 
 
 def test_NormalizationRejectsZeroHeightExplicitly():
+    """Verify that normalization rejects zero height explicitly."""
+
     fuzzySet = ScalarFuzzySet(DiscreteUniverse((0.0, 1.0)), lambda coordinate: 0.0)
 
     with pytest.raises(ValueError, match="zero-height"):
@@ -122,6 +134,8 @@ def test_NormalizationRejectsZeroHeightExplicitly():
 
 
 def test_ContinuousNormalizationRejectsAnalyticallyProvedZeroHeight():
+    """Verify that continuous normalization rejects analytically proved zero height."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
     fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(2.0, 3.0, leftClosed=True, rightClosed=True),
@@ -135,6 +149,8 @@ def test_ContinuousNormalizationRejectsAnalyticallyProvedZeroHeight():
 
 
 def test_ContinuousAnalyticalHeightReusesDerivedPropertyContract():
+    """Verify that continuous analytical height reuses derived property contract."""
+
     membershipFunction = MFunction("logistic", a=2.0, b=0.0)
     universe = ContinuousUniverse(-1.0, 1.0, leftClosed=True, rightClosed=True)
     fuzzySet = ScalarFuzzySet(universe, membershipFunction.mju)
@@ -154,6 +170,8 @@ def test_ContinuousAnalyticalHeightReusesDerivedPropertyContract():
 
 
 def test_ContinuousNormalizationSnapshotsMutableAnalyticalParameters():
+    """Verify that continuous normalization snapshots mutable analytical parameters."""
+
     membershipFunction = MFunction("logistic", a=2.0, b=0.0)
     universe = ContinuousUniverse(-1.0, 1.0, leftClosed=True, rightClosed=True)
     fuzzySet = ScalarFuzzySet(universe, membershipFunction.mju)
@@ -172,6 +190,8 @@ def test_ContinuousNormalizationSnapshotsMutableAnalyticalParameters():
 
 
 def test_ContinuousNormalizationEvidenceDoesNotEscapeItsUniverse():
+    """Verify that continuous normalization evidence does not escape its universe."""
+
     membershipFunction = MFunction("logistic", a=2.0, b=0.0)
     sourceUniverse = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
     sourceSet = ScalarFuzzySet(sourceUniverse, membershipFunction.mju)
@@ -207,6 +227,8 @@ def test_ContinuousNormalizationEvidenceDoesNotEscapeItsUniverse():
 
 
 def test_ContinuousSupremumNeedNotBeAttainedForNormality():
+    """Verify that continuous supremum need not be attained for normality."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=False, rightClosed=False)
     fuzzySet = ScalarFuzzySet(universe, membershipFunction.mju)
@@ -218,6 +240,8 @@ def test_ContinuousSupremumNeedNotBeAttainedForNormality():
 
 
 def test_GenericContinuousCallableFailsClosedWithoutExactHeightEvidence():
+    """Verify that generic continuous callable fails closed without exact height evidence."""
+
     fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True),
         lambda coordinate: 0.5 + coordinate / 4,
@@ -230,6 +254,8 @@ def test_GenericContinuousCallableFailsClosedWithoutExactHeightEvidence():
 
 @pytest.mark.parametrize("tolerance", [-1.0, float("nan"), float("inf"), True])
 def test_NormalityRejectsInvalidTolerance(tolerance):
+    """Verify that normality rejects invalid tolerance."""
+
     fuzzySet = ScalarFuzzySet(DiscreteUniverse((0.0,)), lambda coordinate: 1.0)
 
     with pytest.raises((TypeError, ValueError), match="tolerance"):
@@ -237,6 +263,8 @@ def test_NormalityRejectsInvalidTolerance(tolerance):
 
 
 def test_NormalityToleranceIsAbsoluteAndExplicit():
+    """Verify that normality tolerance is absolute and explicit."""
+
     fuzzySet = ScalarFuzzySet(DiscreteUniverse((0.0,)), lambda coordinate: 1.0 - 5e-13)
 
     assert IsNormal(fuzzySet)
@@ -245,5 +273,7 @@ def test_NormalityToleranceIsAbsoluteAndExplicit():
 
 @pytest.mark.parametrize("operation", [Height, IsNormal, Normalize])
 def test_HeightAwareHelpersRequireScalarFuzzySets(operation):
+    """Verify that height aware helpers require scalar fuzzy sets."""
+
     with pytest.raises(TypeError, match="ScalarFuzzySet"):
         operation(object())

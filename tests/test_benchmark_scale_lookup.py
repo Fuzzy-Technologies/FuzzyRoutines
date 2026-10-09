@@ -18,6 +18,8 @@ from tools.benchmark_scale_lookup import (
 
 
 def test_BenchmarkScaleReportSeparatesConstructionAndLookup():
+    """Verify that benchmark scale report separates construction and lookup."""
+
     report = BuildReport()
 
     assert report["sample_count"] == MINIMUMSAMPLES
@@ -33,6 +35,8 @@ def test_BenchmarkScaleReportSeparatesConstructionAndLookup():
 
 
 def test_BenchmarkScaleRejectsInsufficientSamples():
+    """Verify that benchmark scale rejects insufficient samples."""
+
     try:
         Measure(lambda: None, MINIMUMSAMPLES - 1)
 
@@ -44,6 +48,8 @@ def test_BenchmarkScaleRejectsInsufficientSamples():
 
 
 def test_BenchmarkScaleMainEmitsJson(capsys):
+    """Verify that benchmark scale main emits JSON."""
+
     Main([])
     report = json.loads(capsys.readouterr().out)
 

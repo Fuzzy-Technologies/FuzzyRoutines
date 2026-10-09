@@ -12,6 +12,7 @@ from tools.documentation_gates import (
     ValidateGeneratedPolicy,
     ValidateRenderedLinks,
     ValidateSourceLinks,
+    ValidateTestDocumentation,
 )
 
 PROJECTROOT = Path(__file__).parents[1]
@@ -40,6 +41,67 @@ def test_CurrentGeneratedOutputPolicyMatchesAcceptedAdr():
     """Keep generated-reference drift inapplicable by not committing output."""
 
     assert ValidateGeneratedPolicy() == ()
+
+
+def test_AllTestDeclarationsHaveNonemptySourceDocstrings():
+    """Cover every tracked test class, method, fixture and nested helper."""
+
+    assert ValidateTestDocumentation() == ()
+
+
+def test_TestDocumentationReportsNestedAndAsyncDeclarationsWithoutImport(tmpPath):
+    """Inspect all scopes statically even when module import would fail."""
+
+    _Write(
+        tmpPath / "tests" / "test_static.py",
+        'raise RuntimeError("This module must never be imported")\n'
+        'class Fixture:\n'
+        '    async def Evaluate(self):\n'
+        '        def Nested():\n'
+        '            return 1\n'
+        '        return Nested()\n',
+    )
+
+    violations = ValidateTestDocumentation(tmpPath)
+
+    assert len(violations) == 4
+    assert any("test module has no source docstring" in value for value in violations)
+    assert any("Fixture has no source docstring" in value for value in violations)
+    assert any("Evaluate has no source docstring" in value for value in violations)
+    assert any("Nested has no source docstring" in value for value in violations)
+
+
+def test_TestDocumentationAcceptsDeclaredContractsAndIgnoresFixtureStrings(tmpPath):
+    """Accept documented declarations without interpreting generated fixture code."""
+
+    _Write(
+        tmpPath / "tests" / "test_static.py",
+        '\"\"\"Describe the static fixture.\"\"\"\n'
+        'source = "def Generated(): return 1"\n'
+        'class Fixture:\n'
+        '    \"\"\"Own the fixture contract.\"\"\"\n'
+        '    async def Evaluate(self):\n'
+        '        \"\"\"Evaluate the fixture.\"\"\"\n'
+        '        def Nested():\n'
+        '            \"\"\"Return the fixture value.\"\"\"\n'
+        '            return 1\n'
+        '        return Nested()\n',
+    )
+
+    assert ValidateTestDocumentation(tmpPath) == ()
+
+
+def test_TestDocumentationRejectsWhitespaceAndInvalidSyntax(tmpPath):
+    """Report unusable docstrings and unreadable source with their file paths."""
+
+    _Write(tmpPath / "tests" / "blank.py", '\"\"\"   \"\"\"\ndef Empty():\n    \"\"\"   \"\"\"\n    pass\n')
+    _Write(tmpPath / "tests" / "invalid.py", 'def Broken(:\n')
+
+    violations = ValidateTestDocumentation(tmpPath)
+
+    assert any("blank.py:1: test module" in value for value in violations)
+    assert any("Empty has no source docstring" in value for value in violations)
+    assert any("invalid.py: cannot inspect test documentation" in value for value in violations)
 
 
 def test_CurrentReleaseNotesDoNotDescribeTravisAsActive():

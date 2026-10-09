@@ -11,6 +11,8 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
 
 def test_GaussianPositiveSupportExtendsBeyondLegacyIntegrationWindow():
+    """Verify that gaussian positive support extends beyond legacy integration window."""
+
     membershipFunction = MFunction("gaussian", a=0.0, b=1.0)
     fuzzySet = FuzzySet(membershipFunction, supportSet=(-1.0, 1.0))
 
@@ -20,6 +22,8 @@ def test_GaussianPositiveSupportExtendsBeyondLegacyIntegrationWindow():
 
 
 def test_ShoulderCoreExtendsBeyondLegacyIntegrationWindow():
+    """Verify that shoulder core extends beyond legacy integration window."""
+
     membershipFunction = MFunction("sShoulder", a=0.0, b=1.0)
     fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 1.0))
 
@@ -28,6 +32,8 @@ def test_ShoulderCoreExtendsBeyondLegacyIntegrationWindow():
 
 
 def test_BoundedTriangleSupportCanDifferFromIntegrationWindow():
+    """Verify that bounded triangle support can differ from integration window."""
+
     membershipFunction = MFunction("triangle", a=0.0, b=2.0, c=1.0)
     fuzzySet = FuzzySet(membershipFunction, supportSet=(-1.0, 3.0))
 
@@ -38,6 +44,8 @@ def test_BoundedTriangleSupportCanDifferFromIntegrationWindow():
 
 
 def test_SupportSetMutationChangesOnlyLegacyIntegrationWindow():
+    """Verify that support set mutation changes only legacy integration window."""
+
     membershipFunction = MFunction("sShoulder", a=0.0, b=1.0)
     fuzzySet = FuzzySet(membershipFunction, supportSet=(0.0, 1.0))
     originalMembership = membershipFunction.mju(1.5)

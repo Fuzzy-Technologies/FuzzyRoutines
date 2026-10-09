@@ -9,10 +9,14 @@ from tools.check_license_headers import PROJECTROOT, ValidateHeader, ValidateRep
 
 
 def test_CurrentRepositoryPassesLicensePolicy():
+    """Verify that current repository passes license policy."""
+
     assert ValidateRepository() == ()
 
 
 def test_PythonHeaderRequiresProjectAndApacheFields(tmpPath):
+    """Verify that python header requires project and apache fields."""
+
     projectRoot = tmpPath
     modulePath = projectRoot / "module.py"
     modulePath.write_text('"""Missing ownership header."""\n', encoding="utf-8")
@@ -27,6 +31,8 @@ def test_PythonHeaderRequiresProjectAndApacheFields(tmpPath):
 
 
 def test_HeaderRejectsConflictingLicenseIdentifier(tmpPath):
+    """Verify that header rejects conflicting license identifier."""
+
     documentPath = tmpPath / "document.md"
     documentPath.write_text(
         "<!--\n"
@@ -43,5 +49,7 @@ def test_HeaderRejectsConflictingLicenseIdentifier(tmpPath):
 
 
 def test_CanonicalLicenseAndNoticeAreTracked():
+    """Verify that canonical license and notice are tracked."""
+
     assert (PROJECTROOT / "LICENSE").is_file()
     assert (PROJECTROOT / "NOTICE").is_file()
