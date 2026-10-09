@@ -80,6 +80,10 @@ supported operation-by-operation migration.
 
 #### Fixed
 
+- Task-closing automation reads standalone completion directives only. Context
+  references, negated prose and Markdown examples cannot prematurely close
+  unfinished release tasks after a merge.
+
 - The process test runner counts collection-level skipped modules once across
   parallel/serial phases. Optional retained JUnit evidence supports an exact
   sequential/process test-identity comparison; new CI measures line and branch
