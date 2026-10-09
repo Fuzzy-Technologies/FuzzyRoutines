@@ -19,6 +19,7 @@ import json
 import re
 import sys
 import tomllib
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -122,6 +123,19 @@ def TranslationHash(text: str) -> str:
 
     normalized = text.replace("\r\n", "\n").replace("\r", "\n")
     return f"sha256:{hashlib.sha256(normalized.encode()).hexdigest()}"
+
+
+def ProtectedPageParts(text: str) -> tuple:
+    """Retain executable fences and mathematical expressions across prose translations."""
+
+    fencePattern = re.compile(r"^(`{3,}|~{3,})([^\n]*)\n(.*?)^\1[ \t]*$", re.MULTILINE | re.DOTALL)
+    fences = tuple((match.group(2).strip(), match.group(3).rstrip()) for match in fencePattern.finditer(text))
+    prose = fencePattern.sub("", text)
+    displayPattern = re.compile(r"^\$\$[ \t]*\n(.*?)^\$\$[ \t]*$", re.MULTILINE | re.DOTALL)
+    displays = tuple(re.sub(r"\s+", "", match.group(1)) for match in displayPattern.finditer(prose))
+    prose = displayPattern.sub("", prose)
+    inline = Counter(re.sub(r"\s+", "", match) for match in re.findall(r"(?<![\\$])\$(?!\$)(.+?)(?<!\\)\$", prose))
+    return fences, displays, tuple(sorted(inline.items()))
 
 
 def _PageIdentifier(path: Path, contentRoot: Path) -> str:
@@ -961,6 +975,12 @@ def ValidateLocales(
                 continue
 
             resolvedTranslation = projectRoot / translationPath
+
+            if unit.kind == "page" and resolvedTranslation.is_file():
+                translatedBody = _ReadCanonicalText(resolvedTranslation)
+
+                if ProtectedPageParts(translatedBody) != ProtectedPageParts(unit.body):
+                    diagnostics.append(f"{recordLabel}: {locale} translated code or mathematical expressions differ from canonical source")
 
             if not translationPath or not resolvedTranslation.is_file():
                 diagnostics.append(

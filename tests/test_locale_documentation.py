@@ -11,6 +11,7 @@ from tools.locale_documentation import (
     CanonicalHash,
     CanonicalUnit,
     DiscoverCanonicalUnits,
+    ProtectedPageParts,
     TranslationHash,
     ValidateLocales,
 )
@@ -177,6 +178,16 @@ def test_TranslationEditInvalidatesHumanReviewEvenWhenEnglishIsUnchanged(tmpPath
     report = ValidateLocales(tmpPath)
     assert report.states["page:index"]["ru"] == "stale"
     assert any("translation changed" in item for item in report.diagnostics)
+
+
+def test_TranslationProtectionDetectsChangedCodeAndFormulaButAllowsProse():
+    """A fluent translation must not silently alter executable examples or equations."""
+
+    source = "# English\nValue $x/2$\n\n$$\na+b\n$$\n\n```python\nvalue = 1\n```\n"
+    translated = source.replace("English", "Русский").replace("Value", "Значение")
+    assert ProtectedPageParts(source) == ProtectedPageParts(translated)
+    assert ProtectedPageParts(source) != ProtectedPageParts(translated.replace("x/2", "x/3"))
+    assert ProtectedPageParts(source) != ProtectedPageParts(translated.replace("value = 1", "value = 2"))
 
 
 def test_CurrentGlossariesUseReviewedMathematicalTerminology():

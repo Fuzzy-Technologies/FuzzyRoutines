@@ -127,7 +127,7 @@ plugins:
 ''', encoding="utf-8")
     pageTranslation = sourceRoot / "docs/site/content/ru/index.md"
     pageTranslation.parent.mkdir(parents=True)
-    pageTranslation.write_text("# Расчёт {#calculation}\n\n::: sample.Calculate\n", encoding="utf-8")
+    pageTranslation.write_text("# Расчёт {#calculation}\n\n![Общая фигура](../en/assets/figure.svg)\n\n::: sample.Calculate\n", encoding="utf-8")
     symbolTranslation = sourceRoot / "docs/i18n/ru-calculate.md"
     symbolTranslation.parent.mkdir()
     symbolTranslation.write_text("Вычислить значение без изменения входных данных.", encoding="utf-8")
@@ -147,5 +147,6 @@ plugins:
     assert 'id="sample.Calculate"' in rendered
     assert "Вычислить значение без изменения входных данных." in rendered
     assert "Предварительная версия для рецензирования" in rendered
+    assert 'src="assets/figure.svg"' in rendered
     search = json.loads((outputRoot / "ru/site/search/search_index.json").read_text(encoding="utf-8"))
     assert any("Вычислить значение" in item["text"] for item in search["docs"])

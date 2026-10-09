@@ -84,6 +84,9 @@ def test_DraftLocalesAreAvailableOnlyInAnExplicitReviewArtifact(tmpPath):
     composePagesSite.ComposeSite(apiRoot, reviewRoot, localeRoot, includeDrafts=True)
     assert "Reviewed documentation is not available" in (publicRoot / "api/latest/ru/index.html").read_text(encoding="utf-8")
     assert (reviewRoot / "api/latest/ru/index.html").read_text(encoding="utf-8") == "<html>English API</html>"
+    deepFallback = (publicRoot / "api/latest/ru/api/index.html").read_text(encoding="utf-8")
+    assert "/api/latest/en/api/" in deepFallback
+    assert 'href="../../../../assets/site.css"' in deepFallback
 
 
 def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):

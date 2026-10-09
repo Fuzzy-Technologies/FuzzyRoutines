@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import inspect
 import json
+import posixpath
 import re
 import shutil
 import tomllib
@@ -64,8 +65,6 @@ def PageDestination(unit, project):
 
 def RewriteExternalLinks(text, sourcePath, destination, destinations):
     """Keep staged mathematical/migration references linked to their real sources."""
-
-    import posixpath
 
     def Replace(match):
         """Resolve relative Markdown links before moving a canonical external page."""
@@ -127,6 +126,8 @@ def StageLocale(projectRoot, outputRoot, locale, project, units, records, report
 
         if unit.kind == "page":
             destination = destinations[unit.sourcePath]
+            assetPrefix = posixpath.relpath("assets", posixpath.dirname(destination)) + "/"
+            body = re.sub(r"(?<=\]\()(?:(?:\.\./)+en/assets/)", assetPrefix, body)
 
             if not unit.sourcePath.startswith(CONTENTROOT + "/"):
                 body = RewriteExternalLinks(body, unit.sourcePath, destination, destinations)
@@ -230,6 +231,11 @@ def BuildLocale(projectRoot, outputRoot, locale, project, units, records, report
     for artifact in ("objects.inv", "search/search_index.json"):
         if not (siteRoot / artifact).is_file():
             raise AssertionError(f"missing {locale} artifact: {artifact}")
+
+    sourceAssets = projectRoot / project["branding"]["assetRoot"]
+    for asset in sourceAssets.rglob("*"):
+        if asset.is_file() and (siteRoot / "assets" / asset.relative_to(sourceAssets)).read_bytes() != asset.read_bytes():
+            raise AssertionError(f"shared asset changed in {locale}: {asset.name}")
 
     (outputRoot / locale / "evidence.json").write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"Locale reference: {locale} PASS ({len(evidence['states'])} units; approved={evidence['approved']})")

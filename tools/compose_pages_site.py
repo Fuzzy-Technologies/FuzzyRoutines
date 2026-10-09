@@ -94,11 +94,12 @@ def RecreateOutput(outputRoot):
     return resolvedOutput
 
 
-def WriteLocaleFallback(routeRoot, locale, languageName, statusText):
+def WriteLocaleFallback(routeRoot, locale, languageName, statusText, pageRoute=""):
     """Write an accessible locale placeholder linked to canonical English."""
 
-    canonicalUrl = f"{PUBLICROOT}/api/latest/{locale}/"
-    englishUrl = f"{PUBLICROOT}/api/latest/en/"
+    canonicalUrl = f"{PUBLICROOT}/api/latest/{locale}/{pageRoute}"
+    englishUrl = f"{PUBLICROOT}/api/latest/en/{pageRoute}"
+    stylesheetPath = "../" * (3 + pageRoute.count("/")) + "assets/site.css"
     versionsUrl = f"{PUBLICROOT}/api/versions/"
     productUrl = f"{PUBLICROOT}/"
     pageText = f"""<!doctype html>
@@ -112,7 +113,7 @@ SPDX-License-Identifier: Apache-2.0
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="FuzzyRoutines {html.escape(languageName)} documentation status." />
     <link rel="canonical" href="{canonicalUrl}" />
-    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="{stylesheetPath}" />
     <title>FuzzyRoutines documentation — {html.escape(languageName)}</title>
   </head>
   <body>
@@ -268,6 +269,18 @@ def ComposeSite(apiSite, outputRoot, localeRoot=None, *, includeDrafts=False):
             languageName,
             statusText,
         )
+
+        for englishPage in englishRoot.rglob("index.html"):
+            relativeDirectory = englishPage.relative_to(englishRoot).parent
+
+            if relativeDirectory == Path("."):
+                continue
+
+            WriteLocaleFallback(
+                apiRoot / "latest" / locale / relativeDirectory,
+                locale, languageName, statusText,
+                pageRoute=relativeDirectory.as_posix() + "/",
+            )
 
     WriteApiEntry(apiRoot)
     WriteVersionIndex(apiRoot, ReadPackageVersion())

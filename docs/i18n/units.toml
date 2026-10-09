@@ -11,10 +11,14 @@ sourceHash = "sha256:b9d5190bd09f4d8fc4bac210312ee7abc1a38bad901d655afd57bb85104
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/index.md"
+sourceHash = "sha256:b9d5190bd09f4d8fc4bac210312ee7abc1a38bad901d655afd57bb8510438a04"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/index.md"
+sourceHash = "sha256:b9d5190bd09f4d8fc4bac210312ee7abc1a38bad901d655afd57bb8510438a04"
 
 [[units]]
 id = "page:api.legacy"
@@ -24,10 +28,14 @@ sourceHash = "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f11165063
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/legacy/index.md"
+sourceHash = "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f1116506317e98"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/legacy/index.md"
+sourceHash = "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f1116506317e98"
 
 [[units]]
 id = "page:api.modern"
@@ -37,10 +45,14 @@ sourceHash = "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbe
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/index.md"
+sourceHash = "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbed2314"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/index.md"
+sourceHash = "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbed2314"
 
 [[units]]
 id = "page:api.modern.alphacuts"
@@ -50,10 +62,14 @@ sourceHash = "sha256:2cb68aa5699f4039c622ddeede294f7e14d9486f42ba38559dd46f43d38
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/alphacuts.md"
+sourceHash = "sha256:2cb68aa5699f4039c622ddeede294f7e14d9486f42ba38559dd46f43d380c2b0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/alphacuts.md"
+sourceHash = "sha256:2cb68aa5699f4039c622ddeede294f7e14d9486f42ba38559dd46f43d380c2b0"
 
 [[units]]
 id = "page:api.modern.defuzzification"
@@ -63,10 +79,14 @@ sourceHash = "sha256:df7da6cbba26f7fa4e1ed86b84b42217d16e68015beabd5eef097c14be9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/defuzzification.md"
+sourceHash = "sha256:df7da6cbba26f7fa4e1ed86b84b42217d16e68015beabd5eef097c14be99ad8e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/defuzzification.md"
+sourceHash = "sha256:df7da6cbba26f7fa4e1ed86b84b42217d16e68015beabd5eef097c14be99ad8e"
 
 [[units]]
 id = "page:api.modern.domain"
@@ -76,10 +96,14 @@ sourceHash = "sha256:2fe934b8af992e18b81ca54ea9f5e741c156eb1289d41014f53c2a7b04b
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/domain.md"
+sourceHash = "sha256:2fe934b8af992e18b81ca54ea9f5e741c156eb1289d41014f53c2a7b04ba5968"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/domain.md"
+sourceHash = "sha256:2fe934b8af992e18b81ca54ea9f5e741c156eb1289d41014f53c2a7b04ba5968"
 
 [[units]]
 id = "page:api.modern.exceptions"
@@ -89,10 +113,14 @@ sourceHash = "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/exceptions.md"
+sourceHash = "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573ed6ba"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/exceptions.md"
+sourceHash = "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573ed6ba"
 
 [[units]]
 id = "page:api.modern.fuzzysets"
@@ -102,10 +130,14 @@ sourceHash = "sha256:d2a592c8d08f50c097ec36d3f2ca83229009120ed815903974d4af8bab6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/fuzzysets.md"
+sourceHash = "sha256:d2a592c8d08f50c097ec36d3f2ca83229009120ed815903974d4af8bab67fb8a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/fuzzysets.md"
+sourceHash = "sha256:d2a592c8d08f50c097ec36d3f2ca83229009120ed815903974d4af8bab67fb8a"
 
 [[units]]
 id = "page:api.modern.linguistic"
@@ -115,10 +147,14 @@ sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e69
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/linguistic.md"
+sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/linguistic.md"
+sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
 
 [[units]]
 id = "page:api.modern.membership"
@@ -128,10 +164,14 @@ sourceHash = "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/membership.md"
+sourceHash = "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e185d6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/membership.md"
+sourceHash = "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e185d6"
 
 [[units]]
 id = "page:api.modern.operators"
@@ -141,10 +181,14 @@ sourceHash = "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1a
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/operators.md"
+sourceHash = "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1aee668"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/operators.md"
+sourceHash = "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1aee668"
 
 [[units]]
 id = "page:api.modern.package"
@@ -154,10 +198,14 @@ sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce4251
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/package.md"
+sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/package.md"
+sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
 
 [[units]]
 id = "page:api.modern.properties"
@@ -167,10 +215,14 @@ sourceHash = "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/properties.md"
+sourceHash = "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe7f2d2"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/properties.md"
+sourceHash = "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe7f2d2"
 
 [[units]]
 id = "page:api.modern.relations"
@@ -180,10 +232,14 @@ sourceHash = "sha256:d2b141405bca88377c5f5651d86a4afcda7d320c3d6161a1903dd3aa48f
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/api/modern/relations.md"
+sourceHash = "sha256:d2b141405bca88377c5f5651d86a4afcda7d320c3d6161a1903dd3aa48f010c1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/relations.md"
+sourceHash = "sha256:d2b141405bca88377c5f5651d86a4afcda7d320c3d6161a1903dd3aa48f010c1"
 
 [[units]]
 id = "page:index"
@@ -193,10 +249,14 @@ sourceHash = "sha256:bca1c1871d076e7faa7be5d4eaea28103b73b6401a52cc39af1793c30da
 reviewClass = "editorial"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/index.md"
+sourceHash = "sha256:bca1c1871d076e7faa7be5d4eaea28103b73b6401a52cc39af1793c30daa8d39"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/index.md"
+sourceHash = "sha256:bca1c1871d076e7faa7be5d4eaea28103b73b6401a52cc39af1793c30daa8d39"
 
 [[units]]
 id = "symbol:fuzzyroutines.AlphaCut"
@@ -1497,6 +1557,7 @@ state = "missing"
 
 [units.translations.zh-CN]
 state = "missing"
+
 [[units]]
 id = "symbol:fuzzyroutines.fuzzysets.Complement"
 kind = "symbol"
@@ -2536,6 +2597,7 @@ state = "missing"
 
 [units.translations.zh-CN]
 state = "missing"
+
 [[units]]
 id = "symbol:fuzzyroutines.membership.MembershipCallable"
 kind = "symbol"
@@ -2548,7 +2610,6 @@ state = "missing"
 
 [units.translations.zh-CN]
 state = "missing"
-
 
 [[units]]
 id = "symbol:fuzzyroutines.Bell"
@@ -2714,10 +2775,14 @@ sourceHash = "sha256:ec221b2bc213c0962c9d2d350fa9318e0df37c80c950bb47e51bc2e9f7d
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/index.md"
+sourceHash = "sha256:ec221b2bc213c0962c9d2d350fa9318e0df37c80c950bb47e51bc2e9f7d12674"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/index.md"
+sourceHash = "sha256:ec221b2bc213c0962c9d2d350fa9318e0df37c80c950bb47e51bc2e9f7d12674"
 
 [[units]]
 id = "page:guides.alarm"
@@ -2727,10 +2792,14 @@ sourceHash = "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e9817
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/alarm.md"
+sourceHash = "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e981737593"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/alarm.md"
+sourceHash = "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e981737593"
 
 [[units]]
 id = "page:guides.alpha-cuts"
@@ -2740,10 +2809,14 @@ sourceHash = "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/alpha-cuts.md"
+sourceHash = "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9f03d5"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/alpha-cuts.md"
+sourceHash = "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9f03d5"
 
 [[units]]
 id = "page:guides.api-recipes"
@@ -2753,10 +2826,14 @@ sourceHash = "sha256:6c9d01e1983d0b6081a4a944c3cd2ec357e076cb4b4ab42556ec50ee1eb
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/api-recipes.md"
+sourceHash = "sha256:6c9d01e1983d0b6081a4a944c3cd2ec357e076cb4b4ab42556ec50ee1eb50654"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/api-recipes.md"
+sourceHash = "sha256:6c9d01e1983d0b6081a4a944c3cd2ec357e076cb4b4ab42556ec50ee1eb50654"
 
 [[units]]
 id = "page:guides.centroid"
@@ -2766,10 +2843,14 @@ sourceHash = "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/centroid.md"
+sourceHash = "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab64cd01"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/centroid.md"
+sourceHash = "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab64cd01"
 
 [[units]]
 id = "page:guides.custom"
@@ -2779,10 +2860,14 @@ sourceHash = "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/custom.md"
+sourceHash = "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc0498a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/custom.md"
+sourceHash = "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc0498a"
 
 [[units]]
 id = "page:guides.figures"
@@ -2792,10 +2877,14 @@ sourceHash = "sha256:53ab89fd33a660ecf9651a659c6c1d73fc3bcd1e3b5cf0195476a318441
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/figures.md"
+sourceHash = "sha256:53ab89fd33a660ecf9651a659c6c1d73fc3bcd1e3b5cf0195476a31844112b19"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/figures.md"
+sourceHash = "sha256:53ab89fd33a660ecf9651a659c6c1d73fc3bcd1e3b5cf0195476a31844112b19"
 
 [[units]]
 id = "page:guides.membership-families"
@@ -2805,10 +2894,14 @@ sourceHash = "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f2428
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/membership-families.md"
+sourceHash = "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f24286ee00"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/membership-families.md"
+sourceHash = "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f24286ee00"
 
 [[units]]
 id = "page:guides.risk"
@@ -2818,10 +2911,14 @@ sourceHash = "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/risk.md"
+sourceHash = "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311bac4e"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/risk.md"
+sourceHash = "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311bac4e"
 
 [[units]]
 id = "page:guides.scale-audit"
@@ -2831,10 +2928,14 @@ sourceHash = "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae8
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/scale-audit.md"
+sourceHash = "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae884f4a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/scale-audit.md"
+sourceHash = "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae884f4a"
 
 [[units]]
 id = "page:guides.sensors"
@@ -2844,10 +2945,14 @@ sourceHash = "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/sensors.md"
+sourceHash = "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe308c1f"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/sensors.md"
+sourceHash = "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe308c1f"
 
 [[units]]
 id = "page:guides.temperature"
@@ -2857,10 +2962,14 @@ sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/temperature.md"
+sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0ecc1c8"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/temperature.md"
+sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0ecc1c8"
 
 [[units]]
 id = "page:quick-start"
@@ -2870,10 +2979,14 @@ sourceHash = "sha256:80453d196a050bd4d42fdca05bf42ed6cd700bf739fac982eaf17080ab4
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/quick-start.md"
+sourceHash = "sha256:80453d196a050bd4d42fdca05bf42ed6cd700bf739fac982eaf17080ab4e348c"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/quick-start.md"
+sourceHash = "sha256:80453d196a050bd4d42fdca05bf42ed6cd700bf739fac982eaf17080ab4e348c"
 
 [[units]]
 id = "page:guides.errors"
@@ -2883,10 +2996,14 @@ sourceHash = "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c24
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/errors.md"
+sourceHash = "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c241ddb1"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/errors.md"
+sourceHash = "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c241ddb1"
 
 [[units]]
 id = "page:guides.example-index"
@@ -2896,10 +3013,14 @@ sourceHash = "sha256:b51022ed8446aacbc6376d779dffdc63a02168bac5c79ae4c4e00a0c88e
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/example-index.md"
+sourceHash = "sha256:b51022ed8446aacbc6376d779dffdc63a02168bac5c79ae4c4e00a0c88e87931"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/example-index.md"
+sourceHash = "sha256:b51022ed8446aacbc6376d779dffdc63a02168bac5c79ae4c4e00a0c88e87931"
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -2909,10 +3030,14 @@ sourceHash = "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de6
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/historical-recipes.md"
+sourceHash = "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de688d41"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/historical-recipes.md"
+sourceHash = "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de688d41"
 
 [[units]]
 id = "page:guides.operators"
@@ -2922,10 +3047,14 @@ sourceHash = "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/operators.md"
+sourceHash = "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3225f5"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/operators.md"
+sourceHash = "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3225f5"
 
 [[units]]
 id = "page:guides.results"
@@ -2935,10 +3064,14 @@ sourceHash = "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/results.md"
+sourceHash = "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01081c6"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/results.md"
+sourceHash = "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01081c6"
 
 [[units]]
 id = "page:guides.workflow"
@@ -2948,10 +3081,14 @@ sourceHash = "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/site/content/ru/guides/workflow.md"
+sourceHash = "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3f2356"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/site/content/zh-CN/guides/workflow.md"
+sourceHash = "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3f2356"
 
 [[units]]
 id = "page:mathematics.alpha-cuts"
