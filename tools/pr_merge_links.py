@@ -46,6 +46,7 @@ def ExtractIssueNumbers(text: str) -> list[int]:
             marker = fenceMatch.group("fence")
             if not fenceMarker:
                 fenceMarker, fenceLength = marker[0], len(marker)
+
             elif (
                 marker[0] == fenceMarker
                 and len(marker) >= fenceLength
