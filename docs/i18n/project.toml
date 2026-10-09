@@ -117,3 +117,15 @@ id = "page:migration.historical-to-modern"
 sourcePath = "docs/migration/historical-to-modern.md"
 destination = "migration/historical-to-modern.md"
 title = "Historical-to-Modern API Migration Examples"
+
+[[externalPages]]
+id = "page:contracts.compatibility"
+sourcePath = "docs/COMPATIBILITY.md"
+destination = "contracts/compatibility.md"
+title = "Compatibility and migration"
+
+[[externalPages]]
+id = "page:contracts.public-typing"
+sourcePath = "docs/public-typing.md"
+destination = "contracts/public-typing.md"
+title = "Public modern typing"

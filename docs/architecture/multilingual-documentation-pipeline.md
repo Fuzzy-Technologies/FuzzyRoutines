@@ -17,9 +17,9 @@ three-language rendering. Automation may prepare explicitly labelled draft
 artifacts; it never grants human approval. Stable tagged publication requires
 every required Russian and Simplified Chinese unit to be current and approved.
 
-The required corpus is all 34 canonical site pages, 16 existing mathematical
-and migration documents, 193 public symbol units and 12 module overviews:
-255 independently tracked units per locale. `externalPages` in the
+The required corpus is all 34 canonical site pages, 18 existing mathematical,
+migration, compatibility and public-typing documents, 193 public symbol units
+and 12 module overviews: 257 independently tracked units per locale. `externalPages` in the
 project manifest binds the existing English source files to stable site routes,
 avoiding a second canonical copy. Development protocols, ADRs, audit records,
 benchmark reports and research provenance remain English engineering records;

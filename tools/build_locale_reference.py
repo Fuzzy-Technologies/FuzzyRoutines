@@ -28,8 +28,8 @@ PROJECTROOT = Path(__file__).resolve().parents[1]
 CONTENTROOT = "docs/site/content/en"
 LANGUAGES = {"en": "en", "ru": "ru", "zh-CN": "zh"}
 CATEGORIES = {
-    "ru": {"Worked scenarios": "Практические сценарии", "API reference": "Справочник API", "Modern API": "Современный API", "Historical API": "Исторический API", "Mathematics": "Математические основы", "Migration": "Миграция"},
-    "zh-CN": {"Worked scenarios": "应用场景", "API reference": "API 参考", "Modern API": "现代 API", "Historical API": "历史 API", "Mathematics": "数学基础", "Migration": "迁移"},
+    "ru": {"Worked scenarios": "Практические сценарии", "API reference": "Справочник API", "Modern API": "Современный API", "Historical API": "Исторический API", "Mathematics": "Математические основы", "Migration": "Миграция", "API contracts": "Контракты API"},
+    "zh-CN": {"Worked scenarios": "应用场景", "API reference": "API 参考", "Modern API": "现代 API", "Historical API": "历史 API", "Mathematics": "数学基础", "Migration": "迁移", "API contracts": "API 契约"},
 }
 PREVIEWBANNERS = {
     "ru": "Предварительная версия для рецензирования. Переводы ещё не утверждены; отсутствующие разделы показаны на английском. Это не принятая русская документация релиза.",
@@ -196,7 +196,7 @@ def BuildLocale(projectRoot, outputRoot, locale, project, units, records, report
 
     navigation = [entry for entry in settings["nav"] if "Mathematics guides" not in entry]
 
-    for section, prefix in (("Mathematics", "mathematics/"), ("Migration", "migration/")):
+    for section, prefix in (("Mathematics", "mathematics/"), ("Migration", "migration/"), ("API contracts", "contracts/")):
         pages = [{page["title"]: page["destination"]} for page in project.get("externalPages", ()) if page["destination"].startswith(prefix)]
         if pages:
             navigation.append({section: pages})

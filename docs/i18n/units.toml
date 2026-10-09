@@ -4337,3 +4337,37 @@ sourceHash = "sha256:708b5dcd6e6626a6d8ca04b4f99535e62e6f6129c300032c0612df93a63
 state = "draft"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.relations.md"
 sourceHash = "sha256:708b5dcd6e6626a6d8ca04b4f99535e62e6f6129c300032c0612df93a637fbd0"
+
+[[units]]
+id = "page:contracts.compatibility"
+kind = "page"
+sourcePath = "docs/COMPATIBILITY.md"
+sourceHash = "sha256:1513526081ee04d6b850defc720f19998f2139db0e523be3ba902a8bf92a358f"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/contracts/compatibility.md"
+sourceHash = "sha256:1513526081ee04d6b850defc720f19998f2139db0e523be3ba902a8bf92a358f"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/contracts/compatibility.md"
+sourceHash = "sha256:1513526081ee04d6b850defc720f19998f2139db0e523be3ba902a8bf92a358f"
+
+[[units]]
+id = "page:contracts.public-typing"
+kind = "page"
+sourcePath = "docs/public-typing.md"
+sourceHash = "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/contracts/public-typing.md"
+sourceHash = "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/contracts/public-typing.md"
+sourceHash = "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d"
