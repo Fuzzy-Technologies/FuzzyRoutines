@@ -103,6 +103,9 @@ never document clamping, coercion, or fallback behavior that does not exist.
   delimiters: the canonical MkDocs pipeline and JetBrains Markdown preview use
   the dollar-delimited form. Define every symbol that is not already part of
   the callable's documented arguments.
+- Use `\mathrm{...}` for names inside formulas; GitHub blocks
+  `\operatorname{...}` even though ordinary MathJax accepts it. Check authored
+  Markdown and Python docstrings, because both become rendered documentation.
 - Use an `r` prefix for a docstring containing LaTeX backslashes, or escape
   each backslash explicitly. Raw docstrings are preferred when their final
   character is not a backslash.

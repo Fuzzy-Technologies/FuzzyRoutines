@@ -3,9 +3,11 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Source-layout contracts for human-readable Markdown tables."""
+"""Source-layout and math-compatibility contracts for authored documentation."""
 
+import ast
 import re
+import subprocess
 from itertools import pairwise
 from pathlib import Path
 
@@ -221,3 +223,92 @@ def test_MarkdownTableColumnsRemainAlignedInSource():
     assert not misalignedTables, "Markdown table columns are not source-aligned:\n" + "\n".join(
         misalignedTables
     )
+
+
+def _MathFragments(markdown_text):
+    """Return dollar-delimited mathematics outside literal fenced/inline code."""
+
+    active_fence = None
+    prose_lines = []
+
+    for line in markdown_text.splitlines():
+        if active_fence is not None:
+            if _IsFenceClosing(line, active_fence):
+                active_fence = None
+
+            continue
+
+        fence_opening = _FenceOpening(line)
+
+        if fence_opening is not None:
+            active_fence = fence_opening
+            continue
+
+        prose_lines.append(line)
+
+    prose = re.sub(r"(`+)(?!`)(.*?)\1(?!`)", "", "\n".join(prose_lines), flags=re.DOTALL)
+
+    return tuple(
+        fragment
+        for match in re.finditer(r"\$\$(.*?)\$\$|(?<!\\)\$(.*?)(?<!\\)\$", prose, flags=re.DOTALL)
+        for fragment in match.groups()
+        if fragment is not None
+    )
+
+
+def test_MathFragmentsKeepInlineAndMultilineDisplayExpressions():
+    """Inspect every expression, including a complete piecewise formula."""
+
+    prose = "Inline $x^2$ and $$\n\\begin{cases}x, & x>0\\end{cases}\n$$."
+
+    assert _MathFragments(prose) == ("x^2", "\n\\begin{cases}x, & x>0\\end{cases}\n")
+
+
+def test_MathFragmentsIgnoreLiteralCodeAndEscapedCurrency():
+    """Permit explanations of blocked macros without treating code as math."""
+
+    prose = r"""Literal `$\operatorname{example}$` and \$5.
+````python
+"$\operatorname{fenced}$"
+```
+"$\operatorname{still_fenced}$"
+````
+~~~text
+$\operatorname{tilde}$
+~~~
+Real $\mathrm{height}(A)$.
+"""
+
+    assert _MathFragments(prose) == (r"\mathrm{height}(A)",)
+
+
+def test_AuthoredMathAvoidsBlockedGitHubMacros():
+    """Guard every authored Markdown page and production docstring in CI."""
+
+    markdown_paths = subprocess.check_output(
+        ["git", "ls-files", "--", "*.md"], cwd=REPOSITORYROOT, text=True,
+    ).splitlines()
+    sources = [
+        (path, (REPOSITORYROOT / path).read_text(encoding="utf-8"))
+        for path in markdown_paths
+    ]
+
+    for path in sorted((REPOSITORYROOT / "fuzzyroutines").rglob("*.py")):
+        syntax = ast.parse(path.read_text(encoding="utf-8"))
+
+        for node in ast.walk(syntax):
+            if not isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+
+            docstring = ast.get_docstring(node)
+
+            if docstring:
+                sources.append((f"{path.relative_to(REPOSITORYROOT)}:{getattr(node, 'lineno', 1)}", docstring))
+
+    violations = [
+        source
+        for source, text in sources
+        if any(re.search(r"\\operatorname\b", fragment) for fragment in _MathFragments(text))
+    ]
+
+    assert not violations, "GitHub blocks operatorname; use mathrm in rendered math: " + ", ".join(violations)

@@ -193,6 +193,10 @@ the compatibility policy.
 - In Markdown, delimit inline mathematics with `$...$` and display mathematics
   with `$$...$$` so formulas render in JetBrains IDE and GitHub previews. Do not
   use `\(...\)` or `\[...\]` as Markdown math delimiters.
+- Use `\mathrm{...}` for function names in mathematics. GitHub blocks
+  `\operatorname{...}`; a successful generic MathJax render alone does not
+  establish GitHub compatibility. Include authored Markdown and source
+  docstrings in the markup check.
 - Every production and test module, class, function, and method has a concise docstring
   that explains its responsibility and semantic contract. Python annotations
   remain authoritative for types; docstrings document domains, units,
