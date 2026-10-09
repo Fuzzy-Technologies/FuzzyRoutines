@@ -36,11 +36,26 @@ All seven push workflows passed on the merged revision:
 The final PR head also passed all nine PR workflows before the authorized merge.
 These links certify their recorded revision; later changes receive their own CI.
 
+## Retained performance measurements
+
+[Package run 38006805545](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38006805545)
+records source merge revision `46630bc9209d696ad936f5f6fe66595a2f75ed6a`
+for PR head `ec826eea961bc6e1111bcac136072a523742db95`.
+Both Python 3.13 and 3.14 package artifacts now retain wheel and sdist
+`*-executable-evidence/benchmark-*.json`, including raw measurements, numerical
+parity and environment metadata. The scalar suite has sixteen workloads,
+10000 operations per repeat, seven recorded repeats and one warm-up. All four
+installed-package results were downloaded and checked; all parity checks pass.
+Centroid, scale-lookup and legacy benchmark JSON are retained alongside them.
+These measurements document this environment; they do not establish a universal
+speedup or a cross-machine performance guarantee.
+
 ## Remaining documentation acceptance
 
 The maintainer explicitly accepted the Russian translation, with a reservation
 about its style, and subsequently accepted the corrected PR #307 for squash
-merge. The Russian corpus has not changed since that accepted revision. This
+merge. The only subsequent Russian text correction updates the quick-start
+scenario count from eight to nine. This
 is recorded as maintainer editorial acceptance; another general Russian
 editorial approval is not being requested. It does not claim a native-Chinese
 or mathematical specialist review. The existing ADR-0011 contract still requires

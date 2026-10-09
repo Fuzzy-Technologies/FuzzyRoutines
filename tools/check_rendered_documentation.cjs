@@ -76,7 +76,7 @@ async function Main() {
           await searchResults.first().waitFor({state: 'visible', timeout: 15000});
           result.search = {query: 'UniversalFuzzyScale', results: await searchResults.count(), firstLink: await searchResults.first().getAttribute('href')};
           await page.screenshot({path: path.join(outputRoot, `${locale}-search-${viewport.width}.png`), fullPage: false, animations: 'disabled'});
-          if (await page.locator('#__search').isChecked()) {
+          if (viewport.width < 960 && await page.locator('#__search').isChecked()) {
             await page.locator('label.md-search__icon[for="__search"]').click();
           } else {
             await page.keyboard.press('Escape');
