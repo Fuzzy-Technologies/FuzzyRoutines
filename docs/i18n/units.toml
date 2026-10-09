@@ -124,7 +124,7 @@ state = "missing"
 id = "page:api.modern.membership"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/membership.md"
-sourceHash = "sha256:b80d2b0c223fbdf9d0deddf6e080dbdbc18c034a8292604817ead9370a4fb8d1"
+sourceHash = "sha256:f28d55832bb638a573aa9e50f17a78e870847fc4dd217cd02f5d0924c3cae531"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2008,7 +2008,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.membership.Bell"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:883f35c7554fc141bc059f4ba8c2ff71c74a91e01c2a717f51f30bba52c02803"
+sourceHash = "sha256:34b5e7e04fd4f7faf46bf1703b32a24be7ee491e24311801c117832bd21a9c95"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2073,7 +2073,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.membership.MembershipFunction"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:ec03d30f33e7820c08bbc6171988d2b42a6a8bfcd0f12e54f2b40ab53a50fb4f"
+sourceHash = "sha256:789724adfeddb338e3abea36c983d1d4447912a65b2be1974047d860172661b7"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2125,7 +2125,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.membership.Trapezoid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:6a1fc7091d0a55151b6008cdbe3de1868546f1bc63cff922d613a2174cd0dbaf"
+sourceHash = "sha256:12f1a317b2879ff6425e7d61efeff55f0e211b0648b97ea6e5ebc9b7505b33d3"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2554,7 +2554,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.Bell"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:9e47bea796237225b5f9c142003b9d8efd3eff407ac42d371bbe0dcb55a10310"
+sourceHash = "sha256:832edaf9cf8b105c4218049c40b74d9b1ff3e9d8f182523c53820d93dfe89ae0"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2632,7 +2632,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.MembershipFunction"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:d0dbf0a2c80a1d400310fef0e52898944b4b69c120cf903e418d630b0c525739"
+sourceHash = "sha256:8592603c9fbc0275f39d07fdc28043e85e216ddc1d0326fd737aaaac98ec5f5d"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2671,7 +2671,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.Trapezoid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:e344c1a90c61a9b918ad73f6285f8c29f5878a0c496501cdd66ecd92f4fa8ffd"
+sourceHash = "sha256:09a08f7263b2b84038dce520c85c06e0722248b18eccb28ae4376ce065a1877a"
 reviewClass = "mathematical"
 
 [units.translations.ru]

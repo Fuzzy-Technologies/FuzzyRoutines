@@ -47,12 +47,12 @@ def RisingGrade(coordinate: MembershipScalar) -> MembershipScalar:
     return coordinate
 
 
-membership_function: MembershipCallable = RisingGrade
-fuzzy_set = ScalarFuzzySet(
+membershipFunction: MembershipCallable = RisingGrade
+fuzzySet = ScalarFuzzySet(
     ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True),
-    membership_function,
+    membershipFunction,
 )
-centroid = Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0))
+centroid = Centroid(fuzzySet, IntegrationDomain(0.0, 1.0))
 ```
 
 The centroid is `2 / 3`, using adaptive numerical integration over the explicit

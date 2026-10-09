@@ -20,13 +20,13 @@ def RisingGrade(coordinate: MembershipScalar) -> MembershipScalar:
 def Main() -> None:
     """Evaluate custom membership and its numerical centroid on a finite domain."""
 
-    membership_function: MembershipCallable = RisingGrade
-    fuzzy_set = ScalarFuzzySet(
+    membershipFunction: MembershipCallable = RisingGrade
+    fuzzySet = ScalarFuzzySet(
         ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True),
-        membership_function,
+        membershipFunction,
     )
-    centroid = Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0))
-    print(f"Membership at 0.25: {fuzzy_set.Membership(0.25)}")
+    centroid = Centroid(fuzzySet, IntegrationDomain(0.0, 1.0))
+    print(f"Membership at 0.25: {fuzzySet.Membership(0.25)}")
     print(f"Centroid: {centroid:.12f}")
 
 

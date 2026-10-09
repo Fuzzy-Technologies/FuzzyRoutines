@@ -225,28 +225,28 @@ def test_MarkdownTableColumnsRemainAlignedInSource():
     )
 
 
-def _MathFragments(markdown_text):
+def _MathFragments(markdownText):
     """Return dollar-delimited mathematics outside literal fenced/inline code."""
 
-    active_fence = None
-    prose_lines = []
+    activeFence = None
+    proseLines = []
 
-    for line in markdown_text.splitlines():
-        if active_fence is not None:
-            if _IsFenceClosing(line, active_fence):
-                active_fence = None
+    for line in markdownText.splitlines():
+        if activeFence is not None:
+            if _IsFenceClosing(line, activeFence):
+                activeFence = None
 
             continue
 
-        fence_opening = _FenceOpening(line)
+        fenceOpening = _FenceOpening(line)
 
-        if fence_opening is not None:
-            active_fence = fence_opening
+        if fenceOpening is not None:
+            activeFence = fenceOpening
             continue
 
-        prose_lines.append(line)
+        proseLines.append(line)
 
-    prose = re.sub(r"(`+)(?!`)(.*?)\1(?!`)", "", "\n".join(prose_lines), flags=re.DOTALL)
+    prose = re.sub(r"(`+)(?!`)(.*?)\1(?!`)", "", "\n".join(proseLines), flags=re.DOTALL)
 
     return tuple(
         fragment
@@ -285,12 +285,12 @@ Real $\mathrm{height}(A)$.
 def test_AuthoredMathAvoidsBlockedGitHubMacros():
     """Guard every authored Markdown page and production docstring in CI."""
 
-    markdown_paths = subprocess.check_output(
+    markdownPaths = subprocess.check_output(
         ["git", "ls-files", "--", "*.md"], cwd=REPOSITORYROOT, text=True,
     ).splitlines()
     sources = [
         (path, (REPOSITORYROOT / path).read_text(encoding="utf-8"))
-        for path in markdown_paths
+        for path in markdownPaths
     ]
 
     for path in sorted((REPOSITORYROOT / "fuzzyroutines").rglob("*.py")):

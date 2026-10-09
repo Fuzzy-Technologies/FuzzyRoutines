@@ -62,10 +62,10 @@ from fuzzyroutines import Centroid, ContinuousUniverse, IntegrationDomain, Scala
 
 membership = Triangle(left=0.0, peak=0.5, right=1.0)
 universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
-fuzzy_set = ScalarFuzzySet(universe, membership)
+fuzzySet = ScalarFuzzySet(universe, membership)
 
-assert fuzzy_set.Membership(0.25) == 0.5
-assert abs(Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) - 0.5) < 1e-12
+assert fuzzySet.Membership(0.25) == 0.5
+assert abs(Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) - 0.5) < 1e-12
 ```
 
 The module extraction is validated by historical compatibility tests,

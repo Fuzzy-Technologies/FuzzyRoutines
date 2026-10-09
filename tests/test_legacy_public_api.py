@@ -68,25 +68,25 @@ EXPECTED_MEMBERSHIP_IDENTIFIERS = {
 }
 
 
-def test_legacy_top_level_function_signatures():
+def test_LegacyTopLevelFunctionSignatures():
     for name, expected in EXPECTED_FUNCTION_SIGNATURES.items():
         obj = getattr(fr, name)
         assert str(inspect.signature(obj)) == expected
 
 
-def test_legacy_class_constructor_signatures():
+def test_LegacyClassConstructorSignatures():
     for name, expected in EXPECTED_CLASS_SIGNATURES.items():
         obj = getattr(fr, name)
         assert str(inspect.signature(obj)) == expected
 
 
-def test_legacy_public_class_members_exist():
-    for class_name, expected_members in EXPECTED_PUBLIC_MEMBERS.items():
-        actual_members = set(dir(getattr(fr, class_name)))
-        assert expected_members <= actual_members
+def test_LegacyPublicClassMembersExist():
+    for className, expectedMembers in EXPECTED_PUBLIC_MEMBERS.items():
+        actualMembers = set(dir(getattr(fr, className)))
+        assert expectedMembers <= actualMembers
 
 
-def test_historical_membership_identifiers_are_registered():
+def test_HistoricalMembershipIdentifiersAreRegistered():
     instances = [
         fr.MFunction("hyperbolic", a=1, b=1, c=0),
         fr.MFunction("bell", a=0, b=0.5, c=0.75),
@@ -107,11 +107,11 @@ def test_HistoricalWildcardImportRetainsOnlySupportedSymbols():
     namespace = {}
     exec("from fuzzyroutines.FuzzyRoutines import *", namespace)
 
-    protected_names = (
+    protectedNames = (
         set(EXPECTED_FUNCTION_SIGNATURES)
         | set(EXPECTED_CLASS_SIGNATURES)
     )
-    assert set(fr.__all__) == protected_names, "The facade must retain all supported historical names"
-    assert set(namespace) - {"__builtins__"} == protected_names, (
+    assert set(fr.__all__) == protectedNames, "The facade must retain all supported historical names"
+    assert set(namespace) - {"__builtins__"} == protectedNames, (
         "Historical wildcard imports must expose only the curated compatibility API"
     )

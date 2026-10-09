@@ -53,12 +53,12 @@ __all__ = [
 
 # Serialized historical objects must continue resolving the original module path.
 # Adapters are private implementation details, not a replacement public namespace.
-for _historical_symbol in (
+for _historicalSymbol in (
     DiapasonParser, IsNumber, IsCorrectFuzzyNumberValue,
     FuzzyNOT, FuzzyNOTParabolic, FuzzyAND, FuzzyOR,
     TNorm, TNormCompose, SCoNorm, SCoNormCompose,
     MFunction, FuzzySet, FuzzyScale, UniversalFuzzyScale,
 ):
-    _historical_symbol.__module__ = __name__
+    _historicalSymbol.__module__ = __name__
 
-del _historical_symbol
+del _historicalSymbol

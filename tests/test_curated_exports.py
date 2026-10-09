@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 import fuzzyroutines
-import fuzzyroutines.FuzzyRoutines as legacy_api
+import fuzzyroutines.FuzzyRoutines as legacyApi
 
 MODERN_EXPORTS = {
     "alphacuts": {"AlphaCut", "SampleAlphaCut", "SampledAlphaCut"},
@@ -51,8 +51,8 @@ def test_ModernExportsResolveToCanonicalObjects():
     assert set(fuzzyroutines.__all__) == expected, "The curated modern root surface drifted"
     assert fuzzyroutines.__all__ == sorted(expected), "Modern exports must be unique and deterministic"
 
-    for module_name, names in MODERN_EXPORTS.items():
-        module = importlib.import_module(f"fuzzyroutines.{module_name}")
+    for moduleName, names in MODERN_EXPORTS.items():
+        module = importlib.import_module(f"fuzzyroutines.{moduleName}")
 
         for name in names:
             assert getattr(fuzzyroutines, name) is getattr(module, name), (
@@ -63,19 +63,19 @@ def test_ModernExportsResolveToCanonicalObjects():
 def test_WildcardSurfacesExcludeHelpersEvenAfterLegacyImport():
     """Keep both wildcard surfaces deliberate despite package submodule attributes."""
 
-    modern_namespace = {}
-    legacy_namespace = {}
-    exec("from fuzzyroutines import *", modern_namespace)  # noqa: S102 - literal wildcard-import contract
-    exec("from fuzzyroutines.FuzzyRoutines import *", legacy_namespace)  # noqa: S102 - literal import contract
+    modernNamespace = {}
+    legacyNamespace = {}
+    exec("from fuzzyroutines import *", modernNamespace)  # noqa: S102 - literal wildcard-import contract
+    exec("from fuzzyroutines.FuzzyRoutines import *", legacyNamespace)  # noqa: S102 - literal import contract
 
-    assert set(modern_namespace) - {"__builtins__"} == set(fuzzyroutines.__all__), (
+    assert set(modernNamespace) - {"__builtins__"} == set(fuzzyroutines.__all__), (
         "Modern wildcard import must follow its curated list even after facade imports"
     )
-    assert set(legacy_namespace) - {"__builtins__"} == LEGACY_EXPORTS, (
+    assert set(legacyNamespace) - {"__builtins__"} == LEGACY_EXPORTS, (
         "Legacy wildcard import must retain exactly the fifteen supported names"
     )
-    assert legacy_api.__all__ == sorted(LEGACY_EXPORTS), "Legacy exports must be unique and deterministic"
-    assert not {"math", "copy", "_historical_symbol"} & set(vars(legacy_api)), (
+    assert legacyApi.__all__ == sorted(LEGACY_EXPORTS), "Legacy exports must be unique and deterministic"
+    assert not {"math", "copy", "_historical_symbol"} & set(vars(legacyApi)), (
         "Unused historical helpers and adapter setup variables must remain private"
     )
 

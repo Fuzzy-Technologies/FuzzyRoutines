@@ -65,7 +65,7 @@ suite from Task #52.
 ## Consequences
 
 A common `(left, peak, right)` or
-`(left, plateau_start, plateau_end, right)` API must not be passed through to
+`(left, plateauStart, plateauEnd, right)` API must not be passed through to
 the legacy `triangle` or `trapezium` identifiers. It requires a separate
 modern alias with an unambiguous name.
 

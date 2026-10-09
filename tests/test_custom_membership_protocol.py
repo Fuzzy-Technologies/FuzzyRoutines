@@ -89,64 +89,64 @@ def ClosedUnitUniverse() -> ContinuousUniverse:
     return ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
 
 
-@pytest.mark.parametrize("evaluator_kind", ["function", "lambda", "object", "bound_method"])
-def test_CustomFormsRequireNoInheritance(evaluator_kind):
+@pytest.mark.parametrize('evaluatorKind', ["function", "lambda", "object", "bound_method"])
+def test_CustomFormsRequireNoInheritance(evaluatorKind):
     """Functions and user-owned objects participate in numerical centroid."""
 
-    custom_object = CountingGrade()
+    customObject = CountingGrade()
     evaluators = {
         "function": RisingGrade,
         "lambda": lambda value: value,
-        "object": custom_object,
-        "bound_method": custom_object.Evaluate,
+        "object": customObject,
+        "bound_method": customObject.Evaluate,
     }
-    membership_function: MembershipCallable = evaluators[evaluator_kind]
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), membership_function)
-    assert fuzzy_set.Membership(Fraction(1, 4)) == Fraction(1, 4)
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(2 / 3)
+    membershipFunction: MembershipCallable = evaluators[evaluatorKind]
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), membershipFunction)
+    assert fuzzySet.Membership(Fraction(1, 4)) == Fraction(1, 4)
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(2 / 3)
 
-    if evaluator_kind in {"object", "bound_method"}:
-        assert custom_object.coordinates, "Custom callable was bypassed during evaluation"
-        assert all(0 <= value <= 1 for value in custom_object.coordinates)
+    if evaluatorKind in {"object", "bound_method"}:
+        assert customObject.coordinates, "Custom callable was bypassed during evaluation"
+        assert all(0 <= value <= 1 for value in customObject.coordinates)
 
 
 def test_ConstructionDoesNotExecuteCustomFunction():
     """Construction preserves user state and defers grade validation to use."""
 
-    custom_object = CountingGrade()
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), custom_object)
-    assert custom_object.coordinates == []
-    assert fuzzy_set.membershipFunction is custom_object
+    customObject = CountingGrade()
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), customObject)
+    assert customObject.coordinates == []
+    assert fuzzySet.membershipFunction is customObject
 
 
 @pytest.mark.parametrize("coordinate", [True, False, "0.5", 0.5j, None])
 def test_InvalidCoordinateTypeRejectedBeforeInvocation(coordinate):
     """Only non-boolean real scalar coordinates may reach custom code."""
 
-    custom_object = CountingGrade()
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), custom_object)
+    customObject = CountingGrade()
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), customObject)
 
     with pytest.raises(TypeError, match="coordinate must be a real number"):
-        fuzzy_set.Membership(coordinate)
+        fuzzySet.Membership(coordinate)
 
-    assert custom_object.coordinates == []
+    assert customObject.coordinates == []
 
 
 @pytest.mark.parametrize("coordinate", [float("nan"), float("inf"), -float("inf"), -0.1, 1.1])
 def test_InvalidCoordinateValueRejectedBeforeInvocation(coordinate):
     """Nonfinite and outside-universe inputs fail without user side effects."""
 
-    custom_object = CountingGrade()
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), custom_object)
+    customObject = CountingGrade()
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), customObject)
 
     with pytest.raises(ValueError):
-        fuzzy_set.Membership(coordinate)
+        fuzzySet.Membership(coordinate)
 
-    assert custom_object.coordinates == []
+    assert customObject.coordinates == []
 
 
 @pytest.mark.parametrize(
-    ("grade", "error_type"),
+    ("grade", 'errorType'),
     [
         (True, TypeError),
         (False, TypeError),
@@ -161,7 +161,7 @@ def test_InvalidCoordinateValueRejectedBeforeInvocation(coordinate):
     ],
 )
 @pytest.mark.parametrize("consumer", ["membership", "centroid", "discrete_height"])
-def test_InvalidCustomGradesRejected(grade, error_type, consumer):
+def test_InvalidCustomGradesRejected(grade, errorType, consumer):
     """Every sampled consumer validates grades instead of coercing or clamping."""
 
     universe = (
@@ -169,26 +169,26 @@ def test_InvalidCustomGradesRejected(grade, error_type, consumer):
         if consumer == "discrete_height"
         else ClosedUnitUniverse()
     )
-    fuzzy_set = ScalarFuzzySet(universe, lambda value: grade)
+    fuzzySet = ScalarFuzzySet(universe, lambda value: grade)
 
-    with pytest.raises(error_type, match="membership grade"):
+    with pytest.raises(errorType, match="membership grade"):
         if consumer == "membership":
-            fuzzy_set.Membership(0.5)
+            fuzzySet.Membership(0.5)
 
         elif consumer == "centroid":
-            Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0))
+            Centroid(fuzzySet, IntegrationDomain(0.0, 1.0))
 
         else:
-            Height(fuzzy_set)
+            Height(fuzzySet)
 
 
 def test_CallabilityDoesNotValidateSignature():
     """A malformed callable fails on invocation rather than gaining a valid grade."""
 
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), lambda: 0.5)
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), lambda: 0.5)
 
     with pytest.raises(TypeError):
-        fuzzy_set.Membership(0.5)
+        fuzzySet.Membership(0.5)
 
 
 def test_CustomExceptionsPropagateUnchanged():
@@ -201,10 +201,10 @@ def test_CustomExceptionsPropagateUnchanged():
 
         raise sentinel
 
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), FailingGrade)
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), FailingGrade)
 
     with pytest.raises(RuntimeError) as error:
-        Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0))
+        Centroid(fuzzySet, IntegrationDomain(0.0, 1.0))
 
     assert error.value is sentinel
 
@@ -212,12 +212,12 @@ def test_CustomExceptionsPropagateUnchanged():
 def test_LookalikeMetadataProvidesNoAnalyticalEvidence(monkeypatch):
     """Untrusted shape attributes cannot bypass numeric custom evaluation."""
 
-    custom_object = CountingGrade()
-    custom_object.name = "Triangle"
-    custom_object.parameters = {"a": 0, "b": 1, "c": 0.5}
-    custom_object.__self__ = Triangle(0.0, 0.5, 1.0)
-    custom_object.__func__ = MembershipFunction.Evaluate
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), custom_object)
+    customObject = CountingGrade()
+    customObject.name = "Triangle"
+    customObject.parameters = {"a": 0, "b": 1, "c": 0.5}
+    customObject.__self__ = Triangle(0.0, 0.5, 1.0)
+    customObject.__func__ = MembershipFunction.Evaluate
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), customObject)
 
     def RejectAnalyticalBypass(*args):
         """Fail if arbitrary callable metadata is promoted to exact evidence."""
@@ -228,18 +228,18 @@ def test_LookalikeMetadataProvidesNoAnalyticalEvidence(monkeypatch):
         "fuzzyroutines.defuzzification._PolynomialFamilyMoments",
         RejectAnalyticalBypass,
     )
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(2 / 3)
-    assert len(custom_object.coordinates) >= 5
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(2 / 3)
+    assert len(customObject.coordinates) >= 5
 
     with pytest.raises(ValueError, match="generic membership callable"):
-        Height(fuzzy_set)
+        Height(fuzzySet)
 
 
 def test_ModernAnalyticalEvidenceRemainsAvailable(monkeypatch):
     """The structural interface preserves trusted built-in analytical paths."""
 
-    membership_function: MembershipCallable = Triangle(0.0, 0.25, 1.0)
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), membership_function)
+    membershipFunction: MembershipCallable = Triangle(0.0, 0.25, 1.0)
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), membershipFunction)
 
     def RejectNumericFallback(*args):
         """Fail when an analytical built-in unexpectedly enters quadrature."""
@@ -247,18 +247,18 @@ def test_ModernAnalyticalEvidenceRemainsAvailable(monkeypatch):
         pytest.fail("Trusted triangle must retain analytical centroid moments")
 
     monkeypatch.setattr("fuzzyroutines.defuzzification._AdaptiveMoments", RejectNumericFallback)
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
-    assert Height(fuzzy_set) == 1
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
+    assert Height(fuzzySet) == 1
 
 
-@pytest.mark.parametrize("membership_type", [CallOverrideMembership, EvaluateOverrideMembership])
-@pytest.mark.parametrize("evaluator_kind", ["object", "bound_call"])
-def test_OverriddenMembershipUsesActualCallable(membership_type, evaluator_kind, monkeypatch):
+@pytest.mark.parametrize('membershipType', [CallOverrideMembership, EvaluateOverrideMembership])
+@pytest.mark.parametrize('evaluatorKind', ["object", "bound_call"])
+def test_OverriddenMembershipUsesActualCallable(membershipType, evaluatorKind, monkeypatch):
     """A stored family never overrides the grade supplied by a subclass."""
 
-    membership_function = membership_type("triangle", left=0.0, peak=0.25, right=1.0)
-    evaluator = membership_function if evaluator_kind == "object" else membership_function.__call__
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), evaluator)
+    membershipFunction = membershipType("triangle", left=0.0, peak=0.25, right=1.0)
+    evaluator = membershipFunction if evaluatorKind == "object" else membershipFunction.__call__
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), evaluator)
 
     def RejectAnalyticalBypass(*args):
         """Fail if stored geometry bypasses the active custom callable."""
@@ -266,18 +266,18 @@ def test_OverriddenMembershipUsesActualCallable(membership_type, evaluator_kind,
         pytest.fail("Overridden evaluation must not gain triangle analytical moments")
 
     monkeypatch.setattr("fuzzyroutines.defuzzification._PolynomialFamilyMoments", RejectAnalyticalBypass)
-    assert fuzzy_set.Membership(0.25) == 0.25
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(0.5)
+    assert fuzzySet.Membership(0.25) == 0.25
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(0.5)
 
     with pytest.raises(ValueError, match="generic membership callable"):
-        Height(fuzzy_set)
+        Height(fuzzySet)
 
 
 def test_OverriddenBoundEvaluateUsesActualCallable(monkeypatch):
     """An overridden bound evaluator cannot inherit its owner's certificate."""
 
-    membership_function = EvaluateOverrideMembership("triangle", left=0.0, peak=0.25, right=1.0)
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), membership_function.Evaluate)
+    membershipFunction = EvaluateOverrideMembership("triangle", left=0.0, peak=0.25, right=1.0)
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), membershipFunction.Evaluate)
 
     def RejectAnalyticalBypass(*args):
         """Fail if the custom bound method is replaced with triangle moments."""
@@ -285,23 +285,23 @@ def test_OverriddenBoundEvaluateUsesActualCallable(monkeypatch):
         pytest.fail("Overridden Evaluate must remain a generic bound evaluator")
 
     monkeypatch.setattr("fuzzyroutines.defuzzification._PolynomialFamilyMoments", RejectAnalyticalBypass)
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(0.5)
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(0.5)
 
     with pytest.raises(ValueError, match="generic membership callable"):
-        Height(fuzzy_set)
+        Height(fuzzySet)
 
 
-@pytest.mark.parametrize("evaluator_kind", ["object", "bound_call", "bound_evaluate"])
-def test_UnchangedSubclassEvaluatorsRetainEvidence(evaluator_kind, monkeypatch):
+@pytest.mark.parametrize('evaluatorKind', ["object", "bound_call", "bound_evaluate"])
+def test_UnchangedSubclassEvaluatorsRetainEvidence(evaluatorKind, monkeypatch):
     """Inherited evaluators keep exact evidence when their function is verified."""
 
-    membership_function = InheritedMembership("triangle", left=0.0, peak=0.25, right=1.0)
+    membershipFunction = InheritedMembership("triangle", left=0.0, peak=0.25, right=1.0)
     evaluators = {
-        "object": membership_function,
-        "bound_call": membership_function.__call__,
-        "bound_evaluate": membership_function.Evaluate,
+        "object": membershipFunction,
+        "bound_call": membershipFunction.__call__,
+        "bound_evaluate": membershipFunction.Evaluate,
     }
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), evaluators[evaluator_kind])
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), evaluators[evaluatorKind])
 
     def RejectNumericFallback(*args):
         """Fail when an unchanged evaluator unexpectedly loses its evidence."""
@@ -309,15 +309,15 @@ def test_UnchangedSubclassEvaluatorsRetainEvidence(evaluator_kind, monkeypatch):
         pytest.fail("Unchanged subclass evaluator must retain triangle moments")
 
     monkeypatch.setattr("fuzzyroutines.defuzzification._AdaptiveMoments", RejectNumericFallback)
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
-    assert Height(fuzzy_set) == 1
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
+    assert Height(fuzzySet) == 1
 
 
 def test_CanonicalBoundEvaluateRetainsEvidenceWithCustomCall(monkeypatch):
     """A canonical bound Evaluate is distinct from an overridden callable."""
 
-    membership_function = CallOverrideMembership("triangle", left=0.0, peak=0.25, right=1.0)
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), membership_function.Evaluate)
+    membershipFunction = CallOverrideMembership("triangle", left=0.0, peak=0.25, right=1.0)
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), membershipFunction.Evaluate)
 
     def RejectNumericFallback(*args):
         """Fail if the independently verified canonical method loses evidence."""
@@ -325,15 +325,15 @@ def test_CanonicalBoundEvaluateRetainsEvidenceWithCustomCall(monkeypatch):
         pytest.fail("Canonical Evaluate must retain its own analytical evidence")
 
     monkeypatch.setattr("fuzzyroutines.defuzzification._AdaptiveMoments", RejectNumericFallback)
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
-    assert Height(fuzzy_set) == 1
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
+    assert Height(fuzzySet) == 1
 
 
 def test_OverriddenHistoricalFamilyRemainsGeneric(monkeypatch):
     """A historical registry entry does not certify an overridden method."""
 
-    membership_function = LegacyTriangleOverride("triangle", a=0.0, b=1.0, c=0.25)
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), membership_function.mju)
+    membershipFunction = LegacyTriangleOverride("triangle", a=0.0, b=1.0, c=0.25)
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), membershipFunction.mju)
 
     def RejectAnalyticalBypass(*args):
         """Fail if a custom registry method is replaced by built-in geometry."""
@@ -341,17 +341,17 @@ def test_OverriddenHistoricalFamilyRemainsGeneric(monkeypatch):
         pytest.fail("Overridden historical family must remain a generic callable")
 
     monkeypatch.setattr("fuzzyroutines.defuzzification._PolynomialFamilyMoments", RejectAnalyticalBypass)
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(0.5)
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(0.5)
 
     with pytest.raises(ValueError, match="generic membership callable"):
-        Height(fuzzy_set)
+        Height(fuzzySet)
 
 
 def test_UnchangedHistoricalSubclassRetainsEvidence(monkeypatch):
     """Historical subclasses with canonical bound methods retain exact moments."""
 
-    membership_function = InheritedLegacyMembership("triangle", a=0.0, b=1.0, c=0.25)
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), membership_function.mju)
+    membershipFunction = InheritedLegacyMembership("triangle", a=0.0, b=1.0, c=0.25)
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), membershipFunction.mju)
 
     def RejectNumericFallback(*args):
         """Fail if verified historical methods unnecessarily enter quadrature."""
@@ -359,20 +359,20 @@ def test_UnchangedHistoricalSubclassRetainsEvidence(monkeypatch):
         pytest.fail("Canonical historical subclass must retain analytical moments")
 
     monkeypatch.setattr("fuzzyroutines.defuzzification._AdaptiveMoments", RejectNumericFallback)
-    assert Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
-    assert Height(fuzzy_set) == 1
+    assert Centroid(fuzzySet, IntegrationDomain(0.0, 1.0)) == pytest.approx(5 / 12)
+    assert Height(fuzzySet) == 1
 
 
 def test_CustomCentroidRequiresFiniteContainedDomain():
     """Integration bounds remain a separate validated contract for custom code."""
 
-    custom_object = CountingGrade()
-    fuzzy_set = ScalarFuzzySet(ClosedUnitUniverse(), custom_object)
+    customObject = CountingGrade()
+    fuzzySet = ScalarFuzzySet(ClosedUnitUniverse(), customObject)
 
     with pytest.raises(ValueError, match="entirely within"):
-        Centroid(fuzzy_set, IntegrationDomain(-1.0, 1.0))
+        Centroid(fuzzySet, IntegrationDomain(-1.0, 1.0))
 
-    assert custom_object.coordinates == []
+    assert customObject.coordinates == []
 
     with pytest.raises(ValueError, match="finite"):
         IntegrationDomain(0.0, float("inf"))

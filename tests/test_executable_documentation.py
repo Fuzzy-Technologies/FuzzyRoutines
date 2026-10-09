@@ -51,15 +51,15 @@ def test_ExecutableToolCallablesDocumentTheirBoundary():
                 )
 
 
-def test_ExecutableToolsExposeUsefulHelp(tmp_path):
+def test_ExecutableToolsExposeUsefulHelp(tmpPath):
     environment = os.environ.copy()
     environment["PYTHONPATH"] = str(PROJECTROOT)
-    initialEntries = tuple(tmp_path.iterdir())
+    initialEntries = tuple(tmpPath.iterdir())
 
     for toolName in EXECUTABLETOOLS:
         result = subprocess.run(
             [sys.executable, "-m", f"tools.{toolName}", "--help"],
-            cwd=tmp_path,
+            cwd=tmpPath,
             env=environment,
             capture_output=True,
             text=True,
@@ -68,10 +68,10 @@ def test_ExecutableToolsExposeUsefulHelp(tmp_path):
         )
         assert result.returncode == 0, f"{toolName} --help failed:\n{result.stderr}"
         assert "usage:" in result.stdout.lower(), f"{toolName} has no argparse usage output"
-        assert tuple(tmp_path.iterdir()) == initialEntries, f"{toolName} --help created an artifact"
+        assert tuple(tmpPath.iterdir()) == initialEntries, f"{toolName} --help created an artifact"
 
 
-def test_LegacyBenchmarkSupportsModuleAndDirectCheckoutHelp(tmp_path):
+def test_LegacyBenchmarkSupportsModuleAndDirectCheckoutHelp(tmpPath):
     environment = os.environ.copy()
     environment.pop("PYTHONPATH", None)
     scriptPath = PROJECTROOT / "tools" / "benchmark_legacy_baseline.py"
@@ -83,7 +83,7 @@ def test_LegacyBenchmarkSupportsModuleAndDirectCheckoutHelp(tmp_path):
     for command in commands:
         result = subprocess.run(
             command,
-            cwd=PROJECTROOT if "-m" in command else tmp_path,
+            cwd=PROJECTROOT if "-m" in command else tmpPath,
             env=environment,
             capture_output=True,
             text=True,

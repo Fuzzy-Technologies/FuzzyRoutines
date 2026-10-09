@@ -86,9 +86,9 @@ def test_FacadeContainsOnlyExplicitAdaptersAndHistoricalMetadata():
     syntax = ast.parse((PROJECT_ROOT / "fuzzyroutines" / "FuzzyRoutines.py").read_text())
 
     assert not any(isinstance(node, (ast.FunctionDef, ast.ClassDef)) for node in ast.walk(syntax))
-    adapter_imports = [node for node in syntax.body if isinstance(node, ast.ImportFrom)]
-    assert adapter_imports
-    assert all(node.module.startswith("fuzzyroutines._legacy.") for node in adapter_imports)
+    adapterImports = [node for node in syntax.body if isinstance(node, ast.ImportFrom)]
+    assert adapterImports
+    assert all(node.module.startswith("fuzzyroutines._legacy.") for node in adapterImports)
 
     for name in HISTORICAL_SYMBOLS:
         assert getattr(legacy, name).__module__ == "fuzzyroutines.FuzzyRoutines"
@@ -99,8 +99,8 @@ def test_NewPicklesResolveTheProtectedNamesAndBoundRegistry(protocol):
     """Protect historical callable identity across supported pickle encodings."""
 
     for name in HISTORICAL_SYMBOLS:
-        historical_symbol = getattr(legacy, name)
-        assert pickle.loads(pickle.dumps(historical_symbol, protocol=protocol)) is historical_symbol
+        historicalSymbol = getattr(legacy, name)
+        assert pickle.loads(pickle.dumps(historicalSymbol, protocol=protocol)) is historicalSymbol
 
     function = legacy.MFunction("triangle", a=0, b=2, c=1)
     restored = pickle.loads(pickle.dumps(function, protocol=protocol))
@@ -114,16 +114,16 @@ def test_NewPicklesResolveTheProtectedNamesAndBoundRegistry(protocol):
 def test_PreExtractionPickleRestoresOriginalMutableGraphAndClassIdentities():
     """Load the old implementation's bytes rather than only testing self-roundtrip."""
 
-    function, fuzzy_set, scale, universal = pickle.loads(base64.b64decode(BASELINE_PICKLE_BASE64))
+    function, fuzzySet, scale, universal = pickle.loads(base64.b64decode(BASELINE_PICKLE_BASE64))
 
-    assert tuple(type(value) for value in (function, fuzzy_set, scale, universal)) == (
+    assert tuple(type(value) for value in (function, fuzzySet, scale, universal)) == (
         legacy.MFunction, legacy.FuzzySet, legacy.FuzzyScale, legacy.UniversalFuzzyScale,
     )
     assert function.mju.__self__ is function
     assert function.mju(0.5) == 0.5
-    assert fuzzy_set.supportSet == (0.0, 1.0)
-    expected_centroid = (1 - math.exp(-0.5)) / (math.sqrt(math.pi / 2) * math.erf(1 / math.sqrt(2)))
-    assert fuzzy_set.Defuz() == pytest.approx(expected_centroid)
+    assert fuzzySet.supportSet == (0.0, 1.0)
+    expectedCentroid = (1 - math.exp(-0.5)) / (math.sqrt(math.pi / 2) * math.erf(1 / math.sqrt(2)))
+    assert fuzzySet.Defuz() == pytest.approx(expectedCentroid)
     assert scale.Fuzzy(1.0) is scale.levels[-1]
     assert universal.Fuzzy(1.0) is universal.levels[-1]
     assert universal.levelsNames["Med"] is universal.levels[2]
@@ -225,9 +225,9 @@ from fuzzyroutines.membership import Triangle
 from fuzzyroutines.operators import TNormPolicy
 function = Triangle(0, 1, 2)
 universe = ContinuousUniverse()
-fuzzy_set = ScalarFuzzySet(universe, function)
-assert Height(fuzzy_set) == DeriveProperties(function, universe).height == 1
-assert Centroid(fuzzy_set, IntegrationDomain(0, 2)) == 1
+fuzzySet = ScalarFuzzySet(universe, function)
+assert Height(fuzzySet) == DeriveProperties(function, universe).height == 1
+assert Centroid(fuzzySet, IntegrationDomain(0, 2)) == 1
 assert TNormPolicy("algebraic").Evaluate(0.5, 0.5) == 0.25
 '''
     completed = subprocess.run(

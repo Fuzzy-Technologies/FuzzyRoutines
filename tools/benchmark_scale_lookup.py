@@ -23,7 +23,7 @@ import sys
 import tracemalloc
 from pathlib import Path
 from statistics import median
-from time import perf_counter_ns
+from time import perf_counter_ns as perfCounterNs
 
 from fuzzyroutines.FuzzyRoutines import FuzzyScale, UniversalFuzzyScale
 
@@ -45,9 +45,9 @@ def Measure(workload, sampleCount=MINIMUMSAMPLES, summarizeResult=None):
 
     for sampleIndex in range(sampleCount):
         tracemalloc.start()
-        start = perf_counter_ns()
+        start = perfCounterNs()
         sampleResult = workload()
-        durationSamples.append(perf_counter_ns() - start)
+        durationSamples.append(perfCounterNs() - start)
         _, peakBytes = tracemalloc.get_traced_memory()
         peakBytesSamples.append(peakBytes)
         tracemalloc.stop()

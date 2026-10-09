@@ -68,10 +68,10 @@ from fuzzyroutines import ContinuousUniverse, DeriveProperties, ScalarFuzzySet, 
 
 universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
 membership = Triangle(left=0.0, peak=0.5, right=1.0)
-fuzzy_set = ScalarFuzzySet(universe, membership)
+fuzzySet = ScalarFuzzySet(universe, membership)
 properties = DeriveProperties(membership, universe)
 
-assert fuzzy_set.Membership(0.5) == 1.0
+assert fuzzySet.Membership(0.5) == 1.0
 assert properties.core.Contains(0.5)
 assert properties.height == 1.0
 ```
@@ -88,14 +88,14 @@ support.
 from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 
 membership = MFunction("triangle", a=0.0, b=1.0, c=0.5)
-fuzzy_set = FuzzySet(
+fuzzySet = FuzzySet(
     membership,
     supportSet=(0.0, 1.0),
     linguisticName="Medium",
 )
 
 print(TNorm(0.4, 0.7, normType="algebraic"))
-print(fuzzy_set.Defuz())
+print(fuzzySet.Defuz())
 ```
 
 The legacy triangle order is `a, b, c`, where `c` is the apex. Protected

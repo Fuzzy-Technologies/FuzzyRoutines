@@ -25,18 +25,18 @@ def DiapasonParser(diapason):
         ```
     """
 
-    full_diapason = []
+    fullDiapason = []
 
     try:
         for element in diapason.split(','):
-            full_diapason += [x for x in range(int(element.split('-')[0]), int(element.split('-')[-1]) + 1)]
+            fullDiapason += [x for x in range(int(element.split('-')[0]), int(element.split('-')[-1]) + 1)]
 
     except Exception:
         print('"{}" is not correct diapason string!'.format(diapason))
 
         return []
 
-    return sorted(list(set(full_diapason)))
+    return sorted(list(set(fullDiapason)))
 
 
 def IsNumber(value):
@@ -76,21 +76,21 @@ def IsCorrectFuzzyNumberValue(value):
         return False
 
 
-def _RequireFiniteReal(value, parameter_name):
+def _RequireFiniteReal(value, parameterName):
     """Return a finite built-in integer or float, excluding booleans."""
 
     if not IsNumber(value) or not math.isfinite(value):
-        raise ValueError(f"{parameter_name} must be a finite real number")
+        raise ValueError(f"{parameterName} must be a finite real number")
 
     return value
 
 
-def _RequireFuzzyDegree(value, parameter_name):
+def _RequireFuzzyDegree(value, parameterName):
     """Return a supported built-in number in the fuzzy-degree interval."""
 
-    _RequireFiniteReal(value, parameter_name)
+    _RequireFiniteReal(value, parameterName)
 
     if not 0 <= value <= 1:
-        raise ValueError(f"{parameter_name} must be in the closed interval [0, 1]")
+        raise ValueError(f"{parameterName} must be in the closed interval [0, 1]")
 
     return value

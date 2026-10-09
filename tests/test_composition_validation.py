@@ -24,21 +24,21 @@ def test_CompositionPreservesUnaryIdentity(composition, family, grade):
 
 
 @pytest.mark.parametrize("composition", COMPOSITIONS)
-@pytest.mark.parametrize("invalid_value", [-0.1, 1.1, True, False, float("nan"), float("inf")])
-def test_CompositionRejectsInvalidSingleOperand(composition, invalid_value):
+@pytest.mark.parametrize('invalidValue', [-0.1, 1.1, True, False, float("nan"), float("inf")])
+def test_CompositionRejectsInvalidSingleOperand(composition, invalidValue):
     """Validate a unary operand even when no binary fold is required."""
 
     with pytest.raises(ValueError, match="finite real number|closed interval"):
-        composition(invalid_value)
+        composition(invalidValue)
 
 
 @pytest.mark.parametrize("composition", COMPOSITIONS)
-@pytest.mark.parametrize("invalid_value", [-0.1, 1.1, "0.5", None])
-def test_CompositionRejectsInvalidLaterOperand(composition, invalid_value):
+@pytest.mark.parametrize('invalidValue', [-0.1, 1.1, "0.5", None])
+def test_CompositionRejectsInvalidLaterOperand(composition, invalidValue):
     """Reject invalid later operands before a fold can return a result."""
 
     with pytest.raises(ValueError, match="finite real number|closed interval"):
-        composition(0.5, invalid_value)
+        composition(0.5, invalidValue)
 
 
 @pytest.mark.parametrize("composition", COMPOSITIONS)

@@ -175,7 +175,7 @@ def _PolynomialFamilyMoments(
 
 
 def _GaussianMoments(
-    membership_function: _AnalyticalSource,
+    membershipFunction: _AnalyticalSource,
     domain: IntegrationDomain,
     policy: CentroidPolicy,
 ) -> tuple[float, float] | None:
@@ -188,85 +188,85 @@ def _GaussianMoments(
     caller's existing adaptive policy instead of being clamped.
     """
 
-    centre = cast(float, membership_function.parameters["a"])
-    deviation = cast(float, membership_function.parameters["b"])
-    left_distance = (cast(float, domain.left) - centre) / deviation
-    right_distance = (cast(float, domain.right) - centre) / deviation
-    root_two = math.sqrt(2)
-    left_argument = left_distance / root_two
-    right_argument = right_distance / root_two
+    centre = cast(float, membershipFunction.parameters["a"])
+    deviation = cast(float, membershipFunction.parameters["b"])
+    leftDistance = (cast(float, domain.left) - centre) / deviation
+    rightDistance = (cast(float, domain.right) - centre) / deviation
+    rootTwo = math.sqrt(2)
+    leftArgument = leftDistance / rootTwo
+    rightArgument = rightDistance / rootTwo
 
-    if left_distance >= 0:
-        left_value = math.erfc(left_argument)
-        right_value = math.erfc(right_argument)
-        error_difference = left_value - right_value
+    if leftDistance >= 0:
+        leftValue = math.erfc(leftArgument)
+        rightValue = math.erfc(rightArgument)
+        errorDifference = leftValue - rightValue
 
-    elif right_distance <= 0:
-        left_value = math.erfc(-left_argument)
-        right_value = math.erfc(-right_argument)
-        error_difference = right_value - left_value
+    elif rightDistance <= 0:
+        leftValue = math.erfc(-leftArgument)
+        rightValue = math.erfc(-rightArgument)
+        errorDifference = rightValue - leftValue
 
     else:
-        left_value = math.erf(left_argument)
-        right_value = math.erf(right_argument)
-        error_difference = right_value - left_value
+        leftValue = math.erf(leftArgument)
+        rightValue = math.erf(rightArgument)
+        errorDifference = rightValue - leftValue
 
-    if error_difference <= 0 or not math.isfinite(error_difference):
+    if errorDifference <= 0 or not math.isfinite(errorDifference):
         return None
 
-    resolution_estimate = math.ulp(left_value) + math.ulp(right_value)
+    resolutionEstimate = math.ulp(leftValue) + math.ulp(rightValue)
 
     for distance, argument in (
-        (left_distance, left_argument),
-        (right_distance, right_argument),
+        (leftDistance, leftArgument),
+        (rightDistance, rightArgument),
     ):
         if math.isfinite(argument):
             # Two normalizing operations precede division by sqrt(2). The
             # erf/erfc derivative converts their ULP scale to area resolution.
-            argument_resolution = 2 * math.ulp(distance) / root_two + math.ulp(argument)
-            resolution_estimate += (
+            argumentResolution = 2 * math.ulp(distance) / rootTwo + math.ulp(argument)
+            resolutionEstimate += (
                 2 / math.sqrt(math.pi)
                 * math.exp(-argument * argument)
-                * argument_resolution
+                * argumentResolution
             )
 
-    if resolution_estimate > cast(float, policy.relativeTolerance) * error_difference:
+    if resolutionEstimate > cast(float, policy.relativeTolerance) * errorDifference:
         return None
 
-    left_exponent = -0.5 * left_distance * left_distance
-    right_exponent = -0.5 * right_distance * right_distance
-    squared_distance_difference = (right_distance - left_distance) * (
-        right_distance + left_distance
+    leftExponent = -0.5 * leftDistance * leftDistance
+    rightExponent = -0.5 * rightDistance * rightDistance
+    squaredDistanceDifference = (rightDistance - leftDistance) * (
+        rightDistance + leftDistance
     )
 
-    if not math.isfinite(squared_distance_difference):
+    if not math.isfinite(squaredDistanceDifference):
         # At an infinite standardized endpoint its exponential is exactly
         # zero in binary64, so direct subtraction cannot cancel two tails.
-        exponential_difference = math.exp(left_exponent) - math.exp(right_exponent)
+        exponentialDifference = math.exp(leftExponent) - math.exp(rightExponent)
 
-    elif squared_distance_difference >= 0:
-        exponential_difference = math.exp(left_exponent) * (
-            -math.expm1(-0.5 * squared_distance_difference)
+    elif squaredDistanceDifference >= 0:
+        exponentialDifference = math.exp(leftExponent) * (
+            -math.expm1(-0.5 * squaredDistanceDifference)
         )
 
     else:
-        exponential_difference = math.exp(right_exponent) * math.expm1(
-            0.5 * squared_distance_difference
+        exponentialDifference = math.exp(rightExponent) * math.expm1(
+            0.5 * squaredDistanceDifference
         )
 
-    standardized_area = math.sqrt(math.pi / 2) * error_difference
-    area = deviation * standardized_area
-    centroid = centre + deviation * (exponential_difference / standardized_area)
-    first_moment = area * centroid
+    standardizedArea = math.sqrt(math.pi / 2) * errorDifference
+    area = deviation * standardizedArea
+    centroid = centre + deviation * (exponentialDifference / standardizedArea)
+    firstMoment = area * centroid
 
     if (
         area <= 0
-        or not all(math.isfinite(value) for value in (area, first_moment, centroid))
+        or not all(math.isfinite(value) for value in (area, firstMoment, centroid))
         or not domain.Contains(centroid)
     ):
         return None
 
-    return area, first_moment
+    return area, firstMoment
 
 
 def _SimpsonEstimate(
@@ -411,10 +411,10 @@ def Centroid(
 
 
 def _Centroid(
-    fuzzy_set: ScalarFuzzySet,
-    integration_domain: IntegrationDomain,
+    fuzzySet: ScalarFuzzySet,
+    integrationDomain: IntegrationDomain,
     policy: CentroidPolicy | None,
-    undefined_error: type[Exception],
+    undefinedError: type[Exception],
 ) -> MembershipScalar:
     """Evaluate centroid with the caller boundary's explicit result-error type.
 
@@ -422,13 +422,13 @@ def _Centroid(
     Evaluator exceptions and the existing convergence error remain unchanged.
     """
 
-    if not isinstance(fuzzy_set, ScalarFuzzySet):
+    if not isinstance(fuzzySet, ScalarFuzzySet):
         raise InvalidParameterTypeError("fuzzySet must be a ScalarFuzzySet")
 
-    if not isinstance(fuzzy_set.universe, ContinuousUniverse):
+    if not isinstance(fuzzySet.universe, ContinuousUniverse):
         raise InvalidParameterTypeError("continuous centroid requires a ContinuousUniverse")
 
-    if not isinstance(integration_domain, IntegrationDomain):
+    if not isinstance(integrationDomain, IntegrationDomain):
         raise InvalidParameterTypeError("integrationDomain must be an IntegrationDomain")
 
     if policy is None:
@@ -437,30 +437,30 @@ def _Centroid(
     elif not isinstance(policy, CentroidPolicy):
         raise InvalidParameterTypeError("policy must be a CentroidPolicy")
 
-    integration_domain.ValidateWithin(fuzzy_set.universe)
-    analytical_source = _ContinuousAnalyticalSource(fuzzy_set)
+    integrationDomain.ValidateWithin(fuzzySet.universe)
+    analyticalSource = _ContinuousAnalyticalSource(fuzzySet)
     moments = None
 
-    if analytical_source is not None and analytical_source.name in {"Triangle", "Trapezium", "Parabolic", "Bell"}:
-        moments = _PolynomialFamilyMoments(analytical_source, integration_domain)
+    if analyticalSource is not None and analyticalSource.name in {"Triangle", "Trapezium", "Parabolic", "Bell"}:
+        moments = _PolynomialFamilyMoments(analyticalSource, integrationDomain)
 
-    elif analytical_source is not None and analytical_source.name == "Exponential":
-        moments = _GaussianMoments(analytical_source, integration_domain, policy)
+    elif analyticalSource is not None and analyticalSource.name == "Exponential":
+        moments = _GaussianMoments(analyticalSource, integrationDomain, policy)
 
     if moments is None:
-        moments = _AdaptiveMoments(fuzzy_set, integration_domain, policy)
+        moments = _AdaptiveMoments(fuzzySet, integrationDomain, policy)
 
-    area, first_moment = moments
+    area, firstMoment = moments
 
-    if not math.isfinite(area) or not math.isfinite(first_moment):
-        raise undefined_error("centroid moments must be finite")
+    if not math.isfinite(area) or not math.isfinite(firstMoment):
+        raise undefinedError("centroid moments must be finite")
 
     if area <= 0:
-        raise undefined_error("centroid is undefined for zero membership area")
+        raise undefinedError("centroid is undefined for zero membership area")
 
-    centroid = first_moment / area
+    centroid = firstMoment / area
 
     if not math.isfinite(centroid):
-        raise undefined_error("centroid must be finite")
+        raise undefinedError("centroid must be finite")
 
     return centroid

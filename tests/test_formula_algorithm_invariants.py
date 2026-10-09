@@ -70,9 +70,9 @@ def test_LogisticStableBranchesMatchReferenceAndSaturateWithoutOverflow():
     assert membershipFunction.mju(-1e308) == 0.0
 
 
-@pytest.mark.parametrize("api_kind", ["modern", "legacy"])
+@pytest.mark.parametrize('apiKind', ["modern", "legacy"])
 @pytest.mark.parametrize(
-    ("family", "coordinates", "expected_grades"),
+    ("family", "coordinates", 'expectedGrades'),
     [
         ("triangle_rising", (0.0, 5e307, 1e308), (0.5, 0.75, 1.0)),
         ("triangle_falling", (0.0, 7.5e307), (0.5, 0.25)),
@@ -80,59 +80,59 @@ def test_LogisticStableBranchesMatchReferenceAndSaturateWithoutOverflow():
         ("trapezoid_falling", (0.0, 5e307), (0.5, 0.25)),
     ],
 )
-def test_ExtremeLinearRampsPreserveFiniteRatios(api_kind, family, coordinates, expected_grades):
+def test_ExtremeLinearRampsPreserveFiniteRatios(apiKind, family, coordinates, expectedGrades):
     """Opposite extreme endpoints retain the independently known ramp grades."""
 
-    modern_functions = {
+    modernFunctions = {
         "triangle_rising": Triangle(-1e308, 1e308, 1e308),
         "triangle_falling": Triangle(-1.7e308, -1.5e308, 1.5e308),
         "trapezoid_rising": Trapezoid(-1e308, 1e308, 1.2e308, 1.5e308),
         "trapezoid_falling": Trapezoid(-1.5e308, -1.2e308, -1e308, 1e308),
     }
-    legacy_functions = {
+    legacyFunctions = {
         "triangle_rising": MFunction("triangle", a=-1e308, b=1e308, c=1e308),
         "triangle_falling": MFunction("triangle", a=-1.7e308, b=1.5e308, c=-1.5e308),
         "trapezoid_rising": MFunction("trapezium", a=-1e308, b=1.5e308, c=1e308, d=1.2e308),
         "trapezoid_falling": MFunction("trapezium", a=-1.5e308, b=1e308, c=-1.2e308, d=-1e308),
     }
-    evaluator = modern_functions[family] if api_kind == "modern" else legacy_functions[family].mju
+    evaluator = modernFunctions[family] if apiKind == "modern" else legacyFunctions[family].mju
 
-    for coordinate, expected_grade in zip(coordinates, expected_grades, strict=True):
-        actual_grade = evaluator(coordinate)
-        assert math.isfinite(actual_grade), "A finite linear ramp must not return NaN"
-        assert actual_grade == pytest.approx(expected_grade), "Endpoint subtraction lost the ramp ratio"
+    for coordinate, expectedGrade in zip(coordinates, expectedGrades, strict=True):
+        actualGrade = evaluator(coordinate)
+        assert math.isfinite(actualGrade), "A finite linear ramp must not return NaN"
+        assert actualGrade == pytest.approx(expectedGrade), "Endpoint subtraction lost the ramp ratio"
 
 
-@pytest.mark.parametrize("api_kind", ["modern", "legacy"])
+@pytest.mark.parametrize('apiKind', ["modern", "legacy"])
 @pytest.mark.parametrize("center", [-1e308, 1e308])
-def test_GaussianExtremeDifferencePreservesTwoSigmaGrade(api_kind, center):
+def test_GaussianExtremeDifferencePreservesTwoSigmaGrade(apiKind, center):
     """A two-standard-deviation distance stays positive despite raw overflow."""
 
     evaluator = (
         Gaussian(center, 1e308)
-        if api_kind == "modern"
+        if apiKind == "modern"
         else MFunction("gaussian", a=center, b=1e308).mju
     )
-    actual_grade = evaluator(-center)
+    actualGrade = evaluator(-center)
 
-    assert actual_grade == pytest.approx(math.exp(-2.0)), "Two-sigma Gaussian grade was lost to overflow"
+    assert actualGrade == pytest.approx(math.exp(-2.0)), "Two-sigma Gaussian grade was lost to overflow"
 
 
-@pytest.mark.parametrize("api_kind", ["modern", "legacy"])
+@pytest.mark.parametrize('apiKind', ["modern", "legacy"])
 @pytest.mark.parametrize("midpoint", [-1e308, 1e308])
 @pytest.mark.parametrize("slope", [-1e-308, 1e-308])
-def test_LogisticExtremeDifferencePreservesFiniteExponent(api_kind, midpoint, slope):
+def test_LogisticExtremeDifferencePreservesFiniteExponent(apiKind, midpoint, slope):
     """Small slopes preserve the finite signed exponent across extreme inputs."""
 
     evaluator = (
         Logistic(slope, midpoint)
-        if api_kind == "modern"
+        if apiKind == "modern"
         else MFunction("logistic", a=slope, b=midpoint).mju
     )
-    expected_exponent = -2.0 if (midpoint > 0) == (slope > 0) else 2.0
-    expected_grade = 1 / (1 + math.exp(-expected_exponent))
+    expectedExponent = -2.0 if (midpoint > 0) == (slope > 0) else 2.0
+    expectedGrade = 1 / (1 + math.exp(-expectedExponent))
 
-    assert evaluator(-midpoint) == pytest.approx(expected_grade), "Finite logistic exponent incorrectly saturated"
+    assert evaluator(-midpoint) == pytest.approx(expectedGrade), "Finite logistic exponent incorrectly saturated"
 
 
 def test_ExtremeRationalParametersRetainTheirExactDifferenceArithmetic():

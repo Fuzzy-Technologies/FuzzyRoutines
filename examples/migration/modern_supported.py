@@ -28,17 +28,17 @@ def Main():
     """Print observations from the supported focused modern API."""
 
     universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
-    integration_domain = IntegrationDomain(0.0, 1.0).ValidateWithin(universe)
+    integrationDomain = IntegrationDomain(0.0, 1.0).ValidateWithin(universe)
 
-    membership_function = Triangle(left=0.0, peak=0.5, right=1.0)
-    fuzzy_set = ScalarFuzzySet(universe, membership_function)
-    complement = Complement(fuzzy_set, NegationPolicy("standard"))
-    overlap = Intersection(fuzzy_set, complement, TNormPolicy("logic"))
+    membershipFunction = Triangle(left=0.0, peak=0.5, right=1.0)
+    fuzzySet = ScalarFuzzySet(universe, membershipFunction)
+    complement = Complement(fuzzySet, NegationPolicy("standard"))
+    overlap = Intersection(fuzzySet, complement, TNormPolicy("logic"))
 
     result = {
-        "fuzzySet": fuzzy_set.Membership(0.25),
-        "integrationDomain": [integration_domain.left, integration_domain.right],
-        "membership": membership_function(0.5),
+        "fuzzySet": fuzzySet.Membership(0.25),
+        "integrationDomain": [integrationDomain.left, integrationDomain.right],
+        "membership": membershipFunction(0.5),
         "operator": TNormPolicy("algebraic").Evaluate(0.4, 0.7),
         "overlap": overlap.Membership(0.25),
     }

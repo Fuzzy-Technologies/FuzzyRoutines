@@ -39,8 +39,8 @@ def _AssertParity(identifier, parameters, values):
 
     source = np.asarray(values, dtype=np.float64)
     snapshot = source.copy()
-    scalar_function = MFunction(identifier, **parameters)
-    expected = np.array([scalar_function.mju(float(value)) for value in source.flat]).reshape(source.shape)
+    scalarFunction = MFunction(identifier, **parameters)
+    expected = np.array([scalarFunction.mju(float(value)) for value in source.flat]).reshape(source.shape)
     result = EvaluateMembership(identifier, source, **parameters)
     np.testing.assert_allclose(result, expected, rtol=0, atol=PARITY_TOLERANCE)
     np.testing.assert_array_equal(source, snapshot)
@@ -147,7 +147,7 @@ def test_EvaluationKeepsCallerParametersAndNumpyErrorPolicyUnchanged():
 
     parameters = {"a": 0.0, "b": 1.0}
     original = parameters.copy()
-    error_policy = np.geterr().copy()
+    errorPolicy = np.geterr().copy()
     EvaluateMembership("gaussian", [0.0, 1.0], **parameters)
     assert parameters == original, "Evaluation must not rewrite caller-owned parameters."
-    assert np.geterr() == error_policy, "Experiment must not alter process-wide NumPy error settings."
+    assert np.geterr() == errorPolicy, "Experiment must not alter process-wide NumPy error settings."

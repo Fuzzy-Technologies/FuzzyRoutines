@@ -117,12 +117,12 @@ def _AuthoredSymbols(moduleName: str, path: Path) -> tuple[_Symbol, ...]:
         if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.TypeAlias)):
             continue
 
-        node_name = node.name.id if isinstance(node, ast.TypeAlias) else node.name
+        nodeName = node.name.id if isinstance(node, ast.TypeAlias) else node.name
 
-        if node_name.startswith("_") or _IsOverload(node):
+        if nodeName.startswith("_") or _IsOverload(node):
             continue
 
-        symbolName = f"{moduleName}.{node_name}"
+        symbolName = f"{moduleName}.{nodeName}"
         symbols.append(_Symbol(symbolName, path, node.lineno))
 
         if not isinstance(node, ast.ClassDef):
@@ -148,19 +148,19 @@ def _AuthoredSymbols(moduleName: str, path: Path) -> tuple[_Symbol, ...]:
     return tuple(symbols)
 
 
-def _AdapterSymbols(module_name: str, path: Path, project_root: Path) -> tuple[_Symbol, ...]:
+def _AdapterSymbols(moduleName: str, path: Path, projectRoot: Path) -> tuple[_Symbol, ...]:
     """Discover facade aliases and members at their authored adapter source."""
 
     symbols = []
 
-    for public_name, target_name, target_path in _AdapterTargets(module_name, path, project_root):
-        source_prefix = f"{module_name}.{target_name}"
-        public_prefix = f"{module_name}.{public_name}"
+    for publicName, targetName, targetPath in _AdapterTargets(moduleName, path, projectRoot):
+        sourcePrefix = f"{moduleName}.{targetName}"
+        publicPrefix = f"{moduleName}.{publicName}"
 
-        for symbol in _AuthoredSymbols(module_name, target_path):
-            if symbol.name == source_prefix or symbol.name.startswith(source_prefix + "."):
+        for symbol in _AuthoredSymbols(moduleName, targetPath):
+            if symbol.name == sourcePrefix or symbol.name.startswith(sourcePrefix + "."):
                 symbols.append(_Symbol(
-                    public_prefix + symbol.name[len(source_prefix):],
+                    publicPrefix + symbol.name[len(sourcePrefix):],
                     symbol.path,
                     symbol.line,
                 ))

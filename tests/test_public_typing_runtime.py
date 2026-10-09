@@ -34,8 +34,8 @@ def test_AnnotatedFactoriesRetainRationalParametersAndGrades():
     right = Fraction(2)
     membership = Triangle(left, peak, right)
     universe = ContinuousUniverse(left, right, True, True)
-    fuzzy_set = ScalarFuzzySet(universe, membership)
-    grade = fuzzy_set.Membership(Fraction(1, 2))
+    fuzzySet = ScalarFuzzySet(universe, membership)
+    grade = fuzzySet.Membership(Fraction(1, 2))
 
     assert membership.parameters["left"] is left, "Factory annotations must not coerce rational parameters"
     assert universe.left is left, "Universe annotation changes must preserve endpoint identity"

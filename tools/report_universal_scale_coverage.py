@@ -119,13 +119,13 @@ def ParseArguments():
         type=int,
         default=DEFAULTGRIDPOINTS,
         help=f"number of inclusive [0, 1] grid points (default: {DEFAULTGRIDPOINTS})",
-    )
+    dest = 'gridPoints')
     parser.add_argument(
         "--weak-threshold",
         type=float,
         default=DEFAULTWEAKTHRESHOLD,
         help=f"diagnostic maximum-membership threshold (default: {DEFAULTWEAKTHRESHOLD})",
-    )
+    dest = 'weakThreshold')
     parser.add_argument(
         "--output",
         type=Path,
@@ -138,8 +138,8 @@ def Main():
     """Render one UniversalFuzzyScale coverage report."""
     arguments = ParseArguments()
     report = BuildCoverageReport(
-        gridPoints=arguments.grid_points,
-        weakThreshold=arguments.weak_threshold,
+        gridPoints=arguments.gridPoints,
+        weakThreshold=arguments.weakThreshold,
     )
     rendered = json.dumps(report, indent=2, sort_keys=True)
     print(rendered)

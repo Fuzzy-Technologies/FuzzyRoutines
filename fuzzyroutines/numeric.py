@@ -26,26 +26,26 @@ from fuzzyroutines.exceptions import (
 )
 
 
-def _RequireFiniteReal(value: object, parameter_name: str) -> float:
+def _RequireFiniteReal(value: object, parameterName: str) -> float:
     """Return a finite real scalar unchanged or raise a deterministic error."""
 
     if isinstance(value, bool) or not isinstance(value, Real):
-        raise InvalidParameterTypeError(f"{parameter_name} must be a real number")
+        raise InvalidParameterTypeError(f"{parameterName} must be a real number")
 
     if not math.isfinite(value):
-        raise InvalidParameterError(f"{parameter_name} must be a finite real number")
+        raise InvalidParameterError(f"{parameterName} must be a finite real number")
 
     # Typeshed models Real arithmetic through a complex-like base. This
     # static arithmetic view preserves the original value, including Fraction.
     return cast(float, value)
 
 
-def _RequireGrade(value: object, parameter_name: str) -> float:
+def _RequireGrade(value: object, parameterName: str) -> float:
     """Return a finite real membership degree in the closed unit interval."""
 
-    value = _RequireFiniteReal(value, parameter_name)
+    value = _RequireFiniteReal(value, parameterName)
 
     if not 0 <= value <= 1:
-        raise InvalidParameterError(f"{parameter_name} must lie in the closed interval [0, 1]")
+        raise InvalidParameterError(f"{parameterName} must lie in the closed interval [0, 1]")
 
     return value

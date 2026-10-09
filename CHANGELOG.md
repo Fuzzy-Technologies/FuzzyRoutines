@@ -128,10 +128,13 @@ stable release approval.
   controls support review. Reserved translations are not approved translations.
 - `MFunction.accuracy` and `FuzzyNOTParabolic`'s `epsilon` argument remain for
   source compatibility but no longer select the numerical algorithms.
-- New-code naming guidance follows the current shared Python standard:
-  `snake_case` variables and parameters, `UPPER_SNAKE_CASE` constants, and
-  concise docstrings for tests. Existing public keyword spellings remain
-  protected. Routine local validation covers affected paths; full regression,
+- Project-wide naming follows the maintainer-confirmed Python standard:
+  `camelCase` variables, parameters and fields, `UPPER_SNAKE_CASE` constants, and
+  PascalCase functions and `test_PascalCase` tests. A repository-wide guard
+  checks Python files, embedded fixtures and Markdown examples. Historical
+  interfaces and external contracts remain protected; earlier development
+  plateau keywords are accepted as aliases of `plateauStart`/`plateauEnd`.
+  Routine local validation covers affected paths; full regression,
   documentation, typing, and package gates run in PR CI.
 - Release readiness requires identical wheel and source-distribution bytes
   from independent builds of the exact candidate, with a fixed environment

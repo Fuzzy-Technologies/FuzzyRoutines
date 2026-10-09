@@ -5,41 +5,41 @@
 
 """Parser contracts for explicit Task-closing PR references."""
 
-from tools.pr_merge_links import extract_issue_numbers
+from tools.pr_merge_links import ExtractIssueNumbers
 
 
-def test_extracts_supported_keywords():
+def test_ExtractsSupportedKeywords():
     body = """
     Closes #12
     Fixes #13
     Resolves #14
     Implements #15
     """
-    assert extract_issue_numbers(body) == [12, 13, 14, 15]
+    assert ExtractIssueNumbers(body) == [12, 13, 14, 15]
 
 
-def test_extracts_multiple_references_after_one_keyword():
-    assert extract_issue_numbers("Closes #12, #13 and #14") == [12, 13, 14]
+def test_ExtractsMultipleReferencesAfterOneKeyword():
+    assert ExtractIssueNumbers("Closes #12, #13 and #14") == [12, 13, 14]
 
 
-def test_is_case_insensitive_and_accepts_inflections():
+def test_IsCaseInsensitiveAndAcceptsInflections():
     body = "closed #1\\nFIXED #2\\nresolved #3\\nimplemented #4"
-    assert extract_issue_numbers(body) == [1, 2, 3, 4]
+    assert ExtractIssueNumbers(body) == [1, 2, 3, 4]
 
 
-def test_deduplicates_while_preserving_order():
+def test_DeduplicatesWhilePreservingOrder():
     body = "Closes #9 and #10\\nImplements #9\\nFixes #11"
-    assert extract_issue_numbers(body) == [9, 10, 11]
+    assert ExtractIssueNumbers(body) == [9, 10, 11]
 
 
-def test_plain_references_do_not_close_anything():
+def test_PlainReferencesDoNotCloseAnything():
     body = "Related: #12, #13\\nSee Feature #14 for context."
-    assert extract_issue_numbers(body) == []
+    assert ExtractIssueNumbers(body) == []
 
 
-def test_keyword_without_issue_reference_is_ignored():
-    assert extract_issue_numbers("This closes the implementation gap.") == []
+def test_KeywordWithoutIssueReferenceIsIgnored():
+    assert ExtractIssueNumbers("This closes the implementation gap.") == []
 
 
-def test_zero_and_non_numeric_references_are_ignored():
-    assert extract_issue_numbers("Closes #0 and #abc") == []
+def test_ZeroAndNonNumericReferencesAreIgnored():
+    assert ExtractIssueNumbers("Closes #0 and #abc") == []

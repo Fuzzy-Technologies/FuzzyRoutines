@@ -37,14 +37,14 @@ LEGACY_PUBLIC_SYMBOLS = (
 )
 
 
-def test_historical_module_paths_remain_importable():
+def test_HistoricalModulePathsRemainImportable():
     imported = {path: importlib.import_module(path) for path in LEGACY_MODULE_PATHS}
 
     assert imported["fuzzyroutines"].__name__ == "fuzzyroutines"
     assert imported["fuzzyroutines.FuzzyRoutines"].__name__ == "fuzzyroutines.FuzzyRoutines"
 
 
-def test_named_legacy_imports_resolve_to_module_symbols():
+def test_NamedLegacyImportsResolveToModuleSymbols():
     from fuzzyroutines.FuzzyRoutines import (
         DiapasonParser,
         FuzzyAND,
@@ -87,7 +87,7 @@ def test_named_legacy_imports_resolve_to_module_symbols():
         assert value is getattr(module, name)
 
 
-def test_historical_wildcard_import_exports_protected_symbols():
+def test_HistoricalWildcardImportExportsProtectedSymbols():
     namespace = {}
     exec("from fuzzyroutines.FuzzyRoutines import *", namespace)
 

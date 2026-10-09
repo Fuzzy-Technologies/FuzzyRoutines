@@ -12,8 +12,8 @@ def test_CurrentRepositoryPassesLicensePolicy():
     assert ValidateRepository() == ()
 
 
-def test_PythonHeaderRequiresProjectAndApacheFields(tmp_path):
-    projectRoot = tmp_path
+def test_PythonHeaderRequiresProjectAndApacheFields(tmpPath):
+    projectRoot = tmpPath
     modulePath = projectRoot / "module.py"
     modulePath.write_text('"""Missing ownership header."""\n', encoding="utf-8")
 
@@ -26,8 +26,8 @@ def test_PythonHeaderRequiresProjectAndApacheFields(tmp_path):
     assert any("Maintainer: Fuzzy Technologies contributors" in violation for violation in violations)
 
 
-def test_HeaderRejectsConflictingLicenseIdentifier(tmp_path):
-    documentPath = tmp_path / "document.md"
+def test_HeaderRejectsConflictingLicenseIdentifier(tmpPath):
+    documentPath = tmpPath / "document.md"
     documentPath.write_text(
         "<!--\n"
         "SPDX-FileCopyrightText: 2026 Fuzzy Technologies\n"
@@ -37,7 +37,7 @@ def test_HeaderRejectsConflictingLicenseIdentifier(tmp_path):
         encoding="utf-8",
     )
 
-    violations = ValidateHeader(documentPath, tmp_path)
+    violations = ValidateHeader(documentPath, tmpPath)
 
     assert violations == ("document.md: conflicting SPDX license MIT",)
 

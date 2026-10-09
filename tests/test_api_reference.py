@@ -10,7 +10,7 @@ import re
 import subprocess
 from pathlib import Path
 
-from tools import build_api_reference
+from tools import build_api_reference as buildApiReference
 
 PROJECTROOT = Path(__file__).parents[1]
 SITEROOT = PROJECTROOT / "docs" / "site"
@@ -86,7 +86,7 @@ def test_CanonicalReferenceUsesInstalledStaticDiscoveryAndStrictBuilds():
     )
 
     assert "!ENV FUZZYROUTINES_INSTALLED_PACKAGES" in configurationText
-    assert build_api_reference.CONFIGPATH == CONFIGPATH
+    assert buildApiReference.CONFIGPATH == CONFIGPATH
     assert '"--strict"' in builderText
     assert '"--no-deps"' in builderText
     assert "cwd=buildRoot" in builderText

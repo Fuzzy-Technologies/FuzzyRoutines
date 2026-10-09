@@ -736,20 +736,20 @@ def DeriveProperties(
 
     if isinstance(universe, ContinuousUniverse):
         # Continuous inputs always pass through _GetAnalyticalSource above.
-        analytical_source = cast(_AnalyticalSource, source)
+        analyticalSource = cast(_AnalyticalSource, source)
         (
             globalPositiveSupport,
             globalCore,
             globalBoundary,
             leftLimit,
             rightLimit,
-        ) = _AnalyticalRegions(analytical_source)
+        ) = _AnalyticalRegions(analyticalSource)
         positiveSupport = _IntersectRegion(globalPositiveSupport, universe)
         supportClosure = _ClosureWithin(positiveSupport, universe)
         core = _IntersectRegion(globalCore, universe)
         boundary = _IntersectRegion(globalBoundary, universe)
         height = _ContinuousHeight(
-            analytical_source,
+            analyticalSource,
             core,
             boundary,
             leftLimit,
@@ -771,11 +771,11 @@ def DeriveProperties(
         boundaryPoints = tuple(
             point for point, grade in zip(universe.points, grades) if 0 < grade < 1
         )
-        discrete_support = DiscreteRegion(positivePoints)
+        discreteSupport = DiscreteRegion(positivePoints)
         return DiscreteFuzzyProperties(
             universe,
-            discrete_support,
-            discrete_support,
+            discreteSupport,
+            discreteSupport,
             DiscreteRegion(corePoints),
             DiscreteRegion(boundaryPoints),
             max(grades),

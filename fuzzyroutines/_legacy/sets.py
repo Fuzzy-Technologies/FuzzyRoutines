@@ -71,14 +71,14 @@ class FuzzySet():
         """Return the historical name/function/interval representation."""
 
         # return view of fuzzy set - name = <mju(x|y, params), supportSet>. Example: FuzzySet = <Bell(x, a, b), [0, 1]>
-        set_view = '{} = <{}, [{}, {}]>'.format(
+        setView = '{} = <{}, [{}, {}]>'.format(
             self._name,
             self._mFunction,
             self._integrationDomain.left,
             self._integrationDomain.right,
         )
 
-        return set_view
+        return setView
 
     @property
     def name(self):
@@ -166,14 +166,14 @@ class FuzzySet():
                 its explicit default tolerance.
         """
 
-        fuzzy_set = _ScalarFuzzySet(
+        fuzzySet = _ScalarFuzzySet(
             _domain.ContinuousUniverse(),
             self._mFunction.mju,
         )
 
         # Select the historical result contract inside the engine, where callback
         # failures can propagate without being mistaken for an undefined result.
-        return _Centroid(fuzzy_set, self._integrationDomain, None, ValueError)
+        return _Centroid(fuzzySet, self._integrationDomain, None, ValueError)
 
     def Defuz(self):
         """Return `defuzValue` through the historical method alias.

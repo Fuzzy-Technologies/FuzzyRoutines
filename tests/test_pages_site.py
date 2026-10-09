@@ -39,7 +39,7 @@ def ParsePage(pagePath):
     return parser
 
 
-def testPagesEntryPointHasRequiredMetadata():
+def test_PagesEntryPointHasRequiredMetadata():
     pagePath = SITE_ROOT / "index.html"
     parser = ParsePage(pagePath)
 
@@ -47,7 +47,7 @@ def testPagesEntryPointHasRequiredMetadata():
     assert {"description", "viewport"} <= parser.metaNames
 
 
-def testPagesLocalLinksAndFragmentsResolve():
+def test_PagesLocalLinksAndFragmentsResolve():
     pagePath = SITE_ROOT / "index.html"
     parser = ParsePage(pagePath)
 
@@ -66,14 +66,14 @@ def testPagesLocalLinksAndFragmentsResolve():
             assert parsedLink.fragment in parser.ids, link
 
 
-def testPagesSiteHasNoRuntimeScriptDependencies():
+def test_PagesSiteHasNoRuntimeScriptDependencies():
     pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
 
     assert "<script" not in pageText.lower()
     assert "http://" not in pageText.lower()
 
 
-def testPagesSiteSeparatesImplementedBehaviorFromRoadmap():
+def test_PagesSiteSeparatesImplementedBehaviorFromRoadmap():
     pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
 
     assert 'data-status="implemented"' in pageText
