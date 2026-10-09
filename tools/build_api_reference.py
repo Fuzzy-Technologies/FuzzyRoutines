@@ -274,21 +274,21 @@ def BuildReference():
     environment = os.environ.copy()
     environment["FUZZYROUTINES_INSTALLED_PACKAGES"] = str(installedPackagesPath)
     environment["PYTHONPATH"] = str(guardRoot)
-    RunCommand(
-        [
-            environmentPython,
-            "-m",
-            "mkdocs",
-            "build",
-            "--strict",
-            "--config-file",
-            CONFIGPATH,
-            "--site-dir",
-            siteRoot,
-        ],
-        environment=environment,
-        cwd=buildRoot,
-    )
+    for locale in ("en", "ru", "zh-CN"):
+        RunCommand(
+            [
+                environmentPython,
+                "-m",
+                "tools.build_locale_reference",
+                "--locale",
+                locale,
+                "--output",
+                buildRoot / "locales",
+            ],
+            environment=environment,
+        )
+
+    shutil.copytree(buildRoot / "locales" / "en" / "site", siteRoot)
 
     VerifySite(siteRoot)
     packageVersions = GetPackageVersions(environmentPython)

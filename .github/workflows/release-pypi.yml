@@ -67,6 +67,10 @@ jobs:
             exit 1
           fi
 
+      - name: Require current approved documentation in every release language
+        if: github.event_name == 'push'
+        run: python -m tools.locale_documentation validate --require-approved
+
       - name: Build, reproduce, and check wheel and source distribution
         shell: bash
         run: |

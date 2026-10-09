@@ -57,9 +57,9 @@ The forward-looking spellings currently available through the historical
 | `harringtonDesirability` | `desirability`        | no parameters              |
 
 Each alias resolves to the same bound method as its historical identifier, so
-validation and evaluation cannot drift during the monolith transition. This
-does not make the historical method canonical. The focused modern module will
-own each final implementation and conventional parameter contract; the legacy
+validation and evaluation share one implementation. This
+does not make the historical method canonical. The focused modern module owns
+the formula implementations and conventional parameter contracts; the legacy
 factory identifiers are aliases or explicit compatibility adapters.
 
 No aliases are added for `bell`, `triangle`, or `trapezium`: their historical

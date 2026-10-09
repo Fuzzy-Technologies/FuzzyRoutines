@@ -35,6 +35,12 @@ Existing users should read the
 
 #### Added
 
+- Three-language documentation rendering from the installed package, shared
+  English-labelled figures, stable page routes, and source-bound API fragments.
+  Include mathematical and migration chapters in the required locale corpus.
+  Draft previews remain explicit; stable publication requires current human
+  review bound to both English source and translated text.
+
 - Canonical English quick start and eight worked scenarios explain physical
   inputs, model assumptions, intermediate grades, policy choices, exact versus
   sampled results, and independently verified area moments. Ten reproducible

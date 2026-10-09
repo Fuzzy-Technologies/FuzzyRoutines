@@ -52,6 +52,8 @@ jobs:
           set -euo pipefail
 
           python tools/build_api_reference.py
+          python tools/compose_pages_site.py --locale-root _build/api-reference/locales --include-drafts --output _build/pages/review
+          python tools/compose_pages_site.py --locale-root _build/api-reference/locales
           find _build/api-reference/site -type f -print | LC_ALL=C sort \
             > _build/api-reference/generated-files.txt
 
@@ -64,8 +66,10 @@ jobs:
           python -m tools.locale_documentation validate \
             --output _build/documentation-gates/locales.json
           python -m tools.documentation_gates all \
-            --site-root _build/api-reference/site 2>&1 \
+            --site-root _build/pages/review --deployment-path /FuzzyRoutines 2>&1 \
             | tee _build/documentation-gates/deterministic.txt
+          python -m tools.documentation_gates rendered-links \
+            --site-root _build/pages/site --deployment-path /FuzzyRoutines
 
       - name: Run documented examples against the clean installed wheel
         shell: bash

@@ -5,17 +5,39 @@ SPDX-License-Identifier: Apache-2.0
 
 # Multilingual Documentation Architecture
 
-- Status: accepted design from Task #205; implemented by Task #255
+- Status: accepted design from Task #205; validation from #255, rendering and release gates from #297
 - Decision: [ADR-0011](../adr/0011-multilingual-documentation-pipeline.md)
 - Generator foundation: [ADR-0010](../adr/0010-api-documentation-architecture.md)
 - Initial locales: `en`, `ru`, `zh-CN`
 
 ## Scope boundary
 
-This document specifies the tracked inputs and deterministic state transitions
-implemented by Task #255. It does not create translations or a translation
-service. Russian and Simplified Chinese remain explicit `missing` states until
-accountable human review approves native editorial content.
+This document specifies tracked inputs, deterministic state transitions and
+three-language rendering. Automation may prepare explicitly labelled draft
+artifacts; it never grants human approval. Stable tagged publication requires
+every required Russian and Simplified Chinese unit to be current and approved.
+
+The required corpus is all 34 canonical site pages, 18 existing mathematical,
+migration, compatibility and public-typing documents, 193 public symbol units
+and 12 module overviews: 257 independently tracked units per locale. `externalPages` in the
+project manifest binds the existing English source files to stable site routes,
+avoiding a second canonical copy. Development protocols, ADRs, audit records,
+benchmark reports and research provenance remain English engineering records;
+they are outside the translated user corpus and remain linked as references.
+
+`tools/build_api_reference.py` builds one wheel, then renders English, Russian
+and Simplified Chinese in the isolated documentation environment. Static Griffe
+extensions replace in-memory docstring bodies using validated external fragments;
+Python source, signatures and installed package content remain unchanged.
+Page paths and explicit source-language heading IDs remain stable across locales.
+Language navigation stays on the current page. Search is built for each locale.
+
+CI retains all three sites in a labelled review artifact. Production composition
+copies a target locale only when all its units are approved; otherwise its public
+route retains an explicit English fallback. A stable tag additionally runs
+`python -m tools.locale_documentation validate --require-approved`, which rejects
+missing, draft, review, stale and retired required content before artifact
+publication. Ordinary PR validation permits honest draft progress.
 
 ## Repository layout
 
@@ -46,9 +68,9 @@ docs/
 Generated output remains outside this tree:
 
 ```text
-_build/docs/<version>/en/
-_build/docs/<version>/ru/
-_build/docs/<version>/zh-CN/
+_build/api-reference/locales/en/site/
+_build/api-reference/locales/ru/site/
+_build/api-reference/locales/zh-CN/site/
 ```
 
 Task #206 owns the public URL and Pages artifact layout. The generated path
@@ -90,8 +112,8 @@ than reassigning them.
 
 ### Symbol IDs
 
-Public API symbols use the fully qualified Python name discovered statically by
-Griffe and prefixed with `symbol:`:
+Public API symbols use the fully qualified Python name inventoried statically
+from the source AST and rendered through Griffe, prefixed with `symbol:`:
 
 ```text
 symbol:fuzzyroutines.fuzzysets.ScalarFuzzySet
@@ -107,6 +129,21 @@ docstrings. An approved translated symbol body is a Markdown fragment under
 `docs/i18n/symbols/<locale>/`, referenced by the unit manifest and composed into
 the locale API page at build time. It never replaces or shadows the English
 docstring in Python source.
+
+### Module overview IDs
+
+With `includeModuleDocstrings = true`, the inventory also includes the non-empty
+module docstring of every declared API surface, including the package root.
+Its ID is `module:<qualified-name>`; its kind is `module` and its signature is
+the literal `module <qualified-name>`. It uses the same fragment directory,
+hash-bound state and human-review requirements as symbols. Module overviews do
+not increase callable API counts or require artificial executable examples.
+
+Five constructors have one-line summaries that repeat their class
+contracts. Rendering suppresses only those exact, explicitly listed summaries
+when the class is translated. An edited or new constructor docstring fails the
+locale build until its translation inventory is addressed; additional contract
+facts cannot silently disappear. Signatures and displayed source stay intact.
 
 ### Concept IDs
 
@@ -135,7 +172,7 @@ The versioned payload is:
 ```text
 fuzzy-doc-unit-v1\n
 id:<stable-id>\n
-kind:<page|symbol>\n
+kind:<page|symbol|module>\n
 signature-length:<UTF-8-byte-count>\n
 <public-signature-or-empty>\n
 body-length:<UTF-8-byte-count>\n
@@ -143,10 +180,14 @@ body-length:<UTF-8-byte-count>\n
 ```
 
 For a page, the body is the complete canonical English Markdown file and the
-signature is empty. For a symbol, pinned Griffe extracts the public signature
+signature is empty. For a symbol, the AST inventory extracts the public signature
 and English docstring without importing the package. Including the signature
 makes a parameter, default, or return-annotation change stale even when prose
 was not updated.
+
+For a module, the body is its AST docstring and the signature is
+`module <qualified-name>`. An overview-only edit therefore invalidates that
+unit independently of the callable symbols it introduces.
 
 Hashing never reads rendered HTML. Generated output cannot become a source of
 truth.
@@ -199,12 +240,14 @@ title = "Операции над нечёткими множествами"
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+reviewedTranslationHash = "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789"
 reviewer = "editorial-reviewer-handle"
 reviewedAt = "2026-09-18T00:00:00Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+reviewedTranslationHash = "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789"
 reviewer = "mathematical-reviewer-handle"
 reviewedAt = "2026-09-18T00:00:00Z"
 
@@ -212,7 +255,8 @@ reviewedAt = "2026-09-18T00:00:00Z"
 state = "missing"
 ```
 
-Required fields by unit kind are:
+Required fields by unit kind are shown below. Opted-in `module` units use the
+Symbol column, with a `module:` ID and kind `module`; they cannot use `aliasOf`.
 
 | Field                  | Page        | Symbol      | Meaning                                       |
 |------------------------|-------------|-------------|-----------------------------------------------|
@@ -232,6 +276,14 @@ Required fields by unit kind are:
 Conditional translation paths are required whenever locale content exists.
 Every approved translation requires the review records selected by its review
 class, and every such record requires its hash, reviewer, role, and timestamp.
+
+Every actual approval record also requires `reviewedTranslationHash`, a SHA-256
+digest of the normalized UTF-8 translated text. Editing the translation after
+review therefore invalidates approval even when English is unchanged. Drafts
+record `sourceHash` to detect changes to their source while work is in progress.
+The illustrative digests above must be replaced with actual source and
+translation digests during human review. AI-assisted passes remain draft
+preparation and do not populate human reviewer records.
 
 ## Translation states
 

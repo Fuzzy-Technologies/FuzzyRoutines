@@ -418,6 +418,15 @@ class MembershipFunction:
     Evaluation accepts finite real coordinates excluding booleans. Parameters
     are copied at construction; reading `parameters` cannot mutate the source.
 
+    Args:
+        family: Canonical modern family identifier listed in the class contract.
+        **parameters: Exact finite real parameters documented by the named
+            family constructor; booleans are rejected.
+
+    Raises:
+        ValueError: The family, parameter names, finiteness, or geometric
+            ordering is invalid.
+
     Attributes:
         family: Canonical modern family identifier.
         parameters: Read-only parameter mapping with modern geometric names.
@@ -436,17 +445,7 @@ class MembershipFunction:
     _source: _AnalyticalSource
 
     def __init__(self, family: str, **parameters: MembershipScalar) -> None:
-        """Freeze a family with its exact named parameter set.
-
-        Args:
-            family: Canonical modern family identifier listed in the class contract.
-            **parameters: Exact finite real parameters documented by the named
-                family constructor; booleans are rejected.
-
-        Raises:
-            ValueError: The family, parameter names, finiteness, or geometric
-                ordering is invalid.
-        """
+        """Freeze a validated family with its exact named parameter set."""
 
         if family not in _PARAMETER_MAP:
             raise InvalidParameterError(f"unknown membership-function family: {family!r}")
