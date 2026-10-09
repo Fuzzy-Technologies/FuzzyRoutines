@@ -133,7 +133,8 @@ stable release approval.
   PascalCase functions and `test_PascalCase` tests. A repository-wide guard
   checks Python files, embedded fixtures and Markdown examples. Historical
   interfaces and external contracts remain protected; earlier development
-  plateau keywords are accepted as aliases of `plateauStart`/`plateauEnd`. Routine local validation covers affected paths; full regression,
+  plateau keywords are accepted as aliases of `plateauStart`/`plateauEnd`.
+  Routine local validation covers affected paths; full regression,
   documentation, typing, and package gates run in PR CI.
 - Release readiness requires identical wheel and source-distribution bytes
   from independent builds of the exact candidate, with a fixed environment

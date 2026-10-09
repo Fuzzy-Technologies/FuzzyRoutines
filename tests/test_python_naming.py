@@ -8,6 +8,7 @@
 import ast
 import re
 import subprocess
+import textwrap
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -56,6 +57,7 @@ def _NamingViolations(sourceText, relativePath, *, embedded=False):
     tree = ast.parse(sourceText)
     violations = []
     externalParameters = set()
+    externalReferences = set()
     typeAliasNames = {id(node.name) for node in ast.walk(tree) if isinstance(node, ast.TypeAlias)}
     invalidFixtures = set()
 
@@ -63,6 +65,7 @@ def _NamingViolations(sourceText, relativePath, *, embedded=False):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == "make_archive":
             if relativePath == "tools/reproducible_artifacts.py":
                 externalParameters.update(id(argument) for argument in node.args.args)
+                externalReferences.update(id(child) for child in ast.walk(node) if isinstance(child, ast.Name))
 
         if relativePath == "tests/test_python_naming.py" and isinstance(node, ast.FunctionDef):
             if node.name in {"test_NamingGuardRejectsSnakeCaseAndChecksEmbeddedPython", "test_ExternalExceptionCannotHideOrdinarySnakeCaseLocals"}:
@@ -103,9 +106,15 @@ def _NamingViolations(sourceText, relativePath, *, embedded=False):
             if id(node) in externalParameters and name in SETUPTOOLS_PARAMETERS:
                 valid = True
 
-        elif isinstance(node, ast.Name) and isinstance(node.ctx, ast.Store):
+        elif isinstance(node, ast.Name):
             name = node.id
             valid = bool(CAMEL_CASE.fullmatch(name) or CONSTANT_CASE.fullmatch(name)) or name == "_" or _Dunder(name)
+
+            if isinstance(node.ctx, ast.Load):
+                valid = valid or bool(PASCAL_CASE.fullmatch(name) or TEST_CASE.fullmatch(name))
+
+                if id(node) in externalReferences and name in SETUPTOOLS_PARAMETERS:
+                    valid = True
 
             if relativePath == "docs/api-evaluation/sphinx/conf.py" and name in SPHINX_SETTINGS:
                 valid = True
@@ -176,7 +185,9 @@ def test_ExternalExceptionCannotHideOrdinarySnakeCaseLocals():
     violations = _NamingViolations(sourceText, "tools/reproducible_artifacts.py")
 
     assert len(violations) == 1 and "archive_path" in violations[0]
-    assert len(_NamingViolations(sourceText, "example.py")) == 4
+    assert {violation.rsplit(": ", 1)[-1] for violation in _NamingViolations(sourceText, "example.py")} == {
+        "make_archive", "base_name", "root_dir", "archive_path",
+    }
 
 
 def test_AllTrackedPythonDeclarationsFollowProjectNaming():
@@ -213,3 +224,22 @@ def test_AuthoredMarkdownPythonExamplesFollowProjectNaming():
                 continue
 
     assert not violations, "Markdown Python naming violations:\n" + "\n".join(violations)
+
+
+def test_AuthoredWorkflowPythonFollowsProjectNaming():
+    """Cover inline Python heredocs without treating shell/YAML schema names as identifiers."""
+
+    output = subprocess.check_output(["git", "ls-files", "-z", "*.yml", "*.yaml"], cwd=PROJECT_ROOT, text=True)
+    violations = []
+    pattern = re.compile(r"<<[ \t]*['\"](?P<marker>PY[A-Z_]*)['\"][^\n]*\n(?P<program>.*?)(?m:^[ \t]*(?P=marker)[ \t]*$)", re.DOTALL)
+
+    for relativePath in output.split("\0"):
+        if not relativePath:
+            continue
+
+        sourceText = (PROJECT_ROOT / relativePath).read_text(encoding="utf-8")
+
+        for match in pattern.finditer(sourceText):
+            violations.extend(_NamingViolations(textwrap.dedent(match["program"]), relativePath))
+
+    assert not violations, "Workflow Python naming violations:\n" + "\n".join(violations)

@@ -33,7 +33,7 @@ repository.
   changing an existing public signature needs compatibility review.
 
 These rules govern every tracked Python file and authored executable Python
-fixture or Markdown example. The maintainer-confirmed camelCase rule supersedes
+fixture, Markdown example or workflow heredoc. The maintainer-confirmed camelCase rule supersedes
 the snake_case variable rule in the previously supplied shared standard.
 
 Run `python -m pytest -q tests/test_python_naming.py` to check the entire naming
@@ -284,8 +284,8 @@ could not infer from the filename.
 def test_HigherAlphaCutIsNestedInsideLowerCut():
     """Keep weak cuts nested when the membership threshold increases."""
 
-    lowerCut = AlphaCut(fuzzy_set, 0.25)
-    higherCut = AlphaCut(fuzzy_set, 0.75)
+    lowerCut = AlphaCut(fuzzySet, 0.25)
+    higherCut = AlphaCut(fuzzySet, 0.75)
 
     assert set(higherCut.points) <= set(lowerCut.points), (
         "For beta >= alpha, A_beta must remain a subset of A_alpha."
