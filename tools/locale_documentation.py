@@ -153,8 +153,10 @@ def ProtectedApiContract(text: str) -> tuple:
         if section:
             activeSection = section.group(1)
             sections.append(activeSection)
+
         elif line and not line[:1].isspace():
             activeSection = ""
+
         elif activeSection in {"Args", "Attributes", "Raises"}:
             field = re.match(r"^    (\*{0,2}[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)(?: \([^)]*\))?:", line)
 

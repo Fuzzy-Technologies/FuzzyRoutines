@@ -11,6 +11,7 @@ from pathlib import Path
 from griffe import Extension
 
 REDUNDANTINITIALIZERS = {
+    "fuzzyroutines.membership.MembershipFunction.__init__": "Freeze a validated family with its exact named parameter set.",
     "fuzzyroutines._legacy.membership.MFunction.__init__": "Initialize and validate a historical membership function.",
     "fuzzyroutines._legacy.sets.FuzzySet.__init__": "Initialize the historical mutable fuzzy-set wrapper.",
     "fuzzyroutines._legacy.scales.FuzzyScale.__init__": "Initialize the default three-level scale.",
@@ -32,7 +33,7 @@ class LocaleDocstrings(Extension):
         translated = self.translations.get(obj.path)
 
         if obj.name == "__init__" and obj.parent.path in self.translations and obj.docstring is not None:
-            # These four one-line summaries duplicate the translated class text.
+            # These one-line summaries duplicate the translated class text.
             # Changed or newly authored constructor contracts must enter inventory.
             if obj.docstring.value.strip() != REDUNDANTINITIALIZERS.get(obj.path):
                 raise ValueError(f"constructor documentation needs explicit translation inventory: {obj.path}")

@@ -139,7 +139,7 @@ the literal `module <qualified-name>`. It uses the same fragment directory,
 hash-bound state and human-review requirements as symbols. Module overviews do
 not increase callable API counts or require artificial executable examples.
 
-Four historical constructors have one-line summaries that repeat their class
+Five constructors have one-line summaries that repeat their class
 contracts. Rendering suppresses only those exact, explicitly listed summaries
 when the class is translated. An edited or new constructor docstring fails the
 locale build until its translation inventory is addressed; additional contract

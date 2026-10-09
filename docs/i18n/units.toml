@@ -2710,18 +2710,18 @@ sourceHash = "sha256:c2eb75ace8e5f11e99b1aac45337d6f3463741910a5fe4e6e07e2029175
 id = "symbol:fuzzyroutines.membership.MembershipFunction"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:789724adfeddb338e3abea36c983d1d4447912a65b2be1974047d860172661b7"
+sourceHash = "sha256:29df5354ed777d3fe170e3dbe7cfabba4fd1cbb0dab491cc145db286922ae996"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipFunction.md"
-sourceHash = "sha256:789724adfeddb338e3abea36c983d1d4447912a65b2be1974047d860172661b7"
+sourceHash = "sha256:29df5354ed777d3fe170e3dbe7cfabba4fd1cbb0dab491cc145db286922ae996"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipFunction.md"
-sourceHash = "sha256:789724adfeddb338e3abea36c983d1d4447912a65b2be1974047d860172661b7"
+sourceHash = "sha256:29df5354ed777d3fe170e3dbe7cfabba4fd1cbb0dab491cc145db286922ae996"
 
 [[units]]
 id = "symbol:fuzzyroutines.membership.MembershipFunction.Evaluate"
@@ -3441,18 +3441,18 @@ sourceHash = "sha256:cd36f745573e6139f1293efaea48733801993480f4cdb4fa1762a60a3e3
 id = "symbol:fuzzyroutines.MembershipFunction"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:8592603c9fbc0275f39d07fdc28043e85e216ddc1d0326fd737aaaac98ec5f5d"
+sourceHash = "sha256:79ec75626dbc4c452522f7d0db485290dcff8d34dc8e6f224d475fb970632a4b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/i18n/symbols/ru/fuzzyroutines.membership.MembershipFunction.md"
-sourceHash = "sha256:8592603c9fbc0275f39d07fdc28043e85e216ddc1d0326fd737aaaac98ec5f5d"
+sourceHash = "sha256:79ec75626dbc4c452522f7d0db485290dcff8d34dc8e6f224d475fb970632a4b"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.membership.MembershipFunction.md"
-sourceHash = "sha256:8592603c9fbc0275f39d07fdc28043e85e216ddc1d0326fd737aaaac98ec5f5d"
+sourceHash = "sha256:79ec75626dbc4c452522f7d0db485290dcff8d34dc8e6f224d475fb970632a4b"
 
 [[units]]
 id = "symbol:fuzzyroutines.MembershipScalar"
@@ -3892,7 +3892,7 @@ state = "missing"
 id = "page:mathematics.finite-number-policy"
 kind = "page"
 sourcePath = "docs/mathematics/finite-number-policy.md"
-sourceHash = "sha256:803ac1ea1894282dd7e76b23493e372cd88730ec75febe2e3f2cfcf28ef64454"
+sourceHash = "sha256:b540b154c6b228eb8b8e15ff0cc36bfaf380121f022ad4b345e4313f4aa1f8eb"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -3996,7 +3996,7 @@ state = "missing"
 id = "page:mathematics.numerical-edge-policy"
 kind = "page"
 sourcePath = "docs/mathematics/numerical-edge-policy.md"
-sourceHash = "sha256:605616993ba738676bbf6f88736e594c56dc58dbd4ae2036cad4567ca2206d1e"
+sourceHash = "sha256:8d87163a6dbccef9a8703a6eadf36ca18488e06f00a90e183984ed98329799cb"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -4035,7 +4035,7 @@ state = "missing"
 id = "page:mathematics.universe-support-contract"
 kind = "page"
 sourcePath = "docs/mathematics/universe-support-contract.md"
-sourceHash = "sha256:f275fcce9d6ce963937517dce573250766b74eed7579e521740f3574a1182833"
+sourceHash = "sha256:f7cdde7d2d4e60ab8d7e13cf95381f783eda89e27628e9c05a28ad9707ad0954"
 reviewClass = "mathematical"
 
 [units.translations.ru]

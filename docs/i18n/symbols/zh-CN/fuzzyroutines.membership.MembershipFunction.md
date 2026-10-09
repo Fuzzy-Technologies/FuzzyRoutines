@@ -10,6 +10,13 @@ SPDX-License-Identifier: Apache-2.0
 具名构造函数公开完整的几何参数约束。求值接受有限实数坐标，不接受布尔值。
 构造时会复制参数；读取 `parameters` 无法修改原对象。
 
+Args:
+    family: 类契约中列出的现代规范函数族标识符。
+    **parameters: 具名函数族构造函数所规定的准确有限实数参数集合；不接受布尔值。
+
+Raises:
+    ValueError: 函数族、参数名称、有限性或几何顺序无效。
+
 Attributes:
     family: 现代 API 的规范函数族标识符。
     parameters: 以现代几何参数名称为键的只读映射。

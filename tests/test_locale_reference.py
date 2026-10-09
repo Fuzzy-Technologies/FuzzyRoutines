@@ -14,6 +14,7 @@ import pytest
 from tools.build_locale_reference import (
     AuthoredSymbolPath,
     BuildLocale,
+    ReadInputs,
     RewriteExternalLinks,
     StageLocale,
 )
@@ -112,6 +113,26 @@ def test_OnlyKnownRedundantConstructorSummariesCanBeSuppressed(tmpPath):
     obj.docstring.value = "Additional constructor constraint."
     with pytest.raises(ValueError, match="needs explicit translation inventory"):
         extension.on_instance(node=None, obj=obj, agent=None)
+
+
+def test_TranslatedRealApiRetainsConstructorContracts(tmpPath):
+    """Check the affected real constructor and all static translation hooks, without a full site build."""
+
+    griffe = pytest.importorskip("griffe")
+    _, units, records, _ = ReadInputs(PROJECTROOT)
+    translations = {
+        AuthoredSymbolPath(unit): (PROJECTROOT / records[unit.identifier]["translations"]["ru"]["path"]).read_text(encoding="utf-8")
+        for unit in units if unit.kind != "page"
+    }
+    translationMap = tmpPath / "translations.json"
+    translationMap.write_text(json.dumps(translations), encoding="utf-8")
+    extensions = griffe.load_extensions({str(PROJECTROOT / "tools/locale_griffe_extension.py"): {"translationMap": str(translationMap)}})
+    module = griffe.load("fuzzyroutines", search_paths=[PROJECTROOT], extensions=extensions, allow_inspection=False)
+    constructor = module["membership.MembershipFunction.__init__"]
+    assert constructor.docstring.value == ""
+    assert "**parameters:" in constructor.parent.docstring.value
+    assert "ValueError:" in constructor.parent.docstring.value
+    assert str(constructor.parameters["family"].annotation) == "str"
 
 
 def test_OnePageLocaleBuildRendersTranslatedApiAndPreservesStableAnchors(tmpPath):
