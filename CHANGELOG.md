@@ -35,6 +35,12 @@ Existing users should read the
 
 #### Added
 
+- Canonical English quick start and eight worked scenarios explain physical
+  inputs, model assumptions, intermediate grades, policy choices, exact versus
+  sampled results, and independently verified area moments. Nine reproducible
+  SVG figures and a membership gallery accompany the calculations; plotting
+  dependencies remain documentation-only. Clean-install CI executes every
+  canonical English Python snippet and the complete scenario script.
 - Curated modern root exports provide immutable membership factories and a
   structural custom-callable protocol, explicit continuous/discrete universes,
   numerical integration domains, immutable scalar sets, and scalar policies.

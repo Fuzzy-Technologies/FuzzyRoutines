@@ -47,11 +47,27 @@ implemented-versus-roadmap boundary.
 
 ## Install
 
+Use CPython 3.13 or 3.14. The modern 2.0 API currently comes from `develop`:
+
+```console
+python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
+```
+
+For a checkout you can edit:
+
 ```console
 git clone --branch develop https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
 cd FuzzyRoutines
 python -m pip install .
 ```
+
+The [quick start](docs/site/content/en/quick-start.md) explains the development
+and future stable PyPI installation routes and classifies a 24 °C measurement.
+Explore [eight worked scenarios](docs/site/content/en/guides/index.md), with
+independent numerical checks and nine reproducible scientific figures, or
+browse the [membership gallery](docs/site/content/en/guides/membership-families.md).
+From a checkout with the package installed, `python -I examples/guide.py` runs
+every scenario without NumPy, Matplotlib, network access, or file creation.
 
 ## Choose the API surface
 

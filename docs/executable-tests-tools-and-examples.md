@@ -47,6 +47,37 @@ operating-system temporary directory and removes the complete session after
 the run. It returns `0` only when all parallel and serial phases pass, `1` for
 test failures or process errors, and `2` for invalid runner configuration.
 
+## Worked user scenarios and figures
+
+The canonical [English quick start](site/content/en/quick-start.md) and
+[scenario collection](site/content/en/guides/index.md) are backed by
+`examples/guide.py`. Its default executes eight scenarios, checks independent
+expected results, and emits deterministic JSON to stdout. It creates no files
+and imports no optional plotting or numerical dependency. `--scenario NAME`
+selects one scenario; `--help` returns `0`, malformed arguments return `2`, and
+a failed calculation assertion returns nonzero.
+
+```console
+python -I examples/guide.py
+python -I examples/guide.py --scenario alpha-cuts
+```
+
+The installed verifier extracts every Python fence in `docs/site/content/en`,
+including API-page examples, and runs each independently with `python -I`.
+Package CI repeats this against both wheel and sdist on supported Python
+versions. Documentation CI also executes the examples against its installed
+wheel. An example must not depend on variables or imports from another fence.
+
+`tools/generate_guide_figures.py` executes the same scenario assertions and
+renders nine SVGs from scalar API evaluations. Install the pinned
+`docs/requirements-plots.txt` documentation dependencies, then supply
+`--output-directory`. `--check` verifies bytes without writes; the optional
+`--preview-directory` owns PNG review artifacts. The tool returns `0` on a
+complete rendering or comparison and nonzero on drift or failure. See
+[figure provenance](site/content/en/guides/figures.md) for the exact sample
+grids and numerical limits. CI verifies committed figures with the pinned
+Python 3.14 toolchain; ordinary library installation remains dependency-free.
+
 ## Migration examples
 
 The two focused migration examples emit one JSON object to stdout and create no
@@ -131,8 +162,8 @@ each artifact and supported Python version it then:
 1. creates a clean virtual environment;
 2. installs the artifact without resolving runtime dependencies;
 3. proves `fuzzyroutines` resolves under that environment prefix;
-4. executes every canonical compatibility-guide Python snippet in isolated mode;
-5. runs historical, modern, and bundled examples from a temporary directory;
+4. executes every compatibility-guide and canonical English Python snippet in isolated mode;
+5. runs all eight worked scenarios and historical, modern, and bundled examples from a temporary directory;
 6. runs every benchmark entry point with bounded realistic inputs;
 7. parses redirected JSON stdout and compares each benchmark `--output` file;
 8. leaves generated evidence only under the explicit temporary artifact tree.

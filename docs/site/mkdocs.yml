@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-site_name: FuzzyRoutines API Reference
-site_description: Canonical English API reference for FuzzyRoutines.
+site_name: FuzzyRoutines Documentation
+site_description: Canonical English user guides, worked examples, and API reference.
 site_url: https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/
 repo_url: https://github.com/Fuzzy-Technologies/FuzzyRoutines
 repo_name: Fuzzy-Technologies/FuzzyRoutines
@@ -34,6 +34,20 @@ theme:
 
 nav:
   - Overview: index.md
+  - Quick start: quick-start.md
+  - Worked scenarios:
+      - Overview: guides/index.md
+      - Temperature comfort: guides/temperature.md
+      - Severity and abstention: guides/risk.md
+      - Sensor criteria: guides/sensors.md
+      - Warning zones: guides/alarm.md
+      - Quality alpha cuts: guides/alpha-cuts.md
+      - Centroid accuracy: guides/centroid.md
+      - Scale audit: guides/scale-audit.md
+      - Custom quality model: guides/custom.md
+      - Membership gallery: guides/membership-families.md
+      - Practical API recipes: guides/api-recipes.md
+      - Figure provenance: guides/figures.md
   - Product overview: https://fuzzy-technologies.github.io/FuzzyRoutines/
   - Mathematics guides: https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/develop/docs/mathematics
   - Languages and versions: https://fuzzy-technologies.github.io/FuzzyRoutines/api/
