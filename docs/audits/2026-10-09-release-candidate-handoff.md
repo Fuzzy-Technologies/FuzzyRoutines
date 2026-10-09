@@ -7,8 +7,12 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Prepared result
 
-The draft integration candidate combines the current `develop` mathematical
-audit (merged #303) with the reviewable changes in #304, #305 and #306. It
+The draft integration candidate includes the merged mathematical audit (#303),
+translations (#304), task-closing repair (#305) and PyPI verification (#306).
+It was refreshed from `develop` at
+`ec9baf333dab0aed7e6e47f57b3e1575be6dbba5` after all nine workflows passed
+on #306's conflict-resolution head. The integration preserves the preceding
+candidate's code, version metadata and translated text byte-for-byte. It
 proposes `2.0.0` package metadata and the stable classifier, aligns active
 version/compatibility/migration records and clean-install assertions, and
 puts the stable pip installation route first in all three quick starts.
@@ -20,15 +24,21 @@ source metadata instead of a hard-coded development version.
 No tag, branch promotion, GitHub Release or PyPI publication has occurred.
 The changelog entry remains a proposal with a clearly identified preparation
 date. Finalize it against the approved revision and actual publication date.
-The candidate is kept in draft pending the prerequisites below. After the
-individual prerequisite PRs are merged, refresh this branch from that exact
-`develop` and repeat candidate CI; earlier green revisions do not substitute.
+The prerequisite PRs are merged. The candidate remains draft pending the
+release prerequisites below. New candidate CI must cover the refreshed head;
+earlier green revisions do not substitute.
 
 ## Documentation review target
 
 There are 257 required units per language: 52 pages, 193 public symbol
-contracts and 12 module overviews. Russian and Chinese drafts are complete;
-no human approval has been invented. This version transition changes three
+contracts and 12 module overviews. Russian and Chinese translations are complete.
+On 2026-10-10 at 01:30 Europe/Moscow, maintainer Timur Gilmullin provisionally
+approved the current Russian documentation while noting awkward wording.
+Record that maintainer acceptance without inventing separate specialist review
+roles or extending it to Chinese. Per-unit review records remain unchanged;
+the statement alone does not satisfy every ADR-0011 release requirement.
+Polish Russian wording in a subsequent reviewed change and revalidate affected
+translation hashes. This version transition changes three
 canonical user units and their two translations:
 
 - `page:quick-start`;
@@ -74,8 +84,8 @@ manual upload is an alternative to the approved OIDC workflow.
 
 ## Final execution order
 
-1. Review and merge the prerequisite PRs, then refresh the candidate from the
-   resulting `develop` without changing the approved mathematical contracts.
+1. Prerequisite integration is complete: #304, #305 and #306 are merged and the
+   candidate includes the resulting `develop` without mathematical changes.
 2. Complete the real hash-bound editorial and scientific reviews on the exact
    candidate texts. Record findings and resolutions, not inferred approvals.
 3. Attach exact-candidate CI evidence: full supported-runtime suite, per-module
