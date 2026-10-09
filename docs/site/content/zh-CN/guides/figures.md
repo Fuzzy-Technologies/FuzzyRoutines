@@ -7,12 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 
 仓库中的十一幅 SVG 是科学教学图，由 `tools/generate_guide_figures.py` 根据真实标量 API 求值生成，并非生成式艺术图像。生成器先执行九个场景中的全部断言，再绘制模型和注释。场景代码及数值预期位于 `examples/guide.py`。
 
-## 所有语言共用一套图形 {#one-figure-set-for-all-languages}
-
-英文、俄文和简体中文文档共用这些 SVG。图内文字保持英文，包括标题、坐标轴、图例、注释和单位。翻译页面通过本地化图注、正文和描述性替代文字解释这些标签，不另行生成翻译图片。
-
-规范文件位于 `docs/site/content/en/assets/figures/`。各语言构建可以复制文件以保持相对链接有效，但副本必须与原文件逐字节一致。俄文和中文页面在发布前仍需各自的语言及科学审阅。文档约定见[多语言架构](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/architecture/multilingual-documentation-pipeline.md)。
-
 ## 复现资源 {#reproduce-the-assets}
 
 在已安装 FuzzyRoutines 的仓库工作副本中，使用 CPython 3.14 和固定版本的文档工具链：

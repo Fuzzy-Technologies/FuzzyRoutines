@@ -14,9 +14,8 @@ that these coefficients fit every application. It is not the three-level default
 
 [![Five historical membership curves and their modern reconstruction, shown side by side on zero to one; both retain the weak region near 0.17.](../assets/figures/universal-fuzzy-scale.svg)](../assets/figures/universal-fuzzy-scale.svg)
 
-Both panels use the same English level labels and the same coefficients. The
-left panel evaluates the historical facade; the right evaluates the explicit
-modern construction. The Min curve drops sharply around 0.125; Low, Med and
+Both panels use the same coefficients. The left panel evaluates the historical
+facade; the right evaluates the explicit modern construction. The Min curve drops sharply around 0.125; Low, Med and
 High have flat tops and quadratic shoulders; Max rises between 0.77 and 0.95.
 The small Min tail remains positive even where it is invisible at this scale.
 

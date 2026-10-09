@@ -13,9 +13,6 @@ explain inputs, policies, calculations, expected results, and figures. Browse
 the [membership gallery](guides/membership-families.md) to choose a curve, or
 use the [practical API recipes](guides/api-recipes.md) for smaller operations.
 
-The canonical English API reference is generated from installed-package Python
-annotations and English Google-style docstrings using static Griffe discovery.
-
 Start with the [modern API](api/modern/index.md) for new code. Use the
 [historical compatibility facade](api/legacy/index.md) only when maintaining
 software written against FuzzyRoutines 1.0.3.
@@ -32,6 +29,3 @@ $$
 \mu_{A \setminus B}(x)
 = T\left(\mu_A(x), N\left(\mu_B(x)\right)\right).
 $$
-
-The rendered formula and qualified links above are part of the strict build
-contract.

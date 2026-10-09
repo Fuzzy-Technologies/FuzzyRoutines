@@ -12,7 +12,7 @@ SPDX-License-Identifier: Apache-2.0
 
 [![左侧为历史五级隶属曲线，右侧为现代 API 重建；两者均保留 0.17 附近的弱覆盖区。](../../en/assets/figures/universal-fuzzy-scale.svg)](../../en/assets/figures/universal-fuzzy-scale.svg)
 
-左图计算历史接口，右图计算现代接口；各语言共用这张英文标注的图。
+左图使用历史接口计算，右图使用现代接口计算。
 Min 在 0.125 附近快速下降，Low、Med、High 具有平顶和二次曲线肩部，
 Max 在 0.77 到 0.95 之间上升。Min 的微小正尾部仍然存在，只是在图上难以分辨。
 

@@ -11,20 +11,6 @@ not generated artwork. The generator first executes every assertion in the
 nine worked scenarios, then draws the models and annotations. The scenario
 code and numerical expectations are in `examples/guide.py`.
 
-## One figure set for all languages
-
-English, Russian, and Simplified Chinese documentation share these same SVGs.
-Text inside the images stays English: titles, axes, legends, annotations, and
-units. Translated pages explain those labels in localized captions, prose, and
-descriptive image alternatives. No translated image variants are generated.
-
-The canonical files are under `docs/site/content/en/assets/figures/`. Locale
-builds may copy them for working relative links; the copies must preserve the
-same bytes. Russian and Chinese pages still require their own language and
-scientific review before publication. See the
-[locale architecture](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/architecture/multilingual-documentation-pipeline.md) for
-the documentation contracts.
-
 ## Reproduce the assets
 
 From a checkout with FuzzyRoutines installed, use the pinned documentation
