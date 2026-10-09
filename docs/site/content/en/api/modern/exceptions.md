@@ -52,6 +52,8 @@ including documented generic `Exception` errors, remain protected.
 ## Worked examples
 
 [Undefined-result handling](../../guides/api-recipes.md#handle-a-mathematically-undefined-result) handles zero membership area.
+[Error recipes](../../guides/errors.md) explain catch relationships and a real
+adaptive convergence failure.
 
 ::: fuzzyroutines.exceptions
     options:

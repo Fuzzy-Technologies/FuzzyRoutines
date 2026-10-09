@@ -20,6 +20,7 @@ EXECUTABLETOOLS = (
     "benchmark_scale_lookup",
     "check_license_headers",
     "evaluate_api_documentation",
+    "guide_example_coverage",
     "pr_merge_links",
     "report_universal_scale_coverage",
     "test_runner",

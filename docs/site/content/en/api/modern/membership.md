@@ -76,8 +76,10 @@ python -m mypy --python-version 3.13 --strict --follow-imports silent --warn-unu
 It checks built-in float and integer calls, analytical evaluators, bound methods,
 and rejects narrow inputs, nonnumeric results, and missing positional arguments.
 Imported-module diagnostics are intentionally hidden by `--follow-imports
-silent`; this is a consumer contract check, not the project-wide typing gate
-planned in Task #95. Runtime finiteness, boolean exclusion, and grade range
+silent`; this checks the consumer contract. The broader installed/source typing
+coverage delivered under Task #95 is described in the
+[typing contract](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/public-typing.md).
+Runtime finiteness, boolean exclusion, and grade range
 cannot be proved by these annotations.
 
 ## Worked examples

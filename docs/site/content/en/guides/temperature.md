@@ -21,7 +21,7 @@ $$
 \mu_{\mathrm{Warm}}(24)=2\left(\frac{24-22}{30-22}\right)^2=\frac{1}{8}.
 $$
 
-![Temperature model and measured membership grades](../assets/figures/temperature.svg)
+[![Temperature model and measured membership grades](../assets/figures/temperature.svg)](../assets/figures/temperature.svg)
 
 The strongest grade selects *Comfort*. The result does not claim that comfort
 has a 66.7% probability. Both grades describe the same measurement under two

@@ -39,7 +39,7 @@ For the first triangle, the geometric centroid is
 $(0+2+8)/3=10/3\approx3.333333$. This is an independent analytical oracle.
 The library uses analytical moments for the recognized triangular family.
 
-![Triangle centroid and a separate four-point trapezoidal approximation](../assets/figures/centroid.svg)
+[![Triangle centroid and a separate four-point trapezoidal approximation](../assets/figures/centroid.svg)](../assets/figures/centroid.svg)
 
 The cyan dashed line joins four user-side samples at
 $0,8/3,16/3,8$, whose grades are $0,8/9,4/9,0$. Applying the trapezoidal rule

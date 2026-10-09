@@ -60,6 +60,10 @@ CURVE_REFERENCES = (
     ("alarm", 0, 2, 40, 120, lambda x: min(ShoulderReference(x, 60, 100), 1 - ShoulderReference(x, 90, 110))),
     ("alpha-cuts", 0, 0, 10, 14, lambda x: TriangleReference(x, 10, 12, 14)),
     ("centroid", 0, 0, 0, 8, lambda x: TriangleReference(x, 0, 2, 8)),
+    ("operators", 0, 0, 0, 1, lambda x: min(x, 0.6)),
+    ("operators", 0, 1, 0, 1, lambda x: 0.6 * x),
+    ("operators", 1, 0, 0, 1, lambda x: max(x, 0.6)),
+    ("operators", 1, 1, 0, 1, lambda x: x + 0.6 - 0.6 * x),
     ("scale-audit", 0, 0, 0, 10, lambda x: TriangleReference(x, 0, 2, 6)),
     ("scale-audit", 0, 1, 0, 10, lambda x: TriangleReference(x, 4, 8, 10)),
     ("scale-audit", 1, 0, 0, 10, lambda x: TriangleReference(x, 0, 2, 4)),
@@ -92,6 +96,21 @@ def AssertPoints(collection, expected):
     assert len(points) == len(expected)
     for actual, reference in zip(points, expected, strict=True):
         assert actual == pytest.approx(reference, rel=1e-12, abs=1e-12)
+
+
+def test_EveryContinuousDisplayCurveHasAnIndependentReference(guideFigures):
+    """Prevent a future figure or added curve from escaping scientific checks."""
+
+    plotted = {
+        (name, axisIndex, lineIndex)
+        for name, figure in guideFigures.items()
+        for axisIndex, axis in enumerate(figure.axes)
+        for lineIndex, line in enumerate(axis.lines)
+        if len(line.get_xdata()) == 401
+    }
+    referenced = {(name, axisIndex, lineIndex) for name, axisIndex, lineIndex, _, _, _ in CURVE_REFERENCES}
+
+    assert plotted == referenced
 
 
 def test_MeasurementMarkersAndRiskThresholdMatchWorkedNumbers(guideFigures):

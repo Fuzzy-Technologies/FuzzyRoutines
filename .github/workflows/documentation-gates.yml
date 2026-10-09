@@ -43,6 +43,7 @@ jobs:
             tests/test_documentation_gates.py \
             tests/test_external_link_report.py \
             tests/test_locale_documentation.py \
+            tests/test_guide_example_coverage.py \
             tests/test_guide_examples.py
 
       - name: Build strict reference from a clean installed wheel
@@ -77,6 +78,9 @@ jobs:
           "$GITHUB_WORKSPACE/$environmentPython" -m pytest -q \
             "$GITHUB_WORKSPACE/tests/test_migration_examples.py" \
             "$GITHUB_WORKSPACE/tests/test_guide_examples.py"
+          "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/guide_example_coverage.py" \
+            --require-installed --check-index \
+            --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples.json"
 
       - name: Verify reproducible figures with the installed scalar API
         shell: bash
@@ -103,6 +107,7 @@ jobs:
             _build/documentation-gates/deterministic.txt
             _build/documentation-gates/locales.json
             _build/documentation-gates/figures.json
+            _build/documentation-gates/api-examples.json
           if-no-files-found: warn
 
   external-link-report:

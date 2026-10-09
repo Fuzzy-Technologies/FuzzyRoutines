@@ -43,6 +43,13 @@ Existing users should read the
   canonical English Python snippet and the complete scenario script. Independent
   plot tests check curve data, markers, bars, and rational centroid moments;
   EN/RU/zh-CN share English-labelled SVGs with localized explanatory text.
+- A public example index connects all 193 inventoried symbols to 29 standalone
+  Python blocks, including result fields, historical methods, error categories
+  and typing contracts. Installed wheel/sdist CI checks actual execution and
+  canonical root aliases rather than counting imports. Result-record recipes,
+  three computation diagrams and a tenth SVG comparing conjunction/disjunction
+  complete the canonical English example routes; scientific curve tests now
+  check 26 plotted curves against independent references.
 - Curated modern root exports provide immutable membership factories and a
   structural custom-callable protocol, explicit continuous/discrete universes,
   numerical integration domains, immutable scalar sets, and scalar policies.

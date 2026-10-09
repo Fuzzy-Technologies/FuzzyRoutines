@@ -85,6 +85,15 @@ work and do not substitute for final numerical acceptance.
 
 ## Complete three-language documentation for 2.0.0
 
+The English scenario/figure baseline is merged in
+[PR #301](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/301)
+([`518bc9d`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/518bc9dd5750afde569b1593e243490fc42ce658)).
+The [final English corpus review](audits/2026-10-09-english-corpus-review.md)
+records the subsequent per-symbol example gate, result/error/historical
+recipes and review corrections under #294. AI-assisted English preparation
+does not approve missing Russian or Chinese translations or check final
+release-candidate boxes.
+
 The maintainer requires complete English, Russian and Simplified Chinese user
 documentation for the first stable release. English fallback pages are useful
 during development but do not satisfy this release criterion. Follow

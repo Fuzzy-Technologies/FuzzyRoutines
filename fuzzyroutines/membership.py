@@ -591,7 +591,7 @@ def Hyperbolic(
     conventions documented by `MembershipFunction`.
 
     Args:
-        scale: Positive scale (Gaussian standard deviation or hyperbolic multiplier).
+        scale: Positive multiplier of the distance beyond the cutoff.
         exponent: Positive power of the hyperbolic tail.
         cutoff: End of the grade-one left shoulder.
 
@@ -713,7 +713,7 @@ def Gaussian(center: MembershipScalar, scale: MembershipScalar) -> MembershipFun
 
     Args:
         center: Coordinate of the grade-one Gaussian maximum.
-        scale: Positive scale (Gaussian standard deviation or hyperbolic multiplier).
+        scale: Positive Gaussian standard deviation in coordinate units.
 
     Returns:
         Validated immutable analytical membership function.
@@ -747,17 +747,15 @@ def Logistic(slope: MembershipScalar, midpoint: MembershipScalar) -> MembershipF
 
 
 def HarringtonDesirability() -> MembershipFunction:
-    """Return harrington desirability membership exp(-exp(-x)).
+    """Return Harrington desirability membership exp(-exp(-x)).
 
-    The finite real parameters must satisfy `no stored parameters`; booleans are
-    rejected. The returned callable is immutable and uses the family boundary
-    conventions documented by `MembershipFunction`.
+    This constructor takes no parameters. The immutable returned callable
+    accepts finite real coordinates excluding booleans. Its fixed coordinate
+    scale must be given meaning by the application's preprocessing model.
 
     Returns:
         Validated immutable analytical membership function.
 
-    Raises:
-        ValueError: Parameters are non-real, non-finite, or violate the family contract.
     """
 
     return MembershipFunction("harrington_desirability")
