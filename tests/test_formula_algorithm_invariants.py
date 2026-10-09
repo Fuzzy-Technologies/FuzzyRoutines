@@ -7,6 +7,7 @@
 
 import math
 import re
+from fractions import Fraction
 from pathlib import Path
 
 import pytest
@@ -19,6 +20,7 @@ from fuzzyroutines import (
     ScalarFuzzySet,
 )
 from fuzzyroutines.FuzzyRoutines import FuzzyNOTParabolic, MFunction
+from fuzzyroutines.membership import Gaussian, Logistic, Trapezoid, Triangle
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
 INVARIANTDOCUMENT = PROJECTROOT / "docs" / "mathematics" / "source-algorithm-invariants.md"
@@ -66,6 +68,84 @@ def test_LogisticStableBranchesMatchReferenceAndSaturateWithoutOverflow():
     assert membershipFunction.mju(0.5) == pytest.approx(math.exp(-1.0) / (1 + math.exp(-1.0)))
     assert membershipFunction.mju(1e308) == 1.0
     assert membershipFunction.mju(-1e308) == 0.0
+
+
+@pytest.mark.parametrize("api_kind", ["modern", "legacy"])
+@pytest.mark.parametrize(
+    ("family", "coordinates", "expected_grades"),
+    [
+        ("triangle_rising", (0.0, 5e307, 1e308), (0.5, 0.75, 1.0)),
+        ("triangle_falling", (0.0, 7.5e307), (0.5, 0.25)),
+        ("trapezoid_rising", (0.0, 5e307), (0.5, 0.75)),
+        ("trapezoid_falling", (0.0, 5e307), (0.5, 0.25)),
+    ],
+)
+def test_ExtremeLinearRampsPreserveFiniteRatios(api_kind, family, coordinates, expected_grades):
+    """Opposite extreme endpoints retain the independently known ramp grades."""
+
+    modern_functions = {
+        "triangle_rising": Triangle(-1e308, 1e308, 1e308),
+        "triangle_falling": Triangle(-1.7e308, -1.5e308, 1.5e308),
+        "trapezoid_rising": Trapezoid(-1e308, 1e308, 1.2e308, 1.5e308),
+        "trapezoid_falling": Trapezoid(-1.5e308, -1.2e308, -1e308, 1e308),
+    }
+    legacy_functions = {
+        "triangle_rising": MFunction("triangle", a=-1e308, b=1e308, c=1e308),
+        "triangle_falling": MFunction("triangle", a=-1.7e308, b=1.5e308, c=-1.5e308),
+        "trapezoid_rising": MFunction("trapezium", a=-1e308, b=1.5e308, c=1e308, d=1.2e308),
+        "trapezoid_falling": MFunction("trapezium", a=-1.5e308, b=1e308, c=-1.2e308, d=-1e308),
+    }
+    evaluator = modern_functions[family] if api_kind == "modern" else legacy_functions[family].mju
+
+    for coordinate, expected_grade in zip(coordinates, expected_grades, strict=True):
+        actual_grade = evaluator(coordinate)
+        assert math.isfinite(actual_grade), "A finite linear ramp must not return NaN"
+        assert actual_grade == pytest.approx(expected_grade), "Endpoint subtraction lost the ramp ratio"
+
+
+@pytest.mark.parametrize("api_kind", ["modern", "legacy"])
+@pytest.mark.parametrize("center", [-1e308, 1e308])
+def test_GaussianExtremeDifferencePreservesTwoSigmaGrade(api_kind, center):
+    """A two-standard-deviation distance stays positive despite raw overflow."""
+
+    evaluator = (
+        Gaussian(center, 1e308)
+        if api_kind == "modern"
+        else MFunction("gaussian", a=center, b=1e308).mju
+    )
+    actual_grade = evaluator(-center)
+
+    assert actual_grade == pytest.approx(math.exp(-2.0)), "Two-sigma Gaussian grade was lost to overflow"
+
+
+@pytest.mark.parametrize("api_kind", ["modern", "legacy"])
+@pytest.mark.parametrize("midpoint", [-1e308, 1e308])
+@pytest.mark.parametrize("slope", [-1e-308, 1e-308])
+def test_LogisticExtremeDifferencePreservesFiniteExponent(api_kind, midpoint, slope):
+    """Small slopes preserve the finite signed exponent across extreme inputs."""
+
+    evaluator = (
+        Logistic(slope, midpoint)
+        if api_kind == "modern"
+        else MFunction("logistic", a=slope, b=midpoint).mju
+    )
+    expected_exponent = -2.0 if (midpoint > 0) == (slope > 0) else 2.0
+    expected_grade = 1 / (1 + math.exp(-expected_exponent))
+
+    assert evaluator(-midpoint) == pytest.approx(expected_grade), "Finite logistic exponent incorrectly saturated"
+
+
+def test_ExtremeRationalParametersRetainTheirExactDifferenceArithmetic():
+    """Registered real inputs need no float conversion merely to detect infinity."""
+
+    magnitude = Fraction(10**308)
+    triangle = Triangle(-magnitude, magnitude, magnitude)
+    gaussian = Gaussian(-magnitude, magnitude)
+    logistic = Logistic(1 / magnitude, -magnitude)
+
+    assert triangle(Fraction(0)) == Fraction(1, 2), "Exact rational ramp arithmetic changed"
+    assert gaussian(magnitude) == pytest.approx(math.exp(-2.0))
+    assert logistic(magnitude) == pytest.approx(1 / (1 + math.exp(-2.0)))
 
 
 def test_HarringtonGuardMatchesFormulaAtBoundaryAndRejectsInvalidDomain():

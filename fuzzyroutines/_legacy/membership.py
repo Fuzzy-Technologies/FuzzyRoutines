@@ -48,7 +48,7 @@ class MFunction(_membership._LegacyAnalyticalAdapter):
                            'harringtonDesirability': self.Desirability}
 
         if userFunc not in self._functions:
-            raise ValueError("unknown membership-function identifier: {!r}".format(userFunc))
+            raise ValueError(f"unknown membership-function identifier: {userFunc!r}")
 
         self.mju = self._functions[userFunc]  # Calculate result of define membership function
         self._parameters = self._ValidateParameters(membershipFunctionParams)
@@ -72,12 +72,26 @@ class MFunction(_membership._LegacyAnalyticalAdapter):
     def _AnalyticalSnapshot(self):
         """Freeze current validated parameters for modern analytical operations."""
 
-        if self.mju not in self._functions.values():
+        if not self._HasAnalyticalEvaluator():
             raise ValueError("exact analytical evidence requires an unchanged registered evaluator")
 
         parameters = self._ValidateParameters(self._parameters)
 
-        return _membership._AnalyticalSource(self.name, tuple(parameters.items()))
+        return _membership._AnalyticalSource(self.mju.__name__, tuple(parameters.items()))
+
+    def _HasAnalyticalEvaluator(self):
+        """Verify the registered bound evaluator is a canonical legacy formula."""
+
+        evaluator_name = getattr(self.mju, "__name__", None)
+        canonical_evaluator = getattr(MFunction, evaluator_name, None) if evaluator_name else None
+
+        return (
+            getattr(self.mju, "__self__", None) is self
+            and getattr(self.mju, "__func__", None) is canonical_evaluator
+            and self.mju in self._functions.values()
+            and type(self)._AnalyticalSnapshot is MFunction._AnalyticalSnapshot
+            and type(self)._ValidateParameters is MFunction._ValidateParameters
+        )
 
     @property
     def name(self):

@@ -121,21 +121,7 @@ class _NormalizedContinuousMembership:
 def _ContinuousAnalyticalSource(fuzzySet: ScalarFuzzySet) -> _AnalyticalSource | None:
     """Return trusted analytical evidence from a callable or supported bound evaluator."""
 
-    evaluator = fuzzySet.membershipFunction
-    source = _GetAnalyticalSource(evaluator)
-
-    if source is not None:
-        return source
-
-    owner = getattr(evaluator, "__self__", None)
-    source = _GetAnalyticalSource(owner)
-
-    if source is not None and (
-        evaluator == getattr(owner, "mju", None) or evaluator == getattr(owner, "Evaluate", None)
-    ):
-        return source
-
-    return None
+    return _GetAnalyticalSource(fuzzySet.membershipFunction)
 
 
 def _RequireContinuousAnalyticalSource(fuzzySet: ScalarFuzzySet) -> _AnalyticalSource:

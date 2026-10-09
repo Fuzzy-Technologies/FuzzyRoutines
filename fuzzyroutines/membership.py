@@ -16,7 +16,7 @@ import re
 from collections.abc import Mapping
 from dataclasses import dataclass
 from numbers import Real
-from types import MappingProxyType
+from types import MappingProxyType, MethodType
 from typing import Protocol, cast
 
 from fuzzyroutines.exceptions import InvalidParameterError
@@ -199,6 +199,30 @@ def _Parabolic(parameters: Mapping[str, float], x: float) -> float:
     return 1
 
 
+def _DifferenceRatio(
+    numerator_left: float,
+    numerator_right: float,
+    denominator_left: float,
+    denominator_right: float,
+) -> float:
+    """Preserve a finite ramp ratio when an endpoint difference overflows.
+
+    Ordinary differences retain their established arithmetic. Halving all
+    operands before subtraction keeps extreme binary64 endpoint differences
+    representable without changing the mathematical ratio.
+    """
+
+    numerator = numerator_left - numerator_right
+    denominator = denominator_left - denominator_right
+
+    if abs(numerator) != math.inf and abs(denominator) != math.inf:
+        return numerator / denominator
+
+    return (numerator_left / 2 - numerator_right / 2) / (
+        denominator_left / 2 - denominator_right / 2
+    )
+
+
 def _Triangle(parameters: Mapping[str, float], x: float) -> float:
     """Evaluate the validated triangle family without changing parameters."""
 
@@ -210,10 +234,10 @@ def _Triangle(parameters: Mapping[str, float], x: float) -> float:
         return 0
 
     if x <= c:
-        return (x - a) / (c - a)
+        return _DifferenceRatio(x, a, c, a)
 
     if x < b:
-        return (b - x) / (b - c)
+        return _DifferenceRatio(b, x, b, c)
 
     return 0
 
@@ -230,13 +254,13 @@ def _Trapezium(parameters: Mapping[str, float], x: float) -> float:
         return 0
 
     if x < c:
-        return (x - a) / (c - a)
+        return _DifferenceRatio(x, a, c, a)
 
     if x <= d:
         return 1
 
     if x <= b:
-        return (b - x) / (b - d)
+        return _DifferenceRatio(b, x, b, d)
 
     return 0
 
@@ -246,7 +270,14 @@ def _Exponential(parameters: Mapping[str, float], x: float) -> float:
 
     a = parameters['a']
     b = parameters['b']
-    scaled_distance = (x - a) / b
+    distance = x - a
+    scaled_distance = distance / b
+
+    if abs(distance) == math.inf:
+        # Overflowing subtraction has opposite-sign operands, so distributed
+        # division cannot introduce cancellation between infinite terms.
+        scaled_distance = x / b - a / b
+
     # Binary64 underflow may produce zero far from the centre; analytical
     # support is derived from the formula, never from this sampled value.
     return math.exp(-0.5 * scaled_distance * scaled_distance)
@@ -257,7 +288,11 @@ def _Sigmoidal(parameters: Mapping[str, float], x: float) -> float:
 
     a = parameters['a']
     b = parameters['b']
-    exponent = a * (x - b)
+    distance = x - b
+    exponent = a * distance
+
+    if abs(distance) == math.inf:
+        exponent = a * x - a * b
 
     # Algebraically equivalent branches keep the exp argument non-positive,
     # preventing overflow for every finite exponent. See the numerical
@@ -444,17 +479,62 @@ class _LegacyAnalyticalAdapter:
         raise NotImplementedError
 
 
-def _GetAnalyticalSource(value: object) -> _AnalyticalSource | None:
-    """Return trusted formula evidence, rejecting arbitrary lookalike objects."""
+    def _HasAnalyticalEvaluator(self) -> bool:
+        """Reject adapters that have not verified their active scalar formula."""
 
-    if isinstance(value, _AnalyticalSource):
+        return False
+
+
+def _HasModernAnalyticalEvaluator(value: MembershipFunction) -> bool:
+    """Verify the actual callable and delegated evaluator use built-in formulas."""
+
+    return (
+        type(value).__call__ is MembershipFunction.__call__
+        and getattr(value.Evaluate, "__func__", None) is MembershipFunction.Evaluate
+        and getattr(value.Evaluate, "__self__", None) is value
+        and type(value._source) is _AnalyticalSource
+    )
+
+
+def _GetAnalyticalSource(value: object) -> _AnalyticalSource | None:
+    """Return evidence only for the formula used by the actual evaluator.
+
+    Inherited unchanged evaluators retain analytical evidence. Overridden
+    callables and bound methods remain generic even when their owner stores a
+    built-in family definition.
+    """
+
+    if type(value) is _AnalyticalSource:
         return value
 
-    if isinstance(value, MembershipFunction):
+    if isinstance(value, MembershipFunction) and _HasModernAnalyticalEvaluator(value):
         return value._source
 
-    if isinstance(value, _LegacyAnalyticalAdapter):
+    if isinstance(value, _LegacyAnalyticalAdapter) and value._HasAnalyticalEvaluator():
         return value._AnalyticalSnapshot()
+
+    if not isinstance(value, MethodType):
+        return None
+
+    owner = value.__self__
+    evaluator_function = value.__func__
+
+    if isinstance(owner, MembershipFunction) and type(owner._source) is _AnalyticalSource:
+        if evaluator_function is MembershipFunction.Evaluate:
+            return owner._source
+
+        if evaluator_function is MembershipFunction.__call__ and _HasModernAnalyticalEvaluator(owner):
+            return owner._source
+
+    if type(owner) is _AnalyticalSource and evaluator_function is _AnalyticalSource.mju:
+        return owner
+
+    if (
+        isinstance(owner, _LegacyAnalyticalAdapter)
+        and owner._HasAnalyticalEvaluator()
+        and value == owner.mju
+    ):
+        return owner._AnalyticalSnapshot()
 
     return None
 

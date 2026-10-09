@@ -729,6 +729,9 @@ def DeriveProperties(
         source = membershipFunction
 
     if source is None:
+        if isinstance(universe, ContinuousUniverse) and isinstance(membershipFunction, _LegacyAnalyticalAdapter):
+            raise InvalidParameterError("exact analytical evidence requires an unchanged registered evaluator")
+
         raise InvalidParameterTypeError("membershipFunction must be a supported analytical membership source")
 
     if isinstance(universe, ContinuousUniverse):
