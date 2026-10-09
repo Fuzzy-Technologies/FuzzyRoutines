@@ -85,6 +85,7 @@ jobs:
 
           environmentPython="_build/api-reference/environment/bin/python"
           "$environmentPython" -m pip install --disable-pip-version-check -r docs/requirements-plots.txt
+          "$environmentPython" -m pytest -q tests/test_guide_figures.py
           "$environmentPython" tools/generate_guide_figures.py \
             --output-directory docs/site/content/en/assets/figures --check \
             > _build/documentation-gates/figures.json

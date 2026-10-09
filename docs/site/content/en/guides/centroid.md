@@ -42,9 +42,16 @@ The library uses analytical moments for the recognized triangular family.
 ![Triangle centroid and a separate four-point trapezoidal approximation](../assets/figures/centroid.svg)
 
 The cyan dashed line joins four user-side samples at
-$0,8/3,16/3,8$. Applying the trapezoidal rule separately to area and first
-moment gives $32/9\approx3.555556$, an absolute difference of $2/9$,
-about 6.67% of the true centroid. The executable scenario implements this
+$0,8/3,16/3,8$, whose grades are $0,8/9,4/9,0$. Applying the trapezoidal rule
+separately to area and first moment gives
+
+$$
+A_4=\frac{32}{9},\qquad M_4=\frac{1024}{81},\qquad
+c_4=\frac{M_4}{A_4}=\frac{32}{9}\approx3.555556.
+$$
+
+The absolute difference is $c_4-c=2/9$; the relative difference is
+$(c_4-c)/c=1/15$, about 6.67%. The executable scenario implements this
 calculation explicitly. **Library `Centroid` does not use that fixed grid.**
 The picture shows why a coarse sampled representation can change a result.
 

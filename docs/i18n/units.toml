@@ -2762,7 +2762,7 @@ state = "missing"
 id = "page:guides.centroid"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/centroid.md"
-sourceHash = "sha256:728f3fda3f70896c430ef420e1cece03bdc4e1cf846bf10e9c960a2ae25dec9a"
+sourceHash = "sha256:43006fcf9904db62d07b31fedd66f3a961e7401a3db4885d9f1b9e7d265182ad"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2788,7 +2788,7 @@ state = "missing"
 id = "page:guides.figures"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/figures.md"
-sourceHash = "sha256:4f49540b78d862c733c0d3954c2511e2d4666041a9ef797f0161af5bc1c2dd64"
+sourceHash = "sha256:a5accc211f56aedc4955dbefa40c34d479beb7492b41d038dd4ae4407eaf7c78"
 reviewClass = "mathematical"
 
 [units.translations.ru]

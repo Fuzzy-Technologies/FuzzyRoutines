@@ -54,6 +54,22 @@ _build/docs/<version>/zh-CN/
 Task #206 owns the public URL and Pages artifact layout. The generated path
 above remains a local contract and does not redefine deployment URLs.
 
+## Shared scientific figures
+
+The canonical teaching SVGs live in `docs/site/content/en/assets/figures/`.
+Their embedded text is English for every locale. Russian and Simplified Chinese
+pages reuse this set; they do not own translated SVGs. A locale build may copy
+the assets into its generated output to preserve relative URLs, but copies must
+remain byte-identical to the canonical source. Task #297 must verify asset
+resolution and byte parity when translated publication is implemented.
+
+Captions, Markdown image alternatives, and explanations belong to the page's
+translation unit. Translate and review them, including the meaning of English
+labels and units. Every numerical conclusion must remain available as prose.
+The figure policy does not change source-hash binding or grant translation
+approval. Current reserved-locale fallback pages do not establish translated
+figure-publication evidence.
+
 ## Stable identifiers
 
 ### Page IDs

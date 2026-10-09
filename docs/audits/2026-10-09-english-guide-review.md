@@ -69,6 +69,10 @@ contrast. Mathematical prose uses GitHub-compatible dollar-delimited math;
 strict rendered documentation and anchor checks run in CI. This review must not
 be interpreted as human approval of the final rendered multilingual release.
 
+A [second scientific figure review](2026-10-09-figure-verification.md) independently
+checks all plotted curve data and key markers, records presentation corrections,
+and establishes shared English-labelled SVGs with localized explanations.
+
 ## Remaining M6 work
 
 - Complete per-symbol example coverage and the final canonical-English review

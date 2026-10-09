@@ -143,7 +143,7 @@ does not waive any review, correctness, documentation or publication gate.
 - [ ] Canonical English: engineering, mathematical/scientific, data-science and reader/editor findings are resolved; every supported public API has a usable example or a justified tested alias link.
 - [ ] Russian and Simplified Chinese: every required user-documentation unit is translated, current and individually scientifically/editorially reviewed; no missing/stale fallback is accepted.
 - [ ] Practical examples: the pip-install quick start, at least six complete end-to-end scenarios and their numerical results/figures execute from installed artifacts in CI.
-- [ ] Rendered documentation: all three languages have reviewed navigation, search, formulas, links, localized figures/captions and desktop/mobile readability evidence.
+- [ ] Rendered documentation: all three languages have reviewed navigation, search, formulas, links, shared English-labelled figures with byte-identical assets, localized captions/alternatives and desktop/mobile readability evidence.
 - [ ] Mathematical audit: every supported module has an accepted contract, independent reference/invariant evidence and assessed line/branch coverage; process-based parallel execution is verified on the candidate.
 - [ ] Performance: reproducible benchmark evidence is attached; no performance claim is made without raw measurements and environment metadata.
 - [ ] Security and publishing: release credentials, provenance, and publishing configuration have been explicitly reviewed by an authorized maintainer.

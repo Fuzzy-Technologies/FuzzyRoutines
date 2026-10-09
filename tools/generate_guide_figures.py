@@ -153,18 +153,19 @@ def BuildFigures() -> dict:
     fuzzySet = ScalarFuzzySet(guide["ClosedUniverse"](0, 8), Triangle(0, 2, 8))
     DrawCurves(axis, (("Triangle membership", fuzzySet.Membership),), 0, 8, "Coordinate")
     coordinates = (0, 8 / 3, 16 / 3, 8)
-    axis.plot(coordinates, [fuzzySet.Membership(coordinate) for coordinate in coordinates], "o--", color=COLORS[1], linewidth=1.5)
+    axis.plot(coordinates, [fuzzySet.Membership(coordinate) for coordinate in coordinates], "o--", color=COLORS[1], linewidth=1.5, label="4 sampled coordinates")
     centroid = Centroid(fuzzySet, IntegrationDomain(0, 8))
     coarse = guide["GridCentroid"](fuzzySet, coordinates)
-    axis.axvline(centroid, color=COLORS[2], linewidth=2)
-    axis.axvline(coarse, color=COLORS[3], linestyle="--", linewidth=2)
-    axis.text(4.1, 0.88, "Analytical moments: 3.333333\nUser-side 4-point trapezoids: 3.555556", fontsize=10)
+    axis.axvline(centroid, color=COLORS[2], linewidth=2, label=f"Analytical centroid: {centroid:.6f}")
+    axis.axvline(coarse, color=COLORS[3], linestyle="--", linewidth=2, label=f"4-point moments: {coarse:.6f}")
+    axis.legend(loc="upper center", bbox_to_anchor=(0.5, 1.24), ncol=2, frameon=False, fontsize=10)
     figures["centroid"] = figure
 
     figure, axes = NewFigure("Audit ties and gaps before using a linguistic scale", panels=2)
     for axis, gappy in zip(axes, (False, True), strict=True):
         DrawScale(axis, guide["AuditScale"](gappy=gappy), 0, 10, "Score (11 audit coordinates)")
         axis.set_title("Overlap and tie" if not gappy else "Uncovered coordinates", fontsize=12, pad=34)
+        axis.get_legend().set_bbox_to_anchor((0.5, 1.14))
         axis.axvline(5, color="#edf0f8", linestyle="--", linewidth=1)
         if gappy:
             axis.scatter((0, 4, 5, 6, 10), (0, 0, 0, 0, 0), color=COLORS[2], s=50, zorder=4, clip_on=False)

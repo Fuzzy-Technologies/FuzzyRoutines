@@ -326,26 +326,52 @@ L 62.208 76.32
 L 746.496 297.648
 " style="fill: none; stroke: #8490ab; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="text_17">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #edf0f8" transform="translate(412.9056 103.840123)">Analytical moments: 3.333333</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #edf0f8" transform="translate(412.9056 115.842857)">User-side 4-point trapezoids: 3.555556</text>
-   </g>
    <g id="legend_1">
     <g id="line2d_33">
-     <path d="M 337.666844 47.366117
-L 347.666844 47.366117
-L 357.666844 47.366117
+     <path d="M 235.569969 36.299718
+L 245.569969 36.299718
+L 255.569969 36.299718
 " style="fill: none; stroke: #a99aff; stroke-width: 2.5; stroke-linecap: square"/>
     </g>
+    <g id="text_17">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="263.569969" y="39.799718" transform="rotate(-0 263.569969 39.799718)">Triangle membership</text>
+    </g>
+    <g id="line2d_34">
+     <path d="M 235.569969 51.300499
+L 245.569969 51.300499
+L 255.569969 51.300499
+" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #4dd8d0; stroke-width: 1.5"/>
+     <g>
+      <use xlink:href="#m412919b150" x="245.569969" y="51.300499" style="fill: #4dd8d0; stroke: #4dd8d0"/>
+     </g>
+    </g>
     <g id="text_18">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="365.666844" y="50.866117" transform="rotate(-0 365.666844 50.866117)">Triangle membership</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="263.569969" y="54.800499" transform="rotate(-0 263.569969 54.800499)">4 sampled coordinates</text>
+    </g>
+    <g id="line2d_35">
+     <path d="M 397.541844 36.299718
+L 407.541844 36.299718
+L 417.541844 36.299718
+" style="fill: none; stroke: #ffd166; stroke-width: 2; stroke-linecap: square"/>
+    </g>
+    <g id="text_19">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="425.541844" y="39.799718" transform="rotate(-0 425.541844 39.799718)">Analytical centroid: 3.333333</text>
+    </g>
+    <g id="line2d_36">
+     <path d="M 397.541844 51.300499
+L 407.541844 51.300499
+L 417.541844 51.300499
+" style="fill: none; stroke-dasharray: 7.4,3.2; stroke-dashoffset: 0; stroke: #ff8c9d; stroke-width: 2"/>
+    </g>
+    <g id="text_20">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="425.541844" y="54.800499" transform="rotate(-0 425.541844 54.800499)">4-point moments: 3.555556</text>
     </g>
    </g>
   </g>
-  <g id="text_19">
+  <g id="text_21">
    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="46.656" y="21.309188" transform="rotate(-0 46.656 21.309188)">Centroid accuracy depends on how moments are computed</text>
   </g>
-  <g id="text_20">
+  <g id="text_22">
    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #aab6cf" x="46.656" y="360.612" transform="rotate(-0 46.656 360.612)">FuzzyRoutines  ·  scalar API  ·  illustrative model, not fitted data</text>
   </g>
  </g>
