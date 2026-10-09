@@ -15,6 +15,7 @@ from fuzzyroutines import (
     CentroidPolicy,
     ContinuousUniverse,
     DiscreteUniverse,
+    Gaussian,
     IntegrationDomain,
     ScalarFuzzySet,
 )
@@ -38,6 +39,113 @@ def test_AnalyticalFamiliesMatchIndependentReferences(identifier, parameters, do
     actual = Centroid(fuzzySet, IntegrationDomain(*domain))
 
     assert actual == pytest.approx(expected, abs=1e-12, rel=0.0)
+
+
+@pytest.mark.parametrize(
+    ("left", "right", "expected"),
+    (
+        (7.8, 8.0, 7.87473229552023741947),
+        (8.0, 8.1, 8.04336518790245358447),
+        (8.3, 8.4, 8.34312345024340282606),
+        (20.0, 21.0, 20.04975306733971157807),
+    ),
+)
+@pytest.mark.parametrize("direction", (-1, 1))
+def test_GaussianTailCentroidMatchesIndependentDecimalReferences(
+    left,
+    right,
+    expected,
+    direction,
+):
+    """Protect same-sided tails against cancellation and incorrect coordinates.
+
+    References use 60-digit Decimal exp and composite Simpson sums, with 4096
+    and 8192 panels agreeing within 6e-13 (within 6e-17 for the 7.8--8.4 cases).
+    The 1e-12 absolute bound follows ADR-0005's scalar formula-check policy.
+    """
+
+    bounds = (left, right) if direction == 1 else (-right, -left)
+    domain = IntegrationDomain(*bounds)
+    fuzzy_set = ScalarFuzzySet(ContinuousUniverse(), Gaussian(0.0, 1.0))
+
+    actual = Centroid(fuzzy_set, domain)
+
+    assert domain.Contains(actual), "Positive Gaussian weights must keep the centroid inside the domain"
+    assert actual == pytest.approx(direction * expected, abs=1e-12, rel=0.0)
+
+
+@pytest.mark.parametrize("direction", (-1, 1))
+def test_GaussianTailCentroidPreservesTranslationAndScale(direction):
+    """Check affine covariance against the independent standard-normal reference."""
+
+    centre = 10.0
+    scale = 2.0
+    standardized_bounds = (8.0, 8.1) if direction == 1 else (-8.1, -8.0)
+    domain = IntegrationDomain(
+        centre + scale * standardized_bounds[0],
+        centre + scale * standardized_bounds[1],
+    )
+    fuzzy_set = ScalarFuzzySet(ContinuousUniverse(), Gaussian(centre, scale))
+    expected = centre + scale * direction * 8.04336518790245358447
+
+    actual = Centroid(fuzzy_set, domain)
+
+    assert domain.Contains(actual), "Affine Gaussian moments must retain the integration domain"
+    assert actual == pytest.approx(expected, abs=1e-12, rel=0.0)
+
+
+def test_LegacyGaussianTailUsesTheCorrectedSharedCentroid():
+    """Keep the historical evaluator adapter on the same tail-safe strategy."""
+
+    membership_function = MFunction("gaussian", a=0.0, b=1.0)
+    fuzzy_set = FuzzySet(membership_function, supportSet=(8.3, 8.4))
+
+    actual = fuzzy_set.Defuz()
+
+    assert 8.3 <= actual <= 8.4, "Legacy defuzzification must not retain the out-of-domain Gaussian result"
+    assert actual == pytest.approx(8.34312345024340282606, abs=1e-12, rel=0.0)
+
+
+def test_GaussianNarrowTailUsesExistingAdaptivePolicy(monkeypatch):
+    """Avoid unresolved erfc subtraction while preserving the caller's work policy."""
+
+    from fuzzyroutines import defuzzification
+
+    original_adaptive = defuzzification._AdaptiveMoments
+    policies = []
+
+    def RecordAdaptivePolicy(fuzzy_set, domain, policy):
+        """Observe the numerical fallback without replacing its mathematical work."""
+
+        policies.append(policy)
+
+        return original_adaptive(fuzzy_set, domain, policy)
+
+    monkeypatch.setattr(defuzzification, "_AdaptiveMoments", RecordAdaptivePolicy)
+    policy = CentroidPolicy(maximumDepth=0)
+    domain = IntegrationDomain(8.0, 8.000001)
+    fuzzy_set = ScalarFuzzySet(ContinuousUniverse(), Gaussian(0.0, 1.0))
+
+    actual = Centroid(fuzzy_set, domain, policy)
+
+    assert policies == [policy], "Fallback must use the exact caller policy without a hidden replacement"
+    assert domain.Contains(actual), "A narrow positive tail must not produce a clamped endpoint"
+    # 60-digit Decimal Simpson references at 4096 and 8192 panels agree to 3e-38.
+    assert actual == pytest.approx(8.00000049999933333329, abs=1e-12, rel=0.0)
+
+
+def test_GaussianFallbackPreservesConfiguredNonConvergence():
+    """A strict unresolved Gaussian path must not bypass the adaptive work limit."""
+
+    fuzzy_set = ScalarFuzzySet(ContinuousUniverse(), Gaussian(0.0, 1.0))
+    policy = CentroidPolicy(
+        absoluteTolerance=1e-20,
+        relativeTolerance=1e-16,
+        maximumDepth=0,
+    )
+
+    with pytest.raises(CentroidConvergenceError, match="maximumDepth=0"):
+        Centroid(fuzzy_set, IntegrationDomain(0.0, 1.0), policy)
 
 
 def test_AdaptiveCallableMatchesPolynomialReference():
