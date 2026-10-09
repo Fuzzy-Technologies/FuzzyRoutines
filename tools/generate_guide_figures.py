@@ -240,6 +240,7 @@ def Main(arguments=None) -> int:
         if parsedArguments.check:
             if not destination.is_file() or destination.read_bytes() != rendered:
                 raise RuntimeError(f"stale or missing figure: {destination}")
+
         else:
             destination.write_bytes(rendered)
         if parsedArguments.previewDirectory is not None:
