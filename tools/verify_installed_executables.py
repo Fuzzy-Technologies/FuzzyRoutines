@@ -201,6 +201,16 @@ def RunCanonicalGuideExamples(artifactDirectory, environment):
     if set(report) != expectedScenarios:
         raise RuntimeError("worked-scenarios did not execute the complete documented scenario set")
     results["worked-scenarios"] = sorted(report)
+    results["public-symbol-example-coverage"] = RunCommand(
+        "public-symbol-example-coverage",
+        [
+            sys.executable, "-I", str(PROJECTROOT / "tools/guide_example_coverage.py"),
+            "--require-installed", "--check-index", "--output",
+            str(artifactDirectory / "api-example-coverage.json"),
+        ],
+        artifactDirectory,
+        environment,
+    )
     return results
 
 

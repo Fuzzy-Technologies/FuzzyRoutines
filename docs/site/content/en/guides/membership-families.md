@@ -11,7 +11,7 @@ immutable `MembershipFunction` objects; they do not fit parameters to data.
 All coordinates and parameters must satisfy the documented finite real
 contracts. Booleans are not accepted as numbers.
 
-![Eight membership families evaluated by the scalar API](../assets/figures/membership-families.svg)
+[![Eight membership families evaluated by the scalar API](../assets/figures/membership-families.svg)](../assets/figures/membership-families.svg)
 
 Each curve displays 401 observations over −3 to 3. The displayed interval is
 not a claim about mathematical support. Gaussian, logistic, desirability, and

@@ -9,6 +9,10 @@ The `fuzzyroutines.FuzzyRoutines` module preserves the observed public API of
 version 1.0.3. Its names and mutable object model remain available for existing
 software, but new code should prefer the [modern API](../modern/index.md).
 
+[Historical recipes](../../guides/historical-recipes.md) demonstrate every
+supported family, scalar operator, mutable set and scale, including parameter
+order, integration windows and later-wins ties.
+
 ::: fuzzyroutines.FuzzyRoutines
     options:
       members:

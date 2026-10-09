@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Figure provenance and reproduction
 
-The nine checked-in SVGs are scientific teaching figures produced by
+The ten checked-in SVGs are scientific teaching figures produced by
 `tools/generate_guide_figures.py` from real scalar API evaluations. They are
 not generated artwork. The generator first executes every assertion in the
 eight worked scenarios, then draws the models and annotations. The scenario
@@ -56,7 +56,7 @@ them. The default example script imports neither.
 
 SVG byte comparison detects stale assets; it does not prove their mathematics.
 `tests/test_guide_figures.py` independently checks all 401 coordinates of each
-of the 22 plotted curves against elementary piecewise or exponential formulas.
+of the 26 plotted curves against elementary piecewise or exponential formulas.
 It also checks scatter coordinates, six sensor bars, thresholds, the four-node
 centroid calculation with exact rational arithmetic, and title/legend layout.
 The reference calculations do not call the library's membership functions.
@@ -76,6 +76,8 @@ against the installed scalar API before comparing the SVG files.
 - The centroid picture contrasts analytical moments with a separate user-side
   four-point trapezoidal calculation. Neither the displayed line density nor
   that coarse calculation configures the library's adaptive integration.
+- The operator picture fixes the second input grade at 0.6. Its horizontal
+  axis varies the first grade; neither axis is a physical measurement.
 
 Every image has a descriptive Markdown alternative and SVG title/description.
 Its accompanying page gives the numerical result in text, so colour perception

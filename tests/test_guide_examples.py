@@ -115,7 +115,7 @@ def test_FiguresAreAccessibleAndPlottingDependenciesStayOutsideRuntime():
 
     figureRoot = PROJECT_ROOT / "docs" / "site" / "content" / "en" / "assets" / "figures"
     pageRoot = figureRoot.parents[1] / "guides"
-    for figureName in (*SCENARIOS, "membership-families"):
+    for figureName in (*SCENARIOS, "membership-families", "operators"):
         source = (figureRoot / f"{figureName}.svg").read_text(encoding="utf-8")
         assert "SPDX-License-Identifier: Apache-2.0" in source
         tree = ElementTree.fromstring(source)

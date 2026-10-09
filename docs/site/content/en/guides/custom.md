@@ -13,7 +13,7 @@ from math import isclose
 from fuzzyroutines import (
     Centroid, ComparisonPolicy, ContinuousUniverse, DiscreteUniverse,
     EqualOnDomain, Height, IncludedOnDomain, IntegrationDomain,
-    MembershipScalar, Normalize, ScalarFuzzySet,
+    MembershipCallable, MembershipScalar, Normalize, ScalarFuzzySet,
 )
 
 
@@ -23,8 +23,9 @@ def RisingQuality(coordinate: MembershipScalar) -> MembershipScalar:
     return coordinate / 100
 
 
+callback: MembershipCallable = RisingQuality
 continuous = ScalarFuzzySet(
-    ContinuousUniverse(0, 100, leftClosed=True, rightClosed=True), RisingQuality,
+    ContinuousUniverse(0, 100, leftClosed=True, rightClosed=True), callback,
 )
 centroid = Centroid(continuous, IntegrationDomain(0, 100))
 assert isclose(centroid, 200 / 3, abs_tol=1e-9)
@@ -50,7 +51,7 @@ the adaptive calculation. The built-in analytical geometry machinery cannot
 prove exact continuous height or support for an arbitrary callable. Sampling
 can describe observations, but cannot supply such a proof.
 
-![Original and normalized grades at three declared discrete coordinates](../assets/figures/custom.svg)
+[![Original and normalized grades at three declared discrete coordinates](../assets/figures/custom.svg)](../assets/figures/custom.svg)
 
 On the discrete universe $\{0,25,50\}$, exhaustive evaluation proves a
 height of 0.5. `Normalize` divides every grade by that height and returns a new

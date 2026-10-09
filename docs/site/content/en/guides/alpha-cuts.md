@@ -32,7 +32,7 @@ assert properties.core.Contains(12)
 print(sampled.cutSamples.points)
 ```
 
-![Continuous triangle, nine grid observations, and exact discrete cut points](../assets/figures/alpha-cuts.svg)
+[![Continuous triangle, nine grid observations, and exact discrete cut points](../assets/figures/alpha-cuts.svg)](../assets/figures/alpha-cuts.svg)
 
 The exact **discrete** cut is $\{11,12,13\}$, because every coordinate of
 the declared discrete universe is inspected. At alpha zero it includes all

@@ -13,6 +13,8 @@ configuration.
 ## Worked examples
 
 [Sensor criteria](../../guides/sensors.md) compares combinations; [operator recipes](../../guides/api-recipes.md#choose-scalar-operator-families-deliberately) executes every family.
+[Operator curves](../../guides/operators.md) show how the chosen policy changes
+conjunction and disjunction.
 
 ::: fuzzyroutines.operators
     options:

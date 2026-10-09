@@ -47,6 +47,12 @@ nav:
       - Custom quality model: guides/custom.md
       - Membership gallery: guides/membership-families.md
       - Practical API recipes: guides/api-recipes.md
+      - Computation paths: guides/workflow.md
+      - Operator comparisons: guides/operators.md
+      - Result records: guides/results.md
+      - Error handling: guides/errors.md
+      - Historical recipes: guides/historical-recipes.md
+      - Public example index: guides/example-index.md
       - Figure provenance: guides/figures.md
   - Product overview: https://fuzzy-technologies.github.io/FuzzyRoutines/
   - Mathematics guides: https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/develop/docs/mathematics
@@ -98,7 +104,11 @@ markdown_extensions:
       generic: true
   - pymdownx.highlight
   - pymdownx.inlinehilite
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
 

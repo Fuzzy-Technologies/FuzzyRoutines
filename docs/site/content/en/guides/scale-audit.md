@@ -36,7 +36,7 @@ assert not gappyScale.Fuzzify(5).isMatch
 print(audit.gapFraction, audit.maximumPartitionError)
 ```
 
-![Overlapping scale on the left and sampled coverage gaps on the right](../assets/figures/scale-audit.svg)
+[![Overlapping scale on the left and sampled coverage gaps on the right](../assets/figures/scale-audit.svg)](../assets/figures/scale-audit.svg)
 
 At score 5, the first scale has two grades of 0.25. `tiePolicy="all"` keeps
 both. The default first-term policy chooses *Low*; `"last"` would choose

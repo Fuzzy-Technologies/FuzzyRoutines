@@ -32,7 +32,7 @@ assert not cautious.isMatch
 print(grades, cautious.isMatch)
 ```
 
-![Severity curves and the 0.45 confidence threshold](../assets/figures/risk.svg)
+[![Severity curves and the 0.45 confidence threshold](../assets/figures/risk.svg)](../assets/figures/risk.svg)
 
 The default result selects *Moderate*. Its descending triangle gives
 

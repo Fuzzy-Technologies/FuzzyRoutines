@@ -78,7 +78,7 @@ The result is `Comfort ≈ 0.667`, `Warm = 0.125`, and the selected label is
 grades; selection follows an explicit policy, with the first strongest term
 selected by default.
 
-![Comfort and Warm membership curves with the 24 °C observation marked](assets/figures/temperature.svg)
+[![Comfort and Warm membership curves with the 24 °C observation marked](assets/figures/temperature.svg)](assets/figures/temperature.svg)
 
 The curves show the model on the declared 0–40 °C universe. The dashed line is
 the measurement, and the dots are the two computed grades. This two-label

@@ -15,6 +15,7 @@ import argparse
 import io
 import json
 import runpy
+from functools import partial
 from pathlib import Path
 
 import matplotlib
@@ -34,6 +35,7 @@ from fuzzyroutines import (
     NegationPolicy,
     SampleAlphaCut,
     ScalarFuzzySet,
+    SNormPolicy,
     SShoulder,
     TNormPolicy,
     Trapezoid,
@@ -131,6 +133,20 @@ def BuildFigures() -> dict:
     axis.bar_label(bars, labels=[f"{grade:g}" for grade in grades], padding=6, color="#edf0f8")
     axis.set_xlabel("80 °C and 10 mm/s → grades → explicit scalar policies")
     figures["sensors"] = figure
+
+    figure, axes = NewFigure("Operator choice changes how partial grades combine", panels=2)
+    for axis, conjunction in zip(axes, (True, False), strict=True):
+        policyClass = TNormPolicy if conjunction else SNormPolicy
+        labels = ("Minimum", "Product") if conjunction else ("Maximum", "Algebraic sum")
+        models = tuple(
+            (label, partial(policyClass(family).Evaluate, rightGrade=0.6))
+            for label, family in zip(labels, ("logic", "algebraic"), strict=True)
+        )
+        DrawCurves(axis, models, 0, 1, "First grade (second grade = 0.6)")
+        axis.set_ylabel("Combined grade")
+        axis.set_title("Conjunction (AND)" if conjunction else "Disjunction (OR)", fontsize=12, pad=34)
+        axis.get_legend().set_bbox_to_anchor((0.5, 1.14))
+    figures["operators"] = figure
 
     figure, (axis,) = NewFigure("Warning without critical: a directed fuzzy difference")
     warning, critical = guide["AlarmSets"]()

@@ -24,7 +24,7 @@ assert (minimumAnd, productAnd, maximumOr, algebraicOr) == (0.5, 0.375, 0.75, 0.
 print(minimumAnd, productAnd, maximumOr, algebraicOr)
 ```
 
-![Two input grades and four explicitly selected combination results](../assets/figures/sensors.svg)
+[![Two input grades and four explicitly selected combination results](../assets/figures/sensors.svg)](../assets/figures/sensors.svg)
 
 Minimum conjunction retains the weaker grade: $\min(0.5,0.75)=0.5$.
 Product conjunction gives $0.5\times0.75=0.375$. Maximum disjunction gives

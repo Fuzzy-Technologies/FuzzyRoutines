@@ -32,7 +32,7 @@ assert either.Membership(100) == 1
 print(warningWithoutCritical.Membership(100))
 ```
 
-![Warning, critical, and directed fuzzy difference over temperature](../assets/figures/alarm.svg)
+[![Warning, critical, and directed fuzzy difference over temperature](../assets/figures/alarm.svg)](../assets/figures/alarm.svg)
 
 With standard negation and minimum conjunction,
 

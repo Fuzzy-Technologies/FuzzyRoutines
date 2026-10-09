@@ -7,7 +7,7 @@ schemaVersion = 1
 id = "page:api"
 kind = "page"
 sourcePath = "docs/site/content/en/api/index.md"
-sourceHash = "sha256:0c870ec38c65e17d5306c0b0fe30593ee7e74a316c6cebda90b4fd944b5f6986"
+sourceHash = "sha256:b9d5190bd09f4d8fc4bac210312ee7abc1a38bad901d655afd57bb8510438a04"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -20,7 +20,7 @@ state = "missing"
 id = "page:api.legacy"
 kind = "page"
 sourcePath = "docs/site/content/en/api/legacy/index.md"
-sourceHash = "sha256:5316a081010fea5a313ca4d1faa7798af1cdca7ecac7413d7c4498e3792c99a5"
+sourceHash = "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f1116506317e98"
 reviewClass = "technical"
 
 [units.translations.ru]
@@ -85,7 +85,7 @@ state = "missing"
 id = "page:api.modern.exceptions"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/exceptions.md"
-sourceHash = "sha256:84de32764011c03e9291be3f8a36e8b467ea5f1f627ef3b1da7616d0e452cb7c"
+sourceHash = "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573ed6ba"
 reviewClass = "technical"
 
 [units.translations.ru]
@@ -111,7 +111,7 @@ state = "missing"
 id = "page:api.modern.linguistic"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/linguistic.md"
-sourceHash = "sha256:bcc9970c867e1ae2611c4d12c10facc28216fe8f20ac584630c55aec957cdff9"
+sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -124,7 +124,7 @@ state = "missing"
 id = "page:api.modern.membership"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/membership.md"
-sourceHash = "sha256:d9d87c5d774a2ead9f429c50b7bfaf5ab5ce714713696848e0a487a7c8bd287d"
+sourceHash = "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e185d6"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -137,7 +137,7 @@ state = "missing"
 id = "page:api.modern.operators"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/operators.md"
-sourceHash = "sha256:70a563608f9d337837bc04c00050f2ad7512e9f9047eafa824c02813256d6de2"
+sourceHash = "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1aee668"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -163,7 +163,7 @@ state = "missing"
 id = "page:api.modern.properties"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/properties.md"
-sourceHash = "sha256:28c9c9bfe0a1e36b8382f0857d2a27a60989ebf9300f069f67e6a6618f621b38"
+sourceHash = "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe7f2d2"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2021,7 +2021,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.membership.Gaussian"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:1b4dca8b89dbcb88077a2b65f012b1287d3d4a3916aabed659949b8bec6f6574"
+sourceHash = "sha256:4173db52e7a90a009889b0e982f8ca330b030bea24782e99ba9e687404f61e37"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2034,7 +2034,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.membership.HarringtonDesirability"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:635a78a8b7a48be951629f621c075b17e48bc2bb9eee2a07e0314df99f740874"
+sourceHash = "sha256:b88fbdae5d8bd75df64e1f136e591c2cd75e578277ddc18b67c116ce20241ad9"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2047,7 +2047,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.membership.Hyperbolic"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:9702375084f98c38c5b58b216936a492c534a8ca003c3ba4a7e2c8c386012943"
+sourceHash = "sha256:dc4b5157d980391ac0c795f1612425667f5770b7290675543498c02aec29069b"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2567,7 +2567,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.Gaussian"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:6ba250205022b5256284dabb01d00095b10c0c5fde86475bfdfacd709716d760"
+sourceHash = "sha256:282667a1eb27c9787918c3770c9dbe928a4d4fb671a664dbe8c41baf27a109aa"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2580,7 +2580,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.HarringtonDesirability"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:bd3d4d2e64da1c2f730ffd1f3428c30e0ee52a69a9909585b735505d6e547afe"
+sourceHash = "sha256:8f8fc7c263762e55ccdbe5dd6ca9b71cad38c1b705fd32954a152f7080c6daf2"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2593,7 +2593,7 @@ state = "missing"
 id = "symbol:fuzzyroutines.Hyperbolic"
 kind = "symbol"
 sourcePath = "fuzzyroutines/membership.py"
-sourceHash = "sha256:9f05b98973d09141718840d02161d1b01465a07396cc81e1a5ad24eff753b4d8"
+sourceHash = "sha256:92d1f0c78f74ac112cc107db171de032b0bfd19878f3debdf03f31b7dc5b8da4"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2710,7 +2710,7 @@ state = "missing"
 id = "page:guides"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/index.md"
-sourceHash = "sha256:71eb92579daa015680b5fde164726075d5eecd45a2c063469ae007cce809037e"
+sourceHash = "sha256:ec221b2bc213c0962c9d2d350fa9318e0df37c80c950bb47e51bc2e9f7d12674"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2723,7 +2723,7 @@ state = "missing"
 id = "page:guides.alarm"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/alarm.md"
-sourceHash = "sha256:668d9b0eff4e9432fc597be5f7dcb158631d91e11c31b90b57582b7b70c456c8"
+sourceHash = "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e981737593"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2736,7 +2736,7 @@ state = "missing"
 id = "page:guides.alpha-cuts"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/alpha-cuts.md"
-sourceHash = "sha256:cd1a813260f326bd4a174bf76a8d9f2b2ec080be9b772782a8f2f63f269dbfcd"
+sourceHash = "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9f03d5"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2762,7 +2762,7 @@ state = "missing"
 id = "page:guides.centroid"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/centroid.md"
-sourceHash = "sha256:43006fcf9904db62d07b31fedd66f3a961e7401a3db4885d9f1b9e7d265182ad"
+sourceHash = "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab64cd01"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2775,7 +2775,7 @@ state = "missing"
 id = "page:guides.custom"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/custom.md"
-sourceHash = "sha256:6d95a4a5c97fae7dcaa8e9cc72660650bc703c9ea4332c8b47d319427901ed5c"
+sourceHash = "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc0498a"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2788,7 +2788,7 @@ state = "missing"
 id = "page:guides.figures"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/figures.md"
-sourceHash = "sha256:a5accc211f56aedc4955dbefa40c34d479beb7492b41d038dd4ae4407eaf7c78"
+sourceHash = "sha256:53ab89fd33a660ecf9651a659c6c1d73fc3bcd1e3b5cf0195476a31844112b19"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2801,7 +2801,7 @@ state = "missing"
 id = "page:guides.membership-families"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/membership-families.md"
-sourceHash = "sha256:d3db4e4f2d95b6f97a7853ee3a4ec5f7d35b729f738b4997df0abc039fb45adb"
+sourceHash = "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f24286ee00"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2814,7 +2814,7 @@ state = "missing"
 id = "page:guides.risk"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/risk.md"
-sourceHash = "sha256:c29ce23a60503cc3c912f201269a6737c22c2286a6f9ebeef20a58107ade8b60"
+sourceHash = "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311bac4e"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2827,7 +2827,7 @@ state = "missing"
 id = "page:guides.scale-audit"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/scale-audit.md"
-sourceHash = "sha256:5ba1c4523bcedf2dd8dca5277f94ffb01a4e1966c2f7b0b3d1d441d11656c7ed"
+sourceHash = "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae884f4a"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2840,7 +2840,7 @@ state = "missing"
 id = "page:guides.sensors"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/sensors.md"
-sourceHash = "sha256:e5400209454bdae0944dc318e34fd6f4671604fb35cb0fd6d7e4cfadd338e1e5"
+sourceHash = "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe308c1f"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2853,7 +2853,7 @@ state = "missing"
 id = "page:guides.temperature"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/temperature.md"
-sourceHash = "sha256:2ad2a581542ab28c6f6bc8983f53bf9c6d33d9fb87de762300424074b7b3f817"
+sourceHash = "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0ecc1c8"
 reviewClass = "mathematical"
 
 [units.translations.ru]
@@ -2866,7 +2866,85 @@ state = "missing"
 id = "page:quick-start"
 kind = "page"
 sourcePath = "docs/site/content/en/quick-start.md"
-sourceHash = "sha256:a2b77560ce2219861578aca3a2b62234d7af956b78d65ce808703b8403513723"
+sourceHash = "sha256:80453d196a050bd4d42fdca05bf42ed6cd700bf739fac982eaf17080ab4e348c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:guides.errors"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/errors.md"
+sourceHash = "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c241ddb1"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:guides.example-index"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/example-index.md"
+sourceHash = "sha256:b51022ed8446aacbc6376d779dffdc63a02168bac5c79ae4c4e00a0c88e87931"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:guides.historical-recipes"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/historical-recipes.md"
+sourceHash = "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de688d41"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:guides.operators"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/operators.md"
+sourceHash = "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3225f5"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:guides.results"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/results.md"
+sourceHash = "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01081c6"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:guides.workflow"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/workflow.md"
+sourceHash = "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3f2356"
 reviewClass = "mathematical"
 
 [units.translations.ru]

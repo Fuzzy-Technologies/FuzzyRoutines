@@ -69,7 +69,7 @@ versions. Documentation CI also executes the examples against its installed
 wheel. An example must not depend on variables or imports from another fence.
 
 `tools/generate_guide_figures.py` executes the same scenario assertions and
-renders nine SVGs from scalar API evaluations. Install the pinned
+renders ten SVGs from scalar API evaluations. Install the pinned
 `docs/requirements-plots.txt` documentation dependencies, then supply
 `--output-directory`. `--check` verifies bytes without writes; the optional
 `--preview-directory` owns PNG review artifacts. The tool returns `0` on a
@@ -77,6 +77,22 @@ complete rendering or comparison and nonzero on drift or failure. See
 [figure provenance](site/content/en/guides/figures.md) for the exact sample
 grids and numerical limits. CI verifies committed figures with the pinned
 Python 3.14 toolchain; ordinary library installation remains dependency-free.
+
+`tools/guide_example_coverage.py` executes the same published Python fences
+and records actual public calls, property reads and constructors. Imports alone
+do not count; typing contracts require annotations, and built-in exception
+constructors require retained instances. Root aliases must resolve to their
+canonical module objects. Its default prints a compact JSON summary to stdout;
+`--output PATH` explicitly writes full JSON evidence, `--write-index` updates
+the reader index, and `--check-index` rejects drift without writes. Exit `0`
+means no coverage gaps; execution failures, gaps or drift return nonzero.
+`--require-installed` rejects package origins outside the active environment.
+There are no default artifacts to clean up. Installed wheel/sdist CI runs this
+gate in isolated mode. For a source checkout, use:
+
+```console
+PYTHONPATH=. python tools/guide_example_coverage.py --check-index
+```
 
 ## Migration examples
 
@@ -162,7 +178,7 @@ each artifact and supported Python version it then:
 1. creates a clean virtual environment;
 2. installs the artifact without resolving runtime dependencies;
 3. proves `fuzzyroutines` resolves under that environment prefix;
-4. executes every compatibility-guide and canonical English Python snippet in isolated mode;
+4. executes every compatibility-guide and canonical English Python snippet in isolated mode, recording public-symbol usage and checking the example index;
 5. runs all eight worked scenarios and historical, modern, and bundled examples from a temporary directory;
 6. runs every benchmark entry point with bounded realistic inputs;
 7. parses redirected JSON stdout and compares each benchmark `--output` file;

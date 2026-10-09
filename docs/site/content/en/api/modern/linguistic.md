@@ -9,6 +9,9 @@ SPDX-License-Identifier: Apache-2.0
 
 [Severity and abstention](../../guides/risk.md) explains selection; [scale auditing](../../guides/scale-audit.md) diagnoses ties and gaps.
 
+[Result records](../../guides/results.md) demonstrate every diagnostic property,
+lookup and explicit record constructor.
+
 ::: fuzzyroutines.linguistic
     options:
       members:

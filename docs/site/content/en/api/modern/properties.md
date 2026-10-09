@@ -7,7 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Worked examples
 
-[Property recipes](../../guides/api-recipes.md#read-exact-and-sampled-properties) distinguishes exact geometry from grid observations.
+[Property recipes](../../guides/api-recipes.md#read-exact-and-sampled-properties)
+distinguish exact geometry from grid observations.
+[Result records](../../guides/results.md) explain every returned field and show
+explicit reconstruction.
 
 ::: fuzzyroutines.properties
     options:

@@ -54,6 +54,13 @@ validation rules, errors, and immutable result fields; the
 [membership gallery](membership-families.md) for all eight curve families; and
 [figure provenance](figures.md) for rendering and numerical limitations.
 
+Follow the [computation paths](workflow.md) to choose classification or centroid
+integration. Compare [operator policies](operators.md), inspect and reconstruct
+[result records](results.md), handle [errors](errors.md), or maintain
+[historical integrations](historical-recipes.md). The
+[public example index](example-index.md) links every inventoried symbol to
+executed usage. Open a linked SVG at full size on narrow screens.
+
 The foundational set interpretation follows L. A. Zadeh,
 [“Fuzzy sets” (1965), DOI 10.1016/S0019-9958(65)90241-X](https://doi.org/10.1016/S0019-9958(65)90241-X).
 The examples and policy choices here are specific to FuzzyRoutines.
