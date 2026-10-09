@@ -121,9 +121,11 @@ def StageLocale(projectRoot, outputRoot, locale, project, units, records, report
         state = report.states[unit.identifier].get(locale, "canonical")
         translatedPath = translation.get("path")
         body = unit.body
+        linkSourcePath = unit.sourcePath
 
         if locale != "en" and translatedPath and state in {"draft", "review", "approved"}:
             body = (projectRoot / translatedPath).read_text(encoding="utf-8")
+            linkSourcePath = translatedPath
 
         statuses[unit.identifier] = state
 
@@ -133,7 +135,7 @@ def StageLocale(projectRoot, outputRoot, locale, project, units, records, report
             body = re.sub(r"(?<=\]\()(?:(?:\.\./)+en/assets/)", assetPrefix, body)
 
             if not unit.sourcePath.startswith(CONTENTROOT + "/"):
-                body = RewriteExternalLinks(body, unit.sourcePath, destination, destinations)
+                body = RewriteExternalLinks(body, linkSourcePath, destination, destinations)
 
             pagePath = contentRoot / destination
             pagePath.parent.mkdir(parents=True, exist_ok=True)

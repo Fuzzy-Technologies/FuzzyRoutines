@@ -46,6 +46,9 @@ def test_ExternalPageLinksFollowStableRoutesAndRetainSourceReferences():
     assert "https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/tests/test_domain.py" in result
     assert "[local](#note)" in result
 
+    translated = RewriteExternalLinks("[модель](../../../../MATHEMATICAL_MODEL.md#scalar)", "docs/site/content/ru/mathematics/alpha-cuts.md", "mathematics/alpha-cuts.md", {"docs/MATHEMATICAL_MODEL.md": "mathematics/model.md"})
+    assert translated == "[модель](model.md#scalar)"
+
 
 def test_PreviewBannerAndLanguageSwitchKeepTheCurrentPage():
     """A translation preview cannot look approved or send a language switch home."""
