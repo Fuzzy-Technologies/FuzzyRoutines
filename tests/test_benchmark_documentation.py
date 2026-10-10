@@ -41,4 +41,4 @@ def test_ReadmeLinksPublishedBenchmarkEvidence():
 
     readme = (PROJECTROOT / "README.md").read_text(encoding="utf-8")
 
-    assert "[Results](docs/BENCHMARKS.md)" in readme
+    assert "[Results](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/BENCHMARKS.md)" in readme

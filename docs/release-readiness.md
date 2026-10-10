@@ -9,8 +9,11 @@ SPDX-License-Identifier: Apache-2.0
 
 This is a human-reviewed release gate. Checking a box requires a direct immutable evidence link. An unchecked blocker means the release is not approved.
 
-The selected first stable version is **`2.0.0`**; the proposed candidate metadata is
-**`2.0.0`**. This branch is prepared for review, not approved for publication. The [version rationale](release-version-decision.md),
+The selected first stable version and candidate metadata are **`2.0.0`**.
+PR #312 promoted the initial candidate to `master`. On 2026-10-10, the
+maintainer approved the revised presentation, merged PR #313 into `develop`,
+and requested release finalization. Final promotion, exact-revision CI and the
+protected publication approval remain to be completed. The [version rationale](release-version-decision.md),
 [development changelog](../CHANGELOG.md), and
 [migration notes](migration/1.0.3-to-2.0.0.md) are preparation artifacts, not
 publication approval. [Task #121](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/121)
@@ -56,8 +59,8 @@ The [2026-10-05 project audit](audits/2026-10-05-project-audit.md) records the
 baseline, source and ADR inventory, reproduced defects, usability assessment,
 and verification limits.
 
-The current audit has identified four correctness issues requiring their own
-reviewed fixes and affected-test evidence before stable approval:
+The audit identified four correctness issues, subsequently repaired through
+the reviewed changes linked below:
 
 - [Task #282](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/282):
   Gaussian centroid cancellation on intervals remote from the membership
@@ -103,9 +106,9 @@ does not approve missing Russian or Chinese translations or check final
 release-candidate boxes.
 
 The [multilingual implementation review](audits/2026-10-09-multilingual-review.md)
-records the original 257-unit Russian/Chinese drafts, canonical corrections,
-rendered findings and the remaining hash-bound human reviews. Complete draft
-coverage is not approval.
+records the original 257-unit Russian/Chinese drafts, canonical corrections
+and rendered findings. The later 258-unit acceptance is recorded below;
+complete draft coverage alone is not approval.
 
 The maintainer requires complete English, Russian and Simplified Chinese user
 documentation for the first stable release. English fallback pages are useful
@@ -114,7 +117,7 @@ during development but do not satisfy this release criterion. Follow
 translation state and human review; automated or AI-assisted passes must not
 invent human/native-speaker approval.
 
-Complete the work in this order:
+The completed documentation work followed this order:
 
 1. Finalize canonical English under
    [Task #294](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/294).
@@ -149,8 +152,9 @@ installation. Coordinate the approved promotion, annotated tag and final
 GitHub Release with Task #121. A successful PR dry run is workflow evidence;
 it does not mean the stable artifacts have been published to PyPI.
 
-The maintainer target is 2026-10-09 ahead of the conference week. The target
-does not waive any review, correctness, documentation or publication gate.
+The earlier 2026-10-09 target has passed. The maintainer has requested
+finalization after presentation review; the remaining steps are final promotion,
+exact-revision checks and protected publication. No schedule waives these gates.
 
 The [candidate handoff](audits/2026-10-09-release-candidate-handoff.md) lists
 the prepared integration, the three changed locale-review targets, observed
@@ -179,8 +183,38 @@ The [rendered review and retained performance evidence](audits/2026-10-09-releas
 remain applicable; the later automated rendering passes do not imply an
 additional human visual review of every screenshot.
 
-These are completed integration checks. The final promotion commit and stable
-tag still require their own CI results. No dry run is PyPI publication evidence.
+[PR #312](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/312) promoted
+the reviewed tree to `master` at
+[`d93fde3`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/d93fde360f5a39a173950bc8f2a02e78d7d0f697).
+All seven workflows passed on that exact master commit:
+
+- [Mathematics, coverage and process parity](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077820873).
+- [Quick deterministic gate](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077820471).
+- [Installed-package documentation and rendered review](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077819724).
+- [Optional vectorization experiment](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077809533).
+- [Public typing](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077808617).
+- [Documentation quality](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077805809).
+- [Reproducible packaging and clean installation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077805435).
+
+The presentation and repository-audit fixes are merged in
+[PR #313](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/313) at
+[`202c58f`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/202c58f16bf072b98765adaf1fa05f94c98f6cf1).
+All seven post-merge workflows passed on that exact development commit:
+
+- [Mathematics, coverage and process parity](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38084667932).
+- [Quick deterministic gate](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38084667928).
+- [Installed-package documentation and rendered review](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38084667918).
+- [Optional vectorization experiment](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38084667917).
+- [Public typing](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38084667934).
+- [Documentation quality](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38084667941).
+- [Reproducible packaging and clean installation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38084667921).
+
+The final documentation pass removes preparation-only installation wording and
+corrects the version index: it links to tagged sources and does not promise
+unimplemented hosted snapshots under `/api/versions/<version>/`.
+Any subsequent release revision requires its own checks and final approval.
+The annotated tag and protected release workflow have not run; no dry run or
+Pages deployment is PyPI publication evidence.
 
 ## External publication controls
 
@@ -195,14 +229,18 @@ restrict updates/deletions with no bypass, and
 allows only repository administrators to create tags. Both are active for
 `refs/tags/v*`, without exclusions.
 
-The maintainer confirmed selected `v*` deployment tags and read-only default
-workflow permissions. Those two settings are maintainer-confirmed rather than
-independently read back. Final environment reviewer/self-review settings and
-`PYPI_TRUSTED_PUBLISHING_ENABLED=true` still need confirmation in
-[Task #299](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/299).
-The original sole-reviewer configuration prevented self-review and cannot be
-used to approve a deployment initiated by that same account. Publication stays
-blocked until the maintainer confirms an operable approval policy.
+On 2026-10-10 the maintainer confirmed selected `v*` deployment tags, read-only
+default workflow permissions and the repository variable
+`PYPI_TRUSTED_PUBLISHING_ENABLED=true`. The `pypi` environment retains
+`Tim55667757` as required reviewer, with **Prevent self-review** disabled so the
+sole maintainer can approve a release initiated by that account. The reviewer,
+self-review policy, selected tag policy, read-only default workflow permissions
+and activation variable were independently read back through the GitHub API
+on 2026-10-10. The maintainer confirmation is recorded in [Task #299](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/299).
+
+The saved configuration prepares the protected workflow; it does not prove a
+successful upload. Publication still requires the final approved revision,
+exact-revision checks and environment approval.
 
 ## Mandatory evidence
 

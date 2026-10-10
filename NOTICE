@@ -5,6 +5,14 @@ FuzzyRoutines was originally published in 2019 by Timur Gilmullin through the
 Open DevOps Community / DevOpsHQ project and is now maintained by Fuzzy
 Technologies.
 
-This product includes no vendored third-party source code as of the provenance
-audit recorded by ADR-0012. Third-party Python and documentation tools are
-external dependencies and retain their own licenses.
+The provenance audit recorded by ADR-0012 found no vendored third-party source
+code. Third-party Python and documentation tools are external dependencies and
+retain their own licenses.
+
+The documentation site now includes unmodified Fira Code variable WOFF2 fonts
+from Google Fonts (Fira Code v27), originally developed by the Fira Code
+Project Authors: https://github.com/tonsky/FiraCode.
+The fonts are licensed under the SIL Open Font License, Version 1.1
+(SPDX: OFL-1.1), not Apache-2.0. The complete original copyright and license
+are preserved in docs/site/content/en/assets/fonts/LICENSE.
+The fonts are site assets and are not part of the Python runtime package.

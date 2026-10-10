@@ -4,7 +4,7 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <p align="center">
-  <img src="docs/site/content/en/assets/brand/fuzzyroutines-alice.png" alt="FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory" width="960">
+  <img src="https://raw.githubusercontent.com/Fuzzy-Technologies/FuzzyRoutines/master/docs/site/content/en/assets/brand/fuzzyroutines-alice.png" alt="FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory" width="960">
 </p>
 
 <p align="center">
@@ -13,27 +13,26 @@ SPDX-License-Identifier: Apache-2.0
 </p>
 
 <p align="center">
-  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml"><img alt="Quick deterministic gate" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml/badge.svg?branch=develop"></a>
-  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml"><img alt="API reference build" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml/badge.svg?branch=develop"></a>
+  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml"><img alt="Quick deterministic gate" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml/badge.svg?branch=master"></a>
+  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml"><img alt="API reference build" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml/badge.svg?branch=master"></a>
   <img alt="CPython 3.13 and 3.14" src="https://img.shields.io/badge/CPython-3.13%20%7C%203.14-3776AB?logo=python&amp;logoColor=white">
-  <a href="LICENSE"><img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
+  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/LICENSE"><img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
 </p>
 
-> **Development status:** version 2 is an active correctness-focused
-> modernization. The historical API remains protected, while the modern typed
-> surface grows through small, executable contracts. See the
-> [current implementation boundary](docs/current-status.md).
+> **FuzzyRoutines 2.0** combines a modern typed API with the protected
+> historical API. See the
+> [current implementation boundary](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md).
 
 ## At a glance
 
-| Area              | Current contract                                                                                                                          |
-|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| Runtime           | CPython 3.13 and 3.14                                                                                                                     |
-| Package version   | `2.0.0` candidate; publication awaits final approval                                                                                      |
-| Modern API        | Root exports from [`fuzzyroutines`](docs/public-api-documentation-inventory.md#modern-package-exports)                                    |
-| Compatibility API | [`fuzzyroutines.FuzzyRoutines`](docs/COMPATIBILITY.md) preserves the ADR-protected contract and documents the wider observed 1.0.3 facade |
-| API reference     | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package         |
-| License           | [Apache License 2.0](LICENSE) with attribution details in [NOTICE](NOTICE)                                                                |
+| Area                | Current contract                                                                                                                                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Runtime             | CPython 3.13 and 3.14                                                                                                                                                                                      |
+| Package version     | `2.0.0`                                                                                                                                                                                                    |
+| Modern API          | Root exports from [`fuzzyroutines`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-api-documentation-inventory.md#modern-package-exports)                                     |
+| Compatibility API   | [`fuzzyroutines.FuzzyRoutines`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/COMPATIBILITY.md) preserves the ADR-protected contract and documents the wider observed 1.0.3 facade  |
+| API reference       | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package                                                                          |
+| License             | [Apache License 2.0](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/LICENSE) with attribution details in [NOTICE](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/NOTICE) |
 
 FuzzyRoutines targets scientific-grade behavior within fuzzy computing:
 explicit domains, traceable formulas, analytical results where practical,
@@ -41,45 +40,40 @@ controlled numerical methods elsewhere, and executable evidence for important
 boundaries and invariants. It is a focused library, not a computer-algebra
 system or notebook environment.
 
-Start with the [canonical mathematical model](docs/MATHEMATICAL_MODEL.md) for
+Start with the [canonical mathematical model](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/MATHEMATICAL_MODEL.md) for
 the integrated definitions, formulas, compatibility spellings, and explicit
 implemented-versus-roadmap boundary.
 
 ## Install
 
-Use CPython 3.13 or 3.14. The modern 2.0 API currently comes from `develop`:
+Use CPython 3.13 or 3.14:
 
 ```console
-python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
+python -m pip install fuzzyroutines==2.0.0
 ```
 
-For a checkout you can edit:
+Historical 1.x packages do not provide the modern API shown below. For a
+source checkout, see [Development](#development).
 
-```console
-git clone --branch develop https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
-cd FuzzyRoutines
-python -m pip install .
-```
-
-The [quick start](docs/site/content/en/quick-start.md) explains the development
-and future stable PyPI installation routes and classifies a 24 °C measurement.
-Explore [nine worked scenarios](docs/site/content/en/guides/index.md), with
+The [quick start](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/quick-start.md) explains installation
+and classifies a 24 °C measurement.
+Explore [nine worked scenarios](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/guides/index.md), with
 independent numerical checks and eleven reproducible scientific figures, or
-reconstruct the [historical Universal Fuzzy Scale](docs/site/content/en/guides/universal-fuzzy-scale.md), or
-browse the [membership gallery](docs/site/content/en/guides/membership-families.md).
-The [computation diagrams](docs/site/content/en/guides/workflow.md) explain the
-different workflows; the [public example index](docs/site/content/en/guides/example-index.md)
+reconstruct the [historical Universal Fuzzy Scale](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/guides/universal-fuzzy-scale.md), or
+browse the [membership gallery](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/guides/membership-families.md).
+The [computation diagrams](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/guides/workflow.md) explain the
+different workflows; the [public example index](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/guides/example-index.md)
 links all 193 inventoried public symbols to executed examples.
 From a checkout with the package installed, `python -I examples/guide.py` runs
 every scenario without NumPy, Matplotlib, network access, or file creation.
 
 ## Choose the API surface
 
-| Surface                  | Use it for                                                        | Start here                                                                                 |
-|--------------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| Modern typed API         | New code with explicit universes, policies, and evidence strength | [Modern API inventory](docs/public-api-documentation-inventory.md#modern-package-exports)  |
-| Historical compatibility | Existing software written against the 1.0.3-style facade          | [Protected and observed surfaces](docs/COMPATIBILITY.md#adr-protected-historical-contract) |
-| Migration boundary       | Moving one supported scenario at a time                           | [Canonical migration guide](docs/COMPATIBILITY.md#migration-examples)                      |
+| Surface                    | Use it for                                                          | Start here                                                                                                                                                 |
+| -------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Modern typed API           | New code with explicit universes, policies, and evidence strength   | [Modern API inventory](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-api-documentation-inventory.md#modern-package-exports)  |
+| Historical compatibility   | Existing software written against the 1.0.3-style facade            | [Protected and observed surfaces](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/COMPATIBILITY.md#adr-protected-historical-contract) |
+| Migration boundary         | Moving one supported scenario at a time                             | [Canonical migration guide](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/COMPATIBILITY.md#migration-examples)                      |
 
 ### Modern example
 
@@ -96,9 +90,9 @@ assert properties.core.Contains(0.5)
 assert properties.height == 1.0
 ```
 
-A declared [`ContinuousUniverse`](docs/mathematics/universe-support-contract.md)
+A declared [`ContinuousUniverse`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/universe-support-contract.md)
 is part of fuzzy-set identity. An
-[`IntegrationDomain`](docs/adr/0005-numerical-defuzzification-policy.md) is only
+[`IntegrationDomain`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0005-numerical-defuzzification-policy.md) is only
 a finite interval used by a numerical method; it is never mathematical
 support.
 
@@ -120,41 +114,45 @@ print(fuzzySet.Defuz())
 
 The legacy triangle order is `a, b, c`, where `c` is the apex. Protected
 names and corrected historical defects are tracked in the
-[compatibility ledger](docs/compatibility/corrected-bug-ledger.md).
+[compatibility ledger](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/compatibility/corrected-bug-ledger.md).
 
 ## Core contracts
 
-| Concept                     | Mathematical contract                                                                          | Architecture decision                                                              |
-|-----------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| Membership functions        | [Families, formulas, and parameter domains](docs/mathematics/membership-function-contracts.md) | [ADR-0003](docs/adr/0003-membership-function-contracts.md)                         |
-| Universes and support       | [Universe, support, core, boundary, and height](docs/mathematics/universe-support-contract.md) | [ADR-0002](docs/adr/0002-universe-support-semantics.md)                            |
-| Negations and scalar norms  | [Formula and algorithm invariants](docs/mathematics/source-algorithm-invariants.md)            | [ADR-0004](docs/adr/0004-operator-and-negation-contracts.md)                       |
-| Fuzzy-set operations        | [Complement, intersection, union, and difference](docs/mathematics/fuzzy-set-operations.md)    | [ADR-0008](docs/adr/0008-fuzzy-set-difference-semantics.md)                        |
-| Alpha-cuts                  | [Exact and sampled alpha-cut evidence](docs/mathematics/alpha-cuts.md)                         | [Universe semantics](docs/adr/0002-universe-support-semantics.md)                  |
-| Height and normalization    | [Exact evidence and fail-closed normalization](docs/mathematics/fuzzy-set-normalization.md)    | [Numerical policy](docs/adr/0005-numerical-defuzzification-policy.md)              |
-| Equality and inclusion      | [Explicit comparison domains and policies](docs/mathematics/fuzzy-set-relations.md)            | [Modern domain boundary](docs/current-status.md#implemented-modern-domain-surface) |
-| Linguistic terms and scales | [Immutable typed representation](docs/mathematics/linguistic-term-model.md)                    | [Roadmap boundary](docs/current-status.md#still-in-the-v2-roadmap)                 |
+| Concept                       | Mathematical contract                                                                                                                                          | Architecture decision                                                                                                                              |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Membership functions          | [Families, formulas, and parameter domains](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/membership-function-contracts.md) | [ADR-0003](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0003-membership-function-contracts.md)                         |
+| Universes and support         | [Universe, support, core, boundary, and height](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/universe-support-contract.md) | [ADR-0002](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0002-universe-support-semantics.md)                            |
+| Negations and scalar norms    | [Formula and algorithm invariants](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/source-algorithm-invariants.md)            | [ADR-0004](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0004-operator-and-negation-contracts.md)                       |
+| Fuzzy-set operations          | [Complement, intersection, union, and difference](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/fuzzy-set-operations.md)    | [ADR-0008](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0008-fuzzy-set-difference-semantics.md)                        |
+| Alpha-cuts                    | [Exact and sampled alpha-cut evidence](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/alpha-cuts.md)                         | [Universe semantics](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0002-universe-support-semantics.md)                  |
+| Height and normalization      | [Exact evidence and fail-closed normalization](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/fuzzy-set-normalization.md)    | [Numerical policy](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0005-numerical-defuzzification-policy.md)              |
+| Equality and inclusion        | [Explicit comparison domains and policies](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/fuzzy-set-relations.md)            | [Modern domain boundary](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md#implemented-modern-domain-surface) |
+| Linguistic terms and scales   | [Immutable typed representation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/mathematics/linguistic-term-model.md)                    | [Roadmap boundary](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md#still-in-the-v2-roadmap)                 |
 
 ## Documentation map
 
-| Need                                    | Canonical source                                                                                                                                      |
-|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| What exists now                         | [Current implementation status](docs/current-status.md)                                                                                               |
-| Audited contracts and release limits    | [Project readiness audit](docs/audits/2026-10-05-project-audit.md)                                                                                    |
-| Public symbols                          | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                    |
-| Static types and custom callbacks       | [Public modern typing](docs/public-typing.md)                                                                                                         |
-| Mathematical definitions                | [`docs/mathematics`](docs/mathematics/)                                                                                                               |
-| Compatibility and migration             | [Canonical guide](docs/COMPATIBILITY.md) · [Corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md)                                         |
-| Release changes and version decision    | [Development changelog](CHANGELOG.md) · [1.0.3 migration](docs/migration/1.0.3-to-2.0.0.md) · [Version rationale](docs/release-version-decision.md)   |
-| Benchmarks and performance claims       | [Results](docs/BENCHMARKS.md) · [Protocol](docs/performance/benchmark-reproducibility-protocol.md)                                                    |
-| Tests, tools, examples, and artifacts   | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                               |
-| Contribution and evidence rules         | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                    |
-| Optional vectorization strategy         | [ADR-0015](docs/adr/0015-optional-vectorized-execution-strategy.md) · [Scalar/array evidence](docs/performance/vectorized-membership-comparison.md)   |
-| API documentation architecture          | [ADR-0010](docs/adr/0010-api-documentation-architecture.md) · [Reproducible build](docs/site/README.md)                                               |
+| Need                                      | Canonical source                                                                                                                                                                                                                                                                                                                                    |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What exists now                           | [Current implementation status](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md)                                                                                                                                                                                                                             |
+| Audited contracts and release limits      | [Project readiness audit](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/audits/2026-10-05-project-audit.md)                                                                                                                                                                                                                  |
+| Public symbols                            | [Public API inventory](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-api-documentation-inventory.md)                                                                                                                                                                                                                  |
+| Static types and custom callbacks         | [Public modern typing](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-typing.md)                                                                                                                                                                                                                                       |
+| Mathematical definitions                  | [`docs/mathematics`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/master/docs/mathematics/)                                                                                                                                                                                                                                             |
+| Compatibility and migration               | [Canonical guide](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/COMPATIBILITY.md) · [Corrected-bug ledger](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/compatibility/corrected-bug-ledger.md)                                                                                                       |
+| Release changes and version decision      | [Development changelog](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/CHANGELOG.md) · [1.0.3 migration](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/migration/1.0.3-to-2.0.0.md) · [Version rationale](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/release-version-decision.md) |
+| Benchmarks and performance claims         | [Results](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/BENCHMARKS.md) · [Protocol](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/performance/benchmark-reproducibility-protocol.md)                                                                                                                  |
+| Tests, tools, examples, and artifacts     | [Executable documentation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/executable-tests-tools-and-examples.md)                                                                                                                                                                                                             |
+| Contribution and evidence rules           | [Development evidence protocol](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/development-evidence-protocol.md) · [Python style](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/python-code-style.md)                                                                                                  |
+| Optional vectorization strategy           | [ADR-0015](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0015-optional-vectorized-execution-strategy.md) · [Scalar/array evidence](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/performance/vectorized-membership-comparison.md)                                                                 |
+| API documentation architecture            | [ADR-0010](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/adr/0010-api-documentation-architecture.md) · [Reproducible build](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/README.md)                                                                                                             |
 
 ## Development
 
+For an editable source checkout:
+
 ```console
+git clone --branch master https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
+cd FuzzyRoutines
 python -m pip install -e .
 python -m pip install -r requirements.txt
 python -m pytest -q tests/test_membership_function_contracts.py
@@ -183,7 +181,7 @@ The current typed surface already includes explicit scalar universes, immutable
 fuzzy sets, operations, derived properties, alpha-cuts, comparison policies,
 and linguistic representations. Inline modern annotations, `py.typed`, strict
 source checks, and installed-wheel consumer checks are implemented; see the
-[typing contract](docs/public-typing.md). Symmetric difference, executable
+[typing contract](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-typing.md). Symmetric difference, executable
 convexity, defuzzification methods beyond the implemented centroid contract,
 vectorized backends, and free-threaded CPython support remain roadmap work.
 Performance and concurrency claims require numerical-parity,
@@ -193,15 +191,17 @@ The generated reference is composed with the
 [FuzzyRoutines GitHub Pages site](https://fuzzy-technologies.github.io/FuzzyRoutines/).
 Pull requests and `develop` produce preview artifacts; production deployment
 occurs only from the approved `master` branch. Stable routes separate the
-moving English reference from reserved translation and release-version paths.
+moving references in English, Russian and Simplified Chinese. The version index
+links to tagged sources for historical versions. Separately hosted documentation
+snapshots for individual releases are not currently provided.
 
 ## License
 
 Source code, tests, documentation, examples, tools, workflows, and
 project-owned site assets are licensed under the
-[Apache License 2.0](LICENSE). Redistributions must preserve the license,
-copyright, and attribution notices, including [NOTICE](NOTICE).
+[Apache License 2.0](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/LICENSE). Redistributions must preserve the license,
+copyright, and attribution notices, including [NOTICE](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/NOTICE).
 
 The license does not grant permission to use Fuzzy Technologies trade names or
 marks beyond reasonable attribution and the NOTICE requirements. See the
-[licensing and provenance policy](docs/licensing.md).
+[licensing and provenance policy](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/licensing.md).

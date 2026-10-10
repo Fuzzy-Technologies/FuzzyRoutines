@@ -23,18 +23,21 @@ floor and helper-import changes justify the
 
 #### Digest
 
-- Prepared the first stable modernization candidate: corrected scalar
-  mathematics, explicit modern APIs, preserved historical calls, and
-  reproducible package/documentation evidence.
-- This `2.0.0` entry is proposed for the release candidate. The date records
-  candidate preparation; it is not publication evidence. Finalize it against
-  the approved revision and actual release date before the annotated tag.
-  Final promotion approval and protected PyPI publication remain pending.
+- Modernized scalar fuzzy mathematics with explicit typed APIs, protected
+  historical calls, and reproducible package/documentation evidence.
+- Added complete English, Russian and Simplified Chinese documentation,
+  practical scenarios, and a reconstruction of the historical Universal Fuzzy
+  Scale with graphs and cybersecurity/risk applications.
 
 Existing users should read the
 [1.0.3 migration notes](docs/migration/1.0.3-to-2.0.0.md).
 
 #### Added
+
+- A corporate-styled product page and API theme use locally hosted Fira Code,
+  compact headings and the shared Fuzzy Technologies palette. The quick start
+  includes executable code, expected output and clipboard controls. Images
+  expand in an accessible in-page viewer; pinned MathJax renders formulas as SVG.
 
 - A dedicated Universal Fuzzy Scale guide preserves the five historical
   levels, coefficients and raw membership curves, reconstructs them with the
@@ -60,11 +63,11 @@ Existing users should read the
   canonical English Python snippet and the complete scenario script. Independent
   plot tests check curve data, markers, bars, and rational centroid moments;
   EN/RU/zh-CN share English-labelled SVGs with localized explanatory text.
-- A public example index connects all 193 inventoried symbols to 29 standalone
+- A public example index connects all 193 inventoried symbols to 31 standalone
   Python blocks, including result fields, historical methods, error categories
   and typing contracts. Installed wheel/sdist CI checks actual execution and
   canonical root aliases rather than counting imports. Result-record recipes,
-  three computation diagrams and a tenth SVG comparing conjunction/disjunction
+  three computation diagrams and an SVG comparing conjunction/disjunction
   complete the canonical English example routes; scientific curve tests now
   check 36 plotted curves against independent references.
 - Curated modern root exports provide immutable membership factories and a

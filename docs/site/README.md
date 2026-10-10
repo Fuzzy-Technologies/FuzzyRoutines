@@ -79,15 +79,16 @@ Task #206 composes this generated English reference with the tracked product
 page by running:
 
 ```bash
-python tools/compose_pages_site.py
+python tools/compose_pages_site.py --locale-root _build/api-reference/locales
 ```
 
 The disposable result is `_build/pages/site`. The canonical English route is
-`/api/latest/en/`. Russian and Simplified Chinese routes are reserved with
-explicit untranslated fallback pages, so language navigation never points to
-missing content or presents English as reviewed translation. `/api/versions/`
-distinguishes the moving latest documentation from immutable stable-release
-paths; no stable 2.x documentation is claimed before a release exists.
+`/api/latest/en/`; reviewed Russian and Simplified Chinese references are
+available at `/api/latest/ru/` and `/api/latest/zh-CN/`. The composition requires
+current approved translations for official locale content and retains explicit
+fallbacks when that requirement is not met. `/api/versions/` describes the
+latest-versus-immutable-release policy. An immutable 2.0.0 documentation snapshot
+has not been published; creating a package tag alone does not create one.
 
 Pull requests and `develop` upload preview artifacts without production side
 effects. Only a push to the approved `master` branch can run the Pages deploy

@@ -5,7 +5,9 @@
 
 """Structural and link contracts for the project Pages site."""
 
+import contextlib
 from html.parser import HTMLParser
+from io import StringIO
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -70,7 +72,13 @@ def test_PagesLocalLinksAndFragmentsResolve():
             continue
 
         if parsedLink.path:
-            targetPath = (pagePath.parent / parsedLink.path).resolve()
+            assetPrefix = "api/latest/en/assets/"
+            relativePath = parsedLink.path
+
+            if relativePath.startswith(assetPrefix):
+                relativePath = "site/content/en/assets/" + relativePath[len(assetPrefix):]
+
+            targetPath = (pagePath.parent / relativePath).resolve()
             assert targetPath.is_relative_to(SITE_ROOT.resolve())
             assert targetPath.exists(), link
 
@@ -78,12 +86,14 @@ def test_PagesLocalLinksAndFragmentsResolve():
             assert parsedLink.fragment in parser.ids, link
 
 
-def test_PagesSiteHasNoRuntimeScriptDependencies():
-    """Verify that pages site has no runtime script dependencies."""
+def test_PagesSiteKeepsInteractionsLocal():
+    """Keep copy and image interactions available without remote scripts."""
 
     pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
 
-    assert "<script" not in pageText.lower()
+    assert '<script defer src="assets/site.js"></script>' in pageText
+    assert '<script defer src="api/latest/en/assets/javascripts/lightbox.js"></script>' in pageText
+    assert '<script src="http' not in pageText.lower()
     assert "http://" not in pageText.lower()
 
 
@@ -94,6 +104,26 @@ def test_PagesSiteSeparatesImplementedBehaviorFromRoadmap():
 
     assert 'data-status="implemented"' in pageText
     assert 'data-status="roadmap"' in pageText
-    assert "Implemented on develop" in pageText
-    assert "Still in the v2 roadmap" in pageText
+    assert "Implemented in 2.0" in pageText
+    assert "Future work" in pageText
     assert "current-status.md" in pageText
+
+
+def test_PagesQuickstartProducesDisplayedOutput():
+    """Execute the user-facing example and compare its advertised result."""
+
+    from xml.etree import ElementTree
+    import re
+
+    pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
+    blocks = {
+        match.group(1): ElementTree.fromstring(match.group(0)).text
+        for match in re.finditer(r'<code id="([^"]+)">.*?</code>', pageText, re.S)
+    }
+    output = StringIO()
+
+    with contextlib.redirect_stdout(output):
+        exec(compile(blocks["quickstart-code"], "homepage-quickstart", "exec"), {})
+
+    assert output.getvalue().strip() == blocks["quickstart-output"]
+    assert "git+" not in pageText

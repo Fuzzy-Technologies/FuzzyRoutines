@@ -9,13 +9,9 @@ The FuzzyRoutines product page is a static site in `docs/`. It does not require 
 
 ## Local preview
 
-To preview the tracked product page only, run from the repository root:
-
-```console
-python -m http.server 8000 --directory docs
-```
-
-Open <http://localhost:8000/> and check the desktop and narrow/mobile layouts.
+The product page shares fonts, illustration assets and the image viewer with
+the generated API reference. Build and serve the complete deployment tree
+below so the local preview matches production.
 
 Run the deterministic site checks with:
 
@@ -23,13 +19,13 @@ Run the deterministic site checks with:
 python -m pytest tests/test_pages_site.py tests/test_pages_publication.py
 ```
 
-The checks verify required metadata, local files, same-page fragments, HTTPS-only external links, locale fallbacks, version navigation, and the publication boundary.
+The checks verify required metadata, local files, same-page fragments, HTTPS-only external links, locale publication and fallback boundaries, version navigation, and the publication boundary.
 
 To preview the complete deployment artifact, first build the strict installed-package API reference and then compose the Pages tree:
 
 ```console
 python tools/build_api_reference.py
-python tools/compose_pages_site.py
+python tools/compose_pages_site.py --locale-root _build/api-reference/locales
 python -m http.server 8000 --directory _build/pages/site
 ```
 
@@ -37,8 +33,8 @@ The complete routes are:
 
 - `/` for the product overview;
 - `/api/latest/en/` for the canonical English reference;
-- `/api/latest/ru/` and `/api/latest/zh-CN/` for explicit untranslated fallbacks;
-- `/api/versions/` for the latest-versus-immutable-release policy.
+- `/api/latest/ru/` and `/api/latest/zh-CN/` for reviewed Russian and Simplified Chinese references;
+- `/api/versions/` for the current package version and tagged documentation sources.
 
 ## Publication boundary
 
