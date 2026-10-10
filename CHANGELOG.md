@@ -19,7 +19,7 @@ floor and helper-import changes justify the
 
 ## Minor 2.0
 
-### Patch 0 — v2.0.0 — 2026-10-09
+### Patch 0 — v2.0.0 — 2026-10-10
 
 #### Digest
 
@@ -29,7 +29,7 @@ floor and helper-import changes justify the
 - This `2.0.0` entry is proposed for the release candidate. The date records
   candidate preparation; it is not publication evidence. Finalize it against
   the approved revision and actual release date before the annotated tag.
-  Human readiness approval and protected PyPI publication remain pending.
+  Final promotion approval and protected PyPI publication remain pending.
 
 Existing users should read the
 [1.0.3 migration notes](docs/migration/1.0.3-to-2.0.0.md).
@@ -44,8 +44,9 @@ Existing users should read the
 - Three-language documentation rendering from the installed package, shared
   English-labelled figures, stable page routes, and source-bound API fragments.
   Include mathematical and migration chapters in the required locale corpus.
-  Draft previews remain explicit; stable publication requires current human
-  review bound to both English source and translated text.
+  All 258 units per locale have current hash-bound acceptance: maintainer
+  acceptance for Russian and explicitly delegated AI scientific/editorial
+  acceptance for Chinese, recorded under ADR-0011.
 - Protected PyPI publication is followed by actual wheel/sdist byte comparison
   with approved CI candidates, hash-pinned clean installation from the public
   index, and installed examples on both supported Python versions. PR and

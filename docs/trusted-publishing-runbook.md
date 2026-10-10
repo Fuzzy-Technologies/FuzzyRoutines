@@ -109,7 +109,7 @@ fails immediately. Metadata alone is not treated as byte verification.
 Each matrix job then creates a fresh environment and installs the version from
 `https://pypi.org/simple` with pip hash checking against the approved wheel.
 The existing installed-executable verifier checks package origin, compatibility
-examples, the canonical quick start, all guide snippets, eight scenarios and
+examples, the canonical quick start, all guide snippets, nine scenarios and
 benchmark entry points. Evidence is retained in
 `published-pypi-verification-3.13` and `published-pypi-verification-3.14`.
 These jobs cannot run on PR/manual dry runs or when publishing is disabled.
