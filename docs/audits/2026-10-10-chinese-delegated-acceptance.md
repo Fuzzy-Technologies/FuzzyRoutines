@@ -377,3 +377,40 @@ or a reusable permission to automatically approve translations.
 | `page:contracts.compatibility`                                                      | editorial, technical    | `sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6512b9` | `sha256:9258bfc0bda16e49d866cb11f370695e27b4ca4fe42b4aff46326c94ebe371d6` |
 | `page:contracts.public-typing`                                                      | editorial, technical    | `sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d` | `sha256:78301515cdab739e74528af26adabb57a02958f9f71faa8da7ed8da662772017` |
 | `page:guides.universal-fuzzy-scale`                                                 | editorial, mathematical | `sha256:7092df9d1812256efb772ca9e8e586cdde462cb9395de08558bb439c345a2193` | `sha256:1b80e97feffcdf96a1f0e5196736f07be98e03ea7c787b4a67c21e051fc82687` |
+
+## Fresh Universal Fuzzy Scale application review after PR #310
+
+At **2026-10-10T18:09:44Z**, AIna-Dev performed a new scientific and Chinese editorial
+review of `page:guides.universal-fuzzy-scale` after its cybersecurity/risk
+application paragraphs changed in
+[PR #310](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/310),
+integrated as [`37ffc77`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/37ffc778afeae1fce12348485d21dfa17356d1ec).
+This is a fresh, explicit AI acceptance under the maintainer's existing
+zh-CN 2.0.0 delegation, not automatic approval of changed text or a claim of
+human/native-speaker review. AIna-Dev performed both required roles.
+
+The Chinese paragraphs preserve the English distinction between normalized
+scores, linguistic grades and incident probabilities. They correctly explain
+that increasing risk and improving protection have opposite decision meanings,
+that all membership grades should accompany the selected label, and that
+normalization, aggregation, domain validation, weak coverage and response
+rules belong to the consuming application. The wording is scientifically
+accurate and natural; no further prose correction was required. A targeted
+check of the current historical API confirms score `0.75` selects `High` with
+membership `1`, rather than asserting an incident probability. Protected code
+and formulas are unchanged between the current English and Chinese page.
+
+Only this unit's Chinese review records were refreshed; the root maintainer's
+Russian records and all other Chinese units were preserved. The original UFS
+row above remains historical evidence. The following **single current pair**
+supersedes that row for active 2.0.0 acceptance:
+
+- Unit: `page:guides.universal-fuzzy-scale`.
+- Canonical source: `sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20`.
+- Chinese translation: `sha256:888d672b0d829f408a93e9e08649b13e152dca4b1104a765b08d506bed7d88ca`.
+- Roles: editorial and mathematical.
+- Reviewer: `AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)`.
+- Reviewed at: `2026-10-10T18:09:44Z`.
+
+The unchanged validator binds both hashes. Any subsequent edit again requires
+explicit review; this supplement grants no blanket future approval.
