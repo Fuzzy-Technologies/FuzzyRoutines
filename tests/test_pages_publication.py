@@ -90,7 +90,7 @@ def test_DraftLocalesAreAvailableOnlyInAnExplicitReviewArtifact(tmpPath):
 
 
 def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):
-    """Distinguish the moving latest route from immutable stable releases."""
+    """Expose the moving route and real historical sources without fake snapshots."""
 
     apiRoot = tmpPath / "generated-api"
     outputRoot = tmpPath / "pages"
@@ -102,8 +102,11 @@ def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):
     ).read_text(encoding="utf-8")
 
     assert "2.0.0" in versionText
-    assert "No stable 2.x release documentation has been published yet" in versionText
-    assert "/api/versions/&lt;version&gt;/" in versionText
+    assert "../latest/en/" in versionText
+    assert "Separately hosted documentation snapshots for individual releases" in versionText
+    assert "are not currently provided" in versionText
+    assert "https://github.com/Fuzzy-Technologies/FuzzyRoutines/tags" in versionText
+    assert "/api/versions/&lt;version&gt;/" not in versionText
 
 
 def test_PagesWorkflowBuildsEveryReviewButDeploysOnlyMaster():

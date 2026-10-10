@@ -172,7 +172,7 @@ SPDX-License-Identifier: Apache-2.0
         <div class="hero-copy">
           <p class="eyebrow">Canonical documentation</p>
           <h1 id="api-title">API reference</h1>
-          <p class="hero-lead">Choose the current language route or inspect immutable release documentation.</p>
+          <p class="hero-lead">Choose a language or check which package version the documentation describes.</p>
           <div class="hero-actions">
             <a class="button primary" href="latest/en/" hreflang="en">English</a>
             <a class="button" href="latest/ru/" hreflang="ru">Русский</a>
@@ -189,7 +189,7 @@ SPDX-License-Identifier: Apache-2.0
 
 
 def WriteVersionIndex(apiRoot, packageVersion):
-    """Describe latest versus immutable releases without inventing a release."""
+    """Describe the moving documentation route and link to tagged sources."""
 
     pageText = f"""<!doctype html>
 <!--
@@ -214,16 +214,17 @@ SPDX-License-Identifier: Apache-2.0
       <section class="hero" aria-labelledby="versions-title">
         <div class="hero-copy">
           <p class="eyebrow">Documentation lifecycle</p>
-          <h1 id="versions-title">Latest and immutable releases</h1>
+          <h1 id="versions-title">Documentation versions</h1>
           <p class="hero-lead">
             <a href="../latest/en/">Latest English documentation</a> tracks the approved
             default branch and currently describes package version
             <code>{html.escape(packageVersion)}</code>.
           </p>
           <p>
-            No stable 2.x release documentation has been published yet.
-            Stable releases will appear under <code>/api/versions/&lt;version&gt;/</code>
-            and will never be relabelled as another version.
+            Separately hosted documentation snapshots for individual releases
+            are not currently provided. For historical versions, consult the
+            documentation sources in the corresponding
+            <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/tags">repository tag</a>.
           </p>
         </div>
       </section>

@@ -34,7 +34,7 @@ The complete routes are:
 - `/` for the product overview;
 - `/api/latest/en/` for the canonical English reference;
 - `/api/latest/ru/` and `/api/latest/zh-CN/` for reviewed Russian and Simplified Chinese references;
-- `/api/versions/` for the latest-versus-immutable-release policy.
+- `/api/versions/` for the current package version and tagged documentation sources.
 
 ## Publication boundary
 
