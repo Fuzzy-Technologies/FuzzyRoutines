@@ -1,10 +1,17 @@
-# -*- coding: utf-8 -*-
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
 
+"""Demonstrate the broad historical FuzzyRoutines compatibility API.
 
-# Some examples of using FuzzyRoutines (just run this module).
-# Copyright (C) 2019, Timur Gilmullin (DevOpsHQ)
-# e-mail: tim55667757@gmail.com
+Execution prints human-readable membership, set, scale, operator, negation,
+and parser observations to stdout. The module creates no files and performs no
+network access. New integrations should prefer the focused modern API and the
+smaller migration examples under `examples/migration`.
+"""
 
+import copy
 
 from fuzzyroutines.FuzzyRoutines import *
 
@@ -180,7 +187,7 @@ print('IsCorrectFuzzyNumberValue(1.1) =', IsCorrectFuzzyNumberValue(1.1))
 print('FNOT(0.25) =', FuzzyNOT(0.25))
 print('FNOT(0.25, alpha=0.25) =', FuzzyNOT(0.25, alpha=0.25))
 print('FNOT(0.25, alpha=0.75) =', FuzzyNOT(0.25, alpha=0.75))
-print('FNOT(0.25, alpha=1) =', FuzzyNOT(0.25, alpha=1))
+print('FNOT(0.25, alpha=0.9) =', FuzzyNOT(0.25, alpha=0.9))
 
 print('FNOTParabolic(0.25, alpha=0.25) =', FuzzyNOTParabolic(0.25, alpha=0.25))
 print('FNOTParabolic(0.25, alpha=0.75) =', FuzzyNOTParabolic(0.25, alpha=0.75))

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+# Python environments and caches
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+/.idea/
+
+# Coverage reports
+.coverage
+.coverage.*
+coverage.json
+htmlcov/
+
+# Package builds
+build/
+dist/
+*.egg-info/
+
+# Local benchmark and diagnostic reports
+/benchmark-*.json
+/universal-scale-coverage.json
+
+# Disposable documentation builds and isolated evaluation environments
+/_build/

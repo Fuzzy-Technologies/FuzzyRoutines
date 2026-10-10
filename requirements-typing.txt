@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+# Mypy 1.19 supports the declared CPython 3.13 and 3.14 typing syntax.
+mypy==1.19.1
+mypy-extensions==1.1.0
+pathspec==1.1.1
+typing-extensions==4.16.0
+librt==0.16.0

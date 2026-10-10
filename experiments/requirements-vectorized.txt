@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+# Isolated prototype only; not a scalar-package dependency or published extra.
+numpy==2.3.5

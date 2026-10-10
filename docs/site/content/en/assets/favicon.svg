@@ -1,0 +1,26 @@
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title description">
+  <title id="title">FuzzyRoutines sign</title>
+  <desc id="description">A geometric F joined to an R formed by layered fuzzy membership curves.</desc>
+  <defs>
+    <linearGradient id="fr-spectrum" x1="29" y1="14" x2="54" y2="51" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#66d9ef"/>
+      <stop offset="0.52" stop-color="#9b7bff"/>
+      <stop offset="1" stop-color="#ff79c6"/>
+    </linearGradient>
+    <linearGradient id="fr-echo" x1="34" y1="18" x2="51" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#66d9ef"/>
+      <stop offset="0.5" stop-color="#bd7aff"/>
+      <stop offset="1" stop-color="#ff79c6"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="13" fill="#101316" stroke="#2a343d" stroke-width="2"/>
+  <path d="M12 14H31V20H19V28H29V34H19V50H12Z" fill="#e7f8ff"/>
+  <path d="M31 50V14H40C48 14 53 19 53 27C53 35 48 39 40 39H36L53 51" fill="none" stroke="url(#fr-spectrum)" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M35 19H40C45 19 48 22 48 27C48 32 45 34 40 34H36" fill="none" stroke="url(#fr-echo)" stroke-width="1.75" stroke-linecap="round" opacity="0.82"/>
+  <path d="M39 42L50 50" fill="none" stroke="#ff79c6" stroke-width="1.75" stroke-linecap="round" opacity="0.72"/>
+</svg>

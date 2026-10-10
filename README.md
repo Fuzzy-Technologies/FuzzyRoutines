@@ -1,438 +1,207 @@
-# FuzzyRoutines
-Library contains some routines for work with fuzzy logic operators, fuzzy datasets and fuzzy scales.
-
-[![FuzzyRoutines build status](https://travis-ci.org/devopshq/FuzzyRoutines.svg?branch=master)](https://travis-ci.org/devopshq/FuzzyRoutines) [![FuzzyRoutines on PyPI](https://img.shields.io/pypi/v/FuzzyRoutines.svg)](https://pypi.python.org/pypi/FuzzyRoutines) [![FuzzyRoutines license](https://img.shields.io/pypi/l/FuzzyRoutines.svg)](https://github.com/devopshq/FuzzyRoutines/blob/master/LICENSE)
-
-*Index:*
-- [Install](#Chapter_1)
-- [Usage examples](#Chapter_2)
-    - [Work with membership functions](#Chapter_2_1)
-    - [Work with fuzzy set](#Chapter_2_2)
-    - [Work with fuzzy scales](#Chapter_2_3)
-    - [Work with Universal Fuzzy Scale](#Chapter_2_4)
-    - [Work with fuzzy logic operators](#Chapter_2_5)
-    - [Working with other methods](#Chapter_2_6)
-
-<a name="Chapter_1"></a>Install
--------------------------------
-
-You can install FuzzyRoutines using pip:
-
-    pip install fuzzyroutines [--upgrade] [--pre]
-    
-or using setuptools to build local version:
-
-    git clone https://github.com/devopshq/FuzzyRoutines.git
-    cd FuzzyRoutines
-    python setup.py install
-
-After installing you can check the version of the FuzzyRoutines library:
-
-    pip show fuzzyroutines
-
-
-<a name="Chapter_2"></a>Usage examples
---------------------------------------
-
-You can see and run Example.py script:
-
-    cd fuzzyroutines
-    python Examples.py
-
-Example.py contains some examples of working with fuzzy library. Just copying and run examples below. Do not forget to import FuzzyRoutines module before use:
-
-    from fuzzyroutines.FuzzyRoutines import *
-
-
-<a name="Chapter_2_1"></a>***Work with membership functions***
-
-Usage of some membership functions:
-
-    mjuPars = {'a': 7, 'b': 4, 'c': 0}  # hyperbolic params example
-    funct = MFunction(userFunc='hyperbolic', **mjuPars)  # creating instance of hyperbolic function
-    print('Printing Membership function with parameters: ', funct)
-    
-    mjuPars = {'a': 0, 'b': 0.3, 'c': 0.4}  # bell params example
-    funct = MFunction(userFunc='bell', **mjuPars)  # creating instance of bell function
-    print('Printing Membership function with parameters: ', funct)
-    
-    mjuPars = {'a': 0, 'b': 1}  # parabolic params example
-    funct = MFunction(userFunc='parabolic', **mjuPars)  # creating instance of parabolic function
-    print('Printing Membership function with parameters: ', funct)
-    
-    mjuPars = {'a': 0.2, 'b': 0.8, 'c': 0.7}  # triangle params example
-    funct = MFunction(userFunc='triangle', **mjuPars)  # creating instance of triangle function
-    print('Printing Membership function with parameters: ', funct)
-    
-    mjuPars = {'a': 0.5, 'b': 0.15}  # exponential params example
-    funct = MFunction(userFunc='exponential', **mjuPars)  # creating instance of exponential function
-    print('Printing Membership function with parameters: ', funct)
-    
-    mjuPars = {'a': 15, 'b': 0.5}  # sigmoidal params example
-    funct = MFunction(userFunc='sigmoidal', **mjuPars)  # creating instance of sigmoidal function
-    print('Printing Membership function with parameters: ', funct)
-    
-    funct = MFunction(userFunc='desirability')  # creating instance of desirability function without parameters
-    print('Printing Membership function with parameters: ', funct)
-    
-    mjuPars = {'a': 0.1, 'b': 1, 'c': 0.5, 'd': 0.8}  # trapezium params example
-    funct = MFunction(userFunc='trapezium', **mjuPars)  # creating instance of trapezium function
-    print('Printing Membership function with parameters: ', funct)
-
-Output:
-
-    Printing Membership function with parameters:  Hyperbolic(x, {"a": 7, "b": 4, "c": 0})
-    Printing Membership function with parameters:  Bell(x, {"a": 0, "b": 0.3, "c": 0.4})
-    Printing Membership function with parameters:  Parabolic(x, {"a": 0, "b": 1})
-    Printing Membership function with parameters:  Triangle(x, {"a": 0.2, "b": 0.8, "c": 0.7})
-    Printing Membership function with parameters:  Exponential(x, {"a": 0.5, "b": 0.15})
-    Printing Membership function with parameters:  Sigmoidal(x, {"a": 15, "b": 0.5})
-    Printing Membership function with parameters:  Desirability(y)
-    Printing Membership function with parameters:  Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8})
-
-
-Calculating Trapezium function's values in [0, 1]:
-
-    xPar = 0
-    for i in range(0, 10, 1):
-        xPar = (xPar + i) / 10
-        res = funct.mju(xPar)  # calculate one value of MF with given parameters
-        print('x = {:.1f}, {} = {:1.4f}'.format(xPar, funct, res))
-
-Output:
-
-    x = 0.0, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 0.0000
-    x = 0.1, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 0.0000
-    x = 0.2, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 0.2750
-    x = 0.3, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 0.5525
-    x = 0.4, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 0.8302
-    x = 0.5, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 1.0000
-    x = 0.7, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 1.0000
-    x = 0.8, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 1.0000
-    x = 0.9, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 0.6173
-    x = 1.0, Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}) = 0.0617
-
-
-<a name="Chapter_2_2"></a>***Work with fuzzy set***
-
-    fuzzySet = FuzzySet(funct, (0., 1.))  # creating fuzzy set A = <mju_funct, support_set>
-    print('Printing fuzzy set after init and before changes:', fuzzySet)
-    print('Defuz({}) = {:1.2f}'.format(fuzzySet.name, fuzzySet.Defuz()))
-    
-    changedMjuPars = copy.deepcopy(mjuPars)  # change parameters of membership function with deepcopy example:
-    changedMjuPars['a'] = 0
-    changedMjuPars['b'] = 1
-    changedSupportSet = (0.5, 1)  # change support set
-    fuzzySet.name = 'Changed fuzzy set'
-    
-    fuzzySet.mFunction.parameters = changedMjuPars
-    fuzzySet.supportSet = changedSupportSet
-    
-    print('New membership function with parameters: ', fuzzySet.mFunction)
-    print('New support set: ', fuzzySet.supportSet)
-    print('New value of Defuz({}) = {:1.2f}'.format(fuzzySet.name, fuzzySet.Defuz()))
-    print('Printing fuzzy set after changes:', fuzzySet)
-
-Output:
-
-    Printing fuzzy set after init and before changes: FuzzySet = <Trapezium(x, {"a": 0.1, "b": 1, "c": 0.5, "d": 0.8}), [0.0, 1.0]>
-    Defuz(FuzzySet) = 0.59
-    New membership function with parameters:  Trapezium(x, {"a": 0, "b": 1, "c": 0.5, "d": 0.8})
-    New support set:  (0.5, 1)
-    New value of Defuz(Changed fuzzy set) = 0.59
-    Printing fuzzy set after changes: Changed fuzzy set = <Trapezium(x, {"a": 0, "b": 1, "c": 0.5, "d": 0.8}), [0.5, 1]>
-
-
-<a name="Chapter_2_3"></a>***Work with fuzzy scales***
-
-Fuzzy scale is an ordered set of linguistic variables that looks like this:
-
-S = [{'name': 'name_1', 'fSet': fuzzySet_1}, {'name': 'name_2', 'fSet': fuzzySet_2}, ...]
-
-where name is a linguistic name of fuzzy set, fSet is a user define fuzzy set of FuzzySet type.
-
-    scale = FuzzyScale()  # intialize new fuzzy scale with default levels
-    
-    print('Printing default fuzzy scale in human-readable:', scale)
-    
-    print('Defuz() of all default levels:')
-    for item in scale.levels:
-        print('Defuz({}) = {:1.2f}'.format(item['name'], item['fSet'].Defuz()))
-
-Output:
-
-    Printing default fuzzy scale in human-readable: DefaultScale = {Min, Med, High}
-        Minimum = <Hyperbolic(x, {"a": 7, "b": 4, "c": 0}), [0.0, 1.0]>
-        Medium = <Bell(x, {"a": 0.35, "b": 0.5, "c": 0.6}), [0.0, 1.0]>
-        High = <Triangle(x, {"a": 0.7, "b": 1, "c": 1}), [0.0, 1.0]>
-    Defuz() of all default levels:
-    Defuz(Min) = 0.10
-    Defuz(Med) = 0.55
-    Defuz(High) = 0.90
-
-Add new fuzzy levels:
-
-    print('Define some new levels:')
-    
-    minFunct = MFunction('hyperbolic', **{'a': 2, 'b': 20, 'c': 0})
-    levelMin = FuzzySet(membershipFunction=minFunct, supportSet=(0., 0.5), linguisticName='min')
-    print('Printing Level 1 in human-readable:', levelMin)
-    
-    medFunct = MFunction('bell', **{'a': 0.4, 'b': 0.55, 'c': 0.7})
-    levelMed = FuzzySet(membershipFunction=medFunct, supportSet=(0.25, 0.75), linguisticName='med')
-    print('Printing Level 2 in human-readable:', levelMed)
-    
-    maxFunct = MFunction('triangle', **{'a': 0.65, 'b': 1, 'c': 1})
-    levelMax = FuzzySet(membershipFunction=maxFunct, supportSet=(0.7, 1.), linguisticName='max')
-    print('Printing Level 3 in human-readable:', levelMax)
-
-Output:
-
-    Define some new levels:
-    Printing Level 1 in human-readable: min = <Hyperbolic(x, {"a": 2, "b": 20, "c": 0}), [0.0, 0.5]>
-    Printing Level 2 in human-readable: med = <Bell(x, {"a": 0.4, "b": 0.55, "c": 0.7}), [0.25, 0.75]>
-    Printing Level 3 in human-readable: max = <Triangle(x, {"a": 0.65, "b": 1, "c": 1}), [0.7, 1.0]>
-
-Change scale levels:
-
-    scale.name = 'New Scale'
-    scale.levels = [{'name': levelMin.name, 'fSet': levelMin}, {'name': levelMed.name, 'fSet': levelMed},
-                    {'name': levelMax.name, 'fSet': levelMax}]  # add new ordered set of linguistic variables into scale
-    
-    print('Changed List of levels as objects:', scale.levels)
-    print('Printing changed fuzzy scale in human-readable:', scale)
-    
-    print('Defuz() of all New Scale levels:')
-    for item in scale.levels:
-        print('Defuz({}) = {:1.2f}'.format(item['name'], item['fSet'].Defuz()))
-
-Output:
-
-    Changed List of levels as objects: [{'name': 'min', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB3F17B8>}, {'name': 'med', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB337D68>}, {'name': 'max', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB3F18D0>}]
-    Printing changed fuzzy scale in human-readable: New Scale = {min, med, max}
-        min = <Hyperbolic(x, {"a": 2, "b": 20, "c": 0}), [0.0, 0.5]>
-        med = <Bell(x, {"a": 0.4, "b": 0.55, "c": 0.7}), [0.25, 0.75]>
-        max = <Triangle(x, {"a": 0.65, "b": 1, "c": 1}), [0.7, 1.0]>
-    Defuz() of all New Scale levels:
-    Defuz(min) = 0.24
-    Defuz(med) = 0.61
-    Defuz(max) = 0.89
-
-
-<a name="Chapter_2_4"></a>***Work with Universal Fuzzy Scale***
-
-Universal fuzzy scales S_f = {Min, Low, Med, High, Max} pre-defined in UniversalFuzzyScale() class.
-
-    uniFScale = UniversalFuzzyScale()
-    print('Levels of Universal Fuzzy Scale:', uniFScale.levels)
-    print('Printing scale:', uniFScale)
-
-    print('Defuz() of all Universal Fuzzy Scale levels:')
-    for item in uniFScale.levels:
-        print('Defuz({}) = {:1.2f}'.format(item['name'], item['fSet'].Defuz()))
-
-Output:
-
-    Levels of Universal Fuzzy Scale: [{'name': 'Min', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB34F7B8>}, {'name': 'Low', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB34F198>}, {'name': 'Med', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB34F048>}, {'name': 'High', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB34F0F0>}, {'name': 'Max', 'fSet': <fuzzyroutines.FuzzyRoutines.FuzzySet object at 0x000001AECB34F710>}]
-    Printing scale: FuzzyScale = {Min, Low, Med, High, Max}
-        Min = <Hyperbolic(x, {"a": 8, "b": 20, "c": 0}), [0.0, 0.23]>
-        Low = <Bell(x, {"a": 0.17, "b": 0.23, "c": 0.34}), [0.17, 0.4]>
-        Med = <Bell(x, {"a": 0.34, "b": 0.4, "c": 0.6}), [0.34, 0.66]>
-        High = <Bell(x, {"a": 0.6, "b": 0.66, "c": 0.77}), [0.6, 0.83]>
-        Max = <Parabolic(x, {"a": 0.77, "b": 0.95}), [0.77, 1.0]>
-    Defuz() of all Universal Fuzzy Scale levels:
-    Defuz(Min) = 0.06
-    Defuz(Low) = 0.29
-    Defuz(Med) = 0.50
-    Defuz(High) = 0.71
-    Defuz(Max) = 0.93
-
-Use Fuzzy() function to looking for level on Fuzzy Scale:
-
-    xPar = 0
-    for i in range(0, 10, 1):
-        xPar = (xPar + i) / 10
-        res = uniFScale.Fuzzy(xPar)  # calculate fuzzy level for some real values
-        print('Fuzzy({:1.1f}, {}) = {}, {}'.format(xPar, uniFScale.name, res['name'], res['fSet']))
-
-Output:
-
-    Fuzzy(0.0, FuzzyScale) = Min, Min = <Hyperbolic(x, {"a": 8, "b": 20, "c": 0}), [0.0, 0.23]>
-    Fuzzy(0.1, FuzzyScale) = Min, Min = <Hyperbolic(x, {"a": 8, "b": 20, "c": 0}), [0.0, 0.23]>
-    Fuzzy(0.2, FuzzyScale) = Low, Low = <Bell(x, {"a": 0.17, "b": 0.23, "c": 0.34}), [0.17, 0.4]>
-    Fuzzy(0.3, FuzzyScale) = Low, Low = <Bell(x, {"a": 0.17, "b": 0.23, "c": 0.34}), [0.17, 0.4]>
-    Fuzzy(0.4, FuzzyScale) = Med, Med = <Bell(x, {"a": 0.34, "b": 0.4, "c": 0.6}), [0.34, 0.66]>
-    Fuzzy(0.5, FuzzyScale) = Med, Med = <Bell(x, {"a": 0.34, "b": 0.4, "c": 0.6}), [0.34, 0.66]>
-    Fuzzy(0.7, FuzzyScale) = High, High = <Bell(x, {"a": 0.6, "b": 0.66, "c": 0.77}), [0.6, 0.83]>
-    Fuzzy(0.8, FuzzyScale) = High, High = <Bell(x, {"a": 0.6, "b": 0.66, "c": 0.77}), [0.6, 0.83]>
-    Fuzzy(0.9, FuzzyScale) = Max, Max = <Parabolic(x, {"a": 0.77, "b": 0.95}), [0.77, 1.0]>
-    Fuzzy(1.0, FuzzyScale) = Max, Max = <Parabolic(x, {"a": 0.77, "b": 0.95}), [0.77, 1.0]>
-
-Finding fuzzy level using GetLevelByName() function with exact matching:
-
-    print('Finding level by name with exact matching:')
-
-    res = uniFScale.GetLevelByName('Min')
-    print('GetLevelByName(Min, {}) = {}, {}'.format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-    res = uniFScale.GetLevelByName('High')
-    print('GetLevelByName(High, {}) = {}, {}'.format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-    res = uniFScale.GetLevelByName('max')
-    print('GetLevelByName(max, {}) = {}, {}'.format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-Output:
-
-    Finding level by name with exact matching:
-    GetLevelByName(Min, FuzzyScale) = Min, Min = <Hyperbolic(x, {"a": 8, "b": 20, "c": 0}), [0.0, 0.23]>
-    GetLevelByName(High, FuzzyScale) = High, High = <Bell(x, {"a": 0.6, "b": 0.66, "c": 0.77}), [0.6, 0.83]>
-    GetLevelByName(max, FuzzyScale) = None, None
-
-Finding fuzzy level using GetLevelByName() function without exact matching:
-
-    print('Finding level by name without exact matching:')
-
-    res = uniFScale.GetLevelByName('mIn', exactMatching=False)
-    print("GetLevelByName('mIn', {}) = {}, {}".format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-    res = uniFScale.GetLevelByName('max', exactMatching=False)
-    print("GetLevelByName('max', {}) = {}, {}".format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-    res = uniFScale.GetLevelByName('Hig', exactMatching=False)
-    print("GetLevelByName('Hig', {}) = {}, {}".format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-    res = uniFScale.GetLevelByName('LOw', exactMatching=False)
-    print("GetLevelByName('LOw', {}) = {}, {}".format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-    res = uniFScale.GetLevelByName('eD', exactMatching=False)
-    print("GetLevelByName('eD', {}) = {}, {}".format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-    res = uniFScale.GetLevelByName('Highest', exactMatching=False)
-    print("GetLevelByName('Highest', {}) = {}, {}".format(uniFScale.name, res['name'] if res else 'None', res['fSet'] if res else 'None'))
-
-Output:
-
-    Finding level by name without exact matching:
-    GetLevelByName('mIn', FuzzyScale) = Min, Min = <Hyperbolic(x, {"a": 8, "b": 20, "c": 0}), [0.0, 0.23]>
-    GetLevelByName('max', FuzzyScale) = Max, Max = <Parabolic(x, {"a": 0.77, "b": 0.95}), [0.77, 1.0]>
-    GetLevelByName('Hig', FuzzyScale) = None, None
-    GetLevelByName('LOw', FuzzyScale) = Low, Low = <Bell(x, {"a": 0.17, "b": 0.23, "c": 0.34}), [0.17, 0.4]>
-    GetLevelByName('eD', FuzzyScale) = None, None
-    GetLevelByName('Highest', FuzzyScale) = None, None
-
-
-<a name="Chapter_2_5"></a>***Work with fuzzy logic operators***
-
-Checks that number is in [0, 1]:
-
-    print('IsCorrectFuzzyNumberValue(0.5) =', IsCorrectFuzzyNumberValue(0.5))
-    print('IsCorrectFuzzyNumberValue(1.1) =', IsCorrectFuzzyNumberValue(1.1))
-
-Output:
-
-    IsCorrectFuzzyNumberValue(0.5) = True
-    IsCorrectFuzzyNumberValue(1.1) = False
-
-Calculates result of fuzzy NOT, fuzzy NOT with alpha parameter and parabolic fuzzy NOT operations:
-
-    print('FNOT(0.25) =', FuzzyNOT(0.25))
-    print('FNOT(0.25, alpha=0.25) =', FuzzyNOT(0.25, alpha=0.25))
-    print('FNOT(0.25, alpha=0.75) =', FuzzyNOT(0.25, alpha=0.75))
-    print('FNOT(0.25, alpha=1) =', FuzzyNOT(0.25, alpha=1))
-
-    print('FNOTParabolic(0.25, alpha=0.25) =', FuzzyNOTParabolic(0.25, alpha=0.25))
-    print('FNOTParabolic(0.25, alpha=0.75) =', FuzzyNOTParabolic(0.25, alpha=0.75))
-
-Output:
-
-    FNOT(0.25) = 0.75
-    FNOT(0.25, alpha=0.25) = 0.25
-    FNOT(0.25, alpha=0.75) = 0.9166666666666666
-    FNOT(0.25, alpha=1) = 1.0
-    FNOTParabolic(0.25, alpha=0.25) = 0.25000000000000017
-    FNOTParabolic(0.25, alpha=0.75) = 0.9820000000000008
-
-Calculates result of fuzzy AND/OR operations:
-
-    print('FuzzyAND(0.25, 0.5) =', FuzzyAND(0.25, 0.5))
-    print('FuzzyOR(0.25, 0.5) =', FuzzyOR(0.25, 0.5))
-
-Output:
-
-    FuzzyAND(0.25, 0.5) = 0.25
-    FuzzyOR(0.25, 0.5) = 0.5
-
-Calculates result of T-Norm operations, where T-Norm is one of conjunctive operators - logic, algebraic, boundary, drastic:
-
-    print("TNorm(0.25, 0.5, 'logic') =", TNorm(0.25, 0.5, normType='logic'))
-    print("TNorm(0.25, 0.5, 'algebraic') =", TNorm(0.25, 0.5, normType='algebraic'))
-    print("TNorm(0.25, 0.5, 'boundary') =", TNorm(0.25, 0.5, normType='boundary'))
-    print("TNorm(0.25, 0.5, 'drastic') =", TNorm(0.25, 0.5, normType='drastic'))
-
-Output:
-
-    TNorm(0.25, 0.5, 'logic') = 0.25
-    TNorm(0.25, 0.5, 'algebraic') = 0.125
-    TNorm(0.25, 0.5, 'boundary') = 0
-    TNorm(0.25, 0.5, 'drastic') = 0
-
-Calculates result of S-coNorm operations, where S-coNorm is one of disjunctive operators - logic, algebraic, boundary, drastic:
-
-    print("SCoNorm(0.25, 0.5, 'logic') =", SCoNorm(0.25, 0.5, normType='logic'))
-    print("SCoNorm(0.25, 0.5, 'algebraic') =", SCoNorm(0.25, 0.5, normType='algebraic'))
-    print("SCoNorm(0.25, 0.5, 'boundary') =", SCoNorm(0.25, 0.5, normType='boundary'))
-    print("SCoNorm(0.25, 0.5, 'drastic') =", SCoNorm(0.25, 0.5, normType='drastic'))
-
-Output:
-
-    SCoNorm(0.25, 0.5, 'logic') = 0.5
-    SCoNorm(0.25, 0.5, 'algebraic') = 0.625
-    SCoNorm(0.25, 0.5, 'boundary') = 0.75
-    SCoNorm(0.25, 0.5, 'drastic') = 1
-
-Calculates result of T-Norm operations for N numbers, N > 2:
-
-    print("TNormCompose(0.25, 0.5, 0.75, 'logic') =", TNormCompose(0.25, 0.5, 0.75, normType='logic'))
-    print("TNormCompose(0.25, 0.5, 0.75, 'algebraic') =", TNormCompose(0.25, 0.5, 0.75, normType='algebraic'))
-    print("TNormCompose(0.25, 0.5, 0.75, 'boundary') =", TNormCompose(0.25, 0.5, 0.75, normType='boundary'))
-    print("TNormCompose(0.25, 0.5, 0.75, 'drastic') =", TNormCompose(0.25, 0.5, 0.75, normType='drastic'))
-
-Output:
-
-    TNormCompose(0.25, 0.5, 0.75, 'logic') = 0.25
-    TNormCompose(0.25, 0.5, 0.75, 'algebraic') = 0.09375
-    TNormCompose(0.25, 0.5, 0.75, 'boundary') = 0
-    TNormCompose(0.25, 0.5, 0.75, 'drastic') = 0
-
-Calculates result of S-coNorm operations for N numbers, N > 2:
-
-    print("SCoNormCompose(0.25, 0.5, 0.75, 'logic') =", SCoNormCompose(0.25, 0.5, 0.75, normType='logic'))
-    print("SCoNormCompose(0.25, 0.5, 0.75, 'algebraic') =", SCoNormCompose(0.25, 0.5, 0.75, normType='algebraic'))
-    print("SCoNormCompose(0.25, 0.5, 0.75, 'boundary') =", SCoNormCompose(0.25, 0.5, 0.75, normType='boundary'))
-    print("SCoNormCompose(0.25, 0.5, 0.75, 'drastic') =", SCoNormCompose(0.25, 0.5, 0.75, normType='drastic'))
-
-Output:
-
-    SCoNormCompose(0.25, 0.5, 0.75, 'logic') = 0.75
-    SCoNormCompose(0.25, 0.5, 0.75, 'algebraic') = 0.90625
-    SCoNormCompose(0.25, 0.5, 0.75, 'boundary') = 1
-    SCoNormCompose(0.25, 0.5, 0.75, 'drastic') = 1
-
-
-<a name="Chapter_2_6"></a>***Working with other methods***
-
-Converting some strings to range of sorted unique numbers with DiapasonParser():
-
-    print("Converting some strings to range of sorted unique numbers:")
-    print('String "1,5" converted to:', DiapasonParser("1,5"))
-    print('String "1-5" converted to:', DiapasonParser("1-5"))
-    print('String "8-10, 1-5, 6" converted to:', DiapasonParser("8-10, 1-5, 6"))
-    print('String "11, 11, 12, 12, 1-5, 3-7" converted to:', DiapasonParser("11, 12, 1-5, 3-7"))
-
-Output:
-
-    Converting some strings to range of sorted unique numbers:
-    String "1,5" converted to: [1, 5]
-    String "1-5" converted to: [1, 2, 3, 4, 5]
-    String "8-10, 1-5, 6" converted to: [1, 2, 3, 4, 5, 6, 8, 9, 10]
-    String "11, 11, 12, 12, 1-5, 3-7" converted to: [1, 2, 3, 4, 5, 6, 7, 11, 12]
+<!--
+SPDX-FileCopyrightText: 2019-2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+
+<p align="center">
+  <img src="docs/site/content/en/assets/brand/fuzzyroutines-alice.png" alt="FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory" width="960">
+</p>
+
+<p align="center">
+  A mathematically explicit Python foundation for fuzzy sets, membership
+  functions, linguistic models, and compatibility-safe modernization.
+</p>
+
+<p align="center">
+  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml"><img alt="Quick deterministic gate" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/quick-gate.yml/badge.svg?branch=develop"></a>
+  <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml"><img alt="API reference build" src="https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/workflows/api-reference.yml/badge.svg?branch=develop"></a>
+  <img alt="CPython 3.13 and 3.14" src="https://img.shields.io/badge/CPython-3.13%20%7C%203.14-3776AB?logo=python&amp;logoColor=white">
+  <a href="LICENSE"><img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
+</p>
+
+> **Development status:** version 2 is an active correctness-focused
+> modernization. The historical API remains protected, while the modern typed
+> surface grows through small, executable contracts. See the
+> [current implementation boundary](docs/current-status.md).
+
+## At a glance
+
+| Area              | Current contract                                                                                                                          |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| Runtime           | CPython 3.13 and 3.14                                                                                                                     |
+| Package version   | `2.0.0` candidate; publication awaits final approval                                                                                      |
+| Modern API        | Root exports from [`fuzzyroutines`](docs/public-api-documentation-inventory.md#modern-package-exports)                                    |
+| Compatibility API | [`fuzzyroutines.FuzzyRoutines`](docs/COMPATIBILITY.md) preserves the ADR-protected contract and documents the wider observed 1.0.3 facade |
+| API reference     | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package         |
+| License           | [Apache License 2.0](LICENSE) with attribution details in [NOTICE](NOTICE)                                                                |
+
+FuzzyRoutines targets scientific-grade behavior within fuzzy computing:
+explicit domains, traceable formulas, analytical results where practical,
+controlled numerical methods elsewhere, and executable evidence for important
+boundaries and invariants. It is a focused library, not a computer-algebra
+system or notebook environment.
+
+Start with the [canonical mathematical model](docs/MATHEMATICAL_MODEL.md) for
+the integrated definitions, formulas, compatibility spellings, and explicit
+implemented-versus-roadmap boundary.
+
+## Install
+
+Use CPython 3.13 or 3.14. The modern 2.0 API currently comes from `develop`:
+
+```console
+python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
+```
+
+For a checkout you can edit:
+
+```console
+git clone --branch develop https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
+cd FuzzyRoutines
+python -m pip install .
+```
+
+The [quick start](docs/site/content/en/quick-start.md) explains the development
+and future stable PyPI installation routes and classifies a 24 °C measurement.
+Explore [nine worked scenarios](docs/site/content/en/guides/index.md), with
+independent numerical checks and eleven reproducible scientific figures, or
+reconstruct the [historical Universal Fuzzy Scale](docs/site/content/en/guides/universal-fuzzy-scale.md), or
+browse the [membership gallery](docs/site/content/en/guides/membership-families.md).
+The [computation diagrams](docs/site/content/en/guides/workflow.md) explain the
+different workflows; the [public example index](docs/site/content/en/guides/example-index.md)
+links all 193 inventoried public symbols to executed examples.
+From a checkout with the package installed, `python -I examples/guide.py` runs
+every scenario without NumPy, Matplotlib, network access, or file creation.
+
+## Choose the API surface
+
+| Surface                  | Use it for                                                        | Start here                                                                                 |
+|--------------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| Modern typed API         | New code with explicit universes, policies, and evidence strength | [Modern API inventory](docs/public-api-documentation-inventory.md#modern-package-exports)  |
+| Historical compatibility | Existing software written against the 1.0.3-style facade          | [Protected and observed surfaces](docs/COMPATIBILITY.md#adr-protected-historical-contract) |
+| Migration boundary       | Moving one supported scenario at a time                           | [Canonical migration guide](docs/COMPATIBILITY.md#migration-examples)                      |
+
+### Modern example
+
+```python
+from fuzzyroutines import ContinuousUniverse, DeriveProperties, ScalarFuzzySet, Triangle
+
+universe = ContinuousUniverse(0.0, 1.0, leftClosed=True, rightClosed=True)
+membership = Triangle(left=0.0, peak=0.5, right=1.0)
+fuzzySet = ScalarFuzzySet(universe, membership)
+properties = DeriveProperties(membership, universe)
+
+assert fuzzySet.Membership(0.5) == 1.0
+assert properties.core.Contains(0.5)
+assert properties.height == 1.0
+```
+
+A declared [`ContinuousUniverse`](docs/mathematics/universe-support-contract.md)
+is part of fuzzy-set identity. An
+[`IntegrationDomain`](docs/adr/0005-numerical-defuzzification-policy.md) is only
+a finite interval used by a numerical method; it is never mathematical
+support.
+
+### Historical compatibility example
+
+```python
+from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
+
+membership = MFunction("triangle", a=0.0, b=1.0, c=0.5)
+fuzzySet = FuzzySet(
+    membership,
+    supportSet=(0.0, 1.0),
+    linguisticName="Medium",
+)
+
+print(TNorm(0.4, 0.7, normType="algebraic"))
+print(fuzzySet.Defuz())
+```
+
+The legacy triangle order is `a, b, c`, where `c` is the apex. Protected
+names and corrected historical defects are tracked in the
+[compatibility ledger](docs/compatibility/corrected-bug-ledger.md).
+
+## Core contracts
+
+| Concept                     | Mathematical contract                                                                          | Architecture decision                                                              |
+|-----------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| Membership functions        | [Families, formulas, and parameter domains](docs/mathematics/membership-function-contracts.md) | [ADR-0003](docs/adr/0003-membership-function-contracts.md)                         |
+| Universes and support       | [Universe, support, core, boundary, and height](docs/mathematics/universe-support-contract.md) | [ADR-0002](docs/adr/0002-universe-support-semantics.md)                            |
+| Negations and scalar norms  | [Formula and algorithm invariants](docs/mathematics/source-algorithm-invariants.md)            | [ADR-0004](docs/adr/0004-operator-and-negation-contracts.md)                       |
+| Fuzzy-set operations        | [Complement, intersection, union, and difference](docs/mathematics/fuzzy-set-operations.md)    | [ADR-0008](docs/adr/0008-fuzzy-set-difference-semantics.md)                        |
+| Alpha-cuts                  | [Exact and sampled alpha-cut evidence](docs/mathematics/alpha-cuts.md)                         | [Universe semantics](docs/adr/0002-universe-support-semantics.md)                  |
+| Height and normalization    | [Exact evidence and fail-closed normalization](docs/mathematics/fuzzy-set-normalization.md)    | [Numerical policy](docs/adr/0005-numerical-defuzzification-policy.md)              |
+| Equality and inclusion      | [Explicit comparison domains and policies](docs/mathematics/fuzzy-set-relations.md)            | [Modern domain boundary](docs/current-status.md#implemented-modern-domain-surface) |
+| Linguistic terms and scales | [Immutable typed representation](docs/mathematics/linguistic-term-model.md)                    | [Roadmap boundary](docs/current-status.md#still-in-the-v2-roadmap)                 |
+
+## Documentation map
+
+| Need                                    | Canonical source                                                                                                                                      |
+|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| What exists now                         | [Current implementation status](docs/current-status.md)                                                                                               |
+| Audited contracts and release limits    | [Project readiness audit](docs/audits/2026-10-05-project-audit.md)                                                                                    |
+| Public symbols                          | [Public API inventory](docs/public-api-documentation-inventory.md)                                                                                    |
+| Static types and custom callbacks       | [Public modern typing](docs/public-typing.md)                                                                                                         |
+| Mathematical definitions                | [`docs/mathematics`](docs/mathematics/)                                                                                                               |
+| Compatibility and migration             | [Canonical guide](docs/COMPATIBILITY.md) · [Corrected-bug ledger](docs/compatibility/corrected-bug-ledger.md)                                         |
+| Release changes and version decision    | [Development changelog](CHANGELOG.md) · [1.0.3 migration](docs/migration/1.0.3-to-2.0.0.md) · [Version rationale](docs/release-version-decision.md)   |
+| Benchmarks and performance claims       | [Results](docs/BENCHMARKS.md) · [Protocol](docs/performance/benchmark-reproducibility-protocol.md)                                                    |
+| Tests, tools, examples, and artifacts   | [Executable documentation](docs/executable-tests-tools-and-examples.md)                                                                               |
+| Contribution and evidence rules         | [Development evidence protocol](docs/development-evidence-protocol.md) · [Python style](docs/python-code-style.md)                                    |
+| Optional vectorization strategy         | [ADR-0015](docs/adr/0015-optional-vectorized-execution-strategy.md) · [Scalar/array evidence](docs/performance/vectorized-membership-comparison.md)   |
+| API documentation architecture          | [ADR-0010](docs/adr/0010-api-documentation-architecture.md) · [Reproducible build](docs/site/README.md)                                               |
+
+## Development
+
+```console
+python -m pip install -e .
+python -m pip install -r requirements.txt
+python -m pytest -q tests/test_membership_function_contracts.py
+python -m ruff check fuzzyroutines/membership.py
+```
+
+Choose the tests and lint paths for the files and contracts being changed.
+PR CI runs the complete deterministic suite, typing, documentation builds,
+and package installation gates. Full local regression and build runs are
+reserved for an explicit maintainer request.
+
+The canonical full-suite runner, `python -m tools.test_runner`, discovers the complete suite, uses independent
+`pytest-xdist` worker **processes** by default, caps automatic parallelism at
+12, and moves tests marked `serial` into a separate sequential phase. Use
+`--jobs N`, `--timeout N`, `--serial`, or `--fail-fast` for an explicit run.
+It never retries failures automatically.
+
+The project intentionally does not use `ruff format`. Markdown tables are
+source-aligned and checked automatically. Generated API HTML is disposable
+output under `_build/api-reference/`; annotations, English Google-style
+Markdown docstrings, and tracked Markdown remain the sources of truth.
+
+## Roadmap boundary
+
+The current typed surface already includes explicit scalar universes, immutable
+fuzzy sets, operations, derived properties, alpha-cuts, comparison policies,
+and linguistic representations. Inline modern annotations, `py.typed`, strict
+source checks, and installed-wheel consumer checks are implemented; see the
+[typing contract](docs/public-typing.md). Symmetric difference, executable
+convexity, defuzzification methods beyond the implemented centroid contract,
+vectorized backends, and free-threaded CPython support remain roadmap work.
+Performance and concurrency claims require numerical-parity,
+timing, memory, and race-safety evidence.
+
+The generated reference is composed with the
+[FuzzyRoutines GitHub Pages site](https://fuzzy-technologies.github.io/FuzzyRoutines/).
+Pull requests and `develop` produce preview artifacts; production deployment
+occurs only from the approved `master` branch. Stable routes separate the
+moving English reference from reserved translation and release-version paths.
+
+## License
+
+Source code, tests, documentation, examples, tools, workflows, and
+project-owned site assets are licensed under the
+[Apache License 2.0](LICENSE). Redistributions must preserve the license,
+copyright, and attribution notices, including [NOTICE](NOTICE).
+
+The license does not grant permission to use Fuzzy Technologies trade names or
+marks beyond reasonable attribution and the NOTICE requirements. See the
+[licensing and provenance policy](docs/licensing.md).

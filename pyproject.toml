@@ -1,30 +1,53 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "fuzzyroutines"
-version = "2.0.0.dev0"
-description = "FuzzyRoutines library contains routines for fuzzy logic operators, fuzzy datasets and fuzzy scales."
+version = "2.0.0"
+description = "Scalar fuzzy sets, membership functions, linguistic scales, and explicit fuzzy operators."
 readme = "README.md"
-requires-python = ">=3.6"
-license = {file = "LICENSE"}
+requires-python = ">=3.13"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
 authors = [
-    {name = "Timur Gilmullin", email = "tim55667757@gmail.com"}
+  {name = "Timur Gilmullin", email = "tim55667757@gmail.com"},
 ]
-keywords = ["fuzzy", "logic", "math", "science", "research", "fuzzylogic", "fuzzyset"]
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Science/Research",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
+keywords = ["fuzzy", "fuzzylogic", "fuzzyset", "logic", "math", "research", "science"]
 
 [project.urls]
-Homepage = "https://fuzzy-technologies.github.io/"
+Homepage = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
 Repository = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
-Documentation = "https://fuzzy-technologies.github.io/FuzzyRoutines/"
+Issues = "https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues"
 
-[tool.setuptools]
-packages = ["fuzzyroutines"]
+[tool.setuptools.package-data]
+fuzzyroutines = ["py.typed"]
+
+[tool.setuptools.cmdclass]
+sdist = "tools.reproducible_artifacts.ReproducibleSdist"
+
+[tool.setuptools.packages.find]
+include = ["fuzzyroutines*"]
+
+[tool.pytest.ini_options]
+markers = [
+  "serial: requires an exclusive shared resource and runs outside the parallel phase",
+]
+
+[tool.fuzzyroutines.test-runner]
+max-workers = 12
+timeout = 60

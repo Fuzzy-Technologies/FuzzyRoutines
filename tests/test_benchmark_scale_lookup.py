@@ -1,0 +1,60 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Contracts for the reproducible scale-lookup benchmark."""
+
+import json
+
+from tools.benchmark_scale_lookup import (
+    LOOKUPSAMPLES,
+    MINIMUMSAMPLES,
+    SCALES,
+    BuildReport,
+    Main,
+    Measure,
+)
+
+
+def test_BenchmarkScaleReportSeparatesConstructionAndLookup():
+    """Verify that benchmark scale report separates construction and lookup."""
+
+    report = BuildReport()
+
+    assert report["sample_count"] == MINIMUMSAMPLES
+    assert set(report["workloads"]) == set(SCALES)
+
+    defaultLookup = report["workloads"]["default"]["repeated_lookup"]["result"]
+    universalLookup = report["workloads"]["universal"]["repeated_lookup"]["result"]
+
+    assert defaultLookup["lookups_per_sample"] == LOOKUPSAMPLES
+    assert universalLookup["lookups_per_sample"] == LOOKUPSAMPLES
+    assert defaultLookup["membership_evaluations"] == 3 * LOOKUPSAMPLES
+    assert universalLookup["membership_evaluations"] == 5 * LOOKUPSAMPLES
+
+
+def test_BenchmarkScaleRejectsInsufficientSamples():
+    """Verify that benchmark scale rejects insufficient samples."""
+
+    try:
+        Measure(lambda: None, MINIMUMSAMPLES - 1)
+
+    except ValueError:
+        pass
+
+    else:
+        raise AssertionError("expected an explicit sample-count error")
+
+
+def test_BenchmarkScaleMainEmitsJson(capsys):
+    """Verify that benchmark scale main emits JSON."""
+
+    Main([])
+    report = json.loads(capsys.readouterr().out)
+
+    for scaleName, scaleClass in SCALES.items():
+        constructionResult = report["workloads"][scaleName]["construction"]["result"]
+
+        assert constructionResult["class"] == scaleClass.__name__, "construction evidence identifies the wrong scale"
+        assert constructionResult["level_count"] > 0, "construction evidence lost the scale levels"

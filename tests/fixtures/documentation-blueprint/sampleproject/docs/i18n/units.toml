@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+schemaVersion = 1
+
+[[units]]
+id = "page:index"
+kind = "page"
+sourcePath = "docs/site/content/en/index.md"
+sourceHash = "sha256:b0340303faf8250f6801d7059ca3ab68373370b7bf3ff37de8007d2e822ea0f6"
+reviewClass = "editorial"
+
+[units.translations.de]
+state = "missing"
+
+[[units]]
+id = "symbol:sampleproject.ForecastTemperature"
+kind = "symbol"
+sourcePath = "sampleproject.py"
+sourceHash = "sha256:a8146f929cf9a1703a31e250710b50daa4f01b95692b08383d1b53dcf88625c9"
+reviewClass = "technical"
+
+[units.translations.de]
+state = "missing"

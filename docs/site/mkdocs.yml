@@ -1,0 +1,123 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+site_name: FuzzyRoutines Documentation
+site_description: Canonical English user guides, worked examples, and API reference.
+site_url: https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/
+repo_url: https://github.com/Fuzzy-Technologies/FuzzyRoutines
+repo_name: Fuzzy-Technologies/FuzzyRoutines
+edit_uri: edit/develop/docs/site/content/en/
+
+docs_dir: content/en
+site_dir: ../../_build/api-reference/site
+strict: true
+use_directory_urls: true
+
+theme:
+  name: material
+  language: en
+  logo: assets/brand/fuzzyroutines-sign.svg
+  favicon: assets/favicon.svg
+  palette:
+    scheme: slate
+    primary: black
+    accent: deep purple
+  features:
+    - content.action.edit
+    - content.code.annotate
+    - content.code.copy
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+
+nav:
+  - Overview: index.md
+  - Quick start: quick-start.md
+  - Worked scenarios:
+      - Overview: guides/index.md
+      - Temperature comfort: guides/temperature.md
+      - Severity and abstention: guides/risk.md
+      - Sensor criteria: guides/sensors.md
+      - Warning zones: guides/alarm.md
+      - Quality alpha cuts: guides/alpha-cuts.md
+      - Centroid accuracy: guides/centroid.md
+      - Historical Universal Fuzzy Scale: guides/universal-fuzzy-scale.md
+      - Scale audit: guides/scale-audit.md
+      - Custom quality model: guides/custom.md
+      - Membership gallery: guides/membership-families.md
+      - Practical API recipes: guides/api-recipes.md
+      - Computation paths: guides/workflow.md
+      - Operator comparisons: guides/operators.md
+      - Result records: guides/results.md
+      - Error handling: guides/errors.md
+      - Historical recipes: guides/historical-recipes.md
+      - Public example index: guides/example-index.md
+      - Figure provenance: guides/figures.md
+  - Product overview: https://fuzzy-technologies.github.io/FuzzyRoutines/
+  - Mathematics guides: https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/develop/docs/mathematics
+  - Languages and versions: https://fuzzy-technologies.github.io/FuzzyRoutines/api/
+  - API reference:
+      - Index: api/index.md
+      - Modern API:
+          - Overview: api/modern/index.md
+          - Package exports: api/modern/package.md
+          - Alpha cuts: api/modern/alphacuts.md
+          - Defuzzification: api/modern/defuzzification.md
+          - Domains: api/modern/domain.md
+          - Exceptions: api/modern/exceptions.md
+          - Fuzzy sets: api/modern/fuzzysets.md
+          - Linguistic terms: api/modern/linguistic.md
+          - Membership functions: api/modern/membership.md
+          - Scalar operators: api/modern/operators.md
+          - Derived properties: api/modern/properties.md
+          - Relations: api/modern/relations.md
+      - Historical API:
+          - Compatibility facade: api/legacy/index.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - !ENV FUZZYROUTINES_INSTALLED_PACKAGES
+          options:
+            docstring_style: google
+            docstring_options:
+              warn_missing_types: false
+            heading_level: 2
+            inherited_members: false
+            members_order: source
+            merge_init_into_class: true
+            separate_signature: true
+            show_if_no_docstring: true
+            show_root_full_path: true
+            show_root_heading: true
+            show_signature_annotations: true
+            show_source: true
+            signature_crossrefs: true
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: true
+
+extra_css:
+  - assets/stylesheets/fuzzyroutines.css
+
+extra_javascript:
+  - assets/javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+copyright: Technologies · Knowledge · Science

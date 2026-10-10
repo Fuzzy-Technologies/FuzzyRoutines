@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+schemaVersion = 1
+locale = "de"
+
+[[terms]]
+id = "concept:forecast.temperature"
+english = "temperature forecast"
+preferred = "Temperaturprognose"
+avoid = []
+note = "A deterministic fixture term, not a meteorological model claim."
+references = ["docs/reference.md"]

@@ -1,0 +1,92 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Provide process-safe test resources for the FuzzyRoutines suite."""
+
+from __future__ import annotations
+
+import socket
+import tempfile
+from collections.abc import Callable, Iterator
+from dataclasses import dataclass
+from pathlib import Path
+
+import pytest
+
+
+@dataclass(frozen=True)
+class ReservedTcpPort:
+    """Keep an ephemeral TCP port reserved until the owning test releases it."""
+
+    port: int
+    reservation: socket.socket
+
+    def Close(self) -> None:
+        """Release the reservation exactly when the test is ready to bind it."""
+
+        self.reservation.close()
+
+
+@pytest.fixture(name="tmpPath")
+def TmpPath(request: pytest.FixtureRequest) -> Path:
+    """Expose pytest's isolated temporary directory through a camelCase binding."""
+
+    return request.getfixturevalue("tmp_path")
+
+
+@pytest.fixture(name="isolatedStateRoot", autouse=True)
+def IsolatedStateRoot(tmpPath: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
+    """Give every test an isolated temporary and mutable-state root."""
+
+    stateRoot = tmpPath / "state"
+    tempRoot = tmpPath / "temp"
+    stateRoot.mkdir()
+    tempRoot.mkdir()
+    previousTempRoot = tempfile.tempdir
+    tempfile.tempdir = str(tempRoot)
+    monkeypatch.setenv("FUZZYROUTINES_TEST_STATE_ROOT", str(stateRoot))
+    monkeypatch.setenv("FUZZYROUTINES_TEST_DATABASE", str(stateRoot / "test.sqlite3"))
+    monkeypatch.setenv("TMPDIR", str(tempRoot))
+    monkeypatch.setenv("TEMP", str(tempRoot))
+    monkeypatch.setenv("TMP", str(tempRoot))
+
+    try:
+        yield stateRoot
+
+    finally:
+        tempfile.tempdir = previousTempRoot
+
+
+@pytest.fixture(name="isolatedDatabasePath")
+def IsolatedDatabasePath(isolatedStateRoot: Path) -> Path:
+    """Return a unique database path owned by the current test."""
+
+    return isolatedStateRoot / "test.sqlite3"
+
+
+@pytest.fixture(name="reservedPortFactory")
+def ReservedPortFactory() -> Iterator[Callable[[], ReservedTcpPort]]:
+    """Reserve unique loopback TCP ports without a discover-then-bind race."""
+
+    reservations: list[ReservedTcpPort] = []
+
+    def Reserve() -> ReservedTcpPort:
+        """Bind and retain one unique loopback TCP port until fixture teardown."""
+
+        reservation = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        reservation.bind(("127.0.0.1", 0))
+        reservedPort = ReservedTcpPort(
+            port=reservation.getsockname()[1],
+            reservation=reservation,
+        )
+        reservations.append(reservedPort)
+        return reservedPort
+
+    try:
+        yield Reserve
+
+    finally:
+        for reservedPort in reservations:
+            reservedPort.reservation.close()

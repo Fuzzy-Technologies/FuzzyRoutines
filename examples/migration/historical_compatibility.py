@@ -1,0 +1,47 @@
+# Project: FuzzyRoutines by Fuzzy Technologies
+# Maintainer: Fuzzy Technologies contributors
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+"""Run one end-to-end scenario through the protected historical API.
+
+Execution writes one deterministic JSON object to stdout, creates no files,
+and covers membership, fuzzy-set, operator, scale, and defuzzification paths.
+"""
+
+import json
+
+from fuzzyroutines.FuzzyRoutines import (
+    FuzzySet,
+    MFunction,
+    TNorm,
+    UniversalFuzzyScale,
+)
+
+
+def Main():
+    """Print stable observations from every historical migration area."""
+
+    membershipFunction = MFunction("triangle", a=0.0, b=1.0, c=0.5)
+    fuzzySet = FuzzySet(
+        membershipFunction,
+        supportSet=(0.0, 1.0),
+        linguisticName="Medium",
+    )
+    scale = UniversalFuzzyScale()
+
+    result = {
+        "defuzzification": fuzzySet.Defuz(),
+        "fuzzySet": {
+            "name": fuzzySet.name,
+            "supportSet": fuzzySet.supportSet,
+        },
+        "membership": membershipFunction.mju(0.5),
+        "operator": TNorm(0.4, 0.7, normType="algebraic"),
+        "scale": scale.Fuzzy(0.5)["name"],
+    }
+    print(json.dumps(result, sort_keys=True))
+
+
+if __name__ == "__main__":
+    Main()
