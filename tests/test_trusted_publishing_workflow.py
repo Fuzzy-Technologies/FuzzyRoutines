@@ -95,6 +95,7 @@ def test_ReleaseValidationRestoresCheckoutTagWithoutWeakeningChecks(tmpPath, tag
     tagRef = f"refs/tags/{tagName}"
     if tagKind == "lightweight":
         Git("tag", tagName)
+
     else:
         Git("tag", "-a", tagName, "-m", "Release fixture")
     remoteObject = Git("rev-parse", tagRef)
