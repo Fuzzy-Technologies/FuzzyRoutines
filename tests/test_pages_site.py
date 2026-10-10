@@ -5,7 +5,7 @@
 
 """Structural and link contracts for the project Pages site."""
 
-from contextlib import redirect_stdout
+import contextlib
 from html.parser import HTMLParser
 from io import StringIO
 from pathlib import Path
@@ -72,13 +72,13 @@ def test_PagesLocalLinksAndFragmentsResolve():
             continue
 
         if parsedLink.path:
-            asset_prefix = "api/latest/en/assets/"
-            relative_path = parsedLink.path
+            assetPrefix = "api/latest/en/assets/"
+            relativePath = parsedLink.path
 
-            if relative_path.startswith(asset_prefix):
-                relative_path = "site/content/en/assets/" + relative_path[len(asset_prefix):]
+            if relativePath.startswith(assetPrefix):
+                relativePath = "site/content/en/assets/" + relativePath[len(assetPrefix):]
 
-            targetPath = (pagePath.parent / relative_path).resolve()
+            targetPath = (pagePath.parent / relativePath).resolve()
             assert targetPath.is_relative_to(SITE_ROOT.resolve())
             assert targetPath.exists(), link
 
@@ -115,15 +115,15 @@ def test_PagesQuickstartProducesDisplayedOutput():
     from xml.etree import ElementTree
     import re
 
-    page_text = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
+    pageText = (SITE_ROOT / "index.html").read_text(encoding="utf-8")
     blocks = {
         match.group(1): ElementTree.fromstring(match.group(0)).text
-        for match in re.finditer(r'<code id="([^"]+)">.*?</code>', page_text, re.S)
+        for match in re.finditer(r'<code id="([^"]+)">.*?</code>', pageText, re.S)
     }
     output = StringIO()
 
-    with redirect_stdout(output):
+    with contextlib.redirect_stdout(output):
         exec(compile(blocks["quickstart-code"], "homepage-quickstart", "exec"), {})
 
     assert output.getvalue().strip() == blocks["quickstart-output"]
-    assert "git+" not in page_text
+    assert "git+" not in pageText

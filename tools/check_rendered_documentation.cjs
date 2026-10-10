@@ -200,7 +200,13 @@ async function Main() {
           result.imageViewer = await InspectImageViewer(page, '.md-content img', `${locale}-universal-scale-viewer-${viewport.width}.png`);
           const query = page.locator('input[data-md-component="search-query"]');
           if (!await query.isVisible()) await page.locator('label[for="__search"]:visible').first().click();
-          await query.fill('UniversalFuzzyScale');
+          await query.focus();
+          await page.waitForFunction(() => {
+            const translations = JSON.parse(document.getElementById('__config').textContent).translations;
+            return document.querySelector('.md-search-result__meta').textContent.trim() === translations['search.result.placeholder'];
+          });
+          // Material observes keyup; fill() alone only emits an input event.
+          await query.pressSequentially('UniversalFuzzyScale');
           const searchResults = page.locator('[data-md-component="search-result"] a.md-search-result__link');
           await searchResults.first().waitFor({state: 'visible', timeout: 15000});
           result.search = {query: 'UniversalFuzzyScale', results: await searchResults.count(), firstLink: await searchResults.first().getAttribute('href')};
