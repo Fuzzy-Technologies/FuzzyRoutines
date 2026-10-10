@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 处理无效输入与未解决的数值问题 {#handle-invalid-input-and-unresolved-mathematics}
 
-捕获应用能够处理的异常类别。无效对象类型不同于无效值或无效域；未定义结果不同于数值细化耗尽。在日志和用户反馈中应保留这些区别。错误类别位于 `fuzzyroutines.exceptions`；`CentroidConvergenceError` 也属于解模糊 API。
+捕获应用能够处理的异常类别。无效对象类型不同于无效值或无效域；未定义结果不同于数值细化达到上限仍未收敛。在日志和用户反馈中应保留这些区别。错误类别位于 `fuzzyroutines.exceptions`；`CentroidConvergenceError` 也属于解模糊 API。
 
 ## 理解类别层次 {#understand-the-category-hierarchy}
 
@@ -62,4 +62,4 @@ else:
 ```
 
 
-该平滑回调要求严格容差，但故意配置了不足的深度。实际项目应选择有依据的积分域和细化预算，再与独立参考结果核对。仅增加深度无法证明有限次求值发现了每个狭窄特征。零面积处理见 [API 示例](api-recipes.md#handle-a-mathematically-undefined-result)。
+该平滑回调要求严格容差，但故意将细分深度上限设得过小。实际项目应选择有依据的积分域和细化预算，再与独立参考结果核对。仅增加深度无法证明有限次求值发现了每个狭窄特征。零面积处理见 [API 示例](api-recipes.md#handle-a-mathematically-undefined-result)。

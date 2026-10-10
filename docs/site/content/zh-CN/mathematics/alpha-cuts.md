@@ -14,7 +14,7 @@ A_\alpha = \{x \in X \mid \mu_A(x) \ge \alpha\},
 \qquad \alpha \in [0, 1].
 $$
 
-比较严格采用 `>=`。隶属度等于阈值的坐标属于截集。
+比较直接采用 `>=`。隶属度等于阈值的坐标属于截集。
 API 不会静默替换为强截集 $\{x \mid \mu_A(x) > \alpha\}$，也不应用数值容差。
 
 端点语义直接由定义得到：
@@ -49,7 +49,7 @@ assert AlphaCut(fuzzySet, 1.0).points == (1.0,)
 
 ## 明确采用采样的连续操作 {#explicitly-sampled-continuous-operation}
 
-`ContinuousUniverse` 上的任意 Python 可调用对象通常没有通用解析逆。
+`ContinuousUniverse` 上的任意 Python 可调用对象通常没有通用的解析逆函数。
 有限扫描不能证明其连续 α 截集。
 因此，`AlphaCut` 拒绝连续模糊集，不会将采样点当作精确几何。
 
@@ -84,7 +84,7 @@ assert sampledCut.cutSamples.points == (0.5, 0.75, 1.0)
 assert sampledCut.isExact is False
 ```
 
-当 `alpha=0` 时，`cutSamples` 包含整个声明网格，而非物化的连续论域。
+当 `alpha=0` 时，`cutSamples` 包含整个声明网格，并不展开为整个连续论域。
 当 `alpha=1` 时，它仅包含隶属度恰好为一的采样坐标，不能证明完整的连续核。
 当各截集使用相同模糊集、分析域和网格分辨率时，保证嵌套不变量成立。
 

@@ -78,3 +78,12 @@ This binds the assessment to the translated files without changing unit IDs.
 ADR-0011 human editorial and mathematical/technical acceptance remains a
 separate release requirement. This report neither supplies that acceptance nor
 changes any unit to `approved`.
+
+## Subsequent delegated acceptance
+
+The human-acceptance-pending statement above records the policy and status at
+the time of this earlier review. It is superseded for the 258 explicitly bound
+zh-CN 2.0.0 hash pairs by the maintainer-authorized
+[AI scientific/editorial acceptance](2026-10-10-chinese-delegated-acceptance.md)
+and its narrow ADR-0011 exception. This does not retroactively claim that this
+earlier report was human or native-speaker approval.

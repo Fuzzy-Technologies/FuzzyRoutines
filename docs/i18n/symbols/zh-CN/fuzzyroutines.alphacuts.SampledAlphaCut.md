@@ -3,10 +3,10 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-带完整来源信息的连续 α-截集有限观测。
+连续 α-截集在有限个采样点上的观测结果，附完整来源信息。
 
 Attributes:
-    alpha: $[0, 1]$ 内的弱隶属度阈值。
+    alpha: 用于弱截集的隶属度阈值，取值范围为 $[0, 1]$。
     analysisDomain: 网格覆盖的闭区间。
     sampleCount: 网格坐标数量，包括两个端点。
     coordinates: 跨越 `analysisDomain` 的严格递增坐标。`SampleAlphaCut` 生成均匀网格；直接构造不会重新验证等间距。

@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 快速入门 {#quick-start}
 
-将测得的温度转换为可解释的语言概念隶属度，再选择标签。FuzzyRoutines 提供标量模糊集、八类隶属函数、显式组合策略、语言尺度、α-截集和连续模型的质心。现代 API 要求 **CPython 3.13 或 3.14**，不强制依赖 NumPy 或绘图库。
+计算测得的温度对各语言概念的隶属度，再选择标签。FuzzyRoutines 提供标量模糊集、八类隶属函数、显式组合策略、语言尺度、α-截集和连续模型的质心。现代 API 要求 **CPython 3.13 或 3.14**，不强制依赖 NumPy 或绘图库。
 
 ## 安装 {#install}
 

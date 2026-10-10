@@ -38,7 +38,7 @@ assert abs(centroid - 2 / 3) < 1e-12
 ```
 
 
-质心为 `2 / 3`，通过显式有界积分域上的自适应数值积分求得。一般可调用对象不会因该协议而获得精确连续支集、核、高度或解析面积矩。函数必须对所选积分策略足够规则，并在求值期间保持隶属度一致。只要不改变隶属度，允许可变的记账行为，例如统计调用次数。不会自动创建可调用对象快照。可执行示例见 [`custom_membership.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/migration/custom_membership.py)。
+质心为 `2 / 3`，通过显式有界积分域上的自适应数值积分求得。一般可调用对象不会因该协议而获得精确连续支集、核、高度或解析面积矩。函数必须满足所选积分策略要求的正则性，并在求值期间保持隶属度一致。只要不改变隶属度，允许更新辅助记录，例如统计调用次数。不会自动创建可调用对象快照。可执行示例见 [`custom_membership.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/migration/custom_membership.py)。
 
 可额外安装 mypy，复现隔离的静态调用方检查：
 

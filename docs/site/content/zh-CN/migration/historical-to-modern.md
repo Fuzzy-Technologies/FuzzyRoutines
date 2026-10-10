@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
 `FuzzySet`、`FuzzyScale`、`UniversalFuzzyScale`、`Defuz` 或标量算子函数。
 当专门 API 已提供应用所需行为时，再逐个领域迁移。
 
-当前现代 API 覆盖显式域、不可变标量模糊集、集合代数、关系、派生属性、α 截集、
+当前现代 API 涵盖显式域、不可变标量模糊集、集合代数、关系、派生属性、α 截集、
 基于精确高度的归一化，以及带类型的语言术语和有序尺度表示。
 专门的不可变隶属函数工厂也已通过 `fuzzyroutines.membership` 提供。
 精确及 Unicode 不区分大小写的带类型尺度查找、显式模糊化策略均可用。
@@ -168,7 +168,7 @@ result = modernScale.Fuzzify(
 现代 `Fuzzify()` 返回所有有序隶属度分数，并以最大分数作为置信度。
 其策略显式指定无匹配阈值、并列容差，以及 `first`、`last` 或 `all` 选择。
 历史调用者可以保留 `FuzzyScale` 或 `UniversalFuzzyScale`；
-`tiePolicy="last"` 提供历史后者胜出规则的现代等价方式，而不改变 `Fuzzy()`。
+`tiePolicy="last"` 提供历史并列时后者胜出的规则的现代等价方式，而不改变 `Fuzzy()`。
 
 ## 解模糊化 {#defuzzification}
 

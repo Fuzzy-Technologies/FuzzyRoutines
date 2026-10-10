@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-连续派生区域的一个非空区间分量。
+由计算得到的连续区域中的一个非空区间分量。
 
 Attributes:
     left: 有限左端点；`None` 表示负无穷。

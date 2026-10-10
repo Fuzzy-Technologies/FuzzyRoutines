@@ -77,7 +77,7 @@ print(copy.alpha, copy.cutSamples.points)
 ```
 
 
-弱截集包含隶属度为 0.5 的边界。这个三角形的解析截区间为 [0.5, 1.5]，但 `SampleAlphaCut` 只返回符合条件的网格坐标。构造函数根据全部传入隶属度检查截集。对于手动传入的表格，来源标签不能独立确立等距采样。参见 [α-截集](alpha-cuts.md)。
+弱截集包含隶属度为 0.5 的边界。这个三角形的解析求得的截集区间为 [0.5, 1.5]，但 `SampleAlphaCut` 只返回符合条件的网格坐标。构造函数根据全部传入隶属度检查截集。对于手动传入的表格，来源标签不能独立确立等距采样。参见 [α-截集](alpha-cuts.md)。
 
 ## 分类保留全部隶属度及选择策略 {#a-classification-keeps-all-grades-and-its-selection-policy}
 

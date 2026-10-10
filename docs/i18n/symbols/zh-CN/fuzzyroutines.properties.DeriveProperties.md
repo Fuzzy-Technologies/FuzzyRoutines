@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 连续情形要求使用现代
 [MembershipFunction][fuzzyroutines.membership.MembershipFunction] 或历史
 [MFunction][fuzzyroutines.FuzzyRoutines.MFunction] 适配器。
-精确解析结果的依据来自经过验证的公式来源；任意可调用对象都不能作为连续支集或高度的证明。
+精确解析结果的依据来自经过验证的公式来源；仅凭任意可调用对象的求值接口，无法证明连续论域上的支集或高度。
 离散论域上的结果是精确的，因为会计算每一个已声明的坐标。
 若要对连续情形进行明确标注为近似的查询，请使用
 [SampleProperties][fuzzyroutines.properties.SampleProperties]。

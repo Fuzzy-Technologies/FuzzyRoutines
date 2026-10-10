@@ -17,9 +17,9 @@ three-language rendering. Automation may prepare explicitly labelled draft
 artifacts; it never grants human approval. Stable tagged publication requires
 every required Russian and Simplified Chinese unit to be current and approved.
 
-The required corpus is all 34 canonical site pages, 18 existing mathematical,
+The required corpus is all 35 canonical site pages, 18 existing mathematical,
 migration, compatibility and public-typing documents, 193 public symbol units
-and 12 module overviews: 257 independently tracked units per locale. `externalPages` in the
+and 12 module overviews: 258 independently tracked units per locale. `externalPages` in the
 project manifest binds the existing English source files to stable site routes,
 avoiding a second canonical copy. Development protocols, ADRs, audit records,
 benchmark reports and research provenance remain English engineering records;
@@ -284,6 +284,15 @@ record `sourceHash` to detect changes to their source while work is in progress.
 The illustrative digests above must be replaced with actual source and
 translation digests during human review. AI-assisted passes remain draft
 preparation and do not populate human reviewer records.
+
+The sole release-specific exception is the maintainer-delegated **zh-CN 2.0.0**
+AI acceptance in [ADR-0011](../adr/0011-multilingual-documentation-pipeline.md)
+and its [258-unit hash record](../audits/2026-10-10-chinese-delegated-acceptance.md).
+Existing `reviewer` fields identify AIna-Dev explicitly as AI; all required roles
+and both hash bindings are retained. The human-only wording and state descriptions
+below describe the default policy; this scoped exception takes precedence only
+for its recorded source/translation pairs. It does not grant Russian approval or
+authorize future automatic reviews.
 
 ## Translation states
 

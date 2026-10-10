@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-一次尺度分类的完整、不可变结果依据。
+一次尺度分类的完整、不可变结果记录。
 
 Attributes:
     memberships: 每个已声明尺度术语的分数，按声明顺序排列。

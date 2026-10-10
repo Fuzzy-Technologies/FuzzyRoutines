@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 Args:
     userFunc: 已注册的函数族标识符。兼容别名包括 `"gaussian"`、`"logistic"`、
         `"sShoulder"` 和 `"harringtonDesirability"`。
-    **membershipFunctionParams: 所选函数族要求的准确参数集合。每个值必须是有限的
+    **membershipFunctionParams: 所选函数族规定的完整参数集合，不得缺少或增加参数。每个值必须是有限的
         内置 `int` 或 `float`；不接受 `bool`。
 
 Raises:

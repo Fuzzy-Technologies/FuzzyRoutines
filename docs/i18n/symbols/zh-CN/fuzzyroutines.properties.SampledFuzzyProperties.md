@@ -3,10 +3,10 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-连续域上有限坐标处的近似观测结果。
+连续域上有限个采样坐标处的近似观测结果。
 
 `SampleProperties` 生成均匀网格，并根据对应的隶属度推导所有记录的区域。
-直接构造会验证表格形状、端点覆盖、区域子集及高度，
+直接构造会验证表格结构、端点覆盖、各记录区域是否为采样坐标的子集，以及高度，
 但不会重新验证等间距，也不会重新计算所记录的三个区域。
 
 Attributes:

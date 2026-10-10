@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 
 Args:
     leftSet: 被减的标量模糊集 $A$。
-    rightSet: 相同论域上的减去集合 $B$。
+    rightSet: 同一论域中作为差运算右操作数的标量模糊集 $B$。
     tNormPolicy: 显式合取语义 $T$。
     negationPolicy: 显式补运算语义 $N$。
 

@@ -11,7 +11,7 @@ SPDX-License-Identifier: Apache-2.0
 - 已实现的 v2 接口：[公共 API 清单](../../../../public-api-documentation-inventory.md)
 - 发布版专属变化：[从 1.0.3 到计划中 2.0.0 的迁移说明](../../../../migration/1.0.3-to-2.0.0.md)
 
-本页是选择 API 接口及推进现有 FuzzyRoutines 代码的规范入口。
+本页是选择 API 接口及迁移现有 FuzzyRoutines 代码的规范入口。
 它区分 ADR-0001 保护的狭窄契约与目前仍实现并测试的更广泛 1.0.3 接口。
 两类都不保留已知的数学、数值、验证或陈旧状态缺陷。
 
@@ -47,7 +47,7 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 - [隶属函数契约](../../../../mathematics/membership-function-contracts.md)
   记录的历史关键字名称、参数含义及顺序。
 
-移除或更改此契约需要显式替代或修订 ADR，并提供消费者影响依据。
+移除或更改此契约需要显式替代或修订 ADR，并提供对调用方影响的依据。
 精确签名记录在 [1.0.3 快照](../../../../compatibility/legacy-public-api-1.0.3.md) 中，
 由 [`test_legacy_public_api.py`](../../../../../tests/test_legacy_public_api.py)
 和 [`test_legacy_import_compatibility.py`](../../../../../tests/test_legacy_import_compatibility.py) 强制检查。
@@ -78,11 +78,11 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 | 需求       | 历史路径                               | 已实现的现代路径                                                                               | 边界                                     |
 | -------- | ---------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------- |
 | 二元标量算子   | `FuzzyNOT`、`TNorm`、`SCoNorm`       | `NegationPolicy`、`TNormPolicy`、`SNormPolicy`                                           | 策略对象公开 `Evaluate()`，且不可变。              |
-| 可变参数标量组合 | `TNormCompose`、`SCoNormCompose`    | 无专门的 n 元替代                                                                             | 需要 n 元折叠时保留历史函数。                       |
+| 不定参数标量组合 | `TNormCompose`、`SCoNormCompose`    | 无专门的 n 元替代                                                                             | 需要 n 元折叠时保留历史函数。                       |
 | 隶属函数     | `MFunction`                        | `MembershipFunction`、`Triangle` 等语义工厂及 `MembershipCallable`                            | 现代工厂使用显式几何；`MFunction.mju` 仍为受支持可调用对象。 |
 | 模糊集表示    | 可变 `FuzzySet`                      | `ScalarFuzzySet` 配合 `ContinuousUniverse` 或 `DiscreteUniverse`                          | `supportSet` 是积分区间，不是数学论域或精确支集。        |
 | 集合代数     | 调用者代码应用标量算子                        | 带显式策略对象的 `Complement`、`Intersection`、`Union` 和 `Difference`                            | 二元操作要求论域精确兼容。                          |
-| 集合派生信息   | 无统一历史结果                            | `DeriveProperties`、`SampleProperties`、`AlphaCut`、`SampleAlphaCut`、`Height`、`Normalize` | 精确依据和采样依据使用不同结果契约。                     |
+| 集合派生信息   | 无统一历史结果                            | `DeriveProperties`、`SampleProperties`、`AlphaCut`、`SampleAlphaCut`、`Height`、`Normalize` | 精确结果和采样结果遵循不同的契约。                      |
 | 关系       | 无专门历史接口                            | `EqualOnDomain`、`IncludedOnDomain`、`ComparisonPolicy`、`ComparisonDomain`               | 比较容差和检查域显式给出。                          |
 | 语言表示     | `FuzzyScale`、`UniversalFuzzyScale` | `LinguisticTerm`、`LinguisticScale`、模糊化及采样诊断结果类型                                        | 查找、分数、置信度、并列策略及采样诊断均显式。                |
 | 质心解模糊化   | `FuzzySet.Defuz()`、`defuzValue`    | `Centroid` 配合 `ScalarFuzzySet`、`IntegrationDomain` 及可选 `CentroidPolicy`                | 积分区间显式且有限。                             |
@@ -99,7 +99,7 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 | 修正领域    | 当前行为                               |
 | ------- | ---------------------------------- |
 | 二元标量算子  | 拒绝无效、非有限和布尔操作数；选择函数族的函数拒绝未知函数族。    |
-| 可变参数组合  | 对空输入、无效操作数和未知算子族显式抛出 `ValueError`。 |
+| 不定参数组合  | 对空输入、无效操作数和未知算子族显式抛出 `ValueError`。 |
 | 参数化否定   | 强制执行已证明的参数域；抛物型否定使用有界解析分支。         |
 | 隶属函数构造  | 要求准确的有限参数集合和有效函数族几何。               |
 | Bell 求值 | 不修改调用者可见的参数映射。                     |
@@ -109,7 +109,7 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 
 [已修复错误台账](../../../../compatibility/corrected-bug-ledger.md) 提供变化历史及合并依据。
 未来修正必须加入该台账；有意移除或修改签名则要求 ADR-0001 规定的显式 ADR
-及消费者影响流程。已知下游依据单独记录在[消费者清单](../../../../compatibility/legacy-consumers.md) 中。
+及调用方影响评估流程。已知下游依据单独记录在[消费者清单](../../../../compatibility/legacy-consumers.md) 中。
 
 ## 迁移示例 {#migration-examples}
 
