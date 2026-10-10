@@ -38,6 +38,10 @@ controls in the GitHub web interface:
 
 The workflow also rejects lightweight tags, prerelease spellings, mismatched
 package versions, and tag names other than the exact stable form `vX.Y.Z`.
+Before validation, it restores the local tag reference from `origin` because
+`actions/checkout` can replace an annotated local tag with its peeled event
+commit. This fetch changes no remote reference. The restored tag must be
+annotated and resolve to both the event commit and checked-out `HEAD`.
 Repository settings remain the authorization boundary; the workflow checks are
 defence in depth.
 

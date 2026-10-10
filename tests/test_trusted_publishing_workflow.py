@@ -6,6 +6,11 @@
 """Security invariants for the PyPI Trusted Publishing workflow."""
 
 from pathlib import Path
+import os
+import subprocess
+import textwrap
+
+import pytest
 
 PROJECTROOT = Path(__file__).parents[1]
 WORKFLOWPATH = PROJECTROOT / ".github" / "workflows" / "release-pypi.yml"
@@ -58,6 +63,62 @@ def test_ReleaseTagAndPackageVersionAreFailClosed():
     assert 'git cat-file -t "$GITHUB_REF_NAME"' in workflowText
     assert 'metadata["project"]["version"]' in workflowText
     assert 'packageVersion" != "$tagVersion' in workflowText
+
+
+@pytest.mark.parametrize("tagKind", ["annotated", "lightweight", "wrong-commit", "wrong-version"])
+def test_ReleaseValidationRestoresCheckoutTagWithoutWeakeningChecks(tmpPath, tagKind):
+    """Repair a peeled local ref while rejecting invalid protected remote tags."""
+
+    remotePath = tmpPath / "remote"
+    checkoutPath = tmpPath / "checkout"
+    remotePath.mkdir()
+
+    def Git(*arguments, cwd=remotePath):
+        """Run Git against isolated repositories without external network access."""
+
+        return subprocess.run(
+            ["git", *arguments], cwd=cwd, check=True, capture_output=True, text=True,
+        ).stdout.strip()
+
+    Git("init")
+    Git("config", "user.name", "Release test")
+    Git("config", "user.email", "release-test@example.invalid")
+    (remotePath / "pyproject.toml").write_text('[project]\nversion = "2.0.0"\n')
+    Git("add", "pyproject.toml")
+    Git("commit", "-m", "Release fixture")
+    eventCommit = Git("rev-parse", "HEAD")
+
+    if tagKind == "wrong-commit":
+        Git("commit", "--allow-empty", "-m", "Different commit")
+
+    tagName = "v2.0.1" if tagKind == "wrong-version" else "v2.0.0"
+    tagRef = f"refs/tags/{tagName}"
+    if tagKind == "lightweight":
+        Git("tag", tagName)
+    else:
+        Git("tag", "-a", tagName, "-m", "Release fixture")
+    remoteObject = Git("rev-parse", tagRef)
+    Git("clone", "--no-local", str(remotePath), str(checkoutPath))
+    Git("checkout", "--detach", eventCommit, cwd=checkoutPath)
+    # Reproduce actions/checkout's second fetch, which peels the local tag.
+    Git("fetch", "--no-tags", "origin", f"+{eventCommit}:{tagRef}", cwd=checkoutPath)
+    assert Git("cat-file", "-t", tagRef, cwd=checkoutPath) == "commit"
+
+    validationText = WorkflowText().split(
+        "      - name: Validate protected release tag and version", maxsplit=1,
+    )[1].split("      - name:", maxsplit=1)[0]
+    script = textwrap.dedent(validationText.split("        run: |\n", maxsplit=1)[1])
+    environment = {
+        **os.environ, "GITHUB_REF": tagRef, "GITHUB_REF_NAME": tagName,
+        "GITHUB_SHA": eventCommit,
+    }
+    result = subprocess.run(
+        ["bash", "-c", script], cwd=checkoutPath, env=environment,
+        capture_output=True, text=True,
+    )
+    assert (result.returncode == 0) == (tagKind == "annotated"), result.stderr
+    assert Git("rev-parse", tagRef) == remoteObject
+    assert Git("rev-parse", "HEAD", cwd=checkoutPath) == eventCommit
 
 
 def test_BuildEvidencePrecedesPublishing():
