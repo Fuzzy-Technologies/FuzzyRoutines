@@ -51,7 +51,7 @@ jobs:
           --include-drafts --output _build/pages/review
 
       - name: Install pinned browser review dependencies
-        timeout-minutes: 5
+        timeout-minutes: 10
         run: |
           npm install --prefix _build/browser-dependencies --no-audit --no-fund --ignore-scripts playwright@1.62.1 mathjax@3.2.2
           _build/browser-dependencies/node_modules/.bin/playwright install --with-deps chromium
