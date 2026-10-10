@@ -19,6 +19,24 @@ facade; the right evaluates the explicit modern construction. The Min curve drop
 High have flat tops and quadratic shoulders; Max rises between 0.77 and 0.95.
 The small Min tail remains positive even where it is invisible at this scale.
 
+## Cybersecurity and risk levels
+
+The scale can turn a normalized score into linguistic levels for cybersecurity
+and risk assessment: for example, the risk of an asset, the severity of a
+security finding, or the effectiveness of protective controls. First define
+how observations or expert assessments produce a score in `[0, 1]`, and what
+an increase means. Higher risk and stronger protection have opposite meanings
+for decisions, even when both use the labels Min, Low, Med, High and Max.
+
+For an illustrative risk score of `0.75`, the historical scale selects `High`
+with membership `1`. This means full membership in the High term under this
+model; neither number is a probability of an incident. Keep the membership
+grades alongside the selected label to expose transitions between levels.
+Choose normalization, aggregation and response rules for the application,
+validate them against domain evidence, and handle weak coverage explicitly as
+shown below. The scale supplies linguistic interpretation of an input score;
+it does not by itself measure risk or define an incident-response policy.
+
 ## The historical definition
 
 | Level | Historical family / modern constructor | Historical `supportSet` |

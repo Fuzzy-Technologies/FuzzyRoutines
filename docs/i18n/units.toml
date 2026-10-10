@@ -7967,29 +7967,15 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.universal-fuzzy-scale"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:7092df9d1812256efb772ca9e8e586cdde462cb9395de08558bb439c345a2193"
+sourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:7092df9d1812256efb772ca9e8e586cdde462cb9395de08558bb439c345a2193"
+sourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
 
 [units.translations.zh-CN]
-state = "approved"
+state = "review"
 path = "docs/site/content/zh-CN/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:7092df9d1812256efb772ca9e8e586cdde462cb9395de08558bb439c345a2193"
-
-[[units.translations.zh-CN.reviews]]
-role = "editorial"
-reviewedSourceHash = "sha256:7092df9d1812256efb772ca9e8e586cdde462cb9395de08558bb439c345a2193"
-reviewedTranslationHash = "sha256:1b80e97feffcdf96a1f0e5196736f07be98e03ea7c787b4a67c21e051fc82687"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
-
-[[units.translations.zh-CN.reviews]]
-role = "mathematical"
-reviewedSourceHash = "sha256:7092df9d1812256efb772ca9e8e586cdde462cb9395de08558bb439c345a2193"
-reviewedTranslationHash = "sha256:1b80e97feffcdf96a1f0e5196736f07be98e03ea7c787b4a67c21e051fc82687"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+sourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
