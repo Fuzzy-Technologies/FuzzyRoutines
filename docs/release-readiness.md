@@ -156,22 +156,32 @@ The [candidate handoff](audits/2026-10-09-release-candidate-handoff.md) lists
 the prepared integration, the three changed locale-review targets, observed
 external-control limits and the remaining execution order.
 
+## Integrated candidate evidence
+
+The maintainer accepted and squash-merged [PR #307](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/307)
+into `develop` at `45c9db375033437fc01e73789fbac968e730f0d0`. All seven
+post-merge workflows pass; the [updated handoff](audits/2026-10-09-release-candidate-handoff.md#verified-integration-evidence)
+links the immutable mathematics, packaging, documentation, typing and correctness
+runs. The checked technical items below refer to that integrated revision.
+This records completed work while keeping actual publication and locale-role
+acceptance visible as separate outstanding decisions.
+
 ## Mandatory evidence
 
-- [ ] Mathematics: every supported formula and domain has an accepted contract, primary-source citation where applicable, and executable reference tests.
-- [ ] Correctness repairs: every changed legacy behavior has an entry in the corrected-bug ledger, migration impact, and regression evidence.
-- [ ] Compatibility: public API surface, imports, parameter conventions, and deprecations have tested evidence and release-note links.
-- [ ] Version and migration: the selected version, runtime floor, helper-import changes, corrected numerical behavior, and license transition have been reviewed against the changelog and migration notes.
-- [ ] Test quality: deterministic suite, branch-coverage report, negative cases, and supported-runtime CI links are attached.
-- [ ] Packaging: independent wheel and source distribution builds have matching bytes; clean installation, metadata validation, and supply-chain evidence are attached.
-- [ ] Licensing: Apache-2.0 metadata, `LICENSE`, `NOTICE`, SPDX headers, provenance audit, and packaged artifacts agree.
+- [x] Mathematics: every supported formula and domain has an accepted contract, primary-source citation where applicable, and executable reference tests.
+- [x] Correctness repairs: every changed legacy behavior has an entry in the corrected-bug ledger, migration impact, and regression evidence.
+- [x] Compatibility: public API surface, imports, parameter conventions, and deprecations have tested evidence and release-note links.
+- [x] Version and migration: the selected version, runtime floor, helper-import changes, corrected numerical behavior, and license transition have been reviewed against the changelog and migration notes.
+- [x] Test quality: deterministic suite, branch-coverage report, negative cases, and supported-runtime CI links are attached.
+- [x] Packaging: independent wheel and source distribution builds have matching bytes; clean installation, metadata validation, and supply-chain evidence are attached.
+- [x] Licensing: Apache-2.0 metadata, `LICENSE`, `NOTICE`, SPDX headers, provenance audit, and packaged artifacts agree.
 - [ ] Documentation: README, API/mathematics documents, compatibility notes, and links have been reviewed for accuracy and accessibility.
-- [ ] Canonical English: engineering, mathematical/scientific, data-science and reader/editor findings are resolved; every supported public API has a usable example or a justified tested alias link.
+- [x] Canonical English: engineering, mathematical/scientific, data-science and reader/editor findings are resolved; every supported public API has a usable example or a justified tested alias link.
 - [ ] Russian and Simplified Chinese: every required user-documentation unit is translated, current and individually scientifically/editorially reviewed; no missing/stale fallback is accepted.
-- [ ] Practical examples: the pip-install quick start, at least six complete end-to-end scenarios and their numerical results/figures execute from installed artifacts in CI.
+- [x] Practical examples: the pip-install quick start, at least six complete end-to-end scenarios and their numerical results/figures execute from installed artifacts in CI.
 - [ ] Rendered documentation: all three languages have reviewed navigation, search, formulas, links, shared English-labelled figures with byte-identical assets, localized captions/alternatives and desktop/mobile readability evidence.
-- [ ] Mathematical audit: every supported module has an accepted contract, independent reference/invariant evidence and assessed line/branch coverage; process-based parallel execution is verified on the candidate.
-- [ ] Performance: reproducible benchmark evidence is attached; no performance claim is made without raw measurements and environment metadata.
+- [x] Mathematical audit: every supported module has an accepted contract, independent reference/invariant evidence and assessed line/branch coverage; process-based parallel execution is verified on the candidate.
+- [x] Performance: [raw measurements and environment metadata](audits/2026-10-09-release-candidate-handoff.md#retained-performance-measurements) are retained for installed wheel/sdist on both supported Python versions; no universal speedup is claimed.
 - [ ] Security and publishing: release credentials, provenance, and publishing configuration have been explicitly reviewed by an authorized maintainer.
 
 ## Hard blockers

@@ -83,6 +83,8 @@ jobs:
           PY
           "$venvPath/bin/python" "$GITHUB_WORKSPACE/tools/verify_installed_executables.py" \
             --artifact-directory "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}"
+          cp -a "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}" \
+            "$GITHUB_WORKSPACE/dist/wheel-executable-evidence"
 
       - name: Clean-install source distribution and verify installed package
         shell: bash
@@ -116,6 +118,8 @@ jobs:
           PY
           "$venvPath/bin/python" "$GITHUB_WORKSPACE/tools/verify_installed_executables.py" \
             --artifact-directory "$RUNNER_TEMP/sdist-executable-evidence-${{ matrix.python-version }}"
+          cp -a "$RUNNER_TEMP/sdist-executable-evidence-${{ matrix.python-version }}" \
+            "$GITHUB_WORKSPACE/dist/sdist-executable-evidence"
 
       - name: Upload reproducible artifact evidence
         uses: actions/upload-artifact@v4

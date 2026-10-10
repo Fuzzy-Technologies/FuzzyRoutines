@@ -87,7 +87,7 @@ using it as a complete operational scale.
 
 ## Combine, inspect, and explain a result
 
-Continue with the [eight worked scenarios](guides/index.md). They cover
+Continue with the [nine worked scenarios](guides/index.md). They cover
 physical measurements, policy choices, abstention, directed fuzzy difference,
 alpha cuts, centroids, scale diagnosis, and custom models. Each includes
 self-contained code, expected numbers, and a figure. The
@@ -95,7 +95,7 @@ self-contained code, expected numbers, and a figure. The
 
 The script
 [`examples/guide.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/guide.py)
-runs all eight scenarios and checks independent numerical expectations. From a
+runs all nine scenarios and checks independent numerical expectations. From a
 checkout with the package installed:
 
 ```bash
