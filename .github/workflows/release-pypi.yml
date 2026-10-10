@@ -48,8 +48,18 @@ jobs:
             exit 1
           fi
 
+          # Checkout can replace its local tag ref with the peeled event commit.
+          # Restore only the local ref from the protected remote tag.
+          git fetch --force --no-tags origin "$GITHUB_REF:$GITHUB_REF"
+
           if [[ "$(git cat-file -t "$GITHUB_REF_NAME")" != "tag" ]]; then
             echo "Release tag $GITHUB_REF_NAME must be annotated." >&2
+            exit 1
+          fi
+
+          tagCommit="$(git rev-parse "$GITHUB_REF^{commit}")"
+          if [[ "$tagCommit" != "$GITHUB_SHA" || "$tagCommit" != "$(git rev-parse HEAD)" ]]; then
+            echo "Release tag must identify the exact event and checkout commit." >&2
             exit 1
           fi
 
