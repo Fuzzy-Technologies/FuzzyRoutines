@@ -7146,16 +7146,16 @@ sourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b09077
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a"
-reviewedTranslationHash = "sha256:b505b6d6872eb77d09dfc5cf3d656a89dfd07bf1441948b07f07944ee8d1614b"
+reviewedTranslationHash = "sha256:ca6a19c67131062234ad1f298eedbbf9293e33c729a2d0357837198a2032ca96"
 reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedAt = "2026-10-10T09:07:49Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a"
-reviewedTranslationHash = "sha256:b505b6d6872eb77d09dfc5cf3d656a89dfd07bf1441948b07f07944ee8d1614b"
+reviewedTranslationHash = "sha256:ca6a19c67131062234ad1f298eedbbf9293e33c729a2d0357837198a2032ca96"
 reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedAt = "2026-10-10T09:07:49Z"
 
 [[units]]
 id = "page:mathematics.fuzzy-set-normalization"
@@ -7921,16 +7921,16 @@ sourceHash = "sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6512b9"
-reviewedTranslationHash = "sha256:46412a42e751594eb95a9b3e1c092b5ca32c8333e71f65eab4a17d9a18ef0d4f"
+reviewedTranslationHash = "sha256:9258bfc0bda16e49d866cb11f370695e27b4ca4fe42b4aff46326c94ebe371d6"
 reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedAt = "2026-10-10T09:07:49Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "technical"
 reviewedSourceHash = "sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6512b9"
-reviewedTranslationHash = "sha256:46412a42e751594eb95a9b3e1c092b5ca32c8333e71f65eab4a17d9a18ef0d4f"
+reviewedTranslationHash = "sha256:9258bfc0bda16e49d866cb11f370695e27b4ca4fe42b4aff46326c94ebe371d6"
 reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedAt = "2026-10-10T09:07:49Z"
 
 [[units]]
 id = "page:contracts.public-typing"

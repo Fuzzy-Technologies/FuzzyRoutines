@@ -82,7 +82,7 @@ from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction, TNorm
 | 隶属函数     | `MFunction`                        | `MembershipFunction`、`Triangle` 等语义工厂及 `MembershipCallable`                            | 现代工厂使用显式几何；`MFunction.mju` 仍为受支持可调用对象。 |
 | 模糊集表示    | 可变 `FuzzySet`                      | `ScalarFuzzySet` 配合 `ContinuousUniverse` 或 `DiscreteUniverse`                          | `supportSet` 是积分区间，不是数学论域或精确支集。        |
 | 集合代数     | 调用者代码应用标量算子                        | 带显式策略对象的 `Complement`、`Intersection`、`Union` 和 `Difference`                            | 二元操作要求论域精确兼容。                          |
-| 集合派生信息   | 无统一历史结果                            | `DeriveProperties`、`SampleProperties`、`AlphaCut`、`SampleAlphaCut`、`Height`、`Normalize` | 精确结果和采样结果遵循不同的契约。                     |
+| 集合派生信息   | 无统一历史结果                            | `DeriveProperties`、`SampleProperties`、`AlphaCut`、`SampleAlphaCut`、`Height`、`Normalize` | 精确结果和采样结果遵循不同的契约。                      |
 | 关系       | 无专门历史接口                            | `EqualOnDomain`、`IncludedOnDomain`、`ComparisonPolicy`、`ComparisonDomain`               | 比较容差和检查域显式给出。                          |
 | 语言表示     | `FuzzyScale`、`UniversalFuzzyScale` | `LinguisticTerm`、`LinguisticScale`、模糊化及采样诊断结果类型                                        | 查找、分数、置信度、并列策略及采样诊断均显式。                |
 | 质心解模糊化   | `FuzzySet.Defuz()`、`defuzValue`    | `Centroid` 配合 `ScalarFuzzySet`、`IntegrationDomain` 及可选 `CentroidPolicy`                | 积分区间显式且有限。                             |
