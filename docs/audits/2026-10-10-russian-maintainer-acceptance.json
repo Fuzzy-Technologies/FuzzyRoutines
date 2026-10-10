@@ -1,0 +1,2588 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-10T18:08:54Z",
+  "reviewer": "Tim55667757",
+  "comparisonBy": "AIna (AI)",
+  "reviewedBase": "37ffc778afeae1fce12348485d21dfa17356d1ec",
+  "units": [
+    {
+      "unit": "page:api",
+      "sourceHash": "sha256:b3b998fc2f2c37662b9bc51d62c14a82ea2a73dd7e3255df06652e0ca3318a5f",
+      "translationHash": "sha256:9989cc0ad728dd2038fb2b28bcb996c59dcd1f2093ec6822b1a65ee915780996",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.legacy",
+      "sourceHash": "sha256:bb871cb7cfec01296624328b91169f93716d22f97b05629c92f1116506317e98",
+      "translationHash": "sha256:86feace332276329e9c08aa2b7af30a6fd7b631a00113b92dfb6bb4436c08432",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern",
+      "sourceHash": "sha256:251a18e081c2afc9a2e4558fd98fb9643674226fb9c2b03b79fb8386bbed2314",
+      "translationHash": "sha256:f1547ef835b14db5f4faae7d8c1c35c3fc48f36671956e18b20425bb1df7e2cd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.alphacuts",
+      "sourceHash": "sha256:2cb68aa5699f4039c622ddeede294f7e14d9486f42ba38559dd46f43d380c2b0",
+      "translationHash": "sha256:47850f41a1777298c604f800eee77f6a06834f6f388b838dba9a0aa03fec5034",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.defuzzification",
+      "sourceHash": "sha256:df7da6cbba26f7fa4e1ed86b84b42217d16e68015beabd5eef097c14be99ad8e",
+      "translationHash": "sha256:98f57371d8d19f2db112e44b260d4161effe4e756aff024433c5402a710c7291",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.domain",
+      "sourceHash": "sha256:2fe934b8af992e18b81ca54ea9f5e741c156eb1289d41014f53c2a7b04ba5968",
+      "translationHash": "sha256:0484abf1e324f694caf9222f5bdc4b873124557ba06e9d601e7a2ebb33c66320",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.exceptions",
+      "sourceHash": "sha256:4913d9b698670a7739534770f2c438716deed7172ec699228fbea115573ed6ba",
+      "translationHash": "sha256:725ccf16093fb036cd8ffd48f3fc0fc590e56fbe60796913f4fa46f4ec1ef540",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.fuzzysets",
+      "sourceHash": "sha256:d2a592c8d08f50c097ec36d3f2ca83229009120ed815903974d4af8bab67fb8a",
+      "translationHash": "sha256:beeab05e9578c2a20e5d9025fa962ac0986df533f0700b7e7e90806339e2e39a",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.linguistic",
+      "sourceHash": "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d",
+      "translationHash": "sha256:bfa6e1aa8ac206ee11da11072d681c105a437c82335086f3e2245432c1994593",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.membership",
+      "sourceHash": "sha256:18cc21bfd72f3413c0ac3f7110d8cdaf77171b0bac103428a6edf68319e185d6",
+      "translationHash": "sha256:0f9e7a953455e3dafb56a156968f2a7ee4129f6ea043cbb82f713ea845ab3adb",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.operators",
+      "sourceHash": "sha256:4c13fb13de5a23fcd35c6ed362ca9c2d981e0e092814a50e76d0446cd1aee668",
+      "translationHash": "sha256:03fb5e370432d1788e3da4c84a66edb32278efd35852d2625878a2f54c901020",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.package",
+      "sourceHash": "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b",
+      "translationHash": "sha256:2131a2c69edd122cbd0f58ba9316a4bca6f3acf34c4d6b30d5c80503fe9c73b1",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.properties",
+      "sourceHash": "sha256:c79eaa220ea775ba9760766990702fac77ed1483a182566522a2ecc7dbe7f2d2",
+      "translationHash": "sha256:287d1c8a2326f04083f7339f1595f892d3c242cf10b4f73a4340a15e152739ba",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:api.modern.relations",
+      "sourceHash": "sha256:d2b141405bca88377c5f5651d86a4afcda7d320c3d6161a1903dd3aa48f010c1",
+      "translationHash": "sha256:67b1a5c08d8dd8c965736a320ce67ee69e42677643bc379dc03e62fc55829f1a",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:index",
+      "sourceHash": "sha256:ccc32a7ae0473b42e902d668f55f7268c18642568cefe7f9e50c812971c7dac4",
+      "translationHash": "sha256:9ca9e7e64e5674459e04fd041defcd6e11619f49c9e2112f8ad31f5a26593ec6",
+      "roles": [
+        "editorial"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.AlphaCut",
+      "sourceHash": "sha256:ecb6a322ab9edc837630632dbcb0f1113dc7f58262c4a66ec48d3e59cd8d3c41",
+      "translationHash": "sha256:450237903dd7630e836c2035772bbcd83930e149f341067cb29844b96eceb8e8",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Centroid",
+      "sourceHash": "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9",
+      "translationHash": "sha256:c457d9aeb4d765b8d0390f6b78080bf388e4145abc8786990fd219b17a035674",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.CentroidConvergenceError",
+      "sourceHash": "sha256:0a09150d3e614174b69041b9f0724701c989c1db13d6947b0bdd82f9bb079ed5",
+      "translationHash": "sha256:0b3e1e80dd16cebe117f0ebd32e8671e80d473bc31d1a83e3e708e51905ada93",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.CentroidPolicy",
+      "sourceHash": "sha256:0fcba50f0cc456a6292422ab137b1f57e913b531a0fa5d346c55464094df9458",
+      "translationHash": "sha256:5d2828273fcf7bc5f6de9e6cd15d950db88ace69718aae3140d2fe8ef4ba35dc",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ComparisonDomain",
+      "sourceHash": "sha256:56d57e410fd1c3b88ca8c43df1143a8fd6974d2cb12e62800569fdc6643ffe0e",
+      "translationHash": "sha256:2b0cf63bb128b888b09671829d707706c418aa774283aa02f93c23e86dafb1af",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ComparisonPolicy",
+      "sourceHash": "sha256:4289b6b905e4a0af9826aee94a7492f76c1b7bc07a264e58b164a6267fe5ccda",
+      "translationHash": "sha256:e8b9470029243bb55864d7f030820df284e8bc15bcaa8f2883967094d7187241",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Complement",
+      "sourceHash": "sha256:231cda0cf9d1cd0ae5c6252e344b892d60e5a3304fd4fd4e5aba20b5f170420c",
+      "translationHash": "sha256:0f1d10e758d990e205338b3cda22b672c34921e910583b5894428f39b27281e4",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ContinuousFuzzyProperties",
+      "sourceHash": "sha256:c05ee0b170a3ddf232e462c4dd1e313ac6a6c830c94861547ca8e06499cf95b6",
+      "translationHash": "sha256:b40239396a2123c3d79c8df6fb9d16e82c7d4328603f443b26fe8baf8a0031fc",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ContinuousInterval",
+      "sourceHash": "sha256:f52028e7bb38995dff4cc850131ff94bc69ffef66f46540f11557bac934b54e3",
+      "translationHash": "sha256:e54d583c9e158fe60253f78feba86263c149311f6816edd52abf13fb72f891ec",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ContinuousRegion",
+      "sourceHash": "sha256:b11e4cc978016fd7c845d4d3820ac58f786ed15f2e7ea9b329e3d15123cbed8d",
+      "translationHash": "sha256:ab9d95abb9bd9bec9080713a1508ddcbcc8fa00b9e9436fba93ca6a2ad5f374c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ContinuousUniverse",
+      "sourceHash": "sha256:6a877df1b307d65d0d604b11c954fbc5e44b228d9a80d0776a70c14151fe6dfc",
+      "translationHash": "sha256:3323f8d329a8452705d6226ea28f110787b67833095cc7faefee988e5af0fd31",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.DeriveProperties",
+      "sourceHash": "sha256:046243351f29d9e4c48bc414ed52a711e3900e0c7819341d227d0c9cc629311c",
+      "translationHash": "sha256:b2525bc3d41d2634046fd20b8999895c08c2b05f0f58b9429a37bbe9e8800c64",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Difference",
+      "sourceHash": "sha256:391d1f8f095b1e891962131f48b6018b5f742c98497c720552376a1d12453b61",
+      "translationHash": "sha256:5d7c0960ecaee326c655acb3c6268b5703128603e27baa4342f8845e4d4a2feb",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.DiscreteFuzzyProperties",
+      "sourceHash": "sha256:0e5bae026a083a589caa0d5a39fd59869cd5155a247249284da190ba4ea7b322",
+      "translationHash": "sha256:2d4d10e5cdd7f280a9aefb15cd080c9d584162ed73ce182c7ec042e5ad68b06e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.DiscreteRegion",
+      "sourceHash": "sha256:d7c4ffc796b5fbc24341f3c2e3edf9dd8631032ec2294e5918891ff5dbf794f9",
+      "translationHash": "sha256:43226e051767cb69f7e16896b73bef9c71f31517fd0b19f5332d35436eef5439",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.DiscreteUniverse",
+      "sourceHash": "sha256:ce0c8f40a65d10d363d951f42ae3d023d15a3f47bc4d6ab385611f71527ca891",
+      "translationHash": "sha256:6ae97e1c850a16fd6e5ffede5253b1e1d5505c095394721419b7abc672805360",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.EqualOnDomain",
+      "sourceHash": "sha256:923325d9ecdbc83f6997095f01dfd15a402e98e6e8d957f5f65345416affa5b8",
+      "translationHash": "sha256:7c8c7f736e5bedfa25de41859ac82bf383acc979736bc71e4b42902a9a379473",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzificationPolicy",
+      "sourceHash": "sha256:59780df0bf471db7949f780f5e1191f5c7435d654307bdb325ce5b4d3c422c09",
+      "translationHash": "sha256:7386a3413ed2c3c061ea2aa5732764535c37ea1116f712792b7432e2dec0931b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzificationResult",
+      "sourceHash": "sha256:40d74a854ff0226b176ff17d2773096eda9748c68859b5c8a61351f71a1a6baa",
+      "translationHash": "sha256:681a830b4aac921bc5b9cae77e2de6630b8086ba97e75059718780b3f100cca3",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.DiapasonParser",
+      "sourceHash": "sha256:d623403639581adac57487435c5ffaf4a3cbe5a6b61b73dd0984f2a27d67b582",
+      "translationHash": "sha256:0ad7b5276a8863fa8f3221321020856b74d825986f5e6b9b7084a772be917006",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyAND",
+      "sourceHash": "sha256:11aefd38bd0cdef3b291f22c0219e77df3e343893eb5f347986ba2933147d44e",
+      "translationHash": "sha256:d5bd5bfda9882acea7ba82d69f8dd3778477c2e78e84cae933dfcc0c55ef0581",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyNOT",
+      "sourceHash": "sha256:a08799c73b2b54cb5fd38f32d383bb90dce97ab4840b9071d463099e5ccb76e0",
+      "translationHash": "sha256:2354de5de9c94bc3975f1b43f1e2263ede2c6f8809b5dd4a0c8d5be8182a1a88",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyNOTParabolic",
+      "sourceHash": "sha256:583ee9648c1ceff8da74785d8ef67ab1c71b947d820fcdc8747f3df27ee21c67",
+      "translationHash": "sha256:69f209b1b319bcf37f423e9d3bbf64261282bffcfa415526e4c87aca2f6e4346",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyOR",
+      "sourceHash": "sha256:98ca659b2be20af7b2b7964c0f6779222fd51e5e894e475e4a66f1028d477036",
+      "translationHash": "sha256:d9d5a3256f2bbb1068b837f4b0f4bd7d6b1170c3d5cf911243cef3e84071c9ba",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale",
+      "sourceHash": "sha256:f615bf8409edfae81e814b4be6a7ac0dbb6a8654a8ab41a760728d3494f379d3",
+      "translationHash": "sha256:5607b23af27c9ef9a1ed7513e61f495e0ef1f6cd025e670b5d840f75d5240d20",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.Fuzzy",
+      "sourceHash": "sha256:40cd53e749dd85638db8b0e35f48972bf7b3b7b9a15b5656df01174a8c6bc276",
+      "translationHash": "sha256:7a81ed86ffcfdc4563a912896e185025f510c9c145b82b8de171beea9b4bd4fe",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.GetLevelByName",
+      "sourceHash": "sha256:be2594e4c6775a98fcbc33a1390780b021c4660dd896ca1e58896b979f7d0c08",
+      "translationHash": "sha256:5f6f5fbaa55f4fcdf0c1c5fab025befebad941348aa494aeba556f0f7e97dd54",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.levels",
+      "sourceHash": "sha256:7429fbb46b2cdf8df14775d7667f1ee98082f2aedcedfefca7ca8cffc86e925b",
+      "translationHash": "sha256:05add422b3ff674684d2956a8bd8eb82a9a54e927a2f8fffedb47a56d72df2c5",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzyScale.name",
+      "sourceHash": "sha256:0dd5b36146905f65b4b4a3f4b90ca464f4b9ac66c32949a8a2bd26d15c06e72d",
+      "translationHash": "sha256:dd1184067323f583a451283098f1da8995c67b35f32445f8091d2e317b17cf76",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet",
+      "sourceHash": "sha256:ed4ba1ed35eb3912a13d90c4cc539bea28e512d32486f04fe6213a784f8681f2",
+      "translationHash": "sha256:168652dba3f15a5007f54e9237bf394208c866dc33869f9edf092860cff20021",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.Defuz",
+      "sourceHash": "sha256:92db8d812a36907e50e83244d1e15c9f80c7ec79078a28b1d0811472b82f0c10",
+      "translationHash": "sha256:9613ce378d8c4c51c7e68aca5693317f9ac8d118003eb2c9b97ebbf6232a545e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.defuzValue",
+      "sourceHash": "sha256:83c4c4219f897ff4c28aa88758534d131b6ad6f083008cd0627bf25484f34bb1",
+      "translationHash": "sha256:f6bb0ff8c881c8aeaf763cca5dfaffaefc5475de85450be0741360c36c59176f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.mFunction",
+      "sourceHash": "sha256:fb5f1bb5794dae5f396758e09df910540ddec604e6cbf56d9fff1c7bba81df2b",
+      "translationHash": "sha256:468ed986a6f10e445f03965db877d2d892563bbcf8b953cbe86d742873cb5fcd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.name",
+      "sourceHash": "sha256:daf496678d8077e2ea2e70a35b65519a7b781b493324f9019ee38e024939620f",
+      "translationHash": "sha256:2681976f228cc24a1abab18d2ee5dc48e591ea4a25dbfb5fb96bdf99b4dcebe1",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.FuzzySet.supportSet",
+      "sourceHash": "sha256:7f73e60efcb4f9327a392da8aa40be307a8e404261f7eafdc6feff4e68a771e7",
+      "translationHash": "sha256:6b909a1bce8fd17076b104b04c4daff2ce8af39aaf72d219617f2b37793b9c36",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.IsCorrectFuzzyNumberValue",
+      "sourceHash": "sha256:628318190b48201cda8b2cade6eb076024c9abc66a2aee6d27056389c8188399",
+      "translationHash": "sha256:cc88e572204cc8741c24aa26e73db99238b42681124b83ad47559043064bac4c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.IsNumber",
+      "sourceHash": "sha256:d999f7ddaaeac83100028206835fba8051bc7cd76bce10af29f6b89413d2d6af",
+      "translationHash": "sha256:c08555447bab624d11833e4c4a91eaf71c743345fac14dffca8d636f7546ff74",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction",
+      "sourceHash": "sha256:23232357e23c0e5b7e89ef4796564c0a9d359f674ea084d07ddb78f01b4e112f",
+      "translationHash": "sha256:781b12dae84335e035ec5fc53f5ae0d3b97d359fed1ac8fcadcfc45a3669a786",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Bell",
+      "sourceHash": "sha256:a1c9d8eca710faec3e7cd60a14ad5b5350eb214abfe202e6c2f48cc0d5e5ed55",
+      "translationHash": "sha256:cb0b2faa6d63fdc82aa1619edb56c36ba56a3977bfd31e30c5ebffba4eca1988",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Desirability",
+      "sourceHash": "sha256:5b7054a461770ecfd12e310d988f08320cacb5d00a8909aecdb598d7bb374854",
+      "translationHash": "sha256:5db208aebcbea514fd28d18c1bde73dd24c997cddd6d40d89eba14405d9eac98",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Exponential",
+      "sourceHash": "sha256:0b2d17d0db0145c93ffbc500ffed6d9d7bf62758a2fd764210793e9b40465db0",
+      "translationHash": "sha256:2c7e1987ae05fffb81c85a2ca6b80c8fdea16f504b37462f8036b321c1af45ae",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Hyperbolic",
+      "sourceHash": "sha256:586482e2cf28c9423f9e1781aa058ce1f19275d085736b9478c15ad9b1f01bde",
+      "translationHash": "sha256:af1ea5b4620431459c4d827e5569342ce5fa20b97481a9c8125278aac5210f39",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Parabolic",
+      "sourceHash": "sha256:666c23a8193dae02e3078585c00698e81e42ac5ba34b71ec25b3733f101f6f13",
+      "translationHash": "sha256:0d0da1787d2cedd21b5fd0e242227519b0aaec386ee076850dde90534e6988e5",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Sigmoidal",
+      "sourceHash": "sha256:4e5df78b0c14490121918c2047c26206c592caa957577ac525a6d4dde118c901",
+      "translationHash": "sha256:e53dbacf2cf30282d9a75e8a724dbdf8656ac418be40fe8b5e4952ac680e8827",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Trapezium",
+      "sourceHash": "sha256:8c696636bc2a3d86f7660af9dc0991d18cad05ed952944d6224cb44769c7a1c6",
+      "translationHash": "sha256:872073b967d832dec4d9caf589335692c12053a0eddcf22c4b7f3d4afa285631",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.Triangle",
+      "sourceHash": "sha256:d68a49c8ba7a4f5b0e8f4d2ad9e100a44b1c954f2d7e630e8e2aa3e4f3f0c191",
+      "translationHash": "sha256:d8bb6cd8d4b9341359d613adb54769849383566f79412acc65694f2e8bb51c81",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.name",
+      "sourceHash": "sha256:124b74989182e657a3012c6209cdc1fad280a994752a6c2633f2f41f55d8579d",
+      "translationHash": "sha256:d7192de2d67f5e92f3722cfc633df7b76bdb61ccf0e4644bcff3e5cdcc811bcf",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.MFunction.parameters",
+      "sourceHash": "sha256:a442a45c5d954720ab76763ba7393b7cceace4cf777e4c674cde251a6278a7b4",
+      "translationHash": "sha256:d5b7f777425fef196b517b33b7ead49dbe90c7bb54176280cc64f2a51ed75402",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.SCoNorm",
+      "sourceHash": "sha256:ed90501fd7144b4d00c0601e0fe2707ece17afe0bd05bd1543ca3b4b0ec4e462",
+      "translationHash": "sha256:6103f2eab078cfbe353538a41a81e90cb617b678b791b1d72f95b91935774feb",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.SCoNormCompose",
+      "sourceHash": "sha256:a572fa9e51de603dd0f94c5ca39f543f7090bda3be1ad1d4093d7c0a1a10188a",
+      "translationHash": "sha256:bc99f8f959f4ff41fdd96ee5d8e1b3f29d72de6cfa138cd05092930b3cf40c68",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.TNorm",
+      "sourceHash": "sha256:7760b339c7be1fbb83d852349bb581907821aa86193e302b87a19494e2ec80ff",
+      "translationHash": "sha256:982dc2cf1a9205d593733aa2fb6fdd8c8a0f8d893fa505b8260e8cb8c2154c34",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.TNormCompose",
+      "sourceHash": "sha256:dd32e97be9820abd2c449071984d0a97594203a8f381f16b22e1a8f2763e6da0",
+      "translationHash": "sha256:944953eae6256149ac03260544614c58912ac5c8be36d5f2825998e70d84afdf",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale",
+      "sourceHash": "sha256:728ab821120f12df7d472e3bd2b17af295b826c886a39beb0c933b839c13c025",
+      "translationHash": "sha256:ce982d594ea36d1f77a239c82102989884bfa9872b796b7292bc9c14dbdf0d39",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levels",
+      "sourceHash": "sha256:b33482f25694a973cbb9f208247aa8c6fc8d871b2aba80197d4e1ff885405a5e",
+      "translationHash": "sha256:15a3493a958f174f8044d3b99de897fb252cda5e933c8e4739abd338f4ececbf",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levelsNames",
+      "sourceHash": "sha256:9232aae176dcec51cd5a1022e307e7ca76afdaff4de7e786bf5afb440ebb2c09",
+      "translationHash": "sha256:898d9c9ac98e98cc993c38430c5be1db26e077b723f702641cadc5120d34b6b9",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.FuzzyRoutines.UniversalFuzzyScale.levelsNamesUpper",
+      "sourceHash": "sha256:4f75a924a42314c95599e5521a1cf0f50d0c028048cc2afab9189d04ff2c6a36",
+      "translationHash": "sha256:ea429d145fc4b860533db67a76617cca42a0528a6449ef092007082027816bcc",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Height",
+      "sourceHash": "sha256:dbeaad0c392550f62c3672203f0cdf5a88b4eb6027f4965eeec307c74d5be4fc",
+      "translationHash": "sha256:b3c071adc446f0a9e4affeed564278f360727eb4fddb59a3f355586291b28d66",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.IncludedOnDomain",
+      "sourceHash": "sha256:547ccb2b7e3fa545cd483cb53faa934c03f05a3fada2da418a961e7144d52840",
+      "translationHash": "sha256:05999e7a7aa057fdb12b9231b15e36364594e0a69372924297a04411dfc2678f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.IntegrationDomain",
+      "sourceHash": "sha256:d474de660f4917b27ff7e7d5e32b5bec3657628c44b815310cb2fc9efa758cc8",
+      "translationHash": "sha256:676429b0732e5fd50469c218a947695cf80d0b98f49ff7f5992c2fe5f34df8b0",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Intersection",
+      "sourceHash": "sha256:c74b03e1f6f6a567d5859bc5a4bee7e21e9b7a971bfd22fb90a32b569c54d156",
+      "translationHash": "sha256:dabdd4fe36b661a3681e737411cd03178de5b138445a0d0da768e5befdeca9ac",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.IsNormal",
+      "sourceHash": "sha256:b249f5bec5da405c1b2150991bcb5767cdc2d4aaa316bab813c3be00d800b240",
+      "translationHash": "sha256:4a296f4e2b3d81a33b0a8ee7fb1da25007c37bf76d65e1034d138fd29c0ff93f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.LinguisticScale",
+      "sourceHash": "sha256:848cdf58c4c0c8ed025fbb7d2cc50392a910e706111ff87e3b44b4917c5e77dc",
+      "translationHash": "sha256:147c4d58a2d101f2bbab68731a46b0c7e70c97f70c2f8e9c0bfca1ba73df3e55",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.LinguisticTerm",
+      "sourceHash": "sha256:883a7a29e09e99e34dfcec2f5621290a56979e9ac4eec44ec651f494d3a06411",
+      "translationHash": "sha256:5ae38ddab74f8c29aca010042d570680493473cb24bc20ae5dd5272067aebb0d",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.NegationPolicy",
+      "sourceHash": "sha256:6675a76125e38ddc1e2f1b9685a1785b86ffcfbda4b1170a3457a69291dede3d",
+      "translationHash": "sha256:cd1df4137babee3cf52139652f3ad4a5fc4ea9521f11a4f4f51fcbc57c42f367",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Normalize",
+      "sourceHash": "sha256:8436767afea75085984d8620d3797ba9e330bd708e8181bbd8ffd8897015de08",
+      "translationHash": "sha256:adbf6a9a566176e9b15df066db38ba207d665a00053d644459b252990f99a860",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.SNormPolicy",
+      "sourceHash": "sha256:1514276cc2dd52d4fde98ee4b43dc0887adeb780a01d18d66d4280025ab0a697",
+      "translationHash": "sha256:c21d53689e2f7e9d711596c06760e9811391c456111eb98800f541f2df90e9a0",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.SampleAlphaCut",
+      "sourceHash": "sha256:5f86c50347415650648624ae4ba028ba421860388bd01b3d92433735abf62c8b",
+      "translationHash": "sha256:2263ca818bc6d9c8094f3e0cc684727c385d547847617f84602ecedf71c17919",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.SampleProperties",
+      "sourceHash": "sha256:6a210a04528b9a4ab9cada6a4a81af79476f39d4f3a795a0e08785f9bc02301e",
+      "translationHash": "sha256:d9b1d8336ec1226e1ab384fb5a5faa70920f1e303f2eeab6253fded1c9b6ad1c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.SampledAlphaCut",
+      "sourceHash": "sha256:0d3db0498e523ebbaa77ec0d943a029a2e30db60e28d6ae485df099a7311fedf",
+      "translationHash": "sha256:a3526c37d70aefbe0bf16cd52d2137a4f621f93061e3c68606bbc414de22a164",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.SampledFuzzyProperties",
+      "sourceHash": "sha256:71dbe70ac7ac4b2ddf433052c207947cd4fc70512360eb02c910d74311e20def",
+      "translationHash": "sha256:78434fe9a2ca7ea1e3a06a9a09764a1c514a0df087cddb92f1fd9b214cd7bafd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ScalarFuzzySet",
+      "sourceHash": "sha256:1cb94bed10f53245ecf0ab10af44941ca62237c57eac5af0581c94f9af96e238",
+      "translationHash": "sha256:1d7744606096458cc833f0d11ed4a32898bb9ee8777112b392e1659e71ccb6dd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ScaleDiagnosticPoint",
+      "sourceHash": "sha256:c8376deea2b8fef813168b1b3046044749965796a197d1eabd7a72504899613d",
+      "translationHash": "sha256:33f7265efe0936ca97b96a65b416c81541ae44dd7440ddc788dbf3f8428759f1",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ScaleDiagnosticsPolicy",
+      "sourceHash": "sha256:820722943947e72f85bb9c3dd9ff2ed98dcdd6bc7df04000cbce352a23421541",
+      "translationHash": "sha256:2b83382a4b2c0d16fd17ebaf7e2b0be17fb393c176a8e893c49ce767f589f749",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.ScaleDiagnosticsResult",
+      "sourceHash": "sha256:ac73bb6343df28721ce440e816ddd179de9f7c15d5d77d94f16c5baf97f08dc9",
+      "translationHash": "sha256:bef655e06352cc9ed55f6eb7f929f120296e4ff8067e328222691172c905aef5",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.TNormPolicy",
+      "sourceHash": "sha256:6d8348b6f7acd0668a9572ccfd8390898bdaa537cce80b447a31b89683f8060e",
+      "translationHash": "sha256:98ccdf08dab6b0f3dbe290fef23e626e9007e08661eaf7ff7ef9ad10337868ee",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.TermMembership",
+      "sourceHash": "sha256:a52c53c30f0ff281af961ae32e25f2c051921b42609451f4980927b4b82e8eec",
+      "translationHash": "sha256:044653b543ee37831109a8f518d44902514aa14f1a0297bc092c68fb3d6fdfa6",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Union",
+      "sourceHash": "sha256:3bb9102a4291ee2ccb2640eae3391a77dfab12618cb820f8fb0490a97d6f8e0d",
+      "translationHash": "sha256:35aa8b8cdec6431848a1063828dbe148820be3d23d6afad09953e6892b658041",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.alphacuts.AlphaCut",
+      "sourceHash": "sha256:442721d23b9ec9178663190ae35ca26b2f1fbd58f80e9ad0d38772355703dbab",
+      "translationHash": "sha256:450237903dd7630e836c2035772bbcd83930e149f341067cb29844b96eceb8e8",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.alphacuts.SampleAlphaCut",
+      "sourceHash": "sha256:b6902b65388bfac5d8cd2894ddf1f8c9c5c68871881de314caf537ab3e63da7a",
+      "translationHash": "sha256:2263ca818bc6d9c8094f3e0cc684727c385d547847617f84602ecedf71c17919",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.alphacuts.SampledAlphaCut",
+      "sourceHash": "sha256:a4d4da0bb93b02e35f5691576790ea6352eeb62931c48b25b61c9bac70a9646f",
+      "translationHash": "sha256:a3526c37d70aefbe0bf16cd52d2137a4f621f93061e3c68606bbc414de22a164",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.alphacuts.SampledAlphaCut.isExact",
+      "sourceHash": "sha256:283484298573ecd33f28ffdf5b141dc556a2d8a779be0353e353dd9a1a241743",
+      "translationHash": "sha256:1d4eddc900ff80b102c2e2b58322205329c5aa8a72f481b49c48f670d193e55b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.defuzzification.Centroid",
+      "sourceHash": "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1",
+      "translationHash": "sha256:c457d9aeb4d765b8d0390f6b78080bf388e4145abc8786990fd219b17a035674",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.defuzzification.CentroidConvergenceError",
+      "sourceHash": "sha256:58472f5e4fc2cf869fc00578f1300e757530f2a4c73902162f0ae1e300c49ece",
+      "translationHash": "sha256:0b3e1e80dd16cebe117f0ebd32e8671e80d473bc31d1a83e3e708e51905ada93",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.defuzzification.CentroidPolicy",
+      "sourceHash": "sha256:5322d743920c8aceff7a318ddf85967bf1f731abc0976e5d25c608051dfa7d7a",
+      "translationHash": "sha256:5d2828273fcf7bc5f6de9e6cd15d950db88ace69718aae3140d2fe8ef4ba35dc",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.ContinuousUniverse",
+      "sourceHash": "sha256:c1f3840506ae5a8aaebb315f1ad84cc81a677ff638f7a3cd19eaa9f0dda8d01a",
+      "translationHash": "sha256:3323f8d329a8452705d6226ea28f110787b67833095cc7faefee988e5af0fd31",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.ContinuousUniverse.Contains",
+      "sourceHash": "sha256:5b9d499544042f156410d4dfe8e2f9899e48f5c7a3ad1d858bc67a6d56a555bc",
+      "translationHash": "sha256:23fc93456cea709a7cea5cdca06e36b8b70285c24485acdc9259255e1ec8357e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.ContinuousUniverse.isBounded",
+      "sourceHash": "sha256:bb6fa4c93e1bcae2ae54ab0d7e47f38bb14bd12a97175921a34d3ba3eb96d379",
+      "translationHash": "sha256:df4c818c03a261d01472619b908d3b393df52aba622c21b913be7cc6cb032889",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.DiscreteUniverse",
+      "sourceHash": "sha256:39ef05be933f2b64a219f5060937b7d2e587a2701d726e1bc8e237081c3cd833",
+      "translationHash": "sha256:6ae97e1c850a16fd6e5ffede5253b1e1d5505c095394721419b7abc672805360",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.DiscreteUniverse.Contains",
+      "sourceHash": "sha256:83ce95da3d453b623203298415e693ab9e173b5b2d5064abaf3b6b66f75db751",
+      "translationHash": "sha256:17b52858857b24a6cb1c145cd97232be758223abc610c0b351182f2066b1a5d7",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.IntegrationDomain",
+      "sourceHash": "sha256:f1fb6b0f00e8220d8766d089a77d09aeac17947e7a59602d1c59d55c4fbc657e",
+      "translationHash": "sha256:676429b0732e5fd50469c218a947695cf80d0b98f49ff7f5992c2fe5f34df8b0",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.IntegrationDomain.Contains",
+      "sourceHash": "sha256:7da7cfd1289d000ecc468ede0b74ad56f7c0a79c5356f466eaa5e90da97b8b36",
+      "translationHash": "sha256:b56185cc03537b5db8905089f3c2fd255a68bda1dc2c04abba87d19ef0957780",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval",
+      "sourceHash": "sha256:a7418f6354ea34d1d337df3736635fe6cc46592dcd546660cfbc2a8500f6a23a",
+      "translationHash": "sha256:e78d398e726481ce6c182d4eb5fae8415c4fade29a2b53afb659e4c74bdbb3b0",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval",
+      "sourceHash": "sha256:3069e7d4da243ccf456192a58edddb861f096341668ad2568f584a530c61eed0",
+      "translationHash": "sha256:7b5944b3f9c401778657146f9564c9debdb46e37d8b17e66b1a09f6d9e73b692",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.domain.IntegrationDomain.ValidateWithin",
+      "sourceHash": "sha256:a0b1e4a0ec65df315da2d8d63c5994f7b15aeef38b22ed0a5c60b7c08f753eff",
+      "translationHash": "sha256:1c97109d7a93083ad4a2e7d5dc48f3b26d1e275dd38a5996aff41bb28568585b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.exceptions.FuzzyRoutinesError",
+      "sourceHash": "sha256:931262fc14fbc4674531080d18fc93dc45b941beccb95260a46fecd282a62f35",
+      "translationHash": "sha256:c62dfe1097a1a36d37c949b72c0031a049df42e0238d755d558c915828ccaaf0",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.exceptions.InvalidDomainError",
+      "sourceHash": "sha256:ab26e30965783534e55f75e7130b79973bf90c90f80c9409d5ebb7301d6807ab",
+      "translationHash": "sha256:57064521d27f4e68759b74b2574a05a3dde73d3bfaecea41c25f01f5abdc82c5",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.exceptions.InvalidParameterError",
+      "sourceHash": "sha256:68eec67c11116e32d5b8adc98840e204b78bac1417ac19cb2ab011418b891b46",
+      "translationHash": "sha256:810782cc8cf80ea3a1a154491c54a5ae46fac7b763edd4025c8b10496639a0fa",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.exceptions.InvalidParameterTypeError",
+      "sourceHash": "sha256:f4d59c7129524d6f4fafdf1105d74102103002feb30c91edd2a314c5f336d1a8",
+      "translationHash": "sha256:8e58cb1eb202fbd644943335c204fb8e63f14bf025e974ad1fb20721293789f1",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.exceptions.NumericalError",
+      "sourceHash": "sha256:602d0ee237f4cfe7bb701bc7963427bf8f37e3e119ceb988d3317d607020f6e6",
+      "translationHash": "sha256:363b5b8991406964577369501156a5a4d7d21675c12e029e9d1533851ce76707",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.exceptions.UndefinedResultError",
+      "sourceHash": "sha256:4e93e8e7587670b53e44525e518c6f1575c6d1d009dd82ac8be886ed8fcb8e85",
+      "translationHash": "sha256:40b116903aeb7931c3211bedd7feff5f19e9fdcf679d7027824284d2af1aecdb",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.Complement",
+      "sourceHash": "sha256:5aac8f5209aafae85580276033e20f92497caa1e55b77d4efcc0609f1623b699",
+      "translationHash": "sha256:0f1d10e758d990e205338b3cda22b672c34921e910583b5894428f39b27281e4",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.Difference",
+      "sourceHash": "sha256:b1f35adb8f0a6624397c5827d40f3ef44423db7d498833997c2f6d7e676e8f95",
+      "translationHash": "sha256:5d7c0960ecaee326c655acb3c6268b5703128603e27baa4342f8845e4d4a2feb",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.Height",
+      "sourceHash": "sha256:a88db233677cc89ed1acd5b509f8213a24998bac1d49d8c5cd44678673965823",
+      "translationHash": "sha256:b3c071adc446f0a9e4affeed564278f360727eb4fddb59a3f355586291b28d66",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.Intersection",
+      "sourceHash": "sha256:bde0a50739ff83faecf3d35a12ff358163b5c5576433d0d7f8c45281ad9e3792",
+      "translationHash": "sha256:dabdd4fe36b661a3681e737411cd03178de5b138445a0d0da768e5befdeca9ac",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.IsNormal",
+      "sourceHash": "sha256:acc011cc1be9bc3393ad4223ebd9719bfa094e043be2769fb4da50ddc8e10a10",
+      "translationHash": "sha256:4a296f4e2b3d81a33b0a8ee7fb1da25007c37bf76d65e1034d138fd29c0ff93f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.Normalize",
+      "sourceHash": "sha256:8fcb31870fa613efd0e6ebb2c8cab24dce5970b8aade7ecd7f5058ff70747405",
+      "translationHash": "sha256:adbf6a9a566176e9b15df066db38ba207d665a00053d644459b252990f99a860",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.ScalarFuzzySet",
+      "sourceHash": "sha256:f61c09cdf632a8ac01f2678efea6bd035834de93d4f41ab51ce483dfefa09575",
+      "translationHash": "sha256:1d7744606096458cc833f0d11ed4a32898bb9ee8777112b392e1659e71ccb6dd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership",
+      "sourceHash": "sha256:6d51bfd902c91e6680f1be6795ea0dfc842744b8489a575d3c2505d08fa0de7f",
+      "translationHash": "sha256:a61372b5b85fa6ba1d3a359092384f768d01eeb5686bf604dad97fab9329a82b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.fuzzysets.Union",
+      "sourceHash": "sha256:447e5d47a1c1af1b08b6e39b600c44444875be79be73aeb79c7c6004533253cd",
+      "translationHash": "sha256:35aa8b8cdec6431848a1063828dbe148820be3d23d6afad09953e6892b658041",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.FuzzificationPolicy",
+      "sourceHash": "sha256:54c775b80a7a1c8d0653ba3eeb8a5489a08af0f7412ca1f95e8e1147123f57f1",
+      "translationHash": "sha256:7386a3413ed2c3c061ea2aa5732764535c37ea1116f712792b7432e2dec0931b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.FuzzificationResult",
+      "sourceHash": "sha256:3beff07dfc28f8e4f960bf55f2ce265666303ec299a68c6b170b03a8ab0fdbb2",
+      "translationHash": "sha256:681a830b4aac921bc5b9cae77e2de6630b8086ba97e75059718780b3f100cca3",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.FuzzificationResult.isMatch",
+      "sourceHash": "sha256:245bbb18792f606a0320f88381e62770106e77972d0f0323300040b81e4bad5a",
+      "translationHash": "sha256:dea932aa1d761c6e9188fbeddcd2b7aa8fb2d0f6647094f21a6942c1c9c9334a",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.FuzzificationResult.isTie",
+      "sourceHash": "sha256:a6512dee7da4b6f0f814f6ea22ae81a172c2d3f63264c2080b7327280f568651",
+      "translationHash": "sha256:0f46f5a305b3de600d64e5552968f1931b6d217638d3f5c2de07d49411949841",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.LinguisticScale",
+      "sourceHash": "sha256:7fe5327b5627278bf690538819948769e512cb393b5b0ba34deea5f78192682c",
+      "translationHash": "sha256:147c4d58a2d101f2bbab68731a46b0c7e70c97f70c2f8e9c0bfca1ba73df3e55",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.LinguisticScale.Diagnose",
+      "sourceHash": "sha256:cffb1731fa865f644867521b3001677c5def75556f14b9504a30c357a301aea1",
+      "translationHash": "sha256:f37a46e33fb2f1e99973f9fb0f2697aaf206681c7eecfde29f2f1f39772c7d3a",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.LinguisticScale.Fuzzify",
+      "sourceHash": "sha256:c7755a5772dde0e9f2019575694bc77eb04e89821592927c930ac7d9a6dff64d",
+      "translationHash": "sha256:d6742cc1967b2024a214e3d08a85c28641e16825884f12c3123d3a81a09aad5c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.LinguisticScale.GetTermByName",
+      "sourceHash": "sha256:6adcb23be8cb154ba5645edc63da9ec07c78ae3c7dd3bbce0e57c89b377efa5e",
+      "translationHash": "sha256:bdbecf9c518899e4ce18b0fd11e2c3a54127eee15a64bdcbb2628ed816c92d49",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.LinguisticTerm",
+      "sourceHash": "sha256:ee601bce05c76360a791dc980f248ef4ce3ff8c08e5e462a92e31a3f10bdfcb6",
+      "translationHash": "sha256:5ae38ddab74f8c29aca010042d570680493473cb24bc20ae5dd5272067aebb0d",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint",
+      "sourceHash": "sha256:0b30c010e0b789db768515b7341196689b2166cda6851d212cc195aa4b248d48",
+      "translationHash": "sha256:33f7265efe0936ca97b96a65b416c81541ae44dd7440ddc788dbf3f8428759f1",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms",
+      "sourceHash": "sha256:e51f94d8908a0408716c136261b2e05d8a7b666acc379863b1c2043a31f3ad80",
+      "translationHash": "sha256:69345efc34af036c805df8df97aa7aba0f02c0d7affcd530508be1d845a84319",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap",
+      "sourceHash": "sha256:7921f3e01a74c99469a99e53ceb6fefcce1a3998c887976a16bf8942d244c97d",
+      "translationHash": "sha256:85306200d4243d87f8d450a49d1b4f366a040da3a9f5c55c76430ae243fc3f6e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.isOverlap",
+      "sourceHash": "sha256:e05a752b1756672e54b9776f99c84b1b1386cd9f4633d070840730ec7a94a8de",
+      "translationHash": "sha256:cb10b1fb3a3b2f9adc765a64270c2a3ec25f94abc563b4ebedf855fb0009d099",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.maximumMembership",
+      "sourceHash": "sha256:d21228007a2a563a3de6767604109a8f845f8340bb6efd81d4613ef7cf010fba",
+      "translationHash": "sha256:9501f970c773342dd5a8c8ccaf40fc0c7ffd5587f0b845ebdf2168c8f4b9775e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.membershipSum",
+      "sourceHash": "sha256:2b049914f437c12984eade6e60a6d799d1ddfcbfd2eb48841c31657004f72564",
+      "translationHash": "sha256:58bb118a053673c40093e153545963adf1d09384366715eaec5f3da438db461c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticPoint.partitionError",
+      "sourceHash": "sha256:bfaa941a2ace02e392d5fd305ef6a451dfc237cbfee505c112008283f6199ab1",
+      "translationHash": "sha256:0eb9f680178f18f71462333d592104d1fa3b6cf208cb592d0fdab42f5a8ce49b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsPolicy",
+      "sourceHash": "sha256:f22f08bc819a63300fa75b63d8e3e395dd64873475145278261199bba55c0469",
+      "translationHash": "sha256:2b83382a4b2c0d16fd17ebaf7e2b0be17fb393c176a8e893c49ce767f589f749",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult",
+      "sourceHash": "sha256:d6b0ade2434158a538d7f1d62f977839295d51b9215eb68056c8ea82b8e1c89e",
+      "translationHash": "sha256:bef655e06352cc9ed55f6eb7f929f120296e4ff8067e328222691172c905aef5",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapFraction",
+      "sourceHash": "sha256:5e2f2fede7e880cdc91084d702da9fabb0271fd2bf5f0a4e429b7e9919c8a4c3",
+      "translationHash": "sha256:af8990ff43429e56319ba3e0c2fb10f95edd5ea3e6d28128cebb10170c0d34f3",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.gapPoints",
+      "sourceHash": "sha256:0f1f35bdd6923711775161e9e2bab9b352a6ff44059a2217087cef305da4ae5e",
+      "translationHash": "sha256:011b8f0ded83b2ce615fc26e4eb7cf6365b548f54c52212edb117366c52a985d",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.isPartitionWithinTolerance",
+      "sourceHash": "sha256:ad035a30a1a9daf771023c101aae85dbec513b0fcfc06ca4a625d636a8fb02c6",
+      "translationHash": "sha256:f1fbe558759fa6a1e41faa44da83c6e7c883c0f66d226de35c4c5a26d1f56c05",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumActiveTermCount",
+      "sourceHash": "sha256:9c9fa5c1b75bc792ac4e9cfea60a67edc1338758a774937a83e3e68f319391ba",
+      "translationHash": "sha256:ae44d14d79235010a25189eb2f7fd120b789d37b68cfb0551a381df0ba3d319a",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumCoverage",
+      "sourceHash": "sha256:aa9c92c6d31afe709478886fcbbfaf37c5fade7ab6cfa2d7ef1c5de917ad167a",
+      "translationHash": "sha256:ee7cbea74852d6866c2ad79fb6313718a71eda7427aa8980ab36014e2a439120",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.maximumPartitionError",
+      "sourceHash": "sha256:025ff3a539b37b3b25c8d0752969d26d89e35c96d6734dc30829b650c3dec506",
+      "translationHash": "sha256:39ae30ef319a7afa5544a71c3b721c98160dbbe4d62787345b06dd799f2946bd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanCoverage",
+      "sourceHash": "sha256:17a2fcdd209de2c8ad011097303a123d3c1ef3663763a02f975e1dc2bf2092a8",
+      "translationHash": "sha256:0b13929df65190bac1f5436e8df1cfbde41652b104816e7c6a9bb47b33821166",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.meanPartitionError",
+      "sourceHash": "sha256:41cf64a58b514892a8dbade7529d1c6d09dbf62c360986d46cd645e5ad0a5a09",
+      "translationHash": "sha256:f64e90996e30e35f482b3aeb2af012b90da208a8300ecda7197af1fa8d1011be",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.minimumCoverage",
+      "sourceHash": "sha256:bdd7650170b4bed082c10f5e8eadf9c8af82c007b858fc6c6bcfe4871b2570e0",
+      "translationHash": "sha256:8088caa114f94ba9ce6977bace0374b2069a6214333c459478c87f52630042bd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapFraction",
+      "sourceHash": "sha256:8a1094a13a4a47cea016f724d02d2866b3ba39aa78799f078e644b3f815cd7a8",
+      "translationHash": "sha256:aa018d15b00daf6e57effe1f372f0019de3851e0c0d78c55b11e59002be5fc97",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapPoints",
+      "sourceHash": "sha256:0b61a6ae7d29f4efe34787436b674a28f3a40f9272eba13116020959ae92ee7a",
+      "translationHash": "sha256:cc628de029fa5571f2d3073300f7fa6af2d56106b92ad6d8d11fc25cb3c7cc96",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.linguistic.TermMembership",
+      "sourceHash": "sha256:cd402f54d170b3322c1b3ec6689eb4aa7d0c5df0b60e7739fc50d2b63db12ebc",
+      "translationHash": "sha256:044653b543ee37831109a8f518d44902514aa14f1a0297bc092c68fb3d6fdfa6",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.Bell",
+      "sourceHash": "sha256:34b5e7e04fd4f7faf46bf1703b32a24be7ee491e24311801c117832bd21a9c95",
+      "translationHash": "sha256:616155e8a319da976ee44a48030a98f7f9d937997fa81788c499b4ec9169a973",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.Gaussian",
+      "sourceHash": "sha256:4173db52e7a90a009889b0e982f8ca330b030bea24782e99ba9e687404f61e37",
+      "translationHash": "sha256:53472bc668f20fa31a98bb20b7c4f733355e68e72e6c646dc79049be857b0405",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.HarringtonDesirability",
+      "sourceHash": "sha256:b88fbdae5d8bd75df64e1f136e591c2cd75e578277ddc18b67c116ce20241ad9",
+      "translationHash": "sha256:0c0ee167962eed9b1d43af4df06010d39f677d0089436fd97cb7ed9cd96af881",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.Hyperbolic",
+      "sourceHash": "sha256:dc4b5157d980391ac0c795f1612425667f5770b7290675543498c02aec29069b",
+      "translationHash": "sha256:1a12ec000eb74c13a905a05ab023259bbede0a1efe75868d8ce2de7caa9bf736",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.Logistic",
+      "sourceHash": "sha256:c2eb75ace8e5f11e99b1aac45337d6f3463741910a5fe4e6e07e2029175fa0a3",
+      "translationHash": "sha256:a0c19a688b3d4aaf327210e2578b365d56321189a2b0ea2f652d7830ab5c72b3",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.MembershipFunction",
+      "sourceHash": "sha256:29df5354ed777d3fe170e3dbe7cfabba4fd1cbb0dab491cc145db286922ae996",
+      "translationHash": "sha256:85b30e9a6c7a9f2ec9ebc7a0bbcefdbaa090d6656c541589d220b0124ce175fc",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.MembershipFunction.Evaluate",
+      "sourceHash": "sha256:769bc1c27d3d5d476ef11edf2f18b32637487da59dd926a893c2e02a1cf41d9b",
+      "translationHash": "sha256:d560850882dfecbc0c291541ac84db3d507c851b9846d8afe8518d8a069dcc98",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.MembershipFunction.parameters",
+      "sourceHash": "sha256:98b0a34a266200f11012936c85b7be445d014e22ae37b19734592ffa739a91d6",
+      "translationHash": "sha256:854b3be0c7a1b99bb5c3891807163fdc3a22ebd24f567255486966a5fc140a60",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.SShoulder",
+      "sourceHash": "sha256:a4eed302fc6ad3e5e29f4c176e7a027e06baaa61c31b193b0886e14a22208671",
+      "translationHash": "sha256:a6df848141368e31878d775c6f698a1f11ffed0198a6fb49f278009550df96f7",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.Trapezoid",
+      "sourceHash": "sha256:12f1a317b2879ff6425e7d61efeff55f0e211b0648b97ea6e5ebc9b7505b33d3",
+      "translationHash": "sha256:fcc1fb48015a628243020e9e8f2a4597b7010c39f2c87cc180223fd279cc1f81",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.Triangle",
+      "sourceHash": "sha256:469a2242f3b73e78128b0b1b81f8caad95008dc47b423900118b518fb4caa68e",
+      "translationHash": "sha256:3629b51926eb63e44aa374dd4db42323a0bf971e2278ec849d4e9027564c17f7",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.operators.NegationPolicy",
+      "sourceHash": "sha256:c5a736ee688c14b4fd5085d6fb3facc5dae642f3beaa351b6424124d9992e36a",
+      "translationHash": "sha256:cd1df4137babee3cf52139652f3ad4a5fc4ea9521f11a4f4f51fcbc57c42f367",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.operators.NegationPolicy.Evaluate",
+      "sourceHash": "sha256:ad4f8df13d573de59a93e7bb45a1a3e38197d3aff234cf099d3dd4cda6efdea8",
+      "translationHash": "sha256:6174e43c946505b74bbf7b5d708e9c4ea52f3ec7205183a4e27934352b3e2aff",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.operators.SNormPolicy",
+      "sourceHash": "sha256:4b9d7aa20f27ea44715181edf86f12736ef185eb483b7e1ec53e8e43c9458d6a",
+      "translationHash": "sha256:c21d53689e2f7e9d711596c06760e9811391c456111eb98800f541f2df90e9a0",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.operators.SNormPolicy.Evaluate",
+      "sourceHash": "sha256:2a43f6dcdce2d868928d1a8d75a575bcac30c9d17075ca9a53d892f4822b0ad7",
+      "translationHash": "sha256:ccf1f92dd0fc96fcbc71c05343c5395453c7980149e1832a41f0a0697fac2c10",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.operators.TNormPolicy",
+      "sourceHash": "sha256:a25076b23a756ffe085f5a3c7b7ba16c6f18b91df2531440b5b5cfa3e3224ec4",
+      "translationHash": "sha256:98ccdf08dab6b0f3dbe290fef23e626e9007e08661eaf7ff7ef9ad10337868ee",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.operators.TNormPolicy.Evaluate",
+      "sourceHash": "sha256:09ee1b737766dae8409c44830c618c9d3b1ee21e1e2d788e0db840df7f375f8e",
+      "translationHash": "sha256:77b26c0f13398928fe10b5695c707dcc39906078fe767003fc64c2693c28d9d7",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousFuzzyProperties",
+      "sourceHash": "sha256:e6f7796380b7026850d089320f30f190e522486c8cdc8bb4d41006b74ccaf54c",
+      "translationHash": "sha256:b40239396a2123c3d79c8df6fb9d16e82c7d4328603f443b26fe8baf8a0031fc",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousFuzzyProperties.isExact",
+      "sourceHash": "sha256:fe4ddecec4c4484366f502bfb9b4ec8fd99d63d6923ceb420bedd5b01599d867",
+      "translationHash": "sha256:2abb5e3fe8262eb51ccd4b805bc43a4deed8bb9aaac480a757fe745f13b67bcb",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousInterval",
+      "sourceHash": "sha256:c787d59943c739d5864ea60d0fd4fc6dd97ebc766fc5e8babdc645610b1b2355",
+      "translationHash": "sha256:e54d583c9e158fe60253f78feba86263c149311f6816edd52abf13fb72f891ec",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousInterval.Contains",
+      "sourceHash": "sha256:08367eb6ac60e993b3d722198d94bc68579fc990c63e5f76f61619494d266210",
+      "translationHash": "sha256:7268a5f44958b5afe387e66abe45021282b3f8afdbac787db9cbb79c20b2210e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousInterval.isSingleton",
+      "sourceHash": "sha256:8d60c81c54553f2c1bb967e6a6dcd44e5740b50f8344195ff52e490502eba045",
+      "translationHash": "sha256:cf3da66ef0abb7768ed72b57eaa2f7f64bd9f9d8ac9b2dd1983485196c83a84e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousRegion",
+      "sourceHash": "sha256:12ffffaf7e23aa2dadbec37542bbf7b272406810ab90fa46b02f45783fec8201",
+      "translationHash": "sha256:ab9d95abb9bd9bec9080713a1508ddcbcc8fa00b9e9436fba93ca6a2ad5f374c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousRegion.Contains",
+      "sourceHash": "sha256:eb2062c4200c61e2a01ad541fbdcc7812bd430f61f07c8724249b92b9ad23e55",
+      "translationHash": "sha256:620b221764f5f06815644e5f438728aadd1bd30fe291e1ec438ae1a04e28e579",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.ContinuousRegion.isEmpty",
+      "sourceHash": "sha256:da93dc8c9b8b66e42fe1190fb12f7f38108978d531d3a1ddcc983a121af598d4",
+      "translationHash": "sha256:ac649c52de3af33a83730cf0edb3220649fde7bd29e07138d16ed7916118327d",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.DeriveProperties",
+      "sourceHash": "sha256:c5e405a3daf606673d60247d5f7e92250eed6e99efae90c6cdbe7fe2946fd113",
+      "translationHash": "sha256:b2525bc3d41d2634046fd20b8999895c08c2b05f0f58b9429a37bbe9e8800c64",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.DiscreteFuzzyProperties",
+      "sourceHash": "sha256:64b9ef21eda5236bdeb48851f1b8fe4cd83e620c04bac8c4a22b6b0ec28d9a1f",
+      "translationHash": "sha256:2d4d10e5cdd7f280a9aefb15cd080c9d584162ed73ce182c7ec042e5ad68b06e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.DiscreteFuzzyProperties.isExact",
+      "sourceHash": "sha256:be5fc70931e2033f0c2c91e190dac4d3a87fdabcf5c4bf200e72bb24aae457b2",
+      "translationHash": "sha256:8b12148cf947a6e0acb2c4e20f76da205c3460bfd681c1608832bb34dd1a150f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.DiscreteRegion",
+      "sourceHash": "sha256:f0635b27e8505d4bf48ac84d302fb24799435e71a252381e0c13b1f4e69e4c7b",
+      "translationHash": "sha256:43226e051767cb69f7e16896b73bef9c71f31517fd0b19f5332d35436eef5439",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.DiscreteRegion.Contains",
+      "sourceHash": "sha256:7002b174bf7d1bbb10f2ecbb8230283a03370ec91480e170ad1ef50eac6db16f",
+      "translationHash": "sha256:4e52310bcdb4caefccf65f8fc27b440642a7f828a901512f6130c8a305d05118",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.DiscreteRegion.isEmpty",
+      "sourceHash": "sha256:1de97b536020671c8aef604c9d1e75c5342f168365977e84a936ad13d84813a4",
+      "translationHash": "sha256:6891d325b8fe28ba40c0d006097b4ca9df1abe4ef39919ba88d1245d5995130e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.SampleProperties",
+      "sourceHash": "sha256:3f42fbd697db95700cf3ba47c5cb35722f06a7e486534d0bab0bc43d16a9412b",
+      "translationHash": "sha256:d9b1d8336ec1226e1ab384fb5a5faa70920f1e303f2eeab6253fded1c9b6ad1c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.SampledFuzzyProperties",
+      "sourceHash": "sha256:d1bc144d778bce93772e6ca6b129999a37b3429f0c3ea9428b8d5d1ad72f1c5c",
+      "translationHash": "sha256:78434fe9a2ca7ea1e3a06a9a09764a1c514a0df087cddb92f1fd9b214cd7bafd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.properties.SampledFuzzyProperties.isExact",
+      "sourceHash": "sha256:7290464d47af683bf22fcf0ad06d741a10b43c3f08222e67cd9d35fae1d444be",
+      "translationHash": "sha256:ce2734f9d7b202fafeee8e0bdecbf17817ad005ad8d4f1bd09410a248b86215f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.relations.ComparisonDomain",
+      "sourceHash": "sha256:fa81f3c6b5028deb4ef3c48a41a2a2a39954996dfecfc39cf5d051611ecabe7b",
+      "translationHash": "sha256:2b0cf63bb128b888b09671829d707706c418aa774283aa02f93c23e86dafb1af",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.relations.ComparisonDomain.ValidateWithin",
+      "sourceHash": "sha256:7402314f08061f31e3bde325fee25bdf888f73dc1fe3748024d7f09916af4f12",
+      "translationHash": "sha256:4597e72b9b709078815c07c3d7bbfb8be8a914ca81d42e90e44742e7db526ee4",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.relations.ComparisonPolicy",
+      "sourceHash": "sha256:d68a56234c1e0f841318e638bfb1b56fd3181ffc4cb437a2cc06df5602ace5e6",
+      "translationHash": "sha256:e8b9470029243bb55864d7f030820df284e8bc15bcaa8f2883967094d7187241",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.relations.ComparisonPolicy.Equal",
+      "sourceHash": "sha256:0dc5ecd8a5cf371a98d9dab1fbeff119bc1b21d90eb05d07f604c1809e6ec730",
+      "translationHash": "sha256:4636e1b5faee4493dc4daf049f08de1eb3c6b27797bf02cc883fc6428eca01cb",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.relations.ComparisonPolicy.Included",
+      "sourceHash": "sha256:7d0684f26457c153127a4169823a07ef35eb0bbd5660cafa66fbeea36dd69b1e",
+      "translationHash": "sha256:3afa99e7065708be3b0debb6c6a93ab6018e6c2a1985d069a9e378e2c6340a98",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.relations.EqualOnDomain",
+      "sourceHash": "sha256:b8bc2cb7f8a282433fbb2b722de4e6f405a59f48b62a903ff5f0c9d0c10e6378",
+      "translationHash": "sha256:7c8c7f736e5bedfa25de41859ac82bf383acc979736bc71e4b42902a9a379473",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.relations.IncludedOnDomain",
+      "sourceHash": "sha256:7ff99109e4afac7419058976f735c68acf58716e0bc278565894448008ef7807",
+      "translationHash": "sha256:05999e7a7aa057fdb12b9231b15e36364594e0a69372924297a04411dfc2678f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.MembershipCallable",
+      "sourceHash": "sha256:73f1a324a0c31f5430a1e2e707c266b87fde40137eed1fb09865cd2adc567ebf",
+      "translationHash": "sha256:8e0884d0fb241db870336f3566ce259cfb1a097fee4844583ad62388af4b4eba",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Bell",
+      "sourceHash": "sha256:832edaf9cf8b105c4218049c40b74d9b1ff3e9d8f182523c53820d93dfe89ae0",
+      "translationHash": "sha256:616155e8a319da976ee44a48030a98f7f9d937997fa81788c499b4ec9169a973",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Gaussian",
+      "sourceHash": "sha256:282667a1eb27c9787918c3770c9dbe928a4d4fb671a664dbe8c41baf27a109aa",
+      "translationHash": "sha256:53472bc668f20fa31a98bb20b7c4f733355e68e72e6c646dc79049be857b0405",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.HarringtonDesirability",
+      "sourceHash": "sha256:8f8fc7c263762e55ccdbe5dd6ca9b71cad38c1b705fd32954a152f7080c6daf2",
+      "translationHash": "sha256:0c0ee167962eed9b1d43af4df06010d39f677d0089436fd97cb7ed9cd96af881",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Hyperbolic",
+      "sourceHash": "sha256:92d1f0c78f74ac112cc107db171de032b0bfd19878f3debdf03f31b7dc5b8da4",
+      "translationHash": "sha256:1a12ec000eb74c13a905a05ab023259bbede0a1efe75868d8ce2de7caa9bf736",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Logistic",
+      "sourceHash": "sha256:923f01002c666c3b154ad67cbabbcc605efee2d6b494a1e78b30259c9b651c1e",
+      "translationHash": "sha256:a0c19a688b3d4aaf327210e2578b365d56321189a2b0ea2f652d7830ab5c72b3",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.MembershipCallable",
+      "sourceHash": "sha256:cd36f745573e6139f1293efaea48733801993480f4cdb4fa1762a60a3e3cb305",
+      "translationHash": "sha256:8e0884d0fb241db870336f3566ce259cfb1a097fee4844583ad62388af4b4eba",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.MembershipFunction",
+      "sourceHash": "sha256:79ec75626dbc4c452522f7d0db485290dcff8d34dc8e6f224d475fb970632a4b",
+      "translationHash": "sha256:85b30e9a6c7a9f2ec9ebc7a0bbcefdbaa090d6656c541589d220b0124ce175fc",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.MembershipScalar",
+      "sourceHash": "sha256:6b5ec5792357a433f282bdc88419042b646090628dd10742b65e31cb163d95d8",
+      "translationHash": "sha256:b2e78e2dffb356a7357f25c940fd3b1471d1a065931c742193ba9159f0f74cf9",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.SShoulder",
+      "sourceHash": "sha256:5721ca93afb5dd6e3f3473c76156bdea6b5e4e82335e241a72746a5cd46730a4",
+      "translationHash": "sha256:a6df848141368e31878d775c6f698a1f11ffed0198a6fb49f278009550df96f7",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Trapezoid",
+      "sourceHash": "sha256:09a08f7263b2b84038dce520c85c06e0722248b18eccb28ae4376ce065a1877a",
+      "translationHash": "sha256:fcc1fb48015a628243020e9e8f2a4597b7010c39f2c87cc180223fd279cc1f81",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.Triangle",
+      "sourceHash": "sha256:af8829f7c333c896ec2715a5ccc4bf289a5c241e1c48b6ec150adb6c7bd97f94",
+      "translationHash": "sha256:3629b51926eb63e44aa374dd4db42323a0bf971e2278ec849d4e9027564c17f7",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "symbol:fuzzyroutines.membership.MembershipScalar",
+      "sourceHash": "sha256:ef9a8bb2f9f79e362679d96fc2d494231773bc40f588b74a6aedc90299911f8e",
+      "translationHash": "sha256:b2e78e2dffb356a7357f25c940fd3b1471d1a065931c742193ba9159f0f74cf9",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides",
+      "sourceHash": "sha256:649ce49d1a56b58b0af5a24fd36f59f55aa8d4f75ee58cb1cdbf4fd650ab3c68",
+      "translationHash": "sha256:3f631768a17e89631342275d6d8b9eca7d860cab876e505fe26b3266c8155997",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.alarm",
+      "sourceHash": "sha256:9f4c0c4a3b98094640432468d29fd358770790cb89327d72aa7d56e981737593",
+      "translationHash": "sha256:28800bc08726894dc4bff60948150a9555e8b0e349399f2656c3e26e9c694e19",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.alpha-cuts",
+      "sourceHash": "sha256:1083328c7bd65b5b7fb88f2e313891e2c8629917a1cbee1c0cc77ee67b9f03d5",
+      "translationHash": "sha256:7a6be94835aa6e740742b4bd00b4bf4bda9bc24049852656c3da57291eaf4b8e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.api-recipes",
+      "sourceHash": "sha256:6c9d01e1983d0b6081a4a944c3cd2ec357e076cb4b4ab42556ec50ee1eb50654",
+      "translationHash": "sha256:5f941e1674ce408604e494f38e40fcd06390efc7065ce773301a78a68d70501c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.centroid",
+      "sourceHash": "sha256:06858aed49704931658d7fc622eec69b55de479540deb40b7215f4fdab64cd01",
+      "translationHash": "sha256:a9c42dbba40feeb9e2615659175699bcae1f2831f0f1b01a49ddeee8decca056",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.custom",
+      "sourceHash": "sha256:6d7f1755ff6cf9404acdf0ff7e46d75a1acbe1a5cf903fba02fb4b80abc0498a",
+      "translationHash": "sha256:1921b1728206dabe6d15848070c7666ef08843fa4a8672e8a901558bfbd10332",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.figures",
+      "sourceHash": "sha256:d0e3689dfc53bffe722dca619f1bc7ed065afb4042398905d98b15b552326a1c",
+      "translationHash": "sha256:5c26fed4f5d394b6c366a2d4f60360c9c503c83dc89d8c4e6b21f93a345cfa0f",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.membership-families",
+      "sourceHash": "sha256:4c8e5be1db16ae6c0bd043656c4bf5d7491ae09c1e7c7bba780a66f24286ee00",
+      "translationHash": "sha256:2f2ca646592edf291736d9fd0d035e0919b59cd318fbc10c956a1f66aec34794",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.risk",
+      "sourceHash": "sha256:d25e2395a8aa98b3e5d2ac224d8c09a5497cfb4c5413db9c7fc263d8311bac4e",
+      "translationHash": "sha256:014cf19c5af1ac035c247d17da395932fb9b3fa61e2a9ff944971a4c83b9aa53",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.scale-audit",
+      "sourceHash": "sha256:eb4bd8c5e534bc02978be2ea3563229106dcbe19739fb99f4b30a7e4ae884f4a",
+      "translationHash": "sha256:61df1680f468e11beb70461734daa80dd0c38c26853ccfcde20ee26993757a1b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.sensors",
+      "sourceHash": "sha256:039b6826a3d06368dd2b13ca029bd01d6ec8ec2ddd0cf0bd30180404fe308c1f",
+      "translationHash": "sha256:e89c747cf121865ec4331d2360b7914c52b3fe8b2776499a1fa4fc9c13bf8830",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.temperature",
+      "sourceHash": "sha256:9e4533e8031512e2e6353d54cf4607e245bf21b1a2c88e8e1595430da0ecc1c8",
+      "translationHash": "sha256:3c81d9df7e16b2ed4c33ef77327bf6cecbdc4b9e140844d2250589439269fa5e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:quick-start",
+      "sourceHash": "sha256:2a05f8feebea743b86a490c2dbff7fcdec52e84c8c90b62f6b83d3abd8687ae0",
+      "translationHash": "sha256:216b8aff6250c290cd40a388997d457ac7e640435296ab07c79b4e3ea0174770",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.errors",
+      "sourceHash": "sha256:cd426d56df8d158dcbd49331bbcfa8cbae5055ff3d260a6b0811b255c241ddb1",
+      "translationHash": "sha256:616863a256e54b7aa1a69bc7609ffbc33d3d14acc5e87a17c9414fa5a6368ad1",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.example-index",
+      "sourceHash": "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c",
+      "translationHash": "sha256:9ac20b61e5f10cb368a6af7211639ac1764113a60bb114fe470558e0cf2b4ca9",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.historical-recipes",
+      "sourceHash": "sha256:7e336948192b690fe2f042cd16d0df4ec7a4b4302946f0cf6d8279a1de688d41",
+      "translationHash": "sha256:e052eb24d86cac4278bd6bc26c8408f17b62de3ff4cb7f4631ac14703bef0074",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.operators",
+      "sourceHash": "sha256:544e3a889535715fc43e226b1707b3a221e5bf86a0ce9f311a3fc2a9ad3225f5",
+      "translationHash": "sha256:7f196ef704fd8babdd41ef3b23062ba95cc48cfd6b625514a996f2a1cce84ec7",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.results",
+      "sourceHash": "sha256:e6a5ef56bc602d8bd22f14a952e04a6ace9dbffe4d8ea90d9704d3beb01081c6",
+      "translationHash": "sha256:db1946c4c1343a9667a62153f9d5d99f791f1cb1063e98360c1856d745c19b05",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.workflow",
+      "sourceHash": "sha256:be6d8d2ca92572df77c56568ce5e9c498ef419b04aecd3e78573235d5b3f2356",
+      "translationHash": "sha256:9930c9cc5d831ab4ffe2b174b463b1eb55581a5d777bdc06f1530e55a51f8c51",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.alpha-cuts",
+      "sourceHash": "sha256:126c9ce07b5ce5a1647364910bae4e68e66df0624ad23f0979d0527c462ded5c",
+      "translationHash": "sha256:2a07594fb41faf02405777c29bc7d13778c82ebf78de238bf062ac907306c914",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.centroid-defuzzification",
+      "sourceHash": "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98",
+      "translationHash": "sha256:f3e1f94a8aa6cc86a86370765b09d566f89d6146af8be445440410d119047568",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.finite-number-policy",
+      "sourceHash": "sha256:b540b154c6b228eb8b8e15ff0cc36bfaf380121f022ad4b345e4313f4aa1f8eb",
+      "translationHash": "sha256:abd44f1f0c139a625fa1a095cf5b5fc2e23849b495064b14e6f74b947bdf255b",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.fuzzy-set-convexity",
+      "sourceHash": "sha256:dd0ad4d63e75ae782bfdd4b181bc012e91a8b98944311de130137b090773629a",
+      "translationHash": "sha256:8c359e67b3d42ecf77762d6bfefcb3a88e2e1361b7f4273a552ed16845f61e15",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.fuzzy-set-normalization",
+      "sourceHash": "sha256:f348d817cd4dd739c47712fa2c2010151af8a2acad012ec45b8a1eb7721cf4fc",
+      "translationHash": "sha256:7f70fa648a25ffabab0ecc555f9b7a06f4ee2c486b189a658c41f1874c7ec256",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.fuzzy-set-operations",
+      "sourceHash": "sha256:20b5162f0aafce7787447062f7cb76c66086497188b1328a96b208d6c4786a29",
+      "translationHash": "sha256:011bd2b27030755839a0c38fa861dacf041a06d7c36ca153755daabadd8f4d59",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.fuzzy-set-relations",
+      "sourceHash": "sha256:d3801584d3d407fa9d6418065504e8c4e8e1c9d5bcddf7ebfe40274c44ab4f1d",
+      "translationHash": "sha256:4770859a02aac113101b3ff5466a65a94f030fda2cc51e00f50c78c7616f1857",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.linguistic-term-model",
+      "sourceHash": "sha256:43a316c52cf6ace0a90f6a9e4bb12c750d2f0b76dd11d5036af28437d01edada",
+      "translationHash": "sha256:3f53adc0febb8d644bca9156c09702ee97ffaa50b257f01bd6ed4a90f1baa240",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.membership-function-contracts",
+      "sourceHash": "sha256:e12bce6edda6f8cebc01f20111c4f9fe1b9728b748b555dcd3007ac0c2b27053",
+      "translationHash": "sha256:39e1b1e28b9fc724e80bde9cf2c5c78b035102c09e25e651568f328246b300c8",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.model",
+      "sourceHash": "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f",
+      "translationHash": "sha256:d3b19593f7380faf4b58a68223f0ff3e3c40e271029c60b7a3fd86265241d9b8",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.numerical-edge-policy",
+      "sourceHash": "sha256:8d87163a6dbccef9a8703a6eadf36ca18488e06f00a90e183984ed98329799cb",
+      "translationHash": "sha256:a56c01388958b772b82352d1bf0c9ab5dbe23a068d143cb4c87cf020e9cf1a57",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.parabolic-negation-derivation",
+      "sourceHash": "sha256:cc84da31c9b4780bd2af15ce3cb756a3e8dfceab555860aa2c89e2a75ed048e7",
+      "translationHash": "sha256:816771fbeefb0b5b912a2f9d21107748f98482337b3f659cc65a5738854aacc4",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.source-algorithm-invariants",
+      "sourceHash": "sha256:ea8eab9de491df209ef41a4cae121eed67a46049cfbdf9b264f55fc0cbfe25a4",
+      "translationHash": "sha256:30eb43ee630fb1096881a4434eb88cd9fd738e1956477d20d84625fa2cb09afd",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:mathematics.universe-support-contract",
+      "sourceHash": "sha256:f7cdde7d2d4e60ab8d7e13cf95381f783eda89e27628e9c05a28ad9707ad0954",
+      "translationHash": "sha256:195bdb4fa341da7e189b851fd8e20702e1a9c78f9b0be21712a2b0fc9d05dcbe",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:migration.1.0.3-to-2.0.0",
+      "sourceHash": "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7",
+      "translationHash": "sha256:d638d6cd8da11dce290ee77c2b60c3e6febcc6843f5eff17b11e228a255ae039",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:migration.historical-to-modern",
+      "sourceHash": "sha256:f42e5330774598e2e771473f047cc77c82aea2db207f82164270c6430d5b2360",
+      "translationHash": "sha256:0cbd1eeb6067e0805a5c40ba5482b8f5c1744f2d2623ad40acb202d7e177b34e",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines",
+      "sourceHash": "sha256:7498f92d4ee713f0c6203cea02c65661d8d6e54a09a2c1b22544c527e8751ac8",
+      "translationHash": "sha256:355a21866b2f176aff5e2cbb11bc047ef58eecc7228b8c537f35881e43bc35a3",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.FuzzyRoutines",
+      "sourceHash": "sha256:8b4af731bd7f613019f442261c9c1cfb3f22d86527566c467d9ac30296a32e07",
+      "translationHash": "sha256:11e97431af180e2d158a2a4c21ae91d3a8b66b529d6756d35eb7137b2cdc9f31",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.alphacuts",
+      "sourceHash": "sha256:4d88e6ac30cb505b67e92fa96467edfa7c2785438a79d623828baf516a82264f",
+      "translationHash": "sha256:fd80e70792637e03f2f529b7bc65abc28c2849e3de18a621a3e8ba8b21584960",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.defuzzification",
+      "sourceHash": "sha256:4b96b2e8605994707d1b488652d0554f93caa40c1ed077fb35036c95cc21af57",
+      "translationHash": "sha256:2e5a6a543db39e6d221ca66e978908c9aed2fb773551f0b3dd4c4b739ec22cc5",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.domain",
+      "sourceHash": "sha256:a0d7b9fde8473453c0f294811e6e452f533954b24fefdc69115cd9a3c5ef19fc",
+      "translationHash": "sha256:18de79a48543619e36c7c98d084b924e38bfd15dae442d6621315db4413ab757",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.exceptions",
+      "sourceHash": "sha256:3102490786fccb08169491532eb628d0c91fdaa3ef226960ea7d6ca78f8358b5",
+      "translationHash": "sha256:b2576350fd38d4b9ed0497a40d3494332244780972fa24be93277b62d0a3ef1c",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.fuzzysets",
+      "sourceHash": "sha256:4c2b2a59efc196f10536851dedac8c22789793a88186ad520fa58fa3c927c1f3",
+      "translationHash": "sha256:e3a2b849fe6811e5e463e856cfe49de0b4de905d489af8777f3ed0b63dfa54a3",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.linguistic",
+      "sourceHash": "sha256:96cb9619b6f611c210cfdb691e43e98710498a7087fb344ae02d1362763ac061",
+      "translationHash": "sha256:b0fd26c0353a90f27e3d479444a28e6a44499ac6cc84183eaf241eb816478af9",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.membership",
+      "sourceHash": "sha256:4fe6efe8eb3ba11dbc15cec23e038404f677b39a607eee972d0f9836e527bb39",
+      "translationHash": "sha256:f68c366bdd727afd865cf81899debda8b0f245f16cf6132c75de658ed2680066",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.operators",
+      "sourceHash": "sha256:eb899d29e91d19e36c5cb2cb0eaf5b0cdbd117d2be4565259f646e4af6e19c5b",
+      "translationHash": "sha256:0c9fd3a326774c860e9127d896d0657096e93bd2938b24009607cc5f16cb1158",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.properties",
+      "sourceHash": "sha256:7c989f09299cd314c66cc9a70d48d0e4cfc44d10eb3046f18c5b22b0bd9805e7",
+      "translationHash": "sha256:5fa42a36f7dd57d3c387627e441cfd47dd1878c0895d1e16d3598bdc528e2b0d",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "module:fuzzyroutines.relations",
+      "sourceHash": "sha256:708b5dcd6e6626a6d8ca04b4f99535e62e6f6129c300032c0612df93a637fbd0",
+      "translationHash": "sha256:dec0b789e3783fa6abe602a2c8bcfe3887549c5381820c1107e4dc6fb66d6396",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:contracts.compatibility",
+      "sourceHash": "sha256:aed41e3bc96dccb865f29894bfe7e966e3336676c9b241ef0cedd0080c6512b9",
+      "translationHash": "sha256:5b761e277029fa4289ba754181657e5196fff24a58eac0da4da8b2922d2340a7",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:contracts.public-typing",
+      "sourceHash": "sha256:0b05b3b0b3638306d97b75bf89738f9bb322309fcc20ce09daf83a03da4b6d5d",
+      "translationHash": "sha256:3e095b2ade35b9f12cb1d92a712061b357d3143f6a904a3a85677b0b3123d4ac",
+      "roles": [
+        "editorial",
+        "technical"
+      ],
+      "evidence": "issue #295 comment 6100579303; unchanged reviewed hash pair"
+    },
+    {
+      "unit": "page:guides.universal-fuzzy-scale",
+      "sourceHash": "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20",
+      "translationHash": "sha256:997e502ea40c8af40cd2e6e2be07d332eea21448dcfb27c4bc1277e1a4fdb7b9",
+      "roles": [
+        "editorial",
+        "mathematical"
+      ],
+      "evidence": "PR #310 maintainer correction and squash; supplemental AI comparison"
+    }
+  ]
+}

@@ -157,7 +157,11 @@ AIna-Dev may satisfy the existing editorial and mathematical/technical roles.
 The reviewer is recorded explicitly as AI; this does not represent a human or
 native-speaker review. The same AI performed both roles, without claiming
 independent reviewers. This exception supersedes the human-only sentences above
-solely for those recorded pairs and that release.
+solely for those recorded pairs and that release. The same existing delegation
+also covers the **one newly reviewed UFS hash pair** recorded in the
+[post-PR #310 supplement](../audits/2026-10-10-chinese-delegated-acceptance.md#fresh-universal-fuzzy-scale-application-review-after-pr-310),
+which explicitly supersedes that unit's historical pair after fresh scientific
+and editorial review. No other changed or future pair is approved implicitly.
 
 All existing role, timestamp, canonical-hash, translation-hash, protected-content
 and release validations remain mandatory. Russian approval, other projects,
