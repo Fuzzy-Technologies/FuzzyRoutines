@@ -5,11 +5,11 @@ SPDX-License-Identifier: Apache-2.0
 
 # Current implementation status
 
-This page records the public boundary of the active `develop` branch. It
-separates implemented and tested behavior from the FuzzyRoutines 2 roadmap. The
-first stable modernization candidate uses package metadata `2.0.0`.
-The candidate is not publication evidence: human acceptance, protected release
-execution and post-publication verification remain pending.
+This page records the public boundary prepared for FuzzyRoutines 2.0.0 and
+promoted to `master` through PR #312. It separates implemented and tested
+behavior from the FuzzyRoutines 2 roadmap. Package metadata is `2.0.0`.
+Publication is on hold for the final project and documentation review; a merged
+candidate does not establish a published GitHub or PyPI release.
 
 The [release version review](release-version-decision.md) reaffirms that stable
 target from observable compatibility impact. The
@@ -128,8 +128,10 @@ Representative accepted changes for the historical correctness baseline are
 - the offline documentation gate rejects false approval, incomplete human
   review evidence, malformed locale state, and approved translations made
   stale by a canonical English change;
-- untranslated locale routes remain explicit fallbacks and are never presented
-  as reviewed translations.
+- all 258 required units per locale have current hash-bound acceptance under
+  ADR-0011: Russian maintainer acceptance and explicitly delegated AI
+  scientific/editorial acceptance for Chinese. Missing or stale approvals
+  cannot be presented as reviewed translations.
 
 ## Implemented modern domain surface
 
@@ -192,8 +194,9 @@ The recent accepted documentation and domain wave is
 
 - ADR-0010's source standard, English public docstrings, installed-package API
   reference, and composed product/API site are implemented. Production Pages
-  deployment is restricted to the approved default branch; reserved locale and
-  release-version routes remain explicit fallbacks.
+  deployment is restricted to the approved default branch. English, Russian
+  and Simplified Chinese references are implemented and approved; the version
+  index describes the policy for future immutable release snapshots.
 - Python annotations and docstrings remain authoritative for the generated API
   reference, while mathematical narratives remain hand-authored Markdown;
 - the reproducible three-generator comparison is retained under
@@ -207,17 +210,16 @@ The recent accepted documentation and domain wave is
   available under [`docs/migration/`](migration/historical-to-modern.md) and
   `examples/migration/`.
 
-Explanatory visual guides remain a separate documentation deliverable under
+Explanatory visual guides are complete under
 [M6 Task #280](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/280):
 reproducible membership and operation graphs, exact-versus-sampled evidence,
 centroid geometry, and linguistic tie/no-match examples with readable captions
 and corresponding executable code. They do not change mathematical contracts
 or introduce runtime plotting dependencies.
 
-Existing test-function docstring debt is tracked separately in
-[Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286).
-The updated source standard governs new and modified code; it does not claim
-that every existing test already satisfies the shared documentation rules.
+The test-function docstring repair under
+[Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286) is
+merged in PR #300. The documentation gate checks the shared source standard.
 
 ## Still in the v2 roadmap
 
@@ -245,7 +247,7 @@ as compatibility aliases or adapters rather than defining the new architecture.
 ## Release status
 
 Routine pull-request workflows build and clean-install packages but cannot
-publish them. Release candidates, signed tags, GitHub Releases, and PyPI Trusted
+publish them. Release candidates, annotated tags, GitHub Releases, and PyPI Trusted
 Publishing belong to the release milestone and require the complete
 human-reviewed readiness gate.
 

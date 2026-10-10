@@ -37,15 +37,24 @@ distributed under Apache-2.0 only.
 
 ## Third-party boundary
 
-The audit found no copied or vendored third-party source in the repository.
+The original audit found no copied or vendored third-party source in the repository.
 Packages listed in requirements and documentation-tool manifests are external
 dependencies; this repository does not change their licenses. Generated HTML,
 indexes, inventories, and build environments are disposable outputs and are
 not committed.
 
-If third-party material is added later, its original copyright, source, SPDX
-identifier, and attribution requirements must be recorded before merge. It
-must not be relabeled as Fuzzy Technologies-owned content.
+The documentation site vendors unmodified **Fira Code** variable WOFF2 fonts
+served by the official Google Fonts CSS API (Fira Code v27), from the
+[Fira Code project](https://github.com/tonsky/FiraCode). Their license is
+**SIL Open Font License 1.1 (`OFL-1.1`)**, not Apache-2.0. The original copyright
+and complete license are preserved in
+[`assets/fonts/LICENSE`](site/content/en/assets/fonts/LICENSE). The font-face
+stylesheet records the download source. These are documentation assets, not
+Python runtime dependencies or bundled wheel contents.
+
+Any additional third-party material must retain its original copyright,
+source, SPDX identifier and attribution before merge. It must not be relabeled
+as Fuzzy Technologies-owned content.
 
 ## File-level policy
 
