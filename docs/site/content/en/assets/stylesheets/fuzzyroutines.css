@@ -148,6 +148,16 @@ body {
   text-align: left !important;
 }
 
+/* Material's mobile min-content rule collapses intrinsic SVG maths to 1px. */
+.md-typeset div.arithmatex > mjx-container[display="true"] {
+  width: max-content;
+  min-width: 100%;
+}
+
+.md-typeset div.arithmatex > mjx-container[display="true"] > svg {
+  max-width: none;
+}
+
 .fr-brand-lockup {
   display: block;
   width: min(100%, 32rem);

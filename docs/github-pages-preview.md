@@ -9,13 +9,9 @@ The FuzzyRoutines product page is a static site in `docs/`. It does not require 
 
 ## Local preview
 
-To preview the tracked product page only, run from the repository root:
-
-```console
-python -m http.server 8000 --directory docs
-```
-
-Open <http://localhost:8000/> and check the desktop and narrow/mobile layouts.
+The product page shares fonts, illustration assets and the image viewer with
+the generated API reference. Build and serve the complete deployment tree
+below so the local preview matches production.
 
 Run the deterministic site checks with:
 

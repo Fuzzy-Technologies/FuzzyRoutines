@@ -62,7 +62,10 @@ async function InspectTypography(page) {
     firaLoaded: [...document.fonts].some(font => font.family.replaceAll('"', '') === 'Fira Code' && font.status === 'loaded'),
     backgrounds: [document.documentElement, document.body].map(element => getComputedStyle(element).backgroundColor),
     mathFonts: [...document.querySelectorAll('mjx-math')].map(element => getComputedStyle(element).fontFamily),
-    mathRenderers: [...document.querySelectorAll('mjx-container')].map(element => ({jax: element.getAttribute('jax'), svg: !!element.querySelector('svg')})),
+    mathRenderers: [...document.querySelectorAll('mjx-container')].map(element => {
+      const bounds = element.querySelector('svg')?.getBoundingClientRect();
+      return {jax: element.getAttribute('jax'), svg: !!bounds, display: element.getAttribute('display') === 'true', width: bounds?.width, height: bounds?.height};
+    }),
   }));
   assert.match(result.textFont, /Fira Code/, 'Corporate font is applied');
   assert.equal(result.firaLoaded, true, 'Corporate font is loaded from local assets');
@@ -70,6 +73,7 @@ async function InspectTypography(page) {
   for (const renderer of result.mathRenderers) {
     assert.equal(renderer.jax, 'SVG', 'Mathematics uses the corporate SVG renderer');
     assert.equal(renderer.svg, true, 'Mathematical glyphs render as vectors');
+    if (renderer.display) assert.ok(renderer.width > 2 && renderer.height > 2, `Display mathematics must not collapse (${renderer.width}×${renderer.height}px)`);
   }
   for (const font of result.mathFonts) assert.match(font, /MJX/, 'Mathematics retains MathJax glyph fonts');
   return result;
@@ -198,6 +202,8 @@ async function Main() {
         result.typography = await InspectTypography(page);
         if (pageRoute === 'guides/universal-fuzzy-scale') {
           result.imageViewer = await InspectImageViewer(page, '.md-content img', `${locale}-universal-scale-viewer-${viewport.width}.png`);
+          result.formulaScreenshot = `${locale}-universal-scale-formula-${viewport.width}.png`;
+          await page.locator('div.arithmatex').first().screenshot({path: path.join(outputRoot, result.formulaScreenshot), animations: 'disabled'});
           const query = page.locator('input[data-md-component="search-query"]');
           if (!await query.isVisible()) await page.locator('label[for="__search"]:visible').first().click();
           await query.focus();
