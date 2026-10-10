@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 在均匀有限网格上返回明确标注为近似的观测结果。
 
 Args:
-    membershipFunction: 要采样标量求值结果的现代解析函数族或历史解析适配器。
+    membershipFunction: 将在网格点处进行标量求值的现代解析函数族或历史解析适配器。
     analysisDomain: 网格覆盖的有限闭区间。
     sampleCount: 均匀网格坐标数量，包含端点。
 

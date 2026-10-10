@@ -139,13 +139,31 @@ references.
 
 Allowed translation states are `missing`, `draft`, `review`, `approved`,
 `stale`, and `retired`. Automation may compute `missing` and `stale`, but it may
-not grant `approved`.
+not grant `approved` except for the explicitly scoped delegation below.
 
 Every approved translation requires editorial review. Units containing
 mathematical claims, formulas, numerical tolerances, parameter semantics, or
 executable examples additionally require a human mathematical/technical
 reviewer. Machine translation or AI assistance may produce a draft, but it is
 recorded as `draft` and never treated as review evidence.
+
+### Scoped maintainer delegation for zh-CN 2.0.0
+
+On 2026-10-10, maintainer Timur Gilmullin explicitly delegated the Chinese
+scientific and editorial acceptance of FuzzyRoutines 2.0.0 to AIna-Dev. For
+**only the 258 zh-CN source/translation hash pairs** in the
+[delegated acceptance record](../audits/2026-10-10-chinese-delegated-acceptance.md),
+AIna-Dev may satisfy the existing editorial and mathematical/technical roles.
+The reviewer is recorded explicitly as AI; this does not represent a human or
+native-speaker review. The same AI performed both roles, without claiming
+independent reviewers. This exception supersedes the human-only sentences above
+solely for those recorded pairs and that release.
+
+All existing role, timestamp, canonical-hash, translation-hash, protected-content
+and release validations remain mandatory. Russian approval, other projects,
+future changed translations and publication authorization are outside this
+exception. Ordinary machine translation remains draft preparation; no generic
+automatic approval is introduced.
 
 ### Locale builds, navigation, search, and fallback
 

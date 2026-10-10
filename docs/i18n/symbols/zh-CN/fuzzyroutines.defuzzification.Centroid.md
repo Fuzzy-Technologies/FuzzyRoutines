@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-返回显式有限域上的连续面积质心。
+返回连续隶属函数在显式有限积分域上的面积质心坐标。
 
 结果为 $\int x\mu(x)\;\mathrm{d}x / \int \mu(x)\;\mathrm{d}x$。分段多项式和高斯 `MFunction` 来源在闭式公式稳定时使用解析面积矩；其他可调用对象使用自适应 Simpson 求积。
 

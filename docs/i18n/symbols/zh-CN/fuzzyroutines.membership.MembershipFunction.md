@@ -12,7 +12,7 @@ SPDX-License-Identifier: Apache-2.0
 
 Args:
     family: 类契约中列出的现代规范函数族标识符。
-    **parameters: 具名函数族构造函数所规定的准确有限实数参数集合；不接受布尔值。
+    **parameters: 参数名称必须与具名函数族构造函数的规定完全一致，参数值必须为有限实数；不接受布尔值。
 
 Raises:
     ValueError: 函数族、参数名称、有限性或几何顺序无效。

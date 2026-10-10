@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-返回一个隶属度是否按本策略包含于另一个隶属度。
+根据本策略，检验两个隶属度是否满足模糊包含关系的判据。
 
 Args:
     subsetGrade: 候选子集的隶属度。

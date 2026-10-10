@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 在穷尽域或显式有限域上求模糊包含关系。
 
-包含意味着每个求值点都满足 $\mu_{subset}(x) \leq \mu_{superset}(x)$。容差模式仅允许两个隶属度按显式比较策略在数值上足够接近的违反情形。
+包含意味着每个求值点都满足 $\mu_{subset}(x) \leq \mu_{superset}(x)$。容差模式允许不等式有轻微违反，但仅限于两个隶属度按显式比较策略判定为数值接近的情形。
 
 Args:
     subset: 候选子模糊集。

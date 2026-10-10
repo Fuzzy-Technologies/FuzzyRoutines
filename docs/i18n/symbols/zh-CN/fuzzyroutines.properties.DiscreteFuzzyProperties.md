@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-显式离散论域上的精确派生属性。
+在显式声明的离散论域上计算得到的精确属性。
 
 Attributes:
     universe: 已穷举求值的离散论域。
