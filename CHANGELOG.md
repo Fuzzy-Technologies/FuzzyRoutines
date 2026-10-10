@@ -23,14 +23,11 @@ floor and helper-import changes justify the
 
 #### Digest
 
-- Prepared the first stable modernization candidate: corrected scalar
-  mathematics, explicit modern APIs, preserved historical calls, and
-  reproducible package/documentation evidence.
-- This `2.0.0` entry is proposed for the release candidate. The date records
-  candidate preparation; it is not publication evidence. Finalize it against
-  the approved revision and actual release date before the annotated tag.
-  PR #312 promoted the candidate to `master`; publication is on hold for final
-  project/documentation review. Protected PyPI publication remains pending.
+- Modernized scalar fuzzy mathematics with explicit typed APIs, protected
+  historical calls, and reproducible package/documentation evidence.
+- Added complete English, Russian and Simplified Chinese documentation,
+  practical scenarios, and a reconstruction of the historical Universal Fuzzy
+  Scale with graphs and cybersecurity/risk applications.
 
 Existing users should read the
 [1.0.3 migration notes](docs/migration/1.0.3-to-2.0.0.md).

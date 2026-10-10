@@ -19,9 +19,8 @@ SPDX-License-Identifier: Apache-2.0
   <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/LICENSE"><img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
 </p>
 
-> **Release status:** version 2.0.0 is prepared on `master`; publication is
-> paused for the final project and documentation review. The historical API
-> remains protected alongside the modern typed surface. See the
+> **FuzzyRoutines 2.0** combines a modern typed API with the protected
+> historical API. See the
 > [current implementation boundary](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md).
 
 ## At a glance
@@ -29,7 +28,7 @@ SPDX-License-Identifier: Apache-2.0
 | Area                | Current contract                                                                                                                                                                                           |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Runtime             | CPython 3.13 and 3.14                                                                                                                                                                                      |
-| Package version     | `2.0.0` candidate; publication awaits final approval                                                                                                                                                       |
+| Package version     | `2.0.0`                                                                                                                                                                                                    |
 | Modern API          | Root exports from [`fuzzyroutines`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-api-documentation-inventory.md#modern-package-exports)                                     |
 | Compatibility API   | [`fuzzyroutines.FuzzyRoutines`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/COMPATIBILITY.md) preserves the ADR-protected contract and documents the wider observed 1.0.3 facade  |
 | API reference       | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package                                                                          |
@@ -47,19 +46,17 @@ implemented-versus-roadmap boundary.
 
 ## Install
 
-Use CPython 3.13 or 3.14. After version 2.0.0 is published on PyPI, install it
-with:
+Use CPython 3.13 or 3.14:
 
 ```console
 python -m pip install fuzzyroutines==2.0.0
 ```
 
-**Publication is pending:** this command is the stable installation route once
-the release is available. Historical 1.x packages do not provide the modern API
-shown below. To evaluate the prepared source now, see [Development](#development).
+Historical 1.x packages do not provide the modern API shown below. For a
+source checkout, see [Development](#development).
 
-The [quick start](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/quick-start.md) explains the development
-and future stable PyPI installation routes and classifies a 24 °C measurement.
+The [quick start](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/quick-start.md) explains installation
+and classifies a 24 °C measurement.
 Explore [nine worked scenarios](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/guides/index.md), with
 independent numerical checks and eleven reproducible scientific figures, or
 reconstruct the [historical Universal Fuzzy Scale](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/site/content/en/guides/universal-fuzzy-scale.md), or
@@ -151,7 +148,7 @@ names and corrected historical defects are tracked in the
 
 ## Development
 
-For an editable source checkout while stable publication is pending:
+For an editable source checkout:
 
 ```console
 git clone --branch master https://github.com/Fuzzy-Technologies/FuzzyRoutines.git
@@ -195,8 +192,8 @@ The generated reference is composed with the
 Pull requests and `develop` produce preview artifacts; production deployment
 occurs only from the approved `master` branch. Stable routes separate the
 moving references in English, Russian and Simplified Chinese. The version index
-describes the release-documentation policy; no immutable 2.0.0 snapshot has been
-published yet.
+links to tagged sources for historical versions. Separately hosted documentation
+snapshots for individual releases are not currently provided.
 
 ## License
 
