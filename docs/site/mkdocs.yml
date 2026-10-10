@@ -16,12 +16,13 @@ use_directory_urls: true
 theme:
   name: material
   language: en
+  font: false
   logo: assets/brand/fuzzyroutines-sign.svg
   favicon: assets/favicon.svg
   palette:
     scheme: slate
     primary: black
-    accent: deep purple
+    accent: pink
   features:
     - content.action.edit
     - content.code.annotate
@@ -114,10 +115,13 @@ markdown_extensions:
       permalink: true
 
 extra_css:
+  - assets/stylesheets/fonts.css
   - assets/stylesheets/fuzzyroutines.css
+  - assets/stylesheets/lightbox.css
 
 extra_javascript:
+  - assets/javascripts/lightbox.js
   - assets/javascripts/mathjax.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js
 
 copyright: Technologies · Knowledge · Science

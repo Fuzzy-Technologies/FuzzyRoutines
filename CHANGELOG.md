@@ -19,7 +19,7 @@ floor and helper-import changes justify the
 
 ## Minor 2.0
 
-### Patch 0 — v2.0.0 — 2026-10-09
+### Patch 0 — v2.0.0 — 2026-10-10
 
 #### Digest
 
@@ -29,12 +29,18 @@ floor and helper-import changes justify the
 - This `2.0.0` entry is proposed for the release candidate. The date records
   candidate preparation; it is not publication evidence. Finalize it against
   the approved revision and actual release date before the annotated tag.
-  Human readiness approval and protected PyPI publication remain pending.
+  PR #312 promoted the candidate to `master`; publication is on hold for final
+  project/documentation review. Protected PyPI publication remains pending.
 
 Existing users should read the
 [1.0.3 migration notes](docs/migration/1.0.3-to-2.0.0.md).
 
 #### Added
+
+- A corporate-styled product page and API theme use locally hosted Fira Code,
+  compact headings and the shared Fuzzy Technologies palette. The quick start
+  includes executable code, expected output and clipboard controls. Images
+  expand in an accessible in-page viewer; pinned MathJax renders formulas as SVG.
 
 - A dedicated Universal Fuzzy Scale guide preserves the five historical
   levels, coefficients and raw membership curves, reconstructs them with the
@@ -44,8 +50,9 @@ Existing users should read the
 - Three-language documentation rendering from the installed package, shared
   English-labelled figures, stable page routes, and source-bound API fragments.
   Include mathematical and migration chapters in the required locale corpus.
-  Draft previews remain explicit; stable publication requires current human
-  review bound to both English source and translated text.
+  All 258 units per locale have current hash-bound acceptance: maintainer
+  acceptance for Russian and explicitly delegated AI scientific/editorial
+  acceptance for Chinese, recorded under ADR-0011.
 - Protected PyPI publication is followed by actual wheel/sdist byte comparison
   with approved CI candidates, hash-pinned clean installation from the public
   index, and installed examples on both supported Python versions. PR and
@@ -59,11 +66,11 @@ Existing users should read the
   canonical English Python snippet and the complete scenario script. Independent
   plot tests check curve data, markers, bars, and rational centroid moments;
   EN/RU/zh-CN share English-labelled SVGs with localized explanatory text.
-- A public example index connects all 193 inventoried symbols to 29 standalone
+- A public example index connects all 193 inventoried symbols to 31 standalone
   Python blocks, including result fields, historical methods, error categories
   and typing contracts. Installed wheel/sdist CI checks actual execution and
   canonical root aliases rather than counting imports. Result-record recipes,
-  three computation diagrams and a tenth SVG comparing conjunction/disjunction
+  three computation diagrams and an SVG comparing conjunction/disjunction
   complete the canonical English example routes; scientific curve tests now
   check 36 plotted curves against independent references.
 - Curated modern root exports provide immutable membership factories and a

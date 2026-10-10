@@ -1,0 +1,19 @@
+/*
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+*/
+.image-viewer-trigger { cursor: zoom-in; }
+.image-viewer-trigger:focus-visible { outline: 2px solid #5dff8d; outline-offset: 4px; }
+.image-viewer-open { overflow: hidden; }
+#image-viewer {
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none;
+  max-height: none; margin: 0; padding: 3.5rem 1rem 1rem; border: 0;
+  background: transparent; color: #edf7fa; box-sizing: border-box;
+}
+#image-viewer[open] { display: flex; align-items: center; justify-content: center; }
+#image-viewer::backdrop { background: #03060bf2; }
+.image-viewer-panel { position: relative; max-width: 100%; max-height: 100%; text-align: center; }
+#image-viewer img { display: block; width: auto; height: auto; max-width: 100%; max-height: 78vh; margin: auto; object-fit: contain; border-radius: 6px; }
+#image-viewer p { max-width: 75ch; margin: .7rem auto 0; font-size: 14px; line-height: 1.4; }
+#image-viewer button { position: fixed; top: .75rem; right: 1rem; width: 44px; height: 44px; border: 1px solid #ff5bd8; border-radius: 6px; background: #101820; color: #edf7fa; font: 28px/1 sans-serif; cursor: pointer; }
+#image-viewer button:focus-visible { outline: 2px solid #5dff8d; outline-offset: 3px; }

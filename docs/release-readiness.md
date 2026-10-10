@@ -10,7 +10,10 @@ SPDX-License-Identifier: Apache-2.0
 This is a human-reviewed release gate. Checking a box requires a direct immutable evidence link. An unchecked blocker means the release is not approved.
 
 The selected first stable version is **`2.0.0`**; the proposed candidate metadata is
-**`2.0.0`**. This branch is prepared for review, not approved for publication. The [version rationale](release-version-decision.md),
+**`2.0.0`**. PR #312 promoted the candidate to `master`. On 2026-10-10,
+the maintainer paused publication for the final GitHub project, repository and
+documentation review. No release tag or PyPI publication is authorized while
+that hold remains. The [version rationale](release-version-decision.md),
 [development changelog](../CHANGELOG.md), and
 [migration notes](migration/1.0.3-to-2.0.0.md) are preparation artifacts, not
 publication approval. [Task #121](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/121)
@@ -56,8 +59,8 @@ The [2026-10-05 project audit](audits/2026-10-05-project-audit.md) records the
 baseline, source and ADR inventory, reproduced defects, usability assessment,
 and verification limits.
 
-The current audit has identified four correctness issues requiring their own
-reviewed fixes and affected-test evidence before stable approval:
+The audit identified four correctness issues, subsequently repaired through
+the reviewed changes linked below:
 
 - [Task #282](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/282):
   Gaussian centroid cancellation on intervals remote from the membership
@@ -88,7 +91,7 @@ for explained visual examples and
 [Task #286](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/286)
 for missing test-function docstrings. The test-documentation repair is merged
 in [PR #300](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/300);
-#280 remains open for complete multilingual visual-example acceptance. Neither
+#280 is closed with complete multilingual visual-example acceptance. Neither
 substitutes for final numerical acceptance.
 
 ## Complete three-language documentation for 2.0.0
@@ -103,9 +106,9 @@ does not approve missing Russian or Chinese translations or check final
 release-candidate boxes.
 
 The [multilingual implementation review](audits/2026-10-09-multilingual-review.md)
-records the original 257-unit Russian/Chinese drafts, canonical corrections,
-rendered findings and the remaining hash-bound human reviews. Complete draft
-coverage is not approval.
+records the original 257-unit Russian/Chinese drafts, canonical corrections
+and rendered findings. The later 258-unit acceptance is recorded below;
+complete draft coverage alone is not approval.
 
 The maintainer requires complete English, Russian and Simplified Chinese user
 documentation for the first stable release. English fallback pages are useful
@@ -114,7 +117,7 @@ during development but do not satisfy this release criterion. Follow
 translation state and human review; automated or AI-assisted passes must not
 invent human/native-speaker approval.
 
-Complete the work in this order:
+The completed documentation work followed this order:
 
 1. Finalize canonical English under
    [Task #294](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/294).
@@ -149,8 +152,9 @@ installation. Coordinate the approved promotion, annotated tag and final
 GitHub Release with Task #121. A successful PR dry run is workflow evidence;
 it does not mean the stable artifacts have been published to PyPI.
 
-The maintainer target is 2026-10-09 ahead of the conference week. The target
-does not waive any review, correctness, documentation or publication gate.
+The earlier 2026-10-09 target has passed. Publication now awaits completion of
+the maintainer-requested final review and an explicit decision to resume; no
+schedule waives correctness, documentation or publication gates.
 
 The [candidate handoff](audits/2026-10-09-release-candidate-handoff.md) lists
 the prepared integration, the three changed locale-review targets, observed
@@ -158,13 +162,70 @@ external-control limits and the remaining execution order.
 
 ## Integrated candidate evidence
 
-The maintainer accepted and squash-merged [PR #307](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/307)
-into `develop` at `45c9db375033437fc01e73789fbac968e730f0d0`. All seven
-post-merge workflows pass; the [updated handoff](audits/2026-10-09-release-candidate-handoff.md#verified-integration-evidence)
-links the immutable mathematics, packaging, documentation, typing and correctness
-runs. The checked technical items below refer to that integrated revision.
-This records completed work while keeping actual publication and locale-role
-acceptance visible as separate outstanding decisions.
+The completed documentation acceptance is merged through
+[PR #311](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/311) into
+`develop` at [`2d2d5ab`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/2d2d5ab0a32e75e2f22c936f32dece1cd4e09aa2).
+All nine workflows pass on its reviewed head
+[`882b9c4`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/882b9c47e26205406a5d0a7bfe8cb47b6d838315):
+
+- [Mathematics, coverage and serial/process parity](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38074754762).
+- [Reproducible packages and clean installation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38074754804).
+- [Rendered documentation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38074754845)
+  and [documentation quality](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38074754734).
+- [Trusted PyPI dry run](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38074754892).
+
+The [Russian maintainer acceptance](audits/2026-10-10-russian-maintainer-acceptance.md)
+and [Chinese delegated acceptance](audits/2026-10-10-chinese-delegated-acceptance.md)
+bind all 258 units per locale to current source/translation hashes. The strict
+approved-locale gate passes. The historical Universal Fuzzy Scale includes
+cybersecurity/risk applications, its modern reconstruction, and shared graphs.
+The [rendered review and retained performance evidence](audits/2026-10-09-release-candidate-handoff.md)
+remain applicable; the later automated rendering passes do not imply an
+additional human visual review of every screenshot.
+
+[PR #312](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/312) promoted
+the reviewed tree to `master` at
+[`d93fde3`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/d93fde360f5a39a173950bc8f2a02e78d7d0f697).
+All seven workflows passed on that exact master commit:
+
+- [Mathematics, coverage and process parity](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077820873).
+- [Quick deterministic gate](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077820471).
+- [Installed-package documentation and rendered review](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077819724).
+- [Optional vectorization experiment](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077809533).
+- [Public typing](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077808617).
+- [Documentation quality](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077805809).
+- [Reproducible packaging and clean installation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38077805435).
+
+These results establish the promoted baseline, not later presentation edits.
+Any subsequent release revision requires its own checks and final approval.
+The annotated tag and protected release workflow have not run; no dry run or
+Pages deployment is PyPI publication evidence.
+
+## External publication controls
+
+The maintainer supplied the saved PyPI Trusted Publisher binding for the existing
+`fuzzyroutines` project: `Fuzzy-Technologies/FuzzyRoutines`,
+`release-pypi.yml`, environment `pypi`.
+
+Both GitHub tag rulesets were read back through the API on 2026-10-10:
+[immutable tags](https://github.com/Fuzzy-Technologies/FuzzyRoutines/rules/24847872)
+restrict updates/deletions with no bypass, and
+[tag creation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/rules/24847946)
+allows only repository administrators to create tags. Both are active for
+`refs/tags/v*`, without exclusions.
+
+On 2026-10-10 the maintainer confirmed selected `v*` deployment tags, read-only
+default workflow permissions and the repository variable
+`PYPI_TRUSTED_PUBLISHING_ENABLED=true`. The `pypi` environment retains
+`Tim55667757` as required reviewer, with **Prevent self-review** disabled so the
+sole maintainer can approve a release initiated by that account. These settings
+are maintainer-confirmed, not independently read back. The confirmation is
+recorded in [Task #299](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/299).
+
+The saved configuration prepares the protected workflow; it does not override
+the current release hold or prove a successful upload. Publication still
+requires the final approved revision, a new maintainer release decision and the
+environment approval.
 
 ## Mandatory evidence
 
@@ -175,11 +236,11 @@ acceptance visible as separate outstanding decisions.
 - [x] Test quality: deterministic suite, branch-coverage report, negative cases, and supported-runtime CI links are attached.
 - [x] Packaging: independent wheel and source distribution builds have matching bytes; clean installation, metadata validation, and supply-chain evidence are attached.
 - [x] Licensing: Apache-2.0 metadata, `LICENSE`, `NOTICE`, SPDX headers, provenance audit, and packaged artifacts agree.
-- [ ] Documentation: README, API/mathematics documents, compatibility notes, and links have been reviewed for accuracy and accessibility.
+- [x] Documentation: README, API/mathematics documents, compatibility notes, and links have been reviewed for accuracy and accessibility.
 - [x] Canonical English: engineering, mathematical/scientific, data-science and reader/editor findings are resolved; every supported public API has a usable example or a justified tested alias link.
-- [ ] Russian and Simplified Chinese: every required user-documentation unit is translated, current and individually scientifically/editorially reviewed; no missing/stale fallback is accepted.
+- [x] Russian and Simplified Chinese: every required user-documentation unit is translated, current and individually scientifically/editorially reviewed; no missing/stale fallback is accepted.
 - [x] Practical examples: the pip-install quick start, at least six complete end-to-end scenarios and their numerical results/figures execute from installed artifacts in CI.
-- [ ] Rendered documentation: all three languages have reviewed navigation, search, formulas, links, shared English-labelled figures with byte-identical assets, localized captions/alternatives and desktop/mobile readability evidence.
+- [x] Rendered documentation: all three languages have reviewed navigation, search, formulas, links, shared English-labelled figures with byte-identical assets, localized captions/alternatives and desktop/mobile readability evidence.
 - [x] Mathematical audit: every supported module has an accepted contract, independent reference/invariant evidence and assessed line/branch coverage; process-based parallel execution is verified on the candidate.
 - [x] Performance: [raw measurements and environment metadata](audits/2026-10-09-release-candidate-handoff.md#retained-performance-measurements) are retained for installed wheel/sdist on both supported Python versions; no universal speedup is claimed.
 - [ ] Security and publishing: release credentials, provenance, and publishing configuration have been explicitly reviewed by an authorized maintainer.
@@ -187,9 +248,9 @@ acceptance visible as separate outstanding decisions.
 ## Hard blockers
 
 - [ ] No open blocker or unresolved correctness regression affects the release.
-- [ ] No known invalid legacy behavior is presented as supported compatibility.
+- [x] No known invalid legacy behavior is presented as supported compatibility.
 - [ ] All required GitHub Actions are green for the exact release commit.
 - [ ] A human maintainer has approved the release decision and version number.
 - [ ] The approved wheel and sdist are actually published to PyPI through protected CI, match the approved hashes, and pass clean pip-install quick-start and compatibility checks.
 
-A release is approved only when every item above has evidence and the final human approval is recorded in the release issue or pull request.
+Pre-publication approval requires all applicable readiness evidence and a maintainer release decision recorded in the release issue or pull request. Publication acceptance additionally requires successful PyPI upload and post-publication installation evidence; those results can only be recorded after publication.
