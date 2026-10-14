@@ -13782,50 +13782,50 @@ evidence = "review21 independently reviewed NumPy source through 10b505d; curren
 id = "page:guides.numpy-batches"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/numpy-batches.md"
-sourceHash = "sha256:7049edd921fb52c8843edd83006ff90f24003330bead76f91873041a4ccb41cd"
+sourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/guides/numpy-batches.md"
-sourceHash = "sha256:7049edd921fb52c8843edd83006ff90f24003330bead76f91873041a4ccb41cd"
+sourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:7049edd921fb52c8843edd83006ff90f24003330bead76f91873041a4ccb41cd"
-reviewedTranslationHash = "sha256:b9dc1500d64fa181a172dc703e6b90c0a303125208b3be3fba8906493a7600a9"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
-evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+reviewedSourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
+reviewedTranslationHash = "sha256:3d49b865439252ae69f67e932a4c6e44645ee953e39440cab6520541a59f8bf1"
+reviewer = "onboarding21 (AI; independent scientific/editorial review)"
+reviewedAt = "2026-10-14T20:16:58Z"
+evidence = "onboarding21 independently read the final English, Russian and Simplified Chinese NumPy guide additions and installed-results narrative at beb13c72018b98c7b1143745ead42e5f5418944d. The text separates the exact installed 2.1.0 CI wheel from source studies and unpublished release status; Russian wording identifies the wheel hash, and Chinese scientific terminology preserves candidate, measured-resource and downstream-test-replay meanings. Existing protected code/math and prior API contracts are unchanged."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:7049edd921fb52c8843edd83006ff90f24003330bead76f91873041a4ccb41cd"
-reviewedTranslationHash = "sha256:b9dc1500d64fa181a172dc703e6b90c0a303125208b3be3fba8906493a7600a9"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
-evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+reviewedSourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
+reviewedTranslationHash = "sha256:3d49b865439252ae69f67e932a4c6e44645ee953e39440cab6520541a59f8bf1"
+reviewer = "onboarding21 (AI; independent mathematical-presentation review), review21 (AI; independent raw-evidence acceptance)"
+reviewedAt = "2026-10-14T20:16:58Z"
+evidence = "onboarding21 independently reviewed the mathematical presentation against the recorded scope accepted by review21: the same installed 2.1.0 wheel supplies scalar and NumPy operations, not a 2.0-versus-2.1 comparison; list conversion and prepared arrays are separate workloads, 24 synthetic combinations and grouped 30 public test inputs do not establish production throughput or a universal switching threshold, and timing/IQR, process RSS, traced allocations and dependency costs remain distinct. review21 independently accepted raw records c30dae66247bde7db4993b8ad5a54629ba2d5b790fa75e2197d60652ad5e4f96 and daf317b332b46ef4009e48943ae0124888d3bb6658b01abe280daeba00b7efdc. Protected guide code/math and prior reviewed batch API semantics remain byte-identical; the added paragraph links measured evidence without adding a numerical or probabilistic claim."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/guides/numpy-batches.md"
-sourceHash = "sha256:7049edd921fb52c8843edd83006ff90f24003330bead76f91873041a4ccb41cd"
+sourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:7049edd921fb52c8843edd83006ff90f24003330bead76f91873041a4ccb41cd"
-reviewedTranslationHash = "sha256:9d7de8e313ea1a5e6a48c461b399890f88157a43f4892bb7fe1525f353a4eef8"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
-evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+reviewedSourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
+reviewedTranslationHash = "sha256:ba2cb4c148256f35fc5f3d0167d0beda4123d6ae346070704cc1e85449371d68"
+reviewer = "onboarding21 (AI; independent scientific/editorial review)"
+reviewedAt = "2026-10-14T20:16:58Z"
+evidence = "onboarding21 independently read the final English, Russian and Simplified Chinese NumPy guide additions and installed-results narrative at beb13c72018b98c7b1143745ead42e5f5418944d. The text separates the exact installed 2.1.0 CI wheel from source studies and unpublished release status; Russian wording identifies the wheel hash, and Chinese scientific terminology preserves candidate, measured-resource and downstream-test-replay meanings. Existing protected code/math and prior API contracts are unchanged."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:7049edd921fb52c8843edd83006ff90f24003330bead76f91873041a4ccb41cd"
-reviewedTranslationHash = "sha256:9d7de8e313ea1a5e6a48c461b399890f88157a43f4892bb7fe1525f353a4eef8"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
-evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+reviewedSourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
+reviewedTranslationHash = "sha256:ba2cb4c148256f35fc5f3d0167d0beda4123d6ae346070704cc1e85449371d68"
+reviewer = "onboarding21 (AI; independent mathematical-presentation review), review21 (AI; independent raw-evidence acceptance)"
+reviewedAt = "2026-10-14T20:16:58Z"
+evidence = "onboarding21 independently reviewed the mathematical presentation against the recorded scope accepted by review21: the same installed 2.1.0 wheel supplies scalar and NumPy operations, not a 2.0-versus-2.1 comparison; list conversion and prepared arrays are separate workloads, 24 synthetic combinations and grouped 30 public test inputs do not establish production throughput or a universal switching threshold, and timing/IQR, process RSS, traced allocations and dependency costs remain distinct. review21 independently accepted raw records c30dae66247bde7db4993b8ad5a54629ba2d5b790fa75e2197d60652ad5e4f96 and daf317b332b46ef4009e48943ae0124888d3bb6658b01abe280daeba00b7efdc. Protected guide code/math and prior reviewed batch API semantics remain byte-identical; the added paragraph links measured evidence without adding a numerical or probabilistic claim."
 
 [[units]]
 id = "symbol:fuzzyroutines.batches.EvaluateMembershipBatch"

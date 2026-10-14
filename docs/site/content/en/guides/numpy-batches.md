@@ -51,4 +51,6 @@ for measured sizes and costs. Small batches may be slower; prepared arrays and
 Python lists have different conversion costs. A finite parity grid does not
 establish application throughput or a universal switching point.
 
+See also the [installed 2.1.0 candidate results](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/installed-batch-results.md), which identify the exact wheel and record time, memory and NumPy import/installation costs. Small public consumer test replays are reported separately.
+
 [![Measured list-input and prepared-array speed ratios](../assets/figures/numpy-batch-speed.svg)](../assets/figures/numpy-batch-speed.svg)

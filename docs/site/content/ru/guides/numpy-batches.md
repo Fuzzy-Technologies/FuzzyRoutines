@@ -55,4 +55,6 @@ assert result.selected.argmax(axis=-1).tolist() == [0, 1, 2, 3, 4]
 Малые пакеты могут работать медленнее. Подготовленный массив и список Python
 имеют разные затраты на преобразование; универсального порога переключения нет.
 
+В [отчёте о замерах установленного кандидата 2.1.0](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/installed-batch-results.md) указаны хеш wheel, время выполнения, расход памяти и затраты на импорт и установку NumPy. Отдельно приведены результаты для небольших групп входов из публичных тестов потребителя.
+
 [![Измеренное отношение времени скалярного и пакетного вычисления](../../en/assets/figures/numpy-batch-speed.svg)](../../en/assets/figures/numpy-batch-speed.svg)

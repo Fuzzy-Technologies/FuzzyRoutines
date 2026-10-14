@@ -31,4 +31,6 @@ assert result.selected.argmax(axis=-1).tolist() == [0, 1, 2, 3, 4]
 
 基准验证配置为 Python 3.13/3.14 与 NumPy 2.3.5；可选依赖允许兼容的 NumPy 2.x 版本。异常约定见 [API](../api/modern/batches.md)，实测规模和资源开销见[性能报告](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/public-batch-comparison.md)。小批量可能更慢，预先构造的数组与 Python 列表的转换成本不同；不存在通用的切换阈值。
 
+另见[已安装的 2.1.0 候选包实测报告](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/installed-batch-results.md)。该报告给出 wheel 校验值、运行时间、内存及 NumPy 导入和安装开销，并单列下游公开测试输入的小批量重放结果。
+
 [![标量与批量计算的实测时间比](../../en/assets/figures/numpy-batch-speed.svg)](../../en/assets/figures/numpy-batch-speed.svg)
