@@ -8,14 +8,14 @@ on:
     branches:
       - develop
       - master
-  push:
-    branches:
-      - develop
-      - master
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-install:
@@ -30,18 +30,32 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Select full or reviewed focused validation
+        id: scope
+        uses: ./.github/actions/ci-policy
+
+      - name: Check artifact tooling contracts on routine updates
+        if: steps.scope.outputs.package != 'true'
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements.txt
+          python -m pytest -q tests/test_reproducible_artifacts.py
+
       - name: Build and compare independent wheel and source distributions
+        if: steps.scope.outputs.package == 'true'
         run: |
           python -m pip install --disable-pip-version-check -r requirements-build.txt
           python -m tools.reproducible_artifacts --output-directory dist
 
       - name: Record artifact hashes and source revision
+        if: steps.scope.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -52,6 +66,7 @@ jobs:
           cat dist/reproducibility.json
 
       - name: Clean-install wheel and verify installed package
+        if: steps.scope.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -64,18 +79,21 @@ jobs:
           "$venvPath/bin/python" -m pip install --disable-pip-version-check pytest
           "$venvPath/bin/python" -m pip install --disable-pip-version-check --no-deps "$wheelPath"
 
+          expectedVersion="$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+          export EXPECTED_PACKAGE_VERSION="$expectedVersion"
           cd "$RUNNER_TEMP"
           "$venvPath/bin/python" -m pytest -q \
             "$GITHUB_WORKSPACE/tests/test_legacy_public_api.py" \
             "$GITHUB_WORKSPACE/tests/test_public_api_documentation.py" \
             "$GITHUB_WORKSPACE/tests/test_migration_examples.py"
           "$venvPath/bin/python" - <<'PY'
+          import os
           from importlib.metadata import version
 
           import fuzzyroutines
           from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
-          assert version("fuzzyroutines") == "2.0.0"
+          assert version("fuzzyroutines") == os.environ["EXPECTED_PACKAGE_VERSION"]
           assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzySet is not None
@@ -87,6 +105,7 @@ jobs:
             "$GITHUB_WORKSPACE/dist/wheel-executable-evidence"
 
       - name: Clean-install source distribution and verify installed package
+        if: steps.scope.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -99,18 +118,21 @@ jobs:
           "$venvPath/bin/python" -m pip install --disable-pip-version-check pytest
           "$venvPath/bin/python" -m pip install --disable-pip-version-check --no-deps "$sdistPath"
 
+          expectedVersion="$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+          export EXPECTED_PACKAGE_VERSION="$expectedVersion"
           cd "$RUNNER_TEMP"
           "$venvPath/bin/python" -m pytest -q \
             "$GITHUB_WORKSPACE/tests/test_legacy_public_api.py" \
             "$GITHUB_WORKSPACE/tests/test_public_api_documentation.py" \
             "$GITHUB_WORKSPACE/tests/test_migration_examples.py"
           "$venvPath/bin/python" - <<'PY'
+          import os
           from importlib.metadata import version
 
           import fuzzyroutines
           from fuzzyroutines.FuzzyRoutines import FuzzyScale, MFunction
 
-          assert version("fuzzyroutines") == "2.0.0"
+          assert version("fuzzyroutines") == os.environ["EXPECTED_PACKAGE_VERSION"]
           assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzyScale is not None
@@ -122,6 +144,7 @@ jobs:
             "$GITHUB_WORKSPACE/dist/sdist-executable-evidence"
 
       - name: Upload reproducible artifact evidence
+        if: steps.scope.outputs.package == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: package-artifacts-python-${{ matrix.python-version }}

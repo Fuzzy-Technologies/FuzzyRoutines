@@ -8,6 +8,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from tools import compose_pages_site as composePagesSite
 
 PROJECTROOT = Path(__file__).parents[1]
@@ -89,19 +91,23 @@ def test_DraftLocalesAreAvailableOnlyInAnExplicitReviewArtifact(tmpPath):
     assert 'href="../../../../assets/site.css"' in deepFallback
 
 
-def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):
+@pytest.mark.parametrize("candidateVersion", ["2.0.0", "2.1.0.dev0"])
+def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath, monkeypatch, candidateVersion):
     """Expose the moving route and real historical sources without fake snapshots."""
 
     apiRoot = tmpPath / "generated-api"
     outputRoot = tmpPath / "pages"
     CreateApiFixture(apiRoot)
+    metadataPath = tmpPath / "pyproject.toml"
+    metadataPath.write_text(f'[project]\nversion = "{candidateVersion}"\n', encoding="utf-8")
+    monkeypatch.setattr(composePagesSite, "PROJECTMETADATA", metadataPath)
 
     composePagesSite.ComposeSite(apiRoot, outputRoot)
     versionText = (
         outputRoot / "api" / "versions" / "index.html"
     ).read_text(encoding="utf-8")
 
-    assert "2.0.0" in versionText
+    assert candidateVersion in versionText
     assert "../latest/en/" in versionText
     assert "Separately hosted documentation snapshots for individual releases" in versionText
     assert "are not currently provided" in versionText

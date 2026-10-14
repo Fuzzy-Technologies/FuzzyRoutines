@@ -5,17 +5,17 @@ SPDX-License-Identifier: Apache-2.0
 
 # Current implementation status
 
-This page records the public boundary prepared for FuzzyRoutines 2.0.0 and
-promoted to `master` through PR #312. It separates implemented and tested
-behavior from the FuzzyRoutines 2 roadmap. Package metadata is `2.0.0`.
-Publication is on hold for the final project and documentation review; a merged
-candidate does not establish a published GitHub or PyPI release.
+FuzzyRoutines 2.0.0 was published on 2026-10-10. Its released scalar API is the
+baseline for the current `2.1.0.dev0` development cycle. The capabilities below
+describe that established baseline; planned 2.1 features become implemented
+only when their reviewed changes and evidence are merged into `develop`.
 
 The [release version review](release-version-decision.md) reaffirms that stable
 target from observable compatibility impact. The
 [development changelog](../CHANGELOG.md) and
 [1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) describe the implemented
-boundary; release approval remains pending.
+boundary. The [2.1 milestone](https://github.com/Fuzzy-Technologies/FuzzyRoutines/milestone/8)
+tracks subsequent work. A development build is not a published 2.1 release.
 
 The [2026-10-05 project audit](audits/2026-10-05-project-audit.md) reviews the
 production modules, all accepted ADRs, practical usage, documentation and

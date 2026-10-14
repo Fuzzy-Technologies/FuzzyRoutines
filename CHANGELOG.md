@@ -17,6 +17,21 @@ focused modern API while preserving protected historical calls. The CPython
 floor and helper-import changes justify the
 [selected stable target](docs/release-version-decision.md).
 
+## Minor 2.1
+
+### Patch 0 — v2.1.0.dev0 — 2026-10-14
+
+#### Digest
+
+Development preparation date; this version has not been published.
+The 2.1 cycle adds agent onboarding, explicit fuzzy inference, optional batch
+evaluation and modern neural examples as their implementations are accepted.
+
+#### Changed
+
+- Prepare isolated development and review against the published 2.0.0 baseline.
+  Promotion to `master` and package publication remain separate maintainer gates.
+
 ## Minor 2.0
 
 ### Patch 0 — v2.0.0 — 2026-10-10
