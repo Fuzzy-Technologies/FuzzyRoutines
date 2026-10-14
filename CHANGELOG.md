@@ -29,6 +29,11 @@ evaluation and modern neural examples as their implementations are accepted.
 
 #### Added
 
+- A pinned public consumer migration fixture separates membership, label,
+  centroid and normalized-output changes across historical and modern releases.
+  Installed-candidate checks enforce the published 2.0 boundary while explicitly
+  recording that private FMA/robot application migration is still unverified.
+
 - A version-pinned agent quick start in English, Russian and Simplified Chinese,
   a standalone compute/plot recipe with independent mathematical checks, and
   machine-readable inputs, policies, results and execution evidence. The recipe

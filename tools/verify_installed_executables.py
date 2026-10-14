@@ -269,6 +269,16 @@ def Main(arguments=None):
 
     results = {
         "agent-recipes": RunAgentRecipes(artifactDirectory, environment),
+        "consumer-scale-migration": RunJsonEntryPoint(
+            "consumer-scale-migration",
+            [
+                sys.executable, "-I", str(PROJECTROOT / "tools/consumer_scale_migration.py"),
+                "--fixture", str(PROJECTROOT / "tests/fixtures/consumer_scale_migration.json"),
+                "--check-current",
+            ],
+            artifactDirectory,
+            environment,
+        ),
         "canonical-guide-examples": RunCanonicalGuideExamples(artifactDirectory, environment),
         "compatibility-guide-examples": RunCompatibilityGuideExamples(
             artifactDirectory,
