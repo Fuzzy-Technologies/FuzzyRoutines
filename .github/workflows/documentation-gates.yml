@@ -105,7 +105,8 @@ jobs:
           "$environmentPython" -m pip install --disable-pip-version-check -r docs/requirements-plots.txt
           cd "$RUNNER_TEMP"
           "$GITHUB_WORKSPACE/$environmentPython" -I -m pytest -q \
-            "$GITHUB_WORKSPACE/tests/test_guide_figures.py"
+            "$GITHUB_WORKSPACE/tests/test_guide_figures.py" \
+            "$GITHUB_WORKSPACE/tests/test_agent_recipe_plots.py"
           "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/generate_guide_figures.py" \
             --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures" --check \
             > "$GITHUB_WORKSPACE/_build/documentation-gates/figures.json"

@@ -36,6 +36,7 @@ theme:
 nav:
   - Overview: index.md
   - Quick start: quick-start.md
+  - Agent quick start: agent-quickstart.md
   - Worked scenarios:
       - Overview: guides/index.md
       - Temperature comfort: guides/temperature.md

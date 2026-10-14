@@ -246,6 +246,11 @@ def ComposeSite(apiSite, outputRoot, localeRoot=None, *, includeDrafts=False):
 
     shutil.copy2(PRODUCTROOT / "index.html", outputRoot / "index.html")
     shutil.copytree(PRODUCTROOT / "assets", outputRoot / "assets")
+    shutil.copy2(PRODUCTROOT / "llms.txt", outputRoot / "llms.txt")
+    recipeRoot = outputRoot / "recipes"
+    recipeRoot.mkdir()
+    shutil.copy2(PRODUCTROOT.parent / "examples" / "agent_recipe.py", recipeRoot / "agent_recipe.py")
+    shutil.copy2(PRODUCTROOT / "requirements-plots.txt", recipeRoot / "requirements-plots.txt")
 
     apiRoot = outputRoot / "api"
     englishRoot = apiRoot / "latest" / "en"
