@@ -1,0 +1,33 @@
+{
+  "repository": "/absolute/path/to/clean-evidence-checkout",
+  "harness_commit": null,
+  "output_directory": "/absolute/path/to/new-results-directory",
+  "repeats": 7,
+  "warmups": 1,
+  "iterations": {
+    "scalar": 10000,
+    "scale_construction": 100,
+    "scale_lookup": 10,
+    "fuzzyset_construction": 100,
+    "fuzzyset_centroid": 10
+  },
+  "baseline": {
+    "wheel": null,
+    "wheel_sha256": "501eefd15cefdbb137ad05f2887cb63d662b0f574c64a818ccb6675b2138a2c4",
+    "version": "2.0.0",
+    "source_commit": "49c9aee67a60cad74bc9494943b8745b72d2f43c",
+    "source_evidence_url": "https://pypi.org/pypi/fuzzyroutines/2.0.0/json",
+    "provenance_json": null
+  },
+  "candidate": {
+    "wheel": null,
+    "wheel_sha256": null,
+    "version": "2.1.0",
+    "source_commit": null,
+    "source_evidence_url": null,
+    "provenance_json": null,
+    "artifact_metadata_json": null,
+    "artifact_archive": null
+  },
+  "workload_commit": "49c9aee67a60cad74bc9494943b8745b72d2f43c"
+}

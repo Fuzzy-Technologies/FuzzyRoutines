@@ -11629,50 +11629,51 @@ evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and co
 id = "page:agent-quickstart"
 kind = "page"
 sourcePath = "docs/site/content/en/agent-quickstart.md"
-sourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+sourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/agent-quickstart.md"
-sourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+sourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
-reviewedTranslationHash = "sha256:f80542afa60328d39beb94a38d4511099b79a55cab6a5e26363a0c20892e0c90"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
-reviewedAt = "2026-10-14T18:37:37Z"
-evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+reviewedSourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
+reviewedTranslationHash = "sha256:536a637e815d11fddf46f06a855fc791d2bfdc1b2f139365ddc03c8bd5a4d442"
+reviewer = "onboarding21 (AI; independent scientific/editorial approval), ci21 (AI; exact-hash integration verification)"
+reviewedAt = "2026-10-14T19:41:15Z"
+evidence = "onboarding21 independently approved scientific/editorial source and EN/RU/zh-CN translations in ec08f3b62cb36799391cba69cb0d785370bb8f23. ci21 verified the exact approved source and translation hashes after integration: published 2.0 recipe preserved, explicit local candidate-wheel installation, mathematical distinctions and optional repository-only neural/research boundaries unchanged. Protected code/math/API fragments match. New feature links require the integrated candidate, including NumPy PR #345; final installed-wheel evidence and publication remain separate gates."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
-reviewedTranslationHash = "sha256:f80542afa60328d39beb94a38d4511099b79a55cab6a5e26363a0c20892e0c90"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
-reviewedAt = "2026-10-14T18:37:37Z"
-evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+reviewedSourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
+reviewedTranslationHash = "sha256:536a637e815d11fddf46f06a855fc791d2bfdc1b2f139365ddc03c8bd5a4d442"
+reviewer = "onboarding21 (AI; independent scientific/editorial approval), ci21 (AI; exact-hash integration verification)"
+reviewedAt = "2026-10-14T19:41:15Z"
+evidence = "onboarding21 independently approved scientific/editorial source and EN/RU/zh-CN translations in ec08f3b62cb36799391cba69cb0d785370bb8f23. ci21 verified the exact approved source and translation hashes after integration: published 2.0 recipe preserved, explicit local candidate-wheel installation, mathematical distinctions and optional repository-only neural/research boundaries unchanged. Protected code/math/API fragments match. New feature links require the integrated candidate, including NumPy PR #345; final installed-wheel evidence and publication remain separate gates."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/agent-quickstart.md"
-sourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+sourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
-reviewedTranslationHash = "sha256:688183f9e55462c7e480a5e713dfac4a6b4f5f5f980a33cdb0e4fe67ddcdddb0"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
-reviewedAt = "2026-10-14T18:37:37Z"
-evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+reviewedSourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
+reviewedTranslationHash = "sha256:2ddb75fc0f9d7333d62119da4de5f6c72c8b839bf3d4ebd3a53e75ffda84a690"
+reviewer = "onboarding21 (AI; independent scientific/editorial approval), ci21 (AI; exact-hash integration verification)"
+reviewedAt = "2026-10-14T19:41:15Z"
+evidence = "onboarding21 independently approved scientific/editorial source and EN/RU/zh-CN translations in ec08f3b62cb36799391cba69cb0d785370bb8f23. ci21 verified the exact approved source and translation hashes after integration: published 2.0 recipe preserved, explicit local candidate-wheel installation, mathematical distinctions and optional repository-only neural/research boundaries unchanged. Protected code/math/API fragments match. New feature links require the integrated candidate, including NumPy PR #345; final installed-wheel evidence and publication remain separate gates."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
-reviewedTranslationHash = "sha256:688183f9e55462c7e480a5e713dfac4a6b4f5f5f980a33cdb0e4fe67ddcdddb0"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
-reviewedAt = "2026-10-14T18:37:37Z"
-evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+reviewedSourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
+reviewedTranslationHash = "sha256:2ddb75fc0f9d7333d62119da4de5f6c72c8b839bf3d4ebd3a53e75ffda84a690"
+reviewer = "onboarding21 (AI; independent scientific/editorial approval), ci21 (AI; exact-hash integration verification)"
+reviewedAt = "2026-10-14T19:41:15Z"
+evidence = "onboarding21 independently approved scientific/editorial source and EN/RU/zh-CN translations in ec08f3b62cb36799391cba69cb0d785370bb8f23. ci21 verified the exact approved source and translation hashes after integration: published 2.0 recipe preserved, explicit local candidate-wheel installation, mathematical distinctions and optional repository-only neural/research boundaries unchanged. Protected code/math/API fragments match. New feature links require the integrated candidate, including NumPy PR #345; final installed-wheel evidence and publication remain separate gates."
+
 [[units]]
 id = "module:fuzzyroutines.encoding"
 kind = "module"

@@ -19,13 +19,15 @@ floor and helper-import changes justify the
 
 ## Minor 2.1
 
-### Patch 0 — v2.1.0.dev0 — 2026-10-14
+### Patch 0 — v2.1.0 candidate — 2026-10-14
 
 #### Digest
 
-Development preparation date; this version has not been published.
-The 2.1 cycle adds agent onboarding, explicit fuzzy inference, optional batch
-evaluation and modern neural examples as their implementations are accepted.
+Candidate preparation date; version 2.1.0 has not been published. The published
+stable release remains 2.0.0. This candidate brings agent onboarding, historical
+scale factories, explicit linguistic encoding, fuzzy-rule inference, optional
+NumPy batches and neural examples. Final artifact evidence is tracked in the
+[2.1 readiness gate](docs/release-readiness.md#current-21-development-gate).
 
 #### Added
 

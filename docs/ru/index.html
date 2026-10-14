@@ -53,6 +53,7 @@ SPDX-License-Identifier: Apache-2.0
     <p class="eyebrow">Python · Нечёткая математика · Открытый код</p>
     <p class="hero-lead"><strong>Превращайте измерения в понятные оценки</strong> с помощью функций принадлежности, нечётких множеств и лингвистических шкал. Стройте модели для экспертных систем, оценки рисков и инженерных решений.</p>
     <p class="quiet">CPython 3.13–3.14 · Типизированный скалярный API · NumPy не обязателен · Apache-2.0</p>
+    <p class="release-note" data-status="candidate"><strong>Кандидат 2.1.0</strong> добавляет создание исторической шкалы, лингвистическое кодирование, вывод Мамдани и Сугено, необязательные пакетные вычисления NumPy и примеры нейросетей. Версия ещё не опубликована в PyPI. <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/ru/agent-quickstart.md">Попробовать версию 2.1 →</a></p>
     <div class="hero-actions">
       <a class="button-neon" href="#start">Попробовать пример</a>
       <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/">Открыть справочник API</a>
@@ -65,7 +66,7 @@ SPDX-License-Identifier: Apache-2.0
     <p>Насколько температура в комнате <strong>24 °C</strong> соответствует понятию «комфортно»? Зададим полное соответствие при 22 °C и его убывание до нуля при 16 и 28 °C, затем вычислим степень принадлежности для измеренной температуры.</p>
     <h3>1 · Установка</h3>
     <p>Используйте Python 3.13 или 3.14 в окружении проекта.</p>
-    <p class="release-note"><strong>Пример использует API версии 2.0</strong>. Установите соответствующую версию из <a href="https://pypi.org/project/fuzzyroutines/">PyPI</a>: в исторических релизах 1.x этого API нет.</p>
+    <p class="release-note"><strong>Пример использует опубликованную версию 2.0.0</strong>. Установите эту стабильную версию из <a href="https://pypi.org/project/fuzzyroutines/2.0.0/">PyPI</a>: в исторических релизах 1.x этого API нет.</p>
     <div class="code-block">
       <div class="code-toolbar"><span>Терминал</span><button class="copy-button" type="button" data-copy-target="install-command" aria-label="Скопировать команду установки" hidden>Скопировать</button></div>
       <pre tabindex="0" aria-label="Команда установки"><code id="install-command">python -m pip install fuzzyroutines==2.0.0</code></pre>
@@ -162,7 +163,7 @@ Comfort membership: 0.667</code></pre>
     <details id="status">
       <summary>Возможности и совместимость</summary>
       <p data-status="implemented"><strong>Реализовано в 2.0</strong>: современный скалярный API и исторический фасад совместимости, явная проверка входных данных и документированные численные исправления.</p>
-      <p data-status="roadmap"><strong>Дальнейшая работа</strong>: дополнительные методы дефаззификации, вычисление выпуклости, симметрическая разность и векторизованные вычисления для прикладного использования. В опубликованный скалярный API эти возможности не входят.</p>
+      <p data-status="roadmap"><strong>Дальнейшая работа</strong>: дополнительные методы дефаззификации, проверка выпуклости, симметрическая разность и поддержка Python без GIL остаются за рамками версии 2.1.</p>
     </details>
   </section>
   <footer class="site-footer">

@@ -34,8 +34,9 @@ their own review and candidate checks below.
 
 ## Current 2.1 development gate
 
-The repository is preparing 2.1 from the published 2.0 baseline. The version in
-`pyproject.toml` identifies the checked-out source; development metadata does
+The release-preparation source sets `pyproject.toml` to **2.1.0**, dated
+2026-10-14. This is **unpublished candidate metadata**; the published stable
+release remains 2.0.0. The metadata identifies the checked-out source and does
 not establish publication. Merged features provide implementation evidence,
 while exact-candidate acceptance belongs to
 [Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337).
@@ -46,13 +47,29 @@ review. These documents do not authorize its merge, an annotated release tag,
 a GitHub Release or PyPI publication. Earlier green commits and the completed
 2.0 publication cannot satisfy the candidate checks below.
 
+### Accepted implementation evidence
+
+| Area                                             | Reviewed source evidence                                                                                                                                             |
+| ---                                              | ---                                                                                                                                                                  |
+| Historical scale factory and linguistic encoding | Merged [PR #341](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/341), including mathematical contracts, source-bound translations and installed checks.    |
+| Three-language product homepage                  | Merged [PR #342](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/342), preserving the shared design, copy controls and image viewer.                        |
+| Mamdani and Sugeno inference                     | Merged [PR #343](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/343), including rule traces, independent references and explanatory figures.               |
+| Neural examples and bounded Sugeno research      | Merged [PR #344](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/344), including scientific review, recorded experiments and optional installed-CPU checks. |
+| Optional NumPy batches                           | Merged [PR #345](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/345) after all required CI passed; includes explicit backend and installed-wheel checks.   |
+
+These accepted feature revisions establish implementation and review evidence.
+The exact final 2.1.0 wheel, installed benchmark comparisons and maintainer
+promotion review remain pending. Retain each feature's source-bound acceptance
+when reconciling the final tree; do not reuse an earlier artifact's checks as
+verification of a different wheel.
+
 ### Mandatory evidence
 
 - [ ] Identify the exact candidate commit, version, wheel and sdist hashes; retain reproducible-build and clean-install evidence on both supported interpreters.
 - [ ] Run the complete required CI gate on that candidate, including installed public imports, compatibility and feature-specific mathematical checks.
 - [ ] Compare the installed candidate with installed PyPI 2.0.0 in the same environment for relevant scalar, centroid and scale workloads; retain raw timing samples and independent numerical checks.
-- [ ] Re-run the pinned [consumer scale migration](migration/consumer-scale-boundary.md) against the candidate; distinguish public fixture coverage from private FMA/robot validation that has not occurred.
-- [ ] Verify examples, deterministic scientific figures, optional-dependency boundaries and current EN/RU/zh-CN editorial and mathematical acceptance.
+- [ ] Run the pinned [consumer scale migration CLI](migration/consumer-scale-boundary.md) against the exact installed 2.1.0 wheel, in the candidate scalar environment after timings; source fixture tests do not satisfy this artifact check. Private FMA/robot validation remains unverified.
+- [ ] Confirm the accepted examples, deterministic figures, optional-dependency boundaries and EN/RU/zh-CN reviews still match the final candidate and its artifacts.
 - [ ] Verify the three product landing pages, matching API language destinations, copy controls, formulas, image interactions and mobile layouts from the composed candidate artifact.
 - [ ] Review migration notes, changelog, version decision, scope exclusions and the remaining risks in one concise maintainer handoff.
 
@@ -81,7 +98,7 @@ when the corresponding installed-candidate or publication evidence exists:
 | `docs/site` API pages, guides, navigation and `docs/i18n/units.toml`           | Verify every newly public import, link and reviewed source/translation hash on the final tree.                                |
 | `CHANGELOG.md`; migration and packaging notes                                  | Separate new capabilities, corrected behavior and preserved historical contracts; retain the 2.0 release record.              |
 | `docs/release-readiness.md`; candidate performance and artifact reports        | Attach exact revision, package hashes, raw samples, environment and numerical checks without reusing old development timings. |
-| `docs/release-notes-2.0.0.md`; the future 2.1 GitHub release body              | Preserve 2.0 notes and prepare a separate 2.1 summary with its own verified installation and artifact links.                  |
+| `docs/release-notes-2.0.0.md`; `docs/release-notes-2.1.0.md`                   | Preserve 2.0 notes and prepare a separate 2.1 summary with its own verified installation and artifact links.                  |
 
 ## External publication controls
 
