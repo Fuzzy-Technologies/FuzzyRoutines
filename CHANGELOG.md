@@ -29,6 +29,15 @@ evaluation and modern neural examples as their implementations are accepted.
 
 #### Added
 
+- An optional CPU neural example compares raw, label-centroid and membership
+  inputs, with held-out evaluation and a separate membership-output task.
+  Pinned training dependencies, recorded experiments and reproducible
+  scientific figures accompany the English, Russian and Chinese guides.
+- A bounded differentiable Sugeno research prototype checks scalar parity
+  and gradients and compares shared-data baselines. Its recorded tradeoffs
+  support keeping tensor APIs outside the 2.1 public package; Torch remains
+  an optional repository dependency.
+
 - Typed scalar Mamdani and zero/first-order Sugeno rule inference with explicit
   logical operators, rule weights, output policies and immutable traces.
   English, Russian and Simplified Chinese worked examples include reproducible

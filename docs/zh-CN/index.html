@@ -1,0 +1,175 @@
+<!doctype html>
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="面向 Python 的模糊集、隶属函数与语言标度工具。使用 FuzzyRoutines 将测量值转化为可解释的隶属度。" />
+  <meta name="theme-color" content="#07090d" />
+  <meta property="og:title" content="FuzzyRoutines — Fuzzy Technologies" />
+  <meta property="og:description" content="Python 模糊集、隶属函数与语言标度，提供完整示例并兼容历史接口。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" />
+  <meta property="og:site_name" content="Fuzzy Technologies" />
+  <meta property="og:image" content="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/assets/brand/fuzzyroutines-alice.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" />
+  <link rel="alternate" hreflang="en" href="https://fuzzy-technologies.github.io/FuzzyRoutines/" />
+  <link rel="alternate" hreflang="ru" href="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../api/latest/en/assets/stylesheets/fonts.css" />
+  <link rel="stylesheet" href="../assets/landing.css" />
+  <link rel="stylesheet" href="../api/latest/en/assets/stylesheets/lightbox.css" />
+  <script defer src="../assets/site.js"></script>
+  <script defer src="../api/latest/en/assets/javascripts/lightbox.js"></script>
+  <title>FuzzyRoutines — Fuzzy Technologies</title>
+</head>
+<body>
+<a class="skip-link" href="#content">跳转到正文</a>
+<main id="content">
+  <header class="site-header" id="top">
+    <h1><a href="#top">FuzzyRoutines</a></h1>
+    <a class="company-link" href="https://fuzzy-technologies.github.io/">Fuzzy Technologies ↗</a>
+  </header>
+  <nav class="site-nav" aria-label="主导航">
+    <a href="#start">快速入门</a>
+    <a href="#scale">通用模糊标度</a>
+    <a href="#documentation">文档</a>
+    <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines">GitHub ↗</a>
+  </nav>
+  <nav class="site-nav language-nav" aria-label="页面语言">
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/" hreflang="en" lang="en">English</a>
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" hreflang="ru" lang="ru">Русский</a>
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" hreflang="zh-CN" lang="zh-CN" aria-current="page">简体中文</a>
+  </nav>
+  <img class="project-art" src="../api/latest/en/assets/brand/fuzzyroutines-alice.png"
+       alt="Alice 在 Fuzzy Technologies 实验室介绍 FuzzyRoutines"
+       width="1774" height="887" fetchpriority="high" />
+  <section class="intro" aria-label="关于 FuzzyRoutines">
+    <p class="eyebrow">Python · 模糊数学 · 开源</p>
+    <p class="hero-lead">利用隶属函数、模糊集与语言标度，<strong>将测量值转化为可解释的隶属度</strong>。为专家系统、风险评估及工程决策构建模型。</p>
+    <p class="quiet">CPython 3.13–3.14 · 带类型注解的标量 API · 无需强制安装 NumPy · Apache-2.0</p>
+    <div class="hero-actions">
+      <a class="button-neon" href="#start">运行示例</a>
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/">查看 API</a>
+    </div>
+  </section>
+  <p class="motto-line">技术 · 知识 · 科学</p>
+
+  <section id="start" aria-labelledby="start-title">
+    <h2 id="start-title">快速入门</h2>
+    <p>室温 <strong>24 °C</strong> 在多大程度上属于“舒适”？设 22 °C 时隶属度为 1，并在 16 °C 和 28 °C 处降至 0，然后计算测量值的隶属度。</p>
+    <h3>1 · 安装</h3>
+    <p>在项目环境中使用 Python 3.13 或 3.14。</p>
+    <p class="release-note"><strong>本示例使用 2.0 API</strong>。请从 <a href="https://pypi.org/project/fuzzyroutines/">PyPI</a> 安装对应版本；历史版本 1.x 不提供此 API。</p>
+    <div class="code-block">
+      <div class="code-toolbar"><span>终端</span><button class="copy-button" type="button" data-copy-target="install-command" aria-label="复制安装命令" hidden>复制</button></div>
+      <pre tabindex="0" aria-label="安装命令"><code id="install-command">python -m pip install fuzzyroutines==2.0.0</code></pre>
+    </div>
+    <h3>2 · 运行示例</h3>
+    <p>将代码保存为 <code>comfort.py</code>，然后执行 <code>python comfort.py</code>。</p>
+    <div class="code-block">
+      <div class="code-toolbar"><span>Python · comfort.py</span><button class="copy-button" type="button" data-copy-target="quickstart-code" aria-label="复制 Python 示例" hidden>复制</button></div>
+      <pre tabindex="0" aria-label="Python 示例"><code id="quickstart-code">from fuzzyroutines import (
+    ContinuousUniverse, ScalarFuzzySet, Triangle,
+)
+
+universe = ContinuousUniverse(
+    0, 40, leftClosed=True, rightClosed=True,
+)
+comfort = ScalarFuzzySet(universe, Triangle(16, 22, 28))
+temperature = 24
+grade = comfort.Membership(temperature)
+
+print(f"Temperature: {temperature} °C")
+print(f"Comfort membership: {grade:.3f}")</code></pre>
+    </div>
+    <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+    <h3>3 · 理解结果</h3>
+    <div class="result-grid">
+      <div>
+        <div class="code-block output-block">
+          <div class="code-toolbar"><span>预期输出</span></div>
+          <pre><code id="quickstart-output">Temperature: 24 °C
+Comfort membership: 0.667</code></pre>
+        </div>
+        <p>该温度位于三角形的下降段：<code>(28 − 24) / (28 − 22) = 2/3</code>。数值 <strong>0.667</strong> 表示对舒适温度模糊集的隶属度，而非概率。</p>
+        <p>这些阈值仅为示例中的建模选择。可以添加其他语言项，以区分应用中的舒适、温暖和炎热状态。</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/quick-start/">继续学习含两个语言项的标度 →</a>
+      </div>
+      <figure>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/assets/figures/temperature.svg" aria-label="放大温度隶属度图">
+          <img src="../api/latest/en/assets/figures/temperature.svg" alt="Comfort 三角形隶属函数与 Warm 肩形隶属函数，标出了 24 °C 测量值" loading="lazy" />
+        </a>
+        <figcaption>完整教程加入 Warm 语言项，其在 24 °C 处的隶属度为 0.125。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="scale" aria-labelledby="scale-title">
+    <h2 id="scale-title">通用模糊标度</h2>
+    <div class="project-card featured scale-card">
+      <p class="eyebrow">历史模型 · 现代 API</p>
+      <h3>归一化测量值的五个等级</h3>
+      <p><strong>Min · Low · Med · High · Max</strong></p>
+      <p>使用原始系数重建历史标度，并与现代实现比较。指南提供隶属函数曲线、边界情形及语言项选择规则。</p>
+      <p>用语言等级解释归一化风险评分、发现的安全问题或防护措施的有效性。应先明确评分增大在模型中的含义；隶属度并不等于事件发生概率。</p>
+      <div class="project-links">
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/guides/universal-fuzzy-scale/">查看标度与图形 →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="capabilities" aria-labelledby="capabilities-title">
+    <h2 id="capabilities-title">构建模糊模型</h2>
+    <div class="project-grid">
+      <article class="project-card">
+        <span class="card-label">定义</span><h3>隶属度与集合</h3>
+        <p>八类隶属函数、显式声明的论域，以及不可变的标量模糊集。</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/guides/membership-families/">选择曲线 →</a>
+      </article>
+      <article class="project-card">
+        <span class="card-label">组合</span><h3>模糊运算</h3>
+        <p>通过显式策略计算范数、否定、交集、并集与有向差。</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/guides/">应用场景 →</a>
+      </article>
+      <article class="project-card">
+        <span class="card-label">解释</span><h3>标度与质心</h3>
+        <p>语言项分类、α-截集与质心计算，并提供解析或数值验证。</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/api/">API 参考 →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="documentation" aria-labelledby="documentation-title">
+    <h2 id="documentation-title">文档</h2>
+    <p>九个完整应用场景、可复现图形及公共 API 参考。</p>
+    <nav class="hero-actions" aria-label="文档语言">
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/" hreflang="en" lang="en">English</a>
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/" hreflang="ru" lang="ru">Русский</a>
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/" hreflang="zh-CN" lang="zh-CN">简体中文</a>
+    </nav>
+    <div class="documentation-links">
+      <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/migration/1.0.3-to-2.0.0/">从 1.0.3 升级 →</a>
+      <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/agent-quickstart/">使用 AI 助手计算与绘图 →</a>
+      <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/CHANGELOG.md">更新日志 →</a>
+      <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md">实现状态 →</a>
+    </div>
+    <details id="status">
+      <summary>功能范围与兼容性</summary>
+      <p data-status="implemented"><strong>2.0 已实现</strong>：现代标量 API 与历史兼容接口，包含显式输入验证和已记录的数值修正。</p>
+      <p data-status="roadmap"><strong>后续工作</strong>：扩展解模糊方法、凸性查询、对称差及面向实际应用的向量化计算。这些功能尚不属于已发布的标量 API。</p>
+    </details>
+  </section>
+  <footer class="site-footer">
+    <a href="https://fuzzy-technologies.github.io/"><strong>Fuzzy Technologies</strong></a>
+    <span>技术 · 知识 · 科学</span>
+    <span class="footer-signature">— 以数学与模糊逻辑为基础</span>
+  </footer>
+</main>
+</body>
+</html>

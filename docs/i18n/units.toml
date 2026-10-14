@@ -10852,46 +10852,50 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:migration.1.0.3-to-2.0.0"
 kind = "page"
 sourcePath = "docs/migration/1.0.3-to-2.0.0.md"
-sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+sourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/migration/1.0.3-to-2.0.0.md"
-sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+sourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:d638d6cd8da11dce290ee77c2b60c3e6febcc6843f5eff17b11e228a255ae039"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:3024e621cf61312680ff503b2e7d83c526ca7cfd6fb256b137c667318dc839b4"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:d638d6cd8da11dce290ee77c2b60c3e6febcc6843f5eff17b11e228a255ae039"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:3024e621cf61312680ff503b2e7d83c526ca7cfd6fb256b137c667318dc839b4"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/migration/1.0.3-to-2.0.0.md"
-sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+sourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:ac483427ce3ac65e6fbaa12107426a46d690bfc5193bc1adc703f662c96766bb"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:da338859123d51e6c5f491f7cba80d4447d0c69cc556dca39176d97bd081a595"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:ac483427ce3ac65e6fbaa12107426a46d690bfc5193bc1adc703f662c96766bb"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:da338859123d51e6c5f491f7cba80d4447d0c69cc556dca39176d97bd081a595"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [[units]]
 id = "page:migration.historical-to-modern"
@@ -13578,6 +13582,103 @@ reviewedTranslationHash = "sha256:23286413218b210c82919755ccb5a8f2d29cef741539ef
 reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
 reviewedAt = "2026-10-14T19:11:41Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+[[units]]
+id = "page:guides.differentiable-sugeno"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/differentiable-sugeno.md"
+sourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/site/content/ru/guides/differentiable-sugeno.md"
+sourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
+reviewedTranslationHash = "sha256:8c0a048074a5a5bb36f002bc2749f3d5708d30dc4fc7ff30a2400abf94fedfab"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
+reviewedTranslationHash = "sha256:8c0a048074a5a5bb36f002bc2749f3d5708d30dc4fc7ff30a2400abf94fedfab"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/site/content/zh-CN/guides/differentiable-sugeno.md"
+sourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
+reviewedTranslationHash = "sha256:3628e70794c36a6b9773a70de8df9a07a58ca40c726f566da487bdbc220aaf5d"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
+reviewedTranslationHash = "sha256:3628e70794c36a6b9773a70de8df9a07a58ca40c726f566da487bdbc220aaf5d"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
+
+[[units]]
+id = "page:guides.neural-integration"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/neural-integration.md"
+sourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/site/content/ru/guides/neural-integration.md"
+sourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
+reviewedTranslationHash = "sha256:454c7432cea45218551ee66218619ff616f2b48ff5ab180854650042435297fa"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
+reviewedTranslationHash = "sha256:454c7432cea45218551ee66218619ff616f2b48ff5ab180854650042435297fa"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/site/content/zh-CN/guides/neural-integration.md"
+sourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
+reviewedTranslationHash = "sha256:03d0fdc7bd81342f514f4ac035933f9bc6511e9702a643f5ed7d1c851e12a2b7"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
+reviewedTranslationHash = "sha256:03d0fdc7bd81342f514f4ac035933f9bc6511e9702a643f5ed7d1c851e12a2b7"
+reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
+reviewedAt = "2026-10-14T19:25:46Z"
+evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
 [[units]]
 id = "module:fuzzyroutines.batches"
 kind = "module"

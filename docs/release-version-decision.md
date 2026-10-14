@@ -5,17 +5,20 @@ SPDX-License-Identifier: Apache-2.0
 
 # First modernization release version decision
 
-- Decision: retain **`2.0.0` as the planned first stable modernization version**.
-- Proposed stable candidate metadata: **`2.0.0`**, owned by
-  [`pyproject.toml`](../pyproject.toml).
+- Adopted decision: **`2.0.0` is the first published stable modernization release**.
+- Released metadata: **`2.0.0`** at
+  [tag `v2.0.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/v2.0.0).
+  [`pyproject.toml`](../pyproject.toml) owns the version of each source revision.
 - Planning: [Task #119](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/119)
   under [Feature #37](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/37).
 - Governing policy: [ADR-0006](adr/0006-packaging-versioning-release-policy.md).
 
-This review reaffirms the accepted version policy against the implemented
-public impact. The candidate PR proposes the metadata transition; that proposal does not
-announce a published release or supply human approval. The final human gate remains
-[Task #121](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/121).
+This record explains the accepted version policy against the implemented 2.0
+public impact. Publication completed on 2026-10-10 UTC; the
+[release](https://github.com/Fuzzy-Technologies/FuzzyRoutines/releases/tag/v2.0.0)
+and [production acceptance](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/299#issuecomment-6102397342)
+identify the approved source and verified artifacts. The 2.1 development cycle
+requires a separate [release review](release-readiness.md).
 
 ## Baseline and observable impact
 
@@ -60,12 +63,12 @@ membership identifiers, keyword meanings, and parameter ordering. Modern
 `Triangle(left, peak, right)` is additive and does not reorder historical
 `MFunction("triangle", a=left, b=right, c=peak)`.
 
-The current decision includes these merged changes:
+The 2.0 decision included these merged changes:
 
 - [PR #272](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/272),
   [commit `7f13ebb`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/7f13ebb):
-  ADR-0015 accepts an optional vectorization strategy; the NumPy experiment
-  remains outside the package and establishes no public backend promise.
+  ADR-0015 accepted an optional vectorization strategy; the 2.0 NumPy experiment
+  remained outside the package and established no public backend promise.
 - [PR #273](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/273),
   [commit `d654c9b`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/d654c9b):
   curated modern root exports and the explicit historical wildcard contract.
@@ -79,7 +82,7 @@ pre-extraction pickle fixture; it does not promise arbitrary pickle portability
 across every Python or package version. See
 [`test_legacy_facade.py`](../tests/test_legacy_facade.py).
 
-## Release execution remains pending
+## Release execution completed
 
 The [changelog](../CHANGELOG.md) and
 [release migration notes](migration/1.0.3-to-2.0.0.md) describe implemented
@@ -89,9 +92,11 @@ changes. Public typing and signature coverage under Tasks
 in [PR #276](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/276)
 ([`82647a7`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/82647a7)).
 Their source and installed-wheel checks are documented in
-[public modern typing](public-typing.md). Every item in the
-[readiness checklist](release-readiness.md) must be reviewed against the exact
-candidate commit, including supported-runtime CI and artifact evidence.
+[public modern typing](public-typing.md). The final 2.0 source was
+[`49c9aee`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/49c9aee67a60cad74bc9494943b8745b72d2f43c);
+[protected production CI](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38087564208)
+completed publication and clean-install verification. Each later candidate
+must independently satisfy the [readiness checklist](release-readiness.md).
 
 Only the approved release procedure may change the stable metadata, create the
 matching annotated tag, promote the approved source, create a GitHub Release,

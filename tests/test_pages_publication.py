@@ -139,3 +139,46 @@ def test_PagesCompositionDistributesStandaloneAgentEntrypoints(tmpPath):
     assert (outputRoot / "llms.txt").read_bytes() == (PROJECTROOT / "docs/llms.txt").read_bytes()
     assert (outputRoot / "recipes/agent_recipe.py").read_bytes() == (PROJECTROOT / "examples/agent_recipe.py").read_bytes()
     assert (outputRoot / "recipes/requirements-plots.txt").read_bytes() == (PROJECTROOT / "docs/requirements-plots.txt").read_bytes()
+
+
+def test_LandingLocalesPublishIndependentlyOfApiTranslationApproval(tmpPath):
+    """Product locales remain complete pages even when API locales use explicit fallback."""
+
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
+    CreateApiFixture(apiRoot)
+    composePagesSite.ComposeSite(apiRoot, outputRoot)
+
+    for locale in ("ru", "zh-CN"):
+        page = outputRoot / locale / "index.html"
+        assert page.read_bytes() == (PROJECTROOT / "docs" / locale / "index.html").read_bytes()
+        assert f'<html lang="{locale}">' in page.read_text(encoding="utf-8")
+        assert 'id="quickstart-code"' in page.read_text(encoding="utf-8")
+        assert "Reviewed documentation is not available" in (outputRoot / f"api/latest/{locale}/index.html").read_text(encoding="utf-8")
+
+
+def test_MissingProductLocaleDoesNotReplaceExistingArtifact(tmpPath, monkeypatch):
+    """Reject an incomplete source set before removing a previously composed artifact."""
+
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
+    CreateApiFixture(apiRoot)
+    productRoot = tmpPath / "product"
+    (productRoot / "ru").mkdir(parents=True)
+    (productRoot / "index.html").write_text("English", encoding="utf-8")
+    (productRoot / "ru/index.html").write_text("Russian", encoding="utf-8")
+    outputRoot.mkdir()
+    previous = outputRoot / "previous.html"
+    previous.write_text("Existing artifact", encoding="utf-8")
+    monkeypatch.setattr(composePagesSite, "PRODUCTROOT", productRoot)
+
+    try:
+        composePagesSite.ComposeSite(apiRoot, outputRoot)
+
+    except FileNotFoundError as error:
+        assert "localized product page is missing" in str(error)
+
+    else:
+        raise AssertionError("Missing Chinese landing source must fail composition.")
+
+    assert previous.read_text(encoding="utf-8") == "Existing artifact"

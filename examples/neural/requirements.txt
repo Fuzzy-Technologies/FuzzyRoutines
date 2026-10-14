@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+# Optional example dependency; never installed by the core package.
+# Linux CPU wheels: --index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1
