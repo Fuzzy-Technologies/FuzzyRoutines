@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # Указатель примеров публичного API {#public-api-example-index}
 
-Все 206 учтённых публичных символов связаны с выполненными примерами (34 самостоятельных блока Python). Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
+Все 226 учтённых публичных символов связаны с выполненными примерами (36 самостоятельных блоков Python). Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
 
-Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Два контракта типизации требуют настоящей аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
+Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют явной аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
 
 Указатель подтверждает наличие примеров, но не является независимым доказательством каждой математической ветви. Читайте пояснения, ограничения и утверждения по ссылкам. CI заново получает доказательства на установленном пакете и отклоняет устаревшее содержимое канонического указателя. На символ показано не более двух примеров.
 
@@ -81,7 +81,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.IsNormal`                                                     | [api-recipes, блок 2](api-recipes.md)                                                                            |
 | `fuzzyroutines.LinguisticCodec`                                              | [linguistic-encoding, блок 1](linguistic-encoding.md); [linguistic-encoding, блок 2](linguistic-encoding.md)     |
 | `fuzzyroutines.LinguisticScale`                                              | [linguistic-encoding, блок 1](linguistic-encoding.md); [linguistic-encoding, блок 2](linguistic-encoding.md)     |
-| `fuzzyroutines.LinguisticTerm`                                               | [linguistic-encoding, блок 1](linguistic-encoding.md); [linguistic-encoding, блок 2](linguistic-encoding.md)     |
+| `fuzzyroutines.LinguisticTerm`                                               | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
 | `fuzzyroutines.Logistic`                                                     | [membership-families, блок 1](membership-families.md)                                                            |
 | `fuzzyroutines.MembershipCallable`                                           | [membership, блок 1](../api/modern/membership.md); [custom, блок 1](custom.md)                                   |
 | `fuzzyroutines.MembershipFunction`                                           | [alarm, блок 1](alarm.md); [alpha-cuts, блок 1](alpha-cuts.md)                                                   |
@@ -143,6 +143,26 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, блок 1](../api/modern/membership.md); [alarm, блок 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, блок 1](../api/modern/membership.md); [alarm, блок 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, блок 1](alarm.md); [centroid, блок 1](centroid.md)                                                       |
+| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.AllOf`                                              | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.Antecedent`                                         | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.AnyOf`                                              | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
+| `fuzzyroutines.inference.InferencePolicy`                                    | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
+| `fuzzyroutines.inference.InputGrade`                                         | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
+| `fuzzyroutines.inference.MamdaniModel`                                       | [inference, блок 1](inference.md)                                                                                |
+| `fuzzyroutines.inference.MamdaniModel.Evaluate`                              | [inference, блок 1](inference.md)                                                                                |
+| `fuzzyroutines.inference.MamdaniResult`                                      | [inference, блок 1](inference.md)                                                                                |
+| `fuzzyroutines.inference.MamdaniRule`                                        | [inference, блок 1](inference.md)                                                                                |
+| `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, блок 1](inference.md)                                                                                |
+| `fuzzyroutines.inference.NotCondition`                                       | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.SugenoResult`                                       | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.TermCondition`                                      | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, блок 1](linguistic-encoding.md); [linguistic-encoding, блок 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, блок 1](linguistic-encoding.md); [results, блок 4](results.md)                             |
 | `fuzzyroutines.linguistic.FuzzificationResult.isMatch`                       | [results, блок 4](results.md); [risk, блок 1](risk.md)                                                           |
@@ -151,7 +171,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.linguistic.LinguisticScale.Diagnose`                          | [results, блок 5](results.md); [scale-audit, блок 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.LinguisticScale.Fuzzify`                           | [linguistic-encoding, блок 1](linguistic-encoding.md); [results, блок 4](results.md)                             |
 | `fuzzyroutines.linguistic.LinguisticScale.GetTermByName`                     | [linguistic-encoding, блок 1](linguistic-encoding.md); [results, блок 4](results.md)                             |
-| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [linguistic-encoding, блок 1](linguistic-encoding.md); [linguistic-encoding, блок 2](linguistic-encoding.md)     |
+| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint`                              | [results, блок 5](results.md); [scale-audit, блок 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms`                  | [results, блок 5](results.md); [scale-audit, блок 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap`                        | [results, блок 5](results.md); [scale-audit, блок 1](scale-audit.md)                                             |

@@ -104,3 +104,8 @@ mode = "authored"
 module = "fuzzyroutines.encoding"
 source = "fuzzyroutines/encoding.py"
 mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.inference"
+source = "fuzzyroutines/inference.py"
+mode = "authored"

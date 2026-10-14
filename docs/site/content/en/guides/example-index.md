@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 206 inventoried public symbols are linked to executed examples (34 standalone Python blocks). Root exports are verified aliases of the corresponding module objects.
+All 226 inventoried public symbols are linked to executed examples (36 standalone Python blocks). Root exports are verified aliases of the corresponding module objects.
 
-Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. The two typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
+Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. Typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
 This index establishes example availability, not independent proof of every mathematical branch. Review the linked explanations, limits and assertions. CI regenerates the evidence against an installed package and rejects stale index content. At most two examples per symbol are shown.
 
@@ -81,7 +81,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.IsNormal`                                                     | [api-recipes, block 2](api-recipes.md)                                                                             |
 | `fuzzyroutines.LinguisticCodec`                                              | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.LinguisticScale`                                              | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
-| `fuzzyroutines.LinguisticTerm`                                               | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
+| `fuzzyroutines.LinguisticTerm`                                               | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.Logistic`                                                     | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.MembershipCallable`                                           | [membership, block 1](../api/modern/membership.md); [custom, block 1](custom.md)                                   |
 | `fuzzyroutines.MembershipFunction`                                           | [alarm, block 1](alarm.md); [alpha-cuts, block 1](alpha-cuts.md)                                                   |
@@ -143,6 +143,26 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, block 1](alarm.md); [centroid, block 1](centroid.md)                                                       |
+| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.AllOf`                                              | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.Antecedent`                                         | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.AnyOf`                                              | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
+| `fuzzyroutines.inference.InferencePolicy`                                    | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
+| `fuzzyroutines.inference.InputGrade`                                         | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
+| `fuzzyroutines.inference.MamdaniModel`                                       | [inference, block 1](inference.md)                                                                                 |
+| `fuzzyroutines.inference.MamdaniModel.Evaluate`                              | [inference, block 1](inference.md)                                                                                 |
+| `fuzzyroutines.inference.MamdaniResult`                                      | [inference, block 1](inference.md)                                                                                 |
+| `fuzzyroutines.inference.MamdaniRule`                                        | [inference, block 1](inference.md)                                                                                 |
+| `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, block 1](inference.md)                                                                                 |
+| `fuzzyroutines.inference.NotCondition`                                       | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoResult`                                       | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.TermCondition`                                      | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
 | `fuzzyroutines.linguistic.FuzzificationResult.isMatch`                       | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |
@@ -151,7 +171,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.linguistic.LinguisticScale.Diagnose`                          | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.LinguisticScale.Fuzzify`                           | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
 | `fuzzyroutines.linguistic.LinguisticScale.GetTermByName`                     | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
-| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
+| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint`                              | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms`                  | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap`                        | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |

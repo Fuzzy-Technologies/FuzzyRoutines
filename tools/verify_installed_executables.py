@@ -279,6 +279,12 @@ def Main(arguments=None):
             artifactDirectory,
             environment,
         ),
+        "fuzzy-inference": RunCommand(
+            "fuzzy-inference",
+            [sys.executable, "-I", str(PROJECTROOT / "examples/inference.py")],
+            artifactDirectory,
+            environment,
+        ),
         "canonical-guide-examples": RunCanonicalGuideExamples(artifactDirectory, environment),
         "compatibility-guide-examples": RunCompatibilityGuideExamples(
             artifactDirectory,

@@ -65,6 +65,21 @@ def test_ProfileIsRestoredWhenAnExampleFails():
     assert sys.getprofile() is previous
 
 
+def test_AntecedentTypeContractRequiresAnExecutedAnnotation():
+    """Treat the rule type alias as a used contract, never as an imported name."""
+
+    from fuzzyroutines.inference import Antecedent
+
+    targets = {"fuzzyroutines.inference.Antecedent": Antecedent}
+    imported = "from fuzzyroutines.inference import Antecedent, TermCondition"
+    unused = COVERAGE["BuildReport"]({"unused": imported}, targets)
+    assert unused["missing"] == list(targets)
+    used = COVERAGE["BuildReport"](
+        {"typed": imported + '\ncondition: Antecedent = TermCondition("risk", "low")'}, targets,
+    )
+    assert not used["missing"]
+
+
 def test_CanonicalRootExportsCannotSilentlyChangeTheirTarget(monkeypatch):
     """Reject a root name that no longer resolves to its declared module object."""
 
