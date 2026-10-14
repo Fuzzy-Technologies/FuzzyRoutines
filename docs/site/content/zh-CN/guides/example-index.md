@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 226 个已登记公共符号都链接到已执行的示例，共有 36 个独立 Python 代码块。根导出经过验证，确实是相应模块对象的别名。
+全部 229 个已登记公共符号都链接到已执行的示例，共有 37 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
 
-函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求实际使用的类型注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
+函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
 该索引确立示例的可用性，不独立证明每个数学分支。应阅读链接中的解释、限制和断言。CI 针对已安装软件包重新生成证据，并拒绝过期的规范索引内容。每个符号最多显示两个示例。
 
@@ -109,6 +109,9 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.alphacuts.SampleAlphaCut`                                     | [alpha-cuts, 代码块 1](alpha-cuts.md); [results, 代码块 3](results.md)                                               |
 | `fuzzyroutines.alphacuts.SampledAlphaCut`                                    | [alpha-cuts, 代码块 1](alpha-cuts.md); [results, 代码块 3](results.md)                                               |
 | `fuzzyroutines.alphacuts.SampledAlphaCut.isExact`                            | [alpha-cuts, 代码块 1](alpha-cuts.md); [results, 代码块 3](results.md)                                               |
+| `fuzzyroutines.batches.EvaluateMembershipBatch`                              | [numpy-batches, 代码块 1](numpy-batches.md)                                                                       |
+| `fuzzyroutines.batches.FuzzifyBatch`                                         | [numpy-batches, 代码块 1](numpy-batches.md)                                                                       |
+| `fuzzyroutines.batches.ScaleBatchResult`                                     | [numpy-batches, 代码块 1](numpy-batches.md)                                                                       |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, 代码块 1](errors.md)                                                                                     |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |

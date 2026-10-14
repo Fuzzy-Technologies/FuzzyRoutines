@@ -29,6 +29,9 @@ classifiers = [
 ]
 keywords = ["fuzzy", "fuzzylogic", "fuzzyset", "logic", "math", "research", "science"]
 
+[project.optional-dependencies]
+numpy = ["numpy>=2.3.5,<3"]
+
 [project.urls]
 Homepage = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
 Repository = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"

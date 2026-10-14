@@ -34,6 +34,8 @@ sys.meta_path.insert(0, BlockNumpy())
 import fuzzyroutines
 from fuzzyroutines.FuzzyRoutines import MFunction
 from experiments.vectorized_membership import EvaluateMembership
+from fuzzyroutines.batches import EvaluateMembershipBatch, FuzzifyBatch
+from fuzzyroutines import Gaussian, CreateUniversalFuzzyScale
 assert "numpy" not in sys.modules, "Imports must not load optional NumPy."
 assert MFunction("gaussian", a=0.0, b=1.0).mju(0.0) == 1.0
 
@@ -46,6 +48,21 @@ except ImportError as error:
 else:
     raise AssertionError("Array evaluation must identify the missing optional dependency.")
 assert "numpy" not in sys.modules, "Failure must not retain a partial optional dependency."
+
+for operation in (
+    lambda: EvaluateMembershipBatch(Gaussian(0.0, 1.0), [0.0]),
+    lambda: FuzzifyBatch(CreateUniversalFuzzyScale(), [0.5]),
+):
+    try:
+        operation()
+
+    except ImportError as error:
+        assert "fuzzyroutines[numpy]" in str(error)
+
+    else:
+        raise AssertionError("Public batch calls must identify the missing installation extra.")
+
+assert "numpy" not in sys.modules, "Optional calls must not retain a partial dependency."
 '''
     completed = subprocess.run(
         [sys.executable, "-c", source], cwd=PROJECT_ROOT,

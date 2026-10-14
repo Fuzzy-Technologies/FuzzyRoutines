@@ -47,6 +47,7 @@ nav:
       - Centroid accuracy: guides/centroid.md
       - Historical Universal Fuzzy Scale: guides/universal-fuzzy-scale.md
       - Linguistic inputs and predictions: guides/linguistic-encoding.md
+      - Optional NumPy batches: guides/numpy-batches.md
       - Scale audit: guides/scale-audit.md
       - Mamdani and Sugeno inference: guides/inference.md
       - Neural inputs and outputs: guides/neural-integration.md
@@ -70,6 +71,7 @@ nav:
           - Overview: api/modern/index.md
           - Package exports: api/modern/package.md
           - Alpha cuts: api/modern/alphacuts.md
+          - Optional batches: api/modern/batches.md
           - Defuzzification: api/modern/defuzzification.md
           - Domains: api/modern/domain.md
           - Exceptions: api/modern/exceptions.md

@@ -15,6 +15,7 @@ import os
 import runpy
 import subprocess
 import sys
+import tomllib
 from math import isclose
 from pathlib import Path
 from xml.etree import ElementTree
@@ -100,6 +101,20 @@ def test_SnippetDiscoveryRejectsEmptyGuidesAndPreservesPageOrder(tmpPath):
     assert tuple(loader(tmpPath)) == ("canonical-a-1", "canonical-a-2", "canonical-z-1")
 
 
+def test_OptionalGuideFencesRequireAnExplicitExtra(tmpPath):
+    """Keep the no-extra gate executable without silently claiming array coverage."""
+
+    loader = VERIFIER["LoadCanonicalGuideExamples"]
+    (tmpPath / "guides").mkdir()
+    (tmpPath / "core.md").write_text("```python\nassert True\n```\n", encoding="utf-8")
+    (tmpPath / "guides/numpy-batches.md").write_text("```python\nimport numpy\n```\n", encoding="utf-8")
+    assert tuple(loader(tmpPath)) == ("canonical-core-1",)
+    assert tuple(loader(tmpPath, extras=("numpy",))) == ("canonical-core-1", "canonical-guides-numpy-batches-1")
+
+    with pytest.raises(ValueError, match="Unknown guide extras"):
+        loader(tmpPath, extras=("unknown",))
+
+
 def test_HelpAndInvalidScenarioDoNotComputeOrCreateArtifacts(tmpPath):
     """Keep help informative and invalid selection a standard CLI error."""
 
@@ -127,7 +142,10 @@ def test_FiguresAreAccessibleAndPlottingDependenciesStayOutsideRuntime():
         assert "Computed using the scalar public API" in source
         page = (pageRoot / f"{figureName}.md").read_text(encoding="utf-8")
         assert f"../assets/figures/{figureName}.svg" in page
-    metadata = (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    metadataText = (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    metadata = tomllib.loads(metadataText)
     exampleSource = (PROJECT_ROOT / "examples" / "guide.py").read_text(encoding="utf-8")
-    assert "matplotlib" not in metadata and "numpy" not in metadata
+    assert "matplotlib" not in metadataText
+    assert not any(dependency.lower().startswith(("numpy", "matplotlib"))
+                   for dependency in metadata["project"].get("dependencies", []))
     assert "import matplotlib" not in exampleSource and "import numpy" not in exampleSource

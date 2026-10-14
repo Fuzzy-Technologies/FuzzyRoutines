@@ -58,6 +58,14 @@ evaluation and modern neural examples as their implementations are accepted.
   predictions. Its grade-weighted representatives preserve meaningful small
   contributions. A worked example and reproducible graph explain why averaging
   representatives differs from the centroid of an aggregated fuzzy set.
+- Explicit optional NumPy batches evaluate built-in membership functions and
+  linguistic scales with scalar selection policies, copied arrays and complete
+  membership evidence. The default scalar installation remains dependency-free;
+  NumPy is installed only through the `numpy` extra.
+- Reproducible performance records distinguish synthetic batches from 30 pinned
+  public consumer test replays. Paired timing samples and measured resource
+  costs feed the figures; neither dataset establishes private application
+  throughput or an automatic backend-switching threshold.
 
 #### Changed
 

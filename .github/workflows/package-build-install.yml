@@ -86,12 +86,33 @@ jobs:
             "$GITHUB_WORKSPACE/tests/test_legacy_public_api.py" \
             "$GITHUB_WORKSPACE/tests/test_public_api_documentation.py" \
             "$GITHUB_WORKSPACE/tests/test_migration_examples.py"
-          "$venvPath/bin/python" - <<'PY'
+          "$venvPath/bin/python" -I - <<'PY'
+          import importlib.util
           import os
+          import sys
           from importlib.metadata import version
+          from pathlib import Path
 
           import fuzzyroutines
+          from fuzzyroutines import CreateUniversalFuzzyScale, Gaussian
+          from fuzzyroutines.batches import EvaluateMembershipBatch, FuzzifyBatch
           from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
+
+          assert Path(fuzzyroutines.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
+          assert importlib.util.find_spec("numpy") is None, "The no-extra wheel probe must have no NumPy installed"
+          assert "numpy" not in sys.modules, "Core and batch imports must not import NumPy"
+          for operation in (
+              lambda: EvaluateMembershipBatch(Gaussian(0, 1), [0.0]),
+              lambda: FuzzifyBatch(CreateUniversalFuzzyScale(), [0.5]),
+          ):
+              try:
+                  operation()
+
+              except ImportError as error:
+                  assert "fuzzyroutines[numpy]" in str(error)
+
+              else:
+                  raise AssertionError("Batch execution without the extra must fail with installation guidance")
 
           assert version("fuzzyroutines") == os.environ["EXPECTED_PACKAGE_VERSION"]
           assert fuzzyroutines is not None
@@ -103,6 +124,44 @@ jobs:
             --artifact-directory "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}"
           cp -a "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}" \
             "$GITHUB_WORKSPACE/dist/wheel-executable-evidence"
+
+          # Reuse the exact reproducible wheel for baseline and resolver-selected NumPy.
+          for numpyCase in baseline compatible; do
+            extraRoot="$RUNNER_TEMP/fuzzyroutines-numpy-${{ matrix.python-version }}-$numpyCase"
+            evidenceRoot="$GITHUB_WORKSPACE/dist/numpy-$numpyCase"
+            testRoot="$extraRoot/tests"
+            mkdir -p "$testRoot" "$evidenceRoot"
+            python -m venv "$extraRoot/environment"
+            extraPython="$extraRoot/environment/bin/python"
+            "$extraPython" -m pip install --disable-pip-version-check \
+              pytest -r "$GITHUB_WORKSPACE/requirements-typing.txt"
+            numpyConstraint=()
+            if [ "$numpyCase" = baseline ]; then
+              numpyConstraint=("numpy==2.3.5")
+            fi
+            "$extraPython" -m pip install --disable-pip-version-check \
+              "$wheelPath[numpy]" "${numpyConstraint[@]}"
+            "$extraPython" -I - <<'PY' > "$evidenceRoot/environment.json"
+          import json
+          import sys
+          from pathlib import Path
+
+          import fuzzyroutines
+          import numpy
+
+          assert Path(fuzzyroutines.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
+          print(json.dumps({"python": sys.version, "numpy": numpy.__version__, "packageOrigin": fuzzyroutines.__file__}))
+          PY
+            cat "$evidenceRoot/environment.json"
+            "$extraPython" -m pip list --format=json > "$evidenceRoot/dependencies.json"
+            cp "$GITHUB_WORKSPACE/tests/test_numpy_batches.py" "$GITHUB_WORKSPACE/tests/conftest.py" "$testRoot/"
+            "$extraPython" -I -m pytest -q "$testRoot/test_numpy_batches.py" | tee "$evidenceRoot/parity.txt"
+            "$extraPython" "$GITHUB_WORKSPACE/tools/typecheck.py" --installed --extra numpy \
+              | tee "$evidenceRoot/typing.txt"
+            "$extraPython" -I "$GITHUB_WORKSPACE/examples/numpy_batches.py" > "$evidenceRoot/example.json"
+            "$extraPython" -I -c 'import json, sys; report = json.load(open(sys.argv[1])); assert report["backend"] == "numpy" and report["shape"] == [5, 5]' \
+              "$evidenceRoot/example.json"
+          done
 
       - name: Clean-install source distribution and verify installed package
         if: steps.scope.outputs.package == 'true'

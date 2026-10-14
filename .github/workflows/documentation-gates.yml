@@ -86,13 +86,16 @@ jobs:
           set -euo pipefail
 
           environmentPython="_build/api-reference/environment/bin/python"
-          "$environmentPython" -m pip install --disable-pip-version-check pytest
+          wheelPaths=("$GITHUB_WORKSPACE"/_build/api-reference/artifacts/*.whl)
+          test "${#wheelPaths[@]}" -eq 1
+          test -f "${wheelPaths[0]}"
+          "$environmentPython" -m pip install --disable-pip-version-check pytest "${wheelPaths[0]}[numpy]"
           cd "$RUNNER_TEMP"
           "$GITHUB_WORKSPACE/$environmentPython" -m pytest -q \
             "$GITHUB_WORKSPACE/tests/test_migration_examples.py" \
             "$GITHUB_WORKSPACE/tests/test_guide_examples.py"
           "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/guide_example_coverage.py" \
-            --require-installed --check-index \
+            --require-installed --extra numpy --check-index \
             --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples.json"
 
       - name: Verify reproducible figures with the installed scalar API
@@ -108,7 +111,8 @@ jobs:
             "$GITHUB_WORKSPACE/tests/test_guide_figures.py" \
             "$GITHUB_WORKSPACE/tests/test_agent_recipe_plots.py" \
             "$GITHUB_WORKSPACE/tests/test_encoding_figure.py" \
-            "$GITHUB_WORKSPACE/tests/test_inference_figures.py"
+            "$GITHUB_WORKSPACE/tests/test_inference_figures.py" \
+            "$GITHUB_WORKSPACE/tests/test_batch_figures.py"
           "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/generate_guide_figures.py" \
             --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures" --check \
             > "$GITHUB_WORKSPACE/_build/documentation-gates/figures.json"
@@ -118,6 +122,9 @@ jobs:
           "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/generate_inference_figures.py" \
             --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures" --check \
             > "$GITHUB_WORKSPACE/_build/documentation-gates/inference-figures.json"
+          "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/generate_batch_figures.py" \
+            --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures" --check \
+            > "$GITHUB_WORKSPACE/_build/documentation-gates/numpy-figures.json"
 
       - name: Upload deterministic documentation evidence
         if: always() && steps.scope.outputs.documentation == 'true'
@@ -132,6 +139,7 @@ jobs:
             _build/documentation-gates/figures.json
             _build/documentation-gates/encoding-figure.json
             _build/documentation-gates/inference-figures.json
+            _build/documentation-gates/numpy-figures.json
             _build/documentation-gates/api-examples.json
           if-no-files-found: warn
 
