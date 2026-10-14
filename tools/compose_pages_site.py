@@ -5,10 +5,10 @@
 
 """Compose the product page and generated API reference for GitHub Pages.
 
-The command copies only reviewed static inputs into a disposable Pages root.
-English is the canonical API reference. Reserved Russian and Simplified
-Chinese routes render explicit fallback pages until reviewed translations
-exist; they never masquerade English content as translated documentation.
+The command copies reviewed product pages in English, Russian and Simplified
+Chinese into a disposable Pages root. English is the canonical API reference.
+API locale routes retain explicit fallbacks until reviewed API translations
+exist; the product landing pages are independent of that API review state.
 """
 
 import argparse
@@ -78,6 +78,16 @@ def ValidateApiSite(apiSite):
             raise FileNotFoundError(
                 f"generated API reference is incomplete: {requiredPath}"
             )
+
+
+def ValidateProductPages():
+    """Require all authored landing pages before replacing the Pages artifact."""
+
+    for locale in ("en", *LOCALES):
+        page = PRODUCTROOT / "index.html" if locale == "en" else PRODUCTROOT / locale / "index.html"
+
+        if not page.is_file():
+            raise FileNotFoundError(f"localized product page is missing: {page}")
 
 
 def RecreateOutput(outputRoot):
@@ -242,9 +252,16 @@ def ComposeSite(apiSite, outputRoot, localeRoot=None, *, includeDrafts=False):
 
     apiSite = apiSite.resolve()
     ValidateApiSite(apiSite)
+    ValidateProductPages()
     outputRoot = RecreateOutput(outputRoot)
 
     shutil.copy2(PRODUCTROOT / "index.html", outputRoot / "index.html")
+
+    for locale in LOCALES:
+        localizedRoot = outputRoot / locale
+        localizedRoot.mkdir()
+        shutil.copy2(PRODUCTROOT / locale / "index.html", localizedRoot / "index.html")
+
     shutil.copytree(PRODUCTROOT / "assets", outputRoot / "assets")
     shutil.copy2(PRODUCTROOT / "llms.txt", outputRoot / "llms.txt")
     recipeRoot = outputRoot / "recipes"
@@ -293,6 +310,8 @@ def ComposeSite(apiSite, outputRoot, localeRoot=None, *, includeDrafts=False):
 
     requiredOutput = (
         outputRoot / "index.html",
+        outputRoot / "ru" / "index.html",
+        outputRoot / "zh-CN" / "index.html",
         englishRoot / "index.html",
         apiRoot / "latest" / "ru" / "index.html",
         apiRoot / "latest" / "zh-CN" / "index.html",

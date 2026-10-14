@@ -5,17 +5,19 @@ SPDX-License-Identifier: Apache-2.0
 
 # Packaging and release notes
 
-## 2.0.0 release candidate
+## Published baseline and development builds
 
-The build baseline is intentionally separate from the mathematical
-modernisation work. It adopts the PEP 517/518 build interface and stores the
-candidate version, `2.0.0`, in `pyproject.toml`. Publication remains subject
-to final human acceptance and the protected release workflow.
+FuzzyRoutines `2.0.0` is published on
+[PyPI](https://pypi.org/project/fuzzyroutines/2.0.0/). Its
+[production run](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38087564208)
+records protected publication and installed-artifact verification.
+The build uses PEP 517/518; `pyproject.toml` owns the version of the checked-out
+source. The 2.1 development version is not a published stable release.
 
-The [version decision](release-version-decision.md) reaffirms `2.0.0` as the
-first stable target under ADR-0006, based on the CPython support floor and
-observed helper-import changes. It does not change package metadata or approve
-publication. See the [development changelog](../CHANGELOG.md) and
+The [version decision](release-version-decision.md) records why `2.0.0` was the
+first stable modernization release under ADR-0006, based on the CPython support
+floor and observed helper-import changes. Every subsequent release requires
+its own exact-candidate evidence and maintainer approval. See the [development changelog](../CHANGELOG.md) and
 [1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) for user-visible impact.
 
 - The package supports CPython 3.13 and 3.14.
@@ -40,7 +42,7 @@ requirements and a new output directory:
 python -m pip install -r requirements-build.txt
 python -m tools.reproducible_artifacts --output-directory dist
 (cd dist && sha256sum --check SHA256SUMS)
-python -m pip install --force-reinstall dist/fuzzyroutines-2.0.0-py3-none-any.whl
+python -m pip install --force-reinstall dist/fuzzyroutines-*.whl
 python -c "from fuzzyroutines.FuzzyRoutines import MFunction; print(MFunction('triangle', a=0, b=1, c=0.5))"
 python -m tools.check_license_headers
 ```

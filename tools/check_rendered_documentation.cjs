@@ -79,7 +79,7 @@ async function InspectTypography(page) {
   return result;
 }
 
-async function InspectLanding(context, viewport, evidence) {
+async function InspectLanding(context, viewport, evidence, locale) {
   const page = await context.newPage();
   await page.setViewportSize(viewport);
   const errors = [];
@@ -96,9 +96,19 @@ async function InspectLanding(context, viewport, evidence) {
       },
     }});
   });
-  const url = `${origin}/FuzzyRoutines/`;
+  const route = locale === 'en' ? '/' : `/${locale}/`;
+  const url = `${origin}/FuzzyRoutines${route}`;
   const response = await page.goto(url, {waitUntil: 'networkidle', timeout: 30000});
   assert.equal(response.status(), 200, url);
+  assert.equal(await page.locator('html').getAttribute('lang'), locale);
+  for (const target of locales) {
+    const targetPath = target === 'en' ? '/FuzzyRoutines/' : `/FuzzyRoutines/${target}/`;
+    const link = page.locator(`.language-nav a[hreflang="${target}"]`);
+    assert.equal(new URL(await link.getAttribute('href')).pathname, targetPath);
+    assert.equal(await link.getAttribute('aria-current'), target === locale ? 'page' : null);
+  }
+  await page.reload({waitUntil: 'networkidle', timeout: 30000});
+  assert.equal(await page.locator('html').getAttribute('lang'), locale, 'Direct locale refresh preserves language');
   await page.evaluate(() => document.fonts.ready);
   const result = await page.evaluate(() => ({
     title: document.title,
@@ -129,7 +139,7 @@ async function InspectLanding(context, viewport, evidence) {
     await page.keyboard.press('Enter');
     await page.waitForFunction(() => window.copiedText !== null);
     assert.equal(await page.evaluate(() => window.copiedText), source.trim(), `${target}: copied code`);
-    assert.match(await button.innerText(), /copied/i, `${target}: success feedback`);
+    assert.equal(await button.innerText(), {en: 'Copied', ru: 'Скопировано', 'zh-CN': '已复制'}[locale], `${target}: localized success feedback`);
     result.clipboard.push({target, success: true, keyboard: true});
     await page.evaluate(() => {window.copiedText = null;});
   }
@@ -142,13 +152,13 @@ async function InspectLanding(context, viewport, evidence) {
   result.clipboardFallback = {selected: true, status: (await status.textContent()).trim()};
   result.imageViewers = [];
   for (const [name, selector] of [['banner', 'main .project-art'], ['figure', 'main figure img']]) {
-    result.imageViewers.push(await InspectImageViewer(page, selector, `landing-${name}-viewer-${viewport.width}.png`));
+    result.imageViewers.push(await InspectImageViewer(page, selector, `landing-${locale}-${name}-viewer-${viewport.width}.png`));
   }
   result.overflowAfterInteraction = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
   await page.evaluate(() => {window.getSelection().removeAllRanges(); document.activeElement.blur(); window.scrollTo({top: 0, behavior: 'instant'});});
-  const screenshot = `landing-${viewport.width}.png`;
+  const screenshot = `landing-${locale}-${viewport.width}.png`;
   await page.screenshot({path: path.join(outputRoot, screenshot), fullPage: true, animations: 'disabled'});
-  evidence.pages.push({locale: 'en', route: '/', viewport, ...result, errors, screenshot});
+  evidence.pages.push({locale, route, viewport, ...result, errors, screenshot});
   assert.equal(result.overflowAfterInteraction, false, `${url}: overflow after interaction`);
   assert.deepEqual(errors, [], url);
   await page.close();
@@ -177,7 +187,7 @@ async function Main() {
   });
   try {
     for (const viewport of [{width: 1440, height: 1000}, {width: 390, height: 844}]) {
-      await InspectLanding(context, viewport, evidence);
+      for (const locale of locales) await InspectLanding(context, viewport, evidence, locale);
       for (const locale of locales) for (const pageRoute of routes) {
         const page = await context.newPage();
         await page.setViewportSize(viewport);
