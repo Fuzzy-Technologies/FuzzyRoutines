@@ -125,6 +125,10 @@ jobs:
           "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/generate_batch_figures.py" \
             --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures" --check \
             > "$GITHUB_WORKSPACE/_build/documentation-gates/numpy-figures.json"
+          "$GITHUB_WORKSPACE/$environmentPython" -I "$GITHUB_WORKSPACE/tools/generate_batch_figures.py" \
+            --evidence "$GITHUB_WORKSPACE/docs/performance/evidence/public-batches-installed-python314.json" \
+            --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures/installed-candidate" --check \
+            > "$GITHUB_WORKSPACE/_build/documentation-gates/numpy-installed-figures.json"
 
       - name: Upload deterministic documentation evidence
         if: always() && steps.scope.outputs.documentation == 'true'
@@ -140,6 +144,7 @@ jobs:
             _build/documentation-gates/encoding-figure.json
             _build/documentation-gates/inference-figures.json
             _build/documentation-gates/numpy-figures.json
+            _build/documentation-gates/numpy-installed-figures.json
             _build/documentation-gates/api-examples.json
           if-no-files-found: warn
 

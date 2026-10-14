@@ -1,0 +1,47 @@
+{
+  "artifacts": [
+    {
+      "archive_sha256": "c2716accb5c116bd0dcb3a1934f20f33a5e3a2affc0684e0fdc135e15b56103c",
+      "artifact_id": 11924945948,
+      "artifact_url": "https://api.github.com/repos/Fuzzy-Technologies/FuzzyRoutines/actions/artifacts/11924945948",
+      "expires_at": "2027-01-12T19:54:18Z",
+      "python": "3.13"
+    },
+    {
+      "archive_sha256": "b771b38a7654b0b9aa2dc2fab626006b7be957edaa892a599ce7185755c52412",
+      "artifact_id": 11923929952,
+      "artifact_url": "https://api.github.com/repos/Fuzzy-Technologies/FuzzyRoutines/actions/artifacts/11923929952",
+      "expires_at": "2027-01-12T19:54:18Z",
+      "python": "3.14"
+    }
+  ],
+  "builtSource": "c44983ab4be2ef58d7847e758c118875a51738db",
+  "candidateSdistSha256": "96984441b9c2573c3bb117ce41cfa61d6c03ebd83bd1395925ce79fc30e89526",
+  "candidateVersion": "2.1.0",
+  "candidateWheelSha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0",
+  "limits": [
+    "GitHub API/build records are supporting provenance, not a cryptographic attestation.",
+    "Archive hashes identify the measured files; report-only commits can change SOURCE_DATE_EPOCH and later ZIP bytes.",
+    "Later promotion artifacts require a separate package-payload comparison; they must not inherit this wheel archive digest.",
+    "No release tag or PyPI publication is performed by this record."
+  ],
+  "packageWorkflow": 38627553915,
+  "preparationPullRequest": 346,
+  "publishedBaselineVersion": "2.0.0",
+  "publishedHarness": "b451e502930d581fdffdc2a69ac44a8f3ab18174",
+  "recordSha256": {
+    "SHA256SUMS": "1b1b7b59d4e01a000a3b0883648f6385d892625f3bfeae643f2944b12ef11d23",
+    "artifact-python313.json": "4133bf1c127dd69c8df043e6bfc138a7c6a52f912b3c2dcb8f148cf9688cfc3c",
+    "artifact-python314.json": "65a567ffe266e2126bd22fc561ed40206139c1137a5a54730b84f753fb5b07b9",
+    "ci-workflows.json": "fb903ee1083548e132697a4b996b02c5da521a6f0806171f17848381656e6b71",
+    "pypi-2.0.0-metadata.json": "eb29337954e191c48fa73aa90f2f1ff3291faa499f541062b18bb447b45865f5",
+    "reproducibility-python313.json": "06aaf1e17e001728423e695aa8101b26efef490e7244378bb4c0af1929c06982",
+    "reproducibility.json": "c59d6f6e769de7a2db504d1e92a61d7696d07d4bbd0596c3ccc480dcdb0cfd40",
+    "source-revision.json": "c55f4946d75c68e3fbe16d0bb30e57d47f456e5e1b2087b4a9a43661892e42d0",
+    "verified-identities.json": "34cab4df7ab5717cbe072e4e03a56b5668c90e0d4eb703f30b2ba0f294bac135",
+    "workflow-run.json": "6e46cc9d1c20664079ea803a89aa1ebb4a0ff2c825ec7eed9b3416a1484a2eea"
+  },
+  "schemaVersion": 1,
+  "wheelAndSdistIdenticalAcrossPython313And314": true,
+  "workflowHead": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2"
+}

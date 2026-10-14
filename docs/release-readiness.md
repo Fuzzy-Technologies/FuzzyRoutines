@@ -37,10 +37,14 @@ their own review and candidate checks below.
 The release-preparation source sets `pyproject.toml` to **2.1.0**, dated
 2026-10-14. This is **unpublished candidate metadata**; the published stable
 release remains 2.0.0. The metadata identifies the checked-out source and does
-not establish publication. Merged features provide implementation evidence,
-while exact-candidate acceptance belongs to
-[Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337).
-That task remains open until the candidate evidence and final handoff are complete.
+not establish publication. Preparation [PR #346](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/346)
+passed all ten opening workflows at `f0d09c3`. Its wheel from built source
+`c44983a` has completed installed scalar, NumPy and public-consumer checks.
+The [dated handoff](audits/2026-10-14-2.1-candidate-handoff.md) retains exact
+identities, run links, raw measurements and limits.
+[Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337)
+completes on independently accepted evidence and a prepared maintainer handoff,
+not on the maintainer's later approval of promotion.
 
 The final promotion pull request to `master` is reserved for the maintainer's
 review. These documents do not authorize its merge, an annotated release tag,
@@ -58,25 +62,34 @@ a GitHub Release or PyPI publication. Earlier green commits and the completed
 | Optional NumPy batches                           | Merged [PR #345](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/345) after all required CI passed; includes explicit backend and installed-wheel checks.   |
 
 These accepted feature revisions establish implementation and review evidence.
-The exact final 2.1.0 wheel, installed benchmark comparisons and maintainer
-promotion review remain pending. Retain each feature's source-bound acceptance
-when reconciling the final tree; do not reuse an earlier artifact's checks as
-verification of a different wheel.
+The [artifact acceptance record](performance/evidence/installed-candidate/acceptance.json)
+identifies the measured 2.1.0 wheel and byte-identical wheel/sdist builds on both
+supported interpreters. [Scalar](performance/installed-scalar-comparison.md) and
+[NumPy](performance/installed-batch-results.md) reports retain the installed
+measurements. A later promotion artifact needs its own archive hash and package
+payload comparison; report-only commits can change timestamps. Retain feature
+source-bound reviews without presenting them as checks of different artifact bytes.
 
 ### Mandatory evidence
 
-- [ ] Identify the exact candidate commit, version, wheel and sdist hashes; retain reproducible-build and clean-install evidence on both supported interpreters.
-- [ ] Run the complete required CI gate on that candidate, including installed public imports, compatibility and feature-specific mathematical checks.
-- [ ] Compare the installed candidate with installed PyPI 2.0.0 in the same environment for relevant scalar, centroid and scale workloads; retain raw timing samples and independent numerical checks.
-- [ ] Run the pinned [consumer scale migration CLI](migration/consumer-scale-boundary.md) against the exact installed 2.1.0 wheel, in the candidate scalar environment after timings; source fixture tests do not satisfy this artifact check. Private FMA/robot validation remains unverified.
-- [ ] Confirm the accepted examples, deterministic figures, optional-dependency boundaries and EN/RU/zh-CN reviews still match the final candidate and its artifacts.
-- [ ] Verify the three product landing pages, matching API language destinations, copy controls, formulas, image interactions and mobile layouts from the composed candidate artifact.
-- [ ] Review migration notes, changelog, version decision, scope exclusions and the remaining risks in one concise maintainer handoff.
+The checked items below apply to the exact measured preparation candidate in the
+[handoff](audits/2026-10-14-2.1-candidate-handoff.md), not an unbuilt future release.
+
+- [x] Candidate source/version, wheel/sdist hashes and reproducible-build/clean-install evidence on CPython 3.13 and 3.14 are retained in the [acceptance record](performance/evidence/installed-candidate/acceptance.json).
+- [x] All ten full opening workflows completed successfully at `f0d09c3`, including installed imports, typing, compatibility, mathematics and optional examples; [run metadata](performance/evidence/installed-candidate/ci-workflows.json) is retained.
+- [x] Installed PyPI 2.0.0 and candidate scalar/centroid/scale comparison completed with seven alternating pairs, raw samples and independent parity; the [report](performance/installed-scalar-comparison.md) includes mixed results and shared-host limits.
+- [x] The [installed migration fixture](performance/evidence/consumer-scale-installed-2.1.0.json) passed all 27 synthetic public-boundary cases after timing in the exact no-dependencies candidate environment. Private FMA/robot integration remains unverified.
+- [x] The [installed NumPy study](performance/installed-batch-results.md) retains 24 synthetic combinations, four replay combinations covering 30 upstream test inputs, numerical parity and memory/import/dependency costs.
+- [x] Optional CPU examples, scientific figures, source/report provenance and EN/RU/zh-CN gates passed in the recorded neural/documentation/API workflows.
+- [x] The composed site's three homepages and API routes passed the automated browser gate in the recorded API workflow, including desktop/mobile layout and shared interactions.
+- [x] Independent scientific/editorial review accepted the four-document handoff at `ab77384` on 2026-10-14; numerical/provenance review separately accepted its supporting records. The integrating PR retains this acceptance. This completes preparation; the maintainer's release decision remains separate.
 
 ### Hard blockers
 
-- [ ] Resolve all release-blocking defects and confirm required checks pass on the exact release revision.
-- [ ] Obtain the maintainer's final promotion/release approval before protected publication.
+These are later promotion/publication conditions, not unimplemented 2.1 features:
+
+- [ ] Confirm required CI on the final promotion PR and compare that build's package payload with the measured candidate. Record its own archive identities in the PR.
+- [ ] Obtain the maintainer's final promotion/release approval before merging the final `master` PR or performing protected publication.
 - [ ] After approved publication, verify actual PyPI artifact hashes and clean installations, then record production acceptance.
 
 ## Scope and final 2.1 documentation pass

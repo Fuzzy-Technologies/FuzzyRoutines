@@ -78,13 +78,14 @@ def BuildFigures(report):
     return figures
 
 
-def RenderSvg(figure, name):
-    """Render stable bytes with factual measurement provenance and no timestamp."""
+def RenderSvg(figure, name, evidenceName=None):
+    """Preserve default SVG bytes or identify an explicitly supplied evidence file."""
 
     buffer = io.BytesIO()
+    description = "Measured source-candidate workloads; values come from public-batches-python314-linux.json." if evidenceName is None else f"Measured workloads; values come from {evidenceName}."
     figure.savefig(buffer, format="svg", metadata={
         "Date": None, "Creator": "FuzzyRoutines documentation", "Title": name,
-        "Description": "Measured source-candidate workloads; values come from public-batches-python314-linux.json.",
+        "Description": description,
     })
     rendered = b"\n".join(line.rstrip() for line in buffer.getvalue().splitlines()) + b"\n"
     header = b"<!--\nSPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies\nSPDX-License-Identifier: Apache-2.0\n-->\n"
@@ -104,10 +105,11 @@ def Main(arguments=None):
     options = parser.parse_args(arguments)
     report = json.loads(options.evidence.read_text())
     figures = BuildFigures(report)
+    evidenceName = None if options.evidence.resolve() == EVIDENCE.resolve() else options.evidence.name
 
     for name, figure in figures.items():
         output = options.outputDirectory / f"{name}.svg"
-        rendered = RenderSvg(figure, name)
+        rendered = RenderSvg(figure, name, evidenceName)
 
         if options.check:
             if not output.is_file() or output.read_bytes() != rendered:

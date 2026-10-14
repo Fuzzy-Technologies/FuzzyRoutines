@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # FuzzyRoutines 2.1.0 — Rules, scales and explainable results
 
-**Draft for candidate review. Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). The capabilities below describe the 2.1 implementation scope; final artifact and release evidence is still pending.
+**Draft for candidate review. Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). The implemented candidate has passed its full opening CI and installed-wheel checks. The [handoff](audits/2026-10-14-2.1-candidate-handoff.md) records the measured artifacts, performance evidence and limits; final promotion and publication remain subject to maintainer approval.
 
 FuzzyRoutines 2.1 adds explainable rule inference, a ready-made historical Universal Fuzzy Scale, explicit linguistic encoding and optional NumPy batch evaluation. The default scalar core remains free of external runtime dependencies on CPython 3.13 and 3.14. Existing scalar calls remain available, including the basic agent recipe for published 2.0.0.
 
@@ -23,17 +23,19 @@ The project homepage gains [English](https://fuzzy-technologies.github.io/FuzzyR
 
 Use a fresh CPython 3.13 or 3.14 environment and the exact wheel supplied by the candidate CI run. The agent quick start describes how to supply its local path and metadata version, verify the basic recipe and preserve the resulting evidence. NumPy, plotting and Torch dependencies are optional and installed separately for their respective examples. Repository neural and research scripts also require the matching source revision. The final published-version installation command will be added after release approval and publication.
 
-## Final evidence — pending
+## Candidate evidence and release decision
 
-This draft does not replace [release readiness](release-readiness.md). Task [#337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337) remains open until the candidate evidence is complete. Feature-branch tests and research measurements are supporting evidence, not proof that the final wheel passed release checks.
+Preparation [PR #346](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/346) passed all ten opening workflows on CPython 3.13 and 3.14 where applicable. Its [artifact record](performance/evidence/installed-candidate/acceptance.json) identifies the measured `2.1.0` wheel and reproducible source distribution. The [installed scalar comparison](performance/installed-scalar-comparison.md) preserves seven alternating pairs and independent numerical checks against published 2.0.0. Results were mixed on the shared host, so no general speedup or causal regression is claimed. The [installed NumPy study](performance/installed-batch-results.md) shows advantages for the measured large batches and no consistent advantage for the small public-consumer replay groups. Conversion, memory and optional-dependency costs remain explicit.
 
-| Evidence                                                                                 | Status                                                                                        |
-| ---                                                                                      | ---                                                                                           |
-| Exact integrated candidate revision and version                                          | **Pending** — version is 2.1.0; feature PRs are merged, record the final preparation revision |
-| Full CI result for that candidate on CPython 3.13 and 3.14                               | **Pending** — attach successful run links                                                     |
-| Reproducible wheel/sdist, SHA-256 manifest and clean installed-artifact checks           | **Pending** — attach final artifacts and consumer results                                     |
-| Scalar/NumPy benchmark report with environment, raw samples, parity and dependency costs | **Pending** — attach evidence for the integrated candidate                                    |
-| Optional CPU examples and research source/report provenance                              | **Pending** — verify against the final wheel and matching source revision                     |
-| English/Russian/Chinese acceptance and rendered homepage/API checks                      | **Pending** — feature translations reviewed in merged PRs; verify the final composed artifact |
-| Final promotion PR to `master`                                                           | **Pending** — reserved for maintainer review                                                  |
-| GitHub release and PyPI publication, followed by hash and install checks                 | **Pending** — perform only after approval; this draft authorizes no publication               |
+The candidate passed 27 synthetic public-boundary migration cases; a separate batch replay covers 30 actual upstream test inputs. These checks do not validate private FMA projects, the robot or complete production applications. Their migrations still need application-specific testing. The bounded neural experiments remain examples and research, with no public trainable tensor API.
+
+The [review handoff](audits/2026-10-14-2.1-candidate-handoff.md) supplies the acceptance package for Task [#337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337). Independent acceptance of that package completes release preparation without implying that the owner has approved the final `develop` to `master` PR. The final PR remains open for the maintainer; its own CI and package-payload comparison must be recorded. A later documentation-only revision can change wheel archive timestamps, so a new artifact must retain its own hash. No release tag or PyPI publication is authorized by this draft.
+
+| Stage                                                                    | Status                                                               |
+| ---                                                                      | ---                                                                  |
+| Recorded candidate source, artifacts and full opening CI                 | Complete; identities and successful runs are retained in the handoff |
+| Installed scalar/NumPy measurements and public fixtures                  | Complete; raw samples, parity and limits are retained                |
+| Final handoff independent acceptance                                     | Record in the integrating evidence PR                                |
+| Final promotion CI and artifact-payload comparison                       | Pending on the final promotion PR                                    |
+| Maintainer promotion/release decision                                    | Pending; final PR reserved for owner review                          |
+| GitHub Release, PyPI publication and published hash/install verification | Pending; require separate approval                                   |

@@ -80,3 +80,21 @@ def test_BatchFigureCliDoesNotRequireTheCheckoutToolsPackage(tmpPath):
     drift = subprocess.run(command + ["--output-directory", str(outputRoot), "--check"], cwd=tmpPath,
                            env=environment, capture_output=True, text=True, check=False, timeout=30)
     assert drift.returncode != 0 and "stale or missing figure" in drift.stderr
+
+
+def test_ExplicitEvidenceMetadataKeepsDefaultFiguresByteIdentical():
+    """New provenance names cannot relabel the unchanged historical figure record."""
+
+    figures = FIGURES["BuildFigures"](json.loads(FIGURES["EVIDENCE"].read_text()))
+
+    try:
+        for name, figure in figures.items():
+            original = (PROJECT_ROOT / f"docs/site/content/en/assets/figures/{name}.svg").read_bytes()
+            assert FIGURES["RenderSvg"](figure, name) == original
+            updated = FIGURES["RenderSvg"](figure, name, "public-batches-installed-python314.json")
+            assert b"Measured workloads; values come from public-batches-installed-python314.json." in updated
+            assert b"values come from public-batches-python314-linux.json" not in updated
+
+    finally:
+        for figure in figures.values():
+            FIGURES["plt"].close(figure)

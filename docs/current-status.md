@@ -6,9 +6,12 @@ SPDX-License-Identifier: Apache-2.0
 # Current implementation status
 
 FuzzyRoutines 2.0.0 is the published stable baseline. The current source uses
-**2.1.0 candidate metadata; 2.1.0 has not been published on PyPI**. Source
-implementation and scientific review are separate from final installed-artifact
-acceptance in [Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337).
+**2.1.0 candidate metadata; 2.1.0 has not been published on PyPI**. The exact CI candidate has completed the full opening gate and installed-wheel
+measurements. The [candidate handoff](audits/2026-10-14-2.1-candidate-handoff.md)
+binds its source, artifacts, results and limits for
+[Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337).
+Independent handoff acceptance completes preparation; final promotion approval
+remains the maintainer's separate decision.
 
 ## Accepted 2.1 implementation
 
@@ -29,8 +32,13 @@ acceptance in [Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/is
 
 The [candidate release notes](release-notes-2.1.0.md),
 [development changelog](../CHANGELOG.md) and
-[readiness checklist](release-readiness.md) track the remaining exact-wheel
-checks, benchmark evidence and maintainer promotion review. The
+[readiness checklist](release-readiness.md) link the completed candidate CI,
+[installed scalar comparison](performance/installed-scalar-comparison.md) and
+[installed NumPy results](performance/installed-batch-results.md). Preparation
+[PR #346](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/346) passed all
+ten workflows at `f0d09c3`; its measured wheel contains source `c44983a`.
+Final promotion CI, package-payload comparison and maintainer review remain
+separate from these measured-artifact checks. The
 [first modernization version decision](release-version-decision.md) and
 [1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) remain the historical 2.0
 records. The established scalar contracts below also remain available.
@@ -101,8 +109,11 @@ At that baseline, the measured NumPy experiment remained outside the package;
 see [ADR-0015](adr/0015-optional-vectorized-execution-strategy.md) and the
 [recorded comparison](performance/vectorized-membership-comparison.md).
 The 2.1 public implementation and optional packaging are now accepted under
-[ADR-0018](adr/0018-public-numpy-batches.md), while installed-candidate performance
-evidence remains pending in Task #337.
+[ADR-0018](adr/0018-public-numpy-batches.md). The
+[installed-candidate report](performance/installed-batch-results.md) now records
+parity, paired timings and dependency costs for its exact wheel. Large synthetic
+batches benefited in this run; the small public test replays showed no consistent
+NumPy advantage. No automatic backend switch or universal speedup is claimed.
 
 The subsequent accepted preparation wave includes
 [PR #276](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/276)
@@ -247,7 +258,12 @@ merged in PR #300. The documentation gate checks the shared source standard.
 
 Performance changes are accepted only with reproducible before/after
 measurements and numerical-parity tests. Current scalar optimizations remove
-known duplicate work; they do not establish a universal speed claim.
+known duplicate work; they do not establish a universal speed claim. The
+[installed 2.0/2.1 comparison](performance/installed-scalar-comparison.md) reports
+mixed scalar timings on a shared host, with all raw samples and independent
+numerical checks retained. Public consumer evidence covers 27 synthetic boundary
+cases and, separately, 30 upstream test inputs. Private FMA projects and the
+robot remain unverified.
 
 Ordinary independent Python processes can execute independent models.
 Thread-safe or free-threaded execution is not yet a supported contract for the
@@ -265,11 +281,14 @@ publish them. Release candidates, annotated tags, GitHub Releases, and PyPI Trus
 Publishing belong to the release milestone and require the complete
 human-reviewed readiness gate.
 
-The [2.1 readiness checklist](release-readiness.md) records accepted feature
-reviews separately from pending exact-candidate evidence. Task #337 remains
-open until that evidence and the maintainer's final promotion review are complete.
-The final PR to `master` remains reserved for the maintainer; candidate metadata
-and release notes do not establish publication.
+The [2.1 readiness checklist](release-readiness.md) and
+[dated handoff](audits/2026-10-14-2.1-candidate-handoff.md) distinguish completed
+measured-candidate checks from later promotion checks. Task #337 completes when
+the evidence and prepared handoff receive independent acceptance; it does not
+wait for owner approval of the final release PR. That PR to `master` remains
+open for the maintainer. Its CI and artifact-payload comparison must identify
+its own revision; a later report-only commit can change archive timestamps.
+No release tag, GitHub Release or PyPI upload is authorized by preparation.
 
 The historical 2.0 audit identified correctness follow-ups for remote-interval
 Gaussian centroids ([#282](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/282)),
