@@ -7,6 +7,7 @@
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -28,8 +29,11 @@ def test_EncodingFigureHasAccessibleProvenanceAndPairedNarratives():
     assert "Computed using the scalar public API" in source
 
     for locale in ("en", "ru", "zh-CN"):
-        page = (PROJECT_ROOT / f"docs/site/content/{locale}/guides/linguistic-encoding.md").read_text()
-        assert "../assets/figures/linguistic-encoding.svg" in page
+        pagePath = PROJECT_ROOT / f"docs/site/content/{locale}/guides/linguistic-encoding.md"
+        figurePath = PROJECT_ROOT / "docs/site/content/en/assets/figures/linguistic-encoding.svg"
+        figureLinks = re.findall(r"\]\(([^)]+linguistic-encoding\.svg)\)", pagePath.read_text())
+        assert figureLinks, "The translated narrative must link its explanatory figure"
+        assert all((pagePath.parent / link).resolve() == figurePath.resolve() for link in figureLinks)
 
 
 def test_EncodingFigureCliWritesVerifiesAndDetectsDrift(tmpPath):
