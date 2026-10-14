@@ -106,6 +106,35 @@ print(grades, scale.Fuzzy(0.2)["name"])
 Исправления центра тяжести описаны в
 [руководстве по миграции](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/migration/1.0.3-to-2.0.0.md).
 
+## Готовая шкала в современном API {#modern-preset-factory}
+
+В API 2.1 добавлена фабрика неизменяемой шкалы с исходными коэффициентами.
+Политика выбора уровня и интервалы вычисления центроидов задаются явно.
+Поведение общих классов и исторический путь импорта сохранены. Для запуска
+примера установите wheel проверяемой версии.
+
+```python
+from math import isclose
+from fuzzyroutines import (
+    Centroid, CreateUniversalFuzzyScale,
+    UniversalFuzzyScaleDomains, UniversalFuzzyScalePolicy,
+)
+
+scale = CreateUniversalFuzzyScale()
+result = scale.Fuzzify(0.75, UniversalFuzzyScalePolicy())
+assert result.selectedTerms[0].name == "High"
+centroids = tuple(
+    Centroid(term.fuzzySet, domain)
+    for term, domain in zip(scale.terms, UniversalFuzzyScaleDomains(), strict=True)
+)
+assert isclose(centroids[2], 0.5, abs_tol=1e-12)
+print(result.selectedTerms[0].name, centroids)
+```
+
+Пять центроидов вычисляются на исторических интервалах интегрирования, а не
+на всём нормированном универсальном множестве. Это исправленные значения
+версии 2.0; совпадение с дискретными оценками версии 1.0.3 не гарантируется.
+
 ## Как создать шкалу через современный API
 
 ```python

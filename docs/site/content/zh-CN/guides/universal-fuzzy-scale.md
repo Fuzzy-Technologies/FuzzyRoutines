@@ -90,6 +90,32 @@ print(grades, scale.Fuzzy(0.2)["name"])
 兼容接口保留旧名称与构造方式。本例在 2.0 中执行，并不承诺保留 1.0.3 中的数值错误。
 质心修正参见[迁移说明](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/migration/1.0.3-to-2.0.0.md)。
 
+## 现代预设工厂 {#modern-preset-factory}
+
+2.1 API 提供保留原始系数的不可变尺度工厂。等级选择策略与重心积分区间须显式指定，
+通用现代接口的默认行为及历史导入路径保持不变。运行本例前，请安装待验证版本的 wheel。
+
+```python
+from math import isclose
+from fuzzyroutines import (
+    Centroid, CreateUniversalFuzzyScale,
+    UniversalFuzzyScaleDomains, UniversalFuzzyScalePolicy,
+)
+
+scale = CreateUniversalFuzzyScale()
+result = scale.Fuzzify(0.75, UniversalFuzzyScalePolicy())
+assert result.selectedTerms[0].name == "High"
+centroids = tuple(
+    Centroid(term.fuzzySet, domain)
+    for term, domain in zip(scale.terms, UniversalFuzzyScaleDomains(), strict=True)
+)
+assert isclose(centroids[2], 0.5, abs_tol=1e-12)
+print(result.selectedTerms[0].name, centroids)
+```
+
+五个重心分别在历史积分区间上计算，而不是在整个归一化论域上计算。结果沿用
+2.0 版本修正后的重心语义，不保证与 1.0.3 版本的离散采样估计相同。
+
 ## 使用现代 API 显式构造
 
 ```python

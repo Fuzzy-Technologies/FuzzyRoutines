@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 193 inventoried public symbols are linked to executed examples (31 standalone Python blocks). Root exports are verified aliases of the corresponding module objects.
+All 206 inventoried public symbols are linked to executed examples (34 standalone Python blocks). Root exports are verified aliases of the corresponding module objects.
 
 Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. The two typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
@@ -14,7 +14,7 @@ This index establishes example availability, not independent proof of every math
 | Public symbol                                                                | Executable examples                                                                                                |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `fuzzyroutines.AlphaCut`                                                     | [alpha-cuts, block 1](alpha-cuts.md)                                                                               |
-| `fuzzyroutines.Bell`                                                         | [membership-families, block 1](membership-families.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.Bell`                                                         | [linguistic-encoding, block 1](linguistic-encoding.md); [membership-families, block 1](membership-families.md)     |
 | `fuzzyroutines.Centroid`                                                     | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
 | `fuzzyroutines.CentroidConvergenceError`                                     | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.CentroidPolicy`                                               | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
@@ -25,14 +25,15 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.ContinuousInterval`                                           | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousRegion`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousUniverse`                                           | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
+| `fuzzyroutines.CreateUniversalFuzzyScale`                                    | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.DeriveProperties`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.Difference`                                                   | [alarm, block 1](alarm.md)                                                                                         |
 | `fuzzyroutines.DiscreteFuzzyProperties`                                      | [results, block 1](results.md)                                                                                     |
 | `fuzzyroutines.DiscreteRegion`                                               | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.DiscreteUniverse`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
 | `fuzzyroutines.EqualOnDomain`                                                | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
-| `fuzzyroutines.FuzzificationPolicy`                                          | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |
-| `fuzzyroutines.FuzzificationResult`                                          | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |
+| `fuzzyroutines.FuzzificationPolicy`                                          | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
+| `fuzzyroutines.FuzzificationResult`                                          | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
 | `fuzzyroutines.FuzzyRoutines.DiapasonParser`                                 | [historical-recipes, block 1](historical-recipes.md)                                                               |
 | `fuzzyroutines.FuzzyRoutines.FuzzyAND`                                       | [historical-recipes, block 2](historical-recipes.md)                                                               |
 | `fuzzyroutines.FuzzyRoutines.FuzzyNOT`                                       | [historical-recipes, block 2](historical-recipes.md)                                                               |
@@ -73,13 +74,14 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.Gaussian`                                                     | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.HarringtonDesirability`                                       | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.Height`                                                       | [api-recipes, block 2](api-recipes.md); [custom, block 1](custom.md)                                               |
-| `fuzzyroutines.Hyperbolic`                                                   | [membership-families, block 1](membership-families.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.Hyperbolic`                                                   | [linguistic-encoding, block 1](linguistic-encoding.md); [membership-families, block 1](membership-families.md)     |
 | `fuzzyroutines.IncludedOnDomain`                                             | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
 | `fuzzyroutines.IntegrationDomain`                                            | [exceptions, block 1](../api/modern/exceptions.md); [membership, block 1](../api/modern/membership.md)             |
 | `fuzzyroutines.Intersection`                                                 | [alarm, block 1](alarm.md)                                                                                         |
 | `fuzzyroutines.IsNormal`                                                     | [api-recipes, block 2](api-recipes.md)                                                                             |
-| `fuzzyroutines.LinguisticScale`                                              | [results, block 4](results.md); [results, block 5](results.md)                                                     |
-| `fuzzyroutines.LinguisticTerm`                                               | [results, block 4](results.md); [results, block 5](results.md)                                                     |
+| `fuzzyroutines.LinguisticCodec`                                              | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
+| `fuzzyroutines.LinguisticScale`                                              | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
+| `fuzzyroutines.LinguisticTerm`                                               | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.Logistic`                                                     | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.MembershipCallable`                                           | [membership, block 1](../api/modern/membership.md); [custom, block 1](custom.md)                                   |
 | `fuzzyroutines.MembershipFunction`                                           | [alarm, block 1](alarm.md); [alpha-cuts, block 1](alpha-cuts.md)                                                   |
@@ -87,7 +89,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.NegationPolicy`                                               | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
 | `fuzzyroutines.Normalize`                                                    | [custom, block 1](custom.md)                                                                                       |
 | `fuzzyroutines.SNormPolicy`                                                  | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
-| `fuzzyroutines.SShoulder`                                                    | [alarm, block 1](alarm.md); [membership-families, block 1](membership-families.md)                                 |
+| `fuzzyroutines.SShoulder`                                                    | [alarm, block 1](alarm.md); [linguistic-encoding, block 1](linguistic-encoding.md)                                 |
 | `fuzzyroutines.SampleAlphaCut`                                               | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
 | `fuzzyroutines.SampleProperties`                                             | [api-recipes, block 2](api-recipes.md); [results, block 2](results.md)                                             |
 | `fuzzyroutines.SampledAlphaCut`                                              | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
@@ -97,10 +99,12 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.ScaleDiagnosticsPolicy`                                       | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.ScaleDiagnosticsResult`                                       | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.TNormPolicy`                                                  | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
-| `fuzzyroutines.TermMembership`                                               | [results, block 4](results.md); [results, block 5](results.md)                                                     |
+| `fuzzyroutines.TermMembership`                                               | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
 | `fuzzyroutines.Trapezoid`                                                    | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.Triangle`                                                     | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.Union`                                                        | [alarm, block 1](alarm.md); [centroid, block 1](centroid.md)                                                       |
+| `fuzzyroutines.UniversalFuzzyScaleDomains`                                   | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.UniversalFuzzyScalePolicy`                                    | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.alphacuts.AlphaCut`                                           | [alpha-cuts, block 1](alpha-cuts.md)                                                                               |
 | `fuzzyroutines.alphacuts.SampleAlphaCut`                                     | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
 | `fuzzyroutines.alphacuts.SampledAlphaCut`                                    | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
@@ -118,6 +122,12 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval`                  | [api-recipes, block 1](api-recipes.md); [historical-recipes, block 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval`                    | [api-recipes, block 1](api-recipes.md); [historical-recipes, block 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ValidateWithin`                      | [membership, block 1](../api/modern/membership.md); [alpha-cuts, block 1](alpha-cuts.md)                           |
+| `fuzzyroutines.encoding.LinguisticCodec`                                     | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
+| `fuzzyroutines.encoding.LinguisticCodec.AverageRepresentatives`              | [linguistic-encoding, block 2](linguistic-encoding.md)                                                             |
+| `fuzzyroutines.encoding.LinguisticCodec.DecodePrediction`                    | [linguistic-encoding, block 1](linguistic-encoding.md)                                                             |
+| `fuzzyroutines.encoding.LinguisticCodec.EncodeLabel`                         | [linguistic-encoding, block 1](linguistic-encoding.md)                                                             |
+| `fuzzyroutines.encoding.LinguisticCodec.EncodeMemberships`                   | [linguistic-encoding, block 1](linguistic-encoding.md)                                                             |
+| `fuzzyroutines.encoding.LinguisticCodec.termNames`                           | [linguistic-encoding, block 1](linguistic-encoding.md)                                                             |
 | `fuzzyroutines.exceptions.FuzzyRoutinesError`                                | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.exceptions.InvalidDomainError`                                | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.exceptions.InvalidParameterError`                             | [errors, block 1](errors.md)                                                                                       |
@@ -133,15 +143,15 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, block 1](alarm.md); [centroid, block 1](centroid.md)                                                       |
-| `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |
-| `fuzzyroutines.linguistic.FuzzificationResult`                               | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |
+| `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
+| `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
 | `fuzzyroutines.linguistic.FuzzificationResult.isMatch`                       | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |
 | `fuzzyroutines.linguistic.FuzzificationResult.isTie`                         | [results, block 4](results.md); [scale-audit, block 1](scale-audit.md)                                             |
-| `fuzzyroutines.linguistic.LinguisticScale`                                   | [results, block 4](results.md); [results, block 5](results.md)                                                     |
+| `fuzzyroutines.linguistic.LinguisticScale`                                   | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.LinguisticScale.Diagnose`                          | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
-| `fuzzyroutines.linguistic.LinguisticScale.Fuzzify`                           | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |
-| `fuzzyroutines.linguistic.LinguisticScale.GetTermByName`                     | [results, block 4](results.md)                                                                                     |
-| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [results, block 4](results.md); [results, block 5](results.md)                                                     |
+| `fuzzyroutines.linguistic.LinguisticScale.Fuzzify`                           | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
+| `fuzzyroutines.linguistic.LinguisticScale.GetTermByName`                     | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
+| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint`                              | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms`                  | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap`                        | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
@@ -162,18 +172,18 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.linguistic.ScaleDiagnosticsResult.minimumCoverage`            | [results, block 5](results.md)                                                                                     |
 | `fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapFraction`            | [results, block 5](results.md)                                                                                     |
 | `fuzzyroutines.linguistic.ScaleDiagnosticsResult.overlapPoints`              | [results, block 5](results.md)                                                                                     |
-| `fuzzyroutines.linguistic.TermMembership`                                    | [results, block 4](results.md); [results, block 5](results.md)                                                     |
-| `fuzzyroutines.membership.Bell`                                              | [membership-families, block 1](membership-families.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.linguistic.TermMembership`                                    | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
+| `fuzzyroutines.membership.Bell`                                              | [linguistic-encoding, block 1](linguistic-encoding.md); [membership-families, block 1](membership-families.md)     |
 | `fuzzyroutines.membership.Gaussian`                                          | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.membership.HarringtonDesirability`                            | [membership-families, block 1](membership-families.md)                                                             |
-| `fuzzyroutines.membership.Hyperbolic`                                        | [membership-families, block 1](membership-families.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.membership.Hyperbolic`                                        | [linguistic-encoding, block 1](linguistic-encoding.md); [membership-families, block 1](membership-families.md)     |
 | `fuzzyroutines.membership.Logistic`                                          | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.membership.MembershipCallable`                                | [membership, block 1](../api/modern/membership.md); [custom, block 1](custom.md)                                   |
 | `fuzzyroutines.membership.MembershipFunction`                                | [alarm, block 1](alarm.md); [alpha-cuts, block 1](alpha-cuts.md)                                                   |
 | `fuzzyroutines.membership.MembershipFunction.Evaluate`                       | [alarm, block 1](alarm.md); [alpha-cuts, block 1](alpha-cuts.md)                                                   |
 | `fuzzyroutines.membership.MembershipFunction.parameters`                     | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.membership.MembershipScalar`                                  | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
-| `fuzzyroutines.membership.SShoulder`                                         | [alarm, block 1](alarm.md); [membership-families, block 1](membership-families.md)                                 |
+| `fuzzyroutines.membership.SShoulder`                                         | [alarm, block 1](alarm.md); [linguistic-encoding, block 1](linguistic-encoding.md)                                 |
 | `fuzzyroutines.membership.Trapezoid`                                         | [membership-families, block 1](membership-families.md)                                                             |
 | `fuzzyroutines.membership.Triangle`                                          | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.operators.NegationPolicy`                                     | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
@@ -182,6 +192,9 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.operators.SNormPolicy.Evaluate`                               | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy`                                        | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy.Evaluate`                               | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
+| `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties`                         | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties.isExact`                 | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousInterval`                                | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |

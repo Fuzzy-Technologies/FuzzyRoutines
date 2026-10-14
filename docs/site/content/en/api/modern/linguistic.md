@@ -23,3 +23,17 @@ lookup and explicit record constructor.
         - ScaleDiagnosticPoint
         - ScaleDiagnosticsResult
         - LinguisticScale
+
+::: fuzzyroutines.presets
+    options:
+      members:
+        - CreateUniversalFuzzyScale
+        - UniversalFuzzyScalePolicy
+        - UniversalFuzzyScaleDomains
+
+[Linguistic encoding](../../guides/linguistic-encoding.md) converts labels, full memberships and numeric predictions with explicit domains.
+
+::: fuzzyroutines.encoding
+    options:
+      members:
+        - LinguisticCodec

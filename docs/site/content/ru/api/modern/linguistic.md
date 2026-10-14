@@ -22,3 +22,17 @@ SPDX-License-Identifier: Apache-2.0
         - ScaleDiagnosticPoint
         - ScaleDiagnosticsResult
         - LinguisticScale
+
+::: fuzzyroutines.presets
+    options:
+      members:
+        - CreateUniversalFuzzyScale
+        - UniversalFuzzyScalePolicy
+        - UniversalFuzzyScaleDomains
+
+[Лингвистическое кодирование](../../guides/linguistic-encoding.md) связывает уровни, полные векторы принадлежностей и численные прогнозы через явные области.
+
+::: fuzzyroutines.encoding
+    options:
+      members:
+        - LinguisticCodec
