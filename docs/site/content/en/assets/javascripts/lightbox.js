@@ -28,14 +28,15 @@ SPDX-License-Identifier: Apache-2.0
   panel.append(close_button, expanded, caption);
   viewer.append(panel);
   document.body.append(viewer);
-  let opener = null;
   close_button.addEventListener('click', () => viewer.close());
   viewer.addEventListener('click', event => {
     if (event.target === viewer) viewer.close();
   });
   viewer.addEventListener('close', () => {
+    // A queued close event must not disturb a newly opened dialog. Native
+    // dialog closing already restores focus before this event is dispatched.
+    if (viewer.open) return;
     document.documentElement.classList.remove('image-viewer-open');
-    if (opener?.isConnected) opener.focus({preventScroll: true});
   });
 
   for (const image of document.querySelectorAll('.md-content img, main .project-art, main figure img')) {
@@ -52,7 +53,6 @@ SPDX-License-Identifier: Apache-2.0
     }
     const OpenImage = event => {
       event.preventDefault();
-      opener = trigger;
       expanded.src = image.currentSrc || image.src;
       expanded.alt = image.alt;
       caption.textContent = image.alt;
