@@ -10852,46 +10852,50 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:migration.1.0.3-to-2.0.0"
 kind = "page"
 sourcePath = "docs/migration/1.0.3-to-2.0.0.md"
-sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+sourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/migration/1.0.3-to-2.0.0.md"
-sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+sourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:d638d6cd8da11dce290ee77c2b60c3e6febcc6843f5eff17b11e228a255ae039"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:3024e621cf61312680ff503b2e7d83c526ca7cfd6fb256b137c667318dc839b4"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:d638d6cd8da11dce290ee77c2b60c3e6febcc6843f5eff17b11e228a255ae039"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:3024e621cf61312680ff503b2e7d83c526ca7cfd6fb256b137c667318dc839b4"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/migration/1.0.3-to-2.0.0.md"
-sourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
+sourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:ac483427ce3ac65e6fbaa12107426a46d690bfc5193bc1adc703f662c96766bb"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:da338859123d51e6c5f491f7cba80d4447d0c69cc556dca39176d97bd081a595"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:58cbf5c741e0b81718b2fb03b49b234db6a1bbba84ad966dd231b16a889584d7"
-reviewedTranslationHash = "sha256:ac483427ce3ac65e6fbaa12107426a46d690bfc5193bc1adc703f662c96766bb"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:c42addeb961891f24071c6a1260acfdbdb703ebb3c91dc4981303d8c28995b0f"
+reviewedTranslationHash = "sha256:da338859123d51e6c5f491f7cba80d4447d0c69cc556dca39176d97bd081a595"
+reviewer = "onboarding21 (AI; maintainer-delegated independent review)"
+reviewedAt = "2026-10-14T19:17:33Z"
+evidence = "Independent review of d893eb6: published 2.0 release assets, successful production workflow and acceptance record verified through GitHub; 2.1 remains a separate unpublished candidate gate. English/Russian/Chinese version boundaries agree; existing mathematical contracts and protected code are unchanged. Eight focused release/figure checks passed."
 
 [[units]]
 id = "page:migration.historical-to-modern"
