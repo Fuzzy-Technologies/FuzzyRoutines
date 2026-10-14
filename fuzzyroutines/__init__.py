@@ -22,6 +22,7 @@ from fuzzyroutines.domain import (
     DiscreteUniverse,
     IntegrationDomain,
 )
+from fuzzyroutines.encoding import LinguisticCodec
 from fuzzyroutines.fuzzysets import (
     Complement,
     Difference,
@@ -56,6 +57,11 @@ from fuzzyroutines.membership import (
     Triangle,
 )
 from fuzzyroutines.operators import NegationPolicy, SNormPolicy, TNormPolicy
+from fuzzyroutines.presets import (
+    CreateUniversalFuzzyScale,
+    UniversalFuzzyScaleDomains,
+    UniversalFuzzyScalePolicy,
+)
 from fuzzyroutines.properties import (
     ContinuousFuzzyProperties,
     ContinuousInterval,
@@ -86,6 +92,7 @@ __all__ = [
     "ContinuousInterval",
     "ContinuousRegion",
     "ContinuousUniverse",
+    "CreateUniversalFuzzyScale",
     "DeriveProperties",
     "Difference",
     "DiscreteFuzzyProperties",
@@ -102,6 +109,7 @@ __all__ = [
     "IntegrationDomain",
     "Intersection",
     "IsNormal",
+    "LinguisticCodec",
     "LinguisticScale",
     "LinguisticTerm",
     "Logistic",
@@ -125,4 +133,6 @@ __all__ = [
     "Trapezoid",
     "Triangle",
     "Union",
+    "UniversalFuzzyScaleDomains",
+    "UniversalFuzzyScalePolicy",
 ]

@@ -38,6 +38,12 @@ evaluation and modern neural examples as their implementations are accepted.
   a standalone compute/plot recipe with independent mathematical checks, and
   machine-readable inputs, policies, results and execution evidence. The recipe
   also runs against the published 2.0.0 baseline without a repository checkout.
+- An immutable modern factory preserves the historical Universal Fuzzy Scale's
+  coefficients, term order, selection policy and per-term centroid windows.
+- `LinguisticCodec` explicitly encodes labels or full memberships and decodes
+  predictions. Its grade-weighted representatives preserve meaningful small
+  contributions. A worked example and reproducible graph explain why averaging
+  representatives differs from the centroid of an aggregated fuzzy set.
 
 #### Changed
 

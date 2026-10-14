@@ -367,46 +367,50 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:api.modern.linguistic"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/linguistic.md"
-sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
+sourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/api/modern/linguistic.md"
-sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
+sourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
-reviewedTranslationHash = "sha256:bfa6e1aa8ac206ee11da11072d681c105a437c82335086f3e2245432c1994593"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
+reviewedTranslationHash = "sha256:3157fcedeacaaf49e693c5c8097649f4ba46bcd9f9a5a2ed434ba3b203cea084"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
-reviewedTranslationHash = "sha256:bfa6e1aa8ac206ee11da11072d681c105a437c82335086f3e2245432c1994593"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
+reviewedTranslationHash = "sha256:3157fcedeacaaf49e693c5c8097649f4ba46bcd9f9a5a2ed434ba3b203cea084"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/api/modern/linguistic.md"
-sourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
+sourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
-reviewedTranslationHash = "sha256:687685c217c5ae592d404ba70fe76e8947f7dc0b0b2875efc36da028600d3962"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
+reviewedTranslationHash = "sha256:c98337e72d96518239794e28838c5247f8126b4809880a71b6181ead50c5b533"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:844dbd1ec2507923fc335c77f6640e0b84301d09cf1914ca5a1f3742e6959d0d"
-reviewedTranslationHash = "sha256:687685c217c5ae592d404ba70fe76e8947f7dc0b0b2875efc36da028600d3962"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
+reviewedTranslationHash = "sha256:c98337e72d96518239794e28838c5247f8126b4809880a71b6181ead50c5b533"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units]]
 id = "page:api.modern.membership"
@@ -502,46 +506,50 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:api.modern.package"
 kind = "page"
 sourcePath = "docs/site/content/en/api/modern/package.md"
-sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
+sourceHash = "sha256:8a2d5b7d80e44f2ee74225509f7b82a82efe6c9fc2a6a291f0bfe6c4fcf2a6f4"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/api/modern/package.md"
-sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
+sourceHash = "sha256:8a2d5b7d80e44f2ee74225509f7b82a82efe6c9fc2a6a291f0bfe6c4fcf2a6f4"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
-reviewedTranslationHash = "sha256:2131a2c69edd122cbd0f58ba9316a4bca6f3acf34c4d6b30d5c80503fe9c73b1"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:8a2d5b7d80e44f2ee74225509f7b82a82efe6c9fc2a6a291f0bfe6c4fcf2a6f4"
+reviewedTranslationHash = "sha256:f2f04734f56576a8430f23cef634250e74ba32c7636d0b43f6bfb92c9a99de15"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic API mapping review)"
+reviewedAt = "2026-10-14T18:56:26Z"
+evidence = "All55 root export links generated directly from __init__.py imports and __all__; EN/RU/zh-CN canonical targets identical. Existing translated prose and headings preserved. Four added aliases point to independently reviewed preset/codec contracts."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
-reviewedTranslationHash = "sha256:2131a2c69edd122cbd0f58ba9316a4bca6f3acf34c4d6b30d5c80503fe9c73b1"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:8a2d5b7d80e44f2ee74225509f7b82a82efe6c9fc2a6a291f0bfe6c4fcf2a6f4"
+reviewedTranslationHash = "sha256:f2f04734f56576a8430f23cef634250e74ba32c7636d0b43f6bfb92c9a99de15"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic API mapping review)"
+reviewedAt = "2026-10-14T18:56:26Z"
+evidence = "All55 root export links generated directly from __init__.py imports and __all__; EN/RU/zh-CN canonical targets identical. Existing translated prose and headings preserved. Four added aliases point to independently reviewed preset/codec contracts."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/api/modern/package.md"
-sourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
+sourceHash = "sha256:8a2d5b7d80e44f2ee74225509f7b82a82efe6c9fc2a6a291f0bfe6c4fcf2a6f4"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
-reviewedTranslationHash = "sha256:2092c142a2acf507f7d02720a93c16d3981cc173c601f86bc08fdae03fb5ffe1"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:8a2d5b7d80e44f2ee74225509f7b82a82efe6c9fc2a6a291f0bfe6c4fcf2a6f4"
+reviewedTranslationHash = "sha256:029fa5d1e0396b8f1d8e7297682b2a2da772a7f28d1f495e7d760732c5f18bf5"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic API mapping review)"
+reviewedAt = "2026-10-14T18:56:26Z"
+evidence = "All55 root export links generated directly from __init__.py imports and __all__; EN/RU/zh-CN canonical targets identical. Existing translated prose and headings preserved. Four added aliases point to independently reviewed preset/codec contracts."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:98a42272bb36fe28decc48e9043bcbec4897c2e08c600df145840ce42514692b"
-reviewedTranslationHash = "sha256:2092c142a2acf507f7d02720a93c16d3981cc173c601f86bc08fdae03fb5ffe1"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:8a2d5b7d80e44f2ee74225509f7b82a82efe6c9fc2a6a291f0bfe6c4fcf2a6f4"
+reviewedTranslationHash = "sha256:029fa5d1e0396b8f1d8e7297682b2a2da772a7f28d1f495e7d760732c5f18bf5"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic API mapping review)"
+reviewedAt = "2026-10-14T18:56:26Z"
+evidence = "All55 root export links generated directly from __init__.py imports and __all__; EN/RU/zh-CN canonical targets identical. Existing translated prose and headings preserved. Four added aliases point to independently reviewed preset/codec contracts."
 
 [[units]]
 id = "page:api.modern.properties"
@@ -9985,46 +9993,50 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c"
+sourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c"
+sourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c"
-reviewedTranslationHash = "sha256:9ac20b61e5f10cb368a6af7211639ac1764113a60bb114fe470558e0cf2b4ca9"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
+reviewedTranslationHash = "sha256:c4a32bdf737cf1d131b9ec20bb480e6c73a5423a35e753cbd9715719de11fce1"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
+reviewedAt = "2026-10-14T18:53:29Z"
+evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c"
-reviewedTranslationHash = "sha256:9ac20b61e5f10cb368a6af7211639ac1764113a60bb114fe470558e0cf2b4ca9"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
+reviewedTranslationHash = "sha256:c4a32bdf737cf1d131b9ec20bb480e6c73a5423a35e753cbd9715719de11fce1"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
+reviewedAt = "2026-10-14T18:53:29Z"
+evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c"
+sourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c"
-reviewedTranslationHash = "sha256:bc7083f99e8d1b89fbde79da9b951e8127e7388ff0c0909ec02a96b45e4e8449"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
+reviewedTranslationHash = "sha256:dbe693a842b0ccf40a391377a4ba6c91636a6dc618309cd62bd5fc2622303a64"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
+reviewedAt = "2026-10-14T18:53:29Z"
+evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:fbdd2976385e015247f2d7e6b966073e394c4338374333b219e000770cc4135c"
-reviewedTranslationHash = "sha256:bc7083f99e8d1b89fbde79da9b951e8127e7388ff0c0909ec02a96b45e4e8449"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
+reviewedTranslationHash = "sha256:dbe693a842b0ccf40a391377a4ba6c91636a6dc618309cd62bd5fc2622303a64"
+reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
+reviewedAt = "2026-10-14T18:53:29Z"
+evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -11560,46 +11572,51 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.universal-fuzzy-scale"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
+sourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
+sourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
-reviewedTranslationHash = "sha256:997e502ea40c8af40cd2e6e2be07d332eea21448dcfb27c4bc1277e1a4fdb7b9"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
+reviewedTranslationHash = "sha256:e4efbc4698603cecd11fe9d53350c43820048833492ecb83cea47f68bd151d93"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
-reviewedTranslationHash = "sha256:997e502ea40c8af40cd2e6e2be07d332eea21448dcfb27c4bc1277e1a4fdb7b9"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
+reviewedTranslationHash = "sha256:e4efbc4698603cecd11fe9d53350c43820048833492ecb83cea47f68bd151d93"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/guides/universal-fuzzy-scale.md"
-sourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
+sourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
-reviewedTranslationHash = "sha256:888d672b0d829f408a93e9e08649b13e152dca4b1104a765b08d506bed7d88ca"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T18:09:44Z"
+reviewedSourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
+reviewedTranslationHash = "sha256:636860b5cf6e9c290c19bea0e7696855408ef2b34f05578fe02dc66989672ab5"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a139b8913f8da20"
-reviewedTranslationHash = "sha256:888d672b0d829f408a93e9e08649b13e152dca4b1104a765b08d506bed7d88ca"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T18:09:44Z"
+reviewedSourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
+reviewedTranslationHash = "sha256:636860b5cf6e9c290c19bea0e7696855408ef2b34f05578fe02dc66989672ab5"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
 [[units]]
 id = "page:agent-quickstart"
 kind = "page"
@@ -11648,3 +11665,786 @@ reviewedTranslationHash = "sha256:688183f9e55462c7e480a5e713dfac4a6b4f5f5f980a33
 reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
 reviewedAt = "2026-10-14T18:37:37Z"
 evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+[[units]]
+id = "module:fuzzyroutines.encoding"
+kind = "module"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.md"
+sourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
+reviewedTranslationHash = "sha256:158d49502f58651fff1932b81ca01f6a6791691aed55cb179d660c6f3825dfe6"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
+reviewedTranslationHash = "sha256:158d49502f58651fff1932b81ca01f6a6791691aed55cb179d660c6f3825dfe6"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.md"
+sourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
+reviewedTranslationHash = "sha256:9cf24f5425f1ef31cc5d1776212b7931991fc53aa7b22376614771155a3e006d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
+reviewedTranslationHash = "sha256:9cf24f5425f1ef31cc5d1776212b7931991fc53aa7b22376614771155a3e006d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "module:fuzzyroutines.presets"
+kind = "module"
+sourcePath = "fuzzyroutines/presets.py"
+sourceHash = "sha256:8fe4b7eeac2471b4ad6df9756c4d0185d81455609f57fe28eeb306d7b05c7736"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.presets.md"
+sourceHash = "sha256:8fe4b7eeac2471b4ad6df9756c4d0185d81455609f57fe28eeb306d7b05c7736"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:8fe4b7eeac2471b4ad6df9756c4d0185d81455609f57fe28eeb306d7b05c7736"
+reviewedTranslationHash = "sha256:0a69e6c85926652a3042408737bbe5534525553452ac6919634dd3b133967bc9"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:8fe4b7eeac2471b4ad6df9756c4d0185d81455609f57fe28eeb306d7b05c7736"
+reviewedTranslationHash = "sha256:0a69e6c85926652a3042408737bbe5534525553452ac6919634dd3b133967bc9"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.presets.md"
+sourceHash = "sha256:8fe4b7eeac2471b4ad6df9756c4d0185d81455609f57fe28eeb306d7b05c7736"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:8fe4b7eeac2471b4ad6df9756c4d0185d81455609f57fe28eeb306d7b05c7736"
+reviewedTranslationHash = "sha256:64fbe46a15b0b2e801c2cacca67e30cce207aaf790ef67d7c157b6ed3aeeb7da"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:8fe4b7eeac2471b4ad6df9756c4d0185d81455609f57fe28eeb306d7b05c7736"
+reviewedTranslationHash = "sha256:64fbe46a15b0b2e801c2cacca67e30cce207aaf790ef67d7c157b6ed3aeeb7da"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "page:guides.linguistic-encoding"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/linguistic-encoding.md"
+sourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/site/content/ru/guides/linguistic-encoding.md"
+sourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
+reviewedTranslationHash = "sha256:d706bd16c23ed987aa690caf7d176b25921283cf9645bf00e0dab739fe725066"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
+reviewedTranslationHash = "sha256:d706bd16c23ed987aa690caf7d176b25921283cf9645bf00e0dab739fe725066"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/site/content/zh-CN/guides/linguistic-encoding.md"
+sourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
+reviewedTranslationHash = "sha256:403f69371bd8b1b1d00f4baa305fec8b66d584f5144772c95dc006d8b881d744"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
+reviewedTranslationHash = "sha256:403f69371bd8b1b1d00f4baa305fec8b66d584f5144772c95dc006d8b881d744"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
+
+[[units]]
+id = "symbol:fuzzyroutines.CreateUniversalFuzzyScale"
+kind = "symbol"
+sourcePath = "fuzzyroutines/presets.py"
+sourceHash = "sha256:6c8f4a810ac23a98bb151c1ec64bdd6cb4e7a07824587fe4faadc0687355145e"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.presets.CreateUniversalFuzzyScale.md"
+sourceHash = "sha256:6c8f4a810ac23a98bb151c1ec64bdd6cb4e7a07824587fe4faadc0687355145e"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:6c8f4a810ac23a98bb151c1ec64bdd6cb4e7a07824587fe4faadc0687355145e"
+reviewedTranslationHash = "sha256:ea0d083527b42c35ee85d19200131dbc345ab0fe2e549c024b44b5def05c1708"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:6c8f4a810ac23a98bb151c1ec64bdd6cb4e7a07824587fe4faadc0687355145e"
+reviewedTranslationHash = "sha256:ea0d083527b42c35ee85d19200131dbc345ab0fe2e549c024b44b5def05c1708"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.presets.CreateUniversalFuzzyScale.md"
+sourceHash = "sha256:6c8f4a810ac23a98bb151c1ec64bdd6cb4e7a07824587fe4faadc0687355145e"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:6c8f4a810ac23a98bb151c1ec64bdd6cb4e7a07824587fe4faadc0687355145e"
+reviewedTranslationHash = "sha256:bc0ad06727fc0fef9d09bbe9b734aca0ca881b45ca6e004c3390c052765c7b4e"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:6c8f4a810ac23a98bb151c1ec64bdd6cb4e7a07824587fe4faadc0687355145e"
+reviewedTranslationHash = "sha256:bc0ad06727fc0fef9d09bbe9b734aca0ca881b45ca6e004c3390c052765c7b4e"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.LinguisticCodec"
+kind = "symbol"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.LinguisticCodec.md"
+sourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
+reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
+reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.LinguisticCodec.md"
+sourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
+reviewedTranslationHash = "sha256:ef3fe6e86a77ec2d0288c3a34ca2972e0ab830036d542ff57908600d3ff6c9f3"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
+reviewedTranslationHash = "sha256:ef3fe6e86a77ec2d0288c3a34ca2972e0ab830036d542ff57908600d3ff6c9f3"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.UniversalFuzzyScaleDomains"
+kind = "symbol"
+sourcePath = "fuzzyroutines/presets.py"
+sourceHash = "sha256:9c8e66bf1b6ff7e459ffdb6d11f1eb562bf5bbe45af2832c723db77ae31afa2b"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.presets.UniversalFuzzyScaleDomains.md"
+sourceHash = "sha256:9c8e66bf1b6ff7e459ffdb6d11f1eb562bf5bbe45af2832c723db77ae31afa2b"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:9c8e66bf1b6ff7e459ffdb6d11f1eb562bf5bbe45af2832c723db77ae31afa2b"
+reviewedTranslationHash = "sha256:fb12b04a93b9f92d8bb4b5faea3a5ccd355dd12eaf305e88b8902fbcd35e381d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:9c8e66bf1b6ff7e459ffdb6d11f1eb562bf5bbe45af2832c723db77ae31afa2b"
+reviewedTranslationHash = "sha256:fb12b04a93b9f92d8bb4b5faea3a5ccd355dd12eaf305e88b8902fbcd35e381d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.presets.UniversalFuzzyScaleDomains.md"
+sourceHash = "sha256:9c8e66bf1b6ff7e459ffdb6d11f1eb562bf5bbe45af2832c723db77ae31afa2b"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:9c8e66bf1b6ff7e459ffdb6d11f1eb562bf5bbe45af2832c723db77ae31afa2b"
+reviewedTranslationHash = "sha256:34bf4ccc3ea3db048aad91510e484dc80179ce7f24b196515b8ae617a426c7b1"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:9c8e66bf1b6ff7e459ffdb6d11f1eb562bf5bbe45af2832c723db77ae31afa2b"
+reviewedTranslationHash = "sha256:34bf4ccc3ea3db048aad91510e484dc80179ce7f24b196515b8ae617a426c7b1"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.UniversalFuzzyScalePolicy"
+kind = "symbol"
+sourcePath = "fuzzyroutines/presets.py"
+sourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.presets.UniversalFuzzyScalePolicy.md"
+sourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
+reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
+reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.presets.UniversalFuzzyScalePolicy.md"
+sourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
+reviewedTranslationHash = "sha256:d50af9605667f17fb94d617626d7d151dc180420107fe3e7831abbbdaef73b65"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
+reviewedTranslationHash = "sha256:d50af9605667f17fb94d617626d7d151dc180420107fe3e7831abbbdaef73b65"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.encoding.LinguisticCodec"
+kind = "symbol"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.LinguisticCodec.md"
+sourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
+reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
+reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.LinguisticCodec.md"
+sourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
+reviewedTranslationHash = "sha256:ef3fe6e86a77ec2d0288c3a34ca2972e0ab830036d542ff57908600d3ff6c9f3"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
+reviewedTranslationHash = "sha256:ef3fe6e86a77ec2d0288c3a34ca2972e0ab830036d542ff57908600d3ff6c9f3"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.encoding.LinguisticCodec.AverageRepresentatives"
+kind = "symbol"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.LinguisticCodec.AverageRepresentatives.md"
+sourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
+reviewedTranslationHash = "sha256:41482f484d4eb09fbf24d9d41ccd032f8683c1098479b820421dc095d57fb77b"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
+reviewedTranslationHash = "sha256:41482f484d4eb09fbf24d9d41ccd032f8683c1098479b820421dc095d57fb77b"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.LinguisticCodec.AverageRepresentatives.md"
+sourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
+reviewedTranslationHash = "sha256:e3b17d9e0f9e72770b691e95dfa9cd5dc8431ff5b0eaaf4487a369c5661c2e85"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
+reviewedTranslationHash = "sha256:e3b17d9e0f9e72770b691e95dfa9cd5dc8431ff5b0eaaf4487a369c5661c2e85"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.encoding.LinguisticCodec.DecodePrediction"
+kind = "symbol"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:ae1909ceed93def60d54f41c99262ff6ef59c96be8e88477db1587b97e4fd43c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.LinguisticCodec.DecodePrediction.md"
+sourceHash = "sha256:ae1909ceed93def60d54f41c99262ff6ef59c96be8e88477db1587b97e4fd43c"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ae1909ceed93def60d54f41c99262ff6ef59c96be8e88477db1587b97e4fd43c"
+reviewedTranslationHash = "sha256:262c109b249d58cf6e6f8fe6878e7bd7c6490d60b0bd246c1a5e9b1d4a0b2d9e"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ae1909ceed93def60d54f41c99262ff6ef59c96be8e88477db1587b97e4fd43c"
+reviewedTranslationHash = "sha256:262c109b249d58cf6e6f8fe6878e7bd7c6490d60b0bd246c1a5e9b1d4a0b2d9e"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.LinguisticCodec.DecodePrediction.md"
+sourceHash = "sha256:ae1909ceed93def60d54f41c99262ff6ef59c96be8e88477db1587b97e4fd43c"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ae1909ceed93def60d54f41c99262ff6ef59c96be8e88477db1587b97e4fd43c"
+reviewedTranslationHash = "sha256:d8d965f9a49f5aa6219e1fb63f6e9109ca483b99d76fbaa584366cb2b46999a9"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ae1909ceed93def60d54f41c99262ff6ef59c96be8e88477db1587b97e4fd43c"
+reviewedTranslationHash = "sha256:d8d965f9a49f5aa6219e1fb63f6e9109ca483b99d76fbaa584366cb2b46999a9"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.encoding.LinguisticCodec.EncodeLabel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.LinguisticCodec.EncodeLabel.md"
+sourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
+reviewedTranslationHash = "sha256:452dec35074a38b4ddfb1bb314ba878ef9123c4c23f59e7b22323a3b293c6ed4"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
+reviewedTranslationHash = "sha256:452dec35074a38b4ddfb1bb314ba878ef9123c4c23f59e7b22323a3b293c6ed4"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.LinguisticCodec.EncodeLabel.md"
+sourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
+reviewedTranslationHash = "sha256:d2cd1b1ebac1f74efd3876737b99d197888bdb432242f3b2c9a1b4a7c75c3f8d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
+reviewedTranslationHash = "sha256:d2cd1b1ebac1f74efd3876737b99d197888bdb432242f3b2c9a1b4a7c75c3f8d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.encoding.LinguisticCodec.EncodeMemberships"
+kind = "symbol"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:e77dee29cdbfa837a0decf779e4a2f178264ece7cd6e909966cd8e0f6e1cd22e"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.LinguisticCodec.EncodeMemberships.md"
+sourceHash = "sha256:e77dee29cdbfa837a0decf779e4a2f178264ece7cd6e909966cd8e0f6e1cd22e"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:e77dee29cdbfa837a0decf779e4a2f178264ece7cd6e909966cd8e0f6e1cd22e"
+reviewedTranslationHash = "sha256:49b2ed4cbed22303bef6c3e48a4f669440dba95a83189f8fc0ea014437b7fe50"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:e77dee29cdbfa837a0decf779e4a2f178264ece7cd6e909966cd8e0f6e1cd22e"
+reviewedTranslationHash = "sha256:49b2ed4cbed22303bef6c3e48a4f669440dba95a83189f8fc0ea014437b7fe50"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.LinguisticCodec.EncodeMemberships.md"
+sourceHash = "sha256:e77dee29cdbfa837a0decf779e4a2f178264ece7cd6e909966cd8e0f6e1cd22e"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:e77dee29cdbfa837a0decf779e4a2f178264ece7cd6e909966cd8e0f6e1cd22e"
+reviewedTranslationHash = "sha256:9d6504273484d6776d4ab1edf8ee11bfd745969709b38cac650fc0005ed8b100"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:e77dee29cdbfa837a0decf779e4a2f178264ece7cd6e909966cd8e0f6e1cd22e"
+reviewedTranslationHash = "sha256:9d6504273484d6776d4ab1edf8ee11bfd745969709b38cac650fc0005ed8b100"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.encoding.LinguisticCodec.termNames"
+kind = "symbol"
+sourcePath = "fuzzyroutines/encoding.py"
+sourceHash = "sha256:baf009c35b59726aac54ea4072e6df6c9b7fb7ef60f34290730e6a9051888435"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.encoding.LinguisticCodec.termNames.md"
+sourceHash = "sha256:baf009c35b59726aac54ea4072e6df6c9b7fb7ef60f34290730e6a9051888435"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:baf009c35b59726aac54ea4072e6df6c9b7fb7ef60f34290730e6a9051888435"
+reviewedTranslationHash = "sha256:434cb0bd7e40ae4236ba9d2333761448e2d7c0bf06f04551ab70b9eaf7b4bd27"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:baf009c35b59726aac54ea4072e6df6c9b7fb7ef60f34290730e6a9051888435"
+reviewedTranslationHash = "sha256:434cb0bd7e40ae4236ba9d2333761448e2d7c0bf06f04551ab70b9eaf7b4bd27"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.encoding.LinguisticCodec.termNames.md"
+sourceHash = "sha256:baf009c35b59726aac54ea4072e6df6c9b7fb7ef60f34290730e6a9051888435"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:baf009c35b59726aac54ea4072e6df6c9b7fb7ef60f34290730e6a9051888435"
+reviewedTranslationHash = "sha256:815264db1d7a1ad0b6b9f9539460a33552da42e04c38f7728d3af3cc4769950c"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:baf009c35b59726aac54ea4072e6df6c9b7fb7ef60f34290730e6a9051888435"
+reviewedTranslationHash = "sha256:815264db1d7a1ad0b6b9f9539460a33552da42e04c38f7728d3af3cc4769950c"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.presets.CreateUniversalFuzzyScale"
+kind = "symbol"
+sourcePath = "fuzzyroutines/presets.py"
+sourceHash = "sha256:8134b2166f020e6d91e984849baa6935109ef87a7c41a076eb9c874d8c58879a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.presets.CreateUniversalFuzzyScale.md"
+sourceHash = "sha256:8134b2166f020e6d91e984849baa6935109ef87a7c41a076eb9c874d8c58879a"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:8134b2166f020e6d91e984849baa6935109ef87a7c41a076eb9c874d8c58879a"
+reviewedTranslationHash = "sha256:ea0d083527b42c35ee85d19200131dbc345ab0fe2e549c024b44b5def05c1708"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:8134b2166f020e6d91e984849baa6935109ef87a7c41a076eb9c874d8c58879a"
+reviewedTranslationHash = "sha256:ea0d083527b42c35ee85d19200131dbc345ab0fe2e549c024b44b5def05c1708"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.presets.CreateUniversalFuzzyScale.md"
+sourceHash = "sha256:8134b2166f020e6d91e984849baa6935109ef87a7c41a076eb9c874d8c58879a"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:8134b2166f020e6d91e984849baa6935109ef87a7c41a076eb9c874d8c58879a"
+reviewedTranslationHash = "sha256:bc0ad06727fc0fef9d09bbe9b734aca0ca881b45ca6e004c3390c052765c7b4e"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:8134b2166f020e6d91e984849baa6935109ef87a7c41a076eb9c874d8c58879a"
+reviewedTranslationHash = "sha256:bc0ad06727fc0fef9d09bbe9b734aca0ca881b45ca6e004c3390c052765c7b4e"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.presets.UniversalFuzzyScaleDomains"
+kind = "symbol"
+sourcePath = "fuzzyroutines/presets.py"
+sourceHash = "sha256:d3aa84098c3dfac2093a80a273e8aeee24110ad451cd9d875229d1bf19f47e92"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.presets.UniversalFuzzyScaleDomains.md"
+sourceHash = "sha256:d3aa84098c3dfac2093a80a273e8aeee24110ad451cd9d875229d1bf19f47e92"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:d3aa84098c3dfac2093a80a273e8aeee24110ad451cd9d875229d1bf19f47e92"
+reviewedTranslationHash = "sha256:fb12b04a93b9f92d8bb4b5faea3a5ccd355dd12eaf305e88b8902fbcd35e381d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:d3aa84098c3dfac2093a80a273e8aeee24110ad451cd9d875229d1bf19f47e92"
+reviewedTranslationHash = "sha256:fb12b04a93b9f92d8bb4b5faea3a5ccd355dd12eaf305e88b8902fbcd35e381d"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.presets.UniversalFuzzyScaleDomains.md"
+sourceHash = "sha256:d3aa84098c3dfac2093a80a273e8aeee24110ad451cd9d875229d1bf19f47e92"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:d3aa84098c3dfac2093a80a273e8aeee24110ad451cd9d875229d1bf19f47e92"
+reviewedTranslationHash = "sha256:34bf4ccc3ea3db048aad91510e484dc80179ce7f24b196515b8ae617a426c7b1"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:d3aa84098c3dfac2093a80a273e8aeee24110ad451cd9d875229d1bf19f47e92"
+reviewedTranslationHash = "sha256:34bf4ccc3ea3db048aad91510e484dc80179ce7f24b196515b8ae617a426c7b1"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units]]
+id = "symbol:fuzzyroutines.presets.UniversalFuzzyScalePolicy"
+kind = "symbol"
+sourcePath = "fuzzyroutines/presets.py"
+sourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.presets.UniversalFuzzyScalePolicy.md"
+sourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
+reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
+reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.presets.UniversalFuzzyScalePolicy.md"
+sourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
+reviewedTranslationHash = "sha256:d50af9605667f17fb94d617626d7d151dc180420107fe3e7831abbbdaef73b65"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
+reviewedTranslationHash = "sha256:d50af9605667f17fb94d617626d7d151dc180420107fe3e7831abbbdaef73b65"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
+reviewedAt = "2026-10-14T18:46:38Z"
+evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."

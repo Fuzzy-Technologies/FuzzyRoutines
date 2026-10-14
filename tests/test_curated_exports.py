@@ -16,6 +16,8 @@ MODERN_EXPORTS = {
     "alphacuts": {"AlphaCut", "SampleAlphaCut", "SampledAlphaCut"},
     "defuzzification": {"Centroid", "CentroidConvergenceError", "CentroidPolicy"},
     "domain": {"ContinuousUniverse", "DiscreteUniverse", "IntegrationDomain"},
+    "encoding": {"LinguisticCodec"},
+    "presets": {"CreateUniversalFuzzyScale", "UniversalFuzzyScalePolicy", "UniversalFuzzyScaleDomains"},
     "fuzzysets": {
         "Complement", "Difference", "Height", "Intersection", "IsNormal",
         "Normalize", "ScalarFuzzySet", "Union",
