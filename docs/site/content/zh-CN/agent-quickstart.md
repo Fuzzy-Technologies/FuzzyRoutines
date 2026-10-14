@@ -15,21 +15,41 @@ SPDX-License-Identifier: Apache-2.0
 
 ## 版本与功能索引
 
-示例针对**已发布的 2.0.0** API，使用 CPython **3.13 或 3.14**。
-`/latest/` 文档会更新；精确的包版本约束和 JSON 中的 `environment` 字段用于标识实际执行环境。
-独立脚本基于已安装的 wheel 运行，无需导入仓库中的模块。
+下方基础示例针对**已发布的 2.0.0** API，使用 CPython **3.13 或 3.14**，
+无需依赖 2.1 的新增接口。`/latest/` 文档会更新；精确的包版本约束和 JSON 中的
+`environment` 字段用于标识实际执行环境。独立脚本基于已安装的 wheel 运行，
+无需导入仓库中的模块。
 
-| 功能                         | 已发布版本 2.0.0 的入口                                                                             | 示例                                                                        |
-| -------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| 模糊集与隶属函数                   | `ScalarFuzzySet`, `Triangle`, `Bell`, `Hyperbolic`, `SShoulder`                             | [隶属函数图集](guides/membership-families.md)                                   |
-| 语言项分类                      | `LinguisticScale.Fuzzify`, `FuzzificationPolicy`                                            | [历史通用模糊标度](guides/universal-fuzzy-scale.md)                               |
-| 模糊逻辑基本运算                   | `TNormPolicy`, `SNormPolicy`, `NegationPolicy` 及集合运算                                        | [算子](guides/operators.md)                                                 |
-| 截集与数值输出                    | `AlphaCut`, `SampleAlphaCut`, `Centroid`                                                    | [α-截集](guides/alpha-cuts.md)、[质心](guides/centroid.md)                     |
-| 规则推理与神经网络集成                | 计划用于 2.1；不属于已发布的 2.0.0 API                                                                  | [2.1 计划](https://github.com/Fuzzy-Technologies/FuzzyRoutines/milestone/8) |
-| 可选 NumPy 批量计算              | 计划用于 2.1；2.0.0 使用无外部运行时依赖的标量核心                                                              | [2.1 计划](https://github.com/Fuzzy-Technologies/FuzzyRoutines/milestone/8) |
+| 功能       | 已发布版本 2.0.0 的入口                                                 | 示例                                                    |
+| ---      | ---                                                             | ---                                                   |
+| 模糊集与隶属函数 | `ScalarFuzzySet`, `Triangle`, `Bell`, `Hyperbolic`, `SShoulder` | [隶属函数图集](guides/membership-families.md)               |
+| 语言项分类    | `LinguisticScale.Fuzzify`, `FuzzificationPolicy`                | [历史通用模糊标度](guides/universal-fuzzy-scale.md)           |
+| 模糊逻辑基本运算 | `TNormPolicy`, `SNormPolicy`, `NegationPolicy` 及集合运算            | [算子](guides/operators.md)                             |
+| 截集与数值输出  | `AlphaCut`, `SampleAlphaCut`, `Centroid`                        | [α-截集](guides/alpha-cuts.md)、[质心](guides/centroid.md) |
 
-具体契约以 [API 参考](api/index.md)和[应用场景](guides/index.md)为准。
-不要将规划中的接口名称或旧版包的接口当作当前已支持的 API。
+**2.1 候选版本：**下列开发功能须使用包含相应实现的候选 wheel。
+此功能索引不表示 2.1 已在 PyPI 发布。默认标量核心仍不需要外部运行时依赖。
+
+| 功能            | 2.1 候选版本的入口或范围                                                                                                      | 指南                                                                                                                                                                                                   |
+| ---           | ---                                                                                                                 | ---                                                                                                                                                                                                  |
+| 保留历史参数的预设标度   | `CreateUniversalFuzzyScale`, `UniversalFuzzyScalePolicy`, `UniversalFuzzyScaleDomains`：原始语言项、系数、最后一个精确最大值选择策略及质心积分域 | [通用模糊标度](guides/universal-fuzzy-scale.md)                                                                                                                                                            |
+| 显式语言项编码       | `LinguisticCodec`：语言项质心、有序隶属度向量、标量解码及代表值的加权平均                                                                       | [编码契约](guides/linguistic-encoding.md)                                                                                                                                                                |
+| 可解释的规则推理      | `fuzzyroutines.inference`：`MamdaniModel` 与零阶/一阶 `SugenoModel`，显式指定算子、定义域与失败行为，并提供规则计算轨迹                             | [规则、公式与分步图示](guides/inference.md)                                                                                                                                                                    |
+| 可选 NumPy 批量计算 | `fuzzyroutines.batches.EvaluateMembershipBatch` 与 `FuzzifyBatch`，通过 `backend="numpy"` 显式选择；使用可选依赖组 `numpy`          | [数组形状与适用范围](guides/numpy-batches.md)                                                                                                                                                                 |
+| 神经网络输入与输出     | 仓库中的 CPU PyTorch 示例比较原始坐标、语言项质心和完整隶属度向量；另设输出头预测各项隶属度                                                                | [示例与消融比较](guides/neural-integration.md)                                                                                                                                                              |
+| 可微 Sugeno 研究  | 仅在仓库中提供零阶/一阶原型、梯度检验及留出集比较；**2.1 不提供公共张量后端**                                                                         | [实验与决策](guides/differentiable-sugeno.md)                                                                                                                                                             |
+| 项目主页语言        | 网站入口，与安装包相互独立                                                                                                       | [English](https://fuzzy-technologies.github.io/FuzzyRoutines/), [Русский](https://fuzzy-technologies.github.io/FuzzyRoutines/ru/), [简体中文](https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/) |
+
+隶属度不是概率。语言项质心是数值代表，不是神经网络的可学习权重。
+`LinguisticCodec.AverageRepresentatives` 对语言项代表值求加权平均，
+不等同于聚合模糊集的质心。Mamdani 模型可计算聚合结果的质心；
+Sugeno 模型则以归一化规则激活强度为权重，对规则后件值求平均。
+
+Torch 脚本和研究代码是仓库中的可选示例，不属于安装包核心的模块或依赖。
+运行时应固定与候选构建相匹配的源代码修订版本。合成数据上的比较不能证明模糊特征
+必然改善所有网络；可微原型也不会重新调整历史标度的参数。
+具体契约以 [API 参考](api/index.md)和[应用场景](guides/index.md)为准，
+须与实际安装的构建版本对应。
 
 ## 无需检出仓库即可运行
 
@@ -73,6 +93,20 @@ python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --value 17 --pl
 
 [![历史曲线与输入 0.17 对应的五个隶属度；所有值均低于 0.1 阈值。](../en/assets/figures/agent-risk.svg)](../en/assets/figures/agent-risk.svg)
 
-验证开发版时，安装确切的 wheel，并在 `--expect-version` 中填写其版本，例如 `2.1.0.dev0`。
-这用于显式验证候选构建，不表示可从 PyPI 安装尚未发布的版本。
-报告结果时，请同时保留 JSON 和图像，以便复现。
+## 验证指定的 2.1 候选构建
+
+从 CI 构建产物中取得候选 wheel，并使用受支持 Python 的新建环境。
+按上文下载 `agent_recipe.py` 后，将 `FUZZYROUTINES_WHEEL` 设为 wheel 的绝对本地路径，
+将 `FUZZYROUTINES_VERSION` 设为其元数据中的精确版本。
+这两个值必须来自指定构建产物，不应猜测可从 PyPI 安装的版本。
+
+```bash
+: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the candidate wheel}"
+: "${FUZZYROUTINES_VERSION:?Set the exact candidate version}"
+python -m pip install --no-deps "$FUZZYROUTINES_WHEEL"
+python -I agent_recipe.py --expect-version "$FUZZYROUTINES_VERSION" --output candidate.json > candidate.stdout.json
+```
+
+此步骤只验证候选构建能否运行既有基础标量示例，并不覆盖所有新增功能。
+编码器、规则推理、可选批量计算及仓库示例应按各自指南验证。
+报告结果时，应同时保留 wheel 哈希、源代码修订版本、JSON 和生成的图像。

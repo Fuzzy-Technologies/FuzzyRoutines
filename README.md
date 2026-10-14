@@ -19,16 +19,21 @@ SPDX-License-Identifier: Apache-2.0
   <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/LICENSE"><img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
 </p>
 
-> **FuzzyRoutines 2.0** combines a modern typed API with the protected
-> historical API. See the
-> [current implementation boundary](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md).
+> **Published stable release: 2.0.0.** Its modern typed scalar API preserves
+> the protected historical interface. The quick start below uses this release.
+
+**Candidate 2.1.0 is not yet published on PyPI.** Its scope adds the historical
+scale factory, linguistic encoding, Mamdani/Sugeno inference, optional NumPy
+batches and modern neural examples.
+[Try an explicit candidate wheel](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md)
+or read the [candidate release notes](docs/release-notes-2.1.0.md).
 
 ## At a glance
 
 | Area                | Current contract                                                                                                                                                                                           |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Runtime             | CPython 3.13 and 3.14                                                                                                                                                                                      |
-| Package version     | `2.0.0`                                                                                                                                                                                                    |
+| Published version   | `2.0.0`                                                                                                                                                                                                    |
 | Modern API          | Root exports from [`fuzzyroutines`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-api-documentation-inventory.md#modern-package-exports)                                     |
 | Compatibility API   | [`fuzzyroutines.FuzzyRoutines`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/COMPATIBILITY.md) preserves the ADR-protected contract and documents the wider observed 1.0.3 facade  |
 | API reference       | [Published English reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/) built from the installed package                                                                          |
@@ -190,7 +195,9 @@ and linguistic representations. Inline modern annotations, `py.typed`, strict
 source checks, and installed-wheel consumer checks are implemented; see the
 [typing contract](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/public-typing.md). Symmetric difference, executable
 convexity, defuzzification methods beyond the implemented centroid contract,
-vectorized backends, and free-threaded CPython support remain roadmap work.
+and free-threaded CPython support remain outside the 2.1 scope. Optional NumPy
+batches belong to the candidate and are selected explicitly; ordinary scalar
+calls do not switch backends.
 Performance and concurrency claims require numerical-parity,
 timing, memory, and race-safety evidence.
 

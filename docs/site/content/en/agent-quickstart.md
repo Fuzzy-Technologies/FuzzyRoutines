@@ -17,22 +17,46 @@ No local PC, Docker, GPU, model provider or agent framework is required.
 
 ## Version and capability map
 
-This recipe targets the **published 2.0.0** API on CPython **3.13 or 3.14**.
-The `/latest/` documentation route moves; the exact package pin and the JSON
-`environment` record identify what was actually run. The standalone recipe
-works against an installed wheel and imports no repository modules.
+The basic recipe below targets the **published 2.0.0** API on CPython **3.13 or
+3.14**. It continues to work without the new 2.1 interfaces. The `/latest/`
+documentation route moves; the exact package pin and the JSON `environment`
+record identify what was actually run. The standalone recipe works against an
+installed wheel and imports no repository modules.
 
-| Capability                            | Published 2.0.0 entry point                                                                 | Example                                                                     |
-| ------------------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Sets and memberships                  | `ScalarFuzzySet`, `Triangle`, `Bell`, `Hyperbolic`, `SShoulder`                             | [Membership gallery](guides/membership-families.md)                         |
-| Linguistic classification             | `LinguisticScale.Fuzzify`, `FuzzificationPolicy`                                            | [Historical scale](guides/universal-fuzzy-scale.md)                         |
-| Fuzzy logic primitives                | `TNormPolicy`, `SNormPolicy`, `NegationPolicy`, set operations                              | [Operators](guides/operators.md)                                            |
-| Cuts and numeric output               | `AlphaCut`, `SampleAlphaCut`, `Centroid`                                                    | [Alpha cuts](guides/alpha-cuts.md), [centroid](guides/centroid.md)          |
-| Rule inference and neural integration | Planned for 2.1; not part of the published 2.0.0 API                                        | [2.1 plan](https://github.com/Fuzzy-Technologies/FuzzyRoutines/milestone/8) |
-| Optional NumPy batches                | Planned for 2.1; 2.0.0 uses the dependency-free scalar core                                 | [2.1 plan](https://github.com/Fuzzy-Technologies/FuzzyRoutines/milestone/8) |
+| Capability                | Published 2.0.0 entry point                                     | Example                                                            |
+| ---                       | ---                                                             | ---                                                                |
+| Sets and memberships      | `ScalarFuzzySet`, `Triangle`, `Bell`, `Hyperbolic`, `SShoulder` | [Membership gallery](guides/membership-families.md)                |
+| Linguistic classification | `LinguisticScale.Fuzzify`, `FuzzificationPolicy`                | [Historical scale](guides/universal-fuzzy-scale.md)                |
+| Fuzzy logic primitives    | `TNormPolicy`, `SNormPolicy`, `NegationPolicy`, set operations  | [Operators](guides/operators.md)                                   |
+| Cuts and numeric output   | `AlphaCut`, `SampleAlphaCut`, `Centroid`                        | [Alpha cuts](guides/alpha-cuts.md), [centroid](guides/centroid.md) |
 
-The [API reference](api/index.md) and [worked scenarios](guides/index.md) are
-authoritative. Do not guess names from a future roadmap or historical package.
+**Candidate 2.1:** the following development features require a candidate wheel
+containing them. This list does not announce a 2.1 PyPI release. The default
+scalar package still has no external runtime dependencies.
+
+| Capability                     | Candidate 2.1 entry point or scope                                                                                                                               | Guide                                                                                                                                                                                                |
+| ---                            | ---                                                                                                                                                              | ---                                                                                                                                                                                                  |
+| Preserved historical preset    | `CreateUniversalFuzzyScale`, `UniversalFuzzyScalePolicy`, `UniversalFuzzyScaleDomains`: original terms, coefficients, exact-last tie policy and centroid windows | [Universal Fuzzy Scale](guides/universal-fuzzy-scale.md)                                                                                                                                             |
+| Explicit linguistic encoding   | `LinguisticCodec`: label centroids, ordered membership vectors, scalar decoding and weighted representative averages                                             | [Encoding contracts](guides/linguistic-encoding.md)                                                                                                                                                  |
+| Explainable rule inference     | `fuzzyroutines.inference`: `MamdaniModel` and zero/first-order `SugenoModel`, explicit operators, domains, failures and rule traces                              | [Rules, formulas and stage diagrams](guides/inference.md)                                                                                                                                            |
+| Optional NumPy batches         | `fuzzyroutines.batches.EvaluateMembershipBatch` and `FuzzifyBatch`, selected explicitly with `backend="numpy"`; optional `numpy` extra                           | [Batch shapes and limits](guides/numpy-batches.md)                                                                                                                                                   |
+| Neural inputs and outputs      | Repository CPU PyTorch example compares raw coordinates, label centroids and full membership vectors; a separate output head predicts membership grades          | [Example and ablations](guides/neural-integration.md)                                                                                                                                                |
+| Differentiable Sugeno research | Repository-only zero/first-order prototype, gradient checks and held-out comparisons; **no public tensor backend in 2.1**                                        | [Experiment and decision](guides/differentiable-sugeno.md)                                                                                                                                           |
+| Project homepage languages     | Website entry points, independent of the installed package                                                                                                       | [English](https://fuzzy-technologies.github.io/FuzzyRoutines/), [Русский](https://fuzzy-technologies.github.io/FuzzyRoutines/ru/), [简体中文](https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/) |
+
+Membership grades are not probabilities. A term centroid is a representative
+coordinate, not a learned neural weight. `LinguisticCodec.AverageRepresentatives`
+averages term representatives; it is not the centroid of an aggregated fuzzy
+set. Mamdani can compute that aggregate centroid, whereas Sugeno averages rule
+consequences using normalized firing strengths.
+
+Torch scripts and research code are optional repository examples, not modules
+or dependencies of the installed core. Pin the matching source revision when
+running them. Their synthetic comparisons do not establish that fuzzy features
+improve every network, and the differentiable prototype does not retune the
+historical preset. The [API reference](api/index.md) and
+[worked scenarios](guides/index.md) specify the contracts; use the version that
+matches the installed artifact.
 
 ## Run without a checkout
 
@@ -85,7 +109,22 @@ python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --value 17 --pl
 
 [![Historical curves beside the five memberships at 0.17; all grades fall below the 0.1 decision threshold.](assets/figures/agent-risk.svg)](assets/figures/agent-risk.svg)
 
-For a development wheel, install that exact artifact and change `--expect-version`
-to its version (for example `2.1.0.dev0`). This is an explicit candidate check,
-not an instruction to install an unpublished release from PyPI. Keep the JSON
-and image together when reporting a result.
+## Check an explicit 2.1 candidate
+
+Obtain the candidate wheel from its CI artifact and use a fresh supported
+Python environment. After downloading `agent_recipe.py` as above, set
+`FUZZYROUTINES_WHEEL` to the wheel's absolute local path and
+`FUZZYROUTINES_VERSION` to its exact metadata version. These values must come
+from that artifact, not from a guessed PyPI version.
+
+```bash
+: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the candidate wheel}"
+: "${FUZZYROUTINES_VERSION:?Set the exact candidate version}"
+python -m pip install --no-deps "$FUZZYROUTINES_WHEEL"
+python -I agent_recipe.py --expect-version "$FUZZYROUTINES_VERSION" --output candidate.json > candidate.stdout.json
+```
+
+This checks the preserved basic scalar recipe against the candidate; it does
+not test every new feature. Follow the corresponding guides for codec,
+inference, optional batches and repository examples. Keep the wheel hash,
+source revision, JSON and any image together when reporting a result.
