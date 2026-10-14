@@ -49,6 +49,8 @@ nav:
       - Linguistic inputs and predictions: guides/linguistic-encoding.md
       - Scale audit: guides/scale-audit.md
       - Mamdani and Sugeno inference: guides/inference.md
+      - Neural inputs and outputs: guides/neural-integration.md
+      - Learning Sugeno rules: guides/differentiable-sugeno.md
       - Custom quality model: guides/custom.md
       - Membership gallery: guides/membership-families.md
       - Practical API recipes: guides/api-recipes.md
