@@ -6,11 +6,13 @@ name: Optional vectorized prototype parity
 on:
   pull_request:
     branches: [develop, master]
-  push:
-    branches: [develop, master]
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   array-parity:

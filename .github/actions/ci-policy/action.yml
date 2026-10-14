@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+name: Select reviewed validation scope
+description: Record exact revisions and fail closed on missing focused test selection.
+outputs:
+  full:
+    description: Full established gate is required.
+    value: ${{ steps.policy.outputs.full }}
+  documentation:
+    description: Documentation build is required.
+    value: ${{ steps.policy.outputs.documentation }}
+  package:
+    description: Clean package build/install is required.
+    value: ${{ steps.policy.outputs.package }}
+runs:
+  using: composite
+  steps:
+    - id: policy
+      shell: bash
+      run: python tools/ci_policy.py

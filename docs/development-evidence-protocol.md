@@ -336,7 +336,38 @@ Before asking for review:
 
 ## 7. Merge and completion
 
-Human review remains the default merge gate.
+Human review remains the default merge gate. For the 2.1 development cycle,
+the maintainer explicitly delegated implementation, testing, independent PR
+review and squash merges into `develop` on 2026-10-14. Review must examine the
+current revision and its acceptance evidence; an author cannot treat their
+own implementation summary as independent review. After successful review,
+the connected maintainer account records `Reviewed` for implementation or
+`Approved` for documentation/fix PRs. These comments do not replace any
+required GitHub review or branch protection.
+
+The final `develop` to `master` release PR remains for the maintainer's review.
+This delegation does not authorize its merge, a release tag or PyPI publication.
+
+Use separate worktrees and file ownership for independent tasks. Shared API
+exports, dependency metadata, navigation and release records are integrated
+centrally. Update code, focused tests, source/API documentation, affected
+translations and architectural decisions in the same implementation stream.
+Scientific explanations include reproducible plots derived from the example
+calculations when a figure makes the mathematics clearer.
+
+Routine development runs only affected feature/contract checks. Full gates run
+in PR CI on opening and after bug fixes, without a duplicate local full run.
+Ordinary PR updates declare their reviewed focused scope; missing or invalid
+scope must fail rather than silently omit validation. Record commands, source
+revision and outcomes in PR evidence. Fix review findings in the existing PR.
+
+Use the head commit trailer `CI-Full: true` after a bug fix. For an ordinary
+update, use `CI-Tests: tests/test_feature.py tests/test_contract.py`, listing
+the reviewed tests for the complete PR scope, not only its latest commit.
+The policy also adds mandatory baseline checks and changed test files.
+An opened/full run must finish successfully before a focused update replaces
+it; if another push cancels that run, retain `CI-Full: true` until a full run
+completes on the current revision. Review evidence identifies that revision.
 
 After merge:
 

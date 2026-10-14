@@ -5,14 +5,14 @@ name: Documentation quality gates
 
 on:
   pull_request:
-  push:
-    branches:
-      - develop
-      - master
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deterministic-documentation:
@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.14
         uses: actions/setup-python@v6
@@ -33,6 +35,10 @@ jobs:
             requirements.txt
             docs/requirements-api.txt
             docs/requirements-plots.txt
+
+      - name: Select full or reviewed focused validation
+        id: scope
+        uses: ./.github/actions/ci-policy
 
       - name: Install test dependencies
         run: python -m pip install --disable-pip-version-check -r requirements.txt
@@ -47,6 +53,7 @@ jobs:
             tests/test_guide_examples.py
 
       - name: Build strict reference from a clean installed wheel
+        if: steps.scope.outputs.documentation == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -58,6 +65,7 @@ jobs:
             > _build/api-reference/generated-files.txt
 
       - name: Enforce coverage, source links, rendered anchors and generated policy
+        if: steps.scope.outputs.documentation == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -72,6 +80,7 @@ jobs:
             --site-root _build/pages/site --deployment-path /FuzzyRoutines
 
       - name: Run documented examples against the clean installed wheel
+        if: steps.scope.outputs.documentation == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -87,6 +96,7 @@ jobs:
             --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples.json"
 
       - name: Verify reproducible figures with the installed scalar API
+        if: steps.scope.outputs.documentation == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -101,7 +111,7 @@ jobs:
             > "$GITHUB_WORKSPACE/_build/documentation-gates/figures.json"
 
       - name: Upload deterministic documentation evidence
-        if: always()
+        if: always() && steps.scope.outputs.documentation == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: documentation-deterministic-evidence
@@ -115,6 +125,7 @@ jobs:
           if-no-files-found: warn
 
   external-link-report:
+    if: github.event_name == 'workflow_dispatch' || github.event.action == 'opened'
     name: Non-blocking external-link health report
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -122,11 +133,17 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.14
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
+
+      - name: Select full or reviewed focused validation
+        id: scope
+        uses: ./.github/actions/ci-policy
 
       - name: Probe external documentation links
         continue-on-error: true

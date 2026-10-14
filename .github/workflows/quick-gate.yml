@@ -8,13 +8,13 @@ on:
     branches:
       - develop
       - master
-  push:
-    branches:
-      - develop
-      - master
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   quick-gate:
@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.14
         uses: actions/setup-python@v6
@@ -32,6 +34,10 @@ jobs:
           python-version: "3.14"
           cache: pip
           cache-dependency-path: requirements.txt
+
+      - name: Select full or reviewed focused validation
+        id: scope
+        uses: ./.github/actions/ci-policy
 
       - name: Show environment
         run: |
@@ -44,8 +50,8 @@ jobs:
       - name: Validate Apache-2.0 headers and metadata
         run: python -m tools.check_license_headers
 
-      - name: Run deterministic process-parallel test suite
-        run: python -m tools.test_runner --jobs auto --timeout 60
+      - name: Validate the CI selection and source contracts
+        run: python -m pytest -q tests/test_ci_policy.py tests/test_python_naming.py tests/test_python_source_layout.py
 
       - name: Run legacy import smoke
         run: |

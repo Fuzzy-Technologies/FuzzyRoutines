@@ -18,10 +18,13 @@ permissions:
 
 concurrency:
   group: trusted-pypi-release-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build-distributions:
+    outputs:
+      full: ${{ steps.scope.outputs.full }}
+      package: ${{ steps.scope.outputs.package }}
     name: Build release distributions
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -36,6 +39,11 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
+
+      - name: Select PR validation scope without changing release gates
+        if: github.event_name == 'pull_request'
+        id: scope
+        uses: ./.github/actions/ci-policy
 
       - name: Validate protected release tag and version
         if: github.event_name == 'push'
@@ -82,6 +90,7 @@ jobs:
         run: python -m tools.locale_documentation validate --require-approved
 
       - name: Build, reproduce, and check wheel and source distribution
+        if: github.event_name != 'pull_request' || steps.scope.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -97,6 +106,7 @@ jobs:
           cat dist/reproducibility.json
 
       - name: Upload immutable release candidates
+        if: github.event_name != 'pull_request' || steps.scope.outputs.package == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: trusted-pypi-distributions
@@ -126,12 +136,20 @@ jobs:
           cache-dependency-path: requirements.txt
 
       - name: Download exact release candidates
+        if: github.event_name != 'pull_request' || needs.build-distributions.outputs.package == 'true'
         uses: actions/download-artifact@v5
         with:
           name: trusted-pypi-distributions
           path: dist
 
+      - name: Check release security contracts on routine PR updates
+        if: github.event_name == 'pull_request' && needs.build-distributions.outputs.full != 'true'
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest -q tests/test_trusted_publishing_workflow.py tests/test_pypi_release_verification.py
+
       - name: Verify hashes and full source test suite
+        if: github.event_name != 'pull_request' || needs.build-distributions.outputs.full == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -141,10 +159,12 @@ jobs:
           python -m tools.test_runner --jobs auto --timeout 60
 
       - name: Clean-install and smoke-test both distributions
+        if: github.event_name != 'pull_request' || needs.build-distributions.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
 
+          (cd dist && sha256sum --check SHA256SUMS)
           wheelPath="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.whl' -print -quit)"
           sdistPath="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.tar.gz' -print -quit)"
           test -n "$wheelPath"
