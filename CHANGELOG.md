@@ -29,6 +29,11 @@ evaluation and modern neural examples as their implementations are accepted.
 
 #### Added
 
+- Typed scalar Mamdani and zero/first-order Sugeno rule inference with explicit
+  logical operators, rule weights, output policies and immutable traces.
+  English, Russian and Simplified Chinese worked examples include reproducible
+  stage plots, analytical reference values and explicit no-fire/error behavior.
+
 - A pinned public consumer migration fixture separates membership, label,
   centroid and normalized-output changes across historical and modern releases.
   Installed-candidate checks enforce the published 2.0 boundary while explicitly

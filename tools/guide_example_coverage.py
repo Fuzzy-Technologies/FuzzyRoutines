@@ -31,6 +31,7 @@ VERIFIER = runpy.run_path(str(PROJECT_ROOT / "tools/verify_installed_executables
 TYPE_CONTRACT_NAMES = frozenset({
     "fuzzyroutines.MembershipCallable", "fuzzyroutines.MembershipScalar",
     "fuzzyroutines.membership.MembershipCallable", "fuzzyroutines.membership.MembershipScalar",
+    "fuzzyroutines.inference.Antecedent",
 })
 
 
@@ -232,7 +233,7 @@ def RenderIndex(report):
         "Functions, constructors, methods and properties require actual execution; "
         "imports alone do not count. Result constructors also run when their producer "
         "returns them; see [result records](results.md) for explicit reconstruction. "
-        "The two typing contracts require a real annotation, and exception classes "
+        "Typing contracts require a real annotation, and exception classes "
         "require constructed instances. Private helpers and generated dataclass "
         "methods remain outside the authored public inventory.\n\n"
         "This index establishes example availability, not independent proof of every "

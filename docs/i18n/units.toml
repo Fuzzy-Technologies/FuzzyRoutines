@@ -9993,50 +9993,50 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
+sourceHash = "sha256:fb0d5a35a0b10dca2aacfe79612345a573aaab820fbc0082d2758e0cec6a8524"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
+sourceHash = "sha256:fb0d5a35a0b10dca2aacfe79612345a573aaab820fbc0082d2758e0cec6a8524"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
-reviewedTranslationHash = "sha256:c4a32bdf737cf1d131b9ec20bb480e6c73a5423a35e753cbd9715719de11fce1"
-reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
-reviewedAt = "2026-10-14T18:53:29Z"
-evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
+reviewedSourceHash = "sha256:fb0d5a35a0b10dca2aacfe79612345a573aaab820fbc0082d2758e0cec6a8524"
+reviewedTranslationHash = "sha256:2d67218c9fea6c9f633edbf947e052ac800725bf376650edf89c04a78f3815bd"
+reviewer = "ci21 (AI; delegated combined index editorial and mathematical review)"
+reviewedAt = "2026-10-14T19:16:28Z"
+evidence = "ci21 regenerated the combined scale/inference inventory after rebase onto 6f0f6cf: all 226 public symbols are exercised by 36 standalone Python blocks. Deterministic validation confirmed exact EN/RU/zh-CN symbol, href and Python fence-number parity with existing destinations; localized count and type-annotation prose reviewed. The index records example availability, not independent mathematical completeness."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
-reviewedTranslationHash = "sha256:c4a32bdf737cf1d131b9ec20bb480e6c73a5423a35e753cbd9715719de11fce1"
-reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
-reviewedAt = "2026-10-14T18:53:29Z"
-evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
+reviewedSourceHash = "sha256:fb0d5a35a0b10dca2aacfe79612345a573aaab820fbc0082d2758e0cec6a8524"
+reviewedTranslationHash = "sha256:2d67218c9fea6c9f633edbf947e052ac800725bf376650edf89c04a78f3815bd"
+reviewer = "ci21 (AI; delegated combined index editorial and mathematical review)"
+reviewedAt = "2026-10-14T19:16:28Z"
+evidence = "ci21 regenerated the combined scale/inference inventory after rebase onto 6f0f6cf: all 226 public symbols are exercised by 36 standalone Python blocks. Deterministic validation confirmed exact EN/RU/zh-CN symbol, href and Python fence-number parity with existing destinations; localized count and type-annotation prose reviewed. The index records example availability, not independent mathematical completeness."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
+sourceHash = "sha256:fb0d5a35a0b10dca2aacfe79612345a573aaab820fbc0082d2758e0cec6a8524"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
-reviewedTranslationHash = "sha256:dbe693a842b0ccf40a391377a4ba6c91636a6dc618309cd62bd5fc2622303a64"
-reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
-reviewedAt = "2026-10-14T18:53:29Z"
-evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
+reviewedSourceHash = "sha256:fb0d5a35a0b10dca2aacfe79612345a573aaab820fbc0082d2758e0cec6a8524"
+reviewedTranslationHash = "sha256:d2b1c06dfb97c2c989a39f14e4ef9f7de8d4261196aec0d2196ef5f5df069ae1"
+reviewer = "ci21 (AI; delegated combined index editorial and mathematical review)"
+reviewedAt = "2026-10-14T19:16:28Z"
+evidence = "ci21 regenerated the combined scale/inference inventory after rebase onto 6f0f6cf: all 226 public symbols are exercised by 36 standalone Python blocks. Deterministic validation confirmed exact EN/RU/zh-CN symbol, href and Python fence-number parity with existing destinations; localized count and type-annotation prose reviewed. The index records example availability, not independent mathematical completeness."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:1c9089b8d5d2325b76a2f9ada5feba0b7fed8d9f6f2e896e99bd63ad04d13c79"
-reviewedTranslationHash = "sha256:dbe693a842b0ccf40a391377a4ba6c91636a6dc618309cd62bd5fc2622303a64"
-reviewer = "AIna (AI; maintainer-delegated 2.1 deterministic index and editorial review)"
-reviewedAt = "2026-10-14T18:53:29Z"
-evidence = "Generated from executed source inventory:206 public symbols,34 standalone examples,no missing symbols. Localized table rows preserve every symbol,target URL and block number; only established translated table labels and grammatical counts differ."
+reviewedSourceHash = "sha256:fb0d5a35a0b10dca2aacfe79612345a573aaab820fbc0082d2758e0cec6a8524"
+reviewedTranslationHash = "sha256:d2b1c06dfb97c2c989a39f14e4ef9f7de8d4261196aec0d2196ef5f5df069ae1"
+reviewer = "ci21 (AI; delegated combined index editorial and mathematical review)"
+reviewedAt = "2026-10-14T19:16:28Z"
+evidence = "ci21 regenerated the combined scale/inference inventory after rebase onto 6f0f6cf: all 226 public symbols are exercised by 36 standalone Python blocks. Deterministic validation confirmed exact EN/RU/zh-CN symbol, href and Python fence-number parity with existing destinations; localized count and type-annotation prose reviewed. The index records example availability, not independent mathematical completeness."
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -12448,3 +12448,1129 @@ reviewedTranslationHash = "sha256:d50af9605667f17fb94d617626d7d151dc180420107fe3
 reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
 reviewedAt = "2026-10-14T18:46:38Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+[[units]]
+id = "module:fuzzyroutines.inference"
+kind = "module"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:8fdb9bb4a612d89651d0ab2b3e07bbb809a8a4da0faea6d327239bfd556b5f16"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.md"
+sourceHash = "sha256:8fdb9bb4a612d89651d0ab2b3e07bbb809a8a4da0faea6d327239bfd556b5f16"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:8fdb9bb4a612d89651d0ab2b3e07bbb809a8a4da0faea6d327239bfd556b5f16"
+reviewedTranslationHash = "sha256:ced98040815957db5bb72220d261ff383b7b9cb8e28bd6b403efdb7d2a6c8820"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:8fdb9bb4a612d89651d0ab2b3e07bbb809a8a4da0faea6d327239bfd556b5f16"
+reviewedTranslationHash = "sha256:ced98040815957db5bb72220d261ff383b7b9cb8e28bd6b403efdb7d2a6c8820"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.md"
+sourceHash = "sha256:8fdb9bb4a612d89651d0ab2b3e07bbb809a8a4da0faea6d327239bfd556b5f16"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:8fdb9bb4a612d89651d0ab2b3e07bbb809a8a4da0faea6d327239bfd556b5f16"
+reviewedTranslationHash = "sha256:5ff04dc23ba9b1eecefdcc3eb49777e58de6f2f5b9479dfc6beb15c22a4f6742"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:8fdb9bb4a612d89651d0ab2b3e07bbb809a8a4da0faea6d327239bfd556b5f16"
+reviewedTranslationHash = "sha256:5ff04dc23ba9b1eecefdcc3eb49777e58de6f2f5b9479dfc6beb15c22a4f6742"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "page:api.modern.inference"
+kind = "page"
+sourcePath = "docs/site/content/en/api/modern/inference.md"
+sourceHash = "sha256:97f16317df10f7f20155e9e4e1e7b63f739efed972e92ac6dd74a8e9b1ca3835"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/site/content/ru/api/modern/inference.md"
+sourceHash = "sha256:97f16317df10f7f20155e9e4e1e7b63f739efed972e92ac6dd74a8e9b1ca3835"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:97f16317df10f7f20155e9e4e1e7b63f739efed972e92ac6dd74a8e9b1ca3835"
+reviewedTranslationHash = "sha256:c7bd186a107498cdf4c636db1e132e4ccb2e245a053e7e241925d5647dc7c1a2"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:97f16317df10f7f20155e9e4e1e7b63f739efed972e92ac6dd74a8e9b1ca3835"
+reviewedTranslationHash = "sha256:c7bd186a107498cdf4c636db1e132e4ccb2e245a053e7e241925d5647dc7c1a2"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/site/content/zh-CN/api/modern/inference.md"
+sourceHash = "sha256:97f16317df10f7f20155e9e4e1e7b63f739efed972e92ac6dd74a8e9b1ca3835"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:97f16317df10f7f20155e9e4e1e7b63f739efed972e92ac6dd74a8e9b1ca3835"
+reviewedTranslationHash = "sha256:2aa67b20373cbb86680f323271bb64731b988a6f46466c2ef288e5ac6369e221"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:97f16317df10f7f20155e9e4e1e7b63f739efed972e92ac6dd74a8e9b1ca3835"
+reviewedTranslationHash = "sha256:2aa67b20373cbb86680f323271bb64731b988a6f46466c2ef288e5ac6369e221"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "page:guides.inference"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/inference.md"
+sourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/site/content/ru/guides/inference.md"
+sourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+reviewedTranslationHash = "sha256:ffc20679f96a8bdac455852d7713c164f3b971c45e6b828c8e11f3d155074a04"
+reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+reviewedTranslationHash = "sha256:ffc20679f96a8bdac455852d7713c164f3b971c45e6b828c8e11f3d155074a04"
+reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/site/content/zh-CN/guides/inference.md"
+sourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+reviewedTranslationHash = "sha256:3d082dd2320929c4bc9f4a8117ec4986f78af8a2050c3e495f277cb09497077b"
+reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+reviewedTranslationHash = "sha256:3d082dd2320929c4bc9f4a8117ec4986f78af8a2050c3e495f277cb09497077b"
+reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.AffineConsequent"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.AffineConsequent.md"
+sourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+reviewedTranslationHash = "sha256:238a56889486743b4257d5deedbe42f6a6abd33ae2a350f407d9a770e906ced7"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+reviewedTranslationHash = "sha256:238a56889486743b4257d5deedbe42f6a6abd33ae2a350f407d9a770e906ced7"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.AffineConsequent.md"
+sourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+reviewedTranslationHash = "sha256:cb91bdbc5b37f436984ec792bdc11c741e7eda2fd2e84b28341c7364e0777656"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+reviewedTranslationHash = "sha256:cb91bdbc5b37f436984ec792bdc11c741e7eda2fd2e84b28341c7364e0777656"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.AllOf"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.AllOf.md"
+sourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
+reviewedTranslationHash = "sha256:786262a1a5b5d9a43c2a2abc48a2bdf80bac906d3b5620e4a6f69493155fe989"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
+reviewedTranslationHash = "sha256:786262a1a5b5d9a43c2a2abc48a2bdf80bac906d3b5620e4a6f69493155fe989"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.AllOf.md"
+sourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
+reviewedTranslationHash = "sha256:7076024bce8e46c701b763cadf496a960a40dcd20fdbdb73e9f7ab1cbc767a2c"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
+reviewedTranslationHash = "sha256:7076024bce8e46c701b763cadf496a960a40dcd20fdbdb73e9f7ab1cbc767a2c"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.Antecedent"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.Antecedent.md"
+sourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
+reviewedTranslationHash = "sha256:bcc2fd8aa8cbd914df9123462804ffbcdd40e7670b3218edc2a92912325f4461"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
+reviewedTranslationHash = "sha256:bcc2fd8aa8cbd914df9123462804ffbcdd40e7670b3218edc2a92912325f4461"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.Antecedent.md"
+sourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
+reviewedTranslationHash = "sha256:42fcc92ae25f4009db2419e1dad5d6e9dcb606d9f3ea1b4060d1f88f49dd795d"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
+reviewedTranslationHash = "sha256:42fcc92ae25f4009db2419e1dad5d6e9dcb606d9f3ea1b4060d1f88f49dd795d"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.AnyOf"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.AnyOf.md"
+sourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
+reviewedTranslationHash = "sha256:2da3766fc2e1272bb4ab5d81cc7703b4fa1f18a46ac1d20951d9f37b695b383e"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
+reviewedTranslationHash = "sha256:2da3766fc2e1272bb4ab5d81cc7703b4fa1f18a46ac1d20951d9f37b695b383e"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.AnyOf.md"
+sourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
+reviewedTranslationHash = "sha256:22dffad6aaecea2b5dc935177d86cdea0c73ec8762ff6f1f6703f63822114de4"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
+reviewedTranslationHash = "sha256:22dffad6aaecea2b5dc935177d86cdea0c73ec8762ff6f1f6703f63822114de4"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.ConstantConsequent"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:a794df034839c39566da652c34978f2c5c452a500088085198a9fdd06d462b68"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.ConstantConsequent.md"
+sourceHash = "sha256:a794df034839c39566da652c34978f2c5c452a500088085198a9fdd06d462b68"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a794df034839c39566da652c34978f2c5c452a500088085198a9fdd06d462b68"
+reviewedTranslationHash = "sha256:5e886340e1072898ec760489a634190a47c18afa35dbb610b7cb0946a8d51488"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a794df034839c39566da652c34978f2c5c452a500088085198a9fdd06d462b68"
+reviewedTranslationHash = "sha256:5e886340e1072898ec760489a634190a47c18afa35dbb610b7cb0946a8d51488"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.ConstantConsequent.md"
+sourceHash = "sha256:a794df034839c39566da652c34978f2c5c452a500088085198a9fdd06d462b68"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a794df034839c39566da652c34978f2c5c452a500088085198a9fdd06d462b68"
+reviewedTranslationHash = "sha256:3f7cb2a42596a5ec666d690ceddf8df65000fb46881635722927bbc09b024eb6"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a794df034839c39566da652c34978f2c5c452a500088085198a9fdd06d462b68"
+reviewedTranslationHash = "sha256:3f7cb2a42596a5ec666d690ceddf8df65000fb46881635722927bbc09b024eb6"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.FuzzyVariable"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:2fcb808d28c825a6c0fe32c2befe327b172f63e4f8fb4c8e19dee08b88e30588"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.FuzzyVariable.md"
+sourceHash = "sha256:2fcb808d28c825a6c0fe32c2befe327b172f63e4f8fb4c8e19dee08b88e30588"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:2fcb808d28c825a6c0fe32c2befe327b172f63e4f8fb4c8e19dee08b88e30588"
+reviewedTranslationHash = "sha256:0999da27e53eb7f5850a96cdbc7456ed9b4409bb7b0f4d231184ed8af176bdd1"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:2fcb808d28c825a6c0fe32c2befe327b172f63e4f8fb4c8e19dee08b88e30588"
+reviewedTranslationHash = "sha256:0999da27e53eb7f5850a96cdbc7456ed9b4409bb7b0f4d231184ed8af176bdd1"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.FuzzyVariable.md"
+sourceHash = "sha256:2fcb808d28c825a6c0fe32c2befe327b172f63e4f8fb4c8e19dee08b88e30588"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:2fcb808d28c825a6c0fe32c2befe327b172f63e4f8fb4c8e19dee08b88e30588"
+reviewedTranslationHash = "sha256:820e800b76b5e153f58045bc5d301db37f64270e364102772e156e5c07e5b1f8"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:2fcb808d28c825a6c0fe32c2befe327b172f63e4f8fb4c8e19dee08b88e30588"
+reviewedTranslationHash = "sha256:820e800b76b5e153f58045bc5d301db37f64270e364102772e156e5c07e5b1f8"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.InferencePolicy"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.InferencePolicy.md"
+sourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
+reviewedTranslationHash = "sha256:20cd075b1171b00bbb904de3a2d5ae0152452ca2bc5615582b75f3f12a60d76b"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
+reviewedTranslationHash = "sha256:20cd075b1171b00bbb904de3a2d5ae0152452ca2bc5615582b75f3f12a60d76b"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.InferencePolicy.md"
+sourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
+reviewedTranslationHash = "sha256:c137a1042a4b38a172622a9f7736476fe492a09a55bef0452b4444f9cf4ced12"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
+reviewedTranslationHash = "sha256:c137a1042a4b38a172622a9f7736476fe492a09a55bef0452b4444f9cf4ced12"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.InputGrade"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:217296daaf57a068cc4ceedf645557fd54984d36a75aa89c8ce6e624f43a91d1"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.InputGrade.md"
+sourceHash = "sha256:217296daaf57a068cc4ceedf645557fd54984d36a75aa89c8ce6e624f43a91d1"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:217296daaf57a068cc4ceedf645557fd54984d36a75aa89c8ce6e624f43a91d1"
+reviewedTranslationHash = "sha256:bb89ca0e59a7d83ed86fcb71cd59597d92024862c17b5cb5cc509915fb93ec5f"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:217296daaf57a068cc4ceedf645557fd54984d36a75aa89c8ce6e624f43a91d1"
+reviewedTranslationHash = "sha256:bb89ca0e59a7d83ed86fcb71cd59597d92024862c17b5cb5cc509915fb93ec5f"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.InputGrade.md"
+sourceHash = "sha256:217296daaf57a068cc4ceedf645557fd54984d36a75aa89c8ce6e624f43a91d1"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:217296daaf57a068cc4ceedf645557fd54984d36a75aa89c8ce6e624f43a91d1"
+reviewedTranslationHash = "sha256:3d484b0681b8ec29a1d9c6785f55702c773e0da72e7bda69040b5b88725ba1b8"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:217296daaf57a068cc4ceedf645557fd54984d36a75aa89c8ce6e624f43a91d1"
+reviewedTranslationHash = "sha256:3d484b0681b8ec29a1d9c6785f55702c773e0da72e7bda69040b5b88725ba1b8"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.MamdaniModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.MamdaniModel.md"
+sourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
+reviewedTranslationHash = "sha256:66bd33cff74c8cb5b0577c87bb23e3faf6f8e19e87970dec4bc96e810ceea6e6"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
+reviewedTranslationHash = "sha256:66bd33cff74c8cb5b0577c87bb23e3faf6f8e19e87970dec4bc96e810ceea6e6"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.MamdaniModel.md"
+sourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
+reviewedTranslationHash = "sha256:17343be52f9bdbda3deb159a86e535b3a03a9ebc26fb7c0577b7eb92ba1ec635"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
+reviewedTranslationHash = "sha256:17343be52f9bdbda3deb159a86e535b3a03a9ebc26fb7c0577b7eb92ba1ec635"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.MamdaniModel.Evaluate"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.MamdaniModel.Evaluate.md"
+sourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+reviewedTranslationHash = "sha256:5b7f6a35891256eb9541404619206613ede3b4d710bf2c770b12945e1ab794dd"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+reviewedTranslationHash = "sha256:5b7f6a35891256eb9541404619206613ede3b4d710bf2c770b12945e1ab794dd"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.MamdaniModel.Evaluate.md"
+sourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+reviewedTranslationHash = "sha256:46ce1dd33f42d38bba1791b2490da29a3115a8ec93d923d453fa51a46afdea73"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+reviewedTranslationHash = "sha256:46ce1dd33f42d38bba1791b2490da29a3115a8ec93d923d453fa51a46afdea73"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.MamdaniResult"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.MamdaniResult.md"
+sourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
+reviewedTranslationHash = "sha256:de35b0ec0849f371a4939175cdb7647c45e2b814f66e7e0fb66d3f1db99eeded"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
+reviewedTranslationHash = "sha256:de35b0ec0849f371a4939175cdb7647c45e2b814f66e7e0fb66d3f1db99eeded"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.MamdaniResult.md"
+sourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
+reviewedTranslationHash = "sha256:e73e7e86c504fd430690c5cb22637fa5440c96810d94eff507257d82d48578cf"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
+reviewedTranslationHash = "sha256:e73e7e86c504fd430690c5cb22637fa5440c96810d94eff507257d82d48578cf"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.MamdaniRule"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.MamdaniRule.md"
+sourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
+reviewedTranslationHash = "sha256:71994e3420189b42c0c5ecfe83d4ea78ebf087b8664db46a9eb4d01a78069e19"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
+reviewedTranslationHash = "sha256:71994e3420189b42c0c5ecfe83d4ea78ebf087b8664db46a9eb4d01a78069e19"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.MamdaniRule.md"
+sourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
+reviewedTranslationHash = "sha256:86ecd70882f4569e9512a66213328ae6d1cf5d3d008ed63f84e34653b0a9b5a7"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
+reviewedTranslationHash = "sha256:86ecd70882f4569e9512a66213328ae6d1cf5d3d008ed63f84e34653b0a9b5a7"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.MamdaniRuleTrace"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.MamdaniRuleTrace.md"
+sourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
+reviewedTranslationHash = "sha256:392ffc8e2a0f44fa69567a539e167d43f730da6758cacbfa29cacd3aa4169452"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
+reviewedTranslationHash = "sha256:392ffc8e2a0f44fa69567a539e167d43f730da6758cacbfa29cacd3aa4169452"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.MamdaniRuleTrace.md"
+sourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
+reviewedTranslationHash = "sha256:1b68bc221a241639e9af05918884dd4e751fd17e8d4c4be221cc046ec2b8bedb"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
+reviewedTranslationHash = "sha256:1b68bc221a241639e9af05918884dd4e751fd17e8d4c4be221cc046ec2b8bedb"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.NotCondition"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:2bfc6eb6a6e2f90dd5b007cd8fcdea732f89645ec5dde1fdca0c88bba9d3f458"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.NotCondition.md"
+sourceHash = "sha256:2bfc6eb6a6e2f90dd5b007cd8fcdea732f89645ec5dde1fdca0c88bba9d3f458"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:2bfc6eb6a6e2f90dd5b007cd8fcdea732f89645ec5dde1fdca0c88bba9d3f458"
+reviewedTranslationHash = "sha256:83cdb0cc53b4ff122df4ab733bc167448073b7aaa3b3af1c3d9af75fc4b82205"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:2bfc6eb6a6e2f90dd5b007cd8fcdea732f89645ec5dde1fdca0c88bba9d3f458"
+reviewedTranslationHash = "sha256:83cdb0cc53b4ff122df4ab733bc167448073b7aaa3b3af1c3d9af75fc4b82205"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.NotCondition.md"
+sourceHash = "sha256:2bfc6eb6a6e2f90dd5b007cd8fcdea732f89645ec5dde1fdca0c88bba9d3f458"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:2bfc6eb6a6e2f90dd5b007cd8fcdea732f89645ec5dde1fdca0c88bba9d3f458"
+reviewedTranslationHash = "sha256:91b5237138a00ab4ccb95167a1c7b764d8c8238090b6b209f4d4503ad060f0c9"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:2bfc6eb6a6e2f90dd5b007cd8fcdea732f89645ec5dde1fdca0c88bba9d3f458"
+reviewedTranslationHash = "sha256:91b5237138a00ab4ccb95167a1c7b764d8c8238090b6b209f4d4503ad060f0c9"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.SugenoModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.SugenoModel.md"
+sourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
+reviewedTranslationHash = "sha256:a3e70cd42b1f0152255f1745bfde47100b2f291bb1d15bed0f7db8b1c7e25fbc"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
+reviewedTranslationHash = "sha256:a3e70cd42b1f0152255f1745bfde47100b2f291bb1d15bed0f7db8b1c7e25fbc"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.SugenoModel.md"
+sourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
+reviewedTranslationHash = "sha256:bf370dcbf136fa393db6de23fce48b1ad231510148db4d07c80dd81a9b44575d"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
+reviewedTranslationHash = "sha256:bf370dcbf136fa393db6de23fce48b1ad231510148db4d07c80dd81a9b44575d"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.SugenoModel.Evaluate"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.SugenoModel.Evaluate.md"
+sourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+reviewedTranslationHash = "sha256:8c0cb345c20c8415a292bdc95c497f777873701b9c305204477454505f5168e1"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+reviewedTranslationHash = "sha256:8c0cb345c20c8415a292bdc95c497f777873701b9c305204477454505f5168e1"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.SugenoModel.Evaluate.md"
+sourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+reviewedTranslationHash = "sha256:e76c297b55071d863be73598ab32c05a05a42d652f78bf8479acd83f77cd18d0"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+reviewedTranslationHash = "sha256:e76c297b55071d863be73598ab32c05a05a42d652f78bf8479acd83f77cd18d0"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.SugenoResult"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:ad876c4f055d90ecea3f19debbbffe4a932326588c150e57a5b07b9d1e7c725a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.SugenoResult.md"
+sourceHash = "sha256:ad876c4f055d90ecea3f19debbbffe4a932326588c150e57a5b07b9d1e7c725a"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ad876c4f055d90ecea3f19debbbffe4a932326588c150e57a5b07b9d1e7c725a"
+reviewedTranslationHash = "sha256:5a6fb23b5fd0a21a6ee1e1e01400ed8f179fac2f12d5abfc950174be8da546a2"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ad876c4f055d90ecea3f19debbbffe4a932326588c150e57a5b07b9d1e7c725a"
+reviewedTranslationHash = "sha256:5a6fb23b5fd0a21a6ee1e1e01400ed8f179fac2f12d5abfc950174be8da546a2"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.SugenoResult.md"
+sourceHash = "sha256:ad876c4f055d90ecea3f19debbbffe4a932326588c150e57a5b07b9d1e7c725a"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:ad876c4f055d90ecea3f19debbbffe4a932326588c150e57a5b07b9d1e7c725a"
+reviewedTranslationHash = "sha256:83c98247cb8bd13d6d9f481c028cb710b1f18d7da2e13ce165e614e68476b7cc"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:ad876c4f055d90ecea3f19debbbffe4a932326588c150e57a5b07b9d1e7c725a"
+reviewedTranslationHash = "sha256:83c98247cb8bd13d6d9f481c028cb710b1f18d7da2e13ce165e614e68476b7cc"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.SugenoRule"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.SugenoRule.md"
+sourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
+reviewedTranslationHash = "sha256:d2e8daa5aac4b2723a6c3938146ad48b791798c377ee721349271d8bdb91a836"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
+reviewedTranslationHash = "sha256:d2e8daa5aac4b2723a6c3938146ad48b791798c377ee721349271d8bdb91a836"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.SugenoRule.md"
+sourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
+reviewedTranslationHash = "sha256:0edd1b25dc5b1756200eb75337d9e39687abc85f90be34730759a848bb777d94"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
+reviewedTranslationHash = "sha256:0edd1b25dc5b1756200eb75337d9e39687abc85f90be34730759a848bb777d94"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.SugenoRuleTrace"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.SugenoRuleTrace.md"
+sourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
+reviewedTranslationHash = "sha256:aee3903b0c6bf946c51ec6956ac998da1764039005a8baa6c645f8f88c66af26"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
+reviewedTranslationHash = "sha256:aee3903b0c6bf946c51ec6956ac998da1764039005a8baa6c645f8f88c66af26"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.SugenoRuleTrace.md"
+sourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
+reviewedTranslationHash = "sha256:5373fbc1b56c688c5e82b5befc79dc21feb3d11407a39825560b1c8f9d0f4521"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
+reviewedTranslationHash = "sha256:5373fbc1b56c688c5e82b5befc79dc21feb3d11407a39825560b1c8f9d0f4521"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units]]
+id = "symbol:fuzzyroutines.inference.TermCondition"
+kind = "symbol"
+sourcePath = "fuzzyroutines/inference.py"
+sourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/i18n/symbols/ru/fuzzyroutines.inference.TermCondition.md"
+sourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
+reviewedTranslationHash = "sha256:1000946e1b182eb5d93f190c5ff05b20cc8ee4879e77a5f5cd0f8e60e7d31e59"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
+reviewedTranslationHash = "sha256:1000946e1b182eb5d93f190c5ff05b20cc8ee4879e77a5f5cd0f8e60e7d31e59"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.TermCondition.md"
+sourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
+reviewedTranslationHash = "sha256:23286413218b210c82919755ccb5a8f2d29cef741539ef3b57781986d794097b"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
+reviewedTranslationHash = "sha256:23286413218b210c82919755ccb5a8f2d29cef741539ef3b57781986d794097b"
+reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
+reviewedAt = "2026-10-14T19:11:41Z"
+evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."

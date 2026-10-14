@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 206 个已登记公共符号都链接到已执行的示例，共有 34 个独立 Python 代码块。根导出经过验证，确实是相应模块对象的别名。
+全部 226 个已登记公共符号都链接到已执行的示例，共有 36 个独立 Python 代码块。根导出经过验证，确实是相应模块对象的别名。
 
-函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。两个类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
+函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求实际使用的类型注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
 该索引确立示例的可用性，不独立证明每个数学分支。应阅读链接中的解释、限制和断言。CI 针对已安装软件包重新生成证据，并拒绝过期的规范索引内容。每个符号最多显示两个示例。
 
@@ -81,7 +81,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.IsNormal`                                                     | [api-recipes, 代码块 2](api-recipes.md)                                                                           |
 | `fuzzyroutines.LinguisticCodec`                                              | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
 | `fuzzyroutines.LinguisticScale`                                              | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
-| `fuzzyroutines.LinguisticTerm`                                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
+| `fuzzyroutines.LinguisticTerm`                                               | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.Logistic`                                                     | [membership-families, 代码块 1](membership-families.md)                                                           |
 | `fuzzyroutines.MembershipCallable`                                           | [membership, 代码块 1](../api/modern/membership.md); [custom, 代码块 1](custom.md)                                   |
 | `fuzzyroutines.MembershipFunction`                                           | [alarm, 代码块 1](alarm.md); [alpha-cuts, 代码块 1](alpha-cuts.md)                                                   |
@@ -143,6 +143,26 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, 代码块 1](alarm.md); [centroid, 代码块 1](centroid.md)                                                       |
+| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.AllOf`                                              | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.Antecedent`                                         | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.AnyOf`                                              | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
+| `fuzzyroutines.inference.InferencePolicy`                                    | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
+| `fuzzyroutines.inference.InputGrade`                                         | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
+| `fuzzyroutines.inference.MamdaniModel`                                       | [inference, 代码块 1](inference.md)                                                                               |
+| `fuzzyroutines.inference.MamdaniModel.Evaluate`                              | [inference, 代码块 1](inference.md)                                                                               |
+| `fuzzyroutines.inference.MamdaniResult`                                      | [inference, 代码块 1](inference.md)                                                                               |
+| `fuzzyroutines.inference.MamdaniRule`                                        | [inference, 代码块 1](inference.md)                                                                               |
+| `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, 代码块 1](inference.md)                                                                               |
+| `fuzzyroutines.inference.NotCondition`                                       | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoResult`                                       | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.TermCondition`                                      | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [results, 代码块 4](results.md)                             |
 | `fuzzyroutines.linguistic.FuzzificationResult.isMatch`                       | [results, 代码块 4](results.md); [risk, 代码块 1](risk.md)                                                           |
@@ -151,7 +171,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.linguistic.LinguisticScale.Diagnose`                          | [results, 代码块 5](results.md); [scale-audit, 代码块 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.LinguisticScale.Fuzzify`                           | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [results, 代码块 4](results.md)                             |
 | `fuzzyroutines.linguistic.LinguisticScale.GetTermByName`                     | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [results, 代码块 4](results.md)                             |
-| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
+| `fuzzyroutines.linguistic.LinguisticTerm`                                    | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint`                              | [results, 代码块 5](results.md); [scale-audit, 代码块 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.activeTerms`                  | [results, 代码块 5](results.md); [scale-audit, 代码块 1](scale-audit.md)                                             |
 | `fuzzyroutines.linguistic.ScaleDiagnosticPoint.isGap`                        | [results, 代码块 5](results.md); [scale-audit, 代码块 1](scale-audit.md)                                             |
