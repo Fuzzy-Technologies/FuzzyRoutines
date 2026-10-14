@@ -11778,18 +11778,18 @@ sourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97e
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
-reviewedTranslationHash = "sha256:238e68124e9fceb92e454e247bb471a9e375a3d3837eabcea9945f1b0c36948d"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
-evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+reviewedTranslationHash = "sha256:d706bd16c23ed987aa690caf7d176b25921283cf9645bf00e0dab739fe725066"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
-reviewedTranslationHash = "sha256:238e68124e9fceb92e454e247bb471a9e375a3d3837eabcea9945f1b0c36948d"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
-evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+reviewedTranslationHash = "sha256:d706bd16c23ed987aa690caf7d176b25921283cf9645bf00e0dab739fe725066"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
 
 [units.translations.zh-CN]
 state = "approved"
@@ -11799,18 +11799,18 @@ sourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97e
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
-reviewedTranslationHash = "sha256:18f9ab5e81a91e608cafa7aeec88624bc68cecc8725868d65904976f9896a45a"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
-evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+reviewedTranslationHash = "sha256:403f69371bd8b1b1d00f4baa305fec8b66d584f5144772c95dc006d8b881d744"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
-reviewedTranslationHash = "sha256:18f9ab5e81a91e608cafa7aeec88624bc68cecc8725868d65904976f9896a45a"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
-evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
+reviewedTranslationHash = "sha256:403f69371bd8b1b1d00f4baa305fec8b66d584f5144772c95dc006d8b881d744"
+reviewer = "AIna (AI; maintainer-delegated integration review)"
+reviewedAt = "2026-10-14T19:09:33Z"
+evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
 
 [[units]]
 id = "symbol:fuzzyroutines.CreateUniversalFuzzyScale"

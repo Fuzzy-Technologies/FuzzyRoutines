@@ -70,7 +70,7 @@ $$
 前者以给定隶属度为权重，对代表坐标进行平均；后者计算显式构造的模糊集的面积
 重心。即使隶属度均为 `(1, 1)`，当各语言项面积不同时，两种结果仍可能不同。
 
-[![两个不重叠三角形的中心为 1 和 4、面积为 1 和 2；等隶属度代表值平均为 2.5，而最大值并集的重心为 3。](../assets/figures/linguistic-encoding.svg)](../assets/figures/linguistic-encoding.svg)
+[![两个不重叠三角形的中心为 1 和 4、面积为 1 和 2；等隶属度代表值平均为 2.5，而最大值并集的重心为 3。](../../en/assets/figures/linguistic-encoding.svg)](../../en/assets/figures/linguistic-encoding.svg)
 
 ```python
 from math import isclose
