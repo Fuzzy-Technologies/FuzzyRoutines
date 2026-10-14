@@ -3,6 +3,11 @@
 
 schemaVersion = 1
 
+[[optionalExamples]]
+extra = "numpy"
+pages = ["guides/numpy-batches.md"]
+modules = ["fuzzyroutines.batches"]
+
 [[surfaces]]
 module = "fuzzyroutines"
 source = "fuzzyroutines/__init__.py"
@@ -11,6 +16,11 @@ mode = "exports"
 [[surfaces]]
 module = "fuzzyroutines.alphacuts"
 source = "fuzzyroutines/alphacuts.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.batches"
+source = "fuzzyroutines/batches.py"
 mode = "authored"
 
 [[surfaces]]

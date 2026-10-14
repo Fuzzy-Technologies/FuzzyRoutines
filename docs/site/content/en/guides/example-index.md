@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 226 inventoried public symbols are linked to executed examples (36 standalone Python blocks). Root exports are verified aliases of the corresponding module objects.
+All 229 inventoried public symbols are linked to executed examples (37 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
 
 Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. Typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
@@ -109,6 +109,9 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.alphacuts.SampleAlphaCut`                                     | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
 | `fuzzyroutines.alphacuts.SampledAlphaCut`                                    | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
 | `fuzzyroutines.alphacuts.SampledAlphaCut.isExact`                            | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
+| `fuzzyroutines.batches.EvaluateMembershipBatch`                              | [numpy-batches, block 1](numpy-batches.md)                                                                         |
+| `fuzzyroutines.batches.FuzzifyBatch`                                         | [numpy-batches, block 1](numpy-batches.md)                                                                         |
+| `fuzzyroutines.batches.ScaleBatchResult`                                     | [numpy-batches, block 1](numpy-batches.md)                                                                         |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |

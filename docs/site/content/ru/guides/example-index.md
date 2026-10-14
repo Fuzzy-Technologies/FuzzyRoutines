@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # Указатель примеров публичного API {#public-api-example-index}
 
-Все 226 учтённых публичных символов связаны с выполненными примерами (36 самостоятельных блоков Python). Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
+Все 229 учтённых публичных символов связаны с выполненными примерами (37 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
 
-Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют явной аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
+Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют настоящей аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
 
 Указатель подтверждает наличие примеров, но не является независимым доказательством каждой математической ветви. Читайте пояснения, ограничения и утверждения по ссылкам. CI заново получает доказательства на установленном пакете и отклоняет устаревшее содержимое канонического указателя. На символ показано не более двух примеров.
 
@@ -109,6 +109,9 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.alphacuts.SampleAlphaCut`                                     | [alpha-cuts, блок 1](alpha-cuts.md); [results, блок 3](results.md)                                               |
 | `fuzzyroutines.alphacuts.SampledAlphaCut`                                    | [alpha-cuts, блок 1](alpha-cuts.md); [results, блок 3](results.md)                                               |
 | `fuzzyroutines.alphacuts.SampledAlphaCut.isExact`                            | [alpha-cuts, блок 1](alpha-cuts.md); [results, блок 3](results.md)                                               |
+| `fuzzyroutines.batches.EvaluateMembershipBatch`                              | [numpy-batches, блок 1](numpy-batches.md)                                                                        |
+| `fuzzyroutines.batches.FuzzifyBatch`                                         | [numpy-batches, блок 1](numpy-batches.md)                                                                        |
+| `fuzzyroutines.batches.ScaleBatchResult`                                     | [numpy-batches, блок 1](numpy-batches.md)                                                                        |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, блок 1](errors.md)                                                                                      |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 5](api-recipes.md)                         |

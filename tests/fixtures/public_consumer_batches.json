@@ -1,0 +1,346 @@
+{
+  "attribution": "Public TKSBrokerAPI test inputs and expected results by Timur Gilmullin; extracted and normalized for FuzzyRoutines replay, original order retained.",
+  "license": "SPDX-License-Identifier: Apache-2.0",
+  "replays": [
+    {
+      "cases": [
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 0,
+          "prices": {
+            "current": 1,
+            "highest": 3,
+            "lowest": 2
+          }
+        },
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 0,
+          "prices": {
+            "current": 0,
+            "highest": 0,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 6.6667,
+          "prices": {
+            "current": 1,
+            "highest": 15,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 16.6667,
+          "prices": {
+            "current": 1,
+            "highest": 6,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Low",
+          "expected_percent_rounded_4": 20,
+          "prices": {
+            "current": 1,
+            "highest": 5,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Low",
+          "expected_percent_rounded_4": 33.3333,
+          "prices": {
+            "current": 2,
+            "highest": 6,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Med",
+          "expected_percent_rounded_4": 40,
+          "prices": {
+            "current": 2,
+            "highest": 5,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Med",
+          "expected_percent_rounded_4": 42.8571,
+          "prices": {
+            "current": 3,
+            "highest": 7,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Med",
+          "expected_percent_rounded_4": 50,
+          "prices": {
+            "current": 3,
+            "highest": 6,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Med",
+          "expected_percent_rounded_4": 60,
+          "prices": {
+            "current": 3,
+            "highest": 5,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "High",
+          "expected_percent_rounded_4": 66.6667,
+          "prices": {
+            "current": 4,
+            "highest": 6,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "High",
+          "expected_percent_rounded_4": 77.777,
+          "prices": {
+            "current": 7.7777,
+            "highest": 10,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "High",
+          "expected_percent_rounded_4": 80,
+          "prices": {
+            "current": 4,
+            "highest": 5,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "High",
+          "expected_percent_rounded_4": 80.002,
+          "prices": {
+            "current": 4.0001,
+            "highest": 5,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Max",
+          "expected_percent_rounded_4": 92.7273,
+          "prices": {
+            "current": 51,
+            "highest": 55,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Max",
+          "expected_percent_rounded_4": 100,
+          "prices": {
+            "current": 1,
+            "highest": 1,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Max",
+          "expected_percent_rounded_4": 100,
+          "prices": {
+            "current": 5,
+            "highest": 5,
+            "lowest": 0
+          }
+        }
+      ],
+      "coordinates": [
+        0.0,
+        0.0,
+        0.06666666666666667,
+        0.16666666666666666,
+        0.2,
+        0.3333333333333333,
+        0.4,
+        0.42857142857142855,
+        0.5,
+        0.6,
+        0.6666666666666666,
+        0.7777700000000001,
+        0.8,
+        0.80002,
+        0.9272727272727272,
+        1.0,
+        1.0
+      ],
+      "function": "RiskLong",
+      "name": "tksbrokerapi_risk_long",
+      "test": "test_RiskLongPositive",
+      "test_lines": [
+        908,
+        932
+      ]
+    },
+    {
+      "cases": [
+        {
+          "expected_label": "Max",
+          "expected_percent_rounded_4": 100,
+          "prices": {
+            "current": 1,
+            "highest": 3,
+            "lowest": 2
+          }
+        },
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 0,
+          "prices": {
+            "current": 4,
+            "highest": 3,
+            "lowest": 2
+          }
+        },
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 0,
+          "prices": {
+            "current": 0,
+            "highest": 0,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 0,
+          "prices": {
+            "current": 1,
+            "highest": 1,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Max",
+          "expected_percent_rounded_4": 100,
+          "prices": {
+            "current": 0,
+            "highest": 1,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Max",
+          "expected_percent_rounded_4": 88.8889,
+          "prices": {
+            "current": 1,
+            "highest": 9,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "High",
+          "expected_percent_rounded_4": 77.7778,
+          "prices": {
+            "current": 2,
+            "highest": 9,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "High",
+          "expected_percent_rounded_4": 66.6667,
+          "prices": {
+            "current": 3,
+            "highest": 9,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Med",
+          "expected_percent_rounded_4": 55.5556,
+          "prices": {
+            "current": 4,
+            "highest": 9,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Med",
+          "expected_percent_rounded_4": 44.4444,
+          "prices": {
+            "current": 5,
+            "highest": 9,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Low",
+          "expected_percent_rounded_4": 33.3333,
+          "prices": {
+            "current": 6,
+            "highest": 9,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Low",
+          "expected_percent_rounded_4": 22.2222,
+          "prices": {
+            "current": 7,
+            "highest": 9,
+            "lowest": 0
+          }
+        },
+        {
+          "expected_label": "Min",
+          "expected_percent_rounded_4": 11.1111,
+          "prices": {
+            "current": 8,
+            "highest": 9,
+            "lowest": 0
+          }
+        }
+      ],
+      "coordinates": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.8888888888888888,
+        0.7777777777777778,
+        0.6666666666666666,
+        0.5555555555555556,
+        0.4444444444444444,
+        0.3333333333333333,
+        0.2222222222222222,
+        0.1111111111111111
+      ],
+      "function": "RiskShort",
+      "name": "tksbrokerapi_risk_short",
+      "test": "test_RiskShortPositive",
+      "test_lines": [
+        950,
+        970
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Public positive-test replay groups, not observed production batches. Each original consumer invocation classifies one coordinate. Price normalization is performed before the timed fuzzy operation.",
+  "source": {
+    "license_git_blob": "2bb9ad240fa04c8cf706a4901c4807878e90c2dc",
+    "license_path": "LICENSE",
+    "repository": "Fuzzy-Technologies/TKSBrokerAPI",
+    "revision": "b963c54039f013d432220186ae35a22359c5a773",
+    "source_git_blob": "012caf30a61daf79117f95ee880c4d224213e103",
+    "source_path": "tksbrokerapi/TradeRoutines.py",
+    "source_sha256": "923981bb13302942c571c98133b50d97b2830b2fbdbb0873d64fc56cf951616e",
+    "test_git_blob": "0a09fc3e30fe7182320fb776979d4b704e81fe0f",
+    "test_path": "tests/test_TradeRoutines.py",
+    "test_sha256": "69efddf14b3d3d7031aed90c6e6db0700fbc6c2796648ed3bb8818b12e64ddea"
+  }
+}

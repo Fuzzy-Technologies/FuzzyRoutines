@@ -70,7 +70,7 @@ python -m tools.typecheck
 并禁用构建隔离。
 
 `mypy.ini` 使用严格检查、诊断代码和未生效的忽略指令报告，
-显式覆盖包根、每个现代模块（包括内部数值验证）、检查命令及全部静态调用方。
+显式覆盖包根、每个现代标量模块（包括内部数值验证）、检查命令及核心静态调用方。
 没有全局错误抑制。历史 `FuzzyRoutines` 门面、`_legacy` 适配器
 和可执行 `Examples` 模块具有范围严格限定的跳过导入边界。
 它们保留运行时兼容契约，但不属于现代类型支持承诺。
@@ -79,6 +79,22 @@ python -m tools.typecheck
 不可变结果及精确返回类型断言。预期无效的调用和赋值标注具体诊断代码。
 如果签名变为 `Any`，或以其他方式开始接受无效用法，
 原先必要的忽略指令会变为多余，从而使检查失败。
+
+## 可选 NumPy 范围 {#optional-numpy-scope}
+
+默认的源代码和已安装包检查均不需要 NumPy。显式选择的可选范围添加
+`fuzzyroutines/batches.py` 及 `tests/typing/optional/numpy` 中保持原样的调用方契约，
+使用相同的严格配置：
+
+```bash
+python -m pip install 'fuzzyroutines[numpy]' -r requirements-typing.txt
+python -m tools.typecheck --extra numpy
+/path/to/isolated/environment/bin/python /path/to/checkout/tools/typecheck.py --installed --extra numpy
+```
+
+可选源代码检查也包含核心范围。两种模式都会将已安装包的调用方样例复制到工作树之外。
+包 CI 在 CPython 3.13 和 3.14 上复用已构建的 wheel，分别使用 NumPy 2.3.5 和 extra
+允许的当前版本；日志记录实际解析出的版本。不支持的 extra 会被拒绝。
 
 ## 已安装 wheel 的边界 {#installed-wheel-boundary}
 
@@ -90,7 +106,7 @@ python -m tools.typecheck
 ```
 
 此模式验证 Python 解析到工作树之外的包，并确认安装包包含 `py.typed`。
-它将全部调用方样例复制到仓库之外的临时目录，在那里以隔离 Python 路径、
+它将全部已选调用方样例复制到仓库之外的临时目录，在那里以隔离 Python 路径、
 清空 `MYPYPATH` 与 `PYTHONPATH`、使用全新缓存的方式运行 mypy。
 因此调用方样例检查的是 wheel 注解，而不是偶然找到工作树中的源文件。
 临时探针在成功或失败后均删除；导入与检查器失败保留非零退出码。

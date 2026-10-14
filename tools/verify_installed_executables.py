@@ -5,12 +5,14 @@
 
 """Verify examples and benchmarks against the active installed distribution.
 
-The command runs every user-facing example and benchmark from a new explicit
+The command runs dependency-free examples and benchmarks from a new explicit
 artifact directory with `PYTHONPATH` removed. JSON stdout is persisted and
 parsed, benchmark `--output` files are compared with stdout, and the package
 origin must reside under the active interpreter prefix. The command creates
 only `--artifact-directory` and its contents, performs no network access,
 prints a JSON summary to stdout, and returns nonzero when any contract fails.
+Declared optional guide pages are omitted explicitly in the coverage report;
+the full documentation gate opts into their extras and validates the full index.
 """
 
 from __future__ import annotations
@@ -22,12 +24,22 @@ import os
 import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
 EXAMPLEROOT = PROJECTROOT / "examples" / "migration"
 COMPATIBILITYGUIDE = PROJECTROOT / "docs" / "COMPATIBILITY.md"
 CANONICALROOT = PROJECTROOT / "docs" / "site" / "content" / "en"
+
+
+def OptionalExampleScopes():
+    """Return declared optional pages and modules without importing a backend."""
+
+    manifestPath = PROJECTROOT / "docs/site/api-coverage.toml"
+    manifest = tomllib.loads(manifestPath.read_text(encoding="utf-8"))
+
+    return {scope["extra"]: scope for scope in manifest.get("optionalExamples", ())}
 
 
 def ParseArguments(arguments=None):
@@ -165,11 +177,25 @@ def RunCompatibilityGuideExamples(artifactDirectory, environment):
     return results
 
 
-def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT):
-    """Discover every canonical English Python fence in deterministic page order."""
+def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT, extras=()):
+    """Discover core fences and explicitly selected optional pages in page order."""
 
+    optionalScopes = OptionalExampleScopes()
+    unknownExtras = set(extras) - optionalScopes.keys()
+
+    if unknownExtras:
+        raise ValueError(f"Unknown guide extras: {sorted(unknownExtras)}")
+
+    omittedPages = {
+        page for extra, scope in optionalScopes.items() if extra not in extras
+        for page in scope["pages"]
+    }
     examples = {}
+
     for pagePath in sorted(contentRoot.rglob("*.md")):
+        if pagePath.relative_to(contentRoot).as_posix() in omittedPages:
+            continue
+
         relativePath = pagePath.relative_to(contentRoot).with_suffix("")
         pageName = "-".join(relativePath.parts)
         snippets = re.findall(r"```python\n(.*?)```", pagePath.read_text(encoding="utf-8"), flags=re.DOTALL)
@@ -181,7 +207,7 @@ def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT):
 
 
 def RunCanonicalGuideExamples(artifactDirectory, environment):
-    """Execute every English snippet and all nine scenarios against an installed artifact."""
+    """Execute core English snippets and all nine scenarios against an installed artifact."""
 
     results = {}
     for name, snippet in LoadCanonicalGuideExamples().items():
