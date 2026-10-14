@@ -127,3 +127,15 @@ def test_PagesWorkflowBuildsEveryReviewButDeploysOnlyMaster():
     assert "pages: write" in workflowText
     assert "id-token: write" in workflowText
     assert "python tools/compose_pages_site.py" in workflowText
+
+
+def test_PagesCompositionDistributesStandaloneAgentEntrypoints(tmpPath):
+    """Publish canonical instructions and recipe bytes without requiring a checkout."""
+
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
+    CreateApiFixture(apiRoot)
+    composePagesSite.ComposeSite(apiRoot, outputRoot)
+    assert (outputRoot / "llms.txt").read_bytes() == (PROJECTROOT / "docs/llms.txt").read_bytes()
+    assert (outputRoot / "recipes/agent_recipe.py").read_bytes() == (PROJECTROOT / "examples/agent_recipe.py").read_bytes()
+    assert (outputRoot / "recipes/requirements-plots.txt").read_bytes() == (PROJECTROOT / "docs/requirements-plots.txt").read_bytes()

@@ -67,6 +67,13 @@ links all 193 inventoried public symbols to executed examples.
 From a checkout with the package installed, `python -I examples/guide.py` runs
 every scenario without NumPy, Matplotlib, network access, or file creation.
 
+## Use an AI assistant
+
+Give your assistant the [agent quick start](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/)
+for an exact-version installation, a historical-scale calculation, an illustrative
+risk example and optional headless plots. It includes copyable English, Russian
+and Chinese requests and JSON evidence; no agent framework is required.
+
 ## Choose the API surface
 
 | Surface                    | Use it for                                                          | Start here                                                                                                                                                 |

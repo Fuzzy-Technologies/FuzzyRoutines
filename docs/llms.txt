@@ -1,0 +1,13 @@
+# FuzzyRoutines
+
+<!-- SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0 -->
+
+> Scalar fuzzy computing in Python. Published release: 2.0.0; supported CPython: 3.13 and 3.14. Pin the package and verify the installed version before execution. Development capabilities are not automatically released capabilities.
+
+- [Agent entrypoint and versioned capability map](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/): canonical installation, computation, plots and JSON evidence.
+- [Русский](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/agent-quickstart/): запрос помощнику и объяснение результатов.
+- [简体中文](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/agent-quickstart/): 智能体请求及结果解释。
+- [API reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/api/): supported imports and contracts.
+- [Historical Universal Fuzzy Scale](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/universal-fuzzy-scale/): original coefficients, weak coverage and selection semantics.
+- [Migration](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/migration/1.0.3-to-2.0.0/): compatibility and corrected numerical behavior.

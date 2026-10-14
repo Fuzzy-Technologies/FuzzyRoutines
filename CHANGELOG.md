@@ -27,6 +27,13 @@ Development preparation date; this version has not been published.
 The 2.1 cycle adds agent onboarding, explicit fuzzy inference, optional batch
 evaluation and modern neural examples as their implementations are accepted.
 
+#### Added
+
+- A version-pinned agent quick start in English, Russian and Simplified Chinese,
+  a standalone compute/plot recipe with independent mathematical checks, and
+  machine-readable inputs, policies, results and execution evidence. The recipe
+  also runs against the published 2.0.0 baseline without a repository checkout.
+
 #### Changed
 
 - Prepare isolated development and review against the published 2.0.0 baseline.

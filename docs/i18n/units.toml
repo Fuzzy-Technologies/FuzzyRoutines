@@ -637,32 +637,34 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:index"
 kind = "page"
 sourcePath = "docs/site/content/en/index.md"
-sourceHash = "sha256:ccc32a7ae0473b42e902d668f55f7268c18642568cefe7f9e50c812971c7dac4"
+sourceHash = "sha256:aab34ba24dcabc5af18b33b937250ccfac2f5b9cba5c756527fe50a58f6ad92c"
 reviewClass = "editorial"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/index.md"
-sourceHash = "sha256:ccc32a7ae0473b42e902d668f55f7268c18642568cefe7f9e50c812971c7dac4"
+sourceHash = "sha256:aab34ba24dcabc5af18b33b937250ccfac2f5b9cba5c756527fe50a58f6ad92c"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:ccc32a7ae0473b42e902d668f55f7268c18642568cefe7f9e50c812971c7dac4"
-reviewedTranslationHash = "sha256:9ca9e7e64e5674459e04fd041defcd6e11619f49c9e2112f8ad31f5a26593ec6"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:aab34ba24dcabc5af18b33b937250ccfac2f5b9cba5c756527fe50a58f6ad92c"
+reviewedTranslationHash = "sha256:61797536caac71d628c35db46c5237cf7889a6350ab9339d6282258f98a19a04"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
+reviewedAt = "2026-10-14T18:37:37Z"
+evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/index.md"
-sourceHash = "sha256:ccc32a7ae0473b42e902d668f55f7268c18642568cefe7f9e50c812971c7dac4"
+sourceHash = "sha256:aab34ba24dcabc5af18b33b937250ccfac2f5b9cba5c756527fe50a58f6ad92c"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:ccc32a7ae0473b42e902d668f55f7268c18642568cefe7f9e50c812971c7dac4"
-reviewedTranslationHash = "sha256:2ddbe29cef4ca314384187b1021464faf26c6b3068d94fe7a09d6cd675ff48c5"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:aab34ba24dcabc5af18b33b937250ccfac2f5b9cba5c756527fe50a58f6ad92c"
+reviewedTranslationHash = "sha256:5158f18df3ef9ddf36ad9b68884896f95e0b22edc7e4ca6ce47a7bf7d65aae2f"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
+reviewedAt = "2026-10-14T18:37:37Z"
+evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
 
 [[units]]
 id = "symbol:fuzzyroutines.AlphaCut"
@@ -11598,3 +11600,51 @@ reviewedSourceHash = "sha256:3e8d706a808f95a2faa1a98e83cf40e2d6666ba6466522204a1
 reviewedTranslationHash = "sha256:888d672b0d829f408a93e9e08649b13e152dca4b1104a765b08d506bed7d88ca"
 reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
 reviewedAt = "2026-10-10T18:09:44Z"
+[[units]]
+id = "page:agent-quickstart"
+kind = "page"
+sourcePath = "docs/site/content/en/agent-quickstart.md"
+sourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "approved"
+path = "docs/site/content/ru/agent-quickstart.md"
+sourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+
+[[units.translations.ru.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+reviewedTranslationHash = "sha256:f80542afa60328d39beb94a38d4511099b79a55cab6a5e26363a0c20892e0c90"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
+reviewedAt = "2026-10-14T18:37:37Z"
+evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+
+[[units.translations.ru.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+reviewedTranslationHash = "sha256:f80542afa60328d39beb94a38d4511099b79a55cab6a5e26363a0c20892e0c90"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
+reviewedAt = "2026-10-14T18:37:37Z"
+evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+
+[units.translations.zh-CN]
+state = "approved"
+path = "docs/site/content/zh-CN/agent-quickstart.md"
+sourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+
+[[units.translations.zh-CN.reviews]]
+role = "editorial"
+reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+reviewedTranslationHash = "sha256:688183f9e55462c7e480a5e713dfac4a6b4f5f5f980a33cdb0e4fe67ddcdddb0"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
+reviewedAt = "2026-10-14T18:37:37Z"
+evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."
+
+[[units.translations.zh-CN.reviews]]
+role = "mathematical"
+reviewedSourceHash = "sha256:60a549a6b07c42e0edbb27c72ffd59767f569e6a621228690a4dddbcc0340b4a"
+reviewedTranslationHash = "sha256:688183f9e55462c7e480a5e713dfac4a6b4f5f5f980a33cdb0e4fe67ddcdddb0"
+reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by ci21)"
+reviewedAt = "2026-10-14T18:37:37Z"
+evidence = "Independent source and EN/RU/zh-CN review of 8cf0e6f5fef5b63076528d984f55f97c55d8ea13 and ad9c822800f81a5d441be915aedda2f6d12106fa; protected contracts agree; 24 focused checks and three isolated installed-2.0 recipes passed, including independently verified mathematical output and reproducible SVG."

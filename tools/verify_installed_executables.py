@@ -16,6 +16,7 @@ prints a JSON summary to stdout, and returns nonzero when any contract fails.
 from __future__ import annotations
 
 import argparse
+import importlib.metadata
 import json
 import os
 import re
@@ -214,6 +215,48 @@ def RunCanonicalGuideExamples(artifactDirectory, environment):
     return results
 
 
+def RunAgentRecipes(artifactDirectory, environment):
+    """Verify documented standalone recipes against the actual installed candidate.
+
+    The exact installed version is passed explicitly, so this gate can test a
+    development wheel without changing the public released-version instructions.
+    Every subprocess uses isolated imports and persists parseable JSON evidence.
+    """
+
+    installedVersion = importlib.metadata.version("fuzzyroutines")
+    results = {}
+    scenarios = (
+        ("agent-universal-scale", "universal-fuzzy-scale", "0.2", ["Low"]),
+        ("agent-risk-high", "risk", "75", ["High"]),
+        ("agent-risk-abstention", "risk", "17", []),
+    )
+
+    for name, scenario, value, expectedTerms in scenarios:
+        outputPath = artifactDirectory / f"{name}.json"
+        report = RunCommand(
+            name,
+            [sys.executable, "-I", str(PROJECTROOT / "examples/agent_recipe.py"),
+             "--expect-version", installedVersion, "--scenario", scenario,
+             "--value", value, "--output", str(outputPath)],
+            artifactDirectory,
+            environment,
+        )
+
+        if report != json.loads(outputPath.read_text(encoding="utf-8")):
+            raise RuntimeError(f"{name} stdout differs from the requested JSON artifact")
+
+        if report["environment"]["fuzzyroutines"] != installedVersion:
+            raise RuntimeError(f"{name} did not execute the installed candidate")
+
+        if report["result"]["selectedTerms"] != expectedTerms or not report["checks"]["passed"]:
+            raise RuntimeError(f"{name} failed its expected numerical outcome")
+
+        results[name] = {"version": installedVersion, "selectedTerms": expectedTerms,
+                         "maximumAbsoluteError": report["checks"]["maximumAbsoluteError"]}
+
+    return results
+
+
 def Main(arguments=None):
     """Execute clean-install evidence and return zero after a complete pass."""
 
@@ -225,6 +268,7 @@ def Main(arguments=None):
     packagePath = VerifyPackageOrigin(artifactDirectory, environment)
 
     results = {
+        "agent-recipes": RunAgentRecipes(artifactDirectory, environment),
         "canonical-guide-examples": RunCanonicalGuideExamples(artifactDirectory, environment),
         "compatibility-guide-examples": RunCompatibilityGuideExamples(
             artifactDirectory,
