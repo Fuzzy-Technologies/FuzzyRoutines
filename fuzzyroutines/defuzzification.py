@@ -449,11 +449,17 @@ def _AdaptiveMoments(
     panels: dict[int, _SimpsonPanel] = {}
     pending: list[tuple[float, int]] = []
     serial = 0
+    finitePanels = True
 
     def Add(panel: _SimpsonPanel) -> None:
         """Queue refinable panels by their absolute contribution to global error."""
 
-        nonlocal serial
+        nonlocal serial, finitePanels
+        finitePanels &= all(math.isfinite(value) for value in (*panel.result, *panel.error))
+
+        if not finitePanels:
+            return
+
         serial += 1
         panels[serial] = panel
 
@@ -465,47 +471,72 @@ def _AdaptiveMoments(
         values = (Evaluate(lower), Evaluate(lower / 2 + upper / 2), Evaluate(upper))
         Add(Measure(lower, upper, values, _SimpsonEstimate(lower, upper, *values), 0))
 
+    def Totals() -> tuple[tuple[float, ...], tuple[float, ...]]:
+        """Recompute global evidence before acceptance, avoiding per-split scans."""
+
+        return (
+            tuple(_SumMoments(tuple(panel.result[index] for panel in panels.values())) for index in (0, 1)),
+            tuple(_SumMoments(tuple(panel.error[index] for panel in panels.values())) for index in (0, 1)),
+        )
+
+    absoluteTarget = float(policy.absoluteTolerance) / 4
+    relativeTarget = float(policy.relativeTolerance) / 4
+
+    def Satisfied(result: tuple[float, ...], error: tuple[float, ...]) -> bool:
+        """Reserve margin for the ratio of two independently estimated moments."""
+
+        return (
+            error[0] <= absoluteTarget + relativeTarget * abs(result[0])
+            and error[1] <= absoluteTarget * coordinateScale + relativeTarget * abs(result[1])
+        )
+
+    result, error = Totals()
+
     while True:
-        if any(not math.isfinite(value) for panel in panels.values() for value in (*panel.result, *panel.error)):
+        if not finitePanels or not all(math.isfinite(value) for value in (*result, *error)):
             return math.inf, math.inf
 
-        try:
-            result = tuple(_SumMoments(tuple(panel.result[index] for panel in panels.values())) for index in (0, 1))
-            error = tuple(_SumMoments(tuple(panel.error[index] for panel in panels.values())) for index in (0, 1))
+        if Satisfied(result, error) or not pending:
+            # Cached replacement sums guide refinement; only a full compensated
+            # sum of the active partition can certify the estimated budget.
+            result, error = Totals()
 
-        except OverflowError:
-            return math.inf, math.inf
+            if Satisfied(result, error):
+                return result[0], result[1]
 
-        if not all(math.isfinite(value) for value in (*result, *error)):
-            return math.inf, math.inf
-
-        if (
-            # Reserve margin for the ratio of the two independently estimated moments.
-            error[0] <= (float(policy.absoluteTolerance) + float(policy.relativeTolerance) * abs(result[0])) / 4
-            and error[1] <= (float(policy.absoluteTolerance) * coordinateScale + float(policy.relativeTolerance) * abs(result[1])) / 4
-        ):
-            return result[0], result[1]
-
-        if not pending:
-            raise CentroidConvergenceError(
-                "centroid integration did not converge within maximumDepth="
-                f"{policy.maximumDepth}"
-            )
+            if not pending:
+                raise CentroidConvergenceError(
+                    "centroid integration did not converge within maximumDepth="
+                    f"{policy.maximumDepth}"
+                )
 
         _, identifier = heappop(pending)
         panel = panels.pop(identifier)
         midpoint = panel.left / 2 + panel.right / 2
-        Add(Measure(panel.left, midpoint, (panel.values[0], panel.samples[0], panel.values[1]), panel.estimates[0], panel.depth + 1))
-        Add(Measure(midpoint, panel.right, (panel.values[1], panel.samples[1], panel.values[2]), panel.estimates[1], panel.depth + 1))
+        children = (
+            Measure(panel.left, midpoint, (panel.values[0], panel.samples[0], panel.values[1]), panel.estimates[0], panel.depth + 1),
+            Measure(midpoint, panel.right, (panel.values[1], panel.samples[1], panel.values[2]), panel.estimates[1], panel.depth + 1),
+        )
+
+        for child in children:
+            Add(child)
+
+        result = tuple(_SumMoments((result[index], -panel.result[index], children[0].result[index], children[1].result[index])) for index in (0, 1))
+        error = tuple(_SumMoments((error[index], -panel.error[index], children[0].error[index], children[1].error[index])) for index in (0, 1))
+
 
 
 def _SumMoments(values: tuple[float, ...]) -> float:
     """Use compensated binary64 sums without coercing wholly rational panels."""
 
-    if all(isinstance(value, Fraction) for value in values):
+    if values and isinstance(values[0], Fraction) and all(isinstance(value, Fraction) for value in values):
         return cast(float, sum(values, Fraction(0)))
 
-    return math.fsum(values)
+    try:
+        return math.fsum(values)
+
+    except OverflowError:
+        return math.inf
 
 
 def Centroid(

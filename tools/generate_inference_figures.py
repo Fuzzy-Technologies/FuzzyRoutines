@@ -128,7 +128,7 @@ def BuildFigures() -> dict:
     coordinates = sorted({index / 500 for index in range(501)} | {0.16, 0.18, 0.20, 0.60, 0.75, 0.90})
     figure, axis = plt.subplots(figsize=(11.8, 5.5))
     figure.subplots_adjust(left=0.08, right=0.97, top=0.76, bottom=0.24)
-    figure.suptitle("Mamdani  ·  every fired consequent contributes", fontsize=19, fontweight="bold", x=0.08, ha="left", y=0.96)
+    figure.suptitle("Mamdani  ·  both disjoint consequents contribute", fontsize=19, fontweight="bold", x=0.08, ha="left", y=0.96)
     figure.text(0.08, 0.86, "Two disjoint triangles, both fired at strength 1; aggregate = pointwise maximum", fontsize=11, color="#c6cede")
 
     for trace, color, label in zip(support.rules, COLORS, ("Small: area 0.02, center 0.18", "Large: area 0.15, center 0.75"), strict=False):

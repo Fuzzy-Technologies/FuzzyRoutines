@@ -46,6 +46,39 @@ def One(coordinate):
     return 1.0
 
 
+def test_AdaptiveRefinementRetainsRationalMoments():
+    """Keep exact callback arithmetic through nontrivial panel replacements."""
+
+    source = ScalarFuzzySet(ContinuousUniverse(), lambda coordinate: coordinate**6)
+    result = Centroid(source, IntegrationDomain(Fraction(0), Fraction(1)))
+
+    assert isinstance(result, Fraction)
+    assert float(result) == pytest.approx(7 / 8, abs=1e-11, rel=0)
+
+
+def test_RefinementPropagatesCallbackOverflowUnchanged():
+    """An engine accumulation guard must not swallow a later callback failure."""
+
+    calls = 0
+    failure = OverflowError("application-owned overflow")
+
+    def Evaluate(coordinate):
+        """Fail after initial sampling has already requested refinement."""
+
+        nonlocal calls
+        calls += 1
+
+        if calls > 5:
+            raise failure
+
+        return coordinate**6
+
+    with pytest.raises(OverflowError) as captured:
+        Centroid(ScalarFuzzySet(ContinuousUniverse(), Evaluate), IntegrationDomain(0, 1))
+
+    assert captured.value is failure
+
+
 def EnvelopeCentroid(shapes, heights, bounds):
     """Integrate an independently constructed exact clipped-triangle envelope."""
 

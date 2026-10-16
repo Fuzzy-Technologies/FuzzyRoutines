@@ -169,7 +169,7 @@ assert len(result.inputGrades) == 4
 print(round(result.value, 2))  # 0.37
 ```
 
-## Every fired consequent contributes
+## Both disjoint consequents contribute
 
 ![Two disjoint consequents and their common centroid](../assets/figures/inference-support.svg)
 
@@ -180,6 +180,10 @@ Using only the large triangle would incorrectly give `0.75`.
 Mamdani compositions retain trusted built-in shape boundaries and linear
 clipping points as initial quadrature knots. They remain numerical results;
 arbitrary callbacks do not acquire an analytical certificate.
+
+Under maximum aggregation, one consequent can be completely covered by another;
+only the upper envelope determines the centroid. Both disjoint supports in this
+example remain part of that envelope.
 
 ## Contracts that matter in an application
 
@@ -204,6 +208,9 @@ is rounded only after multiplying the exact ratio by the consequent. Ordinary
 traces remain floating-point values. Polynomial centroid moments with unsafe
 floating-point intermediates use bounded rational recomputation before taking
 the ratio, so a representable center is not lost to moment underflow/overflow.
+The adaptive path raises `NumericalError` if a nonzero sampled product or
+same-sign moment estimate is rounded to zero; it does not acquire that
+analytical fallback.
 
 These fixed rule models do not train parameters or preserve automatic
 differentiation graphs. A trained neuro-fuzzy system is a separate model.

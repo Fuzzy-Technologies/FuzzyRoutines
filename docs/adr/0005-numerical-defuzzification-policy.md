@@ -112,3 +112,9 @@ A quarter of each moment target reserves margin for the final ratio. If a
 nonzero adaptive sample or same-sign area/moment estimate is rounded to zero,
 raise `NumericalError`; generic compositions do not acquire the bounded
 polynomial rational fallback merely by retaining geometry.
+
+The adaptive queue updates compensated moment/error totals when a panel is
+replaced. Acceptance (or depth exhaustion) always recomputes the complete
+active partition before checking the global targets. This removes quadratic
+per-refinement rescans without treating accumulated rounding as acceptance
+evidence. Overflow guards apply to engine sums, not callback exceptions.

@@ -2347,7 +2347,7 @@ L 283.104 143.212303
    </g>
   </g>
   <g id="text_19">
-   <text style="font-weight: 700; font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="67.968" y="30.277031" transform="rotate(-0 67.968 30.277031)">Mamdani  ·  every fired consequent contributes</text>
+   <text style="font-weight: 700; font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #edf0f8" x="67.968" y="30.277031" transform="rotate(-0 67.968 30.277031)">Mamdani  ·  both disjoint consequents contribute</text>
   </g>
   <g id="text_20">
    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #c6cede" x="67.968" y="55.44" transform="rotate(-0 67.968 55.44)">Two disjoint triangles, both fired at strength 1; aggregate = pointwise maximum</text>

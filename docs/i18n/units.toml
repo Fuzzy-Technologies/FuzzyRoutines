@@ -12559,49 +12559,49 @@ evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN
 id = "page:guides.inference"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/inference.md"
-sourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
+sourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/guides/inference.md"
-sourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
+sourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
-reviewedTranslationHash = "sha256:c16fd7a4db62ca101ada3f610f92c968b0f59235acadcf288e92bd458b58d6b0"
+reviewedSourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
+reviewedTranslationHash = "sha256:c45e0e2709537a666001a94063fd7975a011a4e318d8c02ef3dcad1c8283c9a3"
 reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:20:41Z"
+reviewedAt = "2026-10-16T12:44:21Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
-reviewedTranslationHash = "sha256:c16fd7a4db62ca101ada3f610f92c968b0f59235acadcf288e92bd458b58d6b0"
+reviewedSourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
+reviewedTranslationHash = "sha256:c45e0e2709537a666001a94063fd7975a011a4e318d8c02ef3dcad1c8283c9a3"
 reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:20:41Z"
+reviewedAt = "2026-10-16T12:44:21Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/guides/inference.md"
-sourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
+sourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
-reviewedTranslationHash = "sha256:05e5f11830f87054488077c4c321dc1405d091da23952a3ab7c05211ddd69890"
+reviewedSourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
+reviewedTranslationHash = "sha256:2fd3e75b1db1b370f7b2c69e94716f930778aa2c276b28b61d4cf0892246780c"
 reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:20:41Z"
+reviewedAt = "2026-10-16T12:44:21Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
-reviewedTranslationHash = "sha256:05e5f11830f87054488077c4c321dc1405d091da23952a3ab7c05211ddd69890"
+reviewedSourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
+reviewedTranslationHash = "sha256:2fd3e75b1db1b370f7b2c69e94716f930778aa2c276b28b61d4cf0892246780c"
 reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:20:41Z"
+reviewedAt = "2026-10-16T12:44:21Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [[units]]

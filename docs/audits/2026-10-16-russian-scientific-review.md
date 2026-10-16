@@ -104,3 +104,10 @@ layout, markup, API-documentation and documentation-gate tests. The new support
 figure was generated and its Russian reference is now present. Additional
 canonical EN/zh-CN explanations preserve the same inline mathematical symbols
 as the Russian exposition; existing executable fences/display formulas remain.
+
+Final independent AI scientific follow-through checked the numerical limits and
+support-figure area balance against implementation. It identified and corrected
+two overstatements: rational normalization also covers representable subnormal
+weights, and a max-aggregated active consequent may be dominated by another.
+The disjoint-support figure now explicitly limits its title to that example.
+No human line-by-line review or full independent test run is claimed.
