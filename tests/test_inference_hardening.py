@@ -135,6 +135,16 @@ def test_LocalizedTriangleNeedsNoAdditionalDepth():
     assert actual == pytest.approx(0.15, rel=0, abs=1e-15), "Trusted knots must expose positive area before adaptive refinement"
 
 
+@pytest.mark.parametrize(("grade", "bounds"), ((1.0, (1e-200, 3e-200)), (1e-200, (1e-200, 3e-200)), (1.0, (0.0, 5e-324))))
+def test_AdaptiveUnderflowCannotReturnAnErasedCentroid(grade, bounds):
+    """Reject lost constant-area moments instead of returning a false zero."""
+
+    source = ScalarFuzzySet(ContinuousUniverse(), lambda coordinate: grade)
+
+    with pytest.raises(NumericalError, match="underflow"):
+        Centroid(source, IntegrationDomain(*bounds))
+
+
 @pytest.mark.parametrize(("membership", "bounds", "expected"), (
     (Triangle(1e-200, 2e-200, 3e-200), (0, 4e-200), 2e-200),
     (Triangle(1e-160, 2e-160, 3e-160), (0, 4e-160), 2e-160),

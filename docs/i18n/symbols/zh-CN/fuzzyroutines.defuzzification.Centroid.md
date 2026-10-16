@@ -19,6 +19,7 @@ Raises:
     InvalidParameterTypeError: 集合、论域、积分域或策略类型错误。
     InvalidDomainError: 积分域超出论域。
     UndefinedResultError: 隶属面积为零，或计算得到的矩或质心不是有限值。
+    NumericalError: 自适应求积中的非零面积或一阶矩估计，或非零一阶矩采样乘积因算术范围限制下溢为零。
     CentroidConvergenceError: 自适应求积超过 `maximumDepth`。
 
 Notes:

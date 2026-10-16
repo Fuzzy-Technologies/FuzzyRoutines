@@ -368,11 +368,24 @@ def _SimpsonEstimate(
 ) -> tuple[float, float]:
     """Return Simpson estimates for area and first moment on one interval."""
 
+    if left == right:
+        return 0.0, 0.0
+
     scale = (right - left) / 6
-    return (
+    result = (
         scale * (leftValues[0] + 4 * midpointValues[0] + rightValues[0]),
         scale * (leftValues[1] + 4 * midpointValues[1] + rightValues[1]),
     )
+
+    if result[0] == 0 and max(leftValues[0], midpointValues[0], rightValues[0]) > 0:
+        raise NumericalError("positive centroid area estimate underflowed to zero")
+
+    moments = (leftValues[1], midpointValues[1], rightValues[1])
+
+    if result[1] == 0 and (min(moments) >= 0 and max(moments) > 0 or max(moments) <= 0 and min(moments) < 0):
+        raise NumericalError("nonzero centroid first-moment estimate underflowed to zero")
+
+    return result
 
 
 @dataclass(frozen=True, slots=True)
@@ -401,8 +414,12 @@ def _AdaptiveMoments(
         """Evaluate both moments without coercing or masking callback failures."""
 
         grade = cast(float, fuzzySet.Membership(coordinate))
+        moment = coordinate * grade
 
-        return grade, coordinate * grade
+        if coordinate != 0 and grade > 0 and moment == 0:
+            raise NumericalError("nonzero centroid first-moment sample underflowed to zero")
+
+        return grade, moment
 
     def Measure(
         left: float,
@@ -425,7 +442,8 @@ def _AdaptiveMoments(
 
         return _SimpsonPanel(left, right, values, samples, estimates, (result[0], result[1]), (error[0], error[1]), depth)
 
-    left, right = float(domain.left), float(domain.right)
+    # Casts retain exact rational coordinates and callback arithmetic at runtime.
+    left, right = cast(float, domain.left), cast(float, domain.right)
     coordinateScale = max(abs(left), abs(right), 1.0)
     points = (left, *(point for point in _IntegrationPoints(fuzzySet) if left < point < right), right)
     panels: dict[int, _SimpsonPanel] = {}
@@ -439,7 +457,7 @@ def _AdaptiveMoments(
         serial += 1
         panels[serial] = panel
 
-        if panel.depth < policy.maximumDepth:
+        if panel.depth < policy.maximumDepth and any(panel.error):
             priority = max(panel.error[0], panel.error[1] / coordinateScale)
             heappush(pending, (-priority, serial))
 
@@ -452,8 +470,8 @@ def _AdaptiveMoments(
             return math.inf, math.inf
 
         try:
-            result = tuple(math.fsum(panel.result[index] for panel in panels.values()) for index in (0, 1))
-            error = tuple(math.fsum(panel.error[index] for panel in panels.values()) for index in (0, 1))
+            result = tuple(_SumMoments(tuple(panel.result[index] for panel in panels.values())) for index in (0, 1))
+            error = tuple(_SumMoments(tuple(panel.error[index] for panel in panels.values())) for index in (0, 1))
 
         except OverflowError:
             return math.inf, math.inf
@@ -462,8 +480,9 @@ def _AdaptiveMoments(
             return math.inf, math.inf
 
         if (
-            error[0] <= float(policy.absoluteTolerance) + float(policy.relativeTolerance) * abs(result[0])
-            and error[1] <= float(policy.absoluteTolerance) * coordinateScale + float(policy.relativeTolerance) * abs(result[1])
+            # Reserve margin for the ratio of the two independently estimated moments.
+            error[0] <= (float(policy.absoluteTolerance) + float(policy.relativeTolerance) * abs(result[0])) / 4
+            and error[1] <= (float(policy.absoluteTolerance) * coordinateScale + float(policy.relativeTolerance) * abs(result[1])) / 4
         ):
             return result[0], result[1]
 
@@ -478,6 +497,15 @@ def _AdaptiveMoments(
         midpoint = panel.left / 2 + panel.right / 2
         Add(Measure(panel.left, midpoint, (panel.values[0], panel.samples[0], panel.values[1]), panel.estimates[0], panel.depth + 1))
         Add(Measure(midpoint, panel.right, (panel.values[1], panel.samples[1], panel.values[2]), panel.estimates[1], panel.depth + 1))
+
+
+def _SumMoments(values: tuple[float, ...]) -> float:
+    """Use compensated binary64 sums without coercing wholly rational panels."""
+
+    if all(isinstance(value, Fraction) for value in values):
+        return cast(float, sum(values, Fraction(0)))
+
+    return math.fsum(values)
 
 
 def Centroid(
@@ -506,6 +534,8 @@ def Centroid(
         InvalidDomainError: The domain lies outside the universe.
         UndefinedResultError: Membership area is zero or a computed moment or
             centroid is non-finite.
+        NumericalError: A nonzero adaptive area or moment estimate/sample
+            underflows to zero in the available arithmetic.
         CentroidConvergenceError: Adaptive quadrature exceeds `maximumDepth`.
 
     Notes:
@@ -562,7 +592,7 @@ def _Centroid(
             moments is None
             or not all(math.isfinite(value) for value in moments)
             or moments[0] < float.fromhex("0x1.0p-1022")
-            or abs(moments[1]) < float.fromhex("0x1.0p-1022")
+            or abs(cast(float, moments[1])) < float.fromhex("0x1.0p-1022")
         ):
             # Five bounded-degree pieces at most: exact binary64-input moments
             # avoid losing a representable ratio to unrepresentable moments.

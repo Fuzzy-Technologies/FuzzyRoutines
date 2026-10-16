@@ -1,0 +1,1181 @@
+{
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "rows": [
+    {
+      "case": {
+        "scale": "historical",
+        "size": 16,
+        "mode": "prepared_array"
+      },
+      "iterations_per_sample": 100,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "224e0f81fee0b2f6c5a7a41ffee8c4d7e1553359ce10091c42dd395da77964aa"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "224e0f81fee0b2f6c5a7a41ffee8c4d7e1553359ce10091c42dd395da77964aa"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 374749.3,
+            "cpu_ns": 374684.67
+          },
+          {
+            "wall_ns": 303481.08,
+            "cpu_ns": 303534.78
+          },
+          {
+            "wall_ns": 314422.86,
+            "cpu_ns": 314453.85
+          },
+          {
+            "wall_ns": 269838.92,
+            "cpu_ns": 269803.32
+          },
+          {
+            "wall_ns": 255151.31,
+            "cpu_ns": 255184.97
+          },
+          {
+            "wall_ns": 364916.39,
+            "cpu_ns": 366044.97
+          },
+          {
+            "wall_ns": 302647.53,
+            "cpu_ns": 302679.01
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 337133.96,
+            "cpu_ns": 336955.39
+          },
+          {
+            "wall_ns": 302345.87,
+            "cpu_ns": 302391.49
+          },
+          {
+            "wall_ns": 288812.09,
+            "cpu_ns": 288746.78
+          },
+          {
+            "wall_ns": 310396.1,
+            "cpu_ns": 310427.19
+          },
+          {
+            "wall_ns": 315666.63,
+            "cpu_ns": 315676.57
+          },
+          {
+            "wall_ns": 318827.79,
+            "cpu_ns": 318867.89
+          },
+          {
+            "wall_ns": 325115.86,
+            "cpu_ns": 325140.68
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 5987
+        },
+        "candidate": {
+          "traced_peak_bytes": 7489
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 303481.08,
+        "candidate": 315666.63
+      },
+      "baseline_over_candidate": 0.9613974083988542
+    },
+    {
+      "case": {
+        "scale": "historical",
+        "size": 16,
+        "mode": "list_conversion"
+      },
+      "iterations_per_sample": 100,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "224e0f81fee0b2f6c5a7a41ffee8c4d7e1553359ce10091c42dd395da77964aa"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "224e0f81fee0b2f6c5a7a41ffee8c4d7e1553359ce10091c42dd395da77964aa"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 355608.18,
+            "cpu_ns": 355605.11
+          },
+          {
+            "wall_ns": 253366.02,
+            "cpu_ns": 253395.02
+          },
+          {
+            "wall_ns": 252677.68,
+            "cpu_ns": 252714.41
+          },
+          {
+            "wall_ns": 255546.61,
+            "cpu_ns": 255586.16
+          },
+          {
+            "wall_ns": 282907.8,
+            "cpu_ns": 282955.1
+          },
+          {
+            "wall_ns": 285724.74,
+            "cpu_ns": 285742.53
+          },
+          {
+            "wall_ns": 275473.9,
+            "cpu_ns": 275507.17
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 281016.75,
+            "cpu_ns": 281042.07
+          },
+          {
+            "wall_ns": 274212.3,
+            "cpu_ns": 274246.4
+          },
+          {
+            "wall_ns": 284183.12,
+            "cpu_ns": 284205.45
+          },
+          {
+            "wall_ns": 271099.12,
+            "cpu_ns": 271126.28
+          },
+          {
+            "wall_ns": 411181.65,
+            "cpu_ns": 411204.96
+          },
+          {
+            "wall_ns": 319581.62,
+            "cpu_ns": 319621.2
+          },
+          {
+            "wall_ns": 314473.13,
+            "cpu_ns": 314500.12
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 6038
+        },
+        "candidate": {
+          "traced_peak_bytes": 7489
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 275473.9,
+        "candidate": 284183.12
+      },
+      "baseline_over_candidate": 0.9693534929168208
+    },
+    {
+      "case": {
+        "scale": "historical",
+        "size": 200000,
+        "mode": "prepared_array"
+      },
+      "iterations_per_sample": 3,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 5.421010862427522e-20,
+          "full_result_sha256": "e56a9167de81ff0b1b83313ec311bd77b5c0e2dbf2b2606f7a845b99d97c6d28"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 5.421010862427522e-20,
+          "full_result_sha256": "e56a9167de81ff0b1b83313ec311bd77b5c0e2dbf2b2606f7a845b99d97c6d28"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 59710468.0,
+            "cpu_ns": 59710218.333333336
+          },
+          {
+            "wall_ns": 55954964.0,
+            "cpu_ns": 55952267.333333336
+          },
+          {
+            "wall_ns": 60145354.333333336,
+            "cpu_ns": 60143381.666666664
+          },
+          {
+            "wall_ns": 54499465.666666664,
+            "cpu_ns": 54496654.666666664
+          },
+          {
+            "wall_ns": 52119792.333333336,
+            "cpu_ns": 51934970.333333336
+          },
+          {
+            "wall_ns": 53547198.666666664,
+            "cpu_ns": 53547091.333333336
+          },
+          {
+            "wall_ns": 54172176.333333336,
+            "cpu_ns": 54172665.0
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 41260945.666666664,
+            "cpu_ns": 41257894.333333336
+          },
+          {
+            "wall_ns": 49083813.333333336,
+            "cpu_ns": 49084749.0
+          },
+          {
+            "wall_ns": 42286180.666666664,
+            "cpu_ns": 42283338.0
+          },
+          {
+            "wall_ns": 39930623.666666664,
+            "cpu_ns": 39931020.666666664
+          },
+          {
+            "wall_ns": 44749323.333333336,
+            "cpu_ns": 44748179.0
+          },
+          {
+            "wall_ns": 44572071.0,
+            "cpu_ns": 44572547.0
+          },
+          {
+            "wall_ns": 40628521.333333336,
+            "cpu_ns": 40628293.666666664
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 39802107
+        },
+        "candidate": {
+          "traced_peak_bytes": 28402014
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 54499465.666666664,
+        "candidate": 42286180.666666664
+      },
+      "baseline_over_candidate": 1.2888245002847345
+    },
+    {
+      "case": {
+        "scale": "historical",
+        "size": 200000,
+        "mode": "list_conversion"
+      },
+      "iterations_per_sample": 3,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 5.421010862427522e-20,
+          "full_result_sha256": "e56a9167de81ff0b1b83313ec311bd77b5c0e2dbf2b2606f7a845b99d97c6d28"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 5.421010862427522e-20,
+          "full_result_sha256": "e56a9167de81ff0b1b83313ec311bd77b5c0e2dbf2b2606f7a845b99d97c6d28"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 108803259.66666667,
+            "cpu_ns": 108730262.66666667
+          },
+          {
+            "wall_ns": 99084561.33333333,
+            "cpu_ns": 99026774.0
+          },
+          {
+            "wall_ns": 103135501.66666667,
+            "cpu_ns": 99868229.66666667
+          },
+          {
+            "wall_ns": 97702555.66666667,
+            "cpu_ns": 97678455.0
+          },
+          {
+            "wall_ns": 101954376.66666667,
+            "cpu_ns": 101953792.66666667
+          },
+          {
+            "wall_ns": 92811548.66666667,
+            "cpu_ns": 92732683.33333333
+          },
+          {
+            "wall_ns": 93118951.66666667,
+            "cpu_ns": 93046312.66666667
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 84760679.0,
+            "cpu_ns": 84752533.33333333
+          },
+          {
+            "wall_ns": 78043246.66666667,
+            "cpu_ns": 78043347.33333333
+          },
+          {
+            "wall_ns": 94947695.33333333,
+            "cpu_ns": 94946667.33333333
+          },
+          {
+            "wall_ns": 95966606.66666667,
+            "cpu_ns": 95965806.66666667
+          },
+          {
+            "wall_ns": 81292266.0,
+            "cpu_ns": 81288807.66666667
+          },
+          {
+            "wall_ns": 79587111.66666667,
+            "cpu_ns": 79583548.66666667
+          },
+          {
+            "wall_ns": 88177167.0,
+            "cpu_ns": 88175658.33333333
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 39802107
+        },
+        "candidate": {
+          "traced_peak_bytes": 28402014
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 99084561.33333333,
+        "candidate": 84760679.0
+      },
+      "baseline_over_candidate": 1.1689920668678613
+    },
+    {
+      "case": {
+        "scale": "custom",
+        "size": 16,
+        "mode": "prepared_array"
+      },
+      "iterations_per_sample": 100,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "6559a28867779d1296ba6a69548a46c6e4e7f8c9591ab17a066134345df06da2"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "6559a28867779d1296ba6a69548a46c6e4e7f8c9591ab17a066134345df06da2"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 450231.57,
+            "cpu_ns": 449706.39
+          },
+          {
+            "wall_ns": 387574.22,
+            "cpu_ns": 387102.36
+          },
+          {
+            "wall_ns": 471870.96,
+            "cpu_ns": 471911.08
+          },
+          {
+            "wall_ns": 400724.63,
+            "cpu_ns": 400746.37
+          },
+          {
+            "wall_ns": 374286.82,
+            "cpu_ns": 373829.11
+          },
+          {
+            "wall_ns": 373366.33,
+            "cpu_ns": 373393.75
+          },
+          {
+            "wall_ns": 411095.05,
+            "cpu_ns": 411128.04
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 381913.8,
+            "cpu_ns": 381929.6
+          },
+          {
+            "wall_ns": 392157.03,
+            "cpu_ns": 392192.5
+          },
+          {
+            "wall_ns": 406072.48,
+            "cpu_ns": 405580.53
+          },
+          {
+            "wall_ns": 391308.65,
+            "cpu_ns": 391334.13
+          },
+          {
+            "wall_ns": 397481.24,
+            "cpu_ns": 397514.78
+          },
+          {
+            "wall_ns": 405417.4,
+            "cpu_ns": 404670.28
+          },
+          {
+            "wall_ns": 447038.66,
+            "cpu_ns": 446746.5
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 7483
+        },
+        "candidate": {
+          "traced_peak_bytes": 8145
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 400724.63,
+        "candidate": 397481.24
+      },
+      "baseline_over_candidate": 1.0081598568022985
+    },
+    {
+      "case": {
+        "scale": "custom",
+        "size": 16,
+        "mode": "list_conversion"
+      },
+      "iterations_per_sample": 100,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "6559a28867779d1296ba6a69548a46c6e4e7f8c9591ab17a066134345df06da2"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 16,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "6559a28867779d1296ba6a69548a46c6e4e7f8c9591ab17a066134345df06da2"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 512539.85,
+            "cpu_ns": 512534.0
+          },
+          {
+            "wall_ns": 374196.47,
+            "cpu_ns": 374021.28
+          },
+          {
+            "wall_ns": 375939.81,
+            "cpu_ns": 373325.66
+          },
+          {
+            "wall_ns": 379358.05,
+            "cpu_ns": 379382.42
+          },
+          {
+            "wall_ns": 377658.49,
+            "cpu_ns": 377702.44
+          },
+          {
+            "wall_ns": 383438.3,
+            "cpu_ns": 383465.27
+          },
+          {
+            "wall_ns": 366223.57,
+            "cpu_ns": 366250.07
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 453164.79,
+            "cpu_ns": 453187.64
+          },
+          {
+            "wall_ns": 387964.12,
+            "cpu_ns": 387998.88
+          },
+          {
+            "wall_ns": 396124.2,
+            "cpu_ns": 396150.16
+          },
+          {
+            "wall_ns": 392614.92,
+            "cpu_ns": 392654.69
+          },
+          {
+            "wall_ns": 403189.54,
+            "cpu_ns": 403223.23
+          },
+          {
+            "wall_ns": 392002.68,
+            "cpu_ns": 392033.26
+          },
+          {
+            "wall_ns": 407701.23,
+            "cpu_ns": 407724.2
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 7432
+        },
+        "candidate": {
+          "traced_peak_bytes": 8145
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 377658.49,
+        "candidate": 396124.2
+      },
+      "baseline_over_candidate": 0.9533840396522101
+    },
+    {
+      "case": {
+        "scale": "custom",
+        "size": 200000,
+        "mode": "prepared_array"
+      },
+      "iterations_per_sample": 3,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "e5ac626ac130a4ec29a55332376b0bf445e4fb0bb0be2a2385a31f63cc6857db"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "e5ac626ac130a4ec29a55332376b0bf445e4fb0bb0be2a2385a31f63cc6857db"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 74788896.33333333,
+            "cpu_ns": 74787992.33333333
+          },
+          {
+            "wall_ns": 80783453.0,
+            "cpu_ns": 80706946.0
+          },
+          {
+            "wall_ns": 85487910.66666667,
+            "cpu_ns": 85487620.33333333
+          },
+          {
+            "wall_ns": 83585127.0,
+            "cpu_ns": 83274782.33333333
+          },
+          {
+            "wall_ns": 77789608.0,
+            "cpu_ns": 77790104.0
+          },
+          {
+            "wall_ns": 68931630.66666667,
+            "cpu_ns": 68924321.0
+          },
+          {
+            "wall_ns": 74658041.0,
+            "cpu_ns": 74638995.33333333
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 59531985.333333336,
+            "cpu_ns": 59513149.0
+          },
+          {
+            "wall_ns": 59250428.333333336,
+            "cpu_ns": 59250546.0
+          },
+          {
+            "wall_ns": 62544839.333333336,
+            "cpu_ns": 61687849.0
+          },
+          {
+            "wall_ns": 58414520.333333336,
+            "cpu_ns": 58406442.333333336
+          },
+          {
+            "wall_ns": 64121228.666666664,
+            "cpu_ns": 64121302.0
+          },
+          {
+            "wall_ns": 56881491.666666664,
+            "cpu_ns": 56881607.0
+          },
+          {
+            "wall_ns": 59027420.0,
+            "cpu_ns": 58987793.333333336
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 65002283
+        },
+        "candidate": {
+          "traced_peak_bytes": 65002288
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 77789608.0,
+        "candidate": 59250428.333333336
+      },
+      "baseline_over_candidate": 1.3128952851170668
+    },
+    {
+      "case": {
+        "scale": "custom",
+        "size": 200000,
+        "mode": "list_conversion"
+      },
+      "iterations_per_sample": 3,
+      "warmups": 2,
+      "identities": {
+        "baseline": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-before-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+            "batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "e5ac626ac130a4ec29a55332376b0bf445e4fb0bb0be2a2385a31f63cc6857db"
+        },
+        "candidate": {
+          "origin": "/workspace/scratch/0a9762bec34b/selection-after-env/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+          "version": "2.1.0",
+          "numpy": "2.3.5",
+          "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+          "package_hashes": {
+            "FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+            "inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+            "presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+            "encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+            "domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+            "operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+            "__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+            "linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+            "numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+            "defuzzification.py": "afb631bd1f60a2f946420eb9dff00d9ebbaef8715533e68bd3ceb9724af4e7c2",
+            "batches.py": "cf378ee964843f93237885b96206dcca3fa974b326eed6453c8e53ac5d5559a3",
+            "properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+            "alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+            "fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+            "exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+            "membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+            "Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+            "relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+          },
+          "parity_points": 1024,
+          "maximum_absolute_error": 0.0,
+          "full_result_sha256": "e5ac626ac130a4ec29a55332376b0bf445e4fb0bb0be2a2385a31f63cc6857db"
+        }
+      },
+      "raw_samples": {
+        "baseline": [
+          {
+            "wall_ns": 115539297.0,
+            "cpu_ns": 115537704.0
+          },
+          {
+            "wall_ns": 119571110.0,
+            "cpu_ns": 119567825.0
+          },
+          {
+            "wall_ns": 119956895.66666667,
+            "cpu_ns": 119952687.0
+          },
+          {
+            "wall_ns": 112092625.0,
+            "cpu_ns": 112079643.66666667
+          },
+          {
+            "wall_ns": 112872085.33333333,
+            "cpu_ns": 112868165.33333333
+          },
+          {
+            "wall_ns": 109209381.33333333,
+            "cpu_ns": 109099234.66666667
+          },
+          {
+            "wall_ns": 111736443.66666667,
+            "cpu_ns": 111735405.66666667
+          }
+        ],
+        "candidate": [
+          {
+            "wall_ns": 100811457.33333333,
+            "cpu_ns": 100803355.33333333
+          },
+          {
+            "wall_ns": 102276363.0,
+            "cpu_ns": 102244016.0
+          },
+          {
+            "wall_ns": 91308515.66666667,
+            "cpu_ns": 91290716.66666667
+          },
+          {
+            "wall_ns": 91420555.66666667,
+            "cpu_ns": 91420170.66666667
+          },
+          {
+            "wall_ns": 92642457.33333333,
+            "cpu_ns": 92613366.66666667
+          },
+          {
+            "wall_ns": 91387810.0,
+            "cpu_ns": 91382585.0
+          },
+          {
+            "wall_ns": 103173085.0,
+            "cpu_ns": 103068021.33333333
+          }
+        ]
+      },
+      "memory": {
+        "baseline": {
+          "traced_peak_bytes": 65002283
+        },
+        "candidate": {
+          "traced_peak_bytes": 65002288
+        }
+      },
+      "median_wall_ns": {
+        "baseline": 112872085.33333333,
+        "candidate": 92642457.33333333
+      },
+      "baseline_over_candidate": 1.2183623856954975
+    }
+  ],
+  "host": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "logical_cpu_count": 9,
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "cgroup": {
+      "cpu.max": "800000 100000",
+      "memory.max": "8589934592"
+    }
+  },
+  "harness_sha256": "40ef97eed224dd54fdcda09772301ee925ee35100a95bc79c5e097bd9ad2af18",
+  "artifacts": {
+    "baseline": {
+      "wheel_sha256": "40eb4e2dc7043b0c57953d5a6f9073312a438371b44230d1e3846545dac3e628",
+      "source_revision": "640199f4b615d64ce64c2c1f0e9d72afaadd83bc",
+      "origin": "local reproducible build, two independent builds; not CI artifact"
+    },
+    "candidate": {
+      "wheel_sha256": "65fba7aea6254fe660a8ccd200cc7d515a8d3f4bb01e8b1dff29c74b23c5bb96",
+      "source_revision": "edb920c7c9c20d9f7ac669adda712b552f38dc71",
+      "origin": "local reproducible build, two independent builds; not CI artifact"
+    }
+  },
+  "candidate_equivalent_published_tree": "2a3b655c190ff763226dc9c72517b4d7688a6e18",
+  "limitations": "Shared-host observation, two warmups, seven alternating pairs; no universal speedup. Byte-identical complete outputs on all eight cases; sampled scalar parity at up to 1024 points per case. Memory observations traced separately from timings."
+}

@@ -104,3 +104,11 @@ not silently promoted to symbolic guarantees.
 
 This ADR is **Accepted**. A different default numerical method, tolerance
 policy, or zero-area contract requires an amendment or a new ADR.
+
+The global adaptive pass preserves wholly rational coordinates and panel sums.
+Zero-error panels are not subdivided after another panel exhausts its depth;
+otherwise an isolated discontinuity could trigger irrelevant exponential work.
+A quarter of each moment target reserves margin for the final ratio. If a
+nonzero adaptive sample or same-sign area/moment estimate is rounded to zero,
+raise `NumericalError`; generic compositions do not acquire the bounded
+polynomial rational fallback merely by retaining geometry.

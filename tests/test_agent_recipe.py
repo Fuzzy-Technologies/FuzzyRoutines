@@ -142,7 +142,10 @@ def test_AgentInstructionsPreserveCommandsAcrossLocales():
         index = (PROJECT_ROOT / f"docs/site/content/{locale}/index.md").read_text(encoding="utf-8")
         assert "agent-quickstart.md" in index
 
-    for path in ("README.md", "docs/index.html", "docs/llms.txt"):
+    # README uses the matching source route until new live pages are published.
+    assert "docs/site/content/en/agent-quickstart.md" in (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+
+    for path in ("docs/index.html", "docs/llms.txt"):
         assert "/agent-quickstart/" in (PROJECT_ROOT / path).read_text(encoding="utf-8")
 
 

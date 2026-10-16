@@ -723,46 +723,46 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "symbol:fuzzyroutines.Centroid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
+sourceHash = "sha256:57360e961d3024b8d674df2c0a46795cfa3465826b4add180c23e9ff074c54a5"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
+sourceHash = "sha256:57360e961d3024b8d674df2c0a46795cfa3465826b4add180c23e9ff074c54a5"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
-reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewedSourceHash = "sha256:57360e961d3024b8d674df2c0a46795cfa3465826b4add180c23e9ff074c54a5"
+reviewedTranslationHash = "sha256:698334cd6c75f87ec56363d06affde3e985fb68684810d64d0be738ae1f08ecf"
 reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
-reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewedSourceHash = "sha256:57360e961d3024b8d674df2c0a46795cfa3465826b4add180c23e9ff074c54a5"
+reviewedTranslationHash = "sha256:698334cd6c75f87ec56363d06affde3e985fb68684810d64d0be738ae1f08ecf"
 reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
+sourceHash = "sha256:57360e961d3024b8d674df2c0a46795cfa3465826b4add180c23e9ff074c54a5"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
-reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
-reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedSourceHash = "sha256:57360e961d3024b8d674df2c0a46795cfa3465826b4add180c23e9ff074c54a5"
+reviewedTranslationHash = "sha256:a90f24ff1d6ebdc319ef1bf16cbda9b148d80e61037d7776bf9705fed9f47f5a"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
-reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
-reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedSourceHash = "sha256:57360e961d3024b8d674df2c0a46795cfa3465826b4add180c23e9ff074c54a5"
+reviewedTranslationHash = "sha256:a90f24ff1d6ebdc319ef1bf16cbda9b148d80e61037d7776bf9705fed9f47f5a"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [[units]]
 id = "symbol:fuzzyroutines.CentroidConvergenceError"
@@ -4323,46 +4323,46 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "symbol:fuzzyroutines.defuzzification.Centroid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
+sourceHash = "sha256:ea0ce0c661f002adb68e7eeac08da9b4a76bea87b38b0e97c73e590e25702e80"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
+sourceHash = "sha256:ea0ce0c661f002adb68e7eeac08da9b4a76bea87b38b0e97c73e590e25702e80"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
-reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewedSourceHash = "sha256:ea0ce0c661f002adb68e7eeac08da9b4a76bea87b38b0e97c73e590e25702e80"
+reviewedTranslationHash = "sha256:698334cd6c75f87ec56363d06affde3e985fb68684810d64d0be738ae1f08ecf"
 reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
-reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewedSourceHash = "sha256:ea0ce0c661f002adb68e7eeac08da9b4a76bea87b38b0e97c73e590e25702e80"
+reviewedTranslationHash = "sha256:698334cd6c75f87ec56363d06affde3e985fb68684810d64d0be738ae1f08ecf"
 reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
+sourceHash = "sha256:ea0ce0c661f002adb68e7eeac08da9b4a76bea87b38b0e97c73e590e25702e80"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
-reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
-reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedSourceHash = "sha256:ea0ce0c661f002adb68e7eeac08da9b4a76bea87b38b0e97c73e590e25702e80"
+reviewedTranslationHash = "sha256:a90f24ff1d6ebdc319ef1bf16cbda9b148d80e61037d7776bf9705fed9f47f5a"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
-reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
-reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
-reviewedAt = "2026-10-16T12:16:13Z"
+reviewedSourceHash = "sha256:ea0ce0c661f002adb68e7eeac08da9b4a76bea87b38b0e97c73e590e25702e80"
+reviewedTranslationHash = "sha256:a90f24ff1d6ebdc319ef1bf16cbda9b148d80e61037d7776bf9705fed9f47f5a"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:37:27Z"
 
 [[units]]
 id = "symbol:fuzzyroutines.defuzzification.CentroidConvergenceError"
