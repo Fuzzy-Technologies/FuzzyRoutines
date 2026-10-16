@@ -1,0 +1,39 @@
+{
+  "source_head": "bd6f0af22be325967c2694c9497e50b0af2cbff7",
+  "built_source": "4b9efcf67f42aee15bbce3aeac7bbb55388a4822",
+  "harness_head": "bd6f0af22be325967c2694c9497e50b0af2cbff7",
+  "package_run": 38903501182,
+  "wheel_sha256": "cf694da86b560d3619a5480f67a943ca7eb87a90e1c9fde97e188b380e86b883",
+  "sdist_sha256": "a2d3aff466073c9e93123d80fbe85df5d522a2b2d7465f1c9f58c0f1b2c547cd",
+  "supported_interpreter_artifacts_byte_identical": true,
+  "independent_builds_per_artifact": 2,
+  "ci_workflows_completed_successfully": 10,
+  "scalar_workloads": 30,
+  "batch_combinations": 24,
+  "public_replay_inputs": 30,
+  "paired_repeats": 7,
+  "migration_fixture_boundary_check": "passed",
+  "all_benchmark_parity_checks_passed": true,
+  "reports_sha256": {
+    "agent-recipe.json": "052910ad77a91c004425406336e03bd6b1a9f73c0bcf3d3020c64338477e608d",
+    "artifact-python313.json": "db8d8384e80dde555b70b1403257b837127b406b0541a0ed38f87c907b80ae93",
+    "artifact-python314.json": "8b3d187b491602e16e24f8580def8b5a89a468e0a67d65c8f3fff32fee87cdf5",
+    "batch-completion.json": "a90235852ea11fc0526c6b33faa07bc336ac472ba2bfe314d6a287379b029115",
+    "batches.json": "5fa2adbf156494e2237dc6874732b7e31caa6adb42907e4c8b7b688d12502925",
+    "ci-workflows.json": "89a8439e1642e43ceb1c7c40fe09d547a1d3356e341c2538658e13216f692a78",
+    "consumer-replays.json": "22bade6fabf08e0179e1c3ba1259764deb3a5f449cf03bb65c61ccc718e3fb01",
+    "consumer-scale.json": "200234e16488ba20db9d8720e0fe099ac9a8af17838b2b10b5c08099970781b0",
+    "entry-links.json": "09bf590efaed76cd3975b9007a3e7b375d27a1ace3147534d975e7ef6e29c830",
+    "initial-quadrature-profile.json": "f79e756e670edfc575958d210bf365d94ff3f3049d7dbe41b963706033c8e790",
+    "package-workflow.json": "65b7860bd20362ef3ca7a7d65b1a4f7cd8f6ce7fae88f579257b3be5220bc779",
+    "reproducibility.json": "f881abaea31990f3ed47d8020016b63fa75ab9b34f576d89c2e79a37e306da94",
+    "scalar.json": "a001eb1c53738e875f7e643180dc06c5289b46dc87c9097446dca9154f39678f"
+  },
+  "limits": [
+    "Shared host; timing is observational.",
+    "Generic historical hyperbolic centroid is about 4.19x slower than 2.0.0 under the stricter global algorithm.",
+    "Arbitrary callbacks retain unsampled-feature limitations; adaptive errors are estimates.",
+    "Corporate companion PR #52 requires owner merge; 2.1 live page publication and final release remain separate.",
+    "Final promotion build must retain its own archive hashes and compare package code payload to the measured artifact."
+  ]
+}

@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # FuzzyRoutines 2.1.0 — Rules, scales and explainable results
 
-**Draft for candidate review. Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). The implemented candidate has passed its full opening CI and installed-wheel checks. The [handoff](audits/2026-10-14-2.1-candidate-handoff.md) records the measured artifacts, performance evidence and limits; final promotion and publication remain subject to maintainer approval.
+**Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). Numerical audit fixes passed full CI and fresh installed-artifact checks; the [post-audit handoff](audits/2026-10-16-post-audit-handoff.md) records exact identities, measurements and remaining owner actions under Task #337 and the existing release PR #348. Final promotion and publication remain subject to maintainer approval.
 
 FuzzyRoutines 2.1 adds explainable rule inference, a ready-made historical Universal Fuzzy Scale, explicit linguistic encoding and optional NumPy batch evaluation. The default scalar core remains free of external runtime dependencies on CPython 3.13 and 3.14. Existing scalar calls remain available, including the basic agent recipe for published 2.0.0.
 

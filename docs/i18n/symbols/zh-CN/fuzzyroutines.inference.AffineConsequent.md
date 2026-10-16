@@ -5,6 +5,8 @@ SPDX-License-Identifier: Apache-2.0
 
 一阶 Sugeno 仿射后件 $b+\sum_j a_j x_j$。
 
+常数项 $b$ 可以非零；该函数是输入变量的仿射函数。
+
 Attributes:
     intercept: 采用输出单位的有限常数项 $b$。
     coefficients: 不可变的有序 `(inputName, coefficient)` 对元组；名称必须唯一，省略的输入系数为零。

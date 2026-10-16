@@ -63,6 +63,15 @@ certificate, so their centroid uses adaptive Simpson integration with the
 existing tolerance/depth policy. Convergence is numerical evidence under the
 regularity assumption; arbitrarily narrow features may evade sampling.
 
+The 2026-10-16 audit amendment preserves trusted built-in geometry through
+engine-owned activation and aggregation wrappers. Initial quadrature partitions
+include family knots and minimum-clipping points of piecewise-linear terms;
+all panels share one global estimated-error budget. A priority queue refines
+the largest estimated error, retaining the configured maximum depth per initial
+interval. These hints are not analytical certificates, and arbitrary callback
+attributes are not trusted. The disjoint audit triangles have independent
+areas `0.02`, `0.15` and centroid `1161/1700`, rather than the large term's `0.75`.
+
 ### Sugeno
 
 `SugenoRule` accepts `ConstantConsequent(c)` or
@@ -88,6 +97,17 @@ centroid of an aggregated fuzzy set and not a call to the legacy `Defuz()`.
 Every consequent, including inactive ones, must be finite and belong to the
 declared output universe at the supplied inputs; values are never clamped.
 No gradient, parameter training or tensor support is implied.
+
+The audit amendment also retains an exact `Fraction` for a positive normalized
+strength in the binary64 subnormal range. Its contribution is rounded only
+after the exact normalized ratio is multiplied by the consequent; otherwise
+a huge finite consequent could lose a representable contribution. This uses
+the existing `MembershipScalar` real-number field contract, adds no field or
+public type, and keeps ordinary traces on floats. The exact denominator is
+computed at most once per evaluation. Positive antecedent/weight products
+that already underflowed to zero cannot be faithfully represented by the
+existing firing snapshot: they raise `NumericalError`, separately from true
+no-fire. No sentinel or silent redefinition of a trace is allowed.
 
 ### Validation and failure policy
 

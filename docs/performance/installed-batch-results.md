@@ -5,6 +5,10 @@ SPDX-License-Identifier: Apache-2.0
 
 # Installed 2.1.0 NumPy candidate results
 
+Historical measurements from 14 October. See the [post-audit installed
+results](post-audit-installed.md) for the corrected implementation and fresh
+16 October artifact identities; the raw observations below are retained.
+
 The exact **2.1.0 CI wheel** was measured on 14 October 2026. Both the scalar
 reference and NumPy operations came from that installed wheel. This is additive
 release-candidate evidence; the earlier [synthetic source study](public-batch-comparison.md)

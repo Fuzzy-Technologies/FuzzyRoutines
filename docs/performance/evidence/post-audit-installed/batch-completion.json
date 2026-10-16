@@ -1,0 +1,20 @@
+{
+  "execution_command": [
+    "/workspace/scratch/0a9762bec34b/final-batch/environment/bin/python",
+    "-I",
+    "/workspace/scratch/0a9762bec34b/final-measure-harness/experiments/installed_batch_benchmark.py",
+    "--config",
+    "/workspace/scratch/0a9762bec34b/final-batch/execution-config.json",
+    "--worker",
+    "execute"
+  ],
+  "paired_repeats": 7,
+  "parity_passed": true,
+  "public_replay_cases": 30,
+  "public_replay_mode_groups": 4,
+  "reports": [
+    "/workspace/scratch/0a9762bec34b/final-batch/public-batches-installed-python314.json",
+    "/workspace/scratch/0a9762bec34b/final-batch/public-consumer-replays-installed-python314.json"
+  ],
+  "synthetic_cases": 24
+}

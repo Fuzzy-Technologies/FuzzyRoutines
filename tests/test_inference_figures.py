@@ -93,4 +93,18 @@ def test_InferenceFigureCliDoesNotRequireCheckoutToolsOnImportPath(tmpPath):
     assert result.returncode == 0, result.stderr
     report = json.loads(result.stdout)
     assert report["checked"] is True
-    assert set(report["svgBytes"]) == {"inference-mamdani", "inference-sugeno"}
+    assert set(report["svgBytes"]) == {"inference-mamdani", "inference-sugeno", "inference-support"}
+
+
+def test_SupportPlotRetainsBothContributions(inferenceFigures):
+    """Verify the audit figure against independent triangle areas and centers."""
+
+    axis = inferenceFigures["inference-support"].axes[0]
+    expected = (0.02 * 0.18 + 0.15 * 0.75) / 0.17
+
+    assert list(axis.lines[2].get_xdata()) == pytest.approx([expected, expected], rel=0, abs=1e-14), "The marker must include both triangle moments"
+
+    for line, shape in zip(axis.lines[:2], ((0.16, 0.18, 0.20), (0.60, 0.75, 0.90)), strict=True):
+        left, peak, right = shape
+        values = [max(0, min((coordinate - left) / (peak - left), (right - coordinate) / (right - peak))) for coordinate in line.get_xdata()]
+        assert list(line.get_ydata()) == pytest.approx(values, rel=0, abs=1e-14), "Displayed triangles must match their independent piecewise definitions"

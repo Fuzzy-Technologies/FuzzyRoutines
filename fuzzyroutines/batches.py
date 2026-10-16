@@ -335,11 +335,16 @@ def _Selection(np: Any, memberships: Any, policy: FuzzificationPolicy) -> tuple[
     if policy.tiePolicy == "all":
         selected = tied.copy()
 
-    elif policy.tiePolicy == "first":
-        selected = tied & (np.cumsum(tied, axis=-1) == 1)
-
     else:
-        selected = tied & (np.cumsum(tied[..., ::-1], axis=-1)[..., ::-1] == 1)
+        candidates = tied if policy.tiePolicy == "first" else tied[..., ::-1]
+        indices = np.argmax(candidates, axis=-1)
+
+        if policy.tiePolicy == "last":
+            indices = tied.shape[-1] - 1 - indices
+
+        selected = np.zeros_like(tied)
+        np.put_along_axis(selected, indices[..., None], True, axis=-1)
+        selected &= tied
 
     return confidence, tied, selected
 

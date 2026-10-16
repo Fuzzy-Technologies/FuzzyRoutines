@@ -34,6 +34,16 @@ their own review and candidate checks below.
 
 ## Current 2.1 development gate
 
+**The corrected implementation passed full CI and fresh installed checks
+(2026-10-16).** The [post-audit handoff](audits/2026-10-16-post-audit-handoff.md)
+supersedes the earlier preparation acceptance for #331, #349–#351 and #337.
+It records exact wheel/source identities, raw measurements, reviewed figures
+and the generic-centroid performance cost. Task #337 / Feature #323 remain open
+for the corporate companion PR #52 owner merge and final reconciliation.
+Release PR #348, tag and PyPI publication remain separate owner decisions.
+The older checked evidence below describes its named historical revision.
+
+
 The release-preparation source sets `pyproject.toml` to **2.1.0**, dated
 2026-10-14. This is **unpublished candidate metadata**; the published stable
 release remains 2.0.0. The metadata identifies the checked-out source and does

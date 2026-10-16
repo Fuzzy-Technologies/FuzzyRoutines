@@ -14,6 +14,11 @@ the balance point of the resulting area. Sugeno rules contribute **numbers**,
 possibly calculated from the inputs. We take their firing-strength-weighted
 average. The input logic can be identical while the output models differ.
 
+The if-part is the **antecedent**, the then-part the **consequent**. The antecedent
+grade $A_i(\mathbf{x})$ is recorded as `antecedentGrade`. Multiplying it by the
+rule weight $w_i$ gives the firing strength $\alpha_i$ (`firingStrength`). These
+are equal for unit weights. Here, a rule fires when $\alpha_i>0$.
+
 This illustration uses two simple ramps, $\mu_L(x)=1-x$ and $\mu_H(x)=x$, on
 $[0,1]$. They give grades $(0.75,0.25)$ at $x=0.25$. These are degrees of
 membership, not event probabilities. This example is not the historical
@@ -91,6 +96,9 @@ z_i=b_i+\sum_j a_{ij}x_j,\qquad
 z=\sum_i\bar\alpha_i z_i.
 $$
 
+An affine function is a linear combination of inputs plus a constant; $b_i$
+may be nonzero. This is the meaning of `AffineConsequent`.
+
 For the same input and firing strengths, the constant model gives
 $0.75\cdot0.2+0.25\cdot0.8=0.35$. The affine model gives
 $0.75\cdot0.125+0.25\cdot0.625=0.25$. The outlined bars show each rule's
@@ -161,6 +169,22 @@ assert len(result.inputGrades) == 4
 print(round(result.value, 2))  # 0.37
 ```
 
+## Both disjoint consequents contribute
+
+![Two disjoint consequents and their common centroid](../assets/figures/inference-support.svg)
+
+For fully fired triangles `(0.16, 0.18, 0.20)` and `(0.60, 0.75, 0.90)`,
+the areas are `0.02` and `0.15`. Their independent area balance gives
+`(0.02 × 0.18 + 0.15 × 0.75) / 0.17 = 1161/1700`, about `0.68294117647`.
+Using only the large triangle would incorrectly give `0.75`.
+Mamdani compositions retain trusted built-in shape boundaries and linear
+clipping points as initial quadrature knots. They remain numerical results;
+arbitrary callbacks do not acquire an analytical certificate.
+
+Under maximum aggregation, one consequent can be completely covered by another;
+only the upper envelope determines the centroid. Both disjoint supports in this
+example remain part of that envelope.
+
 ## Contracts that matter in an application
 
 Each model has named scalar inputs and one scalar output. Supply exactly the
@@ -175,6 +199,18 @@ Every Sugeno consequence must be finite and belong to its output universe,
 including inactive rules. Overflow raises `NumericalError`; outputs are never
 silently clipped. Frozen model containers retain custom membership callables by
 reference, so those callables must be pure for repeatable results.
+
+A positive antecedent/weight product that underflows to zero raises
+`NumericalError`, separately from true no-fire. When an existing positive firing
+strength normalizes into the subnormal range, its `normalizedStrength` retains
+an exact `Fraction` under the existing real-scalar contract; its contribution
+is rounded only after multiplying the exact ratio by the consequent. Ordinary
+traces remain floating-point values. Polynomial centroid moments with unsafe
+floating-point intermediates use bounded rational recomputation before taking
+the ratio, so a representable center is not lost to moment underflow/overflow.
+The adaptive path raises `NumericalError` if a nonzero sampled product or
+same-sign moment estimate is rounded to zero; it does not acquire that
+analytical fallback.
 
 These fixed rule models do not train parameters or preserve automatic
 differentiation graphs. A trained neuro-fuzzy system is a separate model.

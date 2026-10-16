@@ -24,6 +24,39 @@ renderSvg = plottingHelpers["RenderSvg"]
 plt = plottingHelpers["plt"]
 
 
+def BuildSupportModel():
+    """Construct the two disjoint fully fired consequents from the release audit."""
+
+    from fuzzyroutines import (
+        ContinuousUniverse,
+        IntegrationDomain,
+        LinguisticTerm,
+        NegationPolicy,
+        ScalarFuzzySet,
+        SNormPolicy,
+        TNormPolicy,
+        Triangle,
+    )
+    from fuzzyroutines.inference import (
+        FuzzyVariable,
+        InferencePolicy,
+        MamdaniModel,
+        MamdaniRule,
+        TermCondition,
+    )
+
+    universe = ContinuousUniverse(0, 1, True, True)
+    inputs = (FuzzyVariable("x", (LinguisticTerm("on", ScalarFuzzySet(universe, Triangle(0, 0.5, 1))),)),)
+    output = FuzzyVariable("y", (
+        LinguisticTerm("small", ScalarFuzzySet(universe, Triangle(0.16, 0.18, 0.20))),
+        LinguisticTerm("large", ScalarFuzzySet(universe, Triangle(0.60, 0.75, 0.90))),
+    ))
+    policy = InferencePolicy(TNormPolicy("logic"), SNormPolicy("logic"), NegationPolicy("standard"))
+    rules = tuple(MamdaniRule(term.name, TermCondition("x", "on"), term.name) for term in output.terms)
+
+    return MamdaniModel(inputs, output, rules, policy, TNormPolicy("logic"), SNormPolicy("logic")).Evaluate({"x": 0.5}, IntegrationDomain(0, 1))
+
+
 def BuildFigures() -> dict:
     """Plot actual input grades, activations, aggregates and scalar contributions."""
 
@@ -90,6 +123,27 @@ def BuildFigures() -> dict:
 
     figure.text(0.08, 0.09, "Zero order: 0.75 × 0.20 + 0.25 × 0.80 = 0.35\nFirst order: 0.75 × 0.125 + 0.25 × 0.625 = 0.25", fontsize=11, color=COLORS[2], linespacing=1.7)
     figures["inference-sugeno"] = figure
+
+    support = BuildSupportModel()
+    coordinates = sorted({index / 500 for index in range(501)} | {0.16, 0.18, 0.20, 0.60, 0.75, 0.90})
+    figure, axis = plt.subplots(figsize=(11.8, 5.5))
+    figure.subplots_adjust(left=0.08, right=0.97, top=0.76, bottom=0.24)
+    figure.suptitle("Mamdani  ·  both disjoint consequents contribute", fontsize=19, fontweight="bold", x=0.08, ha="left", y=0.96)
+    figure.text(0.08, 0.86, "Two disjoint triangles, both fired at strength 1; aggregate = pointwise maximum", fontsize=11, color="#c6cede")
+
+    for trace, color, label in zip(support.rules, COLORS, ("Small: area 0.02, center 0.18", "Large: area 0.15, center 0.75"), strict=False):
+        values = [trace.activatedSet.Membership(value) for value in coordinates]
+        axis.plot(coordinates, values, color=color, linewidth=2.5, label=label)
+        axis.fill_between(coordinates, values, color=color, alpha=0.2)
+
+    axis.axvline(support.value, color=COLORS[2], linewidth=2, linestyle="--", label=f"Full centroid = {support.value:.6f}")
+    axis.axvline(0.75, color="#a8afc1", linewidth=1.5, linestyle=":", label="Large term alone = 0.75")
+    axis.set(xlabel="Output coordinate y", ylabel="Activated membership", xlim=(0, 1), ylim=(0, 1.08))
+    axis.spines[["top", "right"]].set_visible(False)
+    axis.grid(True)
+    axis.legend(frameon=False, fontsize=9, loc="upper left", bbox_to_anchor=(0.25, 1.02))
+    figure.text(0.08, 0.09, "Independent area balance: (0.02 × 0.18 + 0.15 × 0.75) / 0.17 = 1161/1700 ≈ 0.682941", fontsize=11, color=COLORS[2])
+    figures["inference-support"] = figure
 
     return figures
 
