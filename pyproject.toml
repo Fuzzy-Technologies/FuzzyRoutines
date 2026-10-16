@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fuzzyroutines"
-version = "2.0.0"
+version = "2.1.0"
 description = "Scalar fuzzy sets, membership functions, linguistic scales, and explicit fuzzy operators."
 readme = "README.md"
 requires-python = ">=3.13"
@@ -28,6 +28,9 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 keywords = ["fuzzy", "fuzzylogic", "fuzzyset", "logic", "math", "research", "science"]
+
+[project.optional-dependencies]
+numpy = ["numpy>=2.3.5,<3"]
 
 [project.urls]
 Homepage = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"

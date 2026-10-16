@@ -103,6 +103,34 @@ runs on version 2.0; it does not assert that every numerical bug in 1.0.3 is
 preserved. In particular, the reviewed centroid corrections are documented in
 the [migration notes](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/migration/1.0.3-to-2.0.0.md).
 
+## Modern preset factory
+
+The 2.1 API adds an immutable factory with the same coefficients. Its selection
+policy and centroid windows stay explicit; the generic modern defaults and the
+legacy import remain unchanged. Install the candidate wheel to run this example.
+
+```python
+from math import isclose
+from fuzzyroutines import (
+    Centroid, CreateUniversalFuzzyScale,
+    UniversalFuzzyScaleDomains, UniversalFuzzyScalePolicy,
+)
+
+scale = CreateUniversalFuzzyScale()
+result = scale.Fuzzify(0.75, UniversalFuzzyScalePolicy())
+assert result.selectedTerms[0].name == "High"
+centroids = tuple(
+    Centroid(term.fuzzySet, domain)
+    for term, domain in zip(scale.terms, UniversalFuzzyScaleDomains(), strict=True)
+)
+assert isclose(centroids[2], 0.5, abs_tol=1e-12)
+print(result.selectedTerms[0].name, centroids)
+```
+
+The five centroids use the historical integration windows, not the full
+normalized universe. These are the corrected 2.0 values; equality with 1.0.3
+sampled centroids is not promised.
+
 ## Explicit construction with the modern API
 
 ```python

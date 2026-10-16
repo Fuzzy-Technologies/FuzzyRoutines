@@ -1,0 +1,22 @@
+{
+  "repository": "/absolute/path/to/clean-public-harness-checkout",
+  "harness_commit": null,
+  "candidate": {
+    "version": "2.1.0",
+    "wheel": "/absolute/path/to/ci/fuzzyroutines-2.1.0-py3-none-any.whl",
+    "wheel_sha256": null,
+    "source_commit": null,
+    "provenance_json": "/absolute/path/to/successful-workflow-run.json",
+    "artifact_metadata_json": "/absolute/path/to/github-artifact-metadata.json",
+    "artifact_archive": "/absolute/path/to/downloaded-package-artifacts.zip",
+    "source_evidence_url": null
+  },
+  "numpy_wheel": {
+    "path": "/absolute/path/to/numpy-2.3.5-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+    "sha256": "fffe29a1ef00883599d1dc2c51aa2e5d80afe49523c261a74933df395c15c520"
+  },
+  "output_directory": "/absolute/path/outside-checkout/new-installed-batch-run",
+  "repeats": 7,
+  "warmups": 1,
+  "shapes": [[1], [16], [32, 32], [10000]]
+}

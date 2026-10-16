@@ -1,0 +1,25 @@
+[
+  {
+    "url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/bd6f0af22be325967c2694c9497e50b0af2cbff7/docs/site/content/en/agent-quickstart.md",
+    "status": 200,
+    "final_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/bd6f0af22be325967c2694c9497e50b0af2cbff7/docs/site/content/en/agent-quickstart.md"
+  },
+  {
+    "url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/bd6f0af22be325967c2694c9497e50b0af2cbff7/docs/site/content/ru/guides/inference.md",
+    "status": 200,
+    "final_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/bd6f0af22be325967c2694c9497e50b0af2cbff7/docs/site/content/ru/guides/inference.md"
+  },
+  {
+    "url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/quick-start.md",
+    "status": 200,
+    "final_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/quick-start.md"
+  },
+  {
+    "url": "https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/",
+    "status": 404
+  },
+  {
+    "url": "https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/inference/",
+    "status": 404
+  }
+]

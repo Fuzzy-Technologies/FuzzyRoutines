@@ -1,0 +1,72 @@
+{
+  "source_revision": "f529b62369a53e3dbf3190fb750d55bdf258cf11",
+  "built_source": "471b10e788d8b2230aaa16e827688e0cfe73342e",
+  "wheel_sha256": "fae78d8c0c909d1f99dc676fdcfb7c74d4919e2511972c72492a60a5348b88c3",
+  "environment": {
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "base_executable": "/root/.local/share/uv/python/cpython-3.14.8-linux-x86_64-gnu/bin/python3.14",
+    "base_executable_sha256": "60b250069178fb421d296805bcff5514acfe9ea9597f92413863db87ed6b4a18",
+    "cgroup": {
+      "cpu.max": "800000 100000",
+      "memory.max": "8589934592"
+    },
+    "executable": "/workspace/scratch/0a9762bec34b/audit-build-env/bin/python",
+    "implementation": "CPython",
+    "logical_cpu_count": 9,
+    "physical_memory_bytes": 10451464192,
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "processor": "AMD EPYC 9V74 80-Core Processor",
+    "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+    "thread_environment": {
+      "MKL_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    }
+  },
+  "workload": "fuzzyset_hyperbolic_centroid",
+  "measurement": {
+    "baseline": {
+      "interquartile_range": 47973.89999999991,
+      "maximum": 1895009.5,
+      "median": 1244040.3,
+      "minimum": 1149042.5,
+      "raw_samples": [
+        1291738.2,
+        1244040.3,
+        1895009.5,
+        1212921.5,
+        1234965.6,
+        1252096.7,
+        1149042.5
+      ]
+    },
+    "baseline_over_candidate": 0.05046190045497312,
+    "candidate": {
+      "interquartile_range": 3329030.6999999955,
+      "maximum": 27626044.0,
+      "median": 24653060.8,
+      "minimum": 22762368.2,
+      "raw_samples": [
+        23266066.6,
+        27416267.6,
+        24615909.3,
+        22762368.2,
+        27123769.7,
+        27626044.0,
+        24653060.8
+      ]
+    },
+    "unit": "nanoseconds_per_operation"
+  },
+  "finding": "Complete per-refinement rescans caused quadratic work. Superseded by cached totals with complete compensated resummation before acceptance."
+}

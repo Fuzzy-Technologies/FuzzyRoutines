@@ -5,7 +5,8 @@
 
 """Strict modern-source and installed-package static typing gates.
 
-The default command checks the explicit modern scope in `mypy.ini`. The
+The default command checks the scalar modern scope in `mypy.ini`; `--extra numpy`
+adds the optional batch module and consumer to the same strict configuration. The
 installed mode copies consumer probes outside the checkout and requires an
 installed package with a `py.typed` marker before checking their contracts.
 Mypy diagnostics reach stdout and stderr unchanged; failures retain a nonzero
@@ -13,6 +14,7 @@ exit status. Temporary consumer copies and caches are removed on completion.
 """
 
 import argparse
+import configparser
 import os
 import shutil
 import subprocess
@@ -22,23 +24,40 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+OPTIONAL_SOURCES = {"numpy": ("fuzzyroutines/batches.py",)}
 
 
-def ConsumerPaths(projectRoot: Path = PROJECT_ROOT) -> tuple[Path, ...]:
-    """Return every static consumer probe, including future additions.
+def ConsumerPaths(projectRoot: Path = PROJECT_ROOT, extras: Sequence[str] = ()) -> tuple[Path, ...]:
+    """Return core consumers and explicitly selected optional consumers.
 
     Args:
         projectRoot: Checkout whose `tests/typing` directory supplies probes.
+        extras: Optional dependency scopes selected by the caller.
     """
 
-    return tuple(sorted((projectRoot / "tests" / "typing").glob("*.py")))
+    consumerRoot = projectRoot / "tests" / "typing"
+    paths = list(consumerRoot.glob("*.py"))
+
+    for extra in extras:
+        if extra not in OPTIONAL_SOURCES:
+            raise ValueError(f"Unknown typing extra: {extra}")
+
+        optionalPaths = tuple((consumerRoot / "optional" / extra).glob("*.py"))
+
+        if not optionalPaths:
+            raise ValueError(f"No typing consumers were found for extra: {extra}")
+
+        paths.extend(optionalPaths)
+
+    return tuple(sorted(set(paths)))
 
 
-def CheckInstalled(projectRoot: Path = PROJECT_ROOT) -> int:
+def CheckInstalled(projectRoot: Path = PROJECT_ROOT, extras: Sequence[str] = ()) -> int:
     """Check isolated consumers against the active installed package.
 
     Args:
         projectRoot: Checkout containing the checker configuration and probes.
+        extras: Optional dependency consumers to include alongside core probes.
 
     Returns:
         Zero when the installed marker and every consumer contract pass;
@@ -81,7 +100,7 @@ def CheckInstalled(projectRoot: Path = PROJECT_ROOT) -> int:
 
             return 1
 
-        consumers = ConsumerPaths(projectRoot)
+        consumers = ConsumerPaths(projectRoot, extras)
 
         if not consumers:
             print("No typing consumer probes were found", file=sys.stderr)
@@ -131,13 +150,30 @@ def Main(arguments: Sequence[str] | None = None) -> int:
         action="store_true",
         help="check copied consumers outside the checkout against the installed package",
     )
+    parser.add_argument(
+        "--extra", action="append", choices=tuple(OPTIONAL_SOURCES), default=[],
+        help="include an explicitly installed optional dependency scope",
+    )
     options = parser.parse_args(arguments)
 
     if options.installed:
-        return CheckInstalled()
+        return CheckInstalled(extras=options.extra)
+
+    command = [sys.executable, "-m", "mypy", "--config-file", str(PROJECT_ROOT / "mypy.ini"), "--no-incremental"]
+
+    if options.extra:
+        configuration = configparser.ConfigParser()
+        configuration.read(PROJECT_ROOT / "mypy.ini")
+        targets = [target.strip() for target in configuration["mypy"]["files"].split(",")]
+
+        for extra in options.extra:
+            targets.extend(OPTIONAL_SOURCES[extra])
+
+        targets.extend(str(path.relative_to(PROJECT_ROOT)) for path in ConsumerPaths(extras=options.extra))
+        command.extend(dict.fromkeys(targets))
 
     result = subprocess.run(
-        [sys.executable, "-m", "mypy", "--config-file", str(PROJECT_ROOT / "mypy.ini"), "--no-incremental"],
+        command,
         cwd=PROJECT_ROOT,
         check=False,
     )

@@ -5,28 +5,41 @@
 
 """Verify examples and benchmarks against the active installed distribution.
 
-The command runs every user-facing example and benchmark from a new explicit
+The command runs dependency-free examples and benchmarks from a new explicit
 artifact directory with `PYTHONPATH` removed. JSON stdout is persisted and
 parsed, benchmark `--output` files are compared with stdout, and the package
 origin must reside under the active interpreter prefix. The command creates
 only `--artifact-directory` and its contents, performs no network access,
 prints a JSON summary to stdout, and returns nonzero when any contract fails.
+Declared optional guide pages are omitted explicitly in the coverage report;
+the full documentation gate opts into their extras and validates the full index.
 """
 
 from __future__ import annotations
 
 import argparse
+import importlib.metadata
 import json
 import os
 import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
 EXAMPLEROOT = PROJECTROOT / "examples" / "migration"
 COMPATIBILITYGUIDE = PROJECTROOT / "docs" / "COMPATIBILITY.md"
 CANONICALROOT = PROJECTROOT / "docs" / "site" / "content" / "en"
+
+
+def OptionalExampleScopes():
+    """Return declared optional pages and modules without importing a backend."""
+
+    manifestPath = PROJECTROOT / "docs/site/api-coverage.toml"
+    manifest = tomllib.loads(manifestPath.read_text(encoding="utf-8"))
+
+    return {scope["extra"]: scope for scope in manifest.get("optionalExamples", ())}
 
 
 def ParseArguments(arguments=None):
@@ -164,11 +177,25 @@ def RunCompatibilityGuideExamples(artifactDirectory, environment):
     return results
 
 
-def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT):
-    """Discover every canonical English Python fence in deterministic page order."""
+def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT, extras=()):
+    """Discover core fences and explicitly selected optional pages in page order."""
 
+    optionalScopes = OptionalExampleScopes()
+    unknownExtras = set(extras) - optionalScopes.keys()
+
+    if unknownExtras:
+        raise ValueError(f"Unknown guide extras: {sorted(unknownExtras)}")
+
+    omittedPages = {
+        page for extra, scope in optionalScopes.items() if extra not in extras
+        for page in scope["pages"]
+    }
     examples = {}
+
     for pagePath in sorted(contentRoot.rglob("*.md")):
+        if pagePath.relative_to(contentRoot).as_posix() in omittedPages:
+            continue
+
         relativePath = pagePath.relative_to(contentRoot).with_suffix("")
         pageName = "-".join(relativePath.parts)
         snippets = re.findall(r"```python\n(.*?)```", pagePath.read_text(encoding="utf-8"), flags=re.DOTALL)
@@ -180,7 +207,7 @@ def LoadCanonicalGuideExamples(contentRoot=CANONICALROOT):
 
 
 def RunCanonicalGuideExamples(artifactDirectory, environment):
-    """Execute every English snippet and all nine scenarios against an installed artifact."""
+    """Execute core English snippets and all nine scenarios against an installed artifact."""
 
     results = {}
     for name, snippet in LoadCanonicalGuideExamples().items():
@@ -214,6 +241,48 @@ def RunCanonicalGuideExamples(artifactDirectory, environment):
     return results
 
 
+def RunAgentRecipes(artifactDirectory, environment):
+    """Verify documented standalone recipes against the actual installed candidate.
+
+    The exact installed version is passed explicitly, so this gate can test a
+    development wheel without changing the public released-version instructions.
+    Every subprocess uses isolated imports and persists parseable JSON evidence.
+    """
+
+    installedVersion = importlib.metadata.version("fuzzyroutines")
+    results = {}
+    scenarios = (
+        ("agent-universal-scale", "universal-fuzzy-scale", "0.2", ["Low"]),
+        ("agent-risk-high", "risk", "75", ["High"]),
+        ("agent-risk-abstention", "risk", "17", []),
+    )
+
+    for name, scenario, value, expectedTerms in scenarios:
+        outputPath = artifactDirectory / f"{name}.json"
+        report = RunCommand(
+            name,
+            [sys.executable, "-I", str(PROJECTROOT / "examples/agent_recipe.py"),
+             "--expect-version", installedVersion, "--scenario", scenario,
+             "--value", value, "--output", str(outputPath)],
+            artifactDirectory,
+            environment,
+        )
+
+        if report != json.loads(outputPath.read_text(encoding="utf-8")):
+            raise RuntimeError(f"{name} stdout differs from the requested JSON artifact")
+
+        if report["environment"]["fuzzyroutines"] != installedVersion:
+            raise RuntimeError(f"{name} did not execute the installed candidate")
+
+        if report["result"]["selectedTerms"] != expectedTerms or not report["checks"]["passed"]:
+            raise RuntimeError(f"{name} failed its expected numerical outcome")
+
+        results[name] = {"version": installedVersion, "selectedTerms": expectedTerms,
+                         "maximumAbsoluteError": report["checks"]["maximumAbsoluteError"]}
+
+    return results
+
+
 def Main(arguments=None):
     """Execute clean-install evidence and return zero after a complete pass."""
 
@@ -225,6 +294,23 @@ def Main(arguments=None):
     packagePath = VerifyPackageOrigin(artifactDirectory, environment)
 
     results = {
+        "agent-recipes": RunAgentRecipes(artifactDirectory, environment),
+        "consumer-scale-migration": RunJsonEntryPoint(
+            "consumer-scale-migration",
+            [
+                sys.executable, "-I", str(PROJECTROOT / "tools/consumer_scale_migration.py"),
+                "--fixture", str(PROJECTROOT / "tests/fixtures/consumer_scale_migration.json"),
+                "--check-current",
+            ],
+            artifactDirectory,
+            environment,
+        ),
+        "fuzzy-inference": RunCommand(
+            "fuzzy-inference",
+            [sys.executable, "-I", str(PROJECTROOT / "examples/inference.py")],
+            artifactDirectory,
+            environment,
+        ),
         "canonical-guide-examples": RunCanonicalGuideExamples(artifactDirectory, environment),
         "compatibility-guide-examples": RunCompatibilityGuideExamples(
             artifactDirectory,

@@ -1,0 +1,406 @@
+{
+  "package_version": "2.1.0",
+  "python_version": "3.14.8",
+  "fixture_sha256": "9c97478588e7e5117b3e1ccb3ab079ec3a47e4766a8c327e3d0b2af5ec8cc741",
+  "consumer_revision": "b963c54039f013d432220186ae35a22359c5a773",
+  "fixture_kind": "synthetic inputs derived from public consumer semantics",
+  "measurements": {
+    "term_order": [
+      "Min",
+      "Low",
+      "Med",
+      "High",
+      "Max"
+    ],
+    "integration_windows": [
+      [
+        0.0,
+        0.23
+      ],
+      [
+        0.17,
+        0.4
+      ],
+      [
+        0.34,
+        0.66
+      ],
+      [
+        0.6,
+        0.83
+      ],
+      [
+        0.77,
+        1.0
+      ]
+    ],
+    "cases": [
+      {
+        "id": "long-0",
+        "coordinate": 0.0,
+        "grades": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 0.0
+      },
+      {
+        "id": "short-0",
+        "coordinate": 1.0,
+        "grades": [
+          8.673617379884035e-19,
+          0,
+          0,
+          0,
+          1
+        ],
+        "label": "Max",
+        "percent": 100.0
+      },
+      {
+        "id": "long-0.17",
+        "coordinate": 0.17,
+        "grades": [
+          0.0021295898943666483,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 17.0
+      },
+      {
+        "id": "short-0.17",
+        "coordinate": 0.83,
+        "grades": [
+          3.602785553537654e-17,
+          0,
+          0,
+          2.73910036535072e-29,
+          0.22222222222222193
+        ],
+        "label": "Max",
+        "percent": 83.0
+      },
+      {
+        "id": "long-0.23",
+        "coordinate": 0.23,
+        "grades": [
+          5.054071072357247e-06,
+          1,
+          0,
+          0,
+          0
+        ],
+        "label": "Low",
+        "percent": 23.0
+      },
+      {
+        "id": "short-0.23",
+        "coordinate": 0.77,
+        "grades": [
+          1.6157931279084558e-16,
+          0,
+          0,
+          1,
+          0
+        ],
+        "label": "High",
+        "percent": 77.0
+      },
+      {
+        "id": "long-0.34",
+        "coordinate": 0.34,
+        "grades": [
+          2.0352694719019468e-09,
+          1,
+          0,
+          0,
+          0
+        ],
+        "label": "Low",
+        "percent": 34.0
+      },
+      {
+        "id": "short-0.34",
+        "coordinate": 0.66,
+        "grades": [
+          3.5263186116655744e-15,
+          0,
+          0,
+          1,
+          0
+        ],
+        "label": "High",
+        "percent": 66.0
+      },
+      {
+        "id": "long-0.4",
+        "coordinate": 0.4,
+        "grades": [
+          7.888609051587808e-11,
+          0,
+          1,
+          0,
+          0
+        ],
+        "label": "Med",
+        "percent": 40.0
+      },
+      {
+        "id": "short-0.4",
+        "coordinate": 0.6,
+        "grades": [
+          2.372330828128563e-14,
+          0,
+          1,
+          0,
+          0
+        ],
+        "label": "Med",
+        "percent": 60.0
+      },
+      {
+        "id": "long-0.5",
+        "coordinate": 0.5,
+        "grades": [
+          9.094947017721011e-13,
+          0,
+          1,
+          0,
+          0
+        ],
+        "label": "Med",
+        "percent": 50.0
+      },
+      {
+        "id": "short-0.5",
+        "coordinate": 0.5,
+        "grades": [
+          9.094947017721011e-13,
+          0,
+          1,
+          0,
+          0
+        ],
+        "label": "Med",
+        "percent": 50.0
+      },
+      {
+        "id": "long-0.6",
+        "coordinate": 0.6,
+        "grades": [
+          2.372330828128563e-14,
+          0,
+          1,
+          0,
+          0
+        ],
+        "label": "Med",
+        "percent": 60.0
+      },
+      {
+        "id": "short-0.6",
+        "coordinate": 0.4,
+        "grades": [
+          7.888609051587808e-11,
+          0,
+          1,
+          0,
+          0
+        ],
+        "label": "Med",
+        "percent": 40.0
+      },
+      {
+        "id": "long-0.66",
+        "coordinate": 0.66,
+        "grades": [
+          3.5263186116655744e-15,
+          0,
+          0,
+          1,
+          0
+        ],
+        "label": "High",
+        "percent": 66.0
+      },
+      {
+        "id": "short-0.66",
+        "coordinate": 0.34,
+        "grades": [
+          2.0352694719019468e-09,
+          1,
+          0,
+          0,
+          0
+        ],
+        "label": "Low",
+        "percent": 34.0
+      },
+      {
+        "id": "long-0.77",
+        "coordinate": 0.77,
+        "grades": [
+          1.6157931279084558e-16,
+          0,
+          0,
+          1,
+          0
+        ],
+        "label": "High",
+        "percent": 77.0
+      },
+      {
+        "id": "short-0.77",
+        "coordinate": 0.23,
+        "grades": [
+          5.054071072357247e-06,
+          1,
+          0,
+          0,
+          0
+        ],
+        "label": "Low",
+        "percent": 23.0
+      },
+      {
+        "id": "long-0.83",
+        "coordinate": 0.83,
+        "grades": [
+          3.602785553537654e-17,
+          0,
+          0,
+          2.73910036535072e-29,
+          0.22222222222222193
+        ],
+        "label": "Max",
+        "percent": 83.0
+      },
+      {
+        "id": "short-0.83",
+        "coordinate": 0.17,
+        "grades": [
+          0.0021295898943666483,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 17.0
+      },
+      {
+        "id": "long-0.95",
+        "coordinate": 0.95,
+        "grades": [
+          2.4195140834566183e-18,
+          0,
+          0,
+          0,
+          1
+        ],
+        "label": "Max",
+        "percent": 95.0
+      },
+      {
+        "id": "short-0.95",
+        "coordinate": 0.05,
+        "grades": [
+          0.9999999890048837,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 5.0
+      },
+      {
+        "id": "long-1",
+        "coordinate": 1.0,
+        "grades": [
+          8.673617379884035e-19,
+          0,
+          0,
+          0,
+          1
+        ],
+        "label": "Max",
+        "percent": 100.0
+      },
+      {
+        "id": "short-1",
+        "coordinate": 0.0,
+        "grades": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 0.0
+      },
+      {
+        "id": "below",
+        "coordinate": 0.0,
+        "grades": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 0.0
+      },
+      {
+        "id": "above",
+        "coordinate": 0.0,
+        "grades": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 0.0
+      },
+      {
+        "id": "flat",
+        "coordinate": 0.0,
+        "grades": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "Min",
+        "percent": 0.0
+      }
+    ],
+    "centroids": [
+      0.06327898286723559,
+      0.28500000000000003,
+      0.5000000000000001,
+      0.7150000000000001,
+      0.9251785714285713
+    ],
+    "centroids_after_accuracy_100": [
+      0.06327898286723559,
+      0.28500000000000003,
+      0.5000000000000001,
+      0.7150000000000001,
+      0.9251785714285713
+    ]
+  },
+  "published_boundary_check": "passed"
+}

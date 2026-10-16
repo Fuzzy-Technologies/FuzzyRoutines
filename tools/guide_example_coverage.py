@@ -10,6 +10,8 @@ profiles the exact published Python fences and observes constructor, method,
 and property execution. Merely importing a symbol does not establish usage.
 Typing contracts require an annotation; built-in exception constructors require
 a retained concrete instance. No package source path is added to sys.path.
+The default core report lists omitted optional pages and symbols. Select every
+declared extra explicitly before generating or validating the complete index.
 """
 
 import argparse
@@ -31,6 +33,7 @@ VERIFIER = runpy.run_path(str(PROJECT_ROOT / "tools/verify_installed_executables
 TYPE_CONTRACT_NAMES = frozenset({
     "fuzzyroutines.MembershipCallable", "fuzzyroutines.MembershipScalar",
     "fuzzyroutines.membership.MembershipCallable", "fuzzyroutines.membership.MembershipScalar",
+    "fuzzyroutines.inference.Antecedent",
 })
 
 
@@ -177,16 +180,37 @@ def ExecuteExamples(examples, targets):
     return coverage
 
 
-def BuildReport(examples=None, targets=None):
-    """Return complete execution evidence and unexplained public-symbol gaps."""
+def BuildReport(examples=None, targets=None, extras=()):
+    """Return execution evidence for the selected scope and explicit omissions."""
 
-    examples = VERIFIER["LoadCanonicalGuideExamples"]() if examples is None else examples
+    optionalScopes = VERIFIER["OptionalExampleScopes"]()
+    unknownExtras = set(extras) - optionalScopes.keys()
+
+    if unknownExtras:
+        raise ValueError(f"Unknown guide extras: {sorted(unknownExtras)}")
+
+    omittedModules = tuple(
+        module for extra, scope in optionalScopes.items() if extra not in extras
+        for module in scope["modules"]
+    )
+    omittedPages = sorted(
+        page for extra, scope in optionalScopes.items() if extra not in extras
+        for page in scope["pages"]
+    )
+    examples = VERIFIER["LoadCanonicalGuideExamples"](extras=extras) if examples is None else examples
     targets = PublicTargets() if targets is None else targets
+    omittedSymbols = sorted(
+        name for name in targets if any(name == module or name.startswith(module + ".") for module in omittedModules)
+    )
+    targets = {name: target for name, target in targets.items() if name not in omittedSymbols}
     coverage = ExecuteExamples(examples, targets)
     package = importlib.import_module("fuzzyroutines")
 
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
+        "extras": sorted(set(extras)),
+        "omittedOptionalPages": omittedPages,
+        "omittedOptionalSymbols": omittedSymbols,
         "packageOrigin": str(Path(package.__file__).resolve()),
         "exampleCount": len(examples),
         "symbolCount": len(coverage),
@@ -201,6 +225,9 @@ def RenderIndex(report):
     if report["missing"]:
         raise RuntimeError("cannot render an incomplete public example index")
 
+    if report.get("omittedOptionalPages") or report.get("omittedOptionalSymbols"):
+        raise RuntimeError("canonical index requires every declared optional extra")
+
     pages = {}
 
     for path in sorted(CONTENT_ROOT.rglob("*.md")):
@@ -209,11 +236,18 @@ def RenderIndex(report):
         pages[key] = path.relative_to(INDEX_PATH.parent).as_posix() if path.is_relative_to(INDEX_PATH.parent) else "../" + path.relative_to(CONTENT_ROOT).as_posix()
 
     rows = [("Public symbol", "Executable examples")]
+    optionalPrefixes = tuple(
+        "canonical-" + "-".join(Path(page).with_suffix("").parts) + "-"
+        for scope in VERIFIER["OptionalExampleScopes"]().values() for page in scope["pages"]
+    )
 
     for name, examples in sorted(report["coverage"].items()):
         links = []
 
-        for exampleName in examples[:2]:
+        # Prefer dependency-free evidence for symbols shared by core and extras.
+        orderedExamples = sorted(examples, key=lambda name: (name.startswith(optionalPrefixes), name))
+
+        for exampleName in orderedExamples[:2]:
             pageKey, _, number = exampleName.rpartition("-")
             path = pages[pageKey]
             links.append(f"[{Path(path).stem}, block {number}]({path})")
@@ -227,12 +261,13 @@ def RenderIndex(report):
         "<!--\nSPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies\n"
         "SPDX-License-Identifier: Apache-2.0\n-->\n\n# Public API example index\n\n"
         f"All {report['symbolCount']} inventoried public symbols are linked to executed "
-        f"examples ({report['exampleCount']} standalone Python blocks). Root exports "
+        f"examples ({report['exampleCount']} standalone Python blocks), with every "
+        "declared optional extra enabled. Root exports "
         "are verified aliases of the corresponding module objects.\n\n"
         "Functions, constructors, methods and properties require actual execution; "
         "imports alone do not count. Result constructors also run when their producer "
         "returns them; see [result records](results.md) for explicit reconstruction. "
-        "The two typing contracts require a real annotation, and exception classes "
+        "Typing contracts require a real annotation, and exception classes "
         "require constructed instances. Private helpers and generated dataclass "
         "methods remain outside the authored public inventory.\n\n"
         "This index establishes example availability, not independent proof of every "
@@ -244,17 +279,67 @@ def RenderIndex(report):
     return header + table + "\n"
 
 
+def ValidateIndex(report, indexText):
+    """Check full index content or only observed core rows with explicit omissions."""
+
+    if not report["omittedOptionalPages"] and not report["omittedOptionalSymbols"]:
+        if indexText != RenderIndex(report):
+            raise RuntimeError("stale public API example index; run --write-index with all extras")
+
+        return
+
+    scopedReport = dict(report, omittedOptionalPages=[], omittedOptionalSymbols=[])
+    expectedRows = {
+        row.split("|")[1].strip(): tuple(cell.strip() for cell in row.split("|")[1:-1])
+        for row in RenderIndex(scopedReport).splitlines() if row.startswith("| `")
+    }
+    actualRows = {}
+
+    for row in indexText.splitlines():
+        if not row.startswith("| `"):
+            continue
+
+        cells = tuple(cell.strip() for cell in row.split("|")[1:-1])
+
+        if cells[0] in actualRows:
+            raise RuntimeError(f"duplicate public API example index row: {cells[0]}")
+
+        actualRows[cells[0]] = cells
+
+    optionalDestinations = {
+        Path(page).relative_to("guides").as_posix() if page.startswith("guides/") else "../" + page
+        for page in report["omittedOptionalPages"]
+    }
+
+    for name, expectedRow in expectedRows.items():
+        actualRow = actualRows.get(name)
+
+        if actualRow is None or len(actualRow) != 2:
+            raise RuntimeError(f"missing or malformed core index row: {name}")
+
+        expectedLinks = expectedRow[1].split("; ")
+        actualLinks = actualRow[1].split("; ")
+        optionalLinks = actualLinks[len(expectedLinks):]
+
+        if (
+            len(actualLinks) > 2 or actualLinks[:len(expectedLinks)] != expectedLinks
+            or any(not any(link.endswith(f"]({path})") for path in optionalDestinations) for link in optionalLinks)
+        ):
+            raise RuntimeError(f"stale core row in public API example index: {name}")
+
+
 def Main(arguments=None):
     """Validate execution coverage and optionally write explicit evidence or index."""
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--require-installed", action="store_true", dest="requireInstalled")
+    parser.add_argument("--extra", action="append", default=[], choices=tuple(VERIFIER["OptionalExampleScopes"]()))
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--write-index", action="store_true", dest="writeIndex")
     modes.add_argument("--check-index", action="store_true", dest="checkIndex")
     options = parser.parse_args(arguments)
-    report = BuildReport()
+    report = BuildReport(extras=options.extra)
 
     if options.requireInstalled and not Path(report["packageOrigin"]).is_relative_to(Path(sys.prefix).resolve()):
         raise RuntimeError(f"package resolved outside installed environment: {report['packageOrigin']}")
@@ -264,15 +349,15 @@ def Main(arguments=None):
         options.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
 
     if not report["missing"]:
-        index = RenderIndex(report)
-
         if options.writeIndex:
-            INDEX_PATH.write_text(index)
+            INDEX_PATH.write_text(RenderIndex(report))
 
-        elif options.checkIndex and INDEX_PATH.read_text() != index:
-            raise RuntimeError("stale public API example index; run --write-index")
+        elif options.checkIndex:
+            ValidateIndex(report, INDEX_PATH.read_text())
 
-    print(json.dumps({key: report[key] for key in ("symbolCount", "exampleCount", "missing")}, sort_keys=True))
+    print(json.dumps({key: report[key] for key in (
+        "symbolCount", "exampleCount", "missing", "extras", "omittedOptionalPages", "omittedOptionalSymbols",
+    )}, sort_keys=True))
 
     return 1 if report["missing"] else 0
 

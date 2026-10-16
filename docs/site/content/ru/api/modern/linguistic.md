@@ -22,3 +22,17 @@ SPDX-License-Identifier: Apache-2.0
         - ScaleDiagnosticPoint
         - ScaleDiagnosticsResult
         - LinguisticScale
+
+::: fuzzyroutines.presets
+    options:
+      members:
+        - CreateUniversalFuzzyScale
+        - UniversalFuzzyScalePolicy
+        - UniversalFuzzyScaleDomains
+
+[Лингвистическое кодирование](../../guides/linguistic-encoding.md) преобразует названия уровней в числовых представителей, вычисляет векторы степеней принадлежности и интерпретирует численные прогнозы. Интервалы интегрирования задаются явно.
+
+::: fuzzyroutines.encoding
+    options:
+      members:
+        - LinguisticCodec

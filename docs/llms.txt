@@ -1,0 +1,26 @@
+# FuzzyRoutines
+
+<!-- SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0 -->
+
+> Scalar fuzzy computing in Python. Published release: 2.0.0; supported CPython: 3.13 and 3.14. The basic agent recipe below works with 2.0.0. Additional 2.1 capabilities describe candidate development and require its exact CI wheel; they do not announce a PyPI release. Verify installed version and source revision before execution. The default scalar core has no external runtime dependencies.
+
+## Start and verify
+
+- [Agent entrypoint and versioned capability map](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/): pinned 2.0.0 installation, memberships, plots and JSON evidence; separate instructions for an explicit candidate wheel.
+- [Русский](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/agent-quickstart/): запрос помощнику, версии API и объяснение результатов.
+- [简体中文](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/agent-quickstart/): 智能体请求、API 版本与结果解释。
+- [API reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/api/): supported imports and contracts; `/latest/` is moving documentation, not an installed-version guarantee.
+- [Migration from 1.0.3](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/migration/1.0.3-to-2.0.0/): compatibility and corrected numerical behavior.
+
+## Candidate 2.1 capability map
+
+- [Historical Universal Fuzzy Scale](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/universal-fuzzy-scale/): `CreateUniversalFuzzyScale`, `UniversalFuzzyScalePolicy` and `UniversalFuzzyScaleDomains` preserve original coefficients, exact-last selection and centroid windows. Existing reconstruction through 2.0 primitives remains valid.
+- [Linguistic encoding](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/linguistic-encoding/): `LinguisticCodec` explicitly maps labels, representatives and ordered grades. Grades are not probabilities; centroids are representative coordinates, not learned network weights. A representative average is not the centroid of an aggregated fuzzy set.
+- [Explainable inference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/inference/): `fuzzyroutines.inference.MamdaniModel` aggregates fuzzy output sets and can compute their centroid; zero/first-order `SugenoModel` averages rule consequences. Policies, domains, no-fire failures and rule traces are explicit.
+- [Optional NumPy batches](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/numpy-batches/): `fuzzyroutines.batches.EvaluateMembershipBatch` and `FuzzifyBatch`, with optional `numpy` extra and explicit `backend="numpy"`. No automatic switch; custom or composed membership callables remain scalar.
+- [CPU neural integration example](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/neural-integration/): repository PyTorch script with fixed fuzzy encodings, raw/centroid/full-grade ablations and a separate membership-output head. Optional dependencies; no Torch dependency in the core and no guaranteed accuracy improvement.
+- [Differentiable Sugeno research](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/guides/differentiable-sugeno/): bounded repository prototype, zero/first-order consequences, trainable smooth memberships, scalar parity and gradient checks. Decision: no public tensor backend in 2.1. Preserve its recorded experimental limits and use matching source files.
+- Project homepage: [English](https://fuzzy-technologies.github.io/FuzzyRoutines/), [Русский](https://fuzzy-technologies.github.io/FuzzyRoutines/ru/), [简体中文](https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/).
+
+Repository neural/research programs are separate from the installed package. Membership grades do not need to sum to one; define normalization, domains and no-match handling for the application. Without a Python execution environment, explain the commands and expected values without claiming execution. Preserve artifact hashes, versions, inputs and numerical evidence when reporting a run.

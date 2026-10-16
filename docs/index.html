@@ -17,6 +17,9 @@ SPDX-License-Identifier: Apache-2.0
   <meta property="og:image" content="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/assets/brand/fuzzyroutines-alice.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://fuzzy-technologies.github.io/FuzzyRoutines/" />
+  <link rel="alternate" hreflang="en" href="https://fuzzy-technologies.github.io/FuzzyRoutines/" />
+  <link rel="alternate" hreflang="ru" href="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="api/latest/en/assets/stylesheets/fonts.css" />
   <link rel="stylesheet" href="assets/landing.css" />
@@ -38,6 +41,11 @@ SPDX-License-Identifier: Apache-2.0
     <a href="#documentation">Documentation</a>
     <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines">GitHub ↗</a>
   </nav>
+  <nav class="site-nav language-nav" aria-label="Page language">
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/" hreflang="en" lang="en" aria-current="page">English</a>
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" hreflang="ru" lang="ru">Русский</a>
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" hreflang="zh-CN" lang="zh-CN">简体中文</a>
+  </nav>
   <img class="project-art" src="api/latest/en/assets/brand/fuzzyroutines-alice.png"
        alt="Alice in the Fuzzy Technologies laboratory, introducing FuzzyRoutines"
        width="1774" height="887" fetchpriority="high" />
@@ -45,6 +53,7 @@ SPDX-License-Identifier: Apache-2.0
     <p class="eyebrow">Python · Fuzzy mathematics · Open source</p>
     <p class="hero-lead"><strong>Turn measurements into interpretable grades</strong> with membership functions, fuzzy sets and linguistic scales. Build models for expert systems, risk assessment and engineering decisions.</p>
     <p class="quiet">CPython 3.13–3.14 · Typed scalar API · No mandatory NumPy dependency · Apache-2.0</p>
+    <p class="release-note" data-status="candidate"><strong>Candidate 2.1.0</strong> adds the historical scale factory, linguistic encoding, Mamdani/Sugeno inference, optional NumPy batches and neural examples. It is not yet published on PyPI. <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md">Try the candidate →</a></p>
     <div class="hero-actions">
       <a class="button-neon" href="#start">Try an example</a>
       <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/">Explore the API</a>
@@ -57,7 +66,7 @@ SPDX-License-Identifier: Apache-2.0
     <p>How well does a room temperature of <strong>24 °C</strong> fit the idea of “comfortable”? Define full comfort at 22 °C, decreasing to zero at 16 and 28 °C, then evaluate the measurement.</p>
     <h3>1 · Install</h3>
     <p>Use Python 3.13 or 3.14 in your project environment.</p>
-    <p class="release-note"><strong>This example uses the 2.0 API</strong>. Install the matching version from <a href="https://pypi.org/project/fuzzyroutines/">PyPI</a>; historical 1.x releases do not provide this API.</p>
+    <p class="release-note"><strong>This example uses published 2.0.0</strong>. Install this stable version from <a href="https://pypi.org/project/fuzzyroutines/2.0.0/">PyPI</a>; historical 1.x releases do not provide this API.</p>
     <div class="code-block">
       <div class="code-toolbar"><span>Terminal</span><button class="copy-button" type="button" data-copy-target="install-command" aria-label="Copy installation command" hidden>Copy</button></div>
       <pre tabindex="0" aria-label="Installation command"><code id="install-command">python -m pip install fuzzyroutines==2.0.0</code></pre>
@@ -147,13 +156,14 @@ Comfort membership: 0.667</code></pre>
     </nav>
     <div class="documentation-links">
       <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/migration/1.0.3-to-2.0.0/">Upgrading from 1.0.3 →</a>
+      <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/">Compute and plot with an AI assistant →</a>
       <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/CHANGELOG.md">Changelog →</a>
       <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md">Implementation status →</a>
     </div>
     <details id="status">
       <summary>Scope and compatibility</summary>
       <p data-status="implemented"><strong>Implemented in 2.0</strong>: the modern scalar API and historical compatibility facade, with explicit validation and documented numerical corrections.</p>
-      <p data-status="roadmap"><strong>Future work</strong>: additional defuzzification methods, executable convexity queries, symmetric difference and production vectorized execution. These are outside the current scalar API.</p>
+      <p data-status="roadmap"><strong>Future work</strong>: additional defuzzification methods, executable convexity queries, symmetric difference and free-threaded Python support remain outside the 2.1 scope.</p>
     </details>
   </section>
   <footer class="site-footer">

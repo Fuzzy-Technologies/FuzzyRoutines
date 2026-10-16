@@ -17,6 +17,81 @@ focused modern API while preserving protected historical calls. The CPython
 floor and helper-import changes justify the
 [selected stable target](docs/release-version-decision.md).
 
+## Minor 2.1
+
+### Patch 0 — v2.1.0 candidate — 2026-10-14
+
+#### Digest
+
+Candidate preparation date; version 2.1.0 has not been published. The published
+stable release remains 2.0.0. This candidate brings agent onboarding, historical
+scale factories, explicit linguistic encoding, fuzzy-rule inference, optional
+NumPy batches and neural examples. Final artifact evidence is tracked in the
+[2.1 readiness gate](docs/release-readiness.md#current-21-development-gate).
+
+#### Added
+
+- An optional CPU neural example compares raw, label-centroid and membership
+  inputs, with held-out evaluation and a separate membership-output task.
+  Pinned training dependencies, recorded experiments and reproducible
+  scientific figures accompany the English, Russian and Chinese guides.
+- A bounded differentiable Sugeno research prototype checks scalar parity
+  and gradients and compares shared-data baselines. Its recorded tradeoffs
+  support keeping tensor APIs outside the 2.1 public package; Torch remains
+  an optional repository dependency.
+
+- Typed scalar Mamdani and zero/first-order Sugeno rule inference with explicit
+  logical operators, rule weights, output policies and immutable traces.
+  English, Russian and Simplified Chinese worked examples include reproducible
+  stage plots, analytical reference values and explicit no-fire/error behavior.
+
+- A pinned public consumer migration fixture separates membership, label,
+  centroid and normalized-output changes across historical and modern releases.
+  Installed-candidate checks enforce the published 2.0 boundary while explicitly
+  recording that private FMA/robot application migration is still unverified.
+
+- A version-pinned agent quick start in English, Russian and Simplified Chinese,
+  a standalone compute/plot recipe with independent mathematical checks, and
+  machine-readable inputs, policies, results and execution evidence. The recipe
+  also runs against the published 2.0.0 baseline without a repository checkout.
+- An immutable modern factory preserves the historical Universal Fuzzy Scale's
+  coefficients, term order, selection policy and per-term centroid windows.
+- `LinguisticCodec` explicitly encodes labels or full memberships and decodes
+  predictions. Its grade-weighted representatives preserve meaningful small
+  contributions. A worked example and reproducible graph explain why averaging
+  representatives differs from the centroid of an aggregated fuzzy set.
+- Explicit optional NumPy batches evaluate built-in membership functions and
+  linguistic scales with scalar selection policies, copied arrays and complete
+  membership evidence. The default scalar installation remains dependency-free;
+  NumPy is installed only through the `numpy` extra.
+- Reproducible performance records distinguish synthetic batches from 30 pinned
+  public consumer test replays. Paired timing samples and measured resource
+  costs feed the figures; neither dataset establishes private application
+  throughput or an automatic backend-switching threshold.
+
+#### Changed
+
+- The README opens with installation and a complete runnable example, then
+  gives short human/agent routes to the appropriate versioned documentation.
+- Russian inference and integration documentation uses reviewed scientific
+  terminology, with university sources and explanatory Mamdani/Sugeno figures.
+- NumPy first/last tie selection avoids cumulative integer scans while
+  preserving complete grades, masks and public result validation.
+
+#### Fixed
+
+- Mamdani centroid integration retains built-in consequent geometry, including
+  narrow and disjoint supports, and enforces global estimated-error targets.
+- Bounded polynomial centroids recover representable coordinates when their
+  intermediate moments underflow or overflow. Sugeno preserves tiny normalized
+  strengths with rational arithmetic where necessary; a positive weighted rule
+  firing that underflows raises `NumericalError` rather than appearing unfired.
+
+#### Release process
+
+- Prepare isolated development and review against the published 2.0.0 baseline.
+  Promotion to `master` and package publication remain separate maintainer gates.
+
 ## Minor 2.0
 
 ### Patch 0 — v2.0.0 — 2026-10-10

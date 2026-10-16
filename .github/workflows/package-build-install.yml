@@ -8,14 +8,14 @@ on:
     branches:
       - develop
       - master
-  push:
-    branches:
-      - develop
-      - master
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-install:
@@ -30,18 +30,32 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Select full or reviewed focused validation
+        id: scope
+        uses: ./.github/actions/ci-policy
+
+      - name: Check artifact tooling contracts on routine updates
+        if: steps.scope.outputs.package != 'true'
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements.txt
+          python -m pytest -q tests/test_reproducible_artifacts.py
+
       - name: Build and compare independent wheel and source distributions
+        if: steps.scope.outputs.package == 'true'
         run: |
           python -m pip install --disable-pip-version-check -r requirements-build.txt
           python -m tools.reproducible_artifacts --output-directory dist
 
       - name: Record artifact hashes and source revision
+        if: steps.scope.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -52,6 +66,7 @@ jobs:
           cat dist/reproducibility.json
 
       - name: Clean-install wheel and verify installed package
+        if: steps.scope.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -64,18 +79,42 @@ jobs:
           "$venvPath/bin/python" -m pip install --disable-pip-version-check pytest
           "$venvPath/bin/python" -m pip install --disable-pip-version-check --no-deps "$wheelPath"
 
+          expectedVersion="$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+          export EXPECTED_PACKAGE_VERSION="$expectedVersion"
           cd "$RUNNER_TEMP"
           "$venvPath/bin/python" -m pytest -q \
             "$GITHUB_WORKSPACE/tests/test_legacy_public_api.py" \
             "$GITHUB_WORKSPACE/tests/test_public_api_documentation.py" \
             "$GITHUB_WORKSPACE/tests/test_migration_examples.py"
-          "$venvPath/bin/python" - <<'PY'
+          "$venvPath/bin/python" -I - <<'PY'
+          import importlib.util
+          import os
+          import sys
           from importlib.metadata import version
+          from pathlib import Path
 
           import fuzzyroutines
+          from fuzzyroutines import CreateUniversalFuzzyScale, Gaussian
+          from fuzzyroutines.batches import EvaluateMembershipBatch, FuzzifyBatch
           from fuzzyroutines.FuzzyRoutines import FuzzySet, MFunction
 
-          assert version("fuzzyroutines") == "2.0.0"
+          assert Path(fuzzyroutines.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
+          assert importlib.util.find_spec("numpy") is None, "The no-extra wheel probe must have no NumPy installed"
+          assert "numpy" not in sys.modules, "Core and batch imports must not import NumPy"
+          for operation in (
+              lambda: EvaluateMembershipBatch(Gaussian(0, 1), [0.0]),
+              lambda: FuzzifyBatch(CreateUniversalFuzzyScale(), [0.5]),
+          ):
+              try:
+                  operation()
+
+              except ImportError as error:
+                  assert "fuzzyroutines[numpy]" in str(error)
+
+              else:
+                  raise AssertionError("Batch execution without the extra must fail with installation guidance")
+
+          assert version("fuzzyroutines") == os.environ["EXPECTED_PACKAGE_VERSION"]
           assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzySet is not None
@@ -86,7 +125,46 @@ jobs:
           cp -a "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}" \
             "$GITHUB_WORKSPACE/dist/wheel-executable-evidence"
 
+          # Reuse the exact reproducible wheel for baseline and resolver-selected NumPy.
+          for numpyCase in baseline compatible; do
+            extraRoot="$RUNNER_TEMP/fuzzyroutines-numpy-${{ matrix.python-version }}-$numpyCase"
+            evidenceRoot="$GITHUB_WORKSPACE/dist/numpy-$numpyCase"
+            testRoot="$extraRoot/tests"
+            mkdir -p "$testRoot" "$evidenceRoot"
+            python -m venv "$extraRoot/environment"
+            extraPython="$extraRoot/environment/bin/python"
+            "$extraPython" -m pip install --disable-pip-version-check \
+              pytest -r "$GITHUB_WORKSPACE/requirements-typing.txt"
+            numpyConstraint=()
+            if [ "$numpyCase" = baseline ]; then
+              numpyConstraint=("numpy==2.3.5")
+            fi
+            "$extraPython" -m pip install --disable-pip-version-check \
+              "$wheelPath[numpy]" "${numpyConstraint[@]}"
+            "$extraPython" -I - <<'PY' > "$evidenceRoot/environment.json"
+          import json
+          import sys
+          from pathlib import Path
+
+          import fuzzyroutines
+          import numpy
+
+          assert Path(fuzzyroutines.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
+          print(json.dumps({"python": sys.version, "numpy": numpy.__version__, "packageOrigin": fuzzyroutines.__file__}))
+          PY
+            cat "$evidenceRoot/environment.json"
+            "$extraPython" -m pip list --format=json > "$evidenceRoot/dependencies.json"
+            cp "$GITHUB_WORKSPACE/tests/test_numpy_batches.py" "$GITHUB_WORKSPACE/tests/conftest.py" "$testRoot/"
+            "$extraPython" -I -m pytest -q "$testRoot/test_numpy_batches.py" | tee "$evidenceRoot/parity.txt"
+            "$extraPython" "$GITHUB_WORKSPACE/tools/typecheck.py" --installed --extra numpy \
+              | tee "$evidenceRoot/typing.txt"
+            "$extraPython" -I "$GITHUB_WORKSPACE/examples/numpy_batches.py" > "$evidenceRoot/example.json"
+            "$extraPython" -I -c 'import json, sys; report = json.load(open(sys.argv[1])); assert report["backend"] == "numpy" and report["shape"] == [5, 5]' \
+              "$evidenceRoot/example.json"
+          done
+
       - name: Clean-install source distribution and verify installed package
+        if: steps.scope.outputs.package == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -99,18 +177,21 @@ jobs:
           "$venvPath/bin/python" -m pip install --disable-pip-version-check pytest
           "$venvPath/bin/python" -m pip install --disable-pip-version-check --no-deps "$sdistPath"
 
+          expectedVersion="$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+          export EXPECTED_PACKAGE_VERSION="$expectedVersion"
           cd "$RUNNER_TEMP"
           "$venvPath/bin/python" -m pytest -q \
             "$GITHUB_WORKSPACE/tests/test_legacy_public_api.py" \
             "$GITHUB_WORKSPACE/tests/test_public_api_documentation.py" \
             "$GITHUB_WORKSPACE/tests/test_migration_examples.py"
           "$venvPath/bin/python" - <<'PY'
+          import os
           from importlib.metadata import version
 
           import fuzzyroutines
           from fuzzyroutines.FuzzyRoutines import FuzzyScale, MFunction
 
-          assert version("fuzzyroutines") == "2.0.0"
+          assert version("fuzzyroutines") == os.environ["EXPECTED_PACKAGE_VERSION"]
           assert fuzzyroutines is not None
           assert MFunction("triangle", a=0, b=1, c=0.5).mju(0.5) == 1
           assert FuzzyScale is not None
@@ -122,6 +203,7 @@ jobs:
             "$GITHUB_WORKSPACE/dist/sdist-executable-evidence"
 
       - name: Upload reproducible artifact evidence
+        if: steps.scope.outputs.package == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: package-artifacts-python-${{ matrix.python-version }}
