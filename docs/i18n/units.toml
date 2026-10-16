@@ -10267,46 +10267,46 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:mathematics.centroid-defuzzification"
 kind = "page"
 sourcePath = "docs/mathematics/centroid-defuzzification.md"
-sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
+sourceHash = "sha256:1a81a52a6d837db48648cbfb015a0361a909dfdf87cca8ebeee4d29c3d8b61b8"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/mathematics/centroid-defuzzification.md"
-sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
+sourceHash = "sha256:1a81a52a6d837db48648cbfb015a0361a909dfdf87cca8ebeee4d29c3d8b61b8"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
-reviewedTranslationHash = "sha256:f3e1f94a8aa6cc86a86370765b09d566f89d6146af8be445440410d119047568"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:1a81a52a6d837db48648cbfb015a0361a909dfdf87cca8ebeee4d29c3d8b61b8"
+reviewedTranslationHash = "sha256:3e4169aa6c09bc68cfa0d9841ec2ecbc73137a983d440956bd37d45fd2f1c997"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:12:53Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
-reviewedTranslationHash = "sha256:f3e1f94a8aa6cc86a86370765b09d566f89d6146af8be445440410d119047568"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:1a81a52a6d837db48648cbfb015a0361a909dfdf87cca8ebeee4d29c3d8b61b8"
+reviewedTranslationHash = "sha256:3e4169aa6c09bc68cfa0d9841ec2ecbc73137a983d440956bd37d45fd2f1c997"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:12:53Z"
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/mathematics/centroid-defuzzification.md"
-sourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
+sourceHash = "sha256:1a81a52a6d837db48648cbfb015a0361a909dfdf87cca8ebeee4d29c3d8b61b8"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
-reviewedTranslationHash = "sha256:d3636b18f46d37435df1ecc8aef1273881040a519c6642259b4dd8878bd66476"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:1a81a52a6d837db48648cbfb015a0361a909dfdf87cca8ebeee4d29c3d8b61b8"
+reviewedTranslationHash = "sha256:e74878ab2afe504be145327a75d2db908769a1bc620be9e3baaf01458b40ff47"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:05:45Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:8d68169da3bfcf30b600a78f3b156be0764ac620346c13753e5a019466e1ff98"
-reviewedTranslationHash = "sha256:d3636b18f46d37435df1ecc8aef1273881040a519c6642259b4dd8878bd66476"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:1a81a52a6d837db48648cbfb015a0361a909dfdf87cca8ebeee4d29c3d8b61b8"
+reviewedTranslationHash = "sha256:e74878ab2afe504be145327a75d2db908769a1bc620be9e3baaf01458b40ff47"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:05:45Z"
 
 [[units]]
 id = "page:mathematics.finite-number-policy"
@@ -10627,46 +10627,46 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:mathematics.model"
 kind = "page"
 sourcePath = "docs/MATHEMATICAL_MODEL.md"
-sourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
+sourceHash = "sha256:b34fcab3912e4ea833316bf84cc1db6038260cae2faad1bc876a99ab8bbe2712"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/mathematics/model.md"
-sourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
+sourceHash = "sha256:b34fcab3912e4ea833316bf84cc1db6038260cae2faad1bc876a99ab8bbe2712"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
-reviewedTranslationHash = "sha256:d3b19593f7380faf4b58a68223f0ff3e3c40e271029c60b7a3fd86265241d9b8"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:b34fcab3912e4ea833316bf84cc1db6038260cae2faad1bc876a99ab8bbe2712"
+reviewedTranslationHash = "sha256:be52ff8f04c4139b9dcb2cdce10d768966f8e810c5ec5c121c5a60eefd91a567"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:05:45Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
-reviewedTranslationHash = "sha256:d3b19593f7380faf4b58a68223f0ff3e3c40e271029c60b7a3fd86265241d9b8"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:b34fcab3912e4ea833316bf84cc1db6038260cae2faad1bc876a99ab8bbe2712"
+reviewedTranslationHash = "sha256:be52ff8f04c4139b9dcb2cdce10d768966f8e810c5ec5c121c5a60eefd91a567"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:05:45Z"
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/mathematics/model.md"
-sourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
+sourceHash = "sha256:b34fcab3912e4ea833316bf84cc1db6038260cae2faad1bc876a99ab8bbe2712"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
-reviewedTranslationHash = "sha256:0929c57c3b43fc2ef65096c62c5ddb65aad1b7d8e4946f0f8ac1624b19a321f1"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:b34fcab3912e4ea833316bf84cc1db6038260cae2faad1bc876a99ab8bbe2712"
+reviewedTranslationHash = "sha256:9de992eef04a6a1de8b71db137f931d160be986a9206e92aa37df6cc00204366"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:05:45Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:cab9dc591f3e6903fa5adccab47ab29a75b01614402d6de85ea36aca806e877f"
-reviewedTranslationHash = "sha256:0929c57c3b43fc2ef65096c62c5ddb65aad1b7d8e4946f0f8ac1624b19a321f1"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:b34fcab3912e4ea833316bf84cc1db6038260cae2faad1bc876a99ab8bbe2712"
+reviewedTranslationHash = "sha256:9de992eef04a6a1de8b71db137f931d160be986a9206e92aa37df6cc00204366"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T13:05:45Z"
 
 [[units]]
 id = "page:mathematics.numerical-edge-policy"

@@ -22,10 +22,15 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FIGURES = runpy.run_path(str(PROJECT_ROOT / "tools/generate_batch_figures.py"))
 
 
-def test_SpeedCurvesUsePairedSampleMediansAndMemoryBarsUseRecordedBytes():
+@pytest.mark.parametrize(("evidencePath", "outputDirectory", "evidenceName"), (
+    (FIGURES["EVIDENCE"], FIGURES["OUTPUT"], None),
+    (PROJECT_ROOT / "docs/performance/evidence/public-batches-installed-python314.json", FIGURES["OUTPUT"] / "installed-candidate", "public-batches-installed-python314.json"),
+    (PROJECT_ROOT / "docs/performance/evidence/post-audit-installed/batches.json", FIGURES["OUTPUT"] / "post-audit", "batches.json"),
+))
+def test_SpeedCurvesUsePairedSampleMediansAndMemoryBarsUseRecordedBytes(evidencePath, outputDirectory, evidenceName):
     """Independently recompute every displayed speed ratio and memory bar."""
 
-    report = json.loads(FIGURES["EVIDENCE"].read_text())
+    report = json.loads(evidencePath.read_text())
     figures = FIGURES["BuildFigures"](report)
 
     try:
@@ -42,6 +47,9 @@ def test_SpeedCurvesUsePairedSampleMediansAndMemoryBarsUseRecordedBytes():
         for axis, key in zip(figures["numpy-batch-memory"].axes, ("rss_peak_bytes", "traced_operation_peak_bytes"), strict=True):
             expected = [case["memory"][backend][key] / 2**20 for backend in ("scalar", "numpy") for case in cases]
             assert [bar.get_height() for bar in axis.patches] == pytest.approx(expected, rel=1e-12)
+
+        for name, figure in figures.items():
+            assert FIGURES["RenderSvg"](figure, name, evidenceName) == (outputDirectory / f"{name}.svg").read_bytes()
 
     finally:
         for figure in figures.values():

@@ -1,0 +1,141 @@
+{
+  "artifacts": [],
+  "checks": {
+    "absoluteTolerance": 1e-12,
+    "coordinates": [
+      0,
+      0.125,
+      0.17,
+      0.2,
+      0.37,
+      0.5,
+      0.63,
+      0.75,
+      0.81,
+      0.86,
+      1,
+      0.2
+    ],
+    "maximumAbsoluteError": 5.551115123125783e-17,
+    "method": "independent piecewise formulas at declared coordinates",
+    "passed": true,
+    "relativeTolerance": 0
+  },
+  "environment": {
+    "fuzzyroutines": "2.1.0",
+    "python": "3.14.8"
+  },
+  "input": {
+    "normalization": "already normalized",
+    "normalizedCoordinate": 0.2,
+    "range": [
+      0,
+      1.0
+    ],
+    "value": 0.2
+  },
+  "interpretation": {
+    "centroidWindows": "Retained for provenance only; never used to clip these curves.",
+    "gradesAreProbabilities": false,
+    "normalizationIsIllustrative": false,
+    "tieBehavior": "Last exact maximum; floating-point near ties are not exact ties.",
+    "weakCoverage": "Near x=0.17, the greatest membership is about 0.00212959; a 0.1 threshold abstains."
+  },
+  "policy": {
+    "minimumConfidence": 0.0,
+    "noMatch": "maximum membership <= minimumConfidence",
+    "tiePolicy": "last",
+    "tieTolerance": 0
+  },
+  "recipeVersion": "1.0",
+  "result": {
+    "isMatch": true,
+    "maximumMembership": 0.5,
+    "memberships": {
+      "High": 0,
+      "Low": 0.5,
+      "Max": 0,
+      "Med": 0,
+      "Min": 8.271121954357797e-05
+    },
+    "selectedTerms": [
+      "Low"
+    ]
+  },
+  "scale": {
+    "closedBoundaries": true,
+    "name": "Historical Universal Fuzzy Scale",
+    "terms": [
+      {
+        "centroidWindow": [
+          0,
+          0.23
+        ],
+        "family": "Hyperbolic",
+        "name": "Min",
+        "parameters": [
+          8,
+          20,
+          0
+        ]
+      },
+      {
+        "centroidWindow": [
+          0.17,
+          0.4
+        ],
+        "family": "Bell",
+        "name": "Low",
+        "parameters": [
+          0.17,
+          0.23,
+          0.34
+        ]
+      },
+      {
+        "centroidWindow": [
+          0.34,
+          0.66
+        ],
+        "family": "Bell",
+        "name": "Med",
+        "parameters": [
+          0.34,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "centroidWindow": [
+          0.6,
+          0.83
+        ],
+        "family": "Bell",
+        "name": "High",
+        "parameters": [
+          0.6,
+          0.66,
+          0.77
+        ]
+      },
+      {
+        "centroidWindow": [
+          0.77,
+          1
+        ],
+        "family": "SShoulder",
+        "name": "Max",
+        "parameters": [
+          0.77,
+          0.95
+        ]
+      }
+    ],
+    "universe": [
+      0,
+      1
+    ]
+  },
+  "scenario": "universal-fuzzy-scale",
+  "schemaVersion": 1
+}
