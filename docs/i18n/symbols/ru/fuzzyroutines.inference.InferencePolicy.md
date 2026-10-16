@@ -3,7 +3,9 @@ SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0
 -->
 
-Явные операторы условий, независимые от активации и агрегации выходов.
+Логические операторы для вычисления условий правил.
+
+Агрегирование подусловий не зависит от активизации заключений и аккумуляции выходных множеств.
 
 Attributes:
     conjunction: T-норма узлов AND.

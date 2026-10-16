@@ -378,17 +378,17 @@ sourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
-reviewedTranslationHash = "sha256:3157fcedeacaaf49e693c5c8097649f4ba46bcd9f9a5a2ed434ba3b203cea084"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:1505a66d4cf800d372a465f7cb15681fd2eb6af3edad0818a25564c6d253544a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:12526a00699da751998dc4a6592b700b5725bfe1b7e7c91af5870d72074920a2"
-reviewedTranslationHash = "sha256:3157fcedeacaaf49e693c5c8097649f4ba46bcd9f9a5a2ed434ba3b203cea084"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:1505a66d4cf800d372a465f7cb15681fd2eb6af3edad0818a25564c6d253544a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -723,46 +723,46 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "symbol:fuzzyroutines.Centroid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
+sourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
+sourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
-reviewedTranslationHash = "sha256:c457d9aeb4d765b8d0390f6b78080bf388e4145abc8786990fd219b17a035674"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
+reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
-reviewedTranslationHash = "sha256:c457d9aeb4d765b8d0390f6b78080bf388e4145abc8786990fd219b17a035674"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
+reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
+sourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
-reviewedTranslationHash = "sha256:5d66a875a1c1150a07c579c2b4ec041c764dd56b7b8b60caea81de75adb4a0e2"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
+reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:059f919e074705641266ddffb6bce5bc8bc094b12efc04648d2b85ca13fbeed9"
-reviewedTranslationHash = "sha256:5d66a875a1c1150a07c579c2b4ec041c764dd56b7b8b60caea81de75adb4a0e2"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:e9b1ad9b6621d30dbcbda3c941fd5cab438c031b0189aa19e3c7d9d0911f03e2"
+reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [[units]]
 id = "symbol:fuzzyroutines.CentroidConvergenceError"
@@ -4323,46 +4323,46 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "symbol:fuzzyroutines.defuzzification.Centroid"
 kind = "symbol"
 sourcePath = "fuzzyroutines/defuzzification.py"
-sourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
+sourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/i18n/symbols/ru/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
+sourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
-reviewedTranslationHash = "sha256:c457d9aeb4d765b8d0390f6b78080bf388e4145abc8786990fd219b17a035674"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
+reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
-reviewedTranslationHash = "sha256:c457d9aeb4d765b8d0390f6b78080bf388e4145abc8786990fd219b17a035674"
-reviewer = "Tim55667757 (maintainer acceptance; AI comparison by AIna, not a personal line-by-line review)"
-reviewedAt = "2026-10-10T18:08:54Z"
+reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
+reviewedTranslationHash = "sha256:0c5a0623ca01da01258fb459a05324ecc020944e799274f1e4bf4f1d6a5016a3"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.defuzzification.Centroid.md"
-sourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
+sourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
-reviewedTranslationHash = "sha256:5d66a875a1c1150a07c579c2b4ec041c764dd56b7b8b60caea81de75adb4a0e2"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
+reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:579be84e19590f007dc0f81afc9af270e71fd94a971144220e306ebbb168b0c1"
-reviewedTranslationHash = "sha256:5d66a875a1c1150a07c579c2b4ec041c764dd56b7b8b60caea81de75adb4a0e2"
-reviewer = "AIna-Dev (AI; maintainer-delegated zh-CN 2.0.0 scientific/editorial review)"
-reviewedAt = "2026-10-10T08:14:59Z"
+reviewedSourceHash = "sha256:fa0c8eafa4a064969a74c17d65162862d951dee6aac1bc5bf6ef715398670ece"
+reviewedTranslationHash = "sha256:2b19174438e9e7ff18b804faf272b9ba9f256399b7e91db9100480307182e2c5"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 
 [[units]]
 id = "symbol:fuzzyroutines.defuzzification.CentroidConvergenceError"
@@ -11591,17 +11591,17 @@ sourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0b
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
-reviewedTranslationHash = "sha256:e4efbc4698603cecd11fe9d53350c43820048833492ecb83cea47f68bd151d93"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:054fd64b53bb98ab940489c4df38080441ea6ec4671307ae7bccb937bc8be4ff"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:311f18f325528efcdd60eb069c8209396727cd3a02bfe99b635d9b1ee0bf255c"
-reviewedTranslationHash = "sha256:e4efbc4698603cecd11fe9d53350c43820048833492ecb83cea47f68bd151d93"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:054fd64b53bb98ab940489c4df38080441ea6ec4671307ae7bccb937bc8be4ff"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -11640,17 +11640,17 @@ sourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
-reviewedTranslationHash = "sha256:536a637e815d11fddf46f06a855fc791d2bfdc1b2f139365ddc03c8bd5a4d442"
-reviewer = "onboarding21 (AI; independent scientific/editorial approval), ci21 (AI; exact-hash integration verification)"
-reviewedAt = "2026-10-14T19:41:15Z"
+reviewedTranslationHash = "sha256:e8a2b30c634745f6801141d639bdae31002f79124f39fd04ddf327be77a2624a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently approved scientific/editorial source and EN/RU/zh-CN translations in ec08f3b62cb36799391cba69cb0d785370bb8f23. ci21 verified the exact approved source and translation hashes after integration: published 2.0 recipe preserved, explicit local candidate-wheel installation, mathematical distinctions and optional repository-only neural/research boundaries unchanged. Protected code/math/API fragments match. New feature links require the integrated candidate, including NumPy PR #345; final installed-wheel evidence and publication remain separate gates."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:cb68d92e0ea3baf8f3c26ccbe405e8b776d05fce85c5ac047ea6f29dcaf77f4d"
-reviewedTranslationHash = "sha256:536a637e815d11fddf46f06a855fc791d2bfdc1b2f139365ddc03c8bd5a4d442"
-reviewer = "onboarding21 (AI; independent scientific/editorial approval), ci21 (AI; exact-hash integration verification)"
-reviewedAt = "2026-10-14T19:41:15Z"
+reviewedTranslationHash = "sha256:e8a2b30c634745f6801141d639bdae31002f79124f39fd04ddf327be77a2624a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently approved scientific/editorial source and EN/RU/zh-CN translations in ec08f3b62cb36799391cba69cb0d785370bb8f23. ci21 verified the exact approved source and translation hashes after integration: published 2.0 recipe preserved, explicit local candidate-wheel installation, mathematical distinctions and optional repository-only neural/research boundaries unchanged. Protected code/math/API fragments match. New feature links require the integrated candidate, including NumPy PR #345; final installed-wheel evidence and publication remain separate gates."
 
 [units.translations.zh-CN]
@@ -11689,17 +11689,17 @@ sourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
-reviewedTranslationHash = "sha256:158d49502f58651fff1932b81ca01f6a6791691aed55cb179d660c6f3825dfe6"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:cd3d8475b23fc5adfe9f340e8db4fe614f2bc2da91c5c58171a8daecc93bce50"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:bdd54543160c3771b2853c5c862f6c1a8574c6460d543ab4f028ea87c62d37d0"
-reviewedTranslationHash = "sha256:158d49502f58651fff1932b81ca01f6a6791691aed55cb179d660c6f3825dfe6"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:cd3d8475b23fc5adfe9f340e8db4fe614f2bc2da91c5c58171a8daecc93bce50"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -11787,17 +11787,17 @@ sourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97e
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
-reviewedTranslationHash = "sha256:d706bd16c23ed987aa690caf7d176b25921283cf9645bf00e0dab739fe725066"
-reviewer = "AIna (AI; maintainer-delegated integration review)"
-reviewedAt = "2026-10-14T19:09:33Z"
+reviewedTranslationHash = "sha256:72b9dd44f8a0c1b6c0451f32305961f69813d275afd3983765cc00ab878c198a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:7627dda13b4ab56d1a0352401f52fd81350c6e5295428ffaa26f2f7c97ecaf43"
-reviewedTranslationHash = "sha256:d706bd16c23ed987aa690caf7d176b25921283cf9645bf00e0dab739fe725066"
-reviewer = "AIna (AI; maintainer-delegated integration review)"
-reviewedAt = "2026-10-14T19:09:33Z"
+reviewedTranslationHash = "sha256:72b9dd44f8a0c1b6c0451f32305961f69813d275afd3983765cc00ab878c198a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Retains independently reviewed mathematical content from e339c84; only the shared figure URL changed to ../../en/assets. Source-link validation and exact protected mathematics/code parity pass; the existing figure and all numerical explanations are unchanged."
 
 [units.translations.zh-CN]
@@ -11885,17 +11885,17 @@ sourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
-reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:5c0707e8e241846c9afac05f3624b0413d221582992588130890ee588a9a7223"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:b424801ffb96839044bbd3c40104e9cd77e9dbb607a145593e7374cda51b1022"
-reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:5c0707e8e241846c9afac05f3624b0413d221582992588130890ee588a9a7223"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -11983,17 +11983,17 @@ sourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd6
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
-reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:af4d04c5b5926a2ee94a4924c699280d5ef1e12081e708498cc74104efcc547d"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:cfb1054dd198f31d2cedea8de9c96c67cb8aff924cb6876fe967b2f5bd649814"
-reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:af4d04c5b5926a2ee94a4924c699280d5ef1e12081e708498cc74104efcc547d"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -12032,17 +12032,17 @@ sourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b50
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
-reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:5c0707e8e241846c9afac05f3624b0413d221582992588130890ee588a9a7223"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:ffc3e4552aa3aa83a4dc8970af3a8a0069dc4ae99e8bf4f21334c206b507111b"
-reviewedTranslationHash = "sha256:9081802f767bc3a45c4fe08b634e72f87ce677777baeb866ab70004254ac74ff"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:5c0707e8e241846c9afac05f3624b0413d221582992588130890ee588a9a7223"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -12081,17 +12081,17 @@ sourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
-reviewedTranslationHash = "sha256:41482f484d4eb09fbf24d9d41ccd032f8683c1098479b820421dc095d57fb77b"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:257600dbe186f5cfa03ad0c92899ecfeb2e5fbf4466a1fc0815e2d98e5f149ef"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:9da451c2777aa400cd4229229130019598065de303253f230de12578c8e96198"
-reviewedTranslationHash = "sha256:41482f484d4eb09fbf24d9d41ccd032f8683c1098479b820421dc095d57fb77b"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:257600dbe186f5cfa03ad0c92899ecfeb2e5fbf4466a1fc0815e2d98e5f149ef"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -12179,17 +12179,17 @@ sourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9c
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
-reviewedTranslationHash = "sha256:452dec35074a38b4ddfb1bb314ba878ef9123c4c23f59e7b22323a3b293c6ed4"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:5d4923f4387d8f447c27192b4eefeb7348b900a52af9ad79390992db3fc2a15a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:fc91237668637da5eab0564aad40f4f9e9a7910d8bd90cf3479469d0d9cdfe51"
-reviewedTranslationHash = "sha256:452dec35074a38b4ddfb1bb314ba878ef9123c4c23f59e7b22323a3b293c6ed4"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:5d4923f4387d8f447c27192b4eefeb7348b900a52af9ad79390992db3fc2a15a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -12424,17 +12424,17 @@ sourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d43
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
-reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:af4d04c5b5926a2ee94a4924c699280d5ef1e12081e708498cc74104efcc547d"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:ecb6647725a46b0fd18d323778c8ce5e1a137bf40069a36a02906ec6d4392d2c"
-reviewedTranslationHash = "sha256:2d07c762f654c06100a44ea3eb31bc680855ce82082f5f0f32c6e9ebba6ffd5b"
-reviewer = "AIna (AI; maintainer-delegated 2.1 independent review by review21 and ci21)"
-reviewedAt = "2026-10-14T18:46:38Z"
+reviewedTranslationHash = "sha256:af4d04c5b5926a2ee94a4924c699280d5ef1e12081e708498cc74104efcc547d"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "Independent review of historical preset b8f77c0, codec4f20bb9 and corrected98d72eb; original coefficients/windows/ties, non-probability grades and representative versus aggregate-centroid meaning verified in EN/RU/zh-CN. Final47 codec/figure checks passed; protected mathematical/API fragments agree."
 
 [units.translations.zh-CN]
@@ -12559,98 +12559,98 @@ evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN
 id = "page:guides.inference"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/inference.md"
-sourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+sourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/guides/inference.md"
-sourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+sourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
-reviewedTranslationHash = "sha256:ffc20679f96a8bdac455852d7713c164f3b971c45e6b828c8e11f3d155074a04"
-reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
+reviewedTranslationHash = "sha256:c16fd7a4db62ca101ada3f610f92c968b0f59235acadcf288e92bd458b58d6b0"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
-reviewedTranslationHash = "sha256:ffc20679f96a8bdac455852d7713c164f3b971c45e6b828c8e11f3d155074a04"
-reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
+reviewedTranslationHash = "sha256:c16fd7a4db62ca101ada3f610f92c968b0f59235acadcf288e92bd458b58d6b0"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/guides/inference.md"
-sourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
+sourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
-reviewedTranslationHash = "sha256:3d082dd2320929c4bc9f4a8117ec4986f78af8a2050c3e495f277cb09497077b"
-reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
+reviewedTranslationHash = "sha256:05e5f11830f87054488077c4c321dc1405d091da23952a3ab7c05211ddd69890"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:9d91c7b289dd379f2ca88ca0f2aa00a71d2de679c74d240057aeed22e0f66344"
-reviewedTranslationHash = "sha256:3d082dd2320929c4bc9f4a8117ec4986f78af8a2050c3e495f277cb09497077b"
-reviewer = "ci21 and inference21 (AI; independent scientific/editorial reviews), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:74ca2e656f538502dbba7e1851574ce614ec12abb840a81e57daedd5595034f0"
+reviewedTranslationHash = "sha256:05e5f11830f87054488077c4c321dc1405d091da23952a3ab7c05211ddd69890"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
 
 [[units]]
 id = "symbol:fuzzyroutines.inference.AffineConsequent"
 kind = "symbol"
 sourcePath = "fuzzyroutines/inference.py"
-sourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+sourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/i18n/symbols/ru/fuzzyroutines.inference.AffineConsequent.md"
-sourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+sourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
-reviewedTranslationHash = "sha256:238a56889486743b4257d5deedbe42f6a6abd33ae2a350f407d9a770e906ced7"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
+reviewedTranslationHash = "sha256:0d4504a991ffc38e4df1eb1bac798eda0aad7222f51648438f97dd07f5f14847"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
-reviewedTranslationHash = "sha256:238a56889486743b4257d5deedbe42f6a6abd33ae2a350f407d9a770e906ced7"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
+reviewedTranslationHash = "sha256:0d4504a991ffc38e4df1eb1bac798eda0aad7222f51648438f97dd07f5f14847"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.AffineConsequent.md"
-sourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
+sourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
-reviewedTranslationHash = "sha256:cb91bdbc5b37f436984ec792bdc11c741e7eda2fd2e84b28341c7364e0777656"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
+reviewedTranslationHash = "sha256:ac95ac29ed1aa0dfa97693352271efb4a91dfe084debde5a3265632f29303b68"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:c3dd0fb94d823926f1c594280679bf728553d3ced2fd62732a5067c09d7312fa"
-reviewedTranslationHash = "sha256:cb91bdbc5b37f436984ec792bdc11c741e7eda2fd2e84b28341c7364e0777656"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
+reviewedTranslationHash = "sha256:ac95ac29ed1aa0dfa97693352271efb4a91dfe084debde5a3265632f29303b68"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract and terminology alignment review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:20:41Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units]]
@@ -12668,17 +12668,17 @@ sourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
-reviewedTranslationHash = "sha256:786262a1a5b5d9a43c2a2abc48a2bdf80bac906d3b5620e4a6f69493155fe989"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:816609eaf2ea2c3a602ded877c4b0590e0b027c0bb193fd9ddc17634fe5bacca"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:277d8601072d509f28071f15a8f2ebc41466b05dbef722be2c81cc4cedb2669b"
-reviewedTranslationHash = "sha256:786262a1a5b5d9a43c2a2abc48a2bdf80bac906d3b5620e4a6f69493155fe989"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:816609eaf2ea2c3a602ded877c4b0590e0b027c0bb193fd9ddc17634fe5bacca"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -12717,17 +12717,17 @@ sourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
-reviewedTranslationHash = "sha256:bcc2fd8aa8cbd914df9123462804ffbcdd40e7670b3218edc2a92912325f4461"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:fb911fe3197d318469f7cbc388145176f21fd800f012e35ebc19126b57c98ad8"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:588852bad2c9842446357c1c54c65da802309259c236d149e2dd395f5b2b5ed1"
-reviewedTranslationHash = "sha256:bcc2fd8aa8cbd914df9123462804ffbcdd40e7670b3218edc2a92912325f4461"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:fb911fe3197d318469f7cbc388145176f21fd800f012e35ebc19126b57c98ad8"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -12766,17 +12766,17 @@ sourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb9680
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
-reviewedTranslationHash = "sha256:2da3766fc2e1272bb4ab5d81cc7703b4fa1f18a46ac1d20951d9f37b695b383e"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:1f16c5cab21b81a04a1b8ce0e73a4b9e53f40064906471d53fca4066650d96cd"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:1983307626defbb608f44007e81b529723f75cea48e70e6f155a8cb96806a165"
-reviewedTranslationHash = "sha256:2da3766fc2e1272bb4ab5d81cc7703b4fa1f18a46ac1d20951d9f37b695b383e"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:1f16c5cab21b81a04a1b8ce0e73a4b9e53f40064906471d53fca4066650d96cd"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -12913,17 +12913,17 @@ sourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
-reviewedTranslationHash = "sha256:20cd075b1171b00bbb904de3a2d5ae0152452ca2bc5615582b75f3f12a60d76b"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:7c9a4a536ab7180384b9950869faf8839a7e8889b08de9c7d2135e3c1b208592"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:6b3d9ee4957c91637d524bccfcdfec7cc2421e850711a790fea58fd154f5e45f"
-reviewedTranslationHash = "sha256:20cd075b1171b00bbb904de3a2d5ae0152452ca2bc5615582b75f3f12a60d76b"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:7c9a4a536ab7180384b9950869faf8839a7e8889b08de9c7d2135e3c1b208592"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13011,17 +13011,17 @@ sourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
-reviewedTranslationHash = "sha256:66bd33cff74c8cb5b0577c87bb23e3faf6f8e19e87970dec4bc96e810ceea6e6"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:02f58742f50bf73acd99f1539b7ba7cdf2225533d65950bcb88266e52cbd3454"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:37eae01e76a4adbff86a2124981fa395be431430537db663eb10937cbe4404e8"
-reviewedTranslationHash = "sha256:66bd33cff74c8cb5b0577c87bb23e3faf6f8e19e87970dec4bc96e810ceea6e6"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:02f58742f50bf73acd99f1539b7ba7cdf2225533d65950bcb88266e52cbd3454"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13049,49 +13049,49 @@ evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN
 id = "symbol:fuzzyroutines.inference.MamdaniModel.Evaluate"
 kind = "symbol"
 sourcePath = "fuzzyroutines/inference.py"
-sourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+sourceHash = "sha256:e5083701dd1873bde45938b0a3e547898530ae7255559eac59879e89035bf022"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/i18n/symbols/ru/fuzzyroutines.inference.MamdaniModel.Evaluate.md"
-sourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+sourceHash = "sha256:e5083701dd1873bde45938b0a3e547898530ae7255559eac59879e89035bf022"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
-reviewedTranslationHash = "sha256:5b7f6a35891256eb9541404619206613ede3b4d710bf2c770b12945e1ab794dd"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:e5083701dd1873bde45938b0a3e547898530ae7255559eac59879e89035bf022"
+reviewedTranslationHash = "sha256:25051de318fec5ab04e32472053950e30b5a2cfe94a53946c3a0aa332a7bff0b"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
-reviewedTranslationHash = "sha256:5b7f6a35891256eb9541404619206613ede3b4d710bf2c770b12945e1ab794dd"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:e5083701dd1873bde45938b0a3e547898530ae7255559eac59879e89035bf022"
+reviewedTranslationHash = "sha256:25051de318fec5ab04e32472053950e30b5a2cfe94a53946c3a0aa332a7bff0b"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.MamdaniModel.Evaluate.md"
-sourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
+sourceHash = "sha256:e5083701dd1873bde45938b0a3e547898530ae7255559eac59879e89035bf022"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
-reviewedTranslationHash = "sha256:46ce1dd33f42d38bba1791b2490da29a3115a8ec93d923d453fa51a46afdea73"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:e5083701dd1873bde45938b0a3e547898530ae7255559eac59879e89035bf022"
+reviewedTranslationHash = "sha256:32a0693f60351cf9d7abb8de2f00a75d61dcefd3e27e2e3de41c87668e494acc"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:6d001e45ff1cd896faff6fd5eb85ba4a88a7bb64923d5b08a62f9407e813a894"
-reviewedTranslationHash = "sha256:46ce1dd33f42d38bba1791b2490da29a3115a8ec93d923d453fa51a46afdea73"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:e5083701dd1873bde45938b0a3e547898530ae7255559eac59879e89035bf022"
+reviewedTranslationHash = "sha256:32a0693f60351cf9d7abb8de2f00a75d61dcefd3e27e2e3de41c87668e494acc"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units]]
@@ -13109,17 +13109,17 @@ sourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
-reviewedTranslationHash = "sha256:de35b0ec0849f371a4939175cdb7647c45e2b814f66e7e0fb66d3f1db99eeded"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:503c75bf896abdbfe9cfcfc28a9c5f04b9458faf575ecf5e0cdeee1a2ad869b8"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:feb6bbbbb1ec8be316bab8ab5e0c3b1e1abe8fd5fef4261108ddd506d53e2e93"
-reviewedTranslationHash = "sha256:de35b0ec0849f371a4939175cdb7647c45e2b814f66e7e0fb66d3f1db99eeded"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:503c75bf896abdbfe9cfcfc28a9c5f04b9458faf575ecf5e0cdeee1a2ad869b8"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13158,17 +13158,17 @@ sourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073a
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
-reviewedTranslationHash = "sha256:71994e3420189b42c0c5ecfe83d4ea78ebf087b8664db46a9eb4d01a78069e19"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:2786947ed5aad42188b88d553e8d4e5bda6cab3480c8d1f4afae457a3742f75b"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:cde651fc92c698252ecd188f6a3dc35728fb32bc514f6891376ff8d073ac91f9"
-reviewedTranslationHash = "sha256:71994e3420189b42c0c5ecfe83d4ea78ebf087b8664db46a9eb4d01a78069e19"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:2786947ed5aad42188b88d553e8d4e5bda6cab3480c8d1f4afae457a3742f75b"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13207,17 +13207,17 @@ sourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9d
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
-reviewedTranslationHash = "sha256:392ffc8e2a0f44fa69567a539e167d43f730da6758cacbfa29cacd3aa4169452"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:214306ea6f19ff3cfdaa13765d44a9b8646260f85307f2c7034d11483924f98e"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:83afd3280beb5b76b6ef7d529a435e29178232a4447a620155ec5729c9da6204"
-reviewedTranslationHash = "sha256:392ffc8e2a0f44fa69567a539e167d43f730da6758cacbfa29cacd3aa4169452"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:214306ea6f19ff3cfdaa13765d44a9b8646260f85307f2c7034d11483924f98e"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13305,17 +13305,17 @@ sourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
-reviewedTranslationHash = "sha256:a3e70cd42b1f0152255f1745bfde47100b2f291bb1d15bed0f7db8b1c7e25fbc"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:a9bf7563880b94ec94aa71e3f13b852b614c4c5ce0b293d22ec5e42dd9a0b281"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
-reviewedTranslationHash = "sha256:a3e70cd42b1f0152255f1745bfde47100b2f291bb1d15bed0f7db8b1c7e25fbc"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:a9bf7563880b94ec94aa71e3f13b852b614c4c5ce0b293d22ec5e42dd9a0b281"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13343,49 +13343,49 @@ evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN
 id = "symbol:fuzzyroutines.inference.SugenoModel.Evaluate"
 kind = "symbol"
 sourcePath = "fuzzyroutines/inference.py"
-sourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+sourceHash = "sha256:4f25cc60018e13663e8cd9f71e71f4a65bf8ca3b7f8844cc9f60e84266c41b13"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/i18n/symbols/ru/fuzzyroutines.inference.SugenoModel.Evaluate.md"
-sourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+sourceHash = "sha256:4f25cc60018e13663e8cd9f71e71f4a65bf8ca3b7f8844cc9f60e84266c41b13"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
-reviewedTranslationHash = "sha256:8c0cb345c20c8415a292bdc95c497f777873701b9c305204477454505f5168e1"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:4f25cc60018e13663e8cd9f71e71f4a65bf8ca3b7f8844cc9f60e84266c41b13"
+reviewedTranslationHash = "sha256:057b2d748d25bbee26d4f4c1d5ed5a5e98c269479f0cb0b7abd23ddd180b0e07"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
-reviewedTranslationHash = "sha256:8c0cb345c20c8415a292bdc95c497f777873701b9c305204477454505f5168e1"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:4f25cc60018e13663e8cd9f71e71f4a65bf8ca3b7f8844cc9f60e84266c41b13"
+reviewedTranslationHash = "sha256:057b2d748d25bbee26d4f4c1d5ed5a5e98c269479f0cb0b7abd23ddd180b0e07"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/i18n/symbols/zh-CN/fuzzyroutines.inference.SugenoModel.Evaluate.md"
-sourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
+sourceHash = "sha256:4f25cc60018e13663e8cd9f71e71f4a65bf8ca3b7f8844cc9f60e84266c41b13"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
-reviewedTranslationHash = "sha256:e76c297b55071d863be73598ab32c05a05a42d652f78bf8479acd83f77cd18d0"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:4f25cc60018e13663e8cd9f71e71f4a65bf8ca3b7f8844cc9f60e84266c41b13"
+reviewedTranslationHash = "sha256:869e3f8b4ca5443014be14daa27f1061ca8848f84a2ebb2af40e269eefafd5cd"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:a72261639fb140bee025fa9e8c5e8e06ba7859bf3dc139d73b545fa3b51c181c"
-reviewedTranslationHash = "sha256:e76c297b55071d863be73598ab32c05a05a42d652f78bf8479acd83f77cd18d0"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedSourceHash = "sha256:4f25cc60018e13663e8cd9f71e71f4a65bf8ca3b7f8844cc9f60e84266c41b13"
+reviewedTranslationHash = "sha256:869e3f8b4ca5443014be14daa27f1061ca8848f84a2ebb2af40e269eefafd5cd"
+reviewer = "AIna-Dev (AI; maintainer-delegated numerical-contract alignment review)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units]]
@@ -13452,17 +13452,17 @@ sourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
-reviewedTranslationHash = "sha256:d2e8daa5aac4b2723a6c3938146ad48b791798c377ee721349271d8bdb91a836"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:ea9cf8ef1dc0e7ae25b6b7bd83f9b326bdbfb9a83fbf2c8cadab35539c984eab"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:521e68988e930f581f4b4835f0c05b662bb44538f1119f4afdfb6166d0a9d474"
-reviewedTranslationHash = "sha256:d2e8daa5aac4b2723a6c3938146ad48b791798c377ee721349271d8bdb91a836"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:ea9cf8ef1dc0e7ae25b6b7bd83f9b326bdbfb9a83fbf2c8cadab35539c984eab"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13501,17 +13501,17 @@ sourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab91785479
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
-reviewedTranslationHash = "sha256:aee3903b0c6bf946c51ec6956ac998da1764039005a8baa6c645f8f88c66af26"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:77c4db0b5e81221320cba2a4cdad4862fd13d9c45352494d448f998e8fae959b"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:a5212bf039b068fc5684e8d3773bcbc2ee9fc1eb89292cf88ab9178547956dc1"
-reviewedTranslationHash = "sha256:aee3903b0c6bf946c51ec6956ac998da1764039005a8baa6c645f8f88c66af26"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:77c4db0b5e81221320cba2a4cdad4862fd13d9c45352494d448f998e8fae959b"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13550,17 +13550,17 @@ sourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
-reviewedTranslationHash = "sha256:1000946e1b182eb5d93f190c5ff05b20cc8ee4879e77a5f5cd0f8e60e7d31e59"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:038aced3e2b653814bb832f380fe653a60e15cc5ffd646d736fe6e5b067f3a3a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:052dc655a520658318d332882e16b4d28e2365442700f0c0eb06375831d3915a"
-reviewedTranslationHash = "sha256:1000946e1b182eb5d93f190c5ff05b20cc8ee4879e77a5f5cd0f8e60e7d31e59"
-reviewer = "ci21 (AI; independent scientific/editorial review), onboarding21 (AI; integration review)"
-reviewedAt = "2026-10-14T19:11:41Z"
+reviewedTranslationHash = "sha256:038aced3e2b653814bb832f380fe653a60e15cc5ffd646d736fe6e5b067f3a3a"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
 
 [units.translations.zh-CN]
@@ -13598,17 +13598,17 @@ sourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
-reviewedTranslationHash = "sha256:8c0a048074a5a5bb36f002bc2749f3d5708d30dc4fc7ff30a2400abf94fedfab"
-reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
-reviewedAt = "2026-10-14T19:25:46Z"
+reviewedTranslationHash = "sha256:2415e39636884e5676c060030a8987b1f502fa161ec619b09ff430f579f4a3bb"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
-reviewedTranslationHash = "sha256:8c0a048074a5a5bb36f002bc2749f3d5708d30dc4fc7ff30a2400abf94fedfab"
-reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
-reviewedAt = "2026-10-14T19:25:46Z"
+reviewedTranslationHash = "sha256:2415e39636884e5676c060030a8987b1f502fa161ec619b09ff430f579f4a3bb"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
 
 [units.translations.zh-CN]
@@ -13647,17 +13647,17 @@ sourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b218624
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
-reviewedTranslationHash = "sha256:454c7432cea45218551ee66218619ff616f2b48ff5ab180854650042435297fa"
-reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
-reviewedAt = "2026-10-14T19:25:46Z"
+reviewedTranslationHash = "sha256:d03d4dc4dad68615901ffd6594a82c8312cd94c767035cf6b0d3fb5d3b72e2a2"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:1cbddd27779b6001a7a035d72556bbc4a1b56ea79192ba73b9e2b21862479148"
-reviewedTranslationHash = "sha256:454c7432cea45218551ee66218619ff616f2b48ff5ab180854650042435297fa"
-reviewer = "onboarding21 (AI; independent scientific/editorial review), ci21 (AI; deterministic integration equivalence)"
-reviewedAt = "2026-10-14T19:25:46Z"
+reviewedTranslationHash = "sha256:d03d4dc4dad68615901ffd6594a82c8312cd94c767035cf6b0d3fb5d3b72e2a2"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
 
 [units.translations.zh-CN]
@@ -13744,17 +13744,17 @@ sourceHash = "sha256:f26fd2cfdd6d43cef2036dc8ae15ae57d8247df282158115d5fde55f36a
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:f26fd2cfdd6d43cef2036dc8ae15ae57d8247df282158115d5fde55f36aeb739"
-reviewedTranslationHash = "sha256:6c52551122c7ba215e42855b5f6c2667c916e0c1f64e8341539e93ab8896b06e"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:adef6a43c81200f7e9831fd11b5ac3b5e7e60f7ad4ad327252002632ca5eb5ba"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [[units.translations.ru.reviews]]
 role = "technical"
 reviewedSourceHash = "sha256:f26fd2cfdd6d43cef2036dc8ae15ae57d8247df282158115d5fde55f36aeb739"
-reviewedTranslationHash = "sha256:6c52551122c7ba215e42855b5f6c2667c916e0c1f64e8341539e93ab8896b06e"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:adef6a43c81200f7e9831fd11b5ac3b5e7e60f7ad4ad327252002632ca5eb5ba"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [units.translations.zh-CN]
@@ -13793,17 +13793,17 @@ sourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bf
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
-reviewedTranslationHash = "sha256:3d49b865439252ae69f67e932a4c6e44645ee953e39440cab6520541a59f8bf1"
-reviewer = "onboarding21 (AI; independent scientific/editorial review)"
-reviewedAt = "2026-10-14T20:16:58Z"
+reviewedTranslationHash = "sha256:f0668195d17ccc82f867f27fadd922855beae778e90b897e2f605164a3acf53e"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently read the final English, Russian and Simplified Chinese NumPy guide additions and installed-results narrative at beb13c72018b98c7b1143745ead42e5f5418944d. The text separates the exact installed 2.1.0 CI wheel from source studies and unpublished release status; Russian wording identifies the wheel hash, and Chinese scientific terminology preserves candidate, measured-resource and downstream-test-replay meanings. Existing protected code/math and prior API contracts are unchanged."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:94a94633fe9ae58981e100f14529149484f8fb3f31d0501d304544ef2bfdd79a"
-reviewedTranslationHash = "sha256:3d49b865439252ae69f67e932a4c6e44645ee953e39440cab6520541a59f8bf1"
-reviewer = "onboarding21 (AI; independent mathematical-presentation review), review21 (AI; independent raw-evidence acceptance)"
-reviewedAt = "2026-10-14T20:16:58Z"
+reviewedTranslationHash = "sha256:f0668195d17ccc82f867f27fadd922855beae778e90b897e2f605164a3acf53e"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "onboarding21 independently reviewed the mathematical presentation against the recorded scope accepted by review21: the same installed 2.1.0 wheel supplies scalar and NumPy operations, not a 2.0-versus-2.1 comparison; list conversion and prepared arrays are separate workloads, 24 synthetic combinations and grouped 30 public test inputs do not establish production throughput or a universal switching threshold, and timing/IQR, process RSS, traced allocations and dependency costs remain distinct. review21 independently accepted raw records c30dae66247bde7db4993b8ad5a54629ba2d5b790fa75e2197d60652ad5e4f96 and daf317b332b46ef4009e48943ae0124888d3bb6658b01abe280daeba00b7efdc. Protected guide code/math and prior reviewed batch API semantics remain byte-identical; the added paragraph links measured evidence without adding a numerical or probabilistic claim."
 
 [units.translations.zh-CN]
@@ -13842,17 +13842,17 @@ sourceHash = "sha256:591c7eb5e2bf541eab79c900530607113451aaa979f4e86c81d976b27c2
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:591c7eb5e2bf541eab79c900530607113451aaa979f4e86c81d976b27c2d9d13"
-reviewedTranslationHash = "sha256:ffb08f2645d2c82a3dae23d0a52737b200e49e6fe1620d334597f5b459a0a831"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:af69daf38918361d079bd9a56a16ae34c630544e8fc8415c85afd2c75a8a7ad3"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:591c7eb5e2bf541eab79c900530607113451aaa979f4e86c81d976b27c2d9d13"
-reviewedTranslationHash = "sha256:ffb08f2645d2c82a3dae23d0a52737b200e49e6fe1620d334597f5b459a0a831"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:af69daf38918361d079bd9a56a16ae34c630544e8fc8415c85afd2c75a8a7ad3"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [units.translations.zh-CN]
@@ -13891,17 +13891,17 @@ sourceHash = "sha256:15d176c1a105b4250ac30d04ebe3c43ad61335993cbccb9b60e179279dd
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:15d176c1a105b4250ac30d04ebe3c43ad61335993cbccb9b60e179279dd12607"
-reviewedTranslationHash = "sha256:373ace987690707470c5a60a438e03151cd0bfad1fee9504e4f10ddcbbabb0b2"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:90738f6b4a7679c36a819546a9561b927bdd2d9cf02824920e1909074826ed23"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:15d176c1a105b4250ac30d04ebe3c43ad61335993cbccb9b60e179279dd12607"
-reviewedTranslationHash = "sha256:373ace987690707470c5a60a438e03151cd0bfad1fee9504e4f10ddcbbabb0b2"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:90738f6b4a7679c36a819546a9561b927bdd2d9cf02824920e1909074826ed23"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [units.translations.zh-CN]
@@ -13940,17 +13940,17 @@ sourceHash = "sha256:167bfc304e523d70716835ac232f5d794dfeeab344d27d351caaf5256b2
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:167bfc304e523d70716835ac232f5d794dfeeab344d27d351caaf5256b201b76"
-reviewedTranslationHash = "sha256:4e6b5fe68fdf3ed88d8fa3c963b9bd8821285f51381d63408d9db7ebee49ea71"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:84fdc3d166c544ff285dfd4b4156a25324b5bdf1e0762ac5c3d81c62f839c288"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:167bfc304e523d70716835ac232f5d794dfeeab344d27d351caaf5256b201b76"
-reviewedTranslationHash = "sha256:4e6b5fe68fdf3ed88d8fa3c963b9bd8821285f51381d63408d9db7ebee49ea71"
-reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
-reviewedAt = "2026-10-14T19:15:12Z"
+reviewedTranslationHash = "sha256:84fdc3d166c544ff285dfd4b4156a25324b5bdf1e0762ac5c3d81c62f839c288"
+reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
+reviewedAt = "2026-10-16T12:16:13Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
 
 [units.translations.zh-CN]

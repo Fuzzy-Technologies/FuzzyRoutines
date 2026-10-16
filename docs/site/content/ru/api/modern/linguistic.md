@@ -30,7 +30,7 @@ SPDX-License-Identifier: Apache-2.0
         - UniversalFuzzyScalePolicy
         - UniversalFuzzyScaleDomains
 
-[Лингвистическое кодирование](../../guides/linguistic-encoding.md) связывает уровни, полные векторы принадлежностей и численные прогнозы через явные области.
+[Лингвистическое кодирование](../../guides/linguistic-encoding.md) преобразует названия уровней в числовых представителей, вычисляет векторы степеней принадлежности и интерпретирует численные прогнозы. Интервалы интегрирования задаются явно.
 
 ::: fuzzyroutines.encoding
     options:

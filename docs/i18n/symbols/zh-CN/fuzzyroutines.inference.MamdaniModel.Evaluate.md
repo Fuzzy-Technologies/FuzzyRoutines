@@ -18,4 +18,5 @@ Raises:
     InvalidParameterTypeError: 参数或隶属函数结果的类型错误。
     InvalidDomainError: 输入坐标或积分区间超出相应论域。
     UndefinedResultError: 无规则激活，或积分面积为零或非有限值。
+    NumericalError: 正的加权规则触发强度下溢为零。
     CentroidConvergenceError: 请求的数值积分未收敛。

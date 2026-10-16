@@ -71,6 +71,24 @@ NumPy batches and neural examples. Final artifact evidence is tracked in the
 
 #### Changed
 
+- The README opens with installation and a complete runnable example, then
+  gives short human/agent routes to the appropriate versioned documentation.
+- Russian inference and integration documentation uses reviewed scientific
+  terminology, with university sources and explanatory Mamdani/Sugeno figures.
+- NumPy first/last tie selection avoids cumulative integer scans while
+  preserving complete grades, masks and public result validation.
+
+#### Fixed
+
+- Mamdani centroid integration retains built-in consequent geometry, including
+  narrow and disjoint supports, and enforces global estimated-error targets.
+- Bounded polynomial centroids recover representable coordinates when their
+  intermediate moments underflow or overflow. Sugeno preserves tiny normalized
+  strengths with rational arithmetic where necessary; a positive weighted rule
+  firing that underflows raises `NumericalError` rather than appearing unfired.
+
+#### Release process
+
 - Prepare isolated development and review against the published 2.0.0 baseline.
   Promotion to `master` and package publication remain separate maintainer gates.
 

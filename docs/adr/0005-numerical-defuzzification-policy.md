@@ -82,5 +82,25 @@ a later domain-specific subtype must preserve that meaning.
 
 ## Acceptance and supersession
 
+### Audit amendment — 2026-10-16
+
+Compositions owned by the inference engine retain trusted built-in knots and
+linear minimum-clipping points as private initial quadrature partitions.
+Generic user callback attributes do not authorize such hints. The sum of all
+active-panel Simpson error estimates must meet the same global area and
+first-moment targets; partitions do not each receive a fresh tolerance.
+Refinement prioritizes estimated error and preserves `maximumDepth` per initial
+interval. These remain conditional numerical estimates, not rigorous error
+certificates for arbitrary functions.
+
+For supported piecewise-polynomial analytical sources, unsafe floating-point
+moments are recomputed with exact rational representations of the binary64
+coordinates before taking the ratio. The shared polynomial formulas and at
+most five pieces are reused; no new numerical backend or runtime dependency
+is introduced. This prevents tiny/huge intermediate moments from erasing a
+representable centroid. A genuinely zero area still raises the existing
+undefined-result error. Gaussian and arbitrary-callback underflow limits are
+not silently promoted to symbolic guarantees.
+
 This ADR is **Accepted**. A different default numerical method, tolerance
 policy, or zero-area contract requires an amendment or a new ADR.

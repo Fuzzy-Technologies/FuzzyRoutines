@@ -34,6 +34,14 @@ their own review and candidate checks below.
 
 ## Current 2.1 development gate
 
+**Post-audit acceptance is open (2026-10-16).** Tasks #331, #349–#351 and #337
+cover the Mamdani support defect, extreme arithmetic, README, batch optimization
+and renewed acceptance in release PR #348. The checked evidence below belongs
+to the earlier preparation revision and is historical. It cannot certify the
+corrected package. Fresh CI, installed artifacts and affected measurements are
+required before the final maintainer decision.
+
+
 The release-preparation source sets `pyproject.toml` to **2.1.0**, dated
 2026-10-14. This is **unpublished candidate metadata**; the published stable
 release remains 2.0.0. The metadata identifies the checked-out source and does

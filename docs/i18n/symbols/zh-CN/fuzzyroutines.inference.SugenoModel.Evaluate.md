@@ -16,4 +16,4 @@ Raises:
     InvalidParameterTypeError: 输入或隶属度类型错误。
     InvalidDomainError: 坐标或后件值超出其论域。
     UndefinedResultError: 所有加权激活强度均为零。
-    NumericalError: 中间仿射运算或求和产生非有限值。
+    NumericalError: 正的加权规则触发强度下溢为零，或中间仿射运算、求和产生非有限值。

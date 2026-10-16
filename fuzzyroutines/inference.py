@@ -20,7 +20,12 @@ from fractions import Fraction
 from numbers import Rational
 from typing import cast
 
-from fuzzyroutines.defuzzification import Centroid, CentroidPolicy
+from fuzzyroutines.defuzzification import (
+    Centroid,
+    CentroidPolicy,
+    _IntegrationPoints,
+    _PartitionedMembership,
+)
 from fuzzyroutines.domain import ContinuousUniverse, IntegrationDomain
 from fuzzyroutines.exceptions import (
     InvalidDomainError,
@@ -224,6 +229,8 @@ class ConstantConsequent:
 @dataclass(frozen=True, slots=True)
 class AffineConsequent:
     r"""First-order Sugeno consequent $b+\sum_j a_j x_j$.
+
+    The constant $b$ may be nonzero; this is an affine function of the inputs.
 
     Attributes:
         intercept: Finite constant $b$ in output units.
@@ -528,6 +535,9 @@ def _Firings(
     antecedents = tuple(_EvaluateCondition(rule.antecedent, grades, policy) for rule in rules)
     result = tuple((grade, grade * cast(float, rule.weight)) for rule, grade in zip(rules, antecedents, strict=True))
 
+    if any(grade > 0 and cast(float, rule.weight) > 0 and strength == 0 for rule, (grade, strength) in zip(rules, result, strict=True)):
+        raise NumericalError("positive rule firing strength underflowed to zero")
+
     if not any(strength > 0 for _, strength in result):
         raise UndefinedResultError("inference is undefined because no rule fires")
 
@@ -625,6 +635,7 @@ class MamdaniModel:
             InvalidParameterTypeError: Malformed arguments or membership results.
             InvalidDomainError: Input or integration coordinate outside its universe.
             UndefinedResultError: No firing or zero/non-finite integrated area.
+            NumericalError: A positive weighted firing product underflows to zero.
             CentroidConvergenceError: The requested quadrature did not converge.
         """
 
@@ -649,11 +660,17 @@ class MamdaniModel:
         terms = {term.name: term.fuzzySet for term in self.output.terms}
         traces = tuple(
             MamdaniRuleTrace(rule.name, antecedent, rule.weight, strength, ScalarFuzzySet(
-                universe, _ActivatedMembership(terms[rule.consequent], strength, self.activation),
+                universe, _PartitionedMembership(
+                    _ActivatedMembership(terms[rule.consequent], strength, self.activation),
+                    _IntegrationPoints(terms[rule.consequent], strength if self.activation.family == "logic" else None),
+                ),
             ))
             for rule, (antecedent, strength) in zip(self.rules, firings, strict=True)
         )
-        outputSet = ScalarFuzzySet(universe, _AggregatedMembership(tuple(trace.activatedSet for trace in traces), self.aggregation))
+        points = tuple(sorted({point for trace in traces for point in _IntegrationPoints(trace.activatedSet)}))
+        outputSet = ScalarFuzzySet(universe, _PartitionedMembership(
+            _AggregatedMembership(tuple(trace.activatedSet for trace in traces), self.aggregation), points,
+        ))
         value = None if integrationDomain is None else Centroid(outputSet, integrationDomain, centroidPolicy)
 
         return MamdaniResult(
@@ -762,7 +779,8 @@ class SugenoModel:
             InvalidParameterTypeError: An input or membership has the wrong type.
             InvalidDomainError: A coordinate or consequence is outside its universe.
             UndefinedResultError: All weighted firing strengths are zero.
-            NumericalError: Intermediate affine arithmetic or summation is non-finite.
+            NumericalError: A positive weighted firing product underflows, or
+                intermediate affine arithmetic or summation is non-finite.
         """
 
         coordinates, inputGrades, grades = _PrepareInputs(self.inputs, inputs)
@@ -771,6 +789,7 @@ class SugenoModel:
         scaled = tuple(strength / maximum for _, strength in firings)
         denominator = _FiniteSum(scaled)
         traces = []
+        exactDenominator = None
 
         for rule, (antecedent, strength), scaledStrength in zip(self.rules, firings, scaled, strict=True):
             consequent = rule.consequent
@@ -786,8 +805,22 @@ class SugenoModel:
             if not self.outputUniverse.Contains(value):
                 raise InvalidDomainError(f"consequent of rule {rule.name!r} lies outside output universe")
 
-            normalized = scaledStrength / denominator
-            traces.append(SugenoRuleTrace(rule.name, antecedent, rule.weight, strength, value, normalized, normalized * value))
+            normalized: MembershipScalar = scaledStrength / denominator
+
+            if strength > 0 and normalized < float.fromhex("0x1.0p-1022"):
+                # MembershipScalar already admits exact Real values. Retain a
+                # positive unrepresentable normalized weight in that contract,
+                # so a large consequent can still have a finite contribution.
+                if exactDenominator is None:
+                    exactDenominator = sum((_ExactRatio(current) for _, current in firings), Fraction(0))
+
+                normalized = _ExactRatio(strength) / exactDenominator
+                contribution = float(normalized * _ExactRatio(value))
+
+            else:
+                contribution = cast(float, normalized) * value
+
+            traces.append(SugenoRuleTrace(rule.name, antecedent, rule.weight, strength, value, normalized, contribution))
 
         result = _WeightedAverage(tuple(traces))
 
