@@ -12570,18 +12570,18 @@ sourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
-reviewedTranslationHash = "sha256:c45e0e2709537a666001a94063fd7975a011a4e318d8c02ef3dcad1c8283c9a3"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:44:21Z"
-evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
+reviewedTranslationHash = "sha256:0d1b5468b2bc65d7f0841857e750f4981404ecb5860b957db2dc9c524d436e6e"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:1cd9c7db60f281b934ca034ccf7d3d0baf32909d50cf8f33b8cd70a859b219e3"
-reviewedTranslationHash = "sha256:c45e0e2709537a666001a94063fd7975a011a4e318d8c02ef3dcad1c8283c9a3"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:44:21Z"
-evidence = "ci21 independently reviewed source 3b416cb and EN/RU/zh-CN worked mathematics: Mamdani 37/96, Sugeno 0.35 and 0.25, analytic and numerical distinctions; 54 focused inference/figure tests passed. inference21 independently reviewed and executed the added composition block in all three locales (0.37; exact protected-fragment parity). onboarding21 independently reviewed integration a662b54. ci21 verified both corrected shared-figure links per locale and final protected math/code/API parity."
+reviewedTranslationHash = "sha256:0d1b5468b2bc65d7f0841857e750f4981404ecb5860b957db2dc9c524d436e6e"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [units.translations.zh-CN]
 state = "approved"
@@ -12619,18 +12619,18 @@ sourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
-reviewedTranslationHash = "sha256:0d4504a991ffc38e4df1eb1bac798eda0aad7222f51648438f97dd07f5f14847"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:20:41Z"
-evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+reviewedTranslationHash = "sha256:12e9b320d1dd9e91e55ce7c1efecca64ae206a30f233eb1148c5d192d86fbf1c"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:85941e5e056b73c75bd1410936ac6a89ed3bb1779966a0c841f251d259d81017"
-reviewedTranslationHash = "sha256:0d4504a991ffc38e4df1eb1bac798eda0aad7222f51648438f97dd07f5f14847"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:20:41Z"
-evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+reviewedTranslationHash = "sha256:12e9b320d1dd9e91e55ce7c1efecca64ae206a30f233eb1148c5d192d86fbf1c"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [units.translations.zh-CN]
 state = "approved"
@@ -13305,18 +13305,18 @@ sourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
-reviewedTranslationHash = "sha256:a9bf7563880b94ec94aa71e3f13b852b614c4c5ce0b293d22ec5e42dd9a0b281"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
-evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+reviewedTranslationHash = "sha256:d4c5173c5179c3f4275657f2b2f1150f7ad12bfbcc34b53c7ffc5fef0419d206"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:d378233b09d87901c9df3bf4f924dd06dbe2ccfd89c4e41c696f6b018e2b0018"
-reviewedTranslationHash = "sha256:a9bf7563880b94ec94aa71e3f13b852b614c4c5ce0b293d22ec5e42dd9a0b281"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
-evidence = "ci21 independently reviewed inference source 3b416cb and EN/RU/zh-CN API/docstring parity, explicit policies, rational and floating-point edge behavior, no-fire/zero-area semantics and analytic references. The 54 focused inference/figure tests passed. onboarding21 independently reviewed integration a662b54; current protected math/code/API fragments match. Installed-candidate and complete PR gates remain separate CI evidence."
+reviewedTranslationHash = "sha256:d4c5173c5179c3f4275657f2b2f1150f7ad12bfbcc34b53c7ffc5fef0419d206"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [units.translations.zh-CN]
 state = "approved"
@@ -13598,18 +13598,18 @@ sourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed
 [[units.translations.ru.reviews]]
 role = "editorial"
 reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
-reviewedTranslationHash = "sha256:2415e39636884e5676c060030a8987b1f502fa161ec619b09ff430f579f4a3bb"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
-evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
+reviewedTranslationHash = "sha256:b7ee03fe3b416f4e2fa4ef086d87e6fcb35ac307b81d728668f92653f9f624b4"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
 reviewedSourceHash = "sha256:a97459107f7cf53eef8f26d6fef17dc4d6b5e2602f4708ce22752f802ed11e10"
-reviewedTranslationHash = "sha256:2415e39636884e5676c060030a8987b1f502fa161ec619b09ff430f579f4a3bb"
-reviewer = "AIna-Dev (AI; maintainer-delegated scientific/editorial review; 2026-10-16 audit)"
-reviewedAt = "2026-10-16T12:16:13Z"
-evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and approved EN/RU/zh-CN scientific/editorial content; URL-only fix 6b47ec6 preserves it. Review covered fixed/trainable distinction, common splits and centroid targets, scalar parity, numerical gradients, zero weights, parameter constraints and held-out poisoning. The 120 predictions per model and raw-MLP baseline were independently checked. NO-GO applies only to a public tensor backend, with findings limited to this synthetic task. ci21 confirmed identical guide bytes, all six calculation-source hashes and report SHA256 92213c93a40f377a5ce55194382ab0f0ddca1c01f5b79e44e6c7f15525479e71 after integration."
+reviewedTranslationHash = "sha256:b7ee03fe3b416f4e2fa4ef086d87e6fcb35ac307b81d728668f92653f9f624b4"
+reviewer = "AIna-Dev (AI; maintainer-requested affine terminology follow-through)"
+reviewedAt = "2026-10-16T13:23:52Z"
+evidence = "Reviewed the current Russian text against its canonical English source and the recorded academic sources. Restored the maintainer-requested affine terminology in the Sugeno guides and API fragments. Formulas, executable fences, public API names, intercept semantics and numerical limits are unchanged; preceding numerical acceptance remains separately source-bound."
 
 [units.translations.zh-CN]
 state = "approved"

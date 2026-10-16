@@ -44,8 +44,8 @@ teaching materials or an original scholarly article, not translation glossaries.
    [Department PDF](https://kafedra-opu.ru/sites/default/files/extra_courses/uslovija_2_porjadka.pdf),
    chapter 1, § 4.1.2, p. 48, example 3: an affine function is given by
    a linear form plus a constant. This verifies that «аффинная» is
-   mathematically correct; its replacement in introductory prose is an
-   explanatory choice, not a correction of the mathematical concept.
+   mathematically correct. The maintainer requested this established term
+   throughout the guides and API fragments after reviewing the initial wording.
 
 ## Terminology decisions
 
@@ -55,7 +55,7 @@ teaching materials or an original scholarly article, not translation glossaries.
 | Antecedent / consequent                                | «условие правила» / «заключение правила»                                                  | Explain the if/then parts before introducing API fields; source 1.                                                                                |
 | `antecedentGrade` / `firingStrength`                   | «степень выполнения (истинности) условия» / «степень активации»                           | Explicit local convention: the latter includes the rule weight. Sources 1–2 support the terminology, not the library-specific weighting contract. |
 | Activation / aggregation                               | «активизация заключения» / «аккумуляция заключений»                                       | Distinguish output operations from «агрегирование подусловий»; identify API `aggregation` explicitly. Sources 1–2.                                |
-| First-order Sugeno / affine                            | «линейная функция входов с постоянным членом»                                             | Keep the intercept and formula; explain the precise affine term once and retain `AffineConsequent`. Sources 2–3.                                  |
+| First-order Sugeno / affine                            | «аффинная функция входов»                                                                 | Retain the established term, intercept and formula, matching `AffineConsequent` and the maintainer decision. Sources 2–3.                         |
 | Centroid / «центр площади»                             | «центр тяжести площади под функцией принадлежности»                                       | Avoid confusion with area-bisector defuzzification; source 1.                                                                                     |
 | Confidence / «уверенность»                             | «максимальная степень принадлежности (`confidence`)»                                      | Describe the actual field without suggesting statistical calibration.                                                                             |
 | Seed, input width, held-out predictions                | «начальное значение генератора», «число входных признаков», «прогнозы на тестовых данных» | Replace compressed English constructions with concrete explanations.                                                                              |
@@ -111,3 +111,11 @@ two overstatements: rational normalization also covers representable subnormal
 weights, and a max-aggregated active consequent may be dominated by another.
 The disjoint-support figure now explicitly limits its title to that example.
 No human line-by-line review or full independent test run is claimed.
+
+Maintainer terminology follow-through: restored «аффинная функция» in both
+Sugeno guides and the `AffineConsequent` / `SugenoModel` Russian API fragments.
+The formulas, executable examples, public identifiers and numerical limits
+are unchanged. The four Russian translation review records bind the revised
+prose to the unchanged canonical English sources. Focused Markdown, locale,
+documentation-gate, API-documentation and locale-rendering checks passed
+(54 tests); multilingual manifest validation and `git diff --check` passed.
