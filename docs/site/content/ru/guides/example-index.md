@@ -121,7 +121,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, блок 1](../api/modern/exceptions.md); [membership, блок 1](../api/modern/membership.md)             |
-| `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [api-recipes, блок 1](api-recipes.md)                                                                            |
+| `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 1](api-recipes.md)                         |
 | `fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval`                  | [api-recipes, блок 1](api-recipes.md); [historical-recipes, блок 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval`                    | [api-recipes, блок 1](api-recipes.md); [historical-recipes, блок 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ValidateWithin`                      | [membership, блок 1](../api/modern/membership.md); [alpha-cuts, блок 1](alpha-cuts.md)                           |

@@ -121,7 +121,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, 代码块 1](../api/modern/exceptions.md); [membership, 代码块 1](../api/modern/membership.md)             |
-| `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [api-recipes, 代码块 1](api-recipes.md)                                                                           |
+| `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 1](api-recipes.md)                         |
 | `fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval`                  | [api-recipes, 代码块 1](api-recipes.md); [historical-recipes, 代码块 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval`                    | [api-recipes, 代码块 1](api-recipes.md); [historical-recipes, 代码块 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ValidateWithin`                      | [membership, 代码块 1](../api/modern/membership.md); [alpha-cuts, 代码块 1](alpha-cuts.md)                           |

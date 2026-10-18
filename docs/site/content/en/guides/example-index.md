@@ -121,7 +121,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, block 1](../api/modern/exceptions.md); [membership, block 1](../api/modern/membership.md)             |
-| `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [api-recipes, block 1](api-recipes.md)                                                                             |
+| `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [membership, block 1](../api/modern/membership.md); [api-recipes, block 1](api-recipes.md)                         |
 | `fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval`                  | [api-recipes, block 1](api-recipes.md); [historical-recipes, block 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ToLegacyInterval`                    | [api-recipes, block 1](api-recipes.md); [historical-recipes, block 4](historical-recipes.md)                       |
 | `fuzzyroutines.domain.IntegrationDomain.ValidateWithin`                      | [membership, block 1](../api/modern/membership.md); [alpha-cuts, block 1](alpha-cuts.md)                           |
