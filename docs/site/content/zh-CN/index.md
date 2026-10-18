@@ -7,6 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 
 ![Fuzzy Technologies 研究实验室中的 Alice 与 FuzzyRoutines](../en/assets/brand/fuzzyroutines-alice.png){ .fr-project-art }
 
+可执行 Python 的助手可使用 [AI 智能体快速入门](agent-quickstart.md)：安装指定版本，运行可复现的标度与风险示例，并输出 JSON 验证记录。
+
 从[快速入门](quick-start.md)开始，安装现代 API，并对一个物理测量值进行分类。[九个完整场景](guides/index.md)说明输入、计算策略、计算过程、预期结果和图形。需要选择曲线时，可查看[隶属函数图集](guides/membership-families.md)；需要完成单项操作时，可查阅[实用 API 示例](guides/api-recipes.md)。
 
 新代码应使用[现代 API](api/modern/index.md)。[历史兼容接口](api/legacy/index.md)用于维护基于 FuzzyRoutines 1.0.3 编写的软件。

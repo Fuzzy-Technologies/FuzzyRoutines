@@ -8,6 +8,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from tools import compose_pages_site as composePagesSite
 
 PROJECTROOT = Path(__file__).parents[1]
@@ -89,19 +91,23 @@ def test_DraftLocalesAreAvailableOnlyInAnExplicitReviewArtifact(tmpPath):
     assert 'href="../../../../assets/site.css"' in deepFallback
 
 
-def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath):
+@pytest.mark.parametrize("candidateVersion", ["2.0.0", "2.1.0.dev0"])
+def test_PagesVersionIndexDoesNotInventAnUnreleasedVersion(tmpPath, monkeypatch, candidateVersion):
     """Expose the moving route and real historical sources without fake snapshots."""
 
     apiRoot = tmpPath / "generated-api"
     outputRoot = tmpPath / "pages"
     CreateApiFixture(apiRoot)
+    metadataPath = tmpPath / "pyproject.toml"
+    metadataPath.write_text(f'[project]\nversion = "{candidateVersion}"\n', encoding="utf-8")
+    monkeypatch.setattr(composePagesSite, "PROJECTMETADATA", metadataPath)
 
     composePagesSite.ComposeSite(apiRoot, outputRoot)
     versionText = (
         outputRoot / "api" / "versions" / "index.html"
     ).read_text(encoding="utf-8")
 
-    assert "2.0.0" in versionText
+    assert candidateVersion in versionText
     assert "../latest/en/" in versionText
     assert "Separately hosted documentation snapshots for individual releases" in versionText
     assert "are not currently provided" in versionText
@@ -121,3 +127,58 @@ def test_PagesWorkflowBuildsEveryReviewButDeploysOnlyMaster():
     assert "pages: write" in workflowText
     assert "id-token: write" in workflowText
     assert "python tools/compose_pages_site.py" in workflowText
+
+
+def test_PagesCompositionDistributesStandaloneAgentEntrypoints(tmpPath):
+    """Publish canonical instructions and recipe bytes without requiring a checkout."""
+
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
+    CreateApiFixture(apiRoot)
+    composePagesSite.ComposeSite(apiRoot, outputRoot)
+    assert (outputRoot / "llms.txt").read_bytes() == (PROJECTROOT / "docs/llms.txt").read_bytes()
+    assert (outputRoot / "recipes/agent_recipe.py").read_bytes() == (PROJECTROOT / "examples/agent_recipe.py").read_bytes()
+    assert (outputRoot / "recipes/requirements-plots.txt").read_bytes() == (PROJECTROOT / "docs/requirements-plots.txt").read_bytes()
+
+
+def test_LandingLocalesPublishIndependentlyOfApiTranslationApproval(tmpPath):
+    """Product locales remain complete pages even when API locales use explicit fallback."""
+
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
+    CreateApiFixture(apiRoot)
+    composePagesSite.ComposeSite(apiRoot, outputRoot)
+
+    for locale in ("ru", "zh-CN"):
+        page = outputRoot / locale / "index.html"
+        assert page.read_bytes() == (PROJECTROOT / "docs" / locale / "index.html").read_bytes()
+        assert f'<html lang="{locale}">' in page.read_text(encoding="utf-8")
+        assert 'id="quickstart-code"' in page.read_text(encoding="utf-8")
+        assert "Reviewed documentation is not available" in (outputRoot / f"api/latest/{locale}/index.html").read_text(encoding="utf-8")
+
+
+def test_MissingProductLocaleDoesNotReplaceExistingArtifact(tmpPath, monkeypatch):
+    """Reject an incomplete source set before removing a previously composed artifact."""
+
+    apiRoot = tmpPath / "generated-api"
+    outputRoot = tmpPath / "pages"
+    CreateApiFixture(apiRoot)
+    productRoot = tmpPath / "product"
+    (productRoot / "ru").mkdir(parents=True)
+    (productRoot / "index.html").write_text("English", encoding="utf-8")
+    (productRoot / "ru/index.html").write_text("Russian", encoding="utf-8")
+    outputRoot.mkdir()
+    previous = outputRoot / "previous.html"
+    previous.write_text("Existing artifact", encoding="utf-8")
+    monkeypatch.setattr(composePagesSite, "PRODUCTROOT", productRoot)
+
+    try:
+        composePagesSite.ComposeSite(apiRoot, outputRoot)
+
+    except FileNotFoundError as error:
+        assert "localized product page is missing" in str(error)
+
+    else:
+        raise AssertionError("Missing Chinese landing source must fail composition.")
+
+    assert previous.read_text(encoding="utf-8") == "Existing artifact"

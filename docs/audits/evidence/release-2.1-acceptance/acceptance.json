@@ -1,0 +1,51 @@
+{
+  "reviewed_source": "c3c531a27f394794072e02acc68d34866e87b0ae",
+  "local_reproducible_wheel_sha256": "0a7d2565ad0f1943bf32b6ea2774b8764ba171d0f15dac74c3330211188b042f",
+  "same_core_source_as_followup": "0dba28a072c6d8dff3eacdc336b922e1ab264b23",
+  "full_cpu_neural_runs": {
+    "samples": 600,
+    "epochs": 400,
+    "seed": 1729,
+    "dtype": "float64",
+    "threads": 1
+  },
+  "fresh_reports_sha256": {
+    "artifact-python313.json": "aea3ad5c1fcd4a61f04a6d0f04a598e1a87b9a8ee67f9723682e6e11339f0c1f",
+    "artifact-python314.json": "51822935b21f038ec1d2b499c5cb8c5cb8decfe2f68f01e1a6687b34a7d9e41f",
+    "ci-workflows.json": "364565ff65871df48060463ab9681f6e956084d1095a2483f2c502bef95f9733",
+    "entry-links.json": "3a632ae4deca6b550ed116ac53e3256341fd526cf4c8437ae2df266d13b395d8",
+    "installed-payload.json": "d95650e3516af4f46d90b2ac9775e408cdd6b524b916177096ecaa61b08f939b",
+    "neural-current.json": "21b3cb1090210e3ec38474123c0884631c2b0bfdf062659302833aba19964800",
+    "package-workflow.json": "acab2f9cc3924dc5314604f356e961cc86cd895439058cb438c0b2daeb7b89a9",
+    "reproducibility.json": "61319d2ba8b0bf9c28c1bbc5df69cc71ae300c865aec815de011bc94d77ac528",
+    "scalar.json": "409dd5d61d2334ca3979a3b20252494213afb5984750c25709686e4f111549ad",
+    "sugeno-current.json": "7159d25e42172d6f9469b2e121eab1eeda4abbf4d0728a8496a48df63aa27af0",
+    "sugeno-installed-provenance.json": "2f0e2e47c72054a189a1de74a497dbd672ec39b5f87c32ff6714d3710794b0e4"
+  },
+  "limitations": [
+    "The local wheel was built twice from the exact committed source and compared byte-for-byte; it is not presented as a CI artifact.",
+    "Current 2.1.0 is not published to PyPI.",
+    "Private FMA/robot application migration remains unverified.",
+    "Synthetic neural experiments do not establish general model superiority or a public trainable backend."
+  ],
+  "ci_head": "0dba28a072c6d8dff3eacdc336b922e1ab264b23",
+  "ci_built_source": "9ab20c7e7b3d98e056f2670a7eebc75083e00553",
+  "package_run": 39168270761,
+  "full_workflows": 10,
+  "full_test_outcomes_per_runtime": {
+    "passed": 1671,
+    "skipped": 22,
+    "failed": 0,
+    "sequential_process_outcomes_identical": true,
+    "process_errors": 0,
+    "timeouts": 0
+  },
+  "scalar_workloads": 30,
+  "paired_repeats": 7,
+  "parity_passed": true,
+  "ci_distributions": {
+    "fuzzyroutines-2.1.0-py3-none-any.whl": "3054f737f2cd247c20647abc5627f2368864563fd228544bb3bf01e8d76d44f7",
+    "fuzzyroutines-2.1.0.tar.gz": "c398585750118b55d648aa277cd2c76ba6161d1d9e2f640ccfe7efa1c9fed6d2"
+  },
+  "supported_interpreter_distributions_byte_identical": true
+}

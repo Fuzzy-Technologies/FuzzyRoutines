@@ -317,6 +317,13 @@ explicit `CentroidPolicy`. A zero or non-finite area raises `ValueError`, and
 exhausted adaptive work raises `CentroidConvergenceError`; no best-so-far or
 fixed-grid estimate is returned as a converged result.
 
+Inference-owned compositions retain trusted built-in geometry as initial knots;
+these hints do not certify arbitrary callables. Adaptive panels share global
+estimated-error targets, recomputed from the complete partition before acceptance.
+Bounded polynomial moments use rational recomputation when floating-point
+intermediates are unsafe. Erased nonzero adaptive intermediates raise
+`NumericalError` rather than silently yielding a zero centroid.
+
 The compatibility method `FuzzySet.Defuz()` and the `defuzValue` property
 delegate to this strategy on every access. They observe current parameters and
 current `supportSet` integration bounds without a retained centroid cache. See the

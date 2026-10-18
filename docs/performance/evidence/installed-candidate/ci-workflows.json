@@ -1,0 +1,92 @@
+[
+  {
+    "id": 38627554781,
+    "name": "Public modern typing",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627554781",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627554140,
+    "name": "Quick deterministic gate",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627554140",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627553845,
+    "name": "Close linked Tasks after merge",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553845",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627553790,
+    "name": "Mathematical coverage and execution parity",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553790",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627553815,
+    "name": "Optional NumPy scalar parity",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553815",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627553976,
+    "name": "Optional neural CPU examples",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553976",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627553918,
+    "name": "Trusted PyPI release",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553918",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627553915,
+    "name": "Package build and clean-install",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553915",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627554030,
+    "name": "Documentation quality gates",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627554030",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  },
+  {
+    "id": 38627553892,
+    "name": "Canonical API reference",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553892",
+    "head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+    "event": "pull_request"
+  }
+]

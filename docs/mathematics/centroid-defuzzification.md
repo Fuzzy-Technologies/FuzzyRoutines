@@ -54,6 +54,25 @@ or an out-of-domain analytical centroid delegates to adaptive integration with
 the same policy. Results are never clamped to an endpoint, and no path silently
 falls back to a fixed sampling grid.
 
+For the four polynomial families, unsafe floating-point moments are instead
+recomputed with exact rational arithmetic over at most five polynomial pieces.
+The ratio is taken before conversion to float, preserving a representable
+centroid even when its separate moments underflow or overflow.
+
+Clipped polynomial panels are evaluated relative to their left endpoint to
+avoid cancellation on narrow windows. Original rational parameters and domain
+endpoints are preserved when they are not exactly representable in binary64;
+the result is then an exact rational centroid, including for windows containing
+no binary64 coordinate. Ordinary float inputs retain floating-point evaluation.
+Trusted inference knots retain original rational coordinates as well. Numerical
+quadrature remains approximate: if rounding moves its result outside the
+integration domain, `NumericalError` is raised rather than returning or clamping
+an invalid coordinate.
+
+Engine-owned inference compositions retain trusted built-in shape knots and
+linear clipping points as initial partitions. They still use numerical
+integration; retaining knots is not an analytical certificate.
+
 ## Precision and failure
 
 `CentroidPolicy` owns the adaptive configuration for one operation. Its
@@ -61,6 +80,12 @@ defaults are an absolute area tolerance of `1e-12`, a relative tolerance of
 `1e-10`, and at most 20 recursive bisections per interval. The absolute
 first-moment target scales with the largest absolute domain coordinate.
 These are moment error targets, rather than a direct bound on centroid error.
+The complete active partition shares these estimated-error targets. One quarter
+of each target reserves margin for the ratio of moments. Cached replacement
+sums guide refinement; a full compensated sum is required before acceptance.
+Wholly rational callback arithmetic is retained. A nonzero sampled product or
+same-sign area/moment estimate that underflows to zero raises `NumericalError`;
+the arbitrary-callable path does not acquire polynomial rational recomputation.
 When tiny membership weights force Gaussian fallback, callers can lower the
 absolute tolerance explicitly so it does not dominate their requested relative
 accuracy.

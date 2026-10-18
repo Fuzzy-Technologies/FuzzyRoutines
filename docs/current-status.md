@@ -5,17 +5,43 @@ SPDX-License-Identifier: Apache-2.0
 
 # Current implementation status
 
-This page records the public boundary prepared for FuzzyRoutines 2.0.0 and
-promoted to `master` through PR #312. It separates implemented and tested
-behavior from the FuzzyRoutines 2 roadmap. Package metadata is `2.0.0`.
-Publication is on hold for the final project and documentation review; a merged
-candidate does not establish a published GitHub or PyPI release.
+FuzzyRoutines 2.0.0 is the published stable baseline. The current source uses
+**2.1.0 candidate metadata; 2.1.0 has not been published on PyPI**. The exact CI candidate has completed the full opening gate and installed-wheel
+measurements. The [candidate handoff](audits/2026-10-14-2.1-candidate-handoff.md)
+binds its source, artifacts, results and limits for
+[Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337).
+Independent handoff acceptance completes preparation; final promotion approval
+remains the maintainer's separate decision.
 
-The [release version review](release-version-decision.md) reaffirms that stable
-target from observable compatibility impact. The
+## Accepted 2.1 implementation
+
+- [PR #341](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/341):
+  immutable historical scale factories and explicit linguistic encoding.
+- [PR #342](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/342):
+  English, Russian and Chinese product pages with shared interactions.
+- [PR #343](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/343):
+  traced scalar Mamdani and zero/first-order Sugeno inference.
+- [PR #344](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/344):
+  optional neural examples and bounded differentiable Sugeno research.
+  The research does not introduce a public tensor backend.
+
+- [PR #345](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/345):
+  explicit optional NumPy membership and scale batches, merged after the required
+  CI passed. No automatic backend switching or general performance advantage is
+  claimed.
+
+The [candidate release notes](release-notes-2.1.0.md),
 [development changelog](../CHANGELOG.md) and
-[1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) describe the implemented
-boundary; release approval remains pending.
+[readiness checklist](release-readiness.md) link the completed candidate CI,
+[installed scalar comparison](performance/installed-scalar-comparison.md) and
+[installed NumPy results](performance/installed-batch-results.md). Preparation
+[PR #346](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/346) passed all
+ten workflows at `f0d09c3`; its measured wheel contains source `c44983a`.
+Final promotion CI, package-payload comparison and maintainer review remain
+separate from these measured-artifact checks. The
+[first modernization version decision](release-version-decision.md) and
+[1.0.3 migration notes](migration/1.0.3-to-2.0.0.md) remain the historical 2.0
+records. The established scalar contracts below also remain available.
 
 The [2026-10-05 project audit](audits/2026-10-05-project-audit.md) reviews the
 production modules, all accepted ADRs, practical usage, documentation and
@@ -71,15 +97,23 @@ review candidates from merged release evidence.
   CPython 3.13 and 3.14; legacy adapters retain their runtime contract outside
   the modern static-typing promise. See [public modern typing](public-typing.md).
 
-The latest accepted architecture and contract wave includes
+The historical 2.0 architecture and contract wave includes
 [PR #272](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/272)
 ([`7f13ebb`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/7f13ebb)),
 [PR #273](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/273)
 ([`d654c9b`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/d654c9b)),
 and [PR #274](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/274)
 ([`126986a`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/commit/126986a)).
-These establish the vectorization decision, curated exports, and error model;
-the vectorized backend itself remains future work.
+These established the vectorization strategy, curated exports and error model.
+At that baseline, the measured NumPy experiment remained outside the package;
+see [ADR-0015](adr/0015-optional-vectorized-execution-strategy.md) and the
+[recorded comparison](performance/vectorized-membership-comparison.md).
+The 2.1 public implementation and optional packaging are now accepted under
+[ADR-0018](adr/0018-public-numpy-batches.md). The
+[installed-candidate report](performance/installed-batch-results.md) now records
+parity, paired timings and dependency costs for its exact wheel. Large synthetic
+batches benefited in this run; the small public test replays showed no consistent
+NumPy advantage. No automatic backend switch or universal speedup is claimed.
 
 The subsequent accepted preparation wave includes
 [PR #276](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/276)
@@ -106,13 +140,6 @@ Representative accepted changes for the historical correctness baseline are
 
 ## Accepted contracts awaiting implementation
 
-- ADR-0015 retains the dependency-free scalar default and adopts optional,
-  explicitly selected vectorization for large batches of supported built-in
-  membership families. The measured NumPy experiment remains outside the
-  package; public backend implementation, packaging and API gates remain
-  separate future work. See the
-  [strategy decision](adr/0015-optional-vectorized-execution-strategy.md) and
-  [recorded comparison](performance/vectorized-membership-comparison.md).
 - ADR-0009 defines continuous fuzzy convexity as quasiconcavity, discrete
   convexity as order-convexity, and finite-grid success as sampled evidence
   rather than proof. The public convexity query and evidence-result API remain
@@ -128,10 +155,10 @@ Representative accepted changes for the historical correctness baseline are
 - the offline documentation gate rejects false approval, incomplete human
   review evidence, malformed locale state, and approved translations made
   stale by a canonical English change;
-- all 258 required units per locale have current hash-bound acceptance under
-  ADR-0011: Russian maintainer acceptance and explicitly delegated AI
-  scientific/editorial acceptance for Chinese. Missing or stale approvals
-  cannot be presented as reviewed translations.
+- every required unit in the current manifest has hash-bound acceptance under
+  ADR-0011, with the applicable editorial, technical and mathematical reviews
+  recorded for each locale. Missing or stale approvals cannot be presented as
+  reviewed translations.
 
 ## Implemented modern domain surface
 
@@ -225,15 +252,18 @@ merged in PR #300. The documentation gate checks the shared source standard.
 
 - symmetric-difference semantics;
 - executable convexity queries with evidence-strength-preserving results;
-- public optional vectorized execution under ADR-0015's API, numerical-parity,
-  time, memory and dependency gates;
 - free-threaded CPython support, subject to race-safety and scaling evidence.
 
 ## Performance and concurrency claims
 
 Performance changes are accepted only with reproducible before/after
 measurements and numerical-parity tests. Current scalar optimizations remove
-known duplicate work; they do not establish a universal speed claim.
+known duplicate work; they do not establish a universal speed claim. The
+[installed 2.0/2.1 comparison](performance/installed-scalar-comparison.md) reports
+mixed scalar timings on a shared host, with all raw samples and independent
+numerical checks retained. Public consumer evidence covers 27 synthetic boundary
+cases and, separately, 30 upstream test inputs. Private FMA projects and the
+robot remain unverified.
 
 Ordinary independent Python processes can execute independent models.
 Thread-safe or free-threaded execution is not yet a supported contract for the
@@ -251,11 +281,16 @@ publish them. Release candidates, annotated tags, GitHub Releases, and PyPI Trus
 Publishing belong to the release milestone and require the complete
 human-reviewed readiness gate.
 
-The [readiness checklist](release-readiness.md) remains unchecked until evidence
-for the exact release commit and Task #121's human approval are recorded.
-Accepted release notes and a selected version do not authorize publication.
+The [2.1 readiness checklist](release-readiness.md) and
+[dated handoff](audits/2026-10-14-2.1-candidate-handoff.md) distinguish completed
+measured-candidate checks from later promotion checks. Task #337 completes when
+the evidence and prepared handoff receive independent acceptance; it does not
+wait for owner approval of the final release PR. That PR to `master` remains
+open for the maintainer. Its CI and artifact-payload comparison must identify
+its own revision; a later report-only commit can change archive timestamps.
+No release tag, GitHub Release or PyPI upload is authorized by preparation.
 
-The current code audit identified correctness follow-ups for remote-interval
+The historical 2.0 audit identified correctness follow-ups for remote-interval
 Gaussian centroids ([#282](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/282)),
 exact-rational fuzzification comparisons
 ([#283](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/283)),
@@ -263,5 +298,6 @@ analytical certificates for evaluator overrides
 ([#284](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/284)),
 and extreme finite membership arithmetic
 ([#285](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/285)). Their
-fixes require separate review and merge; see the
-[audit follow-up gate](release-readiness.md#audit-follow-ups).
+historical review and release records remain linked from the
+[audit follow-up section](release-readiness.md#audit-follow-ups); they do not
+replace acceptance of the new 2.1 candidate.

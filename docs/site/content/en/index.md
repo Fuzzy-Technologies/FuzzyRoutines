@@ -7,6 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 
 ![FuzzyRoutines with Alice in the Fuzzy Technologies research laboratory](assets/brand/fuzzyroutines-alice.png){ .fr-project-art }
 
+For an assistant that can execute Python, use the [agent quick start](agent-quickstart.md): exact-version installation, reproducible scale/risk recipes and JSON evidence.
+
 Start with the [quick start](quick-start.md) to install the modern API and
 classify a physical measurement. The [nine worked scenarios](guides/index.md)
 explain inputs, policies, calculations, expected results, and figures. Browse

@@ -1,0 +1,151 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+name: Optional neural CPU examples
+
+on:
+  pull_request:
+    branches: [develop, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  neural-examples:
+    name: Optional neural checks on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13", "3.14"]
+
+    steps:
+      - name: Check out the exact tested revision
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-build.txt
+            examples/neural/requirements.txt
+            docs/requirements-plots.txt
+
+      - name: Select full or reviewed focused validation
+        id: scope
+        uses: ./.github/actions/ci-policy
+
+      - name: Select optional training and figure checks
+        id: neural
+        run: python tools/neural_ci.py scope
+
+      - name: Build and clean-install the exact candidate wheel
+        if: steps.neural.outputs.active == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python -m pip install --disable-pip-version-check -r requirements-build.txt
+          python -m build --wheel --no-isolation --outdir _build/neural-ci/wheel
+          wheelPaths=("$GITHUB_WORKSPACE"/_build/neural-ci/wheel/*.whl)
+          test "${#wheelPaths[@]}" -eq 1
+          test -f "${wheelPaths[0]}"
+          sha256sum "${wheelPaths[0]}" > _build/neural-ci/wheel.sha256
+          sha256sum --check _build/neural-ci/wheel.sha256
+          git rev-parse HEAD > _build/neural-ci/source-revision.txt
+
+          environmentPath="$RUNNER_TEMP/neural-${{ matrix.python-version }}"
+          python -m venv "$environmentPath"
+          "$environmentPath/bin/python" -m pip install --disable-pip-version-check --no-deps "${wheelPaths[0]}"
+          "$environmentPath/bin/python" -m pip install --disable-pip-version-check -r requirements.txt
+          echo "NEURAL_PYTHON=$environmentPath/bin/python" >> "$GITHUB_ENV"
+
+      - name: Install the optional pinned CPU framework
+        if: steps.neural.outputs.training == 'true'
+        run: |
+          "$NEURAL_PYTHON" -m pip install --disable-pip-version-check \
+            --index-url https://download.pytorch.org/whl/cpu -r examples/neural/requirements.txt
+
+      - name: Run only selected neural source feature tests
+        if: steps.neural.outputs.training == 'true'
+        run: python tools/neural_ci.py run-tests --group training --python "$NEURAL_PYTHON"
+
+      - name: Smoke the installed wheel with a bounded CPU experiment
+        if: steps.neural.outputs.neural == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cd "$RUNNER_TEMP"
+          "$NEURAL_PYTHON" -I "$GITHUB_WORKSPACE/examples/neural/run.py" \
+            --verify-installed --epochs 30 --samples 90 \
+            --output "$GITHUB_WORKSPACE/_build/neural-ci/installed-report.json" \
+            > "$GITHUB_WORKSPACE/_build/neural-ci/installed-stdout.json"
+          "$NEURAL_PYTHON" -I "$GITHUB_WORKSPACE/tools/neural_ci.py" verify-report \
+            --report "$GITHUB_WORKSPACE/_build/neural-ci/installed-report.json" \
+            --stdout "$GITHUB_WORKSPACE/_build/neural-ci/installed-stdout.json" \
+            > "$GITHUB_WORKSPACE/_build/neural-ci/installed-verification.json"
+
+      - name: Smoke research Sugeno against the installed candidate
+        if: steps.neural.outputs.research == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cd "$RUNNER_TEMP"
+          "$NEURAL_PYTHON" -I "$GITHUB_WORKSPACE/tools/research_ci.py" smoke \
+            --output "$GITHUB_WORKSPACE/_build/neural-ci/research-report.json" \
+            --provenance "$GITHUB_WORKSPACE/_build/neural-ci/research-provenance.json" \
+            > "$GITHUB_WORKSPACE/_build/neural-ci/research-stdout.json"
+
+      - name: Install plotting dependencies without requiring Torch
+        if: steps.neural.outputs.plots == 'true'
+        run: |
+          "$NEURAL_PYTHON" -m pip install --disable-pip-version-check -r docs/requirements-plots.txt
+
+      - name: Run only selected figure evidence tests
+        if: steps.neural.outputs.plots == 'true'
+        run: python tools/neural_ci.py run-tests --group plots --python "$NEURAL_PYTHON"
+
+      - name: Verify recorded figures against the installed scalar API
+        if: steps.neural.outputs.neuralPlots == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cd "$RUNNER_TEMP"
+          "$NEURAL_PYTHON" -I "$GITHUB_WORKSPACE/tools/generate_neural_figures.py" \
+            --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures" --check \
+            > "$GITHUB_WORKSPACE/_build/neural-ci/figures.json"
+
+      - name: Verify recorded Sugeno figures and installed source provenance
+        if: steps.neural.outputs.researchPlots == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cd "$RUNNER_TEMP"
+          "$NEURAL_PYTHON" -I "$GITHUB_WORKSPACE/tools/research_ci.py" figures \
+            --output-directory "$GITHUB_WORKSPACE/docs/site/content/en/assets/figures" \
+            > "$GITHUB_WORKSPACE/_build/neural-ci/research-figures.json"
+
+      - name: Upload exact-revision optional evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neural-python-${{ matrix.python-version }}-${{ github.sha }}
+          path: |
+            _build/ci-policy.json
+            _build/neural-ci
+          if-no-files-found: warn

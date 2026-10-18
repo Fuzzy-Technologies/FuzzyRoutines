@@ -28,7 +28,9 @@ def test_ModernTypingScopeCoversEveryFocusedModule():
         for path in (typecheck.PROJECT_ROOT / "fuzzyroutines").glob("*.py")
         if path.name not in {"Examples.py", "FuzzyRoutines.py"}
     }
-    assert modernSources <= targets, "Every focused modern module must remain a strict checker target"
+    optionalSources = {source for sources in typecheck.OPTIONAL_SOURCES.values() for source in sources}
+    assert modernSources <= targets | optionalSources, "Every modern module must belong to a strict core or explicit extra scope"
+    assert not targets & optionalSources, "The core typing gate must remain independent of optional dependencies"
     assert configuration.getboolean("mypy", "strict"), "Consumer negative probes require strict unused-ignore checking"
     assert not configuration.has_option("mypy", "ignore_errors"), "Global suppression would invalidate typing evidence"
     assert not any("_legacy" in target for target in targets), "Historical adapters are outside the modern typing promise"
@@ -36,6 +38,45 @@ def test_ModernTypingScopeCoversEveryFocusedModule():
         path.relative_to(typecheck.PROJECT_ROOT).as_posix()
         for path in typecheck.ConsumerPaths()
     } <= targets, "Every static consumer must participate in the source gate"
+
+
+def test_OptionalConsumersRequireExplicitSelection(tmpPath):
+    """Keep optional imports out of default installed and source consumers."""
+
+    coreRoot = tmpPath / "tests/typing"
+    optionalRoot = coreRoot / "optional/numpy"
+    optionalRoot.mkdir(parents=True)
+    coreProbe = coreRoot / "core.py"
+    optionalProbe = optionalRoot / "arrays.py"
+    coreProbe.write_text("from fuzzyroutines import Triangle\n", encoding="utf-8")
+    optionalProbe.write_text("import numpy\n", encoding="utf-8")
+    assert typecheck.ConsumerPaths(tmpPath) == (coreProbe,)
+    assert set(typecheck.ConsumerPaths(tmpPath, ("numpy",))) == {coreProbe, optionalProbe}
+
+    with pytest.raises(ValueError, match="Unknown typing extra"):
+        typecheck.ConsumerPaths(tmpPath, ("missing",))
+
+    optionalProbe.unlink()
+
+    with pytest.raises(ValueError, match="No typing consumers"):
+        typecheck.ConsumerPaths(tmpPath, ("numpy",))
+
+
+def test_OptionalSourceGateAddsStrictBackendAndConsumers(monkeypatch):
+    """Use the shared strict configuration while explicitly covering array types."""
+
+    def CheckTargets(command, **options):
+        """Observe complete source targets without invoking an external checker."""
+
+        assert "fuzzyroutines/batches.py" in command
+        assert "tests/typing/optional/numpy/batch_consumer.py" in command
+        assert "fuzzyroutines/__init__.py" in command
+        assert "--config-file" in command and "--no-incremental" in command
+
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(typecheck.subprocess, "run", CheckTargets)
+    assert typecheck.Main(["--extra", "numpy"]) == 0
 
 
 @pytest.mark.parametrize("boundary", ["checkout", "missing-marker", "missing-consumers"])

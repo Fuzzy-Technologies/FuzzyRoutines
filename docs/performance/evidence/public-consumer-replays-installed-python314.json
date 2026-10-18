@@ -1,0 +1,1489 @@
+{
+  "baseline": {
+    "git_commit": "c44983ab4be2ef58d7847e758c118875a51738db",
+    "kind": "canonical scalar APIs from the same installed candidate wheel",
+    "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+  },
+  "benchmark": "public-consumer-replays-installed-candidate",
+  "configuration": {
+    "command": [
+      "/workspace/scratch/9353266c239f/FuzzyRoutines/.venv/bin/python",
+      "-I",
+      "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+      "--config",
+      "/workspace/scratch/9353266c239f/candidate-2.1.0-artifacts/batch-config.json",
+      "--run"
+    ],
+    "excluded": "price normalization, model construction, consumer engine, network access",
+    "input_generator": "ordered normalized coordinates extracted from pinned public positive-test cases",
+    "memory": true,
+    "numpy_input": "prepared ndarray or Python list, as named",
+    "paired_backend_order": [
+      [
+        "scalar",
+        "numpy"
+      ],
+      [
+        "numpy",
+        "scalar"
+      ],
+      [
+        "scalar",
+        "numpy"
+      ],
+      [
+        "numpy",
+        "scalar"
+      ],
+      [
+        "scalar",
+        "numpy"
+      ],
+      [
+        "numpy",
+        "scalar"
+      ],
+      [
+        "scalar",
+        "numpy"
+      ]
+    ],
+    "repeats": 7,
+    "scalar_input": "flat Python list in both modes",
+    "seed": null,
+    "timers": [
+      "time.perf_counter_ns",
+      "time.process_time_ns"
+    ],
+    "unit": "nanoseconds per replay group, result allocation included",
+    "warmups": 1
+  },
+  "consumer": {
+    "license_git_blob": "2bb9ad240fa04c8cf706a4901c4807878e90c2dc",
+    "license_path": "LICENSE",
+    "repository": "Fuzzy-Technologies/TKSBrokerAPI",
+    "revision": "b963c54039f013d432220186ae35a22359c5a773",
+    "source_git_blob": "012caf30a61daf79117f95ee880c4d224213e103",
+    "source_path": "tksbrokerapi/TradeRoutines.py",
+    "source_sha256": "923981bb13302942c571c98133b50d97b2830b2fbdbb0873d64fc56cf951616e",
+    "test_git_blob": "0a09fc3e30fe7182320fb776979d4b704e81fe0f",
+    "test_path": "tests/test_TradeRoutines.py",
+    "test_sha256": "69efddf14b3d3d7031aed90c6e6db0700fbc6c2796648ed3bb8818b12e64ddea"
+  },
+  "dependency_evidence": {
+    "path": "public-batches-installed-python314.json",
+    "scope": "Same installed candidate and environment; dependency costs measured once in the accompanying synthetic run.",
+    "sha256": "c30dae66247bde7db4993b8ad5a54629ba2d5b790fa75e2197d60652ad5e4f96"
+  },
+  "environment": {
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "cgroup": {
+      "cpu.max": "800000 100000",
+      "memory.max": "8589934592"
+    },
+    "executable": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+    "git_commit": "c44983ab4be2ef58d7847e758c118875a51738db",
+    "git_dirty": null,
+    "harness_git_commit": "b451e502930d581fdffdc2a69ac44a8f3ab18174",
+    "implementation": "CPython",
+    "logical_cpu_count": 9,
+    "numpy_version": "2.3.5",
+    "package_module_origins": {
+      "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+      "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+      "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+      "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+      "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+      "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+      "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+      "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+      "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+      "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+      "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+      "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+      "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+      "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+      "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+    },
+    "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+    "package_version": "2.1.0",
+    "physical_memory_bytes": 10475839488,
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "processor": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "python": "3.14.8 (main, Oct  3 2026, 01:04:31) [Clang 22.1.3 ]",
+    "source_sha256": {
+      "fuzzyroutines/Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+      "fuzzyroutines/FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+      "fuzzyroutines/__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+      "fuzzyroutines/_legacy/__init__.py": "5b7e1c8cbd3d40ccff576966c6ddce57eaa791f7f72112a431c7054c2c1b84b7",
+      "fuzzyroutines/_legacy/membership.py": "3db8d256dd23901a2b327ff7652a33ec75ef491958727adb1812a751151e4e24",
+      "fuzzyroutines/_legacy/operators.py": "832ab5d7bef5f7cd0d838efe454c4da20ce16dfe47af10c62f0404e35f3a30db",
+      "fuzzyroutines/_legacy/scales.py": "62892b5da0ad67180988dba6d1a68692f3df9f8d42bae2b85a6d20e738916674",
+      "fuzzyroutines/_legacy/sets.py": "4cc109c19ab6542cb810b8f6814dccd7037770a599e04a66fc5417b29b25f1ca",
+      "fuzzyroutines/_legacy/utilities.py": "046e34b07f334bc7b2f5a9dce1b49c7fc4f228452837ffc6ec8d1b7920c8f69c",
+      "fuzzyroutines/alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+      "fuzzyroutines/batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+      "fuzzyroutines/defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+      "fuzzyroutines/domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+      "fuzzyroutines/encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+      "fuzzyroutines/exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+      "fuzzyroutines/fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+      "fuzzyroutines/inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+      "fuzzyroutines/linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+      "fuzzyroutines/membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+      "fuzzyroutines/numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+      "fuzzyroutines/operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+      "fuzzyroutines/presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+      "fuzzyroutines/properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+      "fuzzyroutines/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fuzzyroutines/relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+    },
+    "thread_environment": {
+      "MKL_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    }
+  },
+  "fixture_scope": "Public positive-test replay groups, not observed production batches. Each original consumer invocation classifies one coordinate. Price normalization is performed before the timed fuzzy operation.",
+  "limitations": [
+    "installed CI candidate on a shared host, not a published PyPI release",
+    "test replay groups, not measured production distributions",
+    "memory observations are single samples, RSS is whole-process high water",
+    "no private FMA/robot integration or throughput claim",
+    "fresh-process imports; verification reads package bytes before timing; filesystem caches are not flushed"
+  ],
+  "measurement_completed_at": "2026-10-14T20:08:17.844527+00:00",
+  "provenance": {
+    "candidate": {
+      "artifact_archive": "/workspace/scratch/9353266c239f/candidate-2.1.0-artifacts/package-artifacts-python-3.14.zip",
+      "artifact_metadata_json": "/workspace/scratch/9353266c239f/candidate-2.1.0-artifacts/artifact-python314.json",
+      "candidate_build_evidence": {
+        "artifact_archive_sha256": "b771b38a7654b0b9aa2dc2fab626006b7be957edaa892a599ce7185755c52412",
+        "artifact_id": 11923929952,
+        "artifact_metadata_json_sha256": "65a567ffe266e2126bd22fc561ed40206139c1137a5a54730b84f753fb5b07b9",
+        "built_source_commit": "c44983ab4be2ef58d7847e758c118875a51738db",
+        "built_source_kind": "pull_request_merge",
+        "built_source_parents": [
+          "d2fdb1ed3c0b8d9635ddfbd48f6c09e7356a197f",
+          "f0d09c30189509a9a5237b4869e5aeeb5868e5f2"
+        ],
+        "checksums_record_sha256": "1b1b7b59d4e01a000a3b0883648f6385d892625f3bfeae643f2944b12ef11d23",
+        "reproducibility_json_sha256": "c59d6f6e769de7a2db504d1e92a61d7696d07d4bbd0596c3ccc480dcdb0cfd40",
+        "source_revision_record_sha256": "460af3bbe5b7927e2eb6d4decbc06aa4338e877491179f4e1939232c6b7954b1",
+        "workflow_head_sha": "f0d09c30189509a9a5237b4869e5aeeb5868e5f2",
+        "workflow_run_id": 38627553915
+      },
+      "declared_requires_dist": [
+        "numpy<3,>=2.3.5; extra == \"numpy\""
+      ],
+      "package_file_sha256": {
+        "fuzzyroutines/Examples.py": "8b28bdc5c62b4119f739d6208fd28ec0136ab975106b2c7d003a73f8eb11ef57",
+        "fuzzyroutines/FuzzyRoutines.py": "87d5ffd9bc8bf88cf7decbf385987dac97638f7e8193ea2f8317f036abd4765d",
+        "fuzzyroutines/__init__.py": "1fbd124f8e05002517a955c83cc19884ca7f6b8d70f2fbaaeaeb763fbbdc2b15",
+        "fuzzyroutines/_legacy/__init__.py": "5b7e1c8cbd3d40ccff576966c6ddce57eaa791f7f72112a431c7054c2c1b84b7",
+        "fuzzyroutines/_legacy/membership.py": "3db8d256dd23901a2b327ff7652a33ec75ef491958727adb1812a751151e4e24",
+        "fuzzyroutines/_legacy/operators.py": "832ab5d7bef5f7cd0d838efe454c4da20ce16dfe47af10c62f0404e35f3a30db",
+        "fuzzyroutines/_legacy/scales.py": "62892b5da0ad67180988dba6d1a68692f3df9f8d42bae2b85a6d20e738916674",
+        "fuzzyroutines/_legacy/sets.py": "4cc109c19ab6542cb810b8f6814dccd7037770a599e04a66fc5417b29b25f1ca",
+        "fuzzyroutines/_legacy/utilities.py": "046e34b07f334bc7b2f5a9dce1b49c7fc4f228452837ffc6ec8d1b7920c8f69c",
+        "fuzzyroutines/alphacuts.py": "ba357fc2a20c49f20393b4bbe78449e4500bd027f55a1cc1ad2aeea268cbbaf1",
+        "fuzzyroutines/batches.py": "f9072eed0bda276a7095b821708615ab45ffc31144ada49c0fb9e48a6651dbd8",
+        "fuzzyroutines/defuzzification.py": "49500608a6716685716eaedf1983a689252b3d8392dd91e14ab445105ec5fcc2",
+        "fuzzyroutines/domain.py": "8f0a0776e0421d0078c76f469405f74ab07c085508aa68cae0cb11cf4ec045ca",
+        "fuzzyroutines/encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+        "fuzzyroutines/exceptions.py": "cf28d17c071350c07981535734e0143166984aac75ba73f781b5024735ef8268",
+        "fuzzyroutines/fuzzysets.py": "b7481260ccb46f44054fd8ada3bd9f320c8f929b004cceb651c8c59f3c12c04f",
+        "fuzzyroutines/inference.py": "3cdc612e906dfd31f361a24830df3ae03699cbd7494c4a28eca7962b93da5950",
+        "fuzzyroutines/linguistic.py": "c198653996f350f0ca67775cdbf99ab634acd7c275b6137b4a40714a3ea12647",
+        "fuzzyroutines/membership.py": "c8d0c28bb785e858a459016bff5e728763877c75b90949ecda6ec0d8f005553c",
+        "fuzzyroutines/numeric.py": "f738e91c7667ad4b02dcf11f4e3f6f2f6ed4a2fe429d61e8982fd6af4f214393",
+        "fuzzyroutines/operators.py": "0e7b88507d122d827815f8c3c6a896f3c5a18c95fd4cab31e301d14d15bd76e5",
+        "fuzzyroutines/presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+        "fuzzyroutines/properties.py": "d52ce7c27f2a626e0ea148c7173306733df53e0a2235eef904488760c5532ed5",
+        "fuzzyroutines/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fuzzyroutines/relations.py": "6099ebb1dbf8039d6becd2b633be67dff4c829c926b45b16f887b35a53524de9"
+      },
+      "provenance_json": "/workspace/scratch/9353266c239f/candidate-2.1.0-artifacts/workflow-run.json",
+      "provenance_json_sha256": "6e46cc9d1c20664079ea803a89aa1ebb4a0ff2c825ec7eed9b3416a1484a2eea",
+      "source_commit": "c44983ab4be2ef58d7847e758c118875a51738db",
+      "source_evidence_url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/38627553915",
+      "version": "2.1.0",
+      "wheel": "/workspace/scratch/9353266c239f/candidate-2.1.0-artifacts/fuzzyroutines-2.1.0-py3-none-any.whl",
+      "wheel_python_source_matches_commit": true,
+      "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+    },
+    "executed_commands": [
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"scalar\",\"prepared_array\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"numpy\",\"prepared_array\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"scalar\",\"list_conversion\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"numpy\",\"list_conversion\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"scalar\",\"prepared_array\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"numpy\",\"prepared_array\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"scalar\",\"list_conversion\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"gaussian\",\"numpy\",\"list_conversion\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"scalar\",\"prepared_array\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"numpy\",\"prepared_array\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"scalar\",\"list_conversion\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"numpy\",\"list_conversion\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"scalar\",\"prepared_array\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"numpy\",\"prepared_array\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"scalar\",\"list_conversion\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"bell\",\"numpy\",\"list_conversion\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"prepared_array\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"prepared_array\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"list_conversion\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"list_conversion\",[1],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"prepared_array\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"prepared_array\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"list_conversion\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"list_conversion\",[10000],null]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"fuzzyroutines\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"fuzzyroutines\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"fuzzyroutines\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"fuzzyroutines\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"fuzzyroutines\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"fuzzyroutines\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"fuzzyroutines\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"numpy\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"numpy\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"numpy\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"numpy\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"numpy\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"numpy\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "import",
+        "--case",
+        "\"numpy\""
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"prepared_array\",[17],[0.0,0.0,0.06666666666666667,0.16666666666666666,0.2,0.3333333333333333,0.4,0.42857142857142855,0.5,0.6,0.6666666666666666,0.7777700000000001,0.8,0.80002,0.9272727272727272,1.0,1.0]]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"prepared_array\",[17],[0.0,0.0,0.06666666666666667,0.16666666666666666,0.2,0.3333333333333333,0.4,0.42857142857142855,0.5,0.6,0.6666666666666666,0.7777700000000001,0.8,0.80002,0.9272727272727272,1.0,1.0]]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"list_conversion\",[17],[0.0,0.0,0.06666666666666667,0.16666666666666666,0.2,0.3333333333333333,0.4,0.42857142857142855,0.5,0.6,0.6666666666666666,0.7777700000000001,0.8,0.80002,0.9272727272727272,1.0,1.0]]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"list_conversion\",[17],[0.0,0.0,0.06666666666666667,0.16666666666666666,0.2,0.3333333333333333,0.4,0.42857142857142855,0.5,0.6,0.6666666666666666,0.7777700000000001,0.8,0.80002,0.9272727272727272,1.0,1.0]]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"prepared_array\",[13],[1.0,0.0,0.0,0.0,1.0,0.8888888888888888,0.7777777777777778,0.6666666666666666,0.5555555555555556,0.4444444444444444,0.3333333333333333,0.2222222222222222,0.1111111111111111]]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"prepared_array\",[13],[1.0,0.0,0.0,0.0,1.0,0.8888888888888888,0.7777777777777778,0.6666666666666666,0.5555555555555556,0.4444444444444444,0.3333333333333333,0.2222222222222222,0.1111111111111111]]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"scalar\",\"list_conversion\",[13],[1.0,0.0,0.0,0.0,1.0,0.8888888888888888,0.7777777777777778,0.6666666666666666,0.5555555555555556,0.4444444444444444,0.3333333333333333,0.2222222222222222,0.1111111111111111]]"
+      ],
+      [
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/bin/python",
+        "-I",
+        "/workspace/scratch/9353266c239f/fr-measure-harness/experiments/installed_batch_benchmark.py",
+        "--config",
+        "/workspace/scratch/9353266c239f/final-batch-2.1.0/execution-config.json",
+        "--worker",
+        "memory",
+        "--case",
+        "[\"universal_scale\",\"numpy\",\"list_conversion\",[13],[1.0,0.0,0.0,0.0,1.0,0.8888888888888888,0.7777777777777778,0.6666666666666666,0.5555555555555556,0.4444444444444444,0.3333333333333333,0.2222222222222222,0.1111111111111111]]"
+      ]
+    ],
+    "git_field_meaning": "package source identity proven against wheel bytes; installed wheels have no Git dirty state",
+    "harness": {
+      "dirty": false,
+      "files_sha256": {
+        "experiments/benchmark_public_batches.py": "b795ff8709e9fddd9fd524d76f6292dccf9f898e6caa6ab9a26572b7b4f03b99",
+        "experiments/benchmark_vectorized_membership.py": "d496cbf2cb20de9aaaf8d643a7fb1eecb53191c443ab33587168a6797bd1c33d",
+        "experiments/installed_batch_benchmark.py": "be9327686508bbd56351edccbf0e3d53dbcd553e07301ac199d37445a12fbfb8",
+        "experiments/installed_wheel_evidence.py": "c94976b76178e086f4203ac69065460193fe3f4ef0fa88ad27d0b9b726b9df30",
+        "experiments/vectorized_membership.py": "cc864ddd6e69bd83b0cde78a156863cb8ade4624613108bc78beb489b46074e4",
+        "tests/fixtures/public_consumer_batches.json": "352fa0cd67c3a5ddbc45f50c0271ba0eae081c9bb306c83aba0a7c6208f82736",
+        "tools/extract_consumer_replay.py": "7edced6198085aa8f350d57d234a8115743272c7f5f941d8e9990cbfce549caa"
+      },
+      "source_commit": "b451e502930d581fdffdc2a69ac44a8f3ab18174"
+    },
+    "input_config_sha256": "cca5329f7cf542a3e962b6b429604d73fae87b726de3aadb0488bd0443bfa3ab",
+    "source_report_adaptation": "unchanged public builders/parity/paired timers; isolated installed memory/import dispatch and corrected provenance"
+  },
+  "results": [
+    {
+      "coordinates": [
+        0.0,
+        0.0,
+        0.06666666666666667,
+        0.16666666666666666,
+        0.2,
+        0.3333333333333333,
+        0.4,
+        0.42857142857142855,
+        0.5,
+        0.6,
+        0.6666666666666666,
+        0.7777700000000001,
+        0.8,
+        0.80002,
+        0.9272727272727272,
+        1.0,
+        1.0
+      ],
+      "expected_labels": [
+        "Min",
+        "Min",
+        "Min",
+        "Min",
+        "Low",
+        "Low",
+        "Med",
+        "Med",
+        "Med",
+        "Med",
+        "High",
+        "High",
+        "High",
+        "High",
+        "Max",
+        "Max",
+        "Max"
+      ],
+      "iterations": 60,
+      "memory": {
+        "numpy": {
+          "input_array_payload_bytes": 136,
+          "input_shallow_bytes": 112,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": 986,
+          "rss_before_bytes": 45621248,
+          "rss_high_water_increase_bytes": 1269760,
+          "rss_peak_bytes": 46891008,
+          "traced_operation_peak_bytes": 7202
+        },
+        "scalar": {
+          "input_array_payload_bytes": null,
+          "input_shallow_bytes": 200,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": null,
+          "rss_before_bytes": 26365952,
+          "rss_high_water_increase_bytes": 4096,
+          "rss_peak_bytes": 26370048,
+          "traced_operation_peak_bytes": 6080
+        }
+      },
+      "mode": "prepared_array",
+      "parity": {
+        "absolute_tolerance": 1e-12,
+        "classification_masks_exact": true,
+        "maximum_absolute_error": 0.0,
+        "passed": true,
+        "relative_tolerance": 0.0,
+        "upstream_expected_labels_exact": true,
+        "upstream_expected_percentages_rounded_4_exact": true
+      },
+      "shape": [
+        17
+      ],
+      "size": 17,
+      "timing": {
+        "numpy": {
+          "cpu_ns": {
+            "interquartile_range": 374414.3999999999,
+            "maximum": 1462463.05,
+            "median": 1211472.45,
+            "minimum": 932070.1,
+            "raw_samples": [
+              1211472.45,
+              943827.4666666667,
+              1051342.8166666667,
+              1290377.75,
+              932070.1,
+              1462463.05,
+              1453621.3333333333
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 374474.04166666674,
+            "maximum": 1462554.0666666667,
+            "median": 1211565.7166666666,
+            "minimum": 932203.3833333333,
+            "raw_samples": [
+              1211565.7166666666,
+              943911.5333333333,
+              1051494.0666666667,
+              1290485.95,
+              932203.3833333333,
+              1462554.0666666667,
+              1453867.7333333334
+            ]
+          }
+        },
+        "scalar": {
+          "cpu_ns": {
+            "interquartile_range": 409254.53333333344,
+            "maximum": 1875281.7666666666,
+            "median": 1134325.25,
+            "minimum": 1025282.8333333334,
+            "raw_samples": [
+              1132788.4666666666,
+              1651405.15,
+              1033249.2333333333,
+              1875281.7666666666,
+              1025282.8333333334,
+              1333141.6166666667,
+              1134325.25
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 412469.69166666665,
+            "maximum": 1875822.4333333333,
+            "median": 1137410.4833333334,
+            "minimum": 1025384.5,
+            "raw_samples": [
+              1137410.4833333334,
+              1651494.2166666666,
+              1033357.8666666667,
+              1875822.4333333333,
+              1025384.5,
+              1341852.0166666666,
+              1135048.9833333334
+            ]
+          }
+        }
+      },
+      "upstream_test": "test_RiskLongPositive",
+      "wall_speedup": 0.9387938827310551,
+      "workload": "tksbrokerapi_risk_long"
+    },
+    {
+      "coordinates": [
+        0.0,
+        0.0,
+        0.06666666666666667,
+        0.16666666666666666,
+        0.2,
+        0.3333333333333333,
+        0.4,
+        0.42857142857142855,
+        0.5,
+        0.6,
+        0.6666666666666666,
+        0.7777700000000001,
+        0.8,
+        0.80002,
+        0.9272727272727272,
+        1.0,
+        1.0
+      ],
+      "expected_labels": [
+        "Min",
+        "Min",
+        "Min",
+        "Min",
+        "Low",
+        "Low",
+        "Med",
+        "Med",
+        "Med",
+        "Med",
+        "High",
+        "High",
+        "High",
+        "High",
+        "Max",
+        "Max",
+        "Max"
+      ],
+      "iterations": 60,
+      "memory": {
+        "numpy": {
+          "input_array_payload_bytes": null,
+          "input_shallow_bytes": 200,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": 986,
+          "rss_before_bytes": 26427392,
+          "rss_high_water_increase_bytes": 17661952,
+          "rss_peak_bytes": 44089344,
+          "traced_operation_peak_bytes": 7202
+        },
+        "scalar": {
+          "input_array_payload_bytes": null,
+          "input_shallow_bytes": 200,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": null,
+          "rss_before_bytes": 26431488,
+          "rss_high_water_increase_bytes": 4096,
+          "rss_peak_bytes": 26435584,
+          "traced_operation_peak_bytes": 6080
+        }
+      },
+      "mode": "list_conversion",
+      "parity": {
+        "absolute_tolerance": 1e-12,
+        "classification_masks_exact": true,
+        "maximum_absolute_error": 0.0,
+        "passed": true,
+        "relative_tolerance": 0.0,
+        "upstream_expected_labels_exact": true,
+        "upstream_expected_percentages_rounded_4_exact": true
+      },
+      "shape": [
+        17
+      ],
+      "size": 17,
+      "timing": {
+        "numpy": {
+          "cpu_ns": {
+            "interquartile_range": 338100.80000000005,
+            "maximum": 2228700.4166666665,
+            "median": 1315830.4333333333,
+            "minimum": 1094261.2333333334,
+            "raw_samples": [
+              1601814.75,
+              1333259.1,
+              1094261.2333333334,
+              1315830.4333333333,
+              1127456.3333333333,
+              2228700.4166666665,
+              1131415.9166666667
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 338096.4583333335,
+            "maximum": 2228919.15,
+            "median": 1315933.0833333333,
+            "minimum": 1094368.0333333334,
+            "raw_samples": [
+              1601905.4,
+              1333354.3333333333,
+              1094368.0333333334,
+              1315933.0833333333,
+              1127558.6666666667,
+              2228919.15,
+              1131508.15
+            ]
+          }
+        },
+        "scalar": {
+          "cpu_ns": {
+            "interquartile_range": 201397.59166666656,
+            "maximum": 1953393.3666666667,
+            "median": 1327964.7,
+            "minimum": 1003235.2166666667,
+            "raw_samples": [
+              1308928.9666666666,
+              1003235.2166666667,
+              1327964.7,
+              1248907.95,
+              1474178.2,
+              1486453.9,
+              1953393.3666666667
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 201438.8916666666,
+            "maximum": 1953467.3333333333,
+            "median": 1328057.0833333333,
+            "minimum": 1004238.05,
+            "raw_samples": [
+              1309100.6333333333,
+              1004238.05,
+              1328057.0833333333,
+              1249032.3,
+              1474473.1666666667,
+              1486537.55,
+              1953467.3333333333
+            ]
+          }
+        }
+      },
+      "upstream_test": "test_RiskLongPositive",
+      "wall_speedup": 1.0092132344368827,
+      "workload": "tksbrokerapi_risk_long"
+    },
+    {
+      "coordinates": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.8888888888888888,
+        0.7777777777777778,
+        0.6666666666666666,
+        0.5555555555555556,
+        0.4444444444444444,
+        0.3333333333333333,
+        0.2222222222222222,
+        0.1111111111111111
+      ],
+      "expected_labels": [
+        "Max",
+        "Min",
+        "Min",
+        "Min",
+        "Max",
+        "Max",
+        "High",
+        "High",
+        "Med",
+        "Med",
+        "Low",
+        "Low",
+        "Min"
+      ],
+      "iterations": 78,
+      "memory": {
+        "numpy": {
+          "input_array_payload_bytes": 104,
+          "input_shallow_bytes": 112,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": 754,
+          "rss_before_bytes": 43528192,
+          "rss_high_water_increase_bytes": 1589248,
+          "rss_peak_bytes": 45117440,
+          "traced_operation_peak_bytes": 6386
+        },
+        "scalar": {
+          "input_array_payload_bytes": null,
+          "input_shallow_bytes": 168,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": null,
+          "rss_before_bytes": 26435584,
+          "rss_high_water_increase_bytes": 4096,
+          "rss_peak_bytes": 26439680,
+          "traced_operation_peak_bytes": 4832
+        }
+      },
+      "mode": "prepared_array",
+      "parity": {
+        "absolute_tolerance": 1e-12,
+        "classification_masks_exact": true,
+        "maximum_absolute_error": 0.0,
+        "passed": true,
+        "relative_tolerance": 0.0,
+        "upstream_expected_labels_exact": true,
+        "upstream_expected_percentages_rounded_4_exact": true
+      },
+      "shape": [
+        13
+      ],
+      "size": 13,
+      "timing": {
+        "numpy": {
+          "cpu_ns": {
+            "interquartile_range": 546284.1346153845,
+            "maximum": 16902674.474358976,
+            "median": 1033764.1794871795,
+            "minimum": 810368.5641025641,
+            "raw_samples": [
+              16902674.474358976,
+              1250782.9871794872,
+              938804.3461538461,
+              887163.0897435897,
+              810368.5641025641,
+              1667752.717948718,
+              1033764.1794871795
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 546615.967948718,
+            "maximum": 17146105.346153848,
+            "median": 1044030.0769230769,
+            "minimum": 810451.0384615385,
+            "raw_samples": [
+              17146105.346153848,
+              1250851.8974358975,
+              938877.0769230769,
+              887250.2692307692,
+              810451.0384615385,
+              1668507.3846153845,
+              1044030.0769230769
+            ]
+          }
+        },
+        "scalar": {
+          "cpu_ns": {
+            "interquartile_range": 85665.826923077,
+            "maximum": 1068452.9871794872,
+            "median": 843717.6923076923,
+            "minimum": 608299.641025641,
+            "raw_samples": [
+              1068452.9871794872,
+              608299.641025641,
+              854935.858974359,
+              835644.4358974359,
+              699347.0641025641,
+              843717.6923076923,
+              851387.2948717949
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 85839.80128205137,
+            "maximum": 1068662.1538461538,
+            "median": 843809.1538461539,
+            "minimum": 608374.5641025641,
+            "raw_samples": [
+              1068662.1538461538,
+              608374.5641025641,
+              856578.2051282051,
+              836928.3846153846,
+              699424.8461538461,
+              843809.1538461539,
+              851454.6282051282
+            ]
+          }
+        }
+      },
+      "upstream_test": "test_RiskShortPositive",
+      "wall_speedup": 0.8082230315940648,
+      "workload": "tksbrokerapi_risk_short"
+    },
+    {
+      "coordinates": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.8888888888888888,
+        0.7777777777777778,
+        0.6666666666666666,
+        0.5555555555555556,
+        0.4444444444444444,
+        0.3333333333333333,
+        0.2222222222222222,
+        0.1111111111111111
+      ],
+      "expected_labels": [
+        "Max",
+        "Min",
+        "Min",
+        "Min",
+        "Max",
+        "Max",
+        "High",
+        "High",
+        "Med",
+        "Med",
+        "Low",
+        "Low",
+        "Min"
+      ],
+      "iterations": 78,
+      "memory": {
+        "numpy": {
+          "input_array_payload_bytes": null,
+          "input_shallow_bytes": 168,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": 754,
+          "rss_before_bytes": 26439680,
+          "rss_high_water_increase_bytes": 18092032,
+          "rss_peak_bytes": 44531712,
+          "traced_operation_peak_bytes": 6386
+        },
+        "scalar": {
+          "input_array_payload_bytes": null,
+          "input_shallow_bytes": 168,
+          "installed_package": {
+            "loaded_module_origins": {
+              "fuzzyroutines": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+              "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+              "fuzzyroutines.batches": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/batches.py",
+              "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+              "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+              "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+              "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+              "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+              "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+              "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+              "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+              "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+              "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+              "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+              "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+            },
+            "package_origin": "/workspace/scratch/9353266c239f/final-batch-2.1.0/environment/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+            "package_version": "2.1.0",
+            "wheel_sha256": "de07010468aceea6059225f867e44c80bd89ed64984826aad9e85b4b8723a7e0"
+          },
+          "output_array_payload_bytes": null,
+          "rss_before_bytes": 26435584,
+          "rss_high_water_increase_bytes": 4096,
+          "rss_peak_bytes": 26439680,
+          "traced_operation_peak_bytes": 4832
+        }
+      },
+      "mode": "list_conversion",
+      "parity": {
+        "absolute_tolerance": 1e-12,
+        "classification_masks_exact": true,
+        "maximum_absolute_error": 0.0,
+        "passed": true,
+        "relative_tolerance": 0.0,
+        "upstream_expected_labels_exact": true,
+        "upstream_expected_percentages_rounded_4_exact": true
+      },
+      "shape": [
+        13
+      ],
+      "size": 13,
+      "timing": {
+        "numpy": {
+          "cpu_ns": {
+            "interquartile_range": 417269.87179487175,
+            "maximum": 2416172.0512820515,
+            "median": 1612336.2435897435,
+            "minimum": 1098799.8205128205,
+            "raw_samples": [
+              1612336.2435897435,
+              1397369.9743589743,
+              1926385.2051282052,
+              1645390.217948718,
+              1339865.7051282052,
+              2416172.0512820515,
+              1098799.8205128205
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 411324.916666667,
+            "maximum": 2546615.6025641025,
+            "median": 1612420.576923077,
+            "minimum": 1098906.7692307692,
+            "raw_samples": [
+              1612420.576923077,
+              1412565.064102564,
+              1926454.923076923,
+              1648693.8076923077,
+              1339933.8333333333,
+              2546615.6025641025,
+              1098906.7692307692
+            ]
+          }
+        },
+        "scalar": {
+          "cpu_ns": {
+            "interquartile_range": 178043.032051282,
+            "maximum": 1618798.5256410257,
+            "median": 981626.7564102564,
+            "minimum": 792305.9487179487,
+            "raw_samples": [
+              914297.3333333334,
+              1618798.5256410257,
+              1022997.5128205129,
+              981626.7564102564,
+              1195560.2435897435,
+              948174.358974359,
+              792305.9487179487
+            ]
+          },
+          "wall_ns": {
+            "interquartile_range": 173614.1025641025,
+            "maximum": 1618885.5384615385,
+            "median": 983119.1025641026,
+            "minimum": 792378.0512820513,
+            "raw_samples": [
+              923318.6794871795,
+              1618885.5384615385,
+              1023061.9487179487,
+              983119.1025641026,
+              1195752.5897435897,
+              948267.6538461539,
+              792378.0512820513
+            ]
+          }
+        }
+      },
+      "upstream_test": "test_RiskShortPositive",
+      "wall_speedup": 0.6097162965013463,
+      "workload": "tksbrokerapi_risk_short"
+    }
+  ],
+  "schema_version": 1
+}

@@ -58,7 +58,7 @@ FuzzyRoutines с пятью уровнями: **Min → Low → Med → High →
 общего универсального множества изменит контракт и приведёт к ошибкам при
 классификации большинства координат.
 
-При $0\le x\le1$ формулы можно записать через возрастающую квадратичную функцию:
+При $0\le x\le1$ формулы можно записать через возрастающую кусочно-квадратичную функцию:
 
 $$
 s_{a,b}(x)=\begin{cases}
@@ -105,6 +105,35 @@ print(grades, scale.Fuzzy(0.2)["name"])
 на версии 2.0; это не обещание сохранить ошибки вычислений версии 1.0.3.
 Исправления центра тяжести описаны в
 [руководстве по миграции](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/migration/1.0.3-to-2.0.0.md).
+
+## Готовая шкала в современном API {#modern-preset-factory}
+
+В API 2.1 добавлена фабрика неизменяемой шкалы с исходными коэффициентами.
+Политика выбора уровня и интервалы вычисления центроидов задаются явно.
+Поведение общих классов и исторический путь импорта сохранены. Для запуска
+примера установите пакет соответствующей версии 2.1.
+
+```python
+from math import isclose
+from fuzzyroutines import (
+    Centroid, CreateUniversalFuzzyScale,
+    UniversalFuzzyScaleDomains, UniversalFuzzyScalePolicy,
+)
+
+scale = CreateUniversalFuzzyScale()
+result = scale.Fuzzify(0.75, UniversalFuzzyScalePolicy())
+assert result.selectedTerms[0].name == "High"
+centroids = tuple(
+    Centroid(term.fuzzySet, domain)
+    for term, domain in zip(scale.terms, UniversalFuzzyScaleDomains(), strict=True)
+)
+assert isclose(centroids[2], 0.5, abs_tol=1e-12)
+print(result.selectedTerms[0].name, centroids)
+```
+
+Пять центроидов вычисляются на исторических интервалах интегрирования, а не
+на всём нормированном универсальном множестве. Это исправленные значения
+версии 2.0; совпадение с дискретными оценками версии 1.0.3 не гарантируется.
 
 ## Как создать шкалу через современный API
 
@@ -185,7 +214,7 @@ python examples/guide.py --scenario universal-fuzzy-scale
 Пример проверяет обе реализации по независимым формулам на **1001 точке**
 `0, 0.001, …, 1`, сравнивает выбранные уровни, отказ по порогу и хвост Min.
 Проверки графиков независимо сверяют **401 точку каждой из десяти кривых**.
-Конечная сетка — свидетельство регрессии, а не доказательство для всех
+Проверка на конечной сетке помогает обнаружить регрессии, но не доказывает совпадение для всех
 вещественных чисел. Подробнее:
 [создание графиков](figures.md) и
 [исторические параметры](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/baseline/universal-fuzzy-scale-provenance.md).

@@ -81,18 +81,35 @@ on an earlier cache. The CI wheel builder and build backend also use fixed
 development-only versions with build isolation disabled.
 
 `mypy.ini` uses strict checking, diagnostic codes, and unused-ignore reporting.
-It explicitly covers the package root, every modern module (including internal
-numeric validation), the checker command, and all static consumers. It has no
+It explicitly covers the package root, every scalar modern module (including
+internal numeric validation), the checker command, and the core static consumers. It has no
 global error suppression. The historical `FuzzyRoutines` facade, `_legacy`
 adapters, and executable `Examples` module have a narrowly scoped skipped-import
 boundary. They retain their runtime compatibility contract and are outside the
 modern typing promise.
 
-The consumer fixtures in `tests/typing` include valid imports, numeric inputs,
+The core consumer fixtures in `tests/typing` include valid imports, numeric inputs,
 custom callbacks, policy use, immutable results, and exact return-type
 assertions. Expected-invalid calls and assignments carry a specific diagnostic
 code. If a signature becomes `Any` or otherwise accepts an invalid use, the
 formerly necessary ignore becomes unused and the gate fails.
+
+## Optional NumPy scope
+
+The default source and installed gates require no NumPy. The explicit optional
+scope adds `fuzzyroutines/batches.py` and the unchanged consumer contract in
+`tests/typing/optional/numpy`; they use the same strict configuration:
+
+```bash
+python -m pip install 'fuzzyroutines[numpy]' -r requirements-typing.txt
+python -m tools.typecheck --extra numpy
+/path/to/isolated/environment/bin/python /path/to/checkout/tools/typecheck.py --installed --extra numpy
+```
+
+The optional source command includes the core scope. Installed consumers are
+copied outside the checkout in both modes. Package CI reuses the built wheel with
+NumPy 2.3.5 and the current release allowed by the extra on CPython 3.13 and 3.14;
+the logs record the actual resolved versions. An unsupported extra is rejected.
 
 ## Installed wheel boundary
 
@@ -105,7 +122,7 @@ checker in a new virtual environment, then runs:
 ```
 
 This mode verifies that Python resolves a package outside the checkout and that
-the installed package includes `py.typed`. It copies every consumer into a
+the installed package includes `py.typed`. It copies every selected consumer into a
 temporary directory outside the repository and runs mypy there with isolated
 Python path handling, cleared `MYPYPATH` and `PYTHONPATH`, and a fresh cache.
 Consumers therefore exercise the wheel

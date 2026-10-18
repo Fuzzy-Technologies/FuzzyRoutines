@@ -1,0 +1,176 @@
+<!doctype html>
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Нечёткие множества, функции принадлежности и лингвистические шкалы на Python. Превращайте измерения в понятные оценки с FuzzyRoutines." />
+  <meta name="theme-color" content="#07090d" />
+  <meta property="og:title" content="FuzzyRoutines — Fuzzy Technologies" />
+  <meta property="og:description" content="Нечёткие множества, функции принадлежности и лингвистические шкалы на Python: практические примеры и совместимость с историческим API." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" />
+  <meta property="og:site_name" content="Fuzzy Technologies" />
+  <meta property="og:image" content="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/assets/brand/fuzzyroutines-alice.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" />
+  <link rel="alternate" hreflang="en" href="https://fuzzy-technologies.github.io/FuzzyRoutines/" />
+  <link rel="alternate" hreflang="ru" href="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../api/latest/en/assets/stylesheets/fonts.css" />
+  <link rel="stylesheet" href="../assets/landing.css" />
+  <link rel="stylesheet" href="../api/latest/en/assets/stylesheets/lightbox.css" />
+  <script defer src="../assets/site.js"></script>
+  <script defer src="../api/latest/en/assets/javascripts/lightbox.js"></script>
+  <title>FuzzyRoutines — Fuzzy Technologies</title>
+</head>
+<body>
+<a class="skip-link" href="#content">Перейти к содержанию</a>
+<main id="content">
+  <header class="site-header" id="top">
+    <h1><a href="#top">FuzzyRoutines</a></h1>
+    <a class="company-link" href="https://fuzzy-technologies.github.io/">Fuzzy Technologies ↗</a>
+  </header>
+  <nav class="site-nav" aria-label="Основная навигация">
+    <a href="#start">Быстрый старт</a>
+    <a href="#scale">Универсальная нечёткая шкала</a>
+    <a href="#documentation">Документация</a>
+    <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines">GitHub ↗</a>
+  </nav>
+  <nav class="site-nav language-nav" aria-label="Язык страницы">
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/" hreflang="en" lang="en">English</a>
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/ru/" hreflang="ru" lang="ru" aria-current="page">Русский</a>
+    <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/zh-CN/" hreflang="zh-CN" lang="zh-CN">简体中文</a>
+  </nav>
+  <img class="project-art" src="../api/latest/en/assets/brand/fuzzyroutines-alice.png"
+       alt="Алиса представляет FuzzyRoutines в лаборатории Fuzzy Technologies"
+       width="1774" height="887" fetchpriority="high" />
+  <section class="intro" aria-label="О FuzzyRoutines">
+    <p class="eyebrow">Python · Нечёткая математика · Открытый код</p>
+    <p class="hero-lead"><strong>Превращайте измерения в понятные оценки</strong> с помощью функций принадлежности, нечётких множеств и лингвистических шкал. Стройте модели для экспертных систем, оценки рисков и инженерных решений.</p>
+    <p class="quiet">CPython 3.13–3.14 · Типизированный скалярный API · NumPy не обязателен · Apache-2.0</p>
+    <p class="release-note" data-status="implemented"><strong>FuzzyRoutines 2.1.0</strong> включает создание исторической шкалы, лингвистическое кодирование, вывод Мамдани и Сугено, необязательные пакетные вычисления NumPy и примеры нейросетей. <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/ru/agent-quickstart.md">Установка с проверкой версии и примеры →</a></p>
+    <div class="hero-actions">
+      <a class="button-neon" href="#start">Попробовать пример</a>
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/">Открыть справочник API</a>
+    </div>
+  </section>
+  <p class="motto-line">Технологии · Знания · Наука</p>
+
+  <section id="start" aria-labelledby="start-title">
+    <h2 id="start-title">Быстрый старт</h2>
+    <p>Насколько температура в комнате <strong>24 °C</strong> соответствует понятию «комфортно»? Зададим полное соответствие при 22 °C и его убывание до нуля при 16 и 28 °C, затем вычислим степень принадлежности для измеренной температуры.</p>
+    <h3>1 · Установка</h3>
+    <p>Используйте Python 3.13 или 3.14 в окружении проекта.</p>
+    <p class="release-note"><strong>Пример рассчитан на версию 2.1.0</strong>. Используйте точную версию в команде ниже. Если она ещё недоступна в PyPI, установите проверенный wheel из CI по <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/ru/agent-quickstart.md">инструкции для помощника</a>. Опубликованная версия 2.0.0 остаётся исторической базой для сравнения; в 1.x этого API нет.</p>
+    <div class="code-block">
+      <div class="code-toolbar"><span>Терминал</span><button class="copy-button" type="button" data-copy-target="install-command" aria-label="Скопировать команду установки" hidden>Скопировать</button></div>
+      <pre tabindex="0" aria-label="Команда установки"><code id="install-command">python -m pip install fuzzyroutines==2.1.0</code></pre>
+    </div>
+    <h3>2 · Запуск примера</h3>
+    <p>Сохраните код в <code>comfort.py</code> и выполните <code>python comfort.py</code>.</p>
+    <div class="code-block">
+      <div class="code-toolbar"><span>Python · comfort.py</span><button class="copy-button" type="button" data-copy-target="quickstart-code" aria-label="Скопировать пример Python" hidden>Скопировать</button></div>
+      <pre tabindex="0" aria-label="Пример Python"><code id="quickstart-code">from fuzzyroutines import (
+    ContinuousUniverse, ScalarFuzzySet, Triangle,
+)
+
+universe = ContinuousUniverse(
+    0, 40, leftClosed=True, rightClosed=True,
+)
+comfort = ScalarFuzzySet(universe, Triangle(16, 22, 28))
+temperature = 24
+grade = comfort.Membership(temperature)
+
+print(f"Temperature: {temperature} °C")
+print(f"Comfort membership: {grade:.3f}")</code></pre>
+    </div>
+    <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+    <h3>3 · Разбор результата</h3>
+    <div class="result-grid">
+      <div>
+        <div class="code-block output-block">
+          <div class="code-toolbar"><span>Ожидаемый вывод</span></div>
+          <pre><code id="quickstart-output">Temperature: 24 °C
+Comfort membership: 0.667</code></pre>
+        </div>
+        <p>Температура находится на нисходящей стороне треугольника: <code>(28 − 24) / (28 − 22) = 2/3</code>. Значение <strong>0.667</strong> — это степень принадлежности нечёткому множеству комфортных температур, а не вероятность.</p>
+        <p>Эти пороги выбраны для примера. Добавьте другие термы, чтобы различать комфортные, тёплые и жаркие условия в своей задаче.</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/quick-start/">Перейти к шкале с двумя термами →</a>
+      </div>
+      <figure>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/assets/figures/temperature.svg" aria-label="Увеличить график принадлежности температуры">
+          <img src="../api/latest/en/assets/figures/temperature.svg" alt="Треугольная функция Comfort и возрастающая функция Warm с отмеченной температурой 24 °C" loading="lazy" />
+        </a>
+        <figcaption>В полном примере добавлен терм Warm со степенью принадлежности 0.125 при 24 °C.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="scale" aria-labelledby="scale-title">
+    <h2 id="scale-title">Универсальная нечёткая шкала</h2>
+    <div class="project-card featured scale-card">
+      <p class="eyebrow">Историческая модель · Современный API</p>
+      <h3>Пять уровней для нормализованного измерения</h3>
+      <p><strong>Min · Low · Med · High · Max</strong></p>
+      <p>Воссоздайте историческую шкалу с исходными коэффициентами и сравните её с современной реализацией. В руководстве приведены кривые принадлежности, граничные случаи и правила выбора уровня.</p>
+      <p>Используйте лингвистические уровни для интерпретации нормализованных оценок риска, выявленных проблем безопасности или эффективности защитных мер. Определите, что означает рост оценки в вашей модели: степень принадлежности не является вероятностью инцидента.</p>
+      <div class="project-links">
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/guides/universal-fuzzy-scale/">Изучить шкалу и графики →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="capabilities" aria-labelledby="capabilities-title">
+    <h2 id="capabilities-title">Постройте свою нечёткую модель</h2>
+    <div class="project-grid">
+      <article class="project-card">
+        <span class="card-label">Задайте</span><h3>Принадлежность и множества</h3>
+        <p>Восемь семейств функций принадлежности, явно заданные универсальные множества и неизменяемые скалярные нечёткие множества.</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/guides/membership-families/">Выбрать кривую →</a>
+      </article>
+      <article class="project-card">
+        <span class="card-label">Объедините</span><h3>Нечёткие операции</h3>
+        <p>Нормы, отрицания, пересечение, объединение и направленная разность с явно заданными правилами вычисления.</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/guides/">Практические сценарии →</a>
+      </article>
+      <article class="project-card">
+        <span class="card-label">Интерпретируйте</span><h3>Шкалы и центроиды</h3>
+        <p>Лингвистическая классификация, альфа-срезы и вычисление центроида с аналитическими или численными проверками.</p>
+        <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/api/">Справочник API →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="documentation" aria-labelledby="documentation-title">
+    <h2 id="documentation-title">Документация</h2>
+    <p>Девять практических сценариев, воспроизводимые графики и справочник публичного API.</p>
+    <nav class="hero-actions" aria-label="Язык документации">
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/" hreflang="en" lang="en">English</a>
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/" hreflang="ru" lang="ru">Русский</a>
+      <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/" hreflang="zh-CN" lang="zh-CN">简体中文</a>
+    </nav>
+    <div class="documentation-links">
+      <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/migration/1.0.3-to-2.0.0/">Переход с версии 1.0.3 →</a>
+      <a href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/agent-quickstart/">Вычисления и графики с ИИ-помощником →</a>
+      <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/CHANGELOG.md">История изменений →</a>
+      <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/master/docs/current-status.md">Состояние реализации →</a>
+    </div>
+    <details id="status">
+      <summary>Возможности и совместимость</summary>
+      <p data-status="implemented"><strong>Реализовано в 2.0</strong>: современный скалярный API и исторический фасад совместимости, явная проверка входных данных и документированные численные исправления.</p>
+      <p data-status="roadmap"><strong>Дальнейшая работа</strong>: дополнительные методы дефаззификации, проверка выпуклости, симметрическая разность и поддержка Python без GIL остаются за рамками версии 2.1.</p>
+    </details>
+  </section>
+  <footer class="site-footer">
+    <a href="https://fuzzy-technologies.github.io/"><strong>Fuzzy Technologies</strong></a>
+    <span>Технологии · Знания · Наука</span>
+    <span class="footer-signature">— в основе математика и нечёткая логика</span>
+  </footer>
+</main>
+</body>
+</html>
