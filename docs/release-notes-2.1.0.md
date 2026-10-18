@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # FuzzyRoutines 2.1.0 — Rules, scales and explainable results
 
-**Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). Task #337 renews release-manager acceptance after independent review found polynomial centroid edge failures and onboarding defects on 2026-10-19. The earlier [post-audit handoff](audits/2026-10-16-post-audit-handoff.md) retains its own measured source and artifact identities; its green checks do not approve subsequent corrections. Final promotion through the existing release PR #348 and publication remain subject to maintainer approval.
+**Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). The corrected implementation passed [independent release acceptance](audits/2026-10-19-release-acceptance.md): all ten full workflows, exact installed-artifact checks, fresh scalar measurements and complete CPU neural experiments. The current report supersedes earlier acceptance for the changed paths while preserving historical evidence. Final promotion through release PR #348 and publication remain subject to maintainer approval.
 
 FuzzyRoutines 2.1 adds explainable rule inference, a ready-made historical Universal Fuzzy Scale, explicit linguistic encoding and optional NumPy batch evaluation. The default scalar core remains free of external runtime dependencies on CPython 3.13 and 3.14. Existing scalar calls remain available, including the basic agent recipe for published 2.0.0.
 
@@ -21,7 +21,7 @@ The project homepage gains [English](https://fuzzy-technologies.github.io/FuzzyR
 
 ## Try the candidate
 
-Use a fresh CPython 3.13 or 3.14 environment and the exact wheel supplied by the candidate CI run. The agent quick start describes how to supply its local path and metadata version, verify the basic recipe and preserve the resulting evidence. NumPy, plotting and Torch dependencies are optional and installed separately for their respective examples. Repository neural and research scripts also require the matching source revision. The final published-version installation command will be added after release approval and publication.
+Use a fresh CPython 3.13 or 3.14 environment and the exact wheel supplied by the candidate CI run. The agent quick start describes how to supply its local path and metadata version, verify the basic recipe and preserve the resulting evidence. NumPy, plotting and Torch dependencies are optional and installed separately for their respective examples. Repository neural and research scripts also require the matching source revision. Primary instructions now pin 2.1.0 with an explicit reviewed-wheel fallback when that version is unavailable on the index; they do not claim publication.
 
 ## Candidate evidence and release decision
 
@@ -35,7 +35,7 @@ The [original review handoff](audits/2026-10-14-2.1-candidate-handoff.md) and th
 | ---                                                                      | ---                                                                  |
 | Recorded candidate source, artifacts and full opening CI                 | Complete; identities and successful runs are retained in the handoff |
 | Installed scalar/NumPy measurements and public fixtures                  | Complete; raw samples, parity and limits are retained                |
-| Final handoff independent acceptance                                     | Record in the integrating evidence PR                                |
-| Final promotion CI and artifact-payload comparison                       | Pending on the final promotion PR                                    |
+| Final handoff independent acceptance                                     | Complete; see the 19 October acceptance                              |
+| Final promotion CI and artifact-payload comparison                       | Verify the actual current head and archive identities in #348        |
 | Maintainer promotion/release decision                                    | Pending; final PR reserved for owner review                          |
 | GitHub Release, PyPI publication and published hash/install verification | Pending; require separate approval                                   |

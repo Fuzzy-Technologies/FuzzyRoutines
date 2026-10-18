@@ -1,0 +1,28 @@
+{
+  "packageVersion": "2.1.0",
+  "packageOrigins": {
+    "fuzzyroutines": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/__init__.py",
+    "fuzzyroutines.alphacuts": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/alphacuts.py",
+    "fuzzyroutines.defuzzification": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/defuzzification.py",
+    "fuzzyroutines.domain": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/domain.py",
+    "fuzzyroutines.encoding": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/encoding.py",
+    "fuzzyroutines.exceptions": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/exceptions.py",
+    "fuzzyroutines.fuzzysets": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/fuzzysets.py",
+    "fuzzyroutines.inference": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/inference.py",
+    "fuzzyroutines.linguistic": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/linguistic.py",
+    "fuzzyroutines.membership": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/membership.py",
+    "fuzzyroutines.numeric": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/numeric.py",
+    "fuzzyroutines.operators": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/operators.py",
+    "fuzzyroutines.presets": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/presets.py",
+    "fuzzyroutines.properties": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/properties.py",
+    "fuzzyroutines.relations": "/workspace/scratch/9353266c239f/release-acceptance/venv314/lib/python3.14/site-packages/fuzzyroutines/relations.py"
+  },
+  "sourceSha256": {
+    "examples/neural/run.py": "df878d7d8f0403b0df0b0d097a1295a95e6e0f7137252e586206ae663f33718c",
+    "fuzzyroutines/encoding.py": "7b7ef1f397d00e33e69a5ce46b8fd8627763780fd5e5708e69a2ded150c1b9a8",
+    "fuzzyroutines/inference.py": "273590aa75681b7ade1e353dd85f35f230a577b93cfef2138912265b334d8ea9",
+    "fuzzyroutines/presets.py": "084d962b6b202b347bf37045b010eb6992642fe89236d320d791a3d1da2899cd",
+    "research/differentiable_sugeno.py": "522a701b529a421555b61a3fe875dd2ba1e66887558be20cfa85637feac9b4d2",
+    "research/run_sugeno.py": "4222589c235ea11ff89ebf515b8910cc0180ca0ba2f9c15b5de36f0b574e5500"
+  }
+}

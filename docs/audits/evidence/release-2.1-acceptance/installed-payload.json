@@ -1,0 +1,7 @@
+{
+  "measured_local_wheel_sha256": "0a7d2565ad0f1943bf32b6ea2774b8764ba171d0f15dac74c3330211188b042f",
+  "ci_wheel_sha256": "3054f737f2cd247c20647abc5627f2368864563fd228544bb3bf01e8d76d44f7",
+  "identical_decompressed_entries": 31,
+  "identical_package_files": 25,
+  "archive_bytes_identical": false
+}

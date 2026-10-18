@@ -1,0 +1,69 @@
+{
+  "checked_at": "2026-10-18T21:13:57.720246+00:00",
+  "scope": "Pre-promotion live routes; unpublished 2.1 routes may legitimately be absent.",
+  "results": [
+    {
+      "url": "https://pypi.org/pypi/fuzzyroutines/json",
+      "status": 200,
+      "final_url": "https://pypi.org/pypi/fuzzyroutines/json",
+      "bytes": 27134,
+      "latest_pypi_version": "2.0.0"
+    },
+    {
+      "url": "https://fuzzy-technologies.github.io/FuzzyRoutines/",
+      "status": 200,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/",
+      "bytes": 10641
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/",
+      "status": 200,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/",
+      "bytes": 10641
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/ru/",
+      "status": 404,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/ru/"
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/zh-CN/",
+      "status": 404,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/zh-CN/"
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/en/",
+      "status": 200,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/en/",
+      "bytes": 39386
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/ru/",
+      "status": 200,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/ru/",
+      "bytes": 43136
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/zh-CN/",
+      "status": 200,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/zh-CN/",
+      "bytes": 39318
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/en/agent-quickstart/",
+      "status": 404,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/en/agent-quickstart/"
+    },
+    {
+      "url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/en/guides/inference/",
+      "status": 404,
+      "final_url": "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/en/guides/inference/"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Fuzzy-Technologies/FuzzyRoutines/develop/docs/site/content/en/agent-quickstart.md",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/Fuzzy-Technologies/FuzzyRoutines/develop/docs/site/content/en/agent-quickstart.md",
+      "bytes": 11268
+    }
+  ]
+}

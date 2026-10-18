@@ -1,0 +1,27 @@
+{
+  "artifacts": {
+    "fuzzyroutines-2.1.0-py3-none-any.whl": {
+      "first_sha256": "3054f737f2cd247c20647abc5627f2368864563fd228544bb3bf01e8d76d44f7",
+      "second_sha256": "3054f737f2cd247c20647abc5627f2368864563fd228544bb3bf01e8d76d44f7"
+    },
+    "fuzzyroutines-2.1.0.tar.gz": {
+      "first_sha256": "c398585750118b55d648aa277cd2c76ba6161d1d9e2f640ccfe7efa1c9fed6d2",
+      "second_sha256": "c398585750118b55d648aa277cd2c76ba6161d1d9e2f640ccfe7efa1c9fed6d2"
+    }
+  },
+  "build_tools": {
+    "build": "1.4.0",
+    "packaging": "26.3",
+    "pyproject_hooks": "1.3.3",
+    "setuptools": "84.0.0"
+  },
+  "independent_builds": 2,
+  "platform": "linux",
+  "python": "3.14.8 (main, Oct  1 2026, 02:38:33) [GCC 13.3.0]",
+  "source_date_epoch": 1792359130,
+  "source_mtime_offsets": [
+    1,
+    86400
+  ],
+  "source_revision": "9ab20c7e7b3d98e056f2670a7eebc75083e00553"
+}
