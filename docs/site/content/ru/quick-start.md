@@ -19,21 +19,28 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-Для стабильного пакета 2.0.0 в PyPI:
+Руководство рассчитано на **2.1.0**. Когда эта версия доступна в PyPI,
+установите её с точным указанием версии:
 
 ```bash
-python -m pip install fuzzyroutines==2.0.0
+python -m pip install fuzzyroutines==2.1.0
 ```
 
-Старые релизы 1.x не содержат этот современный API.
-
-Для разработки или кандидата, который ещё не опубликован, устанавливайте код из проверенной ревизии Git:
+Если 2.1.0 ещё недоступна в PyPI, получите соответствующий проверенный wheel
+из CI по [инструкции для помощника](agent-quickstart.md), задайте его абсолютный
+локальный путь в `FUZZYROUTINES_WHEEL` и установите пакет следующим способом:
 
 ```bash
-python -m pip install "fuzzyroutines @ git+https://github.com/Fuzzy-Technologies/FuzzyRoutines.git@develop"
+: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
+python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
+python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')"
 ```
 
-Эта команда требует Git и устанавливает текущее состояние изменяемой ветки `develop`. Для воспроизводимого эксперимента замените `develop` полным SHA проверенного коммита. Используемый здесь публичный современный API доступен в коммите `bd239d2b0972a796c4084498676042bdb7016bed`. Подготовка кандидата сама по себе не означает публикацию релиза в PyPI.
+[Опубликованная версия 2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/)
+и её [документация в теге](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/quick-start.md)
+остаются доступны для воспроизведения прежних результатов. Старые релизы 1.x
+не содержат этот современный API. При проверке кандидата сохраняйте хеш wheel
+и соответствующую ревизию исходников.
 
 ## Измерение и классификация в несколько строк {#measure-and-classify-in-a-few-lines}
 

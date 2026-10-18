@@ -124,8 +124,8 @@ rules or preserve automatic-differentiation gradients.
 
 ## Reproduce the figure
 
-Install the pinned `docs/requirements-plots.txt` toolchain and the candidate
-package, then run:
+Install the pinned `docs/requirements-plots.txt` toolchain and the matching
+2.1 package, then run:
 
 ```bash
 python -m tools.generate_encoding_figure --output-directory docs/site/content/en/assets/figures

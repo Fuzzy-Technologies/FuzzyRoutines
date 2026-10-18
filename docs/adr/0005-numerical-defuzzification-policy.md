@@ -113,6 +113,30 @@ nonzero adaptive sample or same-sign area/moment estimate is rounded to zero,
 raise `NumericalError`; generic compositions do not acquire the bounded
 polynomial rational fallback merely by retaining geometry.
 
+### Release acceptance amendment — 2026-10-19
+
+Clipped polynomial panels are integrated in distance from their left endpoint.
+Subtracting nearby powers of two endpoints can destroy significant digits and
+return a centroid outside a narrow integration window even for an ordinary
+triangle. Independent exact monomial integrals cover every polynomial branch.
+
+The bounded rational path preserves original `Rational` parameters and domain
+endpoints before any binary64 conversion. Distinct rational vertices or large
+integers must not collapse into a zero-width segment. When supplied geometry
+is not exactly representable in binary64, return its exact rational centroid;
+some valid rational integration windows contain no binary64 coordinate at all.
+Ordinary float geometry retains the floating-point path and the existing
+single final rounding on exceptional rational recomputation. This refines the
+analytical implementation without changing historical scale coefficients,
+the centroid definition, adaptive tolerances or optional dependencies.
+
+Trusted inference knots likewise retain distinct original rational coordinates.
+This prevents a known positive-area built-in consequent from disappearing
+during binary64 conversion; it does not turn Mamdani quadrature into symbolic
+integration. If working-precision rounding puts the final numerical centroid
+outside its original integration domain, raise `NumericalError` instead of
+returning an invalid coordinate or clamping it to an endpoint.
+
 The adaptive queue updates compensated moment/error totals when a panel is
 replaced. Acceptance (or depth exhaustion) always recomputes the complete
 active partition before checking the global targets. This removes quadratic

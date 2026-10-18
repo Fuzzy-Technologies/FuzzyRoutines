@@ -114,7 +114,7 @@ print(representative, aggregateCentroid)
 
 ## 复现图形 {#reproduce-the-figure}
 
-安装待验证版本及 `docs/requirements-plots.txt` 中固定的绘图依赖后执行：
+安装匹配的 2.1 软件包及 `docs/requirements-plots.txt` 中固定的绘图依赖后执行：
 
 ```bash
 python -m tools.generate_encoding_figure --output-directory docs/site/content/en/assets/figures

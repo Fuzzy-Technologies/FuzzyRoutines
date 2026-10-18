@@ -34,14 +34,23 @@ their own review and candidate checks below.
 
 ## Current 2.1 development gate
 
-**The corrected implementation passed full CI and fresh installed checks
-(2026-10-16).** The [post-audit handoff](audits/2026-10-16-post-audit-handoff.md)
-supersedes the earlier preparation acceptance for #331, #349–#351 and #337.
-It records exact wheel/source identities, raw measurements, reviewed figures
-and the generic-centroid performance cost. Task #337 / Feature #323 remain open
-for the corporate companion PR #52 owner merge and final reconciliation.
-Release PR #348, tag and PyPI publication remain separate owner decisions.
-The older checked evidence below describes its named historical revision.
+**The corrected 2.1 implementation passed independent release acceptance on
+2026-10-19.** The [current acceptance](audits/2026-10-19-release-acceptance.md)
+records all ten successful full workflows at
+`0dba28a072c6d8dff3eacdc336b922e1ab264b23`, exact installed artifacts, fresh
+thirty-scenario scalar measurements and full 600-observation/400-epoch CPU
+experiments. Rational geometry, narrow polynomial windows, Mamdani knots,
+PyPI links, versioned onboarding and scientific-page rendering were corrected
+and reviewed. Source-bound raw reports remain separate from earlier evidence.
+
+Corporate companion [PR #52](https://github.com/Fuzzy-Technologies/fuzzy-technologies.github.io/pull/52)
+is merged. The subsequent [navigation PR #57](https://github.com/Fuzzy-Technologies/fuzzy-technologies.github.io/pull/57)
+must follow localized project Pages deployment. Task #337 completes after the
+accepted correction is integrated into develop; Feature #323 then completes
+its child acceptance. Release PR #348 remains the maintainer's final review.
+Its actual current head must pass promotion CI and retain its own artifact
+identities. The older checked evidence below describes its named historical
+revision.
 
 
 The release-preparation source sets `pyproject.toml` to **2.1.0**, dated
@@ -98,7 +107,7 @@ The checked items below apply to the exact measured preparation candidate in the
 
 These are later promotion/publication conditions, not unimplemented 2.1 features:
 
-- [ ] Confirm required CI on the final promotion PR and compare that build's package payload with the measured candidate. Record its own archive identities in the PR.
+- [x] Corrected implementation acceptance, full CI, installed package checks and fresh scalar/neural evidence are recorded in the [19 October acceptance](audits/2026-10-19-release-acceptance.md). Final promotion must record the actual #348 head and its own archive identities in that PR.
 - [ ] Obtain the maintainer's final promotion/release approval before merging the final `master` PR or performing protected publication.
 - [ ] After approved publication, verify actual PyPI artifact hashes and clean installations, then record production acceptance.
 

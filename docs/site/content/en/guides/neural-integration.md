@@ -13,7 +13,7 @@ trainable fuzzy rule system** or a validated risk model.
 
 ## Run the complete experiment
 
-Use a checkout containing the 2.1 example. Install that candidate package into
+Use a checkout containing the 2.1 example. Install the matching 2.1 package into
 an isolated environment; the script verifies that it imports the installed
 package. The following commands target a Linux CPU environment:
 

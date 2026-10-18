@@ -3,10 +3,14 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Published-baseline evidence and version-independent candidate instructions."""
+"""Published-baseline evidence and usable candidate installation instructions."""
 
+import importlib.metadata
 import re
+import shlex
+import tomllib
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import pytest
 
@@ -20,6 +24,52 @@ MIGRATION_PATHS = (
 )
 PYPI_RELEASE = "https://pypi.org/project/fuzzyroutines/2.0.0/"
 GITHUB_RELEASE = "https://github.com/Fuzzy-Technologies/FuzzyRoutines/releases/tag/v2.0.0"
+
+
+def test_ReadmeLinksRemainUsableFromThePackageIndex():
+    """Keep package-description links independent of GitHub's relative URL rules."""
+
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    targets = re.findall(r"\]\(([^)]+)\)", text)
+    assert targets, "The README must provide a documentation route"
+    assert all(urlsplit(target).scheme == "https" and urlsplit(target).netloc for target in targets), "README links must work when rendered as the PyPI package description"
+
+
+@pytest.mark.parametrize("relativePath", (
+    "README.md", "docs/index.html", "docs/ru/index.html", "docs/zh-CN/index.html", "docs/llms.txt",
+    *(f"docs/site/content/{locale}/{guide}.md" for locale in ("en", "ru", "zh-CN")
+      for guide in ("quick-start", "agent-quickstart", "guides/numpy-batches")),
+))
+def test_ProductEntryPointsInstallTheDocumentedSourceVersion(relativePath):
+    """Prevent a new release's onboarding from silently installing its older baseline."""
+
+    text = (ROOT / relativePath).read_text(encoding="utf-8")
+    sourceVersion = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
+    pins = re.findall(r"fuzzyroutines(?:\[numpy\])?==([0-9.]+)", text)
+    assert pins and set(pins) == {sourceVersion}, "Primary installation commands must match the release source"
+    assert "2.0.0" in text and "PyPI" in text, "Keep the published baseline distinct from conditional release availability"
+
+
+@pytest.mark.parametrize("locale", ("en", "ru", "zh-CN"))
+@pytest.mark.parametrize("installedVersion", ("2.1.0", "2.0.0", "2.1.0rc1"))
+def test_BatchGuideChecksTheInstalledCandidateBeforeUsingItsApi(locale, installedVersion, monkeypatch):
+    """Exercise the copyable version guard against the candidate and wrong versions."""
+
+    text = (ROOT / "docs/site/content" / locale / "guides/numpy-batches.md").read_text(encoding="utf-8")
+    recipe = next(block for block in re.findall(r"```bash\n(.*?)\n```", text, re.DOTALL) if "$FUZZYROUTINES_WHEEL" in block)
+    commands = [shlex.split(line) for line in recipe.splitlines()]
+    guard = next(command for command in commands if "-c" in command)
+    guardIndex = commands.index(guard)
+    installIndex = next(index for index, command in enumerate(commands) if command[:4] == ["python", "-m", "pip", "install"])
+    assert installIndex < guardIndex, "Check the package that was just installed"
+    assert "$FUZZYROUTINES_WHEEL" in commands[installIndex], "Install the reviewed local wheel rather than the published 2.0 baseline"
+    assert "-I" in guard, "A checkout must not shadow the installed candidate"
+    monkeypatch.setattr(importlib.metadata, "version", lambda package: installedVersion)
+    with pytest.raises(SystemExit) as outcome:
+        exec(guard[guard.index("-c") + 1], {})  # noqa: S102 - Execute the reviewed local documentation fixture.
+    assert (outcome.value.code == 0) == (installedVersion == "2.1.0"), "Only the documented exact candidate may proceed"
+    canonical = (ROOT / "docs/site/content/en/guides/numpy-batches.md").read_text(encoding="utf-8")
+    assert ProtectedPageParts(text) == ProtectedPageParts(canonical), "Translations must preserve executable and mathematical fragments"
 
 
 @pytest.mark.parametrize("relativePath", MIGRATION_PATHS)

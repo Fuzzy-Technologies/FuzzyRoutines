@@ -107,7 +107,7 @@ $0.75\cdot0.125+0.25\cdot0.625=0.25$。空心柱表示各规则的后件值，
 `SugenoModel` 要求显式指定 `outputUniverse`。每条规则的轨迹均包含
 `consequentValue`、`normalizedStrength` 和 `contribution`。
 
-安装包含该 API 的候选版本后，可运行完整的
+安装匹配且包含该 API 的 2.1 软件包后，可运行完整的
 [监测示例](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/inference.py)：
 
 ```bash

@@ -111,7 +111,7 @@ Use `ConstantConsequent(value)` or
 `consequentValue`, `normalizedStrength` and `contribution` for every rule.
 
 Run the complete [monitoring example](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/inference.py)
-after installing the candidate version containing this API:
+after installing the matching 2.1 package containing this API:
 
 ```bash
 python examples/inference.py

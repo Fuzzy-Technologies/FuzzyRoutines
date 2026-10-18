@@ -11,26 +11,27 @@ SPDX-License-Identifier: Apache-2.0
 
 ## 可直接使用的请求
 
-> 请阅读 https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/agent-quickstart/ 。首先检查 Python 版本，安装指定版本 FuzzyRoutines 2.0.0，使用已支持的现代 API 构造历史通用模糊标度，并运行标度及示意性风险等级示例。返回包版本、输入、五个隶属度、选定的语言项或无匹配结果，以及数值验证结果。如果具备绘图环境，请在无图形界面的条件下生成图形。解释 0.17 附近的弱覆盖区，并说明隶属度为何不等于概率。若无法执行代码，请明确说明并给出命令，不要将预期结果表述为已验证结果。
+> 请阅读 https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/agent-quickstart/ 。首先检查 Python 版本，安装指定版本 FuzzyRoutines 2.1.0（若 PyPI 尚未提供，请使用经过审阅的 CI wheel），使用已支持的现代 API 构造历史通用模糊标度，并运行标度及示意性风险等级示例。返回包版本、输入、五个隶属度、选定的语言项或无匹配结果，以及数值验证结果。如果具备绘图环境，请在无图形界面的条件下生成图形。解释 0.17 附近的弱覆盖区，并说明隶属度为何不等于概率。若无法执行代码，请明确说明并给出命令，不要将预期结果表述为已验证结果。
 
 ## 版本与功能索引
 
-下方基础示例针对**已发布的 2.0.0** API，使用 CPython **3.13 或 3.14**，
-无需依赖 2.1 的新增接口。`/latest/` 文档会更新；精确的包版本约束和 JSON 中的
-`environment` 字段用于标识实际执行环境。独立脚本基于已安装的 wheel 运行，
-无需导入仓库中的模块。
+本指南面向 **2.1.0**，使用 CPython **3.13 或 3.14**。如果 PyPI 尚未提供该版本，
+请使用下方经过审阅的 CI wheel 安装步骤。[已发布的 2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/)
+仍可用于复现历史基线；其基础标量示例同样适用于 2.1。`/latest/` 文档会更新，
+精确的包版本约束和 JSON 中的 `environment` 记录说明实际运行的环境。
+独立脚本不导入仓库模块。
 
-| 功能       | 已发布版本 2.0.0 的入口                                                 | 示例                                                    |
+| 功能       | 基础标量 API 入口                                                     | 示例                                                    |
 | ---      | ---                                                             | ---                                                   |
 | 模糊集与隶属函数 | `ScalarFuzzySet`, `Triangle`, `Bell`, `Hyperbolic`, `SShoulder` | [隶属函数图集](guides/membership-families.md)               |
 | 语言项分类    | `LinguisticScale.Fuzzify`, `FuzzificationPolicy`                | [历史通用模糊标度](guides/universal-fuzzy-scale.md)           |
 | 模糊逻辑基本运算 | `TNormPolicy`, `SNormPolicy`, `NegationPolicy` 及集合运算            | [算子](guides/operators.md)                             |
 | 截集与数值输出  | `AlphaCut`, `SampleAlphaCut`, `Centroid`                        | [α-截集](guides/alpha-cuts.md)、[质心](guides/centroid.md) |
 
-**2.1 候选版本：**下列开发功能须使用包含相应实现的候选 wheel。
-此功能索引不表示 2.1 已在 PyPI 发布。默认标量核心仍不需要外部运行时依赖。
+**2.1 的新增功能：**下列 API 需要匹配的 2.1 软件包。安装说明并不表示该版本已在
+PyPI 提供。默认标量核心仍不需要外部运行时依赖。
 
-| 功能            | 2.1 候选版本的入口或范围                                                                                                      | 指南                                                                                                                                                                                                   |
+| 功能            | 2.1 的入口或范围                                                                                                          | 指南                                                                                                                                                                                                   |
 | ---           | ---                                                                                                                 | ---                                                                                                                                                                                                  |
 | 保留历史参数的预设标度   | `CreateUniversalFuzzyScale`, `UniversalFuzzyScalePolicy`, `UniversalFuzzyScaleDomains`：原始语言项、系数、最后一个精确最大值选择策略及质心积分域 | [通用模糊标度](guides/universal-fuzzy-scale.md)                                                                                                                                                            |
 | 显式语言项编码       | `LinguisticCodec`：语言项质心、有序隶属度向量、标量解码及代表值的加权平均                                                                       | [编码契约](guides/linguistic-encoding.md)                                                                                                                                                                |
@@ -55,13 +56,16 @@ Torch 脚本和研究代码是仓库中的可选示例，不属于安装包核�
 
 在新建环境中依次执行以下命令。预检在安装前拒绝不受支持的 Python；脚本随后要求精确匹配已安装的包版本，防止将旧版 `1.0.3` 误认为现代 API。
 
+仅当 PyPI 提供 2.1.0 时使用下方安装命令；否则，请先按最后一节安装经过审阅的
+wheel，再执行安装行之后的示例命令。
+
 ```bash
 python -c "import platform, sys; sys.exit(0 if platform.python_implementation() == 'CPython' and sys.version_info[:2] in ((3, 13), (3, 14)) else 'Use CPython 3.13 or 3.14; do not install on 3.12.')"
-python -m pip install fuzzyroutines==2.0.0
+python -m pip install fuzzyroutines==2.1.0
 curl -fLo agent_recipe.py https://fuzzy-technologies.github.io/FuzzyRoutines/recipes/agent_recipe.py
-python -I agent_recipe.py --expect-version 2.0.0 --output scale.json > scale.stdout.json
-python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --output risk.json > risk.stdout.json
-python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --value 17 --output weak.json > weak.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --output scale.json > scale.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --output risk.json > risk.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --value 17 --output weak.json > weak.stdout.json
 ```
 
 第一次运行计算 `x=0.2`：**Low ≈ 0.5**，同时保留 Min 的微小正尾部，选定语言项为 **Low**。
@@ -88,7 +92,7 @@ JSON 还记录图像哈希和 Matplotlib 版本。使用相同输入和锁定的
 ```bash
 curl -fLo requirements-plots.txt https://fuzzy-technologies.github.io/FuzzyRoutines/recipes/requirements-plots.txt
 python -m pip install -r requirements-plots.txt
-python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --value 17 --plot risk.svg > plot.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --value 17 --plot risk.svg > plot.stdout.json
 ```
 
 [![历史曲线与输入 0.17 对应的五个隶属度；所有值均低于 0.1 阈值。](../en/assets/figures/agent-risk.svg)](../en/assets/figures/agent-risk.svg)

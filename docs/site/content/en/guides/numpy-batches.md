@@ -6,10 +6,24 @@ SPDX-License-Identifier: Apache-2.0
 # Optional NumPy batches
 
 Use batches when many coordinates share one membership function or linguistic
-scale. Ordinary scalar calls remain dependency-free. Install the optional extra:
+scale. Ordinary scalar calls remain dependency-free. This API requires 2.1.0;
+the published 2.0.0 baseline does not provide it. When 2.1.0 is available on PyPI,
+install the exact version with its optional NumPy extra:
 
 ```bash
-python -m pip install 'fuzzyroutines[numpy]'
+python -m pip install 'fuzzyroutines[numpy]==2.1.0'
+```
+
+If that version is not yet available on PyPI, obtain the matching reviewed CI
+wheel using the [version-aware agent guide](../agent-quickstart.md) and set
+`FUZZYROUTINES_WHEEL` to its absolute local path. In a fresh CPython 3.13 or 3.14
+environment, use this route instead; it pins the tested NumPy version:
+
+```bash
+: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
+python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
+python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')" &&
+python -m pip install 'numpy==2.3.5'
 ```
 
 ```python

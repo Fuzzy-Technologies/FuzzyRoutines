@@ -107,7 +107,7 @@ the [migration notes](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/d
 
 The 2.1 API adds an immutable factory with the same coefficients. Its selection
 policy and centroid windows stay explicit; the generic modern defaults and the
-legacy import remain unchanged. Install the candidate wheel to run this example.
+legacy import remain unchanged. Install the matching 2.1 package to run this example.
 
 ```python
 from math import isclose

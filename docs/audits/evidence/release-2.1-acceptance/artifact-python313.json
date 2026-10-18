@@ -1,0 +1,20 @@
+{
+  "id": 12151004559,
+  "node_id": "MDg6QXJ0aWZhY3QxMjE1MTAwNDU1OQ==",
+  "name": "package-artifacts-python-3.13",
+  "size_in_bytes": 432517,
+  "url": "https://api.github.com/repos/Fuzzy-Technologies/FuzzyRoutines/actions/artifacts/12151004559",
+  "archive_download_url": "https://api.github.com/repos/Fuzzy-Technologies/FuzzyRoutines/actions/artifacts/12151004559/zip",
+  "expired": false,
+  "digest": "sha256:29de8b3b2fb4432c3c88efa4807e89979f1534520429a54ff74bf4c2ca510dfa",
+  "created_at": "2026-10-18T21:33:19Z",
+  "updated_at": "2026-10-18T21:33:19Z",
+  "expires_at": "2027-01-16T21:32:13Z",
+  "workflow_run": {
+    "id": 39168270761,
+    "repository_id": 335956697,
+    "head_repository_id": 335956697,
+    "head_branch": "fix/337-release-acceptance",
+    "head_sha": "0dba28a072c6d8dff3eacdc336b922e1ab264b23"
+  }
+}

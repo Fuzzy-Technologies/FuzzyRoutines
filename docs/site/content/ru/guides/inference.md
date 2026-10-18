@@ -124,7 +124,7 @@ $0.75\cdot0.125+0.25\cdot0.625=0.25$. Контурные столбцы пока
 `normalizedStrength` и `contribution`.
 
 Полный [пример мониторинга](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/inference.py)
-запускается после установки версии-кандидата, содержащей этот API:
+запускается после установки пакета соответствующей версии 2.1 с этим API:
 
 ```bash
 python examples/inference.py

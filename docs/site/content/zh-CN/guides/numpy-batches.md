@@ -5,10 +5,23 @@ SPDX-License-Identifier: Apache-2.0
 
 # NumPy 批量计算
 
-批量接口适用于使用同一隶属函数或语言标度处理大量坐标的情形。普通标量调用仍不依赖 NumPy。安装可选依赖：
+批量接口适用于使用同一隶属函数或语言标度处理大量坐标的情形。普通标量调用仍不依赖 NumPy。
+此 API 需要 2.1.0；已发布的历史基线 2.0.0 不提供此接口。当 PyPI 提供 2.1.0 时，
+请指定确切版本并安装 NumPy 可选依赖：
 
 ```bash
-python -m pip install 'fuzzyroutines[numpy]'
+python -m pip install 'fuzzyroutines[numpy]==2.1.0'
+```
+
+如果 PyPI 尚未提供该版本，请按照[含版本校验的智能体指南](../agent-quickstart.md)获取
+匹配且经过审阅的 CI wheel，并将其本地绝对路径赋给 `FUZZYROUTINES_WHEEL`。
+在新的 CPython 3.13 或 3.14 环境中，改用以下步骤安装 wheel 和经过测试的 NumPy 版本：
+
+```bash
+: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
+python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
+python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')" &&
+python -m pip install 'numpy==2.3.5'
 ```
 
 ```python
