@@ -6,11 +6,24 @@ SPDX-License-Identifier: Apache-2.0
 # Пакетные вычисления с NumPy
 
 Пакетный API вычисляет значения функции принадлежности или степени принадлежности
-к термам шкалы сразу для множества координат.
-Обычные скалярные вызовы сохраняют независимость от NumPy. Установите дополнение:
+к термам шкалы сразу для множества координат. Обычные скалярные вызовы сохраняют
+независимость от NumPy. Этот API требует 2.1.0; в опубликованной базовой версии
+2.0.0 его нет. Когда 2.1.0 доступна в PyPI, установите точную версию с дополнением NumPy:
 
 ```bash
-python -m pip install 'fuzzyroutines[numpy]'
+python -m pip install 'fuzzyroutines[numpy]==2.1.0'
+```
+
+Если эта версия ещё недоступна в PyPI, получите соответствующий проверенный
+wheel из CI по [инструкции для помощника с проверкой версии](../agent-quickstart.md)
+и задайте его абсолютный локальный путь в `FUZZYROUTINES_WHEEL`. В новом окружении
+CPython 3.13 или 3.14 используйте следующий способ с проверенной версией NumPy:
+
+```bash
+: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
+python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
+python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')" &&
+python -m pip install 'numpy==2.3.5'
 ```
 
 ```python

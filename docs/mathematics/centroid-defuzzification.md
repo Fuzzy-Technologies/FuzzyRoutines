@@ -59,6 +59,16 @@ recomputed with exact rational arithmetic over at most five polynomial pieces.
 The ratio is taken before conversion to float, preserving a representable
 centroid even when its separate moments underflow or overflow.
 
+Clipped polynomial panels are evaluated relative to their left endpoint to
+avoid cancellation on narrow windows. Original rational parameters and domain
+endpoints are preserved when they are not exactly representable in binary64;
+the result is then an exact rational centroid, including for windows containing
+no binary64 coordinate. Ordinary float inputs retain floating-point evaluation.
+Trusted inference knots retain original rational coordinates as well. Numerical
+quadrature remains approximate: if rounding moves its result outside the
+integration domain, `NumericalError` is raised rather than returning or clamping
+an invalid coordinate.
+
 Engine-owned inference compositions retain trusted built-in shape knots and
 linear clipping points as initial partitions. They still use numerical
 integration; retaining knots is not an analytical certificate.

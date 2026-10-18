@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from fractions import Fraction
 from heapq import heappop, heappush
 from itertools import pairwise
-from numbers import Integral
+from numbers import Integral, Rational
 from typing import cast
 
 from fuzzyroutines.domain import (
@@ -50,7 +50,7 @@ class _PartitionedMembership:
     """Retain engine-owned sampling knots without analytical certification."""
 
     source: MembershipCallable
-    points: tuple[float, ...]
+    points: tuple[MembershipScalar, ...]
 
     def __call__(self, coordinate: MembershipScalar) -> MembershipScalar:
         """Evaluate the original composition without changing its grades."""
@@ -58,7 +58,7 @@ class _PartitionedMembership:
         return self.source(coordinate)
 
 
-def _IntegrationPoints(fuzzySet: ScalarFuzzySet, level: float | None = None) -> tuple[float, ...]:
+def _IntegrationPoints(fuzzySet: ScalarFuzzySet, level: float | None = None) -> tuple[MembershipScalar, ...]:
     """Extract trusted built-in geometry or an engine-owned partition snapshot."""
 
     membership = fuzzySet.membershipFunction
@@ -71,7 +71,7 @@ def _IntegrationPoints(fuzzySet: ScalarFuzzySet, level: float | None = None) -> 
     if source is None:
         return ()
 
-    parameters = {name: float(value) for name, value in source.parameterItems}
+    parameters = {name: cast(float, value) for name, value in source.parameterItems}
     name = source.name
 
     if name in {"Triangle", "Trapezium"}:
@@ -169,15 +169,16 @@ def _PolynomialMoments(
     if isinstance(left, Fraction) or isinstance(right, Fraction):
         constant, linear, quadratic = (Fraction(value) for value in (constant, linear, quadratic))
 
+    # Integrate in distance from the clipped left endpoint. Subtracting powers
+    # at two nearby offsets can lose every useful digit on a narrow window.
+    width = right - left
     leftOffset = left - origin
-    rightOffset = right - origin
-    firstPower = rightOffset - leftOffset
-    secondPower = rightOffset**2 - leftOffset**2
-    thirdPower = rightOffset**3 - leftOffset**3
-    fourthPower = rightOffset**4 - leftOffset**4
-    area = constant * firstPower + linear * secondPower / 2 + quadratic * thirdPower / 3
-    localMoment = constant * secondPower / 2 + linear * thirdPower / 3 + quadratic * fourthPower / 4
-    return area, origin * area + localMoment
+    leftGrade = constant + leftOffset * (linear + leftOffset * quadratic)
+    leftSlope = linear + 2 * leftOffset * quadratic
+    area = width * (leftGrade + width * (leftSlope / 2 + width * quadratic / 3))
+    localMoment = width**2 * (leftGrade / 2 + width * (leftSlope / 3 + width * quadratic / 4))
+
+    return area, left * area + localMoment
 
 
 def _AddSegment(
@@ -209,6 +210,12 @@ def _AddSegment(
     return moments[0] + area, moments[1] + firstMoment
 
 
+def _ExactPolynomialValue(value: MembershipScalar) -> Fraction:
+    """Preserve original rational geometry and the binary64 image of other reals."""
+
+    return Fraction(value) if isinstance(value, Rational) else Fraction(float(value))
+
+
 def _PolynomialFamilyMoments(
     membershipFunction: _AnalyticalSource,
     domain: IntegrationDomain,
@@ -217,14 +224,14 @@ def _PolynomialFamilyMoments(
     """Return analytical moments for supported piecewise-polynomial families."""
 
     parameters: Mapping[str, _Moment] = {
-        name: Fraction(float(value)) if exact else float(value)
+        name: _ExactPolynomialValue(value) if exact else float(value)
         for name, value in membershipFunction.parameterItems
     }
     familyName = membershipFunction.name
     moments: tuple[_Moment, _Moment] = (Fraction(0), Fraction(0)) if exact else (0.0, 0.0)
 
     if exact:
-        domain = IntegrationDomain(Fraction(float(domain.left)), Fraction(float(domain.right)))
+        domain = IntegrationDomain(_ExactPolynomialValue(domain.left), _ExactPolynomialValue(domain.right))
 
     if familyName == "Triangle":
         leftFoot = parameters["a"]
@@ -445,7 +452,7 @@ def _AdaptiveMoments(
     # Casts retain exact rational coordinates and callback arithmetic at runtime.
     left, right = cast(float, domain.left), cast(float, domain.right)
     coordinateScale = max(abs(left), abs(right), 1.0)
-    points = (left, *(point for point in _IntegrationPoints(fuzzySet) if left < point < right), right)
+    points = (left, *(cast(float, point) for point in _IntegrationPoints(fuzzySet) if left < cast(float, point) < right), right)
     panels: dict[int, _SimpsonPanel] = {}
     pending: list[tuple[float, int]] = []
     serial = 0
@@ -566,7 +573,8 @@ def Centroid(
         UndefinedResultError: Membership area is zero or a computed moment or
             centroid is non-finite.
         NumericalError: A nonzero adaptive area or moment estimate/sample
-            underflows to zero in the available arithmetic.
+            underflows to zero, or numerical rounding moves the centroid
+            outside its integration domain.
         CentroidConvergenceError: Adaptive quadrature exceeds `maximumDepth`.
 
     Notes:
@@ -576,6 +584,9 @@ def Centroid(
         Arbitrary callables still require sufficient regularity: unsampled
         features cannot be excluded by numerical quadrature. Unsafe polynomial
         moments use bounded rational recomputation before taking their ratio.
+        Polynomial geometry supplied as non-binary64 rationals retains its
+        original exact values and returns a rational centroid, including when
+        the integration window contains no binary64 coordinate.
     """
 
     return _Centroid(fuzzySet, integrationDomain, policy, UndefinedResultError)
@@ -613,11 +624,23 @@ def _Centroid(
     moments = None
 
     if analyticalSource is not None and analyticalSource.name in {"Triangle", "Trapezium", "Parabolic", "Bell"}:
-        try:
-            moments = _PolynomialFamilyMoments(analyticalSource, integrationDomain)
+        # Preserve exact geometry when binary64 conversion would merge vertices
+        # or alter a rational integration boundary. Ordinary float/int presets
+        # retain the inexpensive floating-point path.
+        exactInputs = any(
+            isinstance(value, Rational) and float(value) != value
+            for value in (
+                *(value for _, value in analyticalSource.parameterItems),
+                integrationDomain.left, integrationDomain.right,
+            )
+        )
 
-        except (OverflowError, ZeroDivisionError):
-            moments = None
+        if not exactInputs:
+            try:
+                moments = _PolynomialFamilyMoments(analyticalSource, integrationDomain)
+
+            except (OverflowError, ZeroDivisionError):
+                moments = None
 
         if (
             moments is None
@@ -625,14 +648,14 @@ def _Centroid(
             or moments[0] < float.fromhex("0x1.0p-1022")
             or abs(cast(float, moments[1])) < float.fromhex("0x1.0p-1022")
         ):
-            # Five bounded-degree pieces at most: exact binary64-input moments
-            # avoid losing a representable ratio to unrepresentable moments.
+            # Five bounded-degree pieces at most: exact original-rational or
+            # binary64-input moments retain ratios with unrepresentable moments.
             exactArea, exactMoment = _PolynomialFamilyMoments(analyticalSource, integrationDomain, exact=True)
 
             if exactArea <= 0:
                 raise undefinedError("centroid is undefined for zero membership area")
 
-            exactCentroid = float(exactMoment / exactArea)
+            exactCentroid = exactMoment / exactArea if exactInputs else float(exactMoment / exactArea)
 
             if not math.isfinite(exactCentroid):
                 raise undefinedError("centroid must be finite")
@@ -657,5 +680,8 @@ def _Centroid(
 
     if not math.isfinite(centroid):
         raise undefinedError("centroid must be finite")
+
+    if not integrationDomain.Contains(centroid):
+        raise NumericalError("centroid is outside integration domain at working precision")
 
     return centroid

@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # FuzzyRoutines 2.1.0 — Rules, scales and explainable results
 
-**Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). Numerical audit fixes passed full CI and fresh installed-artifact checks; the [post-audit handoff](audits/2026-10-16-post-audit-handoff.md) records exact identities, measurements and remaining owner actions under Task #337 and the existing release PR #348. Final promotion and publication remain subject to maintainer approval.
+**Version 2.1.0 has not been published.** The published release remains [2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/). Task #337 renews release-manager acceptance after independent review found polynomial centroid edge failures and onboarding defects on 2026-10-19. The earlier [post-audit handoff](audits/2026-10-16-post-audit-handoff.md) retains its own measured source and artifact identities; its green checks do not approve subsequent corrections. Final promotion through the existing release PR #348 and publication remain subject to maintainer approval.
 
 FuzzyRoutines 2.1 adds explainable rule inference, a ready-made historical Universal Fuzzy Scale, explicit linguistic encoding and optional NumPy batch evaluation. The default scalar core remains free of external runtime dependencies on CPython 3.13 and 3.14. Existing scalar calls remain available, including the basic agent recipe for published 2.0.0.
 
@@ -29,7 +29,7 @@ Preparation [PR #346](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/3
 
 The candidate passed 27 synthetic public-boundary migration cases; a separate batch replay covers 30 actual upstream test inputs. These checks do not validate private FMA projects, the robot or complete production applications. Their migrations still need application-specific testing. The bounded neural experiments remain examples and research, with no public trainable tensor API.
 
-The [review handoff](audits/2026-10-14-2.1-candidate-handoff.md) supplies the acceptance package for Task [#337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337). Independent acceptance of that package completes release preparation without implying that the owner has approved the final `develop` to `master` PR. The final PR remains open for the maintainer; its own CI and package-payload comparison must be recorded. A later documentation-only revision can change wheel archive timestamps, so a new artifact must retain its own hash. No release tag or PyPI publication is authorized by this draft.
+The [original review handoff](audits/2026-10-14-2.1-candidate-handoff.md) and the [16 October correction](audits/2026-10-16-post-audit-handoff.md) remain historical acceptance packages. Task [#337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337) owns the renewed acceptance of the final corrected revision. The final `develop` to `master` PR remains open for the maintainer; its own CI and package-payload comparison must be recorded. A later documentation-only revision can change wheel archive timestamps, so a new artifact must retain its own hash. No release tag or PyPI publication is authorized by this draft.
 
 | Stage                                                                    | Status                                                               |
 | ---                                                                      | ---                                                                  |

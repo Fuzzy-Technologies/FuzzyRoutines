@@ -93,7 +93,7 @@ print(grades, scale.Fuzzy(0.2)["name"])
 ## 现代预设工厂 {#modern-preset-factory}
 
 2.1 API 提供保留原始系数的不可变尺度工厂。等级选择策略与重心积分区间须显式指定，
-通用现代接口的默认行为及历史导入路径保持不变。运行本例前，请安装待验证版本的 wheel。
+通用现代接口的默认行为及历史导入路径保持不变。运行本例前，请安装匹配的 2.1 软件包。
 
 ```python
 from math import isclose

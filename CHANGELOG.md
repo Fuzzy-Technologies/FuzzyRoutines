@@ -80,6 +80,12 @@ NumPy batches and neural examples. Final artifact evidence is tracked in the
 
 #### Fixed
 
+- Polynomial centroid integration preserves distinct rational coordinates and
+  avoids cancellation on narrow clipped windows. Exact independent references
+  cover every polynomial branch and retain centroid containment.
+- README documentation links also work from PyPI; candidate NumPy instructions
+  install and verify the intended wheel before using the new API. Rendered
+  acceptance now covers the new scientific and agent pages in every locale.
 - Mamdani centroid integration retains built-in consequent geometry, including
   narrow and disjoint supports, and enforces global estimated-error targets.
 - Bounded polynomial centroids recover representable coordinates when their

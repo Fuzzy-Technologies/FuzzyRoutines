@@ -34,14 +34,19 @@ their own review and candidate checks below.
 
 ## Current 2.1 development gate
 
-**The corrected implementation passed full CI and fresh installed checks
-(2026-10-16).** The [post-audit handoff](audits/2026-10-16-post-audit-handoff.md)
-supersedes the earlier preparation acceptance for #331, #349–#351 and #337.
-It records exact wheel/source identities, raw measurements, reviewed figures
-and the generic-centroid performance cost. Task #337 / Feature #323 remain open
-for the corporate companion PR #52 owner merge and final reconciliation.
-Release PR #348, tag and PyPI publication remain separate owner decisions.
-The older checked evidence below describes its named historical revision.
+**Release-manager acceptance is being renewed on 2026-10-19.** Independent
+review reproduced polynomial centroid failures for distinct rational geometry
+and narrow clipped windows despite the earlier green checks. Task #337 owns
+the corrections, independent exact references, renewed installed-artifact
+checks and full CI. Earlier evidence does not approve these new changes.
+
+The [post-audit handoff](audits/2026-10-16-post-audit-handoff.md) retains the
+previous measured revision, artifact identities and numerical limits. Corporate
+companion [PR #52](https://github.com/Fuzzy-Technologies/fuzzy-technologies.github.io/pull/52)
+is merged. The subsequent [navigation PR #57](https://github.com/Fuzzy-Technologies/fuzzy-technologies.github.io/pull/57)
+must follow the localized project Pages deployment. Release PR #348, tag and
+PyPI publication remain separate owner decisions. The older checked evidence
+below describes its named historical revision.
 
 
 The release-preparation source sets `pyproject.toml` to **2.1.0**, dated

@@ -13,7 +13,12 @@ const previewRoot = path.resolve(process.argv[2] || '_build/pages/review');
 const outputRoot = path.resolve(process.argv[3] || '_build/browser-review');
 const origin = 'http://documentation.test';
 const locales = ['en', 'ru', 'zh-CN'];
-const routes = ['guides/universal-fuzzy-scale', 'quick-start', 'contracts/compatibility', 'migration/1.0.3-to-2.0.0'];
+const routes = [
+  'guides/universal-fuzzy-scale', 'quick-start', 'contracts/compatibility',
+  'migration/1.0.3-to-2.0.0', 'agent-quickstart',
+  'guides/linguistic-encoding', 'guides/inference', 'guides/numpy-batches',
+  'guides/neural-integration', 'guides/differentiable-sugeno',
+];
 const mimeTypes = {'.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.json': 'application/json', '.woff': 'font/woff', '.woff2': 'font/woff2'};
 
 async function ServeFile(route, root, relative) {
@@ -210,6 +215,15 @@ async function Main() {
           languages: [...document.querySelectorAll('a[hreflang]')].map(link => ({language: link.hreflang, path: new URL(link.href).pathname})),
         }));
         result.typography = await InspectTypography(page);
+        assert.equal(await page.locator('html').getAttribute('lang'), locale === 'zh-CN' ? 'zh' : locale, `${url}: document language`);
+        if (pageRoute.startsWith('guides/') && pageRoute !== 'guides/universal-fuzzy-scale') {
+          result.imageViewer = await InspectImageViewer(page, '.md-content img', `${locale}-${pageRoute.replaceAll('/', '-')}-viewer-${viewport.width}.png`);
+        }
+        if (['guides/linguistic-encoding', 'guides/inference', 'guides/neural-integration', 'guides/differentiable-sugeno'].includes(pageRoute)) {
+          assert.ok(result.mathBlocks > 0, `${url}: scientific explanation includes rendered mathematics`);
+          result.formulaScreenshot = `${locale}-${pageRoute.replaceAll('/', '-')}-formula-${viewport.width}.png`;
+          await page.locator('.arithmatex').first().screenshot({path: path.join(outputRoot, result.formulaScreenshot), animations: 'disabled'});
+        }
         if (pageRoute === 'guides/universal-fuzzy-scale') {
           result.imageViewer = await InspectImageViewer(page, '.md-content img', `${locale}-universal-scale-viewer-${viewport.width}.png`);
           result.formulaScreenshot = `${locale}-universal-scale-formula-${viewport.width}.png`;

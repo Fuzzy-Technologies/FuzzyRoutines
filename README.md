@@ -20,11 +20,16 @@ Classify measurements, combine fuzzy criteria, inspect sets and explain results.
 
 ## Try it: is 24 °C comfortable or warm?
 
-Install the published stable release:
+This source describes **FuzzyRoutines 2.1.0**. Install that exact version:
 
 ```console
-python -m pip install fuzzyroutines==2.0.0
+python -m pip install fuzzyroutines==2.1.0
 ```
+
+If 2.1.0 is not yet available on PyPI, install the reviewed CI wheel using the
+[version-aware agent guide](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md).
+The [published 2.0.0 baseline](https://pypi.org/project/fuzzyroutines/2.0.0/)
+remains available for reproducing earlier results.
 
 ```python
 from fuzzyroutines import (
@@ -57,17 +62,20 @@ sum to one. The two terms do not cover every temperature.
 
 Copy this request:
 
-> Use FuzzyRoutines 2.0.0 and its modern Python API to classify a 24 °C
-> measurement. Read the tagged quick start below, verify Python and the installed
+> Use FuzzyRoutines 2.1.0 and its modern Python API to classify a 24 °C
+> measurement. Read the version-aware quick start below, use the reviewed CI wheel if
+> 2.1.0 is unavailable on PyPI, and verify Python and the installed
 > package version, run the example and check Comfort = 2/3, Warm = 0.125,
 > selected label = Comfort. Return the code and observed values. Explain the
 > chosen thresholds and distinguish membership grades from probabilities.
 > If Python execution is unavailable, label the output as expected.
 
-[Stable quick start](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/quick-start.md) ·
-[Agent guide and capability map](docs/site/content/en/agent-quickstart.md)
+[2.1 quick start](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/quick-start.md) ·
+[Agent guide and capability map](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md)
 
 ## Explore a useful scenario
+
+These tagged 2.0 baseline guides describe scalar operations preserved in 2.1.
 
 | Goal                              | Start here                                                                                                                               |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,30 +84,30 @@ Copy this request:
 | Combine criteria, inspect results | [Worked examples](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/guides/index.md)                  |
 | Maintain existing 1.x software    | [Compatibility and migration](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/COMPATIBILITY.md)                     |
 
-## Explore 2.1 development
+## Explore 2.1 features
 
-The development branch adds the historical Universal Fuzzy Scale factory,
+FuzzyRoutines 2.1 adds the historical Universal Fuzzy Scale factory,
 linguistic encodings, traced Mamdani and Sugeno inference, explicit NumPy
 batches and optional CPU neural examples. The scalar core keeps zero mandatory
 runtime dependencies.
 
-The installation command above uses published 2.0.0. To try the new APIs, use
-the [version-aware agent guide](docs/site/content/en/agent-quickstart.md) with a
-reviewed wheel matching its source revision.
+For installation checks and the new APIs, use
+the [version-aware agent guide](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md) and a
+2.1.0 package matching the reviewed source revision.
 [Release review #348](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/348)
-tracks the current evidence and findings.
+records the reviewed release evidence.
 
 ## Learn more and contribute
 
 - [API reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/api/)
-- [Mathematical contracts](docs/MATHEMATICAL_MODEL.md)
-- [Benchmarks and their limits](docs/performance/installed-batch-results.md)
-- [Development and evidence rules](docs/development-evidence-protocol.md)
-- [Changes](CHANGELOG.md)
+- [Mathematical contracts](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/MATHEMATICAL_MODEL.md)
+- [Benchmarks and their limits](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/installed-batch-results.md)
+- [Development and evidence rules](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/development-evidence-protocol.md)
+- [Changes](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/CHANGELOG.md)
 
 The published `/latest/` reference moves with approved releases. Use matching
 tagged sources when reproducing an older version.
 
 ## License
 
-[Apache-2.0](LICENSE). Preserve the license and [NOTICE](NOTICE).
+[Apache-2.0](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/LICENSE). Preserve the license and [NOTICE](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/NOTICE).

@@ -13,28 +13,30 @@ No local PC, Docker, GPU, model provider or agent framework is required.
 
 ## Copyable request
 
-> Read https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/ . Check Python first, install exactly FuzzyRoutines 2.0.0, construct the historical Universal Fuzzy Scale using its supported modern API, and run the scale and illustrative risk recipes. Return the package version, inputs, five membership grades, selected label or no match, and numerical checks. If plotting is available, produce a headless graph. Explain the weak coverage near 0.17 and why membership grades are not probabilities. If execution is unavailable, say so and provide the commands without claiming results.
+> Read https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/ . Check Python first, install exactly FuzzyRoutines 2.1.0 (use the reviewed CI wheel if PyPI does not yet provide it), construct the historical Universal Fuzzy Scale using its supported modern API, and run the scale and illustrative risk recipes. Return the package version, inputs, five membership grades, selected label or no match, and numerical checks. If plotting is available, produce a headless graph. Explain the weak coverage near 0.17 and why membership grades are not probabilities. If execution is unavailable, say so and provide the commands without claiming results.
 
 ## Version and capability map
 
-The basic recipe below targets the **published 2.0.0** API on CPython **3.13 or
-3.14**. It continues to work without the new 2.1 interfaces. The `/latest/`
-documentation route moves; the exact package pin and the JSON `environment`
-record identify what was actually run. The standalone recipe works against an
-installed wheel and imports no repository modules.
+This guide targets **2.1.0** on CPython **3.13 or 3.14**. If that version
+is not yet available on PyPI, use the reviewed CI wheel instructions below.
+The [published 2.0.0 baseline](https://pypi.org/project/fuzzyroutines/2.0.0/)
+remains available for reproducing earlier results; its basic scalar recipe
+also works with 2.1. The `/latest/` route moves; the exact package pin and JSON
+`environment` record identify what was run. The standalone recipe imports
+no repository modules.
 
-| Capability                | Published 2.0.0 entry point                                     | Example                                                            |
+| Capability                | Basic scalar entry point                                        | Example                                                            |
 | ---                       | ---                                                             | ---                                                                |
 | Sets and memberships      | `ScalarFuzzySet`, `Triangle`, `Bell`, `Hyperbolic`, `SShoulder` | [Membership gallery](guides/membership-families.md)                |
 | Linguistic classification | `LinguisticScale.Fuzzify`, `FuzzificationPolicy`                | [Historical scale](guides/universal-fuzzy-scale.md)                |
 | Fuzzy logic primitives    | `TNormPolicy`, `SNormPolicy`, `NegationPolicy`, set operations  | [Operators](guides/operators.md)                                   |
 | Cuts and numeric output   | `AlphaCut`, `SampleAlphaCut`, `Centroid`                        | [Alpha cuts](guides/alpha-cuts.md), [centroid](guides/centroid.md) |
 
-**Candidate 2.1:** the following development features require a candidate wheel
-containing them. This list does not announce a 2.1 PyPI release. The default
+**Additional 2.1 capabilities:** use a matching 2.1 package for the APIs
+below. Installation instructions do not announce PyPI availability. The default
 scalar package still has no external runtime dependencies.
 
-| Capability                     | Candidate 2.1 entry point or scope                                                                                                                               | Guide                                                                                                                                                                                                |
+| Capability                     | 2.1 entry point or scope                                                                                                                                         | Guide                                                                                                                                                                                                |
 | ---                            | ---                                                                                                                                                              | ---                                                                                                                                                                                                  |
 | Preserved historical preset    | `CreateUniversalFuzzyScale`, `UniversalFuzzyScalePolicy`, `UniversalFuzzyScaleDomains`: original terms, coefficients, exact-last tie policy and centroid windows | [Universal Fuzzy Scale](guides/universal-fuzzy-scale.md)                                                                                                                                             |
 | Explicit linguistic encoding   | `LinguisticCodec`: label centroids, ordered membership vectors, scalar decoding and weighted representative averages                                             | [Encoding contracts](guides/linguistic-encoding.md)                                                                                                                                                  |
@@ -64,13 +66,17 @@ In a fresh environment, run these commands in order. The preflight stops before
 installation on unsupported Python. The recipe then requires the exact installed
 version, so an old `1.0.3` cannot masquerade as the modern API.
 
+Use the PyPI installation below when 2.1.0 is available there. Otherwise,
+install the reviewed wheel using the final section, then run the recipe commands
+below after the installation line.
+
 ```bash
 python -c "import platform, sys; sys.exit(0 if platform.python_implementation() == 'CPython' and sys.version_info[:2] in ((3, 13), (3, 14)) else 'Use CPython 3.13 or 3.14; do not install on 3.12.')"
-python -m pip install fuzzyroutines==2.0.0
+python -m pip install fuzzyroutines==2.1.0
 curl -fLo agent_recipe.py https://fuzzy-technologies.github.io/FuzzyRoutines/recipes/agent_recipe.py
-python -I agent_recipe.py --expect-version 2.0.0 --output scale.json > scale.stdout.json
-python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --output risk.json > risk.stdout.json
-python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --value 17 --output weak.json > weak.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --output scale.json > scale.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --output risk.json > risk.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --value 17 --output weak.json > weak.stdout.json
 ```
 
 The first run evaluates `x=0.2`: **Low ≈ 0.5**, with the original small positive
@@ -104,7 +110,7 @@ pinned toolchain and inputs produce identical image bytes.
 ```bash
 curl -fLo requirements-plots.txt https://fuzzy-technologies.github.io/FuzzyRoutines/recipes/requirements-plots.txt
 python -m pip install -r requirements-plots.txt
-python -I agent_recipe.py --expect-version 2.0.0 --scenario risk --value 17 --plot risk.svg > plot.stdout.json
+python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --value 17 --plot risk.svg > plot.stdout.json
 ```
 
 [![Historical curves beside the five memberships at 0.17; all grades fall below the 0.1 decision threshold.](assets/figures/agent-risk.svg)](assets/figures/agent-risk.svg)

@@ -53,7 +53,7 @@ SPDX-License-Identifier: Apache-2.0
     <p class="eyebrow">Python · Fuzzy mathematics · Open source</p>
     <p class="hero-lead"><strong>Turn measurements into interpretable grades</strong> with membership functions, fuzzy sets and linguistic scales. Build models for expert systems, risk assessment and engineering decisions.</p>
     <p class="quiet">CPython 3.13–3.14 · Typed scalar API · No mandatory NumPy dependency · Apache-2.0</p>
-    <p class="release-note" data-status="candidate"><strong>Candidate 2.1.0</strong> adds the historical scale factory, linguistic encoding, Mamdani/Sugeno inference, optional NumPy batches and neural examples. It is not yet published on PyPI. <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md">Try the candidate →</a></p>
+    <p class="release-note" data-status="implemented"><strong>FuzzyRoutines 2.1.0</strong> includes the historical scale factory, linguistic encoding, Mamdani/Sugeno inference, optional NumPy batches and neural examples. <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md">Version-aware installation and examples →</a></p>
     <div class="hero-actions">
       <a class="button-neon" href="#start">Try an example</a>
       <a class="button-neon" href="https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/">Explore the API</a>
@@ -66,10 +66,10 @@ SPDX-License-Identifier: Apache-2.0
     <p>How well does a room temperature of <strong>24 °C</strong> fit the idea of “comfortable”? Define full comfort at 22 °C, decreasing to zero at 16 and 28 °C, then evaluate the measurement.</p>
     <h3>1 · Install</h3>
     <p>Use Python 3.13 or 3.14 in your project environment.</p>
-    <p class="release-note"><strong>This example uses published 2.0.0</strong>. Install this stable version from <a href="https://pypi.org/project/fuzzyroutines/2.0.0/">PyPI</a>; historical 1.x releases do not provide this API.</p>
+    <p class="release-note"><strong>This example targets 2.1.0</strong>. Use the exact pin below. If that version is not yet available on PyPI, install the reviewed CI wheel using the <a href="https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/site/content/en/agent-quickstart.md">agent guide</a>. Published 2.0.0 remains available as the historical baseline; 1.x does not provide this API.</p>
     <div class="code-block">
       <div class="code-toolbar"><span>Terminal</span><button class="copy-button" type="button" data-copy-target="install-command" aria-label="Copy installation command" hidden>Copy</button></div>
-      <pre tabindex="0" aria-label="Installation command"><code id="install-command">python -m pip install fuzzyroutines==2.0.0</code></pre>
+      <pre tabindex="0" aria-label="Installation command"><code id="install-command">python -m pip install fuzzyroutines==2.1.0</code></pre>
     </div>
     <h3>2 · Run the example</h3>
     <p>Save this as <code>comfort.py</code> and run <code>python comfort.py</code>.</p>
