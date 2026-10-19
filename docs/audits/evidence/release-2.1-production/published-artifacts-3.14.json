@@ -1,0 +1,14 @@
+{
+  "version": "2.1.0",
+  "releaseUrl": "https://pypi.org/project/fuzzyroutines/2.1.0/",
+  "artifacts": {
+    "fuzzyroutines-2.1.0-py3-none-any.whl": {
+      "sha256": "5bc23a6c873cb74ee97217cc62ed1f8d55d3d1fe0160de1510ae6a9d3cacc72f",
+      "size": 85278
+    },
+    "fuzzyroutines-2.1.0.tar.gz": {
+      "sha256": "fe38abd9b1f0274780527badd1d3882fe9a35866383c0f6461315d0cebef61ec",
+      "size": 249202
+    }
+  }
+}

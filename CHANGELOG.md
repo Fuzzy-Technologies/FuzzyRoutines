@@ -19,15 +19,16 @@ floor and helper-import changes justify the
 
 ## Minor 2.1
 
-### Patch 0 — v2.1.0 candidate — 2026-10-14
+### Patch 0 — v2.1.0 — 2026-10-19
 
 #### Digest
 
-Candidate preparation date; version 2.1.0 has not been published. The published
-stable release remains 2.0.0. This candidate brings agent onboarding, historical
-scale factories, explicit linguistic encoding, fuzzy-rule inference, optional
-NumPy batches and neural examples. Final artifact evidence is tracked in the
-[2.1 readiness gate](docs/release-readiness.md#current-21-development-gate).
+Published on PyPI and GitHub on 19 October 2026. This release brings agent
+onboarding, historical scale factories, explicit linguistic encoding, fuzzy-rule
+inference, optional NumPy batches and neural examples. The
+[production acceptance](docs/audits/2026-10-19-2.1-production-acceptance.md)
+records the annotated tag, approved source, reproducible artifacts and verified
+PyPI installations on CPython 3.13 and 3.14.
 
 #### Added
 
@@ -95,8 +96,9 @@ NumPy batches and neural examples. Final artifact evidence is tracked in the
 
 #### Release process
 
-- Prepare isolated development and review against the published 2.0.0 baseline.
-  Promotion to `master` and package publication remain separate maintainer gates.
+- Completed isolated development and review against the published 2.0.0 baseline,
+  maintainer-approved promotion to `master`, protected OIDC publication and
+  post-publication byte/hash and clean-install checks on both supported Pythons.
 
 ## Minor 2.0
 
