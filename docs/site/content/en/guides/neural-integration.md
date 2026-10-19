@@ -11,6 +11,38 @@ synthetic data. Fuzzy memberships and centroid windows stay fixed; training
 changes only network weights. It is a neural integration example, **not a
 trainable fuzzy rule system** or a validated risk model.
 
+## What this example demonstrates
+
+Imagine assigning an observation a level from `Min` to `Max` using two inputs:
+problem severity and exposure. Here **synthetic** means that we generate artificial
+input pairs and calculate their reference scores with a known formula. This gives
+us an answer against which to check the network, without needing a real dataset.
+
+FuzzyRoutines converts coordinates into linguistic labels, their centroid
+representatives or membership vectors. PyTorch learns the mapping to an output;
+FuzzyRoutines then interprets that output on the same scale. Three separate
+networks compare raw coordinates, label centroids and full membership vectors as
+inputs. All three predict the centroid of the reference output level. A fourth,
+separate network predicts five membership grades of the continuous reference
+score directly. Those grades are not class probabilities.
+
+![A recorded prediction: inputs 0.37 and 0.63 become Low and High centroids, a PyTorch network predicts 0.4705, and FuzzyRoutines decodes Med; the reference score 0.4795 has target centroid 0.5000](../assets/figures/neural-workflow.svg)
+
+For one recorded case in the centroid-input experiment:
+
+| Step                            | Result                                               |
+| ------------------------------- | ---------------------------------------------------- |
+| Input coordinates               | Severity `0.37`, exposure `0.63`                     |
+| Input encoding                  | `Low`, `High`, converted to two centroid coordinates |
+| Reference calculation           | `0.05 + 0.65 × 0.37 + 0.30 × 0.63 = 0.4795` → `Med`  |
+| Scalar training target          | Centroid of `Med`: `0.5000`                          |
+| Network prediction and decoding | `0.4705` → `Med`                                     |
+
+The prediction recovers the reference level in this case. It need not equal
+`0.4795`: the scalar training target is the level's centroid. The following
+comparisons show how often each input representation recovers the reference
+levels on held-out data; they do not establish that fuzzy inputs improve accuracy.
+
 ## Run the complete experiment
 
 Use a checkout containing the 2.1 example. Install the matching 2.1 package into
@@ -33,6 +65,18 @@ FuzzyRoutines does not import it. The recorded run used CPython 3.14.8,
 PyTorch 2.14.1+cpu, Linux x86_64, float64 and one CPU thread. A repeat took
 about 21 seconds on the development host; the first cold run took 86 seconds.
 These timings exclude installation and are not performance guarantees.
+
+### What you should see after running
+
+The command prints a JSON report and saves `neural-report.json`; it does not open
+a chart window. Under `scalarAblations`, each model's `heldOut` section reports
+numerical errors and `labelAccuracy`, the fraction of held-out observations with
+the correct decoded level. `probes` contains worked predictions such as the one
+above. `gradeHead` reports the separate five-grade output experiment. Compare
+the three scalar models with the reference table below; reruns can differ.
+The final section explains how to generate the two result figures from your own
+report. The smaller smoke run below checks execution with a reduced training
+budget; it is not expected to reproduce the full-run scores.
 
 A smaller installation smoke uses the same code path with a reduced budget:
 

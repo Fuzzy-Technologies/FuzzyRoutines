@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+SPDX-License-Identifier: Apache-2.0
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title description">
+  <title id="title">From fuzzy inputs to an interpreted neural prediction</title>
+  <desc id="description">One recorded PyTorch CPU experiment probe from examples/neural/reference.json, scalarAblations.centroid.probes[2]. Input severity 0.37 and exposure 0.63 select Low and High. Their centroids enter the network, which predicts 0.47045524861875165, decoded as Med. The known reference formula gives 0.4795, whose selected level Med has training target centroid 0.5. Membership functions and centroid windows stay fixed; only network weights are trained. This is one probe, not an accuracy claim.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#8490ab" stroke-width="1.5"/></marker>
+  </defs>
+  <rect width="960" height="560" rx="18" fill="#121829"/>
+  <g font-family="DejaVu Sans, sans-serif" fill="#edf0f8">
+    <text x="32" y="46" font-size="26" font-weight="bold">One prediction, step by step</text>
+    <text x="32" y="76" font-size="17" fill="#c6cede">Centroid-input experiment · recorded probe · fixed historical scale</text>
+    <rect x="32" y="105" width="270" height="208" rx="12" fill="#1c263d" stroke="#4dd8d0"/>
+    <text x="50" y="137" font-size="20" font-weight="bold" fill="#4dd8d0">1  Encode inputs</text>
+    <text x="50" y="176" font-size="20">Severity 0.37 → Low</text>
+    <text x="50" y="211" font-size="20">Exposure 0.63 → High</text>
+    <text x="50" y="253" font-size="17">FuzzyRoutines</text>
+    <text x="50" y="282" font-size="17" fill="#c6cede">Two label centroids</text>
+    <path d="M 309 210 H 335" fill="none" stroke="#8490ab" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="344" y="105" width="272" height="208" rx="12" fill="#1c263d" stroke="#a99aff"/>
+    <text x="362" y="137" font-size="20" font-weight="bold" fill="#a99aff">2  Predict coordinate</text>
+    <text x="362" y="182" font-size="22">PyTorch MLP</text>
+    <text x="362" y="218" font-size="17" fill="#c6cede">Only weights are learned</text>
+    <text x="362" y="273" font-size="30" font-weight="bold">0.4705</text>
+    <path d="M 623 210 H 649" fill="none" stroke="#8490ab" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="658" y="105" width="270" height="208" rx="12" fill="#1c263d" stroke="#ffd166"/>
+    <text x="676" y="137" font-size="20" font-weight="bold" fill="#ffd166">3  Decode output</text>
+    <text x="676" y="182" font-size="20">FuzzyRoutines</text>
+    <text x="676" y="216" font-size="17" fill="#c6cede">Same fixed scale</text>
+    <text x="676" y="273" font-size="30" font-weight="bold" fill="#ffd166">Med</text>
+    <rect x="32" y="342" width="896" height="142" rx="12" fill="#1c263d" stroke="#8490ab"/>
+    <text x="50" y="374" font-size="20" font-weight="bold">What is the network trained to predict?</text>
+    <text x="50" y="415" font-size="20">Known formula: 0.4795 → reference level: Med → target centroid: 0.5000</text>
+    <text x="50" y="456" font-size="18" fill="#c6cede">The scalar target is the level's centroid, not the continuous reference score.</text>
+    <text x="32" y="521" font-size="17" fill="#c6cede">Result here: correct reference level · overall accuracy is measured on held-out data</text>
+  </g>
+</svg>
