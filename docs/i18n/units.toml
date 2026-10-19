@@ -13636,50 +13636,50 @@ evidence = "onboarding21 independently reviewed source/evidence 573c0d7 and appr
 id = "page:guides.neural-integration"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/neural-integration.md"
-sourceHash = "sha256:8764d555c0cf9e34c87cc932a5d5b730c545123a04ce40d76b1fb21d5e47cbf1"
+sourceHash = "sha256:daac01d9a6d50432f1a15d1cabed0a112a56ab4ad0bb0952c346cbf7156bbf2e"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "approved"
 path = "docs/site/content/ru/guides/neural-integration.md"
-sourceHash = "sha256:8764d555c0cf9e34c87cc932a5d5b730c545123a04ce40d76b1fb21d5e47cbf1"
+sourceHash = "sha256:daac01d9a6d50432f1a15d1cabed0a112a56ab4ad0bb0952c346cbf7156bbf2e"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:8764d555c0cf9e34c87cc932a5d5b730c545123a04ce40d76b1fb21d5e47cbf1"
-reviewedTranslationHash = "sha256:d03d4dc4dad68615901ffd6594a82c8312cd94c767035cf6b0d3fb5d3b72e2a2"
-reviewer = "AIna-Dev (AI; maintainer-delegated 2.1 release acceptance; independent release_process_review)"
-reviewedAt = "2026-10-18T21:25:33Z"
-evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
+reviewedSourceHash = "sha256:daac01d9a6d50432f1a15d1cabed0a112a56ab4ad0bb0952c346cbf7156bbf2e"
+reviewedTranslationHash = "sha256:a96c4862616061aee74e0bf72ec69743f74c85f0cdbf9f3080e3c03cd491cd50"
+reviewer = "neural_docs_review (AI; independent maintainer-delegated editorial and mathematical review)"
+reviewedAt = "2026-10-19T10:36:12Z"
+evidence = "Independent EN/RU/zh-CN editorial and mathematical review against unchanged examples/neural/run.py and reference.json. Verified Low/High labels, input centroids 0.285/0.715, reference score 0.4795, Med target centroid 0.5 and recorded prediction 0.47045524861875165; checked separate scalar/grade targets, JSON keys, synthetic-task limits, Russian severity terminology and accessible SVG rendering. Two independent neural evidence tests and final diff check passed. No training, runtime or reference-report change."
 
 [[units.translations.ru.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:8764d555c0cf9e34c87cc932a5d5b730c545123a04ce40d76b1fb21d5e47cbf1"
-reviewedTranslationHash = "sha256:d03d4dc4dad68615901ffd6594a82c8312cd94c767035cf6b0d3fb5d3b72e2a2"
-reviewer = "AIna-Dev (AI; maintainer-delegated 2.1 release acceptance; independent release_process_review)"
-reviewedAt = "2026-10-18T21:25:33Z"
-evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
+reviewedSourceHash = "sha256:daac01d9a6d50432f1a15d1cabed0a112a56ab4ad0bb0952c346cbf7156bbf2e"
+reviewedTranslationHash = "sha256:a96c4862616061aee74e0bf72ec69743f74c85f0cdbf9f3080e3c03cd491cd50"
+reviewer = "neural_docs_review (AI; independent maintainer-delegated editorial and mathematical review)"
+reviewedAt = "2026-10-19T10:36:12Z"
+evidence = "Independent EN/RU/zh-CN editorial and mathematical review against unchanged examples/neural/run.py and reference.json. Verified Low/High labels, input centroids 0.285/0.715, reference score 0.4795, Med target centroid 0.5 and recorded prediction 0.47045524861875165; checked separate scalar/grade targets, JSON keys, synthetic-task limits, Russian severity terminology and accessible SVG rendering. Two independent neural evidence tests and final diff check passed. No training, runtime or reference-report change."
 
 [units.translations.zh-CN]
 state = "approved"
 path = "docs/site/content/zh-CN/guides/neural-integration.md"
-sourceHash = "sha256:8764d555c0cf9e34c87cc932a5d5b730c545123a04ce40d76b1fb21d5e47cbf1"
+sourceHash = "sha256:daac01d9a6d50432f1a15d1cabed0a112a56ab4ad0bb0952c346cbf7156bbf2e"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
-reviewedSourceHash = "sha256:8764d555c0cf9e34c87cc932a5d5b730c545123a04ce40d76b1fb21d5e47cbf1"
-reviewedTranslationHash = "sha256:a5158cbbfff99cdf3573804a877b4d01d1695cd58b2df1bfe47bc19ccf456557"
-reviewer = "AIna-Dev (AI; maintainer-delegated 2.1 release acceptance; independent release_process_review)"
-reviewedAt = "2026-10-18T21:25:33Z"
-evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
+reviewedSourceHash = "sha256:daac01d9a6d50432f1a15d1cabed0a112a56ab4ad0bb0952c346cbf7156bbf2e"
+reviewedTranslationHash = "sha256:4e022d3dde2f972a3148b818ce1e3359452f1c8e2dd5cdcfbb18273e2f548931"
+reviewer = "neural_docs_review (AI; independent maintainer-delegated editorial and mathematical review)"
+reviewedAt = "2026-10-19T10:36:12Z"
+evidence = "Independent EN/RU/zh-CN editorial and mathematical review against unchanged examples/neural/run.py and reference.json. Verified Low/High labels, input centroids 0.285/0.715, reference score 0.4795, Med target centroid 0.5 and recorded prediction 0.47045524861875165; checked separate scalar/grade targets, JSON keys, synthetic-task limits, Russian severity terminology and accessible SVG rendering. Two independent neural evidence tests and final diff check passed. No training, runtime or reference-report change."
 
 [[units.translations.zh-CN.reviews]]
 role = "mathematical"
-reviewedSourceHash = "sha256:8764d555c0cf9e34c87cc932a5d5b730c545123a04ce40d76b1fb21d5e47cbf1"
-reviewedTranslationHash = "sha256:a5158cbbfff99cdf3573804a877b4d01d1695cd58b2df1bfe47bc19ccf456557"
-reviewer = "AIna-Dev (AI; maintainer-delegated 2.1 release acceptance; independent release_process_review)"
-reviewedAt = "2026-10-18T21:25:33Z"
-evidence = "onboarding21 independently reviewed neural source 68297d1+d216647, recorded experiments and guide/figures aae5ad6, and approved EN/RU/zh-CN scientific/editorial content. The review distinguishes fixed encodings from trainable weights, centroid targets from memberships/probabilities, independent splits and held-out poisoning checks. Figure URL fix 685895d preserves content. ci21 confirmed final table changes are whitespace-only with exact cell equality, report bytes SHA256 354e2f5a5ea68d2c6221af314df1d54993c9ec67d5762f983e1ca4cdde1a244c and original example source hash remain unchanged, and localized figure links resolve."
+reviewedSourceHash = "sha256:daac01d9a6d50432f1a15d1cabed0a112a56ab4ad0bb0952c346cbf7156bbf2e"
+reviewedTranslationHash = "sha256:4e022d3dde2f972a3148b818ce1e3359452f1c8e2dd5cdcfbb18273e2f548931"
+reviewer = "neural_docs_review (AI; independent maintainer-delegated editorial and mathematical review)"
+reviewedAt = "2026-10-19T10:36:12Z"
+evidence = "Independent EN/RU/zh-CN editorial and mathematical review against unchanged examples/neural/run.py and reference.json. Verified Low/High labels, input centroids 0.285/0.715, reference score 0.4795, Med target centroid 0.5 and recorded prediction 0.47045524861875165; checked separate scalar/grade targets, JSON keys, synthetic-task limits, Russian severity terminology and accessible SVG rendering. Two independent neural evidence tests and final diff check passed. No training, runtime or reference-report change."
 [[units]]
 id = "module:fuzzyroutines.batches"
 kind = "module"
