@@ -1,0 +1,129 @@
+{
+  "version": "2.1.0",
+  "sourceRevision": "bbc47529cf1e0baa17d74b0f008d26f5b36ef68b",
+  "tag": {
+    "name": "v2.1.0",
+    "object": "662f0e8b3faad1fbbc3c284cc04677c66d57aa96",
+    "type": "tag"
+  },
+  "productionRun": {
+    "id": 39241460028,
+    "url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/39241460028",
+    "jobs": [
+      {
+        "id": 118023030165,
+        "name": "Build release distributions",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118023174217,
+        "name": "Verify release on Python 3.14",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118023174491,
+        "name": "Verify release on Python 3.13",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118023480001,
+        "name": "Attest release provenance",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118023548782,
+        "name": "Publish verified distributions to PyPI",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118025208987,
+        "name": "Verify PyPI installation on Python 3.14",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118025209147,
+        "name": "Verify PyPI installation on Python 3.13",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "attestationUrl": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/attestations/57356644",
+  "githubRelease": {
+    "id": 416733156,
+    "url": "https://github.com/Fuzzy-Technologies/FuzzyRoutines/releases/tag/v2.1.0",
+    "publishedAt": "2026-10-19T11:07:22Z",
+    "assets": [
+      {
+        "name": "fuzzyroutines-2.1.0-py3-none-any.whl",
+        "size": 85278,
+        "digest": "sha256:5bc23a6c873cb74ee97217cc62ed1f8d55d3d1fe0160de1510ae6a9d3cacc72f"
+      },
+      {
+        "name": "fuzzyroutines-2.1.0.tar.gz",
+        "size": 249202,
+        "digest": "sha256:fe38abd9b1f0274780527badd1d3882fe9a35866383c0f6461315d0cebef61ec"
+      },
+      {
+        "name": "reproducibility.json",
+        "size": 875,
+        "digest": "sha256:3a3c10e0358a363cdb3b69aa9fb75607b5f3711ad9b388e6acc9b16ec0cb152b"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 196,
+        "digest": "sha256:2ffda9709b847b538897c3cbf2e03d5c910bb7a1c55e1b1f4ab5c60f17dc2f19"
+      },
+      {
+        "name": "source-revision.txt",
+        "size": 41,
+        "digest": "sha256:df64ef15f6f5ddc79aeb0d7812a18371166939995a2ed781ab9aef99210b1478"
+      }
+    ]
+  },
+  "workflowArtifacts": [
+    {
+      "id": 12180984549,
+      "name": "published-pypi-verification-3.13",
+      "digest": "sha256:2701470f567ab0f353943e2d30e202535c7a083aca05d15f2fd71a00470435bf"
+    },
+    {
+      "id": 12180819737,
+      "name": "published-pypi-verification-3.14",
+      "digest": "sha256:cc43f359ea1f63d07f924488fbc6b61aa0366d4353d30e706134834d59a22025"
+    },
+    {
+      "id": 12180649121,
+      "name": "trusted-pypi-distributions",
+      "digest": "sha256:d825636a41dd87b0c394e83e029a591aaa91099d014c2ca64ca0cb223fc69a38"
+    }
+  ],
+  "publishedVerification": {
+    "3.13": {
+      "path": "docs/audits/evidence/release-2.1-production/published-artifacts-3.13.json",
+      "sha256": "168e0f35e5087daa4b9b9a3ffb56b2b1b33cc5e5c5274506e9c9ff7e36790740",
+      "archiveFile": "published-pypi-verification-3.13.zip",
+      "archiveSha256": "2701470f567ab0f353943e2d30e202535c7a083aca05d15f2fd71a00470435bf",
+      "uploadTimes": {
+        "fuzzyroutines-2.1.0-py3-none-any.whl": "2026-10-19T11:05:37.981587Z",
+        "fuzzyroutines-2.1.0.tar.gz": "2026-10-19T11:05:39.341496Z"
+      }
+    },
+    "3.14": {
+      "path": "docs/audits/evidence/release-2.1-production/published-artifacts-3.14.json",
+      "sha256": "168e0f35e5087daa4b9b9a3ffb56b2b1b33cc5e5c5274506e9c9ff7e36790740",
+      "archiveFile": "published-pypi-verification-3.14.zip",
+      "archiveSha256": "cc43f359ea1f63d07f924488fbc6b61aa0366d4353d30e706134834d59a22025",
+      "uploadTimes": {
+        "fuzzyroutines-2.1.0-py3-none-any.whl": "2026-10-19T11:05:37.981587Z",
+        "fuzzyroutines-2.1.0.tar.gz": "2026-10-19T11:05:39.341496Z"
+      }
+    }
+  }
+}

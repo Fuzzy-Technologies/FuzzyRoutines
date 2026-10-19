@@ -5,6 +5,23 @@ SPDX-License-Identifier: Apache-2.0
 
 # Stable release readiness checklist
 
+## Published 2.1.0 baseline
+
+**FuzzyRoutines 2.1.0 is published and verified.** PyPI received its wheel and
+source distribution on 19 October 2026 at 11:05 UTC; the GitHub Release was
+published at 11:07:22 UTC. The approved source is
+`bbc47529cf1e0baa17d74b0f008d26f5b36ef68b`, identified by annotated tag `v2.1.0`.
+
+- [PyPI 2.1.0](https://pypi.org/project/fuzzyroutines/2.1.0/) provides the published package.
+- The [protected production run](https://github.com/Fuzzy-Technologies/FuzzyRoutines/actions/runs/39241460028) passed reproducible builds, 1,671 tests with 22 explicit skips on each supported Python, provenance attestation and OIDC publication.
+- Post-publication jobs downloaded both distributions, checked their actual bytes against the approved hashes and verified clean PyPI installations and documented examples on CPython 3.13 and 3.14.
+- The [GitHub Release](https://github.com/Fuzzy-Technologies/FuzzyRoutines/releases/tag/v2.1.0) retains the exact CI distributions, hashes, build/source records and post-publication verification archives.
+- [Production acceptance](audits/2026-10-19-2.1-production-acceptance.md) binds the tag, source, workflow, file sizes, SHA-256 hashes and installed checks.
+
+The tagged source retains its pre-publication preparation records. This living
+page records the completed publication; later documentation updates do not move
+the tag or rebuild or replace the published files.
+
 ## Published 2.0.0 baseline
 
 **FuzzyRoutines 2.0.0 is published and verified.** The GitHub release was
@@ -34,41 +51,29 @@ their own review and candidate checks below.
 
 ## Current 2.1 development gate
 
-**The corrected 2.1 implementation passed independent release acceptance on
-2026-10-19.** The [current acceptance](audits/2026-10-19-release-acceptance.md)
-records all ten successful full workflows at
-`0dba28a072c6d8dff3eacdc336b922e1ab264b23`, exact installed artifacts, fresh
-thirty-scenario scalar measurements and full 600-observation/400-epoch CPU
-experiments. Rational geometry, narrow polynomial windows, Mamdani knots,
-PyPI links, versioned onboarding and scientific-page rendering were corrected
-and reviewed. Source-bound raw reports remain separate from earlier evidence.
+The 2.1 development and publication gates are complete. This section preserves
+preparation evidence and existing anchors; current production acceptance is
+recorded above. The corrected implementation passed independent acceptance on
+19 October 2026. The [acceptance report](audits/2026-10-19-release-acceptance.md)
+retains the numerical corrections, full CI, fresh scalar measurements and CPU
+neural experiments separately from earlier candidate reports.
+
+The maintainer merged release promotion [PR #348](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/348)
+and documentation [PR #354](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/354).
+Their final release source is `bbc47529cf1e0baa17d74b0f008d26f5b36ef68b`.
+Task [#337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337) and
+Feature #323 completed implementation acceptance before protected publication.
+
+The 14 October preparation set `pyproject.toml` to 2.1.0 before publication.
+Preparation [PR #346](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/346),
+its measured wheel from `c44983a` and the
+[dated handoff](audits/2026-10-14-2.1-candidate-handoff.md) remain historical
+evidence for their named revisions. They are not substituted for the production
+archive hashes or published-install checks above.
 
 Corporate companion [PR #52](https://github.com/Fuzzy-Technologies/fuzzy-technologies.github.io/pull/52)
-is merged. The subsequent [navigation PR #57](https://github.com/Fuzzy-Technologies/fuzzy-technologies.github.io/pull/57)
-must follow localized project Pages deployment. Task #337 completes after the
-accepted correction is integrated into develop; Feature #323 then completes
-its child acceptance. Release PR #348 remains the maintainer's final review.
-Its actual current head must pass promotion CI and retain its own artifact
-identities. The older checked evidence below describes its named historical
-revision.
-
-
-The release-preparation source sets `pyproject.toml` to **2.1.0**, dated
-2026-10-14. This is **unpublished candidate metadata**; the published stable
-release remains 2.0.0. The metadata identifies the checked-out source and does
-not establish publication. Preparation [PR #346](https://github.com/Fuzzy-Technologies/FuzzyRoutines/pull/346)
-passed all ten opening workflows at `f0d09c3`. Its wheel from built source
-`c44983a` has completed installed scalar, NumPy and public-consumer checks.
-The [dated handoff](audits/2026-10-14-2.1-candidate-handoff.md) retains exact
-identities, run links, raw measurements and limits.
-[Task #337](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/337)
-completes on independently accepted evidence and a prepared maintainer handoff,
-not on the maintainer's later approval of promotion.
-
-The final promotion pull request to `master` is reserved for the maintainer's
-review. These documents do not authorize its merge, an annotated release tag,
-a GitHub Release or PyPI publication. Earlier green commits and the completed
-2.0 publication cannot satisfy the candidate checks below.
+and localized navigation [PR #57](https://github.com/Fuzzy-Technologies/fuzzy-technologies.github.io/pull/57)
+are merged. Project Pages deployment passed at the final release source.
 
 ### Accepted implementation evidence
 
@@ -107,9 +112,9 @@ The checked items below apply to the exact measured preparation candidate in the
 
 These are later promotion/publication conditions, not unimplemented 2.1 features:
 
-- [x] Corrected implementation acceptance, full CI, installed package checks and fresh scalar/neural evidence are recorded in the [19 October acceptance](audits/2026-10-19-release-acceptance.md). Final promotion must record the actual #348 head and its own archive identities in that PR.
-- [ ] Obtain the maintainer's final promotion/release approval before merging the final `master` PR or performing protected publication.
-- [ ] After approved publication, verify actual PyPI artifact hashes and clean installations, then record production acceptance.
+- [x] Corrected implementation acceptance, full CI, installed package checks and fresh scalar/neural evidence are recorded in the [19 October acceptance](audits/2026-10-19-release-acceptance.md). Final promotion and production archive identities are recorded in the [production acceptance](audits/2026-10-19-2.1-production-acceptance.md).
+- [x] The maintainer approved promotion, merged the final `master` PRs and pushed the annotated `v2.1.0` tag; the configured `pypi` deployment gate was approved after artifact verification.
+- [x] Actual PyPI artifact byte/hash checks and clean installations passed on CPython 3.13 and 3.14; [production acceptance](audits/2026-10-19-2.1-production-acceptance.md) records the completed release.
 
 ## Scope and final 2.1 documentation pass
 
@@ -119,9 +124,10 @@ contracts, implementation and evidence. The bounded differentiable Sugeno
 research task does not authorize a public tensor backend. Do not advertise
 these ideas as released or implemented capabilities without their own accepted work.
 
-The current published-product examples may continue to pin 2.0.0. At final
-2.1 acceptance, review these locations together; change version claims only
-when the corresponding installed-candidate or publication evidence exists:
+The following table preserves the preparation checklist completed during 2.1
+acceptance. At that stage, published-product examples still pinned 2.0.0;
+version claims changed only against installed-candidate or publication evidence.
+Current completed publication evidence is recorded above.
 
 | Location                                                                       | Final review action                                                                                                           |
 | ---                                                                            | ---                                                                                                                           |
