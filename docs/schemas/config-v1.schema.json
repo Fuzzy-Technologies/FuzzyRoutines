@@ -352,51 +352,48 @@
       "required": ["conjunction", "disjunction", "negation"]
     },
     "antecedent": {
-      "oneOf": [
+      "$comment": "Select the node shape by kind before recursing so shared operand fields are only validated once.",
+      "type": "object",
+      "properties": {"kind": {"enum": ["term", "all", "any", "not"]}},
+      "required": ["kind"],
+      "allOf": [
         {
-          "type": "object",
-          "properties": {
-            "kind": {"const": "term"},
-            "input": {"$ref": "#/$defs/id"},
-            "term": {"$ref": "#/$defs/id"}
-          },
-          "additionalProperties": false,
-          "required": ["kind", "input", "term"]
+          "if": {"properties": {"kind": {"const": "term"}}, "required": ["kind"]},
+          "then": {
+            "properties": {
+              "kind": true,
+              "input": {"$ref": "#/$defs/id"},
+              "term": {"$ref": "#/$defs/id"}
+            },
+            "additionalProperties": false,
+            "required": ["input", "term"]
+          }
         },
         {
-          "type": "object",
-          "properties": {
-            "kind": {"const": "all"},
-            "operands": {
-              "type": "array",
-              "items": {"$ref": "#/$defs/antecedent"},
-              "minItems": 2
-            }
-          },
-          "additionalProperties": false,
-          "required": ["kind", "operands"]
+          "if": {"properties": {"kind": {"enum": ["all", "any"]}}, "required": ["kind"]},
+          "then": {
+            "properties": {
+              "kind": true,
+              "operands": {
+                "type": "array",
+                "items": {"$ref": "#/$defs/antecedent"},
+                "minItems": 2
+              }
+            },
+            "additionalProperties": false,
+            "required": ["operands"]
+          }
         },
         {
-          "type": "object",
-          "properties": {
-            "kind": {"const": "any"},
-            "operands": {
-              "type": "array",
-              "items": {"$ref": "#/$defs/antecedent"},
-              "minItems": 2
-            }
-          },
-          "additionalProperties": false,
-          "required": ["kind", "operands"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "kind": {"const": "not"},
-            "operand": {"$ref": "#/$defs/antecedent"}
-          },
-          "additionalProperties": false,
-          "required": ["kind", "operand"]
+          "if": {"properties": {"kind": {"const": "not"}}, "required": ["kind"]},
+          "then": {
+            "properties": {
+              "kind": true,
+              "operand": {"$ref": "#/$defs/antecedent"}
+            },
+            "additionalProperties": false,
+            "required": ["operand"]
+          }
         }
       ]
     },

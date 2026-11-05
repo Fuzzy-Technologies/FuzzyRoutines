@@ -31,10 +31,12 @@ package version. This repository file is the schema source; its `$id` identifies
 the document and is not a URL that a configuration loader must fetch. All
 schema references are internal. A configuration cannot select its own schema.
 
-| Envelope | Contains |
-| --- | --- |
-| `kind: model` | Named universes, named built-in membership definitions, and named ordered scales; optionally one scalar Mamdani or Sugeno inference definition. A scale library needs no inference definition. |
-| `kind: project` | One or more named, inline model envelopes; optionally selected defaults, presentation, and evaluation scenarios. The document is self-contained. |
+- A `model` contains named universes, named built-in membership definitions,
+  and named scales with ordered terms. It can also contain one scalar Mamdani
+  or Sugeno inference definition. A scale library needs no inference definition.
+- A `project` contains one or more named, inline model envelopes. It can also
+  contain selected defaults, presentation, and evaluation scenarios. The
+  document is self-contained.
 
 Both envelopes declare `schemaVersion: 1`. A future optional YAML codec must
 decode to the same data model and run the same validation. Project presentation
@@ -78,16 +80,20 @@ and scenarios never change the model's stored policies, numbers, or ordering.
 
 The v1 membership allowlist is explicit:
 
-| Family tag | Parameters and constraints |
-| --- | --- |
-| `hyperbolic` | `scale > 0`, `exponent > 0`, finite `cutoff` |
-| `bell` | `left < plateauStart <= plateauEnd` |
-| `s_shoulder` | `left < right` |
-| `triangle` | `left < peak <= right` |
-| `trapezoid` | `left < plateauStart <= plateauEnd < right` |
-| `gaussian` | Finite `center`, `scale > 0` |
-| `logistic` | `slope != 0`, finite `midpoint` |
-| `harrington_desirability` | Empty `parameters` object |
+| Family tag                | Parameters and constraints                   |
+| ------------------------- | -------------------------------------------- |
+| `hyperbolic`              | `scale > 0`, `exponent > 0`, finite `cutoff` |
+| `bell`                    | `left < plateauStart <= plateauEnd`          |
+| `s_shoulder`              | `left < right`                               |
+| `triangle`                | `left < peak <= right`                       |
+| `trapezoid`               | `left < plateauStart <= plateauEnd < right`  |
+| `gaussian`                | Finite `center`, `scale > 0`                 |
+| `logistic`                | `slope != 0`, finite `midpoint`              |
+| `harrington_desirability` | Empty `parameters` object                    |
+
+This allowlist covers the existing analytical families. Custom point tables
+and interpolants require a separate wire representation; choosing a discrete
+universe does not implicitly change an analytical family into a table.
 
 The Universal Fuzzy Scale is stored as ordinary definitions on closed
 `[0, 1]`, not as a version-dependent preset alias. The normative v1
@@ -108,24 +114,25 @@ IDs are 1–64 ASCII characters: first an ASCII letter, then letters, digits,
 `_` or `-`. They are case-sensitive, with no trimming or implicit aliases.
 An ID is a map key for named definitions, models, plots, and evaluations.
 Terms, variables, and rules instead carry IDs in their ordered arrays. They
-also carry a nonblank Unicode `name` for the reconstructed runtime object;
-the spelling is preserved. Runtime names are exact; scale term names must
+also carry a nonblank Unicode `name` of at most 256 code points for the
+reconstructed runtime object; the spelling is preserved without Unicode
+normalization. Runtime names are exact; scale term names must
 additionally be distinct under Unicode case folding, as required by
 `LinguisticScale`.
 
-| Reference | Target and scope |
-| --- | --- |
-| Scale `universe`; Sugeno `outputUniverse` | Universe ID in the same model |
-| Term `membership` | Membership ID in the same model |
-| Variable `scale` | Scale ID in the same model |
-| Antecedent `input`, then `term` | Input ID in the same inference definition, then term ID in that input's scale |
-| Mamdani rule `consequent` | Term ID in the output variable's scale |
-| Affine coefficient `input` | Input ID in the same inference definition |
-| Representative `windows` keys | Term IDs in that scale, with exactly one window per term |
-| `presentation.units` keys | Project model IDs, then local universe IDs |
-| Plot `model`, `scale`, and `termColors` keys | Project model ID, then local scale ID, then term IDs in that scale |
-| Evaluation `model` and `inputs` keys | Project model ID, then exactly the selected inference definition's input IDs |
-| Project `defaults` fields | IDs in `models`, `presentation.plots`, and `evaluations`, respectively |
+| Reference                                    | Target and scope                                                              |
+| -------------------------------------------- | ----------------------------------------------------------------------------- |
+| Scale `universe`; Sugeno `outputUniverse`    | Universe ID in the same model                                                 |
+| Term `membership`                            | Membership ID in the same model                                               |
+| Variable `scale`                             | Scale ID in the same model                                                    |
+| Antecedent `input`, then `term`              | Input ID in the same inference definition, then term ID in that input's scale |
+| Mamdani rule `consequent`                    | Term ID in the output variable's scale                                        |
+| Affine coefficient `input`                   | Input ID in the same inference definition                                     |
+| Representative `windows` keys                | Term IDs in that scale, with exactly one window per term                      |
+| `presentation.units` keys                    | Project model IDs, then local universe IDs                                    |
+| Plot `model`, `scale`, and `termColors` keys | Project model ID, then local scale ID, then term IDs in that scale            |
+| Evaluation `model` and `inputs` keys         | Project model ID, then exactly the selected inference definition's input IDs  |
+| Project `defaults` fields                    | IDs in `models`, `presentation.plots`, and `evaluations`, respectively        |
 
 IDs may repeat across distinct namespaces. A term ID is unique within its
 scale; variable IDs are unique across an inference definition's inputs and
@@ -138,8 +145,9 @@ graph has no recursive object references: only antecedents can nest, inline.
 Projects may declare display units per universe and a plot title, axis label,
 and opaque `#RRGGBB` term colors. Units are labels, not conversion rules. Plot
 order follows the chosen scale's terms; the color map is an optional partial
-override. A scenario specifies exact finite input coordinates and whether to
-show traces; no file is evaluated on load. With no explicit default, a consumer
+override. A scenario requires a model with inference, one finite coordinate
+within each declared input universe, and a flag for showing traces. No file
+is evaluated on load. With no explicit default, a consumer
 must select an entry even for a singleton project. If default plot or evaluation
 IDs are specified, they must select the same model as `defaults.model`.
 Missing or conflicting defaults fail when specified; a reader never guesses a
@@ -163,7 +171,7 @@ Validation occurs before any model construction is exposed to callers:
    Validate the structure against the selected locally supplied schema. Fields
    are closed; unknown names, kinds, families, or parameters fail. IDs and
    names use separate syntactic rules.
-3. Validate semantic constraints. Reject blank labels, duplicate IDs or
+3. Validate semantic constraints. Reject all-whitespace labels, duplicate IDs or
    runtime names in their declared namespaces, and unknown or wrong-scope
    references. Validate all ordered geometry, integration domains, term
    window coverage, universe types, constants in the declared output
@@ -242,7 +250,9 @@ attributes or approximate callbacks through sampling.
 
 ## Output
 
-Versioned offline schema and isolated design fixtures. The JSON codec in
+Versioned offline schema and [isolated design fixtures](../schemas/config-v1/README.md),
+with [Russian](../schemas/config-v1/README.ru.md) and
+[Simplified Chinese](../schemas/config-v1/README.zh-CN.md) guides. The JSON codec in
 [#385](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/385), optional
 YAML codec in [#386](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/386),
 and project handling in [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387)
