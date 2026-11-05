@@ -25,11 +25,11 @@ evaluation independent of diagnostics.
 | Observation                               | Severity | Rationale                             |
 | ----------------------------------------- | -------- | ------------------------------------- |
 | Unknown input, input term, or output term | Error    | Model bindings cannot resolve it      |
-| Unknown affine coefficient input         | Error    | The coefficient cannot bind           |
-| Repeated rule name                       | Error    | The constructor requires unique names |
-| Zero weight                              | Warning  | The rule cannot fire                  |
-| Exact active rule repeated               | Warning  | The repeat can change aggregation     |
-| Same active antecedent, different output | Warning  | The rules may intentionally blend     |
+| Unknown affine coefficient input          | Error    | The coefficient cannot bind           |
+| Repeated rule name                        | Error    | The constructor requires unique names |
+| Zero weight                               | Warning  | The rule cannot fire                  |
+| Exact active rule repeated                | Warning  | The repeat can change aggregation     |
+| Same active antecedent, different output  | Warning  | The rules may intentionally blend     |
 
 Report references in expression traversal order, retaining the first
 occurrence of a repeated invalid reference per rule. Check even zero-weight
