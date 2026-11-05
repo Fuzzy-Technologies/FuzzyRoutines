@@ -6,24 +6,13 @@ SPDX-License-Identifier: Apache-2.0
 # Optional NumPy batches
 
 Use batches when many coordinates share one membership function or linguistic
-scale. Ordinary scalar calls remain dependency-free. This API requires 2.1.0;
-the published 2.0.0 baseline does not provide it. When 2.1.0 is available on PyPI,
-install the exact version with its optional NumPy extra:
+scale. Ordinary scalar calls remain dependency-free. The batch API was
+introduced in 2.1.0. In a fresh CPython 3.13 or 3.14 environment, install the
+[published 2.1.0 package](https://pypi.org/project/fuzzyroutines/2.1.0/) with its
+optional NumPy extra:
 
 ```bash
 python -m pip install 'fuzzyroutines[numpy]==2.1.0'
-```
-
-If that version is not yet available on PyPI, obtain the matching reviewed CI
-wheel using the [version-aware agent guide](../agent-quickstart.md) and set
-`FUZZYROUTINES_WHEEL` to its absolute local path. In a fresh CPython 3.13 or 3.14
-environment, use this route instead; it pins the tested NumPy version:
-
-```bash
-: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
-python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
-python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')" &&
-python -m pip install 'numpy==2.3.5'
 ```
 
 ```python
@@ -60,11 +49,11 @@ backend selection, normalization or probability conversion.
 
 The optional baseline is Python 3.13/3.14 and NumPy 2.3.5; the extra permits
 compatible NumPy 2.x releases. See the [API](../api/modern/batches.md) for failures
-and the [performance evidence](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/public-batch-comparison.md)
+and the [performance evidence at `v2.1.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.1.0/docs/performance/public-batch-comparison.md)
 for measured sizes and costs. Small batches may be slower; prepared arrays and
 Python lists have different conversion costs. A finite parity grid does not
 establish application throughput or a universal switching point.
 
-See also the [installed 2.1.0 candidate results](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/installed-batch-results.md), which identify the exact wheel and record time, memory and NumPy import/installation costs. Small public consumer test replays are reported separately.
+See also the [pre-release measurements recorded at `v2.1.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.1.0/docs/performance/installed-batch-results.md), which identify the exact wheel and record time, memory and NumPy import/installation costs. Small public consumer test replays are reported separately.
 
 [![Measured list-input and prepared-array speed ratios](../assets/figures/numpy-batch-speed.svg)](../assets/figures/numpy-batch-speed.svg)

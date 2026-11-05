@@ -23,28 +23,20 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-This guide targets **2.1.0**. When that version is available on PyPI, install it
-with the exact pin:
+Install [FuzzyRoutines 2.1.0 from PyPI](https://pypi.org/project/fuzzyroutines/2.1.0/)
+and verify the version before running the example:
 
 ```bash
 python -m pip install fuzzyroutines==2.1.0
+python -I -c "from importlib.metadata import version; print(version('fuzzyroutines'))"
 ```
 
-If 2.1.0 is not yet available on PyPI, obtain the matching reviewed CI wheel
-from the [agent guide](agent-quickstart.md), set its absolute local path in
-`FUZZYROUTINES_WHEEL`, and use this installation route instead:
-
-```bash
-: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
-python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
-python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')"
-```
-
+The version check prints `2.1.0`. The hosted `/latest/` documentation can
+change; for a specific release, consult the [documentation version guide](https://fuzzy-technologies.github.io/FuzzyRoutines/api/versions/).
 The [published 2.0.0 baseline](https://pypi.org/project/fuzzyroutines/2.0.0/)
 and its [tagged documentation](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/quick-start.md)
 remain available for reproducing earlier results. Older 1.x releases do not
-provide this modern API. Preserve the wheel hash and matching source revision
-when reporting candidate results.
+provide this modern API.
 
 ## Measure and classify in a few lines
 
@@ -96,9 +88,9 @@ self-contained code, expected numbers, and a figure. The
 [membership gallery](guides/membership-families.md) helps choose a curve.
 
 The script
-[`examples/guide.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/guide.py)
+[`examples/guide.py` at `v2.1.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.1.0/examples/guide.py)
 runs all nine scenarios and checks independent numerical expectations. From a
-checkout with the package installed:
+checkout of that tag with the matching package installed:
 
 ```bash
 python -I examples/guide.py
