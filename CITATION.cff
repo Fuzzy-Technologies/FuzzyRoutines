@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+# SPDX-License-Identifier: Apache-2.0
+
+cff-version: "1.2.0"
+message: "If you use FuzzyRoutines in your research, please cite the version you used."
+title: FuzzyRoutines
+type: software
+authors:
+  - given-names: Timur
+    family-names: Gilmullin
+version: "2.1.0"
+date-released: "2026-10-19"
+license: Apache-2.0
+url: https://pypi.org/project/fuzzyroutines/2.1.0/
+repository-code: https://github.com/Fuzzy-Technologies/FuzzyRoutines
