@@ -77,12 +77,12 @@ def ProbeHistoricalScale():
 
     for coordinate, term, confidence in references:
         result = modern.Fuzzify(coordinate, policy)
-        legacy_winner = legacy.Fuzzy(coordinate)
-        legacy_grade = legacy_winner["fSet"].mFunction.mju(coordinate)
+        winner = legacy.Fuzzy(coordinate)
+        grade = winner["fSet"].mFunction.mju(coordinate)
 
         assert [item.name for item in result.selectedTerms] == [term], f"Modern historical winner changed at {coordinate}"
-        assert legacy_winner["name"] == term, f"Legacy historical winner changed at {coordinate}"
-        assert result.confidence == legacy_grade, f"Modern and legacy confidence differ at {coordinate}"
+        assert winner["name"] == term, f"Legacy historical winner changed at {coordinate}"
+        assert result.confidence == grade, f"Modern and legacy confidence differ at {coordinate}"
         assert math.isclose(result.confidence, confidence, rel_tol=0, abs_tol=1e-12), (
             f"Historical confidence changed at {coordinate}"
         )
@@ -143,17 +143,17 @@ def ProbeInference():
     return {"mamdani": mamdani.value, "sugeno": sugeno.value}
 
 
-def ProbeNumpy(expected_version):
+def ProbeNumpy(expected):
     """Check optional imports, explicit missing-extra guidance and array execution."""
 
     from fuzzyroutines import CreateUniversalFuzzyScale, Gaussian
     from fuzzyroutines.batches import EvaluateMembershipBatch, FuzzifyBatch
 
     assert "numpy" not in sys.modules, "Importing the core or batch API eagerly imported NumPy"
-    numpy_present = importlib.util.find_spec("numpy") is not None
-    assert numpy_present == bool(expected_version), "NumPy availability disagrees with the requested installation"
+    present = importlib.util.find_spec("numpy") is not None
+    assert present == bool(expected), "NumPy availability disagrees with the requested installation"
 
-    if not expected_version:
+    if not expected:
         operations = (
             (EvaluateMembershipBatch, Gaussian(0, 1), [0, 1]),
             (FuzzifyBatch, CreateUniversalFuzzyScale(), [0.2]),
@@ -173,7 +173,7 @@ def ProbeNumpy(expected_version):
 
     import numpy
 
-    assert numpy.__version__ == expected_version, "The installed NumPy version differs from the requested baseline"
+    assert numpy.__version__ == expected, "The installed NumPy version differs from the requested baseline"
     grades = EvaluateMembershipBatch(Gaussian(0, 1), [0, 1])
     numpy.testing.assert_allclose(grades, [1, math.exp(-0.5)], rtol=0, atol=1e-12)
     scale = FuzzifyBatch(CreateUniversalFuzzyScale(), [0.2])
@@ -182,56 +182,56 @@ def ProbeNumpy(expected_version):
     return numpy.__version__
 
 
-def Probe(expected_version, numpy_version):
+def Probe(expected, extra):
     """Prove consumer paths and installed origin before testing public behavior."""
 
     import fuzzyroutines
 
-    work_path = Path.cwd()
+    workdir = Path.cwd()
     prefix = Path(sys.prefix).resolve()
-    package_path = Path(fuzzyroutines.__file__).resolve()
-    site_packages = Path(sysconfig.get_path("purelib")).resolve()
-    assert " " in str(work_path) and not str(work_path).isascii(), "Consumer path must exercise spaces and Unicode"
-    assert prefix == (work_path / "venv").resolve(), "Consumer is not using the fresh virtual environment"
-    assert package_path.is_relative_to(site_packages) and site_packages.is_relative_to(prefix), (
+    origin = Path(fuzzyroutines.__file__).resolve()
+    purelib = Path(sysconfig.get_path("purelib")).resolve()
+    assert " " in str(workdir) and not str(workdir).isascii(), "Consumer path must exercise spaces and Unicode"
+    assert prefix == (workdir / "venv").resolve(), "Consumer is not using the fresh virtual environment"
+    assert origin.is_relative_to(purelib) and purelib.is_relative_to(prefix), (
         "Core import escaped the installed site-packages"
     )
-    assert version("fuzzyroutines") == expected_version, "Installed metadata differs from pyproject.toml"
+    assert version("fuzzyroutines") == expected, "Installed metadata differs from pyproject.toml"
 
     return {
-        "working_directory": str(work_path),
-        "package_origin": str(package_path),
-        "package_version": expected_version,
+        "working_directory": str(workdir),
+        "package_origin": str(origin),
+        "package_version": expected,
         "historical_winners": ProbeHistoricalScale(),
         "inference": ProbeInference(),
-        "numpy": ProbeNumpy(numpy_version),
+        "numpy": ProbeNumpy(extra),
     }
 
 
-def InstallAndProbe(case_path, artifact, package_version, numpy_version=""):
+def InstallAndProbe(directory, artifact, release, extra=""):
     """Install a local distribution and execute the copied probe in isolated mode."""
 
-    case_path.mkdir()
-    distribution = case_path / artifact.name
+    directory.mkdir()
+    distribution = directory / artifact.name
     shutil.copyfile(artifact, distribution)
-    probe_path = case_path / "probe.py"
-    shutil.copyfile(__file__, probe_path)
-    environment = case_path / "venv"
+    probe = directory / "probe.py"
+    shutil.copyfile(__file__, probe)
+    environment = directory / "venv"
     venv.EnvBuilder(with_pip=True).create(environment)
     interpreter = environment / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     requirements = [str(distribution)]
 
-    if numpy_version:
-        constraints = case_path / "constraints.txt"
-        constraints.write_text(f"numpy=={numpy_version}\n", encoding="utf-8")
+    if extra:
+        constraints = directory / "constraints.txt"
+        constraints.write_text(f"numpy=={extra}\n", encoding="utf-8")
         requirements = ["--constraint", str(constraints), "--only-binary=:all:", f"fuzzyroutines[numpy] @ {distribution.as_uri()}"]
 
     pip = [str(interpreter), "-I", "-m", "pip", "--disable-pip-version-check"]
-    subprocess.run([*pip, "install", "--no-cache-dir", *requirements], cwd=case_path, check=True)
-    subprocess.run([*pip, "check"], cwd=case_path, check=True)
+    subprocess.run([*pip, "install", "--no-cache-dir", *requirements], cwd=directory, check=True)
+    subprocess.run([*pip, "check"], cwd=directory, check=True)
     report = subprocess.check_output(
-        [str(interpreter), "-I", str(probe_path), "--probe", package_version, numpy_version],
-        cwd=case_path, encoding="utf-8",
+        [str(interpreter), "-I", str(probe), "--probe", release, extra],
+        cwd=directory, encoding="utf-8",
     )
 
     return json.loads(report)
@@ -255,24 +255,24 @@ def Main():
     if args.artifacts is None or args.output is None or not args.numpy_version:
         parser.error("--artifacts, --output and a nonempty NumPy version are required")
 
-    source_root = Path(__file__).resolve().parents[1]
-    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=source_root, encoding="ascii").strip()
+    checkout = Path(__file__).resolve().parents[1]
+    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=checkout, encoding="ascii").strip()
     artifacts = VerifiedArtifacts(args.artifacts.resolve(), revision)
-    project = tomllib.loads((source_root / "pyproject.toml").read_text(encoding="utf-8"))["project"]
+    project = tomllib.loads((checkout / "pyproject.toml").read_text(encoding="utf-8"))["project"]
     cases = {}
 
     with TemporaryDirectory(prefix="fuzzy install \N{GREEK CAPITAL LETTER OMEGA} ") as directory:
-        consumer_root = Path(directory).resolve()
+        consumer = Path(directory).resolve()
 
-        if consumer_root.is_relative_to(source_root):
+        if consumer.is_relative_to(checkout):
             raise ValueError("The temporary consumer directory must be outside the source checkout")
 
-        case_specs = (("wheel", "wheel", ""), ("sdist", "sdist", ""), ("wheel-numpy", "wheel", args.numpy_version))
+        scenarios = (("wheel", "wheel", ""), ("sdist", "sdist", ""), ("wheel-numpy", "wheel", args.numpy_version))
 
-        for case, kind, numpy_version in case_specs:
+        for case, kind, extra in scenarios:
             artifact, digest = artifacts[kind]
             print(f"Installed distribution smoke: {case}", flush=True)
-            result = InstallAndProbe(consumer_root / case, artifact, project["version"], numpy_version)
+            result = InstallAndProbe(consumer / case, artifact, project["version"], extra)
             cases[case] = {"artifact": artifact.name, "sha256": digest, **result}
 
     report = json.dumps({
