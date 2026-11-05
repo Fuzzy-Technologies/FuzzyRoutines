@@ -1,0 +1,32 @@
+{
+  "calibration": {
+    "rows": 199,
+    "seed": 43002
+  },
+  "levels": {
+    "0.9": {
+      "calibration_rank": 180,
+      "covered_test_rows": 917,
+      "empirical_coverage": 0.917,
+      "interval_width_ms": 41.801087,
+      "radius_ms": 20.900544
+    },
+    "0.95": {
+      "calibration_rank": 190,
+      "covered_test_rows": 949,
+      "empirical_coverage": 0.949,
+      "interval_width_ms": 45.605281,
+      "radius_ms": 22.80264
+    }
+  },
+  "test": {
+    "rows": 1000,
+    "seed": 43003
+  },
+  "test_mean_absolute_error_ms": 10.261719,
+  "train": {
+    "rows": 200,
+    "seed": 43001
+  },
+  "train_offset_ms": 8.557271
+}
