@@ -1,0 +1,32 @@
+{
+  "kind": "model",
+  "memberships": {
+    "desirability": {
+      "family": "harrington_desirability",
+      "parameters": {}
+    }
+  },
+  "scales": {
+    "score": {
+      "terms": [
+        {
+          "id": "desirable",
+          "membership": "desirability",
+          "name": "Desirable"
+        }
+      ],
+      "universe": "scores"
+    }
+  },
+  "schemaVersion": 1,
+  "universes": {
+    "scores": {
+      "kind": "discrete",
+      "points": [
+        -2,
+        0,
+        2
+      ]
+    }
+  }
+}
