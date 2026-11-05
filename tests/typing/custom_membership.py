@@ -16,6 +16,10 @@ from fuzzyroutines.membership import (
     MembershipFunction,
     MembershipScalar,
 )
+from fuzzyroutines.point_membership import (
+    DiscreteMembershipTable,
+    PiecewiseLinearMembership,
+)
 
 
 def BroadGrade(coordinate: MembershipScalar) -> float:
@@ -55,6 +59,17 @@ def CheckConsumers(builtIn: MembershipFunction, fuzzySet: ScalarFuzzySet) -> Non
     analytical(1)
     boundMethod(0.5)
     setEvaluator(1)
+
+
+def CheckPointMembership() -> None:
+    """Accept both point-backed evaluators through the installed scalar protocol."""
+
+    table = DiscreteMembershipTable(((0, 0.25), (2, 0.75)))
+    discrete: MembershipCallable = table
+    linear: MembershipCallable = PiecewiseLinearMembership(table.points, boundary="clamp")
+    fuzzySet = ScalarFuzzySet(table.universe, discrete)
+    fuzzySet.Membership(2)
+    linear(0.5)
 
 
 NARROW_CALLBACK: MembershipCallable = FloatOnlyGrade  # type: ignore[assignment]

@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 229 inventoried public symbols are linked to executed examples (37 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
+All 231 inventoried public symbols are linked to executed examples (38 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
 
 Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. Typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
@@ -24,13 +24,13 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.ContinuousFuzzyProperties`                                    | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousInterval`                                           | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousRegion`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
-| `fuzzyroutines.ContinuousUniverse`                                           | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
+| `fuzzyroutines.ContinuousUniverse`                                           | [membership, block 1](../api/modern/membership.md); [point-membership, block 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.CreateUniversalFuzzyScale`                                    | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.DeriveProperties`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.Difference`                                                   | [alarm, block 1](alarm.md)                                                                                         |
 | `fuzzyroutines.DiscreteFuzzyProperties`                                      | [results, block 1](results.md)                                                                                     |
 | `fuzzyroutines.DiscreteRegion`                                               | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
-| `fuzzyroutines.DiscreteUniverse`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
+| `fuzzyroutines.DiscreteUniverse`                                             | [point-membership, block 1](../api/modern/point-membership.md); [alpha-cuts, block 1](alpha-cuts.md)               |
 | `fuzzyroutines.EqualOnDomain`                                                | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
 | `fuzzyroutines.FuzzificationPolicy`                                          | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.FuzzificationResult`                                          | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
@@ -94,7 +94,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.SampleProperties`                                             | [api-recipes, block 2](api-recipes.md); [results, block 2](results.md)                                             |
 | `fuzzyroutines.SampledAlphaCut`                                              | [alpha-cuts, block 1](alpha-cuts.md); [results, block 3](results.md)                                               |
 | `fuzzyroutines.SampledFuzzyProperties`                                       | [api-recipes, block 2](api-recipes.md); [results, block 2](results.md)                                             |
-| `fuzzyroutines.ScalarFuzzySet`                                               | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
+| `fuzzyroutines.ScalarFuzzySet`                                               | [membership, block 1](../api/modern/membership.md); [point-membership, block 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.ScaleDiagnosticPoint`                                         | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.ScaleDiagnosticsPolicy`                                       | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
 | `fuzzyroutines.ScaleDiagnosticsResult`                                       | [results, block 5](results.md); [scale-audit, block 1](scale-audit.md)                                             |
@@ -115,11 +115,11 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
-| `fuzzyroutines.domain.ContinuousUniverse`                                    | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
+| `fuzzyroutines.domain.ContinuousUniverse`                                    | [membership, block 1](../api/modern/membership.md); [point-membership, block 1](../api/modern/point-membership.md) |
+| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [membership, block 1](../api/modern/membership.md); [point-membership, block 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [api-recipes, block 1](api-recipes.md)                                                                             |
-| `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
-| `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
+| `fuzzyroutines.domain.DiscreteUniverse`                                      | [point-membership, block 1](../api/modern/point-membership.md); [alpha-cuts, block 1](alpha-cuts.md)               |
+| `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [point-membership, block 1](../api/modern/point-membership.md); [alpha-cuts, block 1](alpha-cuts.md)               |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, block 1](../api/modern/exceptions.md); [membership, block 1](../api/modern/membership.md)             |
 | `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [membership, block 1](../api/modern/membership.md); [api-recipes, block 1](api-recipes.md)                         |
 | `fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval`                  | [api-recipes, block 1](api-recipes.md); [historical-recipes, block 4](historical-recipes.md)                       |
@@ -143,8 +143,8 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.fuzzysets.Intersection`                                       | [alarm, block 1](alarm.md)                                                                                         |
 | `fuzzyroutines.fuzzysets.IsNormal`                                           | [api-recipes, block 2](api-recipes.md)                                                                             |
 | `fuzzyroutines.fuzzysets.Normalize`                                          | [custom, block 1](custom.md)                                                                                       |
-| `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
-| `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
+| `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, block 1](../api/modern/membership.md); [point-membership, block 1](../api/modern/point-membership.md) |
+| `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, block 1](../api/modern/membership.md); [point-membership, block 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, block 1](alarm.md); [centroid, block 1](centroid.md)                                                       |
 | `fuzzyroutines.inference.AffineConsequent`                                   | [inference, block 2](inference.md)                                                                                 |
 | `fuzzyroutines.inference.AllOf`                                              | [inference, block 2](inference.md)                                                                                 |
@@ -215,6 +215,8 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.operators.SNormPolicy.Evaluate`                               | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy`                                        | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy.Evaluate`                               | [alarm, block 1](alarm.md); [api-recipes, block 3](api-recipes.md)                                                 |
+| `fuzzyroutines.point_membership.DiscreteMembershipTable`                     | [point-membership, block 1](../api/modern/point-membership.md)                                                     |
+| `fuzzyroutines.point_membership.PiecewiseLinearMembership`                   | [point-membership, block 1](../api/modern/point-membership.md)                                                     |
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |

@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 229 个已登记公共符号都链接到已执行的示例，共有 37 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
+全部 231 个已登记公共符号都链接到已执行的示例，共有 38 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
 
 函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
@@ -24,13 +24,13 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.ContinuousFuzzyProperties`                                    | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousInterval`                                           | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousRegion`                                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
-| `fuzzyroutines.ContinuousUniverse`                                           | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
+| `fuzzyroutines.ContinuousUniverse`                                           | [membership, 代码块 1](../api/modern/membership.md); [point-membership, 代码块 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.CreateUniversalFuzzyScale`                                    | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.DeriveProperties`                                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.Difference`                                                   | [alarm, 代码块 1](alarm.md)                                                                                       |
 | `fuzzyroutines.DiscreteFuzzyProperties`                                      | [results, 代码块 1](results.md)                                                                                   |
 | `fuzzyroutines.DiscreteRegion`                                               | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
-| `fuzzyroutines.DiscreteUniverse`                                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 1](api-recipes.md)                                       |
+| `fuzzyroutines.DiscreteUniverse`                                             | [point-membership, 代码块 1](../api/modern/point-membership.md); [alpha-cuts, 代码块 1](alpha-cuts.md)               |
 | `fuzzyroutines.EqualOnDomain`                                                | [api-recipes, 代码块 4](api-recipes.md); [custom, 代码块 1](custom.md)                                               |
 | `fuzzyroutines.FuzzificationPolicy`                                          | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
 | `fuzzyroutines.FuzzificationResult`                                          | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [results, 代码块 4](results.md)                             |
@@ -94,7 +94,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.SampleProperties`                                             | [api-recipes, 代码块 2](api-recipes.md); [results, 代码块 2](results.md)                                             |
 | `fuzzyroutines.SampledAlphaCut`                                              | [alpha-cuts, 代码块 1](alpha-cuts.md); [results, 代码块 3](results.md)                                               |
 | `fuzzyroutines.SampledFuzzyProperties`                                       | [api-recipes, 代码块 2](api-recipes.md); [results, 代码块 2](results.md)                                             |
-| `fuzzyroutines.ScalarFuzzySet`                                               | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
+| `fuzzyroutines.ScalarFuzzySet`                                               | [membership, 代码块 1](../api/modern/membership.md); [point-membership, 代码块 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.ScaleDiagnosticPoint`                                         | [results, 代码块 5](results.md); [scale-audit, 代码块 1](scale-audit.md)                                             |
 | `fuzzyroutines.ScaleDiagnosticsPolicy`                                       | [results, 代码块 5](results.md); [scale-audit, 代码块 1](scale-audit.md)                                             |
 | `fuzzyroutines.ScaleDiagnosticsResult`                                       | [results, 代码块 5](results.md); [scale-audit, 代码块 1](scale-audit.md)                                             |
@@ -115,11 +115,11 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, 代码块 1](errors.md)                                                                                     |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
-| `fuzzyroutines.domain.ContinuousUniverse`                                    | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
+| `fuzzyroutines.domain.ContinuousUniverse`                                    | [membership, 代码块 1](../api/modern/membership.md); [point-membership, 代码块 1](../api/modern/point-membership.md) |
+| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [membership, 代码块 1](../api/modern/membership.md); [point-membership, 代码块 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [api-recipes, 代码块 1](api-recipes.md)                                                                           |
-| `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 1](api-recipes.md)                                       |
-| `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 1](api-recipes.md)                                       |
+| `fuzzyroutines.domain.DiscreteUniverse`                                      | [point-membership, 代码块 1](../api/modern/point-membership.md); [alpha-cuts, 代码块 1](alpha-cuts.md)               |
+| `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [point-membership, 代码块 1](../api/modern/point-membership.md); [alpha-cuts, 代码块 1](alpha-cuts.md)               |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, 代码块 1](../api/modern/exceptions.md); [membership, 代码块 1](../api/modern/membership.md)             |
 | `fuzzyroutines.domain.IntegrationDomain.Contains`                            | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 1](api-recipes.md)                         |
 | `fuzzyroutines.domain.IntegrationDomain.FromLegacyInterval`                  | [api-recipes, 代码块 1](api-recipes.md); [historical-recipes, 代码块 4](historical-recipes.md)                       |
@@ -143,8 +143,8 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.fuzzysets.Intersection`                                       | [alarm, 代码块 1](alarm.md)                                                                                       |
 | `fuzzyroutines.fuzzysets.IsNormal`                                           | [api-recipes, 代码块 2](api-recipes.md)                                                                           |
 | `fuzzyroutines.fuzzysets.Normalize`                                          | [custom, 代码块 1](custom.md)                                                                                     |
-| `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
-| `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
+| `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, 代码块 1](../api/modern/membership.md); [point-membership, 代码块 1](../api/modern/point-membership.md) |
+| `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, 代码块 1](../api/modern/membership.md); [point-membership, 代码块 1](../api/modern/point-membership.md) |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, 代码块 1](alarm.md); [centroid, 代码块 1](centroid.md)                                                       |
 | `fuzzyroutines.inference.AffineConsequent`                                   | [inference, 代码块 2](inference.md)                                                                               |
 | `fuzzyroutines.inference.AllOf`                                              | [inference, 代码块 2](inference.md)                                                                               |
@@ -215,6 +215,8 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.operators.SNormPolicy.Evaluate`                               | [alarm, 代码块 1](alarm.md); [api-recipes, 代码块 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy`                                        | [alarm, 代码块 1](alarm.md); [api-recipes, 代码块 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy.Evaluate`                               | [alarm, 代码块 1](alarm.md); [api-recipes, 代码块 3](api-recipes.md)                                                 |
+| `fuzzyroutines.point_membership.DiscreteMembershipTable`                     | [point-membership, 代码块 1](../api/modern/point-membership.md)                                                   |
+| `fuzzyroutines.point_membership.PiecewiseLinearMembership`                   | [point-membership, 代码块 1](../api/modern/point-membership.md)                                                   |
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
