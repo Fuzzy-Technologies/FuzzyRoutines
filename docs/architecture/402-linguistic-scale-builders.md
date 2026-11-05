@@ -28,9 +28,9 @@ incorrect tuple shapes fail at construction. A shoulder peak may coincide
 with the corresponding universe endpoint because its plateau then has
 zero width. Out-of-domain evaluation keeps the existing scalar error.
 
-The interval grades sum to one exactly. Linear grades sum to one in exact
-arithmetic, and the implementation will test an absolute binary64 tolerance
-for the rounded grades. Coverage and partition claims apply inside the
+The interval grades sum to one exactly. Linear grades use exact rational
+interpolation of integer, rational, and binary64 coordinates. Other real
+scalar types use their binary64 representation for interpolation. Coverage and partition claims apply inside the
 declared universe and do not modify the historical Universal Fuzzy Scale.
 No sampled point is used as a substitute for these constructions.
 
