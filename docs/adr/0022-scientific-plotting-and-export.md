@@ -55,13 +55,13 @@ the scalar API.
 
 ### Sampling, knots and annotations
 
-| Model or overlay | Rendering contract |
-| --- | --- |
-| Continuous with known geometry | Start with 401 evenly spaced display coordinates including both ends of each term's visible interval when they belong to the universe. Allow an explicit integer count of at least two. Assign endpoints directly, merge all visible known breakpoints and requested input coordinates, and deduplicate and sort before evaluation within each continuous segment. The count describes the base grid; extra samples are reported separately. |
-| Explicit piecewise linear model | Include every visible knot and segment boundary, even when the base grid misses one. Connect samples only on declared linear segments. Take extrapolation and domain membership from the model contract; do not fit or extend a line past it. |
+| Model or overlay                          | Rendering contract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---                                       | ---                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Continuous with known geometry            | Start with 401 evenly spaced display coordinates including both ends of each term's visible interval when they belong to the universe. Allow an explicit integer count of at least two. Assign endpoints directly, merge all visible known breakpoints and requested input coordinates, and deduplicate and sort before evaluation within each continuous segment. The count describes the base grid; extra samples are reported separately.                                                                                            |
+| Explicit piecewise linear model           | Include every visible knot and segment boundary, even when the base grid misses one. Connect samples only on declared linear segments. Take extrapolation and domain membership from the model contract; do not fit or extend a line past it.                                                                                                                                                                                                                                                                                           |
 | Open endpoints, jumps and isolated values | Split artists at a known jump; no stroke or fill bridges it. Plot the evaluated value at an included jump or singleton as a filled marker. For an excluded endpoint or a one-sided limit, use an open marker only when the limit is known from the model's geometry and differs from any filled marker at that position. Include a representable interior sample near each visible open edge when the base grid does not reach it. A caller-supplied break coordinate splits the stroke even if exact one-sided limits are unavailable. |
-| Custom callable with unknown continuity | Show sampled markers by default. A caller may declare continuous segments and breakpoints for lines, with that assumption recorded in the figure or accompanying evidence. The renderer does not infer continuity from apparent smoothness. |
-| Discrete universe | Plot one marker per declared coordinate inside the window, including zero grades. Optional stems are vertical guides only. No joins, area fills, synthesized coordinates, interpolation or resampling. A continuous function evaluated on a discrete universe follows this rule. |
+| Custom callable with unknown continuity   | Show sampled markers by default. A caller may declare continuous segments and breakpoints for lines, with that assumption recorded in the figure or accompanying evidence. The renderer does not infer continuity from apparent smoothness.                                                                                                                                                                                                                                                                                             |
+| Discrete universe                         | Plot one marker per declared coordinate inside the window, including zero grades. Optional stems are vertical guides only. No joins, area fills, synthesized coordinates, interpolation or resampling. A continuous function evaluated on a discrete universe follows this rule.                                                                                                                                                                                                                                                        |
 
 A finite grid is display resolution, not an error bound. Validate it before
 evaluation and reject requests that cannot yield the required distinct display
@@ -101,13 +101,13 @@ different line pattern or point symbol per cycle. Labels identify the
 terms even when styles repeat. An explicit per-term style can customize a
 user scale without changing its order or grades.
 
-| Historical term | Corporate color | Unchanged model |
-| --- | --- | --- |
-| `Min` | `#a99aff` | `Hyperbolic(8, 20, 0)` |
-| `Low` | `#4dd8d0` | `Bell(0.17, 0.23, 0.34)` |
-| `Med` | `#ffd166` | `Bell(0.34, 0.40, 0.60)` |
-| `High` | `#ff8c9d` | `Bell(0.60, 0.66, 0.77)` |
-| `Max` | `#8cdb91` | `SShoulder(0.77, 0.95)` |
+| Historical term | Corporate color | Unchanged model          |
+| ---             | ---             | ---                      |
+| `Min`           | `#a99aff`       | `Hyperbolic(8, 20, 0)`   |
+| `Low`           | `#4dd8d0`       | `Bell(0.17, 0.23, 0.34)` |
+| `Med`           | `#ffd166`       | `Bell(0.34, 0.40, 0.60)` |
+| `High`          | `#ff8c9d`       | `Bell(0.60, 0.66, 0.77)` |
+| `Max`           | `#8cdb91`       | `SShoulder(0.77, 0.95)`  |
 
 The historical Universal Fuzzy Scale uses the closed normalized `[0, 1]`
 universe. Its Min tail and weak coverage around `x = 0.17` remain visible
@@ -125,11 +125,11 @@ explicit font and label sizing (11 pt base, 18 pt title); require a
 configured font that covers labels outside its repertoire rather than
 silently substituting machine-specific glyphs.
 
-| Format and filename suffix | Background and font behavior | Stable metadata |
-| --- | --- | --- |
-| PNG, `.png` | Opaque profile canvas by default; explicit transparency leaves the canvas and axes transparent while preserving artist alpha. Text is rasterized at the requested DPI. | Fixed software identifier and resolution; no timestamp or destination path. |
-| JPEG, `.jpg` or `.jpeg` | Require an explicit opaque background color; reject a simultaneous transparency request. Composite both canvas and axes with the supplied background before RGB encoding. Use quality 95 and 4:4:4 chroma as defaults. | Fixed encoding settings and resolution; no generated timestamps, EXIF or destination path. |
-| SVG, `.svg` | Opaque by default, with an explicit transparent option. Editable text is the default (`svg.fonttype = none`) and requires the font on the viewer's system. An opt-in path mode preserves glyph geometry without relying on the viewer's fonts and sacrifices selectable labels. | Fixed creator and description, caller title, versioned ID salt and no generated date; serialize as UTF-8 with LF line endings. |
+| Format and filename suffix | Background and font behavior                                                                                                                                                                                                                                                    | Stable metadata                                                                                                                |
+| ---                        | ---                                                                                                                                                                                                                                                                             | ---                                                                                                                            |
+| PNG, `.png`                | Opaque profile canvas by default; explicit transparency leaves the canvas and axes transparent while preserving artist alpha. Text is rasterized at the requested DPI.                                                                                                          | Fixed software identifier and resolution; no timestamp or destination path.                                                    |
+| JPEG, `.jpg` or `.jpeg`    | Require an explicit opaque background color; reject a simultaneous transparency request. Composite both canvas and axes with the supplied background before RGB encoding. Use quality 95 and 4:4:4 chroma as defaults.                                                          | Fixed encoding settings and resolution; no generated timestamps, EXIF or destination path.                                     |
+| SVG, `.svg`                | Opaque by default, with an explicit transparent option. Editable text is the default (`svg.fonttype = none`) and requires the font on the viewer's system. An opt-in path mode preserves glyph geometry without relying on the viewer's fonts and sacrifices selectable labels. | Fixed creator and description, caller title, versioned ID salt and no generated date; serialize as UTF-8 with LF line endings. |
 
 Transparent exports leave foreground colors unchanged; the caller chooses
 a contrasting background for the intended publication. Require an explicit
