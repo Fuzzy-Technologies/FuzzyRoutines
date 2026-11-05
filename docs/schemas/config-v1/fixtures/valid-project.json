@@ -1,0 +1,255 @@
+{
+  "defaults": {
+    "evaluation": "quarter",
+    "model": "weighted",
+    "plot": "risk"
+  },
+  "evaluations": {
+    "quarter": {
+      "inputs": {
+        "risk": 0.25
+      },
+      "model": "weighted",
+      "trace": true
+    }
+  },
+  "kind": "project",
+  "models": {
+    "centroid": {
+      "inference": {
+        "activation": "logic",
+        "aggregation": "logic",
+        "centroid": {
+          "domain": {
+            "left": 0,
+            "right": 1
+          },
+          "policy": {
+            "absoluteTolerance": 1e-12,
+            "maximumDepth": 20,
+            "relativeTolerance": 1e-10
+          }
+        },
+        "inputs": [
+          {
+            "id": "risk",
+            "name": "Risk",
+            "scale": "risk"
+          }
+        ],
+        "kind": "mamdani",
+        "output": {
+          "id": "response",
+          "name": "Response",
+          "scale": "response"
+        },
+        "policy": {
+          "conjunction": "logic",
+          "disjunction": "logic",
+          "negation": {
+            "family": "standard"
+          }
+        },
+        "rules": [
+          {
+            "antecedent": {
+              "kind": "not",
+              "operand": {
+                "input": "risk",
+                "kind": "term",
+                "term": "high"
+              }
+            },
+            "consequent": "central",
+            "id": "respond",
+            "name": "Respond",
+            "weight": 1
+          }
+        ]
+      },
+      "kind": "model",
+      "memberships": {
+        "rising": {
+          "family": "s_shoulder",
+          "parameters": {
+            "left": 0,
+            "right": 1
+          }
+        },
+        "symmetric": {
+          "family": "triangle",
+          "parameters": {
+            "left": 0,
+            "peak": 0.5,
+            "right": 1
+          }
+        }
+      },
+      "scales": {
+        "response": {
+          "terms": [
+            {
+              "id": "central",
+              "membership": "symmetric",
+              "name": "Central"
+            }
+          ],
+          "universe": "normalized"
+        },
+        "risk": {
+          "terms": [
+            {
+              "id": "high",
+              "membership": "rising",
+              "name": "High"
+            }
+          ],
+          "universe": "normalized"
+        }
+      },
+      "schemaVersion": 1,
+      "universes": {
+        "normalized": {
+          "kind": "continuous",
+          "left": 0,
+          "leftClosed": true,
+          "right": 1,
+          "rightClosed": true
+        }
+      }
+    },
+    "weighted": {
+      "inference": {
+        "inputs": [
+          {
+            "id": "risk",
+            "name": "Risk",
+            "scale": "risk"
+          }
+        ],
+        "kind": "sugeno",
+        "outputUniverse": "normalized",
+        "policy": {
+          "conjunction": "logic",
+          "disjunction": "logic",
+          "negation": {
+            "family": "standard"
+          }
+        },
+        "rules": [
+          {
+            "antecedent": {
+              "kind": "not",
+              "operand": {
+                "input": "risk",
+                "kind": "term",
+                "term": "high"
+              }
+            },
+            "consequent": {
+              "kind": "constant",
+              "value": 0.25
+            },
+            "id": "base",
+            "name": "Base",
+            "weight": 1
+          },
+          {
+            "antecedent": {
+              "kind": "all",
+              "operands": [
+                {
+                  "input": "risk",
+                  "kind": "term",
+                  "term": "high"
+                },
+                {
+                  "kind": "any",
+                  "operands": [
+                    {
+                      "input": "risk",
+                      "kind": "term",
+                      "term": "high"
+                    },
+                    {
+                      "kind": "not",
+                      "operand": {
+                        "input": "risk",
+                        "kind": "term",
+                        "term": "high"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "consequent": {
+              "coefficients": [
+                {
+                  "input": "risk",
+                  "value": 0.5
+                }
+              ],
+              "intercept": 0.5,
+              "kind": "affine"
+            },
+            "id": "increase",
+            "name": "Increase",
+            "weight": 1
+          }
+        ]
+      },
+      "kind": "model",
+      "memberships": {
+        "rising": {
+          "family": "s_shoulder",
+          "parameters": {
+            "left": 0,
+            "right": 1
+          }
+        }
+      },
+      "scales": {
+        "risk": {
+          "terms": [
+            {
+              "id": "high",
+              "membership": "rising",
+              "name": "High"
+            }
+          ],
+          "universe": "normalized"
+        }
+      },
+      "schemaVersion": 1,
+      "universes": {
+        "normalized": {
+          "kind": "continuous",
+          "left": 0,
+          "leftClosed": true,
+          "right": 1,
+          "rightClosed": true
+        }
+      }
+    }
+  },
+  "presentation": {
+    "plots": {
+      "risk": {
+        "model": "weighted",
+        "scale": "risk",
+        "termColors": {
+          "high": "#8E44AD"
+        },
+        "title": "Risk / Риск / 风险",
+        "xLabel": "Risk"
+      }
+    },
+    "units": {
+      "weighted": {
+        "normalized": "normalized ratio"
+      }
+    }
+  },
+  "schemaVersion": 1
+}

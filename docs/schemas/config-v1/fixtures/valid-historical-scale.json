@@ -1,0 +1,120 @@
+{
+  "kind": "model",
+  "memberships": {
+    "high": {
+      "family": "bell",
+      "parameters": {
+        "left": 0.6,
+        "plateauEnd": 0.77,
+        "plateauStart": 0.66
+      }
+    },
+    "low": {
+      "family": "bell",
+      "parameters": {
+        "left": 0.17,
+        "plateauEnd": 0.34,
+        "plateauStart": 0.23
+      }
+    },
+    "max": {
+      "family": "s_shoulder",
+      "parameters": {
+        "left": 0.77,
+        "right": 0.95
+      }
+    },
+    "med": {
+      "family": "bell",
+      "parameters": {
+        "left": 0.34,
+        "plateauEnd": 0.6,
+        "plateauStart": 0.4
+      }
+    },
+    "min": {
+      "family": "hyperbolic",
+      "parameters": {
+        "cutoff": 0,
+        "exponent": 20,
+        "scale": 8
+      }
+    }
+  },
+  "scales": {
+    "universal": {
+      "fuzzification": {
+        "minimumConfidence": 0,
+        "tiePolicy": "last",
+        "tieTolerance": 0
+      },
+      "representatives": {
+        "policy": {
+          "absoluteTolerance": 1e-12,
+          "maximumDepth": 20,
+          "relativeTolerance": 1e-10
+        },
+        "windows": {
+          "high": {
+            "left": 0.6,
+            "right": 0.83
+          },
+          "low": {
+            "left": 0.17,
+            "right": 0.4
+          },
+          "max": {
+            "left": 0.77,
+            "right": 1
+          },
+          "med": {
+            "left": 0.34,
+            "right": 0.66
+          },
+          "min": {
+            "left": 0,
+            "right": 0.23
+          }
+        }
+      },
+      "terms": [
+        {
+          "id": "min",
+          "membership": "min",
+          "name": "Min"
+        },
+        {
+          "id": "low",
+          "membership": "low",
+          "name": "Low"
+        },
+        {
+          "id": "med",
+          "membership": "med",
+          "name": "Med"
+        },
+        {
+          "id": "high",
+          "membership": "high",
+          "name": "High"
+        },
+        {
+          "id": "max",
+          "membership": "max",
+          "name": "Max"
+        }
+      ],
+      "universe": "normalized"
+    }
+  },
+  "schemaVersion": 1,
+  "universes": {
+    "normalized": {
+      "kind": "continuous",
+      "left": 0,
+      "leftClosed": true,
+      "right": 1,
+      "rightClosed": true
+    }
+  }
+}

@@ -1,0 +1,629 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fuzzy-technologies.github.io/FuzzyRoutines/schemas/config-v1.schema.json",
+  "$comment": "SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies; SPDX-License-Identifier: Apache-2.0",
+  "title": "FuzzyRoutines model and project configuration, version 1",
+  "description": "Structural validation only; see ADR-0021 for parser, reference, and mathematical constraints.",
+  "oneOf": [
+    {"$ref": "#/$defs/model"},
+    {"$ref": "#/$defs/project"}
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[A-Za-z]",
+      "not": {"pattern": "[^A-Za-z0-9_-]"}
+    },
+    "label": {"type": "string", "minLength": 1, "maxLength": 256},
+    "number": {"type": "number", "minimum": -1.7976931348623157e+308, "maximum": 1.7976931348623157e+308},
+    "positive": {"$ref": "#/$defs/number", "exclusiveMinimum": 0},
+    "grade": {"$ref": "#/$defs/number", "minimum": 0, "maximum": 1},
+    "integrationDomain": {
+      "type": "object",
+      "properties": {
+        "left": {"$ref": "#/$defs/number"},
+        "right": {"$ref": "#/$defs/number"}
+      },
+      "additionalProperties": false,
+      "required": ["left", "right"]
+    },
+    "universe": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {"const": "continuous"},
+            "left": {
+              "oneOf": [
+                {"$ref": "#/$defs/number"},
+                {"type": "null"}
+              ]
+            },
+            "right": {
+              "oneOf": [
+                {"$ref": "#/$defs/number"},
+                {"type": "null"}
+              ]
+            },
+            "leftClosed": {"type": "boolean"},
+            "rightClosed": {"type": "boolean"}
+          },
+          "additionalProperties": false,
+          "required": ["kind", "left", "right", "leftClosed", "rightClosed"],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "left": {"type": "null"}
+                }
+              },
+              "then": {
+                "properties": {
+                  "leftClosed": {"const": false}
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "right": {"type": "null"}
+                }
+              },
+              "then": {
+                "properties": {
+                  "rightClosed": {"const": false}
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {"const": "discrete"},
+            "points": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/number"},
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false,
+          "required": ["kind", "points"]
+        }
+      ]
+    },
+    "membership": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "hyperbolic"},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "scale": {"$ref": "#/$defs/positive"},
+                "exponent": {"$ref": "#/$defs/positive"},
+                "cutoff": {"$ref": "#/$defs/number"}
+              },
+              "additionalProperties": false,
+              "required": ["scale", "exponent", "cutoff"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "bell"},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "left": {"$ref": "#/$defs/number"},
+                "plateauStart": {"$ref": "#/$defs/number"},
+                "plateauEnd": {"$ref": "#/$defs/number"}
+              },
+              "additionalProperties": false,
+              "required": ["left", "plateauStart", "plateauEnd"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "s_shoulder"},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "left": {"$ref": "#/$defs/number"},
+                "right": {"$ref": "#/$defs/number"}
+              },
+              "additionalProperties": false,
+              "required": ["left", "right"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "triangle"},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "left": {"$ref": "#/$defs/number"},
+                "peak": {"$ref": "#/$defs/number"},
+                "right": {"$ref": "#/$defs/number"}
+              },
+              "additionalProperties": false,
+              "required": ["left", "peak", "right"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "trapezoid"},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "left": {"$ref": "#/$defs/number"},
+                "plateauStart": {"$ref": "#/$defs/number"},
+                "plateauEnd": {"$ref": "#/$defs/number"},
+                "right": {"$ref": "#/$defs/number"}
+              },
+              "additionalProperties": false,
+              "required": ["left", "plateauStart", "plateauEnd", "right"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "gaussian"},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "center": {"$ref": "#/$defs/number"},
+                "scale": {"$ref": "#/$defs/positive"}
+              },
+              "additionalProperties": false,
+              "required": ["center", "scale"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "logistic"},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "slope": {
+                  "$ref": "#/$defs/number",
+                  "not": {"const": 0}
+                },
+                "midpoint": {"$ref": "#/$defs/number"}
+              },
+              "additionalProperties": false,
+              "required": ["slope", "midpoint"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "harrington_desirability"},
+            "parameters": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false,
+          "required": ["family", "parameters"]
+        }
+      ]
+    },
+    "fuzzification": {
+      "type": "object",
+      "properties": {
+        "tiePolicy": {
+          "enum": ["first", "last", "all"]
+        },
+        "minimumConfidence": {"$ref": "#/$defs/grade"},
+        "tieTolerance": {"$ref": "#/$defs/grade"}
+      },
+      "additionalProperties": false,
+      "required": ["tiePolicy", "minimumConfidence", "tieTolerance"]
+    },
+    "centroidPolicy": {
+      "type": "object",
+      "properties": {
+        "absoluteTolerance": {"$ref": "#/$defs/positive"},
+        "relativeTolerance": {"$ref": "#/$defs/positive"},
+        "maximumDepth": {"type": "integer", "minimum": 0, "maximum": 9007199254740991}
+      },
+      "additionalProperties": false,
+      "required": ["absoluteTolerance", "relativeTolerance", "maximumDepth"]
+    },
+    "representatives": {
+      "type": "object",
+      "properties": {
+        "windows": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/integrationDomain"},
+          "minProperties": 1
+        },
+        "policy": {"$ref": "#/$defs/centroidPolicy"}
+      },
+      "additionalProperties": false,
+      "required": ["windows", "policy"]
+    },
+    "scale": {
+      "type": "object",
+      "properties": {
+        "universe": {"$ref": "#/$defs/id"},
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"$ref": "#/$defs/id"},
+              "name": {"$ref": "#/$defs/label"},
+              "membership": {"$ref": "#/$defs/id"}
+            },
+            "additionalProperties": false,
+            "required": ["id", "name", "membership"]
+          },
+          "minItems": 1
+        },
+        "fuzzification": {"$ref": "#/$defs/fuzzification"},
+        "representatives": {"$ref": "#/$defs/representatives"}
+      },
+      "additionalProperties": false,
+      "required": ["universe", "terms"]
+    },
+    "variable": {
+      "type": "object",
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "name": {"$ref": "#/$defs/label"},
+        "scale": {"$ref": "#/$defs/id"}
+      },
+      "additionalProperties": false,
+      "required": ["id", "name", "scale"]
+    },
+    "norm": {
+      "enum": ["logic", "algebraic", "boundary", "drastic"]
+    },
+    "negation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "standard"}
+          },
+          "additionalProperties": false,
+          "required": ["family"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "parametric"},
+            "alpha": {"$ref": "#/$defs/number", "exclusiveMinimum": 0, "exclusiveMaximum": 1}
+          },
+          "additionalProperties": false,
+          "required": ["family", "alpha"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "family": {"const": "parabolic"},
+            "alpha": {"$ref": "#/$defs/number", "minimum": 0.25, "maximum": 0.75}
+          },
+          "additionalProperties": false,
+          "required": ["family", "alpha"]
+        }
+      ]
+    },
+    "inferencePolicy": {
+      "type": "object",
+      "properties": {
+        "conjunction": {"$ref": "#/$defs/norm"},
+        "disjunction": {"$ref": "#/$defs/norm"},
+        "negation": {"$ref": "#/$defs/negation"}
+      },
+      "additionalProperties": false,
+      "required": ["conjunction", "disjunction", "negation"]
+    },
+    "antecedent": {
+      "$comment": "Select the node shape by kind before recursing so shared operand fields are only validated once.",
+      "type": "object",
+      "properties": {"kind": {"enum": ["term", "all", "any", "not"]}},
+      "required": ["kind"],
+      "allOf": [
+        {
+          "if": {"properties": {"kind": {"const": "term"}}, "required": ["kind"]},
+          "then": {
+            "properties": {
+              "kind": true,
+              "input": {"$ref": "#/$defs/id"},
+              "term": {"$ref": "#/$defs/id"}
+            },
+            "additionalProperties": false,
+            "required": ["input", "term"]
+          }
+        },
+        {
+          "if": {"properties": {"kind": {"enum": ["all", "any"]}}, "required": ["kind"]},
+          "then": {
+            "properties": {
+              "kind": true,
+              "operands": {
+                "type": "array",
+                "items": {"$ref": "#/$defs/antecedent"},
+                "minItems": 2
+              }
+            },
+            "additionalProperties": false,
+            "required": ["operands"]
+          }
+        },
+        {
+          "if": {"properties": {"kind": {"const": "not"}}, "required": ["kind"]},
+          "then": {
+            "properties": {
+              "kind": true,
+              "operand": {"$ref": "#/$defs/antecedent"}
+            },
+            "additionalProperties": false,
+            "required": ["operand"]
+          }
+        }
+      ]
+    },
+    "sugenoConsequent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {"const": "constant"},
+            "value": {"$ref": "#/$defs/number"}
+          },
+          "additionalProperties": false,
+          "required": ["kind", "value"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {"const": "affine"},
+            "intercept": {"$ref": "#/$defs/number"},
+            "coefficients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "input": {"$ref": "#/$defs/id"},
+                  "value": {"$ref": "#/$defs/number"}
+                },
+                "additionalProperties": false,
+                "required": ["input", "value"]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": ["kind", "intercept", "coefficients"]
+        }
+      ]
+    },
+    "inference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {"const": "mamdani"},
+            "inputs": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/variable"},
+              "minItems": 1
+            },
+            "output": {"$ref": "#/$defs/variable"},
+            "policy": {"$ref": "#/$defs/inferencePolicy"},
+            "activation": {"$ref": "#/$defs/norm"},
+            "aggregation": {"$ref": "#/$defs/norm"},
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"$ref": "#/$defs/id"},
+                  "name": {"$ref": "#/$defs/label"},
+                  "antecedent": {"$ref": "#/$defs/antecedent"},
+                  "consequent": {"$ref": "#/$defs/id"},
+                  "weight": {"$ref": "#/$defs/grade"}
+                },
+                "additionalProperties": false,
+                "required": ["id", "name", "antecedent", "consequent", "weight"]
+              },
+              "minItems": 1
+            },
+            "centroid": {
+              "type": "object",
+              "properties": {
+                "domain": {"$ref": "#/$defs/integrationDomain"},
+                "policy": {"$ref": "#/$defs/centroidPolicy"}
+              },
+              "additionalProperties": false,
+              "required": ["domain", "policy"]
+            }
+          },
+          "additionalProperties": false,
+          "required": ["kind", "inputs", "output", "policy", "activation", "aggregation", "rules"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {"const": "sugeno"},
+            "inputs": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/variable"},
+              "minItems": 1
+            },
+            "outputUniverse": {"$ref": "#/$defs/id"},
+            "policy": {"$ref": "#/$defs/inferencePolicy"},
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"$ref": "#/$defs/id"},
+                  "name": {"$ref": "#/$defs/label"},
+                  "antecedent": {"$ref": "#/$defs/antecedent"},
+                  "consequent": {"$ref": "#/$defs/sugenoConsequent"},
+                  "weight": {"$ref": "#/$defs/grade"}
+                },
+                "additionalProperties": false,
+                "required": ["id", "name", "antecedent", "consequent", "weight"]
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": ["kind", "inputs", "outputUniverse", "policy", "rules"]
+        }
+      ]
+    },
+    "model": {
+      "type": "object",
+      "properties": {
+        "kind": {"const": "model"},
+        "schemaVersion": {"type": "integer", "const": 1},
+        "universes": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/universe"},
+          "minProperties": 1
+        },
+        "memberships": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/membership"},
+          "minProperties": 1
+        },
+        "scales": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/scale"},
+          "minProperties": 1
+        },
+        "inference": {"$ref": "#/$defs/inference"}
+      },
+      "additionalProperties": false,
+      "required": ["kind", "schemaVersion", "universes", "memberships", "scales"]
+    },
+    "color": {"type": "string", "minLength": 7, "maxLength": 7, "pattern": "^#[0-9A-Fa-f]{6}$"},
+    "plot": {
+      "type": "object",
+      "properties": {
+        "model": {"$ref": "#/$defs/id"},
+        "scale": {"$ref": "#/$defs/id"},
+        "title": {"$ref": "#/$defs/label"},
+        "xLabel": {"$ref": "#/$defs/label"},
+        "termColors": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/color"},
+          "minProperties": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": ["model", "scale"]
+    },
+    "presentation": {
+      "type": "object",
+      "properties": {
+        "units": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {
+            "type": "object",
+            "propertyNames": {"$ref": "#/$defs/id"},
+            "additionalProperties": {"$ref": "#/$defs/label"},
+            "minProperties": 1
+          },
+          "minProperties": 1
+        },
+        "plots": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/plot"},
+          "minProperties": 1
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "evaluation": {
+      "type": "object",
+      "properties": {
+        "model": {"$ref": "#/$defs/id"},
+        "inputs": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/number"},
+          "minProperties": 1
+        },
+        "trace": {"type": "boolean"}
+      },
+      "additionalProperties": false,
+      "required": ["model", "inputs", "trace"]
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "kind": {"const": "project"},
+        "schemaVersion": {"type": "integer", "const": 1},
+        "models": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/model"},
+          "minProperties": 1
+        },
+        "defaults": {
+          "type": "object",
+          "properties": {
+            "model": {"$ref": "#/$defs/id"},
+            "plot": {"$ref": "#/$defs/id"},
+            "evaluation": {"$ref": "#/$defs/id"}
+          },
+          "additionalProperties": false,
+          "required": ["model"]
+        },
+        "presentation": {"$ref": "#/$defs/presentation"},
+        "evaluations": {
+          "type": "object",
+          "propertyNames": {"$ref": "#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/evaluation"},
+          "minProperties": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": ["kind", "schemaVersion", "models"]
+    }
+  }
+}
