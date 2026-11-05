@@ -24,8 +24,8 @@ separate from the cost of evaluating rules.
 
 Propose a separate operation, `EvaluateSugenoBatch(model, values, *,
 feature_names, backend="numpy", on_error="raise", trace="off",
-chunk_size=4096)`. The operation and result are design names; this ADR does
-not ship a callable. Calling this operation opts into NumPy. The sole
+chunk_size=4096)`. The spelling is illustrative; this ADR does not ship
+a callable. Calling this operation opts into NumPy. The sole
 accepted backend is `"numpy"`; there is no `"auto"`, scalar dispatch or
 fallback through `model.Evaluate`. NumPy loads on request via the existing
 `fuzzyroutines[numpy]` extra. If absent, the call raises `ImportError` with
@@ -67,23 +67,47 @@ Let `N` be the number of observations, `F > 0` the number of model inputs,
 `T` the number of declared input terms across all variables, and `R` the
 number of model rules.
 
-| Concern       | Contract |
-| ------------- | -------- |
-| Observations  | A rank-two numeric ndarray or rectangular list/tuple of rows with shape `(N, F)`. No scalar, rank-one, broadcast, transposed or implicit flattening semantics. |
-| Feature axis  | A required tuple of exactly `F` unique, case-sensitive names, one per supplied column. It must be a permutation of the model input names; bind by name, not by physical column position or dictionary order. A square input is still interpreted as rows of observations. |
-| Empty input   | A shaped `(0, F)` ndarray or the empty outer sequence `[]`/`()` with valid `feature_names`. Reject `(0, G)` for `G != F` and reject a rank-one empty ndarray. Shape, model and options are validated even when `N = 0`. |
-| Single row    | Use `(1, F)`, including `(1, 1)` for one feature. All output arrays retain a row axis. |
-| Array dtype   | Signed/unsigned integer or real floating dtype; allow non-contiguous, negative-stride, read-only and non-native-endian inputs. Reject Boolean, complex, string, object, structured and masked arrays. Reject array subclasses that would discard custom input semantics on conversion. |
-| Sequence data | Validate shape and real numeric cells before execution; reject Boolean cells even in mixed numeric rows. Accept built-in `int`/`float` and NumPy integer/real-floating scalars. Reject ragged input, implicit coercions from other cell types, iterators and mappings. |
-| Conversion    | Work on a private C-order float64 chunk in model feature order. Precision may change (including large integers); scalar parity is against the resulting binary64 coordinates. A non-finite converted coordinate is a bad row. Input data is never mutated or retained in the result. |
-| Base result   | `values`: float64 `(N,)` in output units; `valid_mask`: bool `(N,)`; `status`: uint8 `(N,)`. Valid values are finite, failed values are `NaN`, and `valid_mask` is true exactly where `status == 0`. |
-| Ownership     | Fresh, independent arrays exposed read-only, with an explicit array copy for writable use. Row order follows the source, including failed rows; row indices are zero based. |
+Input is a rank-two numeric ndarray or rectangular list/tuple of rows.
+Each row is an observation, even in a square matrix. There is no
+broadcasting, transposing or implicit flattening. `feature_names` is a
+tuple of exactly `F` unique, case-sensitive names, one per supplied
+column and a permutation of the model input names. Bind columns by name
+and evaluate in model declaration order.
 
-Raggedness, wrong shape/dtype or cell type, bad feature bindings, invalid
-options, unsupported model data and dependency errors are whole-call
-failures; they cannot be masked. A missing feature column is a call error
-even when every row would be empty. An array already converted to numeric
-dtype conveys only its current dtype and values.
+| Case             | Shape or dtype                                   |
+| ---------------- | ------------------------------------------------ |
+| Observations     | `(N, F)`                                         |
+| Empty input      | `(0, F)`, or `[]`/`()` with valid feature names  |
+| Single row       | `(1, F)`, including `(1, 1)` for one feature     |
+| `values`         | float64 `(N,)` in the model's output units       |
+| `valid_mask`     | bool `(N,)`, true exactly where `status == 0`    |
+| `status`         | uint8 `(N,)`, preserving source row order        |
+
+Reject rank-one inputs, including empty ndarrays, and wrong widths,
+including `(0, G)` for `G != F`. Validate shape, model and options even
+when `N = 0`. Array dtypes may be signed/unsigned integer or real floating;
+allow non-contiguous, negative-stride, read-only and non-native-endian
+inputs. Reject Boolean, complex, string, object and structured dtypes,
+and ndarray subclasses including masked arrays. For sequences, accept
+built-in `int`/`float` and NumPy integer/real-floating scalars. Reject
+Boolean cells before mixed numeric coercion, and reject ragged rows,
+iterators, mappings and implicit coercion from other cell types.
+
+Convert to private C-order float64 chunks in model feature order.
+Precision may change, including for large integers; compare parity
+against the converted coordinates. A non-finite converted coordinate is
+a bad row. A failed output value is `NaN`; valid values are finite.
+Return fresh independent arrays exposed read-only. Callers can request
+writable copies using the array copy operation. Do not mutate input data
+or retain it in the result. Row indices are zero based.
+
+Use `InvalidParameterTypeError` for unsupported input kinds, dtypes,
+cell types or model types, and `InvalidParameterError` for malformed
+shape, name bindings or option values. Such validation errors and
+dependency errors fail the whole call; they cannot be masked. A missing
+feature column is a call error even when every row would be empty. An
+array already converted to numeric dtype conveys its current dtype and
+values.
 
 ### Row failures
 
@@ -94,24 +118,29 @@ with the same classifications. The operation uses the following stage
 order within a row. Errors at the same stage need not match scalar message
 text; check features, terms and rules in model order for diagnostics.
 
-| Stage                         | Status | Error in `"raise"` mode     |
-| ----------------------------- | -----: | --------------------------- |
-| Valid result                  |      0 | —                           |
-| Non-finite coordinate before or after float64 conversion (including conversion overflow) | 1 | `InvalidParameterError` |
-| Finite coordinate outside its input universe | 2 | `InvalidDomainError` |
-| Membership/antecedent arithmetic failure, invalid grade, or positive weighted firing underflowing to zero | 5 | `NumericalError` |
-| All weighted firings truly zero |     3 | `UndefinedResultError`      |
-| Non-finite affine or output arithmetic | 5 | `NumericalError`          |
-| Finite consequent or final value outside the output universe | 4 | `InvalidDomainError` |
+| Stage                                   | Status | Error in `"raise"` mode |
+| --------------------------------------- | -----: | ----------------------- |
+| Valid result                            | 0      | —                       |
+| Non-finite input or conversion overflow | 1      | `InvalidParameterError` |
+| Input outside its universe              | 2      | `InvalidDomainError`    |
+| Membership, antecedent or firing error  | 5      | `NumericalError`        |
+| All weighted firings truly zero         | 3      | `UndefinedResultError`  |
+| Non-finite affine or output arithmetic  | 5      | `NumericalError`        |
+| Consequent or output outside universe   | 4      | `InvalidDomainError`    |
 
 After firing succeeds, evaluate and validate every consequent in rule
 order, including inactive rules, before validating the final output.
 For a row with multiple bad consequents, the first failing rule determines
-the code. Arithmetic failure in a lower level membership kernel is wrapped
-with its cause when available. These are explicit batch row categories;
-scalar exception types and ordering are unchanged. A model defect or
-unexpected engine/resource error is a call failure, never a bad row. The
-engine must restore the ambient NumPy error policy on success and failure.
+the code. Invalid grades and a positive weighted firing rounded to zero
+are numerical errors. Preserve the cause of a lower level membership
+failure when available. These are explicit batch row categories;
+scalar exception types and ordering are unchanged. In a row with both
+an invalid domain and a failing membership, the batch reports the
+domain first because it validates every input domain before evaluating
+terms. Differential tests isolate scalar failures; combined failures
+use the batch precedence table. A model defect or unexpected engine or
+resource error is a call failure. Restore the ambient NumPy error policy
+on success and failure.
 
 ### Scalar parity
 
@@ -146,11 +175,19 @@ All modes return the base result. Changing trace level cannot change a
 value, status or error index. Result metadata uses the model's variable,
 term and rule declaration order, independent of supplied column order.
 
-| Mode         | Retained evidence |
-| ------------ | ----------------- |
-| `"off"`     | No trace arrays or per-row trace objects. |
-| `"summary"` | Also retain `fired_rule_count` (int64 `(N,)`) and `max_firing_strength` (float64 `(N,)`). True no-fire rows have count and maximum zero; other failed rows use `-1` and `NaN`. |
-| `"full"`    | Summary plus `input_grades` (float64 `(N, T)`), and five float64 `(N, R)` arrays for antecedent grade, firing, consequent, normalized strength and contribution. One float64 `(R,)` vector stores static rule weights. Include a bool `(N, R)` mask marking where the scalar exact normalized ratio is used. |
+| Mode        | Retained evidence                                         |
+| ----------- | --------------------------------------------------------- |
+| `"off"`     | Base result; no trace arrays or per-row trace objects.    |
+| `"summary"` | Base result, fired rule count and maximum firing.         |
+| `"full"`    | Summary, input grades, rule traces, weights and mask.     |
+
+Summary stores `fired_rule_count` as int64 `(N,)` and
+`max_firing_strength` as float64 `(N,)`. True no-fire rows have count and
+maximum zero; other failed rows use `-1` and `NaN`. Full adds
+`input_grades` as float64 `(N, T)`, and five float64 `(N, R)` arrays for
+antecedent grade, firing, consequent, normalized strength and
+contribution. Static rule weights occupy one float64 `(R,)` vector. A
+bool `(N, R)` mask marks where the exact normalized ratio is used.
 
 Full trace preserves inactive rules on successful rows. Grades and the
 five per-rule fields are `NaN` on failed rows, with a false exact-ratio
@@ -163,13 +200,14 @@ the trace. Rounded contributions may not sum exactly to the reported value.
 
 `chunk_size` is a positive integer number of rows (not Boolean), with a
 default of 4096. Process consecutive chunks of up to that size, including
-a final partial chunk. Empty input needs no kernel invocation. Preserve
-identical values, masks and traces across chunk sizes and layouts; do not
-reduce across rows. Under `"raise"`, failures in later rows or stages
-cannot take precedence over an earlier failing row. Validate structure
-and prepare model metadata once. Avoid a whole-batch conversion or reorder
-copy: normalize one chunk at a time, then write results directly into
-their final buffers.
+a final partial chunk. Empty input needs no kernel invocation. For
+identical converted coordinates, preserve masks, statuses and trace
+ordering exactly across chunk sizes and layouts, and meet the same
+numeric parity bounds. Do not reduce across rows. Under `"raise"`,
+failures in later rows or stages cannot take precedence over an earlier
+failing row. Validate structure and prepare model metadata once. Avoid
+a whole-batch conversion or reorder copy: normalize one chunk at a time,
+then write results directly into their final buffers.
 
 ## Validation and resource budget
 
@@ -205,7 +243,8 @@ their final buffers.
   workloads separately, small batches (`1`, `16`), `1024` and `100000`
   rows, both orders, all modes and at least two chunk sizes. Retain at
   least seven paired alternating time samples, raw memory evidence, and
-  the model/input sizes, layout, software and host details. Follow the
+  the model/input sizes, layout, software and host details. Record fresh
+  process import costs separately, with and without the optional extra. Follow the
   [benchmark protocol](../performance/benchmark-reproducibility-protocol.md).
   Accept a throughput claim only for measured workloads with a repeatable
   conversion-inclusive gain and acceptable memory for the intended caller.
@@ -216,9 +255,35 @@ their final buffers.
   batch operation is implemented; released scalar and membership/scale
   guides retain their current contracts.
 
+## Bounded evidence
+
+Run `python -m experiments.sugeno_batch_contract_probe` from the checkout
+with NumPy available. The [probe](../../experiments/sugeno_batch_contract_probe.py)
+independently computes a two-input, two-rule model on ten rows. The case
+at `(risk, exposure) = (1/4, 1/4)`
+has normalized strengths `(3/5, 2/5)` and exact weighted means `9/20`,
+`67/160` and `7/16` for the constant, affine and mixed cases. The probe
+checks those means, then compares the NumPy witness with scalar traces
+on ordinary finite rows and tests no-fire, bad input and a bad inactive
+consequent at different chunk boundaries. It exercises empty, single,
+strided/reordered, integer, non-native-endian and float32 inputs. If
+extended precision is available, it also checks conversion overflow.
+
+On Python 3.13.17 with NumPy 2.5.4, the maximum observed absolute
+output difference was zero in all three model orders. The ten-row
+case (`T = 4`, `R = 2`) retained 100, 260 and 1416 array payload bytes
+for off, summary and full respectively. Separate scalar witnesses show
+why true zero firing and positive product underflow are different,
+why a rounded-zero normalized ratio can still contribute `2**-52`,
+and why affine cancellation must preserve a unit residual. The probe
+does not implement general model validation or numerical repair, and
+its payload counts do not measure temporary memory, RSS or throughput.
+
 ## Output
 
 The proposed contract specifies a single-output batch, error and trace
-semantics, and the gates a public implementation must pass. Scalar
-inference, existing NumPy operations and package dependencies are
-unchanged by this decision record.
+semantics, and the gates a public implementation must pass. Implement
+the batch engine in [#406](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/406)
+and measure it in [#407](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/407).
+Scalar inference, existing NumPy operations and package dependencies
+are unchanged by this decision record.
