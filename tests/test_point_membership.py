@@ -24,7 +24,10 @@ from fuzzyroutines.exceptions import (
     InvalidParameterError,
     InvalidParameterTypeError,
 )
-from fuzzyroutines.point_membership import DiscreteMembershipTable, PiecewiseLinearMembership
+from fuzzyroutines.point_membership import (
+    DiscreteMembershipTable,
+    PiecewiseLinearMembership,
+)
 
 POINTS = ((-2, Fraction(1, 4)), (1, Fraction(3, 4)), (5, Fraction(1, 2)))
 

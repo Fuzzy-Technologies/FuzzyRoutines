@@ -9993,50 +9993,18 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
+sourceHash = "sha256:2b8f5bd334a3ec831c00ba33b7c2037b8506a02d0a7f196f2f3859396bc77d98"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "approved"
+state = "draft"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-
-[[units.translations.ru.reviews]]
-role = "editorial"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:e8dd6c46198da8f64fa095829c084d8ac6c6b460d200fc4d06be9a3c3c33f8fc"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
-
-[[units.translations.ru.reviews]]
-role = "mathematical"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:e8dd6c46198da8f64fa095829c084d8ac6c6b460d200fc4d06be9a3c3c33f8fc"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
+sourceHash = "sha256:2b8f5bd334a3ec831c00ba33b7c2037b8506a02d0a7f196f2f3859396bc77d98"
 
 [units.translations.zh-CN]
-state = "approved"
+state = "draft"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-
-[[units.translations.zh-CN.reviews]]
-role = "editorial"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:bde6c16c3358b75e89a08c3c9fc84e0909c7e5bec411ea56a6e8f6d3c2b85eef"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
-
-[[units.translations.zh-CN.reviews]]
-role = "mathematical"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:bde6c16c3358b75e89a08c3c9fc84e0909c7e5bec411ea56a6e8f6d3c2b85eef"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
+sourceHash = "sha256:2b8f5bd334a3ec831c00ba33b7c2037b8506a02d0a7f196f2f3859396bc77d98"
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -13973,3 +13941,71 @@ reviewedTranslationHash = "sha256:69ab0164d560f8aaba876856337deee4f31c31305a1c40
 reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
 reviewedAt = "2026-10-14T19:15:12Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+
+[[units]]
+id = "module:fuzzyroutines.point_membership"
+kind = "module"
+sourcePath = "fuzzyroutines/point_membership.py"
+sourceHash = "sha256:13d57713fd0d5ca4b4b7b558d2038cb4309ee6d1d809c95678867606be177f29"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.point_membership.md"
+sourceHash = "sha256:13d57713fd0d5ca4b4b7b558d2038cb4309ee6d1d809c95678867606be177f29"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.point_membership.md"
+sourceHash = "sha256:13d57713fd0d5ca4b4b7b558d2038cb4309ee6d1d809c95678867606be177f29"
+
+[[units]]
+id = "page:api.modern.point-membership"
+kind = "page"
+sourcePath = "docs/site/content/en/api/modern/point-membership.md"
+sourceHash = "sha256:72c0708e05292985aac766e459fa60f474bfa192f35756f7cc99d2e395402c94"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/api/modern/point-membership.md"
+sourceHash = "sha256:72c0708e05292985aac766e459fa60f474bfa192f35756f7cc99d2e395402c94"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/point-membership.md"
+sourceHash = "sha256:72c0708e05292985aac766e459fa60f474bfa192f35756f7cc99d2e395402c94"
+
+[[units]]
+id = "symbol:fuzzyroutines.point_membership.DiscreteMembershipTable"
+kind = "symbol"
+sourcePath = "fuzzyroutines/point_membership.py"
+sourceHash = "sha256:c4ead987c4f0a5228e7ec64ac822f6ce7576c3de2ad4ccfbbc526569effce65e"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.point_membership.DiscreteMembershipTable.md"
+sourceHash = "sha256:c4ead987c4f0a5228e7ec64ac822f6ce7576c3de2ad4ccfbbc526569effce65e"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.point_membership.DiscreteMembershipTable.md"
+sourceHash = "sha256:c4ead987c4f0a5228e7ec64ac822f6ce7576c3de2ad4ccfbbc526569effce65e"
+
+[[units]]
+id = "symbol:fuzzyroutines.point_membership.PiecewiseLinearMembership"
+kind = "symbol"
+sourcePath = "fuzzyroutines/point_membership.py"
+sourceHash = "sha256:f5b2f34d303d2349254a4fb844b63fdbcd176f03e3a57b0a6d9884061dd230e3"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.point_membership.PiecewiseLinearMembership.md"
+sourceHash = "sha256:f5b2f34d303d2349254a4fb844b63fdbcd176f03e3a57b0a6d9884061dd230e3"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.point_membership.PiecewiseLinearMembership.md"
+sourceHash = "sha256:f5b2f34d303d2349254a4fb844b63fdbcd176f03e3a57b0a6d9884061dd230e3"

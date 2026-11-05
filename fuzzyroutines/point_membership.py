@@ -3,7 +3,12 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Immutable scalar membership from declared points, with explicit semantics."""
+"""Immutable scalar membership from declared points, with explicit semantics.
+
+Discrete tables store exact lookup data. Piecewise-linear functions define
+grades between knots and declare their behavior outside the knot interval.
+Neither representation needs an optional dependency.
+"""
 
 import bisect
 from dataclasses import dataclass, field
@@ -122,7 +127,19 @@ class DiscreteMembershipTable:
         object.__setattr__(self, "universe", universe)
 
     def __call__(self, coordinate: MembershipScalar, /) -> MembershipScalar:
-        """Return the stored grade or raise `InvalidDomainError` for an absent coordinate."""
+        """Return the grade stored at exactly the supplied coordinate.
+
+        Args:
+            coordinate: Finite, non-boolean real coordinate to match.
+
+        Returns:
+            The stored grade without numeric conversion.
+
+        Raises:
+            InvalidParameterTypeError: If the coordinate is not a non-boolean real.
+            InvalidParameterError: If the coordinate fails finite scalar validation.
+            InvalidDomainError: If the coordinate is absent from the table.
+        """
 
         position = _ValidateScalar(coordinate, "coordinate")
         coordinates = cast(tuple[float, ...], self.universe.points)
@@ -138,10 +155,12 @@ class DiscreteMembershipTable:
 class PiecewiseLinearMembership:
     """Linear membership between strictly increasing knots.
 
-    At every knot the stored grade is returned unchanged. Between knots the
-    grade is the linear blend of the two adjacent grades. Duplicate knots
-    are invalid; interior jumps cannot be encoded. A zero extension can
-    produce a jump at an endpoint with a nonzero grade.
+    At every knot the stored grade is returned unchanged. For two adjacent
+    knots $(a, g_a)$ and $(b, g_b)$ and an interior coordinate $x$, the grade
+    is $(1-t)g_a+tg_b$, where $t=(x-a)/(b-a)$. All-rational interpolation
+    returns a `Fraction`; other interpolated grades are returned as floats.
+    Duplicate knots are invalid; interior jumps cannot be encoded. A zero
+    extension produces a jump at any endpoint with a nonzero grade.
 
     Attributes:
         knots: Tuple of at least two `(coordinate, grade)` pairs. Coordinates
@@ -170,7 +189,21 @@ class PiecewiseLinearMembership:
         object.__setattr__(self, "_coordinates", tuple(coordinate for coordinate, _ in knots))
 
     def __call__(self, coordinate: MembershipScalar, /) -> MembershipScalar:
-        """Return a knot, interpolated, or policy grade for one finite coordinate."""
+        """Return a knot, interpolated, or policy grade for one coordinate.
+
+        Args:
+            coordinate: Finite, non-boolean real coordinate to evaluate.
+
+        Returns:
+            A grade in $[0, 1]$ according to the knots and boundary policy.
+
+        Raises:
+            InvalidParameterTypeError: If the coordinate is not a non-boolean real.
+            InvalidParameterError: If the coordinate fails finite scalar validation.
+            InvalidDomainError: If the coordinate is outside the knot interval
+                under the error policy, or the interpolation cannot resolve the
+                supplied real type's coordinates.
+        """
 
         position = _ValidateScalar(coordinate, "coordinate")
         index = bisect.bisect_left(self._coordinates, position)
