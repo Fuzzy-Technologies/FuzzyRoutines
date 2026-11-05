@@ -13,17 +13,15 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Запрос для помощника
 
-> Прочитай https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/agent-quickstart/ . Сначала проверь версию Python, установи именно FuzzyRoutines 2.1.0 (если её ещё нет в PyPI, используй проверенный wheel из CI), создай историческую Универсальную нечёткую шкалу через доступный современный API и выполни примеры для шкалы и условного уровня риска. Покажи версию пакета, входные данные, пять степеней принадлежности, выбранный уровень или отказ от классификации и результаты численных проверок. Если доступно построение графиков, сохрани график без графического интерфейса. Объясни слабое покрытие около 0.17 и отличие степеней принадлежности от вероятностей. Если выполнять код негде, сообщи об этом и приведи команды, не выдавая их за выполненные.
+> Прочитай https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/agent-quickstart/ . Сначала проверь версию Python, установи именно FuzzyRoutines 2.1.0 из PyPI и запусти примеры из тега `v2.1.0`: создай историческую Универсальную нечёткую шкалу и классифицируй условные оценки риска. Покажи версию пакета, входные данные, пять степеней принадлежности, выбранный уровень или отказ от классификации и результаты численных проверок. Если доступно построение графиков, сохрани график без графического интерфейса. Объясни слабое покрытие около 0.17 и отличие степеней принадлежности от вероятностей. Если выполнить код негде, приведи команды и пометь результаты как ожидаемые.
 
 ## Версии и возможности
 
-Руководство рассчитано на **2.1.0** и CPython **3.13 или 3.14**. Если эта
-версия ещё недоступна в PyPI, используйте приведённую ниже инструкцию для
-проверенного wheel из CI. [Опубликованная версия 2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/)
-остаётся базой для воспроизведения прежних результатов; базовый скалярный
-пример работает и в 2.1. Содержимое `/latest/` обновляется; точная версия пакета
-и поле `environment` в JSON показывают, что было запущено. Автономный скрипт
-не импортирует модули из репозитория.
+Руководство использует [опубликованную версию 2.1.0](https://pypi.org/project/fuzzyroutines/2.1.0/)
+на CPython **3.13 или 3.14**. Автономный скрипт из тега `v2.1.0` не импортирует
+модули из репозитория. Установленная версия записывается в поле `environment`
+в JSON. Содержимое `/latest/` может обновляться; для воспроизведения прежних
+результатов используйте [указатель версий документации](https://fuzzy-technologies.github.io/FuzzyRoutines/api/versions/).
 
 | Возможность                 | Базовый скалярный API                                                    | Пример                                                              |
 | --------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
@@ -33,8 +31,7 @@ SPDX-License-Identifier: Apache-2.0
 | Срезы и численный результат | `AlphaCut`, `SampleAlphaCut`, `Centroid`                                 | [Альфа-срезы](guides/alpha-cuts.md), [центроид](guides/centroid.md) |
 
 **Дополнительные возможности 2.1:** для перечисленных API нужен пакет
-соответствующей версии 2.1. Инструкция по установке не означает, что версия уже
-доступна в PyPI. Скалярное ядро по-прежнему не требует внешних зависимостей.
+соответствующей версии. Скалярное ядро не требует внешних зависимостей.
 
 | Возможность                              | Интерфейс или область применения в 2.1                                                                                                                                                       | Руководство                                                                                                                                                                                          |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -62,20 +59,16 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Запуск без копии репозитория
 
-В новой среде выполните команды по порядку. Первая проверка остановит установку
-на неподдерживаемом Python. Затем скрипт потребует точную версию установленного
-пакета: старый `1.0.3` не будет принят за современный API.
-
-Команда установки из PyPI ниже применима, когда там доступна версия 2.1.0.
-Иначе установите проверенный wheel по инструкции в последнем разделе, затем
-выполните команды примеров после строки установки.
+В новом окружении выполните эти команды в Bash. Если версия Python не
+поддерживается, первая команда остановит цепочку до установки пакета. Перед
+вычислением степеней принадлежности скрипт проверит точную версию пакета.
 
 ```bash
-python -c "import platform, sys; sys.exit(0 if platform.python_implementation() == 'CPython' and sys.version_info[:2] in ((3, 13), (3, 14)) else 'Use CPython 3.13 or 3.14; do not install on 3.12.')"
-python -m pip install fuzzyroutines==2.1.0
-curl -fLo agent_recipe.py https://fuzzy-technologies.github.io/FuzzyRoutines/recipes/agent_recipe.py
-python -I agent_recipe.py --expect-version 2.1.0 --output scale.json > scale.stdout.json
-python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --output risk.json > risk.stdout.json
+python -c "import platform, sys; sys.exit(0 if platform.python_implementation() == 'CPython' and sys.version_info[:2] in ((3, 13), (3, 14)) else 'Use CPython 3.13 or 3.14.')" &&
+python -m pip install fuzzyroutines==2.1.0 &&
+curl -fLo agent_recipe.py https://raw.githubusercontent.com/Fuzzy-Technologies/FuzzyRoutines/v2.1.0/examples/agent_recipe.py &&
+python -I agent_recipe.py --expect-version 2.1.0 --output scale.json > scale.stdout.json &&
+python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --output risk.json > risk.stdout.json &&
 python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --value 17 --output weak.json > weak.stdout.json
 ```
 
@@ -112,29 +105,9 @@ python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --value 17 --ou
 инструментов повторный запуск создаёт побайтово одинаковое изображение.
 
 ```bash
-curl -fLo requirements-plots.txt https://fuzzy-technologies.github.io/FuzzyRoutines/recipes/requirements-plots.txt
-python -m pip install -r requirements-plots.txt
+curl -fLo requirements-plots.txt https://raw.githubusercontent.com/Fuzzy-Technologies/FuzzyRoutines/v2.1.0/docs/requirements-plots.txt &&
+python -m pip install -r requirements-plots.txt &&
 python -I agent_recipe.py --expect-version 2.1.0 --scenario risk --value 17 --plot risk.svg > plot.stdout.json
 ```
 
 [![Исторические кривые и пять степеней принадлежности при 0.17: все значения ниже порога 0.1.](../en/assets/figures/agent-risk.svg)](../en/assets/figures/agent-risk.svg)
-
-## Проверка конкретного кандидата 2.1
-
-Возьмите wheel кандидата из артефактов CI и создайте новую среду с поддерживаемой
-версией Python. Скачав `agent_recipe.py` по командам выше, задайте
-`FUZZYROUTINES_WHEEL` — абсолютный локальный путь к wheel, а
-`FUZZYROUTINES_VERSION` — его точную версию из метаданных. Эти значения берутся
-из конкретного артефакта; угадывать версию для установки из PyPI не нужно.
-
-```bash
-: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the candidate wheel}"
-: "${FUZZYROUTINES_VERSION:?Set the exact candidate version}"
-python -m pip install --no-deps "$FUZZYROUTINES_WHEEL"
-python -I agent_recipe.py --expect-version "$FUZZYROUTINES_VERSION" --output candidate.json > candidate.stdout.json
-```
-
-Так проверяется сохранённый базовый скалярный пример на кандидате, а не все
-новые возможности. Кодек, вывод, необязательные пакетные вычисления и примеры
-из репозитория проверяйте по соответствующим руководствам. В отчёте сохраняйте
-вместе хеш wheel, ревизию исходников, JSON и полученные изображения.

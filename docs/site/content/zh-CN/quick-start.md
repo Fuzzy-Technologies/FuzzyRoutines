@@ -19,25 +19,17 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-本指南面向 **2.1.0**。当 PyPI 提供该版本时，请指定确切版本安装：
+从 PyPI 安装 [FuzzyRoutines 2.1.0](https://pypi.org/project/fuzzyroutines/2.1.0/)，并在运行示例前确认版本：
 
 ```bash
 python -m pip install fuzzyroutines==2.1.0
+python -I -c "from importlib.metadata import version; print(version('fuzzyroutines'))"
 ```
 
-如果 PyPI 尚未提供 2.1.0，请按照[智能体指南](agent-quickstart.md)获取匹配且经过审阅的
-CI wheel，将其本地绝对路径赋给 `FUZZYROUTINES_WHEEL`，并改用以下安装方式：
-
-```bash
-: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
-python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
-python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')"
-```
-
+版本检查应输出 `2.1.0`。`/latest/` 文档会更新；如需查阅特定发行版，请参见[文档版本索引](https://fuzzy-technologies.github.io/FuzzyRoutines/api/versions/)。
 [已发布的 2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/)
-及其[标签版本文档](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/quick-start.md)
+及其[标签版本文档](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/zh-CN/quick-start.md)
 仍可用于复现历史基线。较早的 1.x 版本不提供此现代 API。
-报告候选构建的结果时，请保留 wheel 哈希值及匹配的源代码修订版本。
 
 ## 用几行代码完成测量与分类 {#measure-and-classify-in-a-few-lines}
 
@@ -74,7 +66,7 @@ print(grades, result.selectedTerms[0].name)
 
 接着阅读[九个完整场景](guides/index.md)。它们涵盖物理测量、策略选择、拒绝分类、有向模糊差、α-截集、质心、尺度诊断和自定义模型。每个场景都包含可独立运行的代码、预期数值和图形。[隶属函数图集](guides/membership-families.md)可以帮助选择曲线。
 
-脚本 [`examples/guide.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/guide.py)运行全部九个场景，并检查独立确定的数值预期。在已安装软件包的仓库工作副本中运行：
+标签 `v2.1.0` 下的脚本 [`examples/guide.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.1.0/examples/guide.py)运行全部九个场景，并检查独立确定的数值预期。检出该标签并安装对应版本的软件包后，运行：
 
 ```bash
 python -I examples/guide.py

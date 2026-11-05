@@ -19,28 +19,20 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-Руководство рассчитано на **2.1.0**. Когда эта версия доступна в PyPI,
-установите её с точным указанием версии:
+Установите [FuzzyRoutines 2.1.0 из PyPI](https://pypi.org/project/fuzzyroutines/2.1.0/)
+и проверьте версию перед запуском примера:
 
 ```bash
 python -m pip install fuzzyroutines==2.1.0
+python -I -c "from importlib.metadata import version; print(version('fuzzyroutines'))"
 ```
 
-Если 2.1.0 ещё недоступна в PyPI, получите соответствующий проверенный wheel
-из CI по [инструкции для помощника](agent-quickstart.md), задайте его абсолютный
-локальный путь в `FUZZYROUTINES_WHEEL` и установите пакет следующим способом:
-
-```bash
-: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
-python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
-python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')"
-```
-
+Проверка должна вывести `2.1.0`. Содержимое `/latest/` может обновляться;
+для конкретного релиза используйте [указатель версий документации](https://fuzzy-technologies.github.io/FuzzyRoutines/api/versions/).
 [Опубликованная версия 2.0.0](https://pypi.org/project/fuzzyroutines/2.0.0/)
-и её [документация в теге](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/en/quick-start.md)
+и её [документация в теге](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.0.0/docs/site/content/ru/quick-start.md)
 остаются доступны для воспроизведения прежних результатов. Старые релизы 1.x
-не содержат этот современный API. При проверке кандидата сохраняйте хеш wheel
-и соответствующую ревизию исходников.
+не содержат этого современного API.
 
 ## Измерение и классификация в несколько строк {#measure-and-classify-in-a-few-lines}
 
@@ -77,7 +69,7 @@ print(grades, result.selectedTerms[0].name)
 
 Перейдите к [девяти практическим сценариям](guides/index.md). Они показывают физические измерения, выбор правил, отказ от классификации, направленную нечёткую разность, альфа-срезы, центроиды, диагностику шкалы и пользовательские модели. Каждый содержит самостоятельный код, ожидаемые числа и график. [Галерея функций принадлежности](guides/membership-families.md) поможет выбрать кривую.
 
-Скрипт [`examples/guide.py`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/examples/guide.py) выполняет все девять сценариев и сравнивает результаты с независимо рассчитанными эталонными значениями. Из локальной копии репозитория с установленным пакетом выполните:
+Скрипт [`examples/guide.py` из тега `v2.1.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.1.0/examples/guide.py) выполняет все девять сценариев и сравнивает результаты с независимо рассчитанными эталонными значениями. Переключите локальную копию на этот тег, установите соответствующую версию пакета и выполните:
 
 ```bash
 python -I examples/guide.py
