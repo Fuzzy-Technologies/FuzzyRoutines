@@ -4,3 +4,4 @@
 include tools/__init__.py
 include tools/reproducible_artifacts.py
 include requirements-build.txt
+include CITATION.cff
