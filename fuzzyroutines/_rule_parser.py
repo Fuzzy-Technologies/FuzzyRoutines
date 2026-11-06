@@ -99,6 +99,7 @@ class _RuleDraft:
     antecedent: _AntecedentDraft
     consequent: _ConsequentDraft
     weight: _LocatedValue[float]
+    sourceEnd: int | None
 
 
 def _ValidateAntecedentDepth(root: _AntecedentDraft) -> None:
@@ -268,12 +269,12 @@ class _RuleParser:
         consequent = self.Consequent()
         self.Take("word", "WEIGHT")
         weight = self.Number()
-        self.Take("end")
+        sourceEnd = self.Take("end").start
 
         if not 0.0 <= weight.value <= 1.0:
             raise _RuleParseError("invalid-rule-semantics", weight.start, "Rule weight must be in [0, 1].")
 
-        return _RuleDraft(identifier, name, antecedent, consequent, weight)
+        return _RuleDraft(identifier, name, antecedent, consequent, weight, sourceEnd)
 
 
 def _ParseRule(source: bytes) -> _RuleDraft:
