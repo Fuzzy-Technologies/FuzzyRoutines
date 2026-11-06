@@ -95,6 +95,15 @@ negative zero. Parenthesize a child operator of lower precedence and a
 child operator of the same n-ary kind. Preserve operand and coefficient
 order. Insignificant user whitespace and escape spellings are not retained.
 
+Before accepting a bound rule or returning serialized text, check its
+canonical representation against the same byte, token and nesting limits.
+Count canonical UTF-8 bytes after escaping and formatting, including the
+final LF. Stop counting at the first exceeded limit. A compact source
+can meet the input limits and still fail this check. Report the exceeded
+limit category with a canonical representation diagnostic at the source's
+end-of-input offset when a source exists. Export from a typed rule has no
+source offset. Return no partial rule or text on failure.
+
 In the same model context, parsing canonical text reproduces the typed
 tree and v1 rule fields, including coefficient order, rule name, rule ID
 and signed zero. The mapping is only defined for the supported v1 rule
@@ -124,6 +133,19 @@ a wrong-kind consequent, `WEIGHT 1.01`, `WEIGHT 1e-999`, and
 `"risk" IS "Low" + "Min"`. Reparse canonical output and check the full
 ordered AST and v1 rule fields. Use a nested same-operator case and a
 negative-zero coefficient as separate regression fixtures.
+
+For the canonical byte boundary, start with
+`RULE r "R" IF "risk" IS "High" THEN AFFINE(0` and end with
+`) WEIGHT 1`. Between them put 255 compact pairs of the form
+`,"<name>":0`. Each name consists of `x`, its distinct three-digit
+index (000 through 254), and 246 ASCII `a` characters. Bind all names
+as inputs of the same Sugeno model. The compact source is 65,079 bytes
+without LF. Canonical formatting adds two spaces per pair and a final LF,
+producing 65,590 bytes with the same token count. Reject it for exceeding
+the canonical byte limit. Remove 54 trailing `a` characters from the
+first name in both the model and rule to obtain exactly 65,536 canonical
+bytes, which must be accepted and reparsed. Removing only 53 must still
+fail.
 
 ## Output
 
