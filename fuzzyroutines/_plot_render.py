@@ -91,7 +91,7 @@ def RenderPlot(
 
     except ModuleNotFoundError as error:
         if error.name == "matplotlib":
-            raise ImportError("Scientific plot rendering requires Matplotlib.") from error
+            raise ImportError("Scientific plot rendering requires Matplotlib. Install fuzzyroutines[plot].") from error
 
         raise
 
