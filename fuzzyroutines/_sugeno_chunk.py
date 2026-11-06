@@ -74,8 +74,13 @@ class _ChunkResult:
 
 
 @dataclass(frozen=True, slots=True)
-class _FullTrace:
-    """Full rule and input evidence written at original observation indices."""
+class SugenoBatchFullTrace:
+    """Read-only rule and input evidence in model declaration order.
+
+    Failed rows have NaN grades, strengths, outputs, and contributions. The
+    exact-ratio mask is false on failed rows and marks a retained exact ratio
+    on successful rows. Static rule weights occupy a single vector.
+    """
 
     inputGrades: NDArray[Float64]
     antecedents: NDArray[Float64]
@@ -88,12 +93,16 @@ class _FullTrace:
 
 
 @dataclass(frozen=True, slots=True)
-class _Trace:
-    """Summary buffers and optional full trace buffers for a prepared batch."""
+class SugenoBatchTrace:
+    """Read-only firing counts and maxima, with optional full rule evidence.
+
+    True no-fire rows have count and maximum zero. Other failures have count
+    -1 and maximum NaN. Full evidence is present only in full trace mode.
+    """
 
     firedRuleCount: NDArray[Int64]
     maxFiringStrength: NDArray[Float64]
-    full: _FullTrace | None
+    full: SugenoBatchFullTrace | None
 
 
 def _DomainMask(
@@ -191,7 +200,7 @@ def _EvaluateChunk(
     plan: _PreparedModel,
     coordinates: NDArray[Float64],
     *,
-    trace: _Trace | None = None,
+    trace: SugenoBatchTrace | None = None,
     offset: int = 0,
 ) -> _ChunkResult:
     """Run the prepared stages for one binary64 coordinate chunk in model order.

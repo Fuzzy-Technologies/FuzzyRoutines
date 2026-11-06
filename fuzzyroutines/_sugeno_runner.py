@@ -8,9 +8,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, fields
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any, Literal, SupportsFloat, cast
 
-from fuzzyroutines._sugeno_chunk import _EvaluateChunk, _FullTrace, _RowFailure, _Trace
+from fuzzyroutines._sugeno_chunk import (
+    SugenoBatchFullTrace,
+    SugenoBatchTrace,
+    _EvaluateChunk,
+    _RowFailure,
+)
 from fuzzyroutines._sugeno_model import _PreparedModel
 from fuzzyroutines.batches import _Numpy
 from fuzzyroutines.exceptions import (
@@ -27,6 +32,8 @@ if TYPE_CHECKING:
     from numpy.typing import NDArray
 
 type _TraceMode = Literal["off", "summary", "full"]
+type _CoordinateRow = list[object] | tuple[object, ...]
+type _CoordinatesInput = NDArray[Any] | list[_CoordinateRow] | tuple[_CoordinateRow, ...]
 
 _STATUS_ERRORS = {
     1: InvalidParameterError,
@@ -45,8 +52,13 @@ _STATUS_DESCRIPTIONS = {
 
 
 @dataclass(frozen=True, slots=True)
-class _PreparedBatchResult:
-    """Read-only result arrays and model-order metadata for one prepared batch."""
+class SugenoBatchResult:
+    """Read-only batch predictions, statuses, and model-order metadata.
+
+    Each value, status, and validity entry corresponds to one source row.
+    Valid rows have status zero and a finite value. Failed rows have NaN
+    values and nonzero statuses. Trace data is absent in trace-off mode.
+    """
 
     values: NDArray[Float64]
     status: NDArray[UInt8]
@@ -54,10 +66,10 @@ class _PreparedBatchResult:
     featureNames: tuple[str, ...]
     termNames: tuple[tuple[str, str], ...]
     ruleNames: tuple[str, ...]
-    trace: _Trace | None
+    trace: SugenoBatchTrace | None
 
 
-def _AllocateTrace(np: Any, plan: _PreparedModel, size: int, mode: _TraceMode) -> _Trace | None:
+def _AllocateTrace(np: Any, plan: _PreparedModel, size: int, mode: _TraceMode) -> SugenoBatchTrace | None:
     """Allocate only the trace payload selected for the whole result."""
 
     if mode == "off":
@@ -67,7 +79,7 @@ def _AllocateTrace(np: Any, plan: _PreparedModel, size: int, mode: _TraceMode) -
 
     if mode == "full":
         ruleShape = (size, len(plan.ruleNames))
-        full = _FullTrace(
+        full = SugenoBatchFullTrace(
             np.full((size, len(plan.termNames)), np.nan, dtype=np.float64),
             np.full(ruleShape, np.nan, dtype=np.float64),
             np.full(ruleShape, np.nan, dtype=np.float64),
@@ -78,14 +90,14 @@ def _AllocateTrace(np: Any, plan: _PreparedModel, size: int, mode: _TraceMode) -
             np.array(plan.weights, dtype=np.float64),
         )
 
-    return _Trace(
+    return SugenoBatchTrace(
         np.full(size, -1, dtype=np.int64),
         np.full(size, np.nan, dtype=np.float64),
         full,
     )
 
 
-def _FreezeTrace(trace: _Trace | None) -> None:
+def _FreezeTrace(trace: SugenoBatchTrace | None) -> None:
     """Publish the independently allocated trace arrays read-only."""
 
     if trace is None:
@@ -108,30 +120,59 @@ def _RaiseRowFailure(failure: _RowFailure, offset: int) -> None:
     raise _STATUS_ERRORS[failure.status](message) from failure.cause
 
 
+def _CopyCoordinates(
+    np: Any,
+    source: _CoordinatesInput,
+    columns: tuple[int, ...],
+    offset: int,
+    end: int,
+) -> NDArray[Float64]:
+    """Convert only this chunk and leave binary64 overflows for row handling."""
+
+    chunk: NDArray[Float64] = np.empty((end - offset, len(columns)), dtype=np.float64)
+
+    with np.errstate(over="ignore", under="ignore", invalid="ignore"):
+        if isinstance(source, (list, tuple)):
+            for index, row in enumerate(source[offset:end]):
+                for column, original in enumerate(columns):
+                    try:
+                        chunk[index, column] = float(cast(SupportsFloat, row[original]))
+
+                    except OverflowError:
+                        chunk[index, column] = np.inf
+
+        else:
+            for column, original in enumerate(columns):
+                chunk[:, column] = source[offset:end, original]
+
+    return chunk
+
+
 def _EvaluatePreparedBatch(
     plan: _PreparedModel,
-    coordinates: NDArray[Float64],
+    coordinates: _CoordinatesInput,
     *,
     chunkSize: int,
     traceMode: _TraceMode,
     raiseOnError: bool,
-) -> _PreparedBatchResult:
-    """Evaluate validated binary64 observations in consecutive private chunks.
+    columns: tuple[int, ...] | None = None,
+) -> SugenoBatchResult:
+    """Evaluate validated observation sources in consecutive binary64 chunks.
 
-    The caller has already bound coordinates to model feature order and
-    validated options. Failed row indices and trace payload positions refer
-    to the input row sequence, independent of chunk size.
+    Column offsets bind the source to model feature order. Failed row
+    indices and trace positions refer to the original row sequence.
     """
 
     np = _Numpy()
-    size = coordinates.shape[0]
+    size = len(coordinates)
     values: NDArray[Float64] = np.empty(size, dtype=np.float64)
     status: NDArray[UInt8] = np.empty(size, dtype=np.uint8)
     trace = _AllocateTrace(np, plan, size, traceMode)
+    sourceColumns = tuple(range(len(plan.featureNames))) if columns is None else columns
 
     for offset in range(0, size, chunkSize):
         end = min(offset + chunkSize, size)
-        chunk = np.array(coordinates[offset:end], dtype=np.float64, order="C", copy=True)
+        chunk = _CopyCoordinates(np, coordinates, sourceColumns, offset, end)
         result = _EvaluateChunk(plan, chunk, trace=trace, offset=offset)
 
         if raiseOnError and result.failure is not None:
@@ -146,4 +187,4 @@ def _EvaluatePreparedBatch(
     validMask.setflags(write=False)
     _FreezeTrace(trace)
 
-    return _PreparedBatchResult(values, status, validMask, plan.featureNames, plan.termNames, plan.ruleNames, trace)
+    return SugenoBatchResult(values, status, validMask, plan.featureNames, plan.termNames, plan.ruleNames, trace)
