@@ -128,8 +128,8 @@ def test_HelpAndInvalidScenarioDoNotComputeOrCreateArtifacts(tmpPath):
     assert set(tmpPath.iterdir()) == initialEntries
 
 
-def test_FiguresAreAccessibleAndPlottingDependenciesStayOutsideRuntime():
-    """Require descriptive SVG metadata, paired prose, and docs-only plotting dependencies."""
+def test_FiguresAreAccessibleAndPlottingDependenciesStayOptional():
+    """Require descriptive SVG metadata, paired prose, and an opt-in plot backend."""
 
     figureRoot = PROJECT_ROOT / "docs" / "site" / "content" / "en" / "assets" / "figures"
     pageRoot = figureRoot.parents[1] / "guides"
@@ -142,10 +142,14 @@ def test_FiguresAreAccessibleAndPlottingDependenciesStayOutsideRuntime():
         assert "Computed using the scalar public API" in source
         page = (pageRoot / f"{figureName}.md").read_text(encoding="utf-8")
         assert f"../assets/figures/{figureName}.svg" in page
-    metadataText = (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    metadata = tomllib.loads(metadataText)
+    project = tomllib.loads((PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
+    extras = project["optional-dependencies"]
     exampleSource = (PROJECT_ROOT / "examples" / "guide.py").read_text(encoding="utf-8")
-    assert "matplotlib" not in metadataText
-    assert not any(dependency.lower().startswith(("numpy", "matplotlib"))
-                   for dependency in metadata["project"].get("dependencies", []))
+    assert not project.get("dependencies", []), "The scalar package must remain dependency-free."
+    assert extras["plot"] == ["matplotlib>=3.11.2,<4", "pillow>=12.3.0,<13"]
+    assert not any(
+        dependency.strip().casefold().startswith(("matplotlib", "pillow"))
+        for extra, dependencies in extras.items() if extra != "plot"
+        for dependency in dependencies
+    ), "The plotting backend must be available only through the plot extra."
     assert "import matplotlib" not in exampleSource and "import numpy" not in exampleSource
