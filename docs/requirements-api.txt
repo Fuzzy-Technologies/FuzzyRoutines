@@ -34,7 +34,7 @@ python-dateutil==2.9.0.post0
 pyyaml==6.0.3
 pyyaml-env-tag==1.1
 requests==2.34.2
-setuptools==80.9.0
+setuptools==84.0.0
 six==1.17.0
 urllib3==2.8.0
 watchdog==6.0.0
