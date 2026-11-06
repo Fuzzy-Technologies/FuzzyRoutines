@@ -41,9 +41,7 @@ class ScaleModelDecodeError(ConfigurationError):
     def __init__(self, category: _Category, path: ConfigPath, message: str) -> None:
         """Record actionable scale model diagnostics."""
 
-        super().__init__(message)
-        self.category = category
-        self.pointer = ConfigPointer(path)
+        super().__init__(message, category=category, pointer=ConfigPointer(path))
 
 
 @dataclass(frozen=True, slots=True)

@@ -88,6 +88,13 @@ class ConfigurationError(ValueError):
     category: str
     pointer: str
 
+    def __init__(self, message: str, *, category: str, pointer: str) -> None:
+        """Store one diagnostic with its stable category and wire location."""
+
+        super().__init__(message)
+        self.category = category
+        self.pointer = pointer
+
 
 class JsonConfigParseError(ConfigurationError):
     """Malformed or unsafe wire data with an RFC 6901 diagnostic pointer."""
@@ -97,8 +104,7 @@ class JsonConfigParseError(ConfigurationError):
     def __init__(self, message: str, pointer: str = "") -> None:
         """Retain the parser diagnostic and its source location."""
 
-        super().__init__(message)
-        self.pointer = pointer
+        super().__init__(message, category=self.category, pointer=pointer)
 
 
 class _JsonReader:

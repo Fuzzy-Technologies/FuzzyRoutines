@@ -8,6 +8,11 @@ extra = "numpy"
 pages = ["guides/numpy-batches.md"]
 modules = ["fuzzyroutines.batches"]
 
+[[optionalExamples]]
+extra = "config"
+pages = ["api/modern/configuration.md"]
+modules = ["fuzzyroutines.configuration"]
+
 [[surfaces]]
 module = "fuzzyroutines"
 source = "fuzzyroutines/__init__.py"

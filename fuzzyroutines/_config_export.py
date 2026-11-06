@@ -58,8 +58,7 @@ class ConfigExportError(ConfigurationError):
     def __init__(self, path: ConfigPath, message: str) -> None:
         """Record a precise wire pointer and the reason export cannot proceed."""
 
-        super().__init__(message)
-        self.pointer = ConfigPointer(path)
+        super().__init__(message, category=self.category, pointer=ConfigPointer(path))
 
 
 def _Binary64(value: object, path: ConfigPath) -> float:

@@ -31,9 +31,7 @@ class ConfigEnvelopeError(ConfigurationError):
     def __init__(self, category: _Category, path: ConfigPath, message: str) -> None:
         """Retain the normalized diagnostic independently of schema wording."""
 
-        super().__init__(message)
-        self.category = category
-        self.pointer = ConfigPointer(path)
+        super().__init__(message, category=category, pointer=ConfigPointer(path))
 
 
 def _SelectEnvelope(document: JsonValue, path: ConfigPath, *, inline: bool) -> _EnvelopeKind:
