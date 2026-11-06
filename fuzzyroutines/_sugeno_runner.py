@@ -7,12 +7,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, fields
+from dataclasses import fields
 from typing import TYPE_CHECKING, Any, Literal, SupportsFloat, cast
 
 from fuzzyroutines._sugeno_chunk import (
-    SugenoBatchFullTrace,
-    SugenoBatchTrace,
     _EvaluateChunk,
     _RowFailure,
 )
@@ -24,9 +22,13 @@ from fuzzyroutines.exceptions import (
     NumericalError,
     UndefinedResultError,
 )
+from fuzzyroutines.sugeno_batches import (
+    SugenoBatchFullTrace,
+    SugenoBatchResult,
+    SugenoBatchTrace,
+)
 
 if TYPE_CHECKING:
-    from numpy import bool_ as Bool
     from numpy import float64 as Float64
     from numpy import uint8 as UInt8
     from numpy.typing import NDArray
@@ -49,24 +51,6 @@ _STATUS_DESCRIPTIONS = {
     4: "consequent or output outside its universe",
     5: "numerical failure",
 }
-
-
-@dataclass(frozen=True, slots=True)
-class SugenoBatchResult:
-    """Read-only batch predictions, statuses, and model-order metadata.
-
-    Each value, status, and validity entry corresponds to one source row.
-    Valid rows have status zero and a finite value. Failed rows have NaN
-    values and nonzero statuses. Trace data is absent in trace-off mode.
-    """
-
-    values: NDArray[Float64]
-    status: NDArray[UInt8]
-    validMask: NDArray[Bool]
-    featureNames: tuple[str, ...]
-    termNames: tuple[tuple[str, str], ...]
-    ruleNames: tuple[str, ...]
-    trace: SugenoBatchTrace | None
 
 
 def _AllocateTrace(np: Any, plan: _PreparedModel, size: int, mode: _TraceMode) -> SugenoBatchTrace | None:

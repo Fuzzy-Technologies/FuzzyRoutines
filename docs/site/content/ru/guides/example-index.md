@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Указатель примеров публичного API {#public-api-example-index}
 
-Все 229 учтённых публичных символов связаны с выполненными примерами (37 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
+Все 233 учтённых публичных символов связаны с выполненными примерами (38 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
 
 Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют настоящей аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
 
@@ -146,11 +146,11 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, блок 1](../api/modern/membership.md); [alarm, блок 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, блок 1](../api/modern/membership.md); [alarm, блок 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, блок 1](alarm.md); [centroid, блок 1](centroid.md)                                                       |
-| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, блок 2](inference.md); [sugeno-batches, блок 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.AllOf`                                              | [inference, блок 2](inference.md)                                                                                |
 | `fuzzyroutines.inference.Antecedent`                                         | [inference, блок 2](inference.md)                                                                                |
 | `fuzzyroutines.inference.AnyOf`                                              | [inference, блок 2](inference.md)                                                                                |
-| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, блок 2](inference.md); [sugeno-batches, блок 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
 | `fuzzyroutines.inference.InferencePolicy`                                    | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
 | `fuzzyroutines.inference.InputGrade`                                         | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
@@ -160,10 +160,10 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.inference.MamdaniRule`                                        | [inference, блок 1](inference.md)                                                                                |
 | `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, блок 1](inference.md)                                                                                |
 | `fuzzyroutines.inference.NotCondition`                                       | [inference, блок 2](inference.md)                                                                                |
-| `fuzzyroutines.inference.SugenoModel`                                        | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, блок 2](inference.md); [sugeno-batches, блок 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, блок 2](inference.md)                                                                                |
 | `fuzzyroutines.inference.SugenoResult`                                       | [inference, блок 2](inference.md)                                                                                |
-| `fuzzyroutines.inference.SugenoRule`                                         | [inference, блок 2](inference.md)                                                                                |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, блок 2](inference.md); [sugeno-batches, блок 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, блок 2](inference.md)                                                                                |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, блок 1](linguistic-encoding.md); [linguistic-encoding, блок 2](linguistic-encoding.md)     |
@@ -242,3 +242,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
+| `fuzzyroutines.sugeno_batches.EvaluateSugenoBatch`                           | [sugeno-batches, блок 1](sugeno-batches.md)                                                                      |
+| `fuzzyroutines.sugeno_batches.SugenoBatchFullTrace`                          | [sugeno-batches, блок 1](sugeno-batches.md)                                                                      |
+| `fuzzyroutines.sugeno_batches.SugenoBatchResult`                             | [sugeno-batches, блок 1](sugeno-batches.md)                                                                      |
+| `fuzzyroutines.sugeno_batches.SugenoBatchTrace`                              | [sugeno-batches, блок 1](sugeno-batches.md)                                                                      |

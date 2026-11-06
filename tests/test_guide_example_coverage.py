@@ -113,7 +113,7 @@ def test_AllPublishedPublicExamplesAndTheirIndexAreCurrent():
 
     assert report["symbolCount"] >= 190 and not report["missing"]
     COVERAGE["ValidateIndex"](report, COVERAGE["INDEX_PATH"].read_text())
-    assert report["omittedOptionalPages"] == ["guides/numpy-batches.md"]
+    assert report["omittedOptionalPages"] == ["guides/numpy-batches.md", "guides/sugeno-batches.md"]
 
 
 def test_OptionalScopesAreReportedAndCannotProduceAFullIndex():

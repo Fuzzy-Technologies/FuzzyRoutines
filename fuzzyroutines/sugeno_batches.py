@@ -7,21 +7,22 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Literal, cast
 
-from fuzzyroutines._sugeno_chunk import SugenoBatchFullTrace, SugenoBatchTrace
 from fuzzyroutines._sugeno_model import _PrepareModel
-from fuzzyroutines._sugeno_runner import (
-    SugenoBatchResult,
-    _CoordinatesInput,
-    _EvaluatePreparedBatch,
-)
 from fuzzyroutines.batches import _Numpy
 from fuzzyroutines.exceptions import InvalidParameterError, InvalidParameterTypeError
 from fuzzyroutines.inference import SugenoModel
 
 if TYPE_CHECKING:
+    from numpy import bool_ as Bool
+    from numpy import float64 as Float64
+    from numpy import int64 as Int64
+    from numpy import uint8 as UInt8
     from numpy.typing import NDArray
+
+    from fuzzyroutines._sugeno_runner import _CoordinatesInput
 
 __all__ = [
     "EvaluateSugenoBatch",
@@ -29,6 +30,56 @@ __all__ = [
     "SugenoBatchResult",
     "SugenoBatchTrace",
 ]
+
+
+@dataclass(frozen=True, slots=True)
+class SugenoBatchFullTrace:
+    """Read-only rule and input evidence in model declaration order.
+
+    Failed rows have NaN grades, strengths, outputs, and contributions. The
+    exact-ratio mask is false on failed rows and marks a retained exact ratio
+    on successful rows. Static rule weights occupy a single vector.
+    """
+
+    inputGrades: NDArray[Float64]
+    antecedents: NDArray[Float64]
+    firings: NDArray[Float64]
+    consequents: NDArray[Float64]
+    normalized: NDArray[Float64]
+    contributions: NDArray[Float64]
+    exactRatios: NDArray[Bool]
+    ruleWeights: NDArray[Float64]
+
+
+@dataclass(frozen=True, slots=True)
+class SugenoBatchTrace:
+    """Read-only firing counts and maxima, with optional full rule evidence.
+
+    True no-fire rows have count and maximum zero. Other failures have count
+    -1 and maximum NaN. Full evidence is present only in full trace mode.
+    """
+
+    firedRuleCount: NDArray[Int64]
+    maxFiringStrength: NDArray[Float64]
+    full: SugenoBatchFullTrace | None
+
+
+@dataclass(frozen=True, slots=True)
+class SugenoBatchResult:
+    """Read-only batch predictions, statuses, and model-order metadata.
+
+    Each value, status, and validity entry corresponds to one source row.
+    Valid rows have status zero and a finite value. Failed rows have NaN
+    values and nonzero statuses. Trace data is absent in trace-off mode.
+    """
+
+    values: NDArray[Float64]
+    status: NDArray[UInt8]
+    validMask: NDArray[Bool]
+    featureNames: tuple[str, ...]
+    termNames: tuple[tuple[str, str], ...]
+    ruleNames: tuple[str, ...]
+    trace: SugenoBatchTrace | None
 
 
 def _ValidateCoordinates(np: Any, values: object, width: int) -> _CoordinatesInput:
@@ -116,6 +167,8 @@ def EvaluateSugenoBatch(
         3 for no firing, 4 for output domain and 5 for numerical errors.
         Importing the module does not import NumPy or alter scalar evaluation.
     """
+
+    from fuzzyroutines._sugeno_runner import _EvaluatePreparedBatch
 
     if type(backend) is not str or backend != "numpy":
         raise InvalidParameterError("backend must be 'numpy'")

@@ -22,10 +22,11 @@ from fuzzyroutines.membership import _AnalyticalSource
 if TYPE_CHECKING:
     from numpy import bool_ as Bool
     from numpy import float64 as Float64
-    from numpy import int64 as Int64
     from numpy import intp as Intp
     from numpy import uint8 as UInt8
     from numpy.typing import NDArray
+
+    from fuzzyroutines.sugeno_batches import SugenoBatchTrace
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,38 +72,6 @@ class _ChunkResult:
     values: NDArray[Float64]
     status: NDArray[UInt8]
     failure: _RowFailure | None
-
-
-@dataclass(frozen=True, slots=True)
-class SugenoBatchFullTrace:
-    """Read-only rule and input evidence in model declaration order.
-
-    Failed rows have NaN grades, strengths, outputs, and contributions. The
-    exact-ratio mask is false on failed rows and marks a retained exact ratio
-    on successful rows. Static rule weights occupy a single vector.
-    """
-
-    inputGrades: NDArray[Float64]
-    antecedents: NDArray[Float64]
-    firings: NDArray[Float64]
-    consequents: NDArray[Float64]
-    normalized: NDArray[Float64]
-    contributions: NDArray[Float64]
-    exactRatios: NDArray[Bool]
-    ruleWeights: NDArray[Float64]
-
-
-@dataclass(frozen=True, slots=True)
-class SugenoBatchTrace:
-    """Read-only firing counts and maxima, with optional full rule evidence.
-
-    True no-fire rows have count and maximum zero. Other failures have count
-    -1 and maximum NaN. Full evidence is present only in full trace mode.
-    """
-
-    firedRuleCount: NDArray[Int64]
-    maxFiringStrength: NDArray[Float64]
-    full: SugenoBatchFullTrace | None
 
 
 def _DomainMask(

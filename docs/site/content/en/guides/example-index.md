@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 229 inventoried public symbols are linked to executed examples (37 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
+All 233 inventoried public symbols are linked to executed examples (38 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
 
 Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. Typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
@@ -146,11 +146,11 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, block 1](alarm.md); [centroid, block 1](centroid.md)                                                       |
-| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, block 2](inference.md); [sugeno-batches, block 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.AllOf`                                              | [inference, block 2](inference.md)                                                                                 |
 | `fuzzyroutines.inference.Antecedent`                                         | [inference, block 2](inference.md)                                                                                 |
 | `fuzzyroutines.inference.AnyOf`                                              | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, block 2](inference.md); [sugeno-batches, block 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.inference.InferencePolicy`                                    | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.inference.InputGrade`                                         | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
@@ -160,10 +160,10 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.inference.MamdaniRule`                                        | [inference, block 1](inference.md)                                                                                 |
 | `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, block 1](inference.md)                                                                                 |
 | `fuzzyroutines.inference.NotCondition`                                       | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.SugenoModel`                                        | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, block 2](inference.md); [sugeno-batches, block 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, block 2](inference.md)                                                                                 |
 | `fuzzyroutines.inference.SugenoResult`                                       | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.SugenoRule`                                         | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, block 2](inference.md); [sugeno-batches, block 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, block 2](inference.md)                                                                                 |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
@@ -242,3 +242,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
+| `fuzzyroutines.sugeno_batches.EvaluateSugenoBatch`                           | [sugeno-batches, block 1](sugeno-batches.md)                                                                       |
+| `fuzzyroutines.sugeno_batches.SugenoBatchFullTrace`                          | [sugeno-batches, block 1](sugeno-batches.md)                                                                       |
+| `fuzzyroutines.sugeno_batches.SugenoBatchResult`                             | [sugeno-batches, block 1](sugeno-batches.md)                                                                       |
+| `fuzzyroutines.sugeno_batches.SugenoBatchTrace`                              | [sugeno-batches, block 1](sugeno-batches.md)                                                                       |
