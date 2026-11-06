@@ -17,7 +17,7 @@ from ._config_json import _MAX_BYTES, _NUMBER, DecodeConfigJson, JsonNumber
 from .configuration import ConfigurationError, LoadModel, MamdaniBinding, ModelConfiguration, ScaleDefinition
 from .encoding import LinguisticCodec
 from .exceptions import FuzzyRoutinesError
-from .inference import MamdaniResult, SugenoResult
+from .inference import MamdaniResult, MamdaniRuleTrace, SugenoResult, SugenoRuleTrace
 from .linguistic import FuzzificationPolicy
 
 type _ErrorCategory = Literal["usage", "configuration", "evaluation", "io", "capability"]
@@ -296,10 +296,11 @@ def _Infer(
         inputId, termId = inputTerms[(item.variable, item.term)]
         grades.append({"input": inputId, "term": termId, "grade": float(item.grade)})
 
+    ruleTraces: Sequence[MamdaniRuleTrace | SugenoRuleTrace] = evaluated.rules
     rules = [
         {"rule": ruleId, "antecedentGrade": float(rule.antecedentGrade),
          "weight": float(rule.weight), "firingStrength": float(rule.firingStrength)}
-        for ruleId, rule in zip(binding.ruleIds, evaluated.rules, strict=True)
+        for ruleId, rule in zip(binding.ruleIds, ruleTraces, strict=True)
     ]
 
     if isinstance(evaluated, SugenoResult):

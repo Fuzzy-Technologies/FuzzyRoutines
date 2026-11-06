@@ -33,6 +33,9 @@ keywords = ["fuzzy", "fuzzylogic", "fuzzyset", "logic", "math", "research", "sci
 config = ["jsonschema>=4.26,<5", "referencing>=0.37,<1"]
 numpy = ["numpy>=2.3.5,<3"]
 
+[project.scripts]
+fuzzyroutines = "fuzzyroutines._cli:Main"
+
 [project.urls]
 Homepage = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
 Repository = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
