@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # ADR-0028 External model interchange profile
 
-- Status: Proposed checkpoint for 2.2
+- Status: Proposed for 2.2
 - Date: 2026-11-06
 - Task: [#424](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/424)
 - Feature: [#371](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/371)
@@ -13,11 +13,15 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Decision
 
-Choose a bounded, import-only MATLAB-style text FIS profile for an
-interoperability spike. FuzzyLite 6.0 reproduced the original fixture's three
-in-domain results with positive rule firing. The installed reader in #425
-remains a no-go until a FuzzyRoutines consumer identifies a model they would
-migrate. The v1 JSON/YAML model remains the canonical representation.
+For the design task, choose a bounded, import-only MATLAB-style text FIS
+profile. FuzzyLite 6.0 reproduced the original fixture's three in-domain
+results with positive rule firing. This evidence supports the profile choice
+and completes the fixture evaluation for #424. The v1 JSON/YAML model remains
+the canonical representation.
+
+For [#425](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/425),
+the installed reader remains a no-go until a FuzzyRoutines consumer identifies
+a model they would migrate. Accepting the design leaves this gate in place.
 
 ## Evidence and implementation cost
 
@@ -59,6 +63,10 @@ migrate. The v1 JSON/YAML model remains the canonical representation.
 
 These sources support a bounded format preference. They do not establish
 market share, broad conformance, or an obligation to implement any format.
+IEC and IEEE identify their published standards. MathWorks documents the
+supported read/write operations and model behavior. The text syntax exercised
+here comes from the original fixture and its verified FuzzyLite 6.0 execution.
+The evidence supports this tested dialect.
 
 ## Proposed FIS import subset
 
@@ -66,7 +74,9 @@ Read one bounded text model. Require type-1 Sugeno, exactly one input and
 one output, explicit finite closed ranges, strictly nondegenerate triangular
 input terms, constant consequents, and weighted-average output. Require
 positive in-range term and consequent indices and explicit product weights
-in $[0,1]$. Use the explicit min/max operator pair for the one-input profile.
+in $[0,1]$. Require the fixture's min/max antecedent operators, product
+implication, sum aggregation and weighted-average defuzzification fields.
+Each rule has exactly one antecedent term.
 Resolve numbered declarations in source order and retain their display names.
 Map the range to `ContinuousUniverse`, each `trimf` to `Triangle`, and each
 rule to `SugenoRule` with a `TermCondition` and a
@@ -120,9 +130,11 @@ sum, duplicate sections, and signed or zero rule indices.
 
 ## Licensing and next gate
 
-Use primary documentation and originally authored fixtures. Repository and
-standard licenses apply to their own materials. The JFML IoT repository
-declares GPL-3.0, and no external implementation, schema, vendor sample
-model, or standards text is included here. Reuse requires a separate
-provenance and license decision. A future clean install must run without
-MATLAB, Octave, a Java bridge, or network access.
+Use primary documentation and originally authored fixtures. The IEC and
+IEEE standards are accessed under their publishers' terms. Cite the
+MathWorks documentation and retain original test data. Any redistribution of
+standard text, schemas, or vendor fixtures requires verified permission.
+JFML IoT declares GPL-3.0. The FuzzyLite 6.0 release also declares GPL-3.0
+and was used as a separate evaluator. Reusing their implementation code
+requires a separate provenance and license decision. A future clean install
+must run without MATLAB, Octave, a Java bridge, or network access.
