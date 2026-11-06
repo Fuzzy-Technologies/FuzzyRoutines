@@ -8,8 +8,11 @@ SPDX-License-Identifier: Apache-2.0
 [English](README.md) · [Русский](README.ru.md)
 
 [ADR-0021](../../adr/0021-versioned-project-configuration.md) 提出了
-[版本 1 的 JSON Schema](../../../fuzzyroutines/config-v1.schema.json)。这些 JSON 文件用于说明和检验
-拟议格式，可以用 JSON Schema 验证器检查。本次变更尚未为 FuzzyRoutines 添加加载接口。
+[版本 1 的 JSON Schema](../../../fuzzyroutines/config-v1.schema.json)。
+安装 `fuzzyroutines[config]` 后，可以用
+[`LoadModel`](../../site/content/zh-CN/api/modern/configuration.md) 读取独立模型示例，
+再用 `DumpModel` 生成规范化字节。文件由调用方打开。
+项目示例展示内嵌模型、呈现设置和求值场景。`LoadModel` 接受独立模型文档。
 
 - [历史通用模糊标度](fixtures/valid-historical-scale.json) 保留了五个原始语言项、
   各项系数、闭区间论域 `[0, 1]`、各项的质心积分区间，以及在最大隶属度完全相等时
@@ -30,5 +33,5 @@ SPDX-License-Identifier: Apache-2.0
 [可调用对象示例](fixtures/invalid-schema-callable.json) 无法通过结构验证，
 因为配置不允许这种函数类型或导入路径。
 [引用缺失示例](fixtures/invalid-semantic-reference.json) 能通过结构验证，
-但加载时应在 `/scales/score/terms/0/membership` 报错，因为该模型中没有
-ID 为 `missing` 的隶属函数。未来的加载器必须同时检查结构和引用关系。
+调用 `LoadModel` 时会在 `/scales/score/terms/0/membership` 报错，
+因为该模型中没有 ID 为 `missing` 的隶属函数。

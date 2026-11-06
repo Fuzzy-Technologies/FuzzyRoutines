@@ -13973,3 +13973,163 @@ reviewedTranslationHash = "sha256:69ab0164d560f8aaba876856337deee4f31c31305a1c40
 reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
 reviewedAt = "2026-10-14T19:15:12Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+
+[[units]]
+id = "module:fuzzyroutines.configuration"
+kind = "module"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:b783a6b9e947c28b9c3c19366803990de72a222ad6fe352530c35df304bf53c9"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:api.modern.configuration"
+kind = "page"
+sourcePath = "docs/site/content/en/api/modern/configuration.md"
+sourceHash = "sha256:aeaf5658ff2ab5c3589431636cbdb6238a5f63d691d2ef2c0571169af940953c"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/api/modern/configuration.md"
+sourceHash = "sha256:aeaf5658ff2ab5c3589431636cbdb6238a5f63d691d2ef2c0571169af940953c"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/configuration.md"
+sourceHash = "sha256:aeaf5658ff2ab5c3589431636cbdb6238a5f63d691d2ef2c0571169af940953c"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.AssembleModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:a1ea1c448abc053c2572610d409bd7324e46a9bec7cc2a309d5ebbf26a8377e8"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ConfigurationError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_json.py"
+sourceHash = "sha256:f023b29f92d20d8def1e452fb37d6c8db6619b4c8526fc392c24570b99ee5dae"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.DumpModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:d5f4307d28566595896057d8238fea27bc23690471f9ea3116aa5e249e50fa23"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.LoadModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:2be02873c89d8a88b9d54794d3a1d299c9136603416e9668cbe4cfb769f422c4"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.MamdaniBinding"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:dc456037aab8f86f97b835db6b5830d1ad04cff2f5c4ce538b1dff0c79c1b83d"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.MamdaniCentroid"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_mamdani_model.py"
+sourceHash = "sha256:c2123d3e7f316ffac3cea9e150f94060dd767c461f93d93a5ee0b6a66a565d2a"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ModelConfiguration"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:4d94f358931c3ff6b853a67cb1c5a76cb66bb7866ad5c91d5b0ffed645a49e09"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ScaleDefinition"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_scale_model.py"
+sourceHash = "sha256:4f5551b4474d24ae3064ab119b8165971daf42691bc19de694ae6e4332e4d067"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ScaleRepresentatives"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_scale_model.py"
+sourceHash = "sha256:9900de08d951b97356dd8c0ea3dfd3a42d4febd71a9fc63456af3d02f7daa02f"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.SugenoBinding"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:bce9682cfa337b8e5c6b9117789682adadae21e6656a79cc8ceb5296e1c8c299"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"

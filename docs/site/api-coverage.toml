@@ -119,3 +119,48 @@ mode = "authored"
 module = "fuzzyroutines.inference"
 source = "fuzzyroutines/inference.py"
 mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.configuration"
+source = "fuzzyroutines/configuration.py"
+mode = "exports"
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_envelope"
+reason = "Internal version and kind dispatch behind the public configuration codec."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_export"
+reason = "Internal v1 serialization behind the public DumpModel and AssembleModel functions."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_inference"
+reason = "Internal reconstruction helpers shared by the two scalar inference model kinds."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_json"
+reason = "Internal bounded JSON reader and diagnostics used by the public configuration codec."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_mamdani_model"
+reason = "Internal Mamdani reconstruction with public settings re-exported by configuration."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_project"
+reason = "Internal project validation and reconstruction for a separately scoped public project API."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_scale_model"
+reason = "Internal scale reconstruction with public definitions re-exported by configuration."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_schema"
+reason = "Internal accessor for the bundled, offline v1 schema resource."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_structure"
+reason = "Internal schema validator used by the public configuration codec."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_sugeno_model"
+reason = "Internal Sugeno reconstruction used by the public configuration codec."

@@ -8,9 +8,12 @@ SPDX-License-Identifier: Apache-2.0
 [English](README.md) · [简体中文](README.zh-CN.md)
 
 В [ADR-0021](../../adr/0021-versioned-project-configuration.md) предложена
-[схема версии 1](../../../fuzzyroutines/config-v1.schema.json). Эти JSON-файлы описывают проектируемый
-формат: их можно проверить валидатором JSON Schema. Загрузка через API
-FuzzyRoutines в этом изменении не добавляется.
+[схема версии 1](../../../fuzzyroutines/config-v1.schema.json). Установите
+`fuzzyroutines[config]`, чтобы загрузить примеры самостоятельных моделей
+через [`LoadModel`](../../site/content/ru/api/modern/configuration.md) и получить
+канонические байты через `DumpModel`. Файлы открывает вызывающий код.
+Пример проекта показывает встроенные модели, оформление и сценарии.
+`LoadModel` принимает документы самостоятельных моделей.
 
 - [Историческая шкала](fixtures/valid-historical-scale.json) сохраняет пять
   исходных термов, их коэффициенты, замкнутую единичную область, интервалы
@@ -36,6 +39,6 @@ FuzzyRoutines в этом изменении не добавляется.
 локально. [Пример с вызываемым объектом](fixtures/invalid-schema-callable.json)
 не проходит проверку схемы: такой тип и путь импорта запрещены.
 [Пример с отсутствующей ссылкой](fixtures/invalid-semantic-reference.json)
-проходит схему, но должен завершиться ошибкой по пути
-`/scales/score/terms/0/membership`: в модели нет функции принадлежности
-с ID `missing`. Будущий загрузчик проверит и структуру, и связи.
+проходит проверку схемы. При вызове `LoadModel` ошибка указывает на
+`/scales/score/terms/0/membership`, поскольку в модели нет определения
+функции принадлежности с ID `missing`.
