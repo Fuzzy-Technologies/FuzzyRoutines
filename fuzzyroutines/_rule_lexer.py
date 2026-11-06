@@ -124,7 +124,7 @@ def _LexRule(source: bytes) -> tuple[_RuleToken, ...]:
     except UnicodeDecodeError as error:
         raise _RuleLexError("malformed-input", error.start, "Invalid UTF-8 in rule.") from error
 
-    tokens = []
+    tokens: list[_RuleToken] = []
     position = 0
     offset = 0
 
