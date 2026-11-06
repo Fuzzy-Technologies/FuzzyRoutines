@@ -37,7 +37,7 @@ fuzzyroutines membership --project PATH [--model NAME] --scale ID --term ID --x 
 fuzzyroutines fuzzify --project PATH [--model NAME] --scale ID --x NUMBER
 fuzzyroutines infer --project PATH [--model NAME] [--evaluation ID] [--input ID=NUMBER ...] [--term-input ID=TERM ... --encoding representative-centroid] [--explain]
 fuzzyroutines validate --project PATH
-fuzzyroutines plot --project PATH [--model NAME] [--plot ID | --scale ID] --output PATH [--overwrite]
+fuzzyroutines plot --project PATH [--model NAME] [--plot ID | --scale ID] --output PATH [--background COLOR] [--overwrite]
 ```
 
 `NAME` and `ID` select exact, case-sensitive configuration IDs. A standalone
@@ -75,9 +75,16 @@ ID fails without falling back. An explicit `--scale` and an explicit
   supplied, use the declared default plot if it applies to the selected
   model. A plot without a preset or scale fails. Preset title, units and
   colors affect presentation only. Require an explicit output path with
-  `.png`, `.jpg`, `.jpeg`, or `.svg` suffix. A pre-existing output fails
-  unless `--overwrite` is supplied. The plot task owns format and sampling
-  policies. No rendering occurs when support is unavailable.
+  `.png`, `.jpg`, `.jpeg`, or `.svg` suffix, matched case-insensitively.
+  JPEG requires `--background COLOR` for both `.jpg` and `.jpeg`. The color
+  must be an opaque `#RRGGBB` token: a literal `#` followed by exactly six
+  ASCII hexadecimal digits. Quote the token in the shell. The renderer
+  composites the canvas and axes over that color before RGB encoding, as
+  specified by ADR-0022. Missing or invalid JPEG colors and use of the flag
+  with PNG or SVG are usage errors before any rendering or output write.
+  A pre-existing output fails unless `--overwrite` is supplied. The plot
+  task owns the remaining format and sampling policies. No rendering occurs
+  when support is unavailable.
 
 Numeric tokens use the JSON number grammar and ADR-0021's finite binary64
 conversion policy. Each resulting input coordinate must belong to its
@@ -151,6 +158,8 @@ fuzzyroutines fuzzify --project docs/schemas/config-v1/fixtures/valid-project.js
 fuzzyroutines infer --project docs/schemas/config-v1/fixtures/valid-project.json --evaluation quarter --explain
 fuzzyroutines infer --project model.yaml --model weighted --input risk=0.8 --explain
 fuzzyroutines plot --project docs/schemas/config-v1/fixtures/valid-project.json --plot risk --output risk.svg
+fuzzyroutines plot --project docs/schemas/config-v1/fixtures/valid-project.json --plot risk --output risk.jpg --background '#F5F5F5'
+fuzzyroutines plot --project docs/schemas/config-v1/fixtures/valid-project.json --plot risk --output missing-background.jpeg
 ```
 
 Validation returns project v1. Membership and fuzzification return the
@@ -163,6 +172,13 @@ fixture with [an unresolved reference](../schemas/config-v1/fixtures/invalid-sem
 fails with configuration exit `3` and the underlying reference pointer.
 Re-running the plot command against the same path without `--overwrite`
 fails with I/O exit `5`.
+
+With the renderer installed and a fresh output path, the JPEG command with
+`#F5F5F5` exits `0`, writes an opaque RGB JPEG to `risk.jpg`, and emits
+`{"command":"plot","result":{"format":"jpeg","output":"risk.jpg"},"resultVersion":1}`
+on stdout followed by LF. The missing-background command exits `2`, leaves
+stdout empty, emits a JSON error on stderr with `error.category` equal to
+`usage`, and does not create `missing-background.jpeg`.
 
 ## Consequences
 
