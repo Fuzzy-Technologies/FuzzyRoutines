@@ -3,13 +3,14 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Decode a bounded YAML document into the private JSON wire representation.
+"""Read and write bounded YAML project data through the v1 JSON wire representation.
 
 The optional YAML backend supplies parsing events. No YAML objects are
 constructed and project semantics are validated separately.
 """
 
 from collections.abc import Callable, Generator, Iterator
+from json import dumps
 from typing import cast
 
 from yaml import BaseLoader, YAMLError, parse
@@ -30,6 +31,7 @@ from yaml.events import (
 from yaml.nodes import ScalarNode
 from yaml.resolver import Resolver
 
+from ._config_export import ConfigExportError
 from ._config_json import (
     _AntecedentDepth,
     _MAX_ANTECEDENT_DEPTH,
@@ -42,11 +44,17 @@ from ._config_json import (
     ConfigPointer,
     DecodeConfigJson,
     JsonConfigParseError,
+    JsonNumber,
     JsonValue,
 )
+from ._config_project import _ConfiguredProject, _DecodeProjectData
 
 _JSON_LITERALS = {"null": None, "false": False, "true": True}
 _STRING_TAG = "tag:yaml.org,2002:str"
+_YAML_QUOTE_ESCAPES = {
+    codepoint: f"\\u{codepoint:04x}"
+    for codepoint in (*range(0x7f, 0xa0), 0x2028, 0x2029, 0xfffe, 0xffff)
+}
 # PyYAML's event interfaces are only partially annotated in the pinned stubs.
 _PARSE_EVENTS = cast(Callable[[str, type[BaseLoader]], Generator[Event, None, None]], parse)
 _RESOLVE_SCALAR = cast(Callable[[Resolver, type[ScalarNode], str, tuple[bool, bool]], str], Resolver.resolve)
@@ -248,3 +256,89 @@ def DecodeConfigYaml(encoded: bytes) -> JsonValue:
 
     finally:
         events.close()
+
+
+def DecodeYamlProject(encoded: bytes) -> _ConfiguredProject:
+    """Read a YAML project with the shared v1 schema and bindings.
+
+    Args:
+        encoded: A bounded UTF-8 YAML project.
+
+    Returns:
+        Immutable project settings and named models without executed scenarios.
+
+    Raises:
+        ConfigurationError: YAML parsing or shared project validation fails.
+        ImportError: The optional configuration validator is unavailable.
+    """
+
+    return _DecodeProjectData(DecodeConfigYaml(encoded))
+
+
+def _QuoteYaml(value: str) -> str:
+    """Quote strings while preserving YAML line separators and controls."""
+
+    return dumps(value, ensure_ascii=False).translate(_YAML_QUOTE_ESCAPES)
+
+
+def _AppendYamlEntry(lines: list[str], label: str, value: JsonValue, depth: int) -> None:
+    """Emit one mapping or sequence entry with a stable indentation."""
+
+    prefix = "  " * depth + label
+
+    if isinstance(value, (dict, list)) and value:
+        lines.append(prefix)
+        _AppendYamlBlock(lines, value, depth + 1)
+
+        return
+
+    if isinstance(value, JsonNumber):
+        text = value.token
+
+    elif isinstance(value, str):
+        text = _QuoteYaml(value)
+
+    else:
+        text = dumps(value)
+
+    lines.append(f"{prefix} {text}")
+
+
+def _AppendYamlBlock(lines: list[str], value: dict[str, JsonValue] | list[JsonValue], depth: int) -> None:
+    """Emit sorted mapping keys and preserve source sequence order."""
+
+    if isinstance(value, dict):
+        for key, item in sorted(value.items()):
+            _AppendYamlEntry(lines, f"{_QuoteYaml(key)}:", item, depth)
+
+    else:
+        for item in value:
+            _AppendYamlEntry(lines, "-", item, depth)
+
+
+def ConvertProjectJsonToYaml(encoded: bytes) -> bytes:
+    """Export a validated v1 JSON project as deterministic UTF-8 block YAML.
+
+    Args:
+        encoded: A bounded UTF-8 JSON project.
+
+    Returns:
+        Equivalent YAML bytes with exact number tokens and a final newline.
+
+    Raises:
+        ConfigurationError: The project is invalid or the YAML output exceeds
+            the document size limit.
+        ImportError: The optional configuration validator is unavailable.
+    """
+
+    document = DecodeConfigJson(encoded)
+    _DecodeProjectData(document)
+    assert isinstance(document, dict), "A validated v1 project must be a mapping."
+    lines: list[str] = []
+    _AppendYamlBlock(lines, document, 0)
+    yaml = ("\n".join(lines) + "\n").encode("utf-8")
+
+    if len(yaml) > _MAX_BYTES:
+        raise ConfigExportError((), "YAML exceeds the 1,048,576-byte limit.")
+
+    return yaml

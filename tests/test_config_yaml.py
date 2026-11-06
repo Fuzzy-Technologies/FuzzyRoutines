@@ -105,3 +105,69 @@ def test_ReadsBlockCollectionsAndRejectsDeepAntecedents():
     tail = b"}]}}"
     _DecodeYaml(root + condition + tail)
     _Reject(root + b"{operand: " + condition + b"}" + tail, "/inference/rules/0/antecedent" + "/operand" * 64, "64-node")
+
+
+_PROJECT_JSON = (
+    b'{"schemaVersion":1.0,"kind":"project","models":{"sample":'
+    b'{"kind":"model","schemaVersion":1,"universes":{"unit":{"kind":"continuous",'
+    b'"left":-0,"right":1,"leftClosed":true,"rightClosed":true}},'
+    b'"memberships":{"mid":{"family":"triangle","parameters":{"left":0,"peak":5e-1,"right":1}}},'
+    b'"scales":{"score":{"universe":"unit","terms":[{"id":"mid","membership":"mid",'
+    b'"name":"on \\u0085 \\u2028 \\ufffe \\ud83d\\ude80"}]}}}},"defaults":{"model":"sample"}}'
+)
+
+
+def _RequireProjectExtras() -> None:
+    """Keep semantic tests conditional on both explicit optional extras."""
+
+    if any(FindSpec(name) is None for name in ("yaml", "jsonschema", "referencing")):
+        raise SkipTest("YAML project validation requires the YAML and configuration extras.")
+
+
+def test_ExportsStableYamlAndReusesProjectBindings():
+    """Preserve the exact tree and reconstruct the same project via either format."""
+
+    _RequireProjectExtras()
+
+    from fuzzyroutines._config_project import DecodeProject
+    from fuzzyroutines._config_yaml import ConvertProjectJsonToYaml, DecodeYamlProject
+
+    yaml = ConvertProjectJsonToYaml(_PROJECT_JSON)
+    assert yaml == ConvertProjectJsonToYaml(_PROJECT_JSON), "Exported YAML must be deterministic."
+    assert yaml.startswith(b'"defaults":\n') and b'"peak": 5e-1\n' in yaml, (
+        "Export must use sorted block mappings and preserve decimal spelling."
+    )
+    assert _DecodeYaml(yaml) == DecodeConfigJson(_PROJECT_JSON), (
+        "YAML export must preserve strings, arrays and exact number tokens."
+    )
+    reference = DecodeProject(_PROJECT_JSON)
+    project = DecodeYamlProject(yaml)
+    assert project.defaults == reference.defaults and set(project.models) == set(reference.models), (
+        "Both formats must bind the same project model and defaults."
+    )
+
+
+def test_ReportsSharedProjectValidationFailuresAtTheirPaths():
+    """Apply the shared schema, version and semantic errors to YAML."""
+
+    _RequireProjectExtras()
+
+    from fuzzyroutines._config_json import ConfigurationError
+    from fuzzyroutines._config_yaml import ConvertProjectJsonToYaml, DecodeYamlProject
+
+    yaml = ConvertProjectJsonToYaml(_PROJECT_JSON)
+    cases = (
+        (yaml.replace(b'"schemaVersion": 1.0', b'"schemaVersion": 2'), "unsupported-version", "/schemaVersion"),
+        (yaml + b'"include": "external"\n', "invalid-shape", "/include"),
+        (yaml.replace(b'"model": "sample"', b'"model": "missing"'), "unresolved-reference", "/defaults/model"),
+    )
+
+    for encoded, category, pointer in cases:
+        try:
+            DecodeYamlProject(encoded)
+
+        except ConfigurationError as error:
+            assert (error.category, error.pointer) == (category, pointer), "YAML must preserve the v1 diagnostics."
+
+        else:
+            raise AssertionError(f"Expected {category!r} at {pointer!r}.")
