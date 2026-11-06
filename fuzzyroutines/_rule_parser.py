@@ -17,7 +17,7 @@ from fuzzyroutines._rule_lexer import _LexRule, _RuleLexError, _RuleToken, _Toke
 
 _MAX_DEPTH = 64
 
-type _RuleErrorCategory = Literal["malformed-input", "exceeded-limit", "invalid-rule-semantics"]
+type _RuleErrorCategory = Literal["malformed-input", "exceeded-limit", "unresolved-binding", "invalid-rule-semantics"]
 type _AntecedentDraft = _PredicateDraft | _NegationDraft | _JunctionDraft
 type _ConsequentDraft = _TermDraft | _ConstantDraft | _AffineDraft
 
@@ -73,6 +73,7 @@ class _TermDraft:
     """The exact name of a Mamdani output term."""
 
     termName: _LocatedValue[str]
+    start: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -80,6 +81,7 @@ class _ConstantDraft:
     """A finite binary64 Sugeno constant with its source span."""
 
     output: _LocatedValue[float]
+    start: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -88,6 +90,7 @@ class _AffineDraft:
 
     intercept: _LocatedValue[float]
     coefficients: tuple[tuple[_LocatedValue[str], _LocatedValue[float]], ...]
+    start: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -224,15 +227,15 @@ class _RuleParser:
 
         match token.value:
             case "TERM":
-                return _TermDraft(self.Text("string"))
+                return _TermDraft(self.Text("string"), token.start)
             case "CONSTANT":
-                return _ConstantDraft(self.Number())
+                return _ConstantDraft(self.Number(), token.start)
             case "AFFINE":
-                return self.Affine()
+                return self.Affine(token.start)
             case _:
                 raise _RuleParseError("malformed-input", token.start, "Expected TERM, CONSTANT, or AFFINE.")
 
-    def Affine(self) -> _AffineDraft:
+    def Affine(self, start: int) -> _AffineDraft:
         """Read an intercept and unique, ordered name-coefficient pairs."""
 
         self.Take("punctuation", "(")
@@ -254,7 +257,7 @@ class _RuleParser:
 
         self.Take("punctuation", ")")
 
-        return _AffineDraft(intercept, tuple(coefficients))
+        return _AffineDraft(intercept, tuple(coefficients), start)
 
     def Rule(self) -> _RuleDraft:
         """Require one complete rule with an explicit weight in [0, 1]."""
