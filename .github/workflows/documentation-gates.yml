@@ -102,14 +102,14 @@ jobs:
           python -m venv "$configEnvironment"
           configPython="$configEnvironment/bin/python"
           "$configPython" -m pip install --disable-pip-version-check "${wheelPaths[0]}[config]"
-          "$configPython" -I -c 'import sys; import fuzzyroutines.configuration; assert not {"jsonschema", "referencing", "numpy"} & sys.modules.keys()'
+          "$configPython" -I -c 'import sys; import fuzzyroutines.configuration; assert not {"jsonschema", "referencing", "numpy", "yaml"} & sys.modules.keys()'
           "$configPython" -I "$GITHUB_WORKSPACE/tools/guide_example_coverage.py" \
             --require-installed --extra config --check-index \
             --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples-config.json"
 
-          "$configPython" -m pip install --disable-pip-version-check "${wheelPaths[0]}[numpy]"
+          "$configPython" -m pip install --disable-pip-version-check "${wheelPaths[0]}[numpy,yaml]"
           "$configPython" -I "$GITHUB_WORKSPACE/tools/guide_example_coverage.py" \
-            --require-installed --extra config --extra numpy --check-index \
+            --require-installed --extra config --extra numpy --extra yaml --check-index \
             --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples-all.json"
 
       - name: Verify reproducible figures with the installed scalar API

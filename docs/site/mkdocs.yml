@@ -73,6 +73,8 @@ nav:
           - Alpha cuts: api/modern/alphacuts.md
           - Optional batches: api/modern/batches.md
           - JSON configuration: api/modern/configuration.md
+          - Affine input mapping: api/modern/input-mapping.md
+          - YAML project configuration: api/modern/yaml.md
           - Defuzzification: api/modern/defuzzification.md
           - Domains: api/modern/domain.md
           - Exceptions: api/modern/exceptions.md

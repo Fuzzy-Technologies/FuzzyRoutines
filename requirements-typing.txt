@@ -7,3 +7,5 @@ mypy-extensions==1.1.0
 pathspec==1.1.1
 typing-extensions==4.16.0
 librt==0.16.0
+# The private YAML parser is checked without installing its runtime extra.
+types-PyYAML==6.0.12.20250915

@@ -35,3 +35,14 @@ SPDX-License-Identifier: Apache-2.0
 [引用缺失示例](fixtures/invalid-semantic-reference.json) 能通过结构验证，
 调用 `LoadModel` 时会在 `/scales/score/terms/0/membership` 报错，
 因为该模型中没有 ID 为 `missing` 的隶属函数。
+
+## YAML 项目验证
+
+可选依赖组 `fuzzyroutines[yaml]` 提供 YAML 解析器。安装验证使用
+`fuzzyroutines[config,yaml]`，同时检查解析、本地 v1 架构和项目语义。
+YAML 与 JSON 使用相同的项目字段和引用作用域。标签、锚点、别名、
+合并键和重复键都会被拒绝。`include` 等项目字段也无法通过 v1 架构验证。
+测试确认转换会保留数字写法、Unicode 字符和数组顺序。
+
+公共 [YAML 转换函数](../../site/content/zh-CN/api/modern/yaml.md) 接收并返回经过
+验证的项目字节。可复用项目快照的公共接口由 [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387) 单独跟踪。

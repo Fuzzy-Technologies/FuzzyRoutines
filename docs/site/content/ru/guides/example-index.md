@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Указатель примеров публичного API {#public-api-example-index}
 
-Все 239 учтённых публичных символов связаны с выполненными примерами (38 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
+Все 245 учтённых публичных символов связаны с выполненными примерами (40 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
 
 Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют настоящей аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
 
@@ -24,7 +24,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.ContinuousFuzzyProperties`                                    | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousInterval`                                           | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousRegion`                                             | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
-| `fuzzyroutines.ContinuousUniverse`                                           | [membership, блок 1](../api/modern/membership.md); [alarm, блок 1](alarm.md)                                     |
+| `fuzzyroutines.ContinuousUniverse`                                           | [input-mapping, блок 1](../api/modern/input-mapping.md); [membership, блок 1](../api/modern/membership.md)       |
 | `fuzzyroutines.CreateUniversalFuzzyScale`                                    | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.DeriveProperties`                                             | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
 | `fuzzyroutines.Difference`                                                   | [alarm, блок 1](alarm.md)                                                                                        |
@@ -119,15 +119,15 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.configuration.MamdaniBinding`                                 | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.MamdaniCentroid`                                | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, блок 1](../api/modern/configuration.md)                                                          |
-| `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, блок 1](../api/modern/configuration.md)                                                          |
+| `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, блок 1](../api/modern/configuration.md); [yaml, блок 1](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleRepresentatives`                           | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, блок 1](errors.md)                                                                                      |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 5](api-recipes.md)                         |
-| `fuzzyroutines.domain.ContinuousUniverse`                                    | [membership, блок 1](../api/modern/membership.md); [alarm, блок 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [membership, блок 1](../api/modern/membership.md); [alarm, блок 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [api-recipes, блок 1](api-recipes.md)                                                                            |
+| `fuzzyroutines.domain.ContinuousUniverse`                                    | [input-mapping, блок 1](../api/modern/input-mapping.md); [membership, блок 1](../api/modern/membership.md)       |
+| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [input-mapping, блок 1](../api/modern/input-mapping.md); [membership, блок 1](../api/modern/membership.md)       |
+| `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [input-mapping, блок 1](../api/modern/input-mapping.md); [api-recipes, блок 1](api-recipes.md)                   |
 | `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, блок 1](../api/modern/exceptions.md); [membership, блок 1](../api/modern/membership.md)             |
@@ -176,6 +176,10 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.inference.SugenoRule`                                         | [inference, блок 2](inference.md); [configuration, блок 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, блок 2](inference.md); [configuration, блок 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, блок 1](inference.md); [inference, блок 2](inference.md)                                             |
+| `fuzzyroutines.input_mapping.AffineInputMapping`                             | [input-mapping, блок 1](../api/modern/input-mapping.md)                                                          |
+| `fuzzyroutines.input_mapping.AffineInputMapping.Forward`                     | [input-mapping, блок 1](../api/modern/input-mapping.md)                                                          |
+| `fuzzyroutines.input_mapping.AffineInputMapping.Inverse`                     | [input-mapping, блок 1](../api/modern/input-mapping.md)                                                          |
+| `fuzzyroutines.input_mapping.MissingObservationError`                        | [input-mapping, блок 1](../api/modern/input-mapping.md)                                                          |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, блок 1](linguistic-encoding.md); [linguistic-encoding, блок 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, блок 1](linguistic-encoding.md); [results, блок 4](results.md)                             |
 | `fuzzyroutines.linguistic.FuzzificationResult.isMatch`                       | [results, блок 4](results.md); [risk, блок 1](risk.md)                                                           |
@@ -252,3 +256,5 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
+| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, блок 1](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.yaml_configuration.ConvertProjectYamlToJson`                  | [yaml, блок 1](../api/modern/yaml.md)                                                                            |

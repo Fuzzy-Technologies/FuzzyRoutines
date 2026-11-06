@@ -11,7 +11,7 @@ from types import MappingProxyType
 from typing import cast
 
 from ._config_inference import _ResolveScale
-from ._config_json import ConfigPath, DecodeConfigJson
+from ._config_json import ConfigPath, DecodeConfigJson, JsonValue
 from ._config_mamdani_model import _ConfiguredMamdani, _DecodeMamdani
 from ._config_scale_model import (
     ScaleModelDecodeError,
@@ -244,7 +244,12 @@ def DecodeProject(encoded: bytes) -> _ConfiguredProject:
         ValueError: Parsing, structural or semantic validation fails.
     """
 
-    wire = DecodeConfigJson(encoded)
+    return _DecodeProjectData(DecodeConfigJson(encoded))
+
+
+def _DecodeProjectData(wire: JsonValue) -> _ConfiguredProject:
+    """Validate a parsed v1 wire tree and reconstruct its unevaluated project."""
+
     CheckConfigStructure(wire, ReadConfigV1Schema())
     document = cast(_Object, wire)
 

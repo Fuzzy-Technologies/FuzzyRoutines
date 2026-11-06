@@ -101,6 +101,7 @@ jobs:
           assert Path(fuzzyroutines.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
           assert importlib.util.find_spec("numpy") is None, "The no-extra wheel probe must have no NumPy installed"
           assert "numpy" not in sys.modules, "Core and batch imports must not import NumPy"
+          assert importlib.util.find_spec("yaml") is None, "The no-extra wheel probe must have no PyYAML installed"
           for operation in (
               lambda: EvaluateMembershipBatch(Gaussian(0, 1), [0.0]),
               lambda: FuzzifyBatch(CreateUniversalFuzzyScale(), [0.5]),
@@ -162,6 +163,76 @@ jobs:
             "$extraPython" -I -c 'import json, sys; report = json.load(open(sys.argv[1])); assert report["backend"] == "numpy" and report["shape"] == [5, 5]' \
               "$evidenceRoot/example.json"
           done
+
+      - name: Verify the optional YAML reader from the installed wheel
+        if: steps.scope.outputs.package == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          wheelPath="$(find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -name '*.whl' -print -quit)"
+          test -n "$wheelPath"
+          extraRoot="$RUNNER_TEMP/fuzzyroutines-yaml-${{ matrix.python-version }}"
+          python -m venv "$extraRoot/environment"
+          extraPython="$extraRoot/environment/bin/python"
+          "$extraPython" -m pip install --disable-pip-version-check pytest "$wheelPath[yaml]"
+          "$extraPython" -m pip check
+
+          cd "$extraRoot"
+          "$extraPython" -I - <<'PY'
+          import sys
+          from pathlib import Path
+
+          import fuzzyroutines
+          import yaml
+
+          assert Path(fuzzyroutines.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
+          assert Path(yaml.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
+          PY
+          cp "$GITHUB_WORKSPACE/tests/test_config_yaml.py" "$extraRoot/"
+          "$extraPython" -I -m pytest -q "$extraRoot/test_config_yaml.py"
+
+      - name: Verify YAML project validation with both extras from the installed wheel
+        if: steps.scope.outputs.package == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          wheelPaths=("$GITHUB_WORKSPACE"/dist/*.whl)
+          test "${#wheelPaths[@]}" -eq 1
+          test -f "${wheelPaths[0]}"
+          extraRoot="$RUNNER_TEMP/fuzzyroutines-yaml-project-${{ matrix.python-version }}"
+          python -m venv "$extraRoot/environment"
+          extraPython="$extraRoot/environment/bin/python"
+          "$extraPython" -m pip install --disable-pip-version-check pytest "${wheelPaths[0]}[config,yaml]"
+          "$extraPython" -m pip check
+
+          cd "$extraRoot"
+          "$extraPython" -I - <<'PY'
+          import sys
+          from pathlib import Path
+
+          import fuzzyroutines
+          import jsonschema
+          import referencing
+          import yaml
+
+          prefix = Path(sys.prefix).resolve()
+          for module in (fuzzyroutines, jsonschema, referencing, yaml):
+              assert Path(module.__file__).resolve().is_relative_to(prefix), module.__name__
+          PY
+          cp "$GITHUB_WORKSPACE/tests/test_config_yaml.py" "$extraRoot/"
+          reportPath="$GITHUB_WORKSPACE/dist/yaml-project.xml"
+          "$extraPython" -I -m pytest -q "$extraRoot/test_config_yaml.py" --junitxml="$reportPath"
+          "$extraPython" -I - "$reportPath" <<'PY'
+          import sys
+          from xml.etree.ElementTree import parse as ParseXml
+
+          suites = ParseXml(sys.argv[1]).getroot().findall(".//testsuite")
+          assert suites and all(suite.attrib["skipped"] == "0" for suite in suites), (
+              "The installed YAML project gate must execute every focused case."
+          )
+          PY
 
       - name: Clean-install source distribution and verify installed package
         if: steps.scope.outputs.package == 'true'

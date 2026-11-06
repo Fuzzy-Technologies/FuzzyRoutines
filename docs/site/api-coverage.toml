@@ -13,6 +13,11 @@ extra = "config"
 pages = ["api/modern/configuration.md"]
 modules = ["fuzzyroutines.configuration"]
 
+[[optionalExamples]]
+extra = "yaml"
+pages = ["api/modern/yaml.md"]
+modules = ["fuzzyroutines.yaml_configuration"]
+
 [[surfaces]]
 module = "fuzzyroutines"
 source = "fuzzyroutines/__init__.py"
@@ -46,6 +51,11 @@ mode = "authored"
 [[surfaces]]
 module = "fuzzyroutines.fuzzysets"
 source = "fuzzyroutines/fuzzysets.py"
+mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.input_mapping"
+source = "fuzzyroutines/input_mapping.py"
 mode = "authored"
 
 [[surfaces]]
@@ -130,6 +140,11 @@ module = "fuzzyroutines.configuration"
 source = "fuzzyroutines/configuration.py"
 mode = "exports"
 
+[[surfaces]]
+module = "fuzzyroutines.yaml_configuration"
+source = "fuzzyroutines/yaml_configuration.py"
+mode = "authored"
+
 [[exclusions]]
 symbol = "fuzzyroutines._config_envelope"
 reason = "Internal version and kind dispatch behind the public configuration codec."
@@ -171,5 +186,9 @@ symbol = "fuzzyroutines._config_sugeno_model"
 reason = "Internal Sugeno reconstruction used by the public configuration codec."
 
 [[exclusions]]
+symbol = "fuzzyroutines._config_yaml"
+reason = "Internal bounded YAML reader for the separately scoped project API."
+
+[[exclusions]]
 symbol = "fuzzyroutines._input_mapping"
-reason = "Private affine normalization experiment for the input units contract in ADR-0033."
+reason = "Private exact-ratio normalization kernel used by the public input mapping facade."
