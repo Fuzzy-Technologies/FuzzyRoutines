@@ -83,6 +83,10 @@ symbol = "fuzzyroutines.numeric"
 reason = "Internal scalar validation helpers; public validation contracts are documented at the consuming API boundaries."
 
 [[exclusions]]
+symbol = "fuzzyroutines._model_composition"
+reason = "Private ADR-0034 prototype for composing scalar models; the public composition API is tracked separately."
+
+[[exclusions]]
 symbol = "fuzzyroutines.Examples"
 reason = "Executable demonstration module validated as documentation, not a reusable public API surface."
 
