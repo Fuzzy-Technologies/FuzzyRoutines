@@ -20,15 +20,17 @@ def test_NumpyExtraDoesNotAddAScalarRuntimeDependency():
     assert project["optional-dependencies"]["numpy"] == ["numpy>=2.3.5,<3"]
 
 
-def test_OptionalCoverageDeclaresBothTheGuideAndItsPublicModule():
+def test_OptionalCoverageDeclaresTheGuidesAndTheirPublicModules():
     """Make omitted example evidence explicit without hiding the public API surface."""
 
     manifest = tomllib.loads((PROJECT_ROOT / "docs/site/api-coverage.toml").read_text(encoding="utf-8"))
     scopes = {scope["extra"]: scope for scope in manifest["optionalExamples"]}
-    assert scopes["numpy"]["pages"] == ["guides/numpy-batches.md"]
-    assert scopes["numpy"]["modules"] == ["fuzzyroutines.batches"]
-    assert any(surface["module"] == "fuzzyroutines.batches" for surface in manifest["surfaces"])
+    assert scopes["numpy"]["pages"] == ["guides/numpy-batches.md", "guides/sugeno-batches.md"]
+    assert scopes["numpy"]["modules"] == ["fuzzyroutines.batches", "fuzzyroutines.sugeno_batches"]
+    assert set(scopes["numpy"]["modules"]) <= {surface["module"] for surface in manifest["surfaces"]}
 
     for locale in ("en", "ru", "zh-CN"):
-        assert (PROJECT_ROOT / "docs/site/content" / locale / "guides/numpy-batches.md").is_file()
-        assert (PROJECT_ROOT / "docs/site/content" / locale / "api/modern/batches.md").is_file()
+        contentRoot = PROJECT_ROOT / "docs/site/content" / locale
+
+        for page in (*scopes["numpy"]["pages"], "api/modern/batches.md", "api/modern/sugeno-batches.md"):
+            assert (contentRoot / page).is_file()

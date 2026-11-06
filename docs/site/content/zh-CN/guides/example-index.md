@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 229 个已登记公共符号都链接到已执行的示例，共有 37 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
+全部 233 个已登记公共符号都链接到已执行的示例，共有 38 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
 
 函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
@@ -146,11 +146,11 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet`                                     | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.ScalarFuzzySet.Membership`                          | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
 | `fuzzyroutines.fuzzysets.Union`                                              | [alarm, 代码块 1](alarm.md); [centroid, 代码块 1](centroid.md)                                                       |
-| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.AffineConsequent`                                   | [inference, 代码块 2](inference.md); [sugeno-batches, 代码块 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.AllOf`                                              | [inference, 代码块 2](inference.md)                                                                               |
 | `fuzzyroutines.inference.Antecedent`                                         | [inference, 代码块 2](inference.md)                                                                               |
 | `fuzzyroutines.inference.AnyOf`                                              | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, 代码块 2](inference.md); [sugeno-batches, 代码块 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.inference.InferencePolicy`                                    | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.inference.InputGrade`                                         | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
@@ -160,10 +160,10 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.inference.MamdaniRule`                                        | [inference, 代码块 1](inference.md)                                                                               |
 | `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, 代码块 1](inference.md)                                                                               |
 | `fuzzyroutines.inference.NotCondition`                                       | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.SugenoModel`                                        | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, 代码块 2](inference.md); [sugeno-batches, 代码块 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, 代码块 2](inference.md)                                                                               |
 | `fuzzyroutines.inference.SugenoResult`                                       | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.SugenoRule`                                         | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, 代码块 2](inference.md); [sugeno-batches, 代码块 1](sugeno-batches.md)                                   |
 | `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, 代码块 2](inference.md)                                                                               |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
@@ -242,3 +242,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, 代码块 4](api-recipes.md); [custom, 代码块 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, 代码块 4](api-recipes.md); [custom, 代码块 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, 代码块 4](api-recipes.md); [custom, 代码块 1](custom.md)                                               |
+| `fuzzyroutines.sugeno_batches.EvaluateSugenoBatch`                           | [sugeno-batches, 代码块 1](sugeno-batches.md)                                                                     |
+| `fuzzyroutines.sugeno_batches.SugenoBatchFullTrace`                          | [sugeno-batches, 代码块 1](sugeno-batches.md)                                                                     |
+| `fuzzyroutines.sugeno_batches.SugenoBatchResult`                             | [sugeno-batches, 代码块 1](sugeno-batches.md)                                                                     |
+| `fuzzyroutines.sugeno_batches.SugenoBatchTrace`                              | [sugeno-batches, 代码块 1](sugeno-batches.md)                                                                     |

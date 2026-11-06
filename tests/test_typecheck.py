@@ -68,8 +68,9 @@ def test_OptionalSourceGateAddsStrictBackendAndConsumers(monkeypatch):
     def CheckTargets(command, **options):
         """Observe complete source targets without invoking an external checker."""
 
-        assert "fuzzyroutines/batches.py" in command
+        assert set(typecheck.OPTIONAL_SOURCES["numpy"]) <= set(command)
         assert "tests/typing/optional/numpy/batch_consumer.py" in command
+        assert "tests/typing/optional/numpy/sugeno_batch_consumer.py" in command
         assert "fuzzyroutines/__init__.py" in command
         assert "--config-file" in command and "--no-incremental" in command
 

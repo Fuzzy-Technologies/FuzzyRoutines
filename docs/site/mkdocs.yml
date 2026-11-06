@@ -50,6 +50,7 @@ nav:
       - Optional NumPy batches: guides/numpy-batches.md
       - Scale audit: guides/scale-audit.md
       - Mamdani and Sugeno inference: guides/inference.md
+      - Sugeno rule batches: guides/sugeno-batches.md
       - Neural inputs and outputs: guides/neural-integration.md
       - Learning Sugeno rules: guides/differentiable-sugeno.md
       - Custom quality model: guides/custom.md
@@ -77,6 +78,7 @@ nav:
           - Exceptions: api/modern/exceptions.md
           - Fuzzy sets: api/modern/fuzzysets.md
           - Rule inference: api/modern/inference.md
+          - Sugeno rule batches: api/modern/sugeno-batches.md
           - Linguistic terms: api/modern/linguistic.md
           - Membership functions: api/modern/membership.md
           - Scalar operators: api/modern/operators.md
