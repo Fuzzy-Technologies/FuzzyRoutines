@@ -122,13 +122,8 @@ def test_TranslatedRealApiRetainsConstructorContracts(tmpPath):
     """Check the affected real constructor and all static translation hooks, without a full site build."""
 
     griffe = pytest.importorskip("griffe")
-    _, units, records, _ = ReadInputs(PROJECTROOT)
-    translations = {
-        AuthoredSymbolPath(unit): (PROJECTROOT / records[unit.identifier]["translations"]["ru"]["path"]).read_text(encoding="utf-8")
-        for unit in units if unit.kind != "page"
-    }
-    translationMap = tmpPath / "translations.json"
-    translationMap.write_text(json.dumps(translations), encoding="utf-8")
+    project, units, records, report = ReadInputs(PROJECTROOT)
+    _, translationMap, _ = StageLocale(PROJECTROOT, tmpPath, "ru", project, units, records, report)
     extensions = griffe.load_extensions({str(PROJECTROOT / "tools/locale_griffe_extension.py"): {"translationMap": str(translationMap)}})
     module = griffe.load("fuzzyroutines", search_paths=[PROJECTROOT], extensions=extensions, allow_inspection=False)
     constructor = module["membership.MembershipFunction.__init__"]
@@ -136,6 +131,10 @@ def test_TranslatedRealApiRetainsConstructorContracts(tmpPath):
     assert "**parameters:" in constructor.parent.docstring.value
     assert "ValueError:" in constructor.parent.docstring.value
     assert str(constructor.parameters["family"].annotation) == "str"
+    batch = module["sugeno_batches.EvaluateSugenoBatch"]
+    assert "Вычисляет правила Сугено" in batch.docstring.value
+    assert "featureNames" in batch.docstring.value
+    assert str(batch.returns) == "SugenoBatchResult"
 
 
 @pytest.mark.parametrize("locale,pageTitle,description", (

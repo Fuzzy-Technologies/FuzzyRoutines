@@ -6,7 +6,7 @@
 """Strict modern-source and installed-package static typing gates.
 
 The default command checks the scalar modern scope in `mypy.ini`; `--extra numpy`
-adds the optional batch module and consumer to the same strict configuration. The
+adds the optional batch modules and consumers to the same strict configuration. The
 installed mode copies consumer probes outside the checkout and requires an
 installed package with a `py.typed` marker before checking their contracts.
 Mypy diagnostics reach stdout and stderr unchanged; failures retain a nonzero
@@ -24,7 +24,18 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-OPTIONAL_SOURCES = {"numpy": ("fuzzyroutines/batches.py",)}
+OPTIONAL_SOURCES = {
+    "numpy": (
+        "fuzzyroutines/batches.py",
+        "fuzzyroutines/sugeno_batches.py",
+        "fuzzyroutines/_sugeno_antecedents.py",
+        "fuzzyroutines/_sugeno_batch.py",
+        "fuzzyroutines/_sugeno_chunk.py",
+        "fuzzyroutines/_sugeno_consequents.py",
+        "fuzzyroutines/_sugeno_model.py",
+        "fuzzyroutines/_sugeno_runner.py",
+    ),
+}
 
 
 def ConsumerPaths(projectRoot: Path = PROJECT_ROOT, extras: Sequence[str] = ()) -> tuple[Path, ...]:

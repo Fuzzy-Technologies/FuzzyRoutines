@@ -13951,10 +13951,14 @@ sourceHash = "sha256:1b6e48c16f200e7455db61ce4ba2f14ae0d179005f9f546d80e7880a4f7
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.sugeno_batches.md"
+sourceHash = "sha256:1b6e48c16f200e7455db61ce4ba2f14ae0d179005f9f546d80e7880a4f7806e4"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.sugeno_batches.md"
+sourceHash = "sha256:1b6e48c16f200e7455db61ce4ba2f14ae0d179005f9f546d80e7880a4f7806e4"
 
 [[units]]
 id = "page:api.modern.sugeno-batches"
@@ -13998,10 +14002,14 @@ sourceHash = "sha256:c971226dae424c879049eb3059a35324d409244eec83a8229e41eb77c55
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.sugeno_batches.EvaluateSugenoBatch.md"
+sourceHash = "sha256:c971226dae424c879049eb3059a35324d409244eec83a8229e41eb77c55af990"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.sugeno_batches.EvaluateSugenoBatch.md"
+sourceHash = "sha256:c971226dae424c879049eb3059a35324d409244eec83a8229e41eb77c55af990"
 
 [[units]]
 id = "symbol:fuzzyroutines.sugeno_batches.SugenoBatchFullTrace"
@@ -14011,10 +14019,14 @@ sourceHash = "sha256:ceb0f8044119548ce0709d3c6cf148b3c7eea3ac272e266f1e118e62286
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.sugeno_batches.SugenoBatchFullTrace.md"
+sourceHash = "sha256:ceb0f8044119548ce0709d3c6cf148b3c7eea3ac272e266f1e118e622868afc0"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.sugeno_batches.SugenoBatchFullTrace.md"
+sourceHash = "sha256:ceb0f8044119548ce0709d3c6cf148b3c7eea3ac272e266f1e118e622868afc0"
 
 [[units]]
 id = "symbol:fuzzyroutines.sugeno_batches.SugenoBatchResult"
@@ -14024,10 +14036,14 @@ sourceHash = "sha256:e8fe08440689f0ba310c20b609b2e65255b2f0591b60788ce2b9cce267f
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.sugeno_batches.SugenoBatchResult.md"
+sourceHash = "sha256:e8fe08440689f0ba310c20b609b2e65255b2f0591b60788ce2b9cce267fe1f3b"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.sugeno_batches.SugenoBatchResult.md"
+sourceHash = "sha256:e8fe08440689f0ba310c20b609b2e65255b2f0591b60788ce2b9cce267fe1f3b"
 
 [[units]]
 id = "symbol:fuzzyroutines.sugeno_batches.SugenoBatchTrace"
@@ -14037,7 +14053,11 @@ sourceHash = "sha256:8c08aefdd5768839f905df64dcb67cc4443fa13d99a9fad61297415552c
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.sugeno_batches.SugenoBatchTrace.md"
+sourceHash = "sha256:8c08aefdd5768839f905df64dcb67cc4443fa13d99a9fad61297415552c52b9c"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.sugeno_batches.SugenoBatchTrace.md"
+sourceHash = "sha256:8c08aefdd5768839f905df64dcb67cc4443fa13d99a9fad61297415552c52b9c"
