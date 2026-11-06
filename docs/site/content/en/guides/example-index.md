@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 241 inventoried public symbols are linked to executed examples (39 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
+All 245 inventoried public symbols are linked to executed examples (40 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
 
 Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. Typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
@@ -24,7 +24,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.ContinuousFuzzyProperties`                                    | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousInterval`                                           | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousRegion`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
-| `fuzzyroutines.ContinuousUniverse`                                           | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
+| `fuzzyroutines.ContinuousUniverse`                                           | [input-mapping, block 1](../api/modern/input-mapping.md); [membership, block 1](../api/modern/membership.md)       |
 | `fuzzyroutines.CreateUniversalFuzzyScale`                                    | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.DeriveProperties`                                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.Difference`                                                   | [alarm, block 1](alarm.md)                                                                                         |
@@ -125,9 +125,9 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
-| `fuzzyroutines.domain.ContinuousUniverse`                                    | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [api-recipes, block 1](api-recipes.md)                                                                             |
+| `fuzzyroutines.domain.ContinuousUniverse`                                    | [input-mapping, block 1](../api/modern/input-mapping.md); [membership, block 1](../api/modern/membership.md)       |
+| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [input-mapping, block 1](../api/modern/input-mapping.md); [membership, block 1](../api/modern/membership.md)       |
+| `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [input-mapping, block 1](../api/modern/input-mapping.md); [api-recipes, block 1](api-recipes.md)                   |
 | `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, block 1](../api/modern/exceptions.md); [membership, block 1](../api/modern/membership.md)             |
@@ -176,6 +176,10 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.inference.SugenoRule`                                         | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
+| `fuzzyroutines.input_mapping.AffineInputMapping`                             | [input-mapping, block 1](../api/modern/input-mapping.md)                                                           |
+| `fuzzyroutines.input_mapping.AffineInputMapping.Forward`                     | [input-mapping, block 1](../api/modern/input-mapping.md)                                                           |
+| `fuzzyroutines.input_mapping.AffineInputMapping.Inverse`                     | [input-mapping, block 1](../api/modern/input-mapping.md)                                                           |
+| `fuzzyroutines.input_mapping.MissingObservationError`                        | [input-mapping, block 1](../api/modern/input-mapping.md)                                                           |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
 | `fuzzyroutines.linguistic.FuzzificationResult.isMatch`                       | [results, block 4](results.md); [risk, block 1](risk.md)                                                           |

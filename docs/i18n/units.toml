@@ -9993,18 +9993,18 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
+sourceHash = "sha256:13f6c4a2c4c058b21afab0f7bbb9b0aa064aadd71b1330fcc155ee2ee46fe00e"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
+sourceHash = "sha256:13f6c4a2c4c058b21afab0f7bbb9b0aa064aadd71b1330fcc155ee2ee46fe00e"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
+sourceHash = "sha256:13f6c4a2c4c058b21afab0f7bbb9b0aa064aadd71b1330fcc155ee2ee46fe00e"
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -14150,6 +14150,88 @@ id = "symbol:fuzzyroutines.yaml_configuration.ConvertProjectYamlToJson"
 kind = "symbol"
 sourceHash = "sha256:fe70da1c44de46feaa9d5646f77114bded381e15e070e904e6d8e52b19391d6e"
 sourcePath = "fuzzyroutines/yaml_configuration.py"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "module:fuzzyroutines.input_mapping"
+kind = "module"
+sourcePath = "fuzzyroutines/input_mapping.py"
+sourceHash = "sha256:9371301520c0d2f67eff17f2b4a30039f08ea7a817a5fafd99560dde424089ae"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:api.modern.input-mapping"
+kind = "page"
+sourcePath = "docs/site/content/en/api/modern/input-mapping.md"
+sourceHash = "sha256:8798bb1e36ccdf8c97d7d08f9efcb4ffea7ba38959c9517bb801ee77730d0bd6"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/api/modern/input-mapping.md"
+sourceHash = "sha256:8798bb1e36ccdf8c97d7d08f9efcb4ffea7ba38959c9517bb801ee77730d0bd6"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/input-mapping.md"
+sourceHash = "sha256:8798bb1e36ccdf8c97d7d08f9efcb4ffea7ba38959c9517bb801ee77730d0bd6"
+
+[[units]]
+id = "symbol:fuzzyroutines.input_mapping.AffineInputMapping"
+kind = "symbol"
+sourcePath = "fuzzyroutines/input_mapping.py"
+sourceHash = "sha256:2b66aadc36bd5c9572f105d2707fe58052080e571346afd9344a9aefc404700e"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.input_mapping.AffineInputMapping.Forward"
+kind = "symbol"
+sourcePath = "fuzzyroutines/input_mapping.py"
+sourceHash = "sha256:9235ca1d5a30f053689beeb4516e777b5046cb8e9741e78ed87ad2ba9d5f5948"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.input_mapping.AffineInputMapping.Inverse"
+kind = "symbol"
+sourcePath = "fuzzyroutines/input_mapping.py"
+sourceHash = "sha256:61ba33f4bc87ab072697366e4228de36106d6531298aab7f1989868385971c98"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.input_mapping.MissingObservationError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/input_mapping.py"
+sourceHash = "sha256:4856343f15cf4ed8953cf0b02b9a1f49a21d74aaf338baf633afc21be4ad1d3a"
 reviewClass = "technical"
 
 [units.translations.ru]
