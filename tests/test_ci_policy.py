@@ -253,6 +253,21 @@ def test_WorkflowsKeepScopedChecksAndDoNotRepeatDevelopmentPushes():
     assert "  push:\n    branches:\n      - master\n" in pages
 
 
+def test_PackageGateRunsBothPlotProbesAgainstTheSameWheel():
+    """Keep the core and constrained plot-extra probes in the installed wheel gate."""
+
+    workflow = (PROJECT_ROOT / ".github/workflows/package-build-install.yml").read_text(encoding="utf-8")
+    wheelStep = workflow.split("- name: Clean-install wheel and verify installed package", 1)[1]
+    wheelStep = wheelStep.split("- name: Clean-install source distribution", 1)[0]
+    assert "if: steps.scope.outputs.package == 'true'" in wheelStep
+    assert '--no-deps "$wheelPath"' in wheelStep
+    assert '"$venvPath/bin/python" -I "$plotProbe" --mode core' in wheelStep
+    assert 'python -m venv "$plotRoot/environment"' in wheelStep
+    assert '--constraint "$GITHUB_WORKSPACE/docs/requirements-plots.txt" "$wheelPath[plot]"' in wheelStep
+    assert '"$plotPython" -I "$plotProbe" --mode plot' in wheelStep
+    assert 'plotEvidence="$GITHUB_WORKSPACE/dist/plot-evidence"' in wheelStep
+
+
 def test_MergeCheckoutUsesHeadTrailersAndRecordsBothRevisions(tmpPath):
     """Read feature trailers even when Actions checks out a synthetic merge commit."""
 
