@@ -13,6 +13,7 @@ from research.controlled_drift import (
     SAMPLE_COUNT,
     SEED,
     GenerateStream,
+    RunEvidence,
     RunExperiment,
     RunPrequential,
 )
@@ -57,6 +58,24 @@ def test_ExplicitSeedReproducesItsOwnScenario():
     report = RunExperiment(seed=seed, driftAt=84)
     assert report == RunExperiment(seed=seed, driftAt=84), "An explicit seed and phase must reproduce the metrics"
     assert report["seed"] == seed, "The report must identify the evaluated seed"
+
+
+def test_EvidenceCapturesStateBeforeUpdatesAndCountsActualOperations():
+    """Check offset timing and refit cost at the mixed and all-shifted windows."""
+
+    report = RunEvidence(driftAt=84)
+    counts = report["operationCounts"]
+    snapshots = {row["index"]: row for row in report["preUpdateSnapshots"]}
+    assert counts["sharedSugenoEvaluations"] == SAMPLE_COUNT, "All candidates must share one evaluation per row"
+    assert counts["periodicRefits"] == 9, "Only completed 24-row windows must trigger a refit"
+    assert counts["periodicResidualsRead"] == 216, "Each completed refit reads 24 residuals"
+    assert counts["periodicResidualCapacity"] == REFIT_PERIOD, "Residual retention must stay bounded"
+    assert counts["adaptiveThresholdChecks"] == SAMPLE_COUNT, "The adaptive condition runs once per revealed label"
+    assert counts["adaptiveStepAttempts"] == counts["adaptiveOffsetChanges"] == 8, "The seeded adaptive steps must actually change state"
+    assert snapshots[84]["adaptive"] == 0, "The first shifted label must not change its own prediction state"
+    assert snapshots[96]["periodic"] == approx(0.125, abs=0.015), "The first refit must mix both regimes"
+    assert snapshots[120]["periodic"] == approx(0.25, abs=0.015), "The second refit must use shifted labels only"
+    assert report == RunEvidence(driftAt=84), "Snapshot evidence must be exactly reproducible"
 
 
 @mark.parametrize("driftAt", (0, SAMPLE_COUNT))

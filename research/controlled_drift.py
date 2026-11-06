@@ -53,6 +53,10 @@ class Forecast:
     adaptive: float
     periodicUpdate: float
     adaptiveUpdate: float
+    periodicOffset: float
+    adaptiveOffset: float
+    periodicRefit: bool
+    adaptiveStep: bool
 
 
 def _Low(coordinate: float) -> float:
@@ -129,17 +133,23 @@ def RunPrequential(stream: Iterable[tuple[float, float]]) -> Iterator[Forecast]:
         residuals.append(target - fixed)
         periodicNext = periodicOffset
         adaptiveNext = adaptiveOffset
+        periodicRefit = index % REFIT_PERIOD == 0
 
-        if index % REFIT_PERIOD == 0:
+        if periodicRefit:
             periodicNext = min(OFFSET_CAP, max(-OFFSET_CAP, fmean(residuals)))
 
         error = target - adaptive
+        adaptiveStep = abs(error) > UPDATE_TRIGGER
 
-        if abs(error) > UPDATE_TRIGGER:
+        if adaptiveStep:
             step = min(UPDATE_CAP, max(-UPDATE_CAP, error / 2))
             adaptiveNext = min(OFFSET_CAP, max(-OFFSET_CAP, adaptiveOffset + step))
 
-        yield Forecast(target, fixed, periodic, adaptive, periodicNext - periodicOffset, adaptiveNext - adaptiveOffset)
+        yield Forecast(
+            target, fixed, periodic, adaptive,
+            periodicNext - periodicOffset, adaptiveNext - adaptiveOffset,
+            periodicOffset, adaptiveOffset, periodicRefit, adaptiveStep,
+        )
 
         periodicOffset = periodicNext
         adaptiveOffset = adaptiveNext
@@ -190,16 +200,50 @@ def RunExperiment(*, seed: int = SEED, driftAt: int = DRIFT_AT) -> dict:
     }
 
 
+def RunEvidence(*, seed: int = SEED, driftAt: int = DRIFT_AT) -> dict:
+    """Return pre-update offset snapshots and deterministic operation counts.
+
+    Snapshots surround drift and the next two scheduled refits. Offsets are
+    added to both fixed rule consequences. Counts describe operations and
+    state capacity in the experiment rather than wall time or memory bytes.
+    """
+
+    forecasts = tuple(RunPrequential(GenerateStream(seed=seed, driftAt=driftAt)))
+    firstRefit = (driftAt // REFIT_PERIOD + 1) * REFIT_PERIOD
+    indices = sorted({0, driftAt - 1, driftAt, firstRefit, firstRefit + REFIT_PERIOD, len(forecasts) - 1})
+    refits = sum(row.periodicRefit for row in forecasts)
+
+    return {
+        "seed": seed,
+        "driftAt": driftAt,
+        "operationCounts": {
+            "sharedSugenoEvaluations": len(forecasts),
+            "periodicRefits": refits,
+            "periodicResidualsRead": refits * REFIT_PERIOD,
+            "periodicResidualCapacity": REFIT_PERIOD,
+            "adaptiveThresholdChecks": len(forecasts),
+            "adaptiveStepAttempts": sum(row.adaptiveStep for row in forecasts),
+            "adaptiveOffsetChanges": sum(row.adaptiveUpdate != 0 for row in forecasts),
+        },
+        "preUpdateSnapshots": [
+            {"index": index, "fixed": 0.0, "periodic": forecasts[index].periodicOffset, "adaptive": forecasts[index].adaptiveOffset}
+            for index in indices if index < len(forecasts)
+        ],
+    }
+
+
 def Main() -> None:
     """Print the selected reproducible experiment as JSON."""
 
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--drift-at", type=int, default=DRIFT_AT, dest="driftAt")
+    parser.add_argument("--evidence", action="store_true", help="print offset snapshots and operation counts")
     options = parser.parse_args()
+    run = RunEvidence if options.evidence else RunExperiment
 
     try:
-        report = RunExperiment(seed=options.seed, driftAt=options.driftAt)
+        report = run(seed=options.seed, driftAt=options.driftAt)
 
     except ValueError as error:
         parser.error(str(error))
