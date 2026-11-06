@@ -8,9 +8,12 @@ SPDX-License-Identifier: Apache-2.0
 [Русский](README.ru.md) · [简体中文](README.zh-CN.md)
 
 [ADR-0021](../../adr/0021-versioned-project-configuration.md) proposes
-the [version 1 schema](../config-v1.schema.json). These JSON files are design
-fixtures. They can be checked with a JSON Schema validator; FuzzyRoutines does
-not load them in this change.
+the [version 1 schema](../../../fuzzyroutines/config-v1.schema.json). Install
+`fuzzyroutines[config]` to load standalone model fixtures with
+[`LoadModel`](../../site/content/en/api/modern/configuration.md) and write
+canonical bytes with `DumpModel`. Both functions leave file access to the caller.
+The project fixture illustrates inline models, presentation, and scenarios.
+`LoadModel` accepts standalone model envelopes.
 
 - [Historical scale](fixtures/valid-historical-scale.json) stores the five
   original terms, their coefficients, the closed unit universe, the
@@ -35,8 +38,8 @@ even though the runtime variable is named `Risk`.
 ## Checking the files
 
 Run from the repository root with a Draft 2020-12 validator. This example
-uses `jsonschema` 4.26.0 in a separate validation environment; it is not a
-package dependency. The registry is offline.
+uses `jsonschema` 4.26.0 and `referencing`, available through the optional
+`config` extra. The registry is offline.
 
 ```bash
 python - <<'PY'
@@ -48,12 +51,13 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 from referencing import Registry
 
-schema_root = Path("docs/schemas")
-schema = json.loads((schema_root / "config-v1.schema.json").read_text(encoding="utf-8"))
+fixtureRoot = Path("docs/schemas/config-v1/fixtures")
+schemaPath = Path("fuzzyroutines/config-v1.schema.json")
+schema = json.loads(schemaPath.read_text(encoding="utf-8"))
 Draft202012Validator.check_schema(schema)
 validator = Draft202012Validator(schema, registry=Registry())
 
-for path in sorted((schema_root / "config-v1" / "fixtures").glob("*.json")):
+for path in sorted(fixtureRoot.glob("*.json")):
     document = json.loads(path.read_text(encoding="utf-8"))
     expected = not path.name.startswith("invalid-schema-")
     assert validator.is_valid(document) == expected, f"Unexpected schema outcome: {path}"
@@ -64,6 +68,6 @@ The [callable case](fixtures/invalid-schema-callable.json) fails the schema
 because its family and import parameters are outside the allowlist.
 The [dangling-reference case](fixtures/invalid-semantic-reference.json)
 passes the schema but must fail reference resolution. The expected error
-points to `/scales/score/terms/0/membership`: there is no membership definition
-with ID `missing` in that model. The design fixtures distinguish structural
-validation from the semantic checks a future loader must perform.
+from `LoadModel` points to `/scales/score/terms/0/membership` because the model
+has no membership definition with ID `missing`. The two fixtures distinguish
+schema validation from semantic reference resolution.

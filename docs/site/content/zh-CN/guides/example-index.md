@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 229 个已登记公共符号都链接到已执行的示例，共有 37 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
+全部 239 个已登记公共符号都链接到已执行的示例，共有 38 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
 
 函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
@@ -112,6 +112,16 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.batches.EvaluateMembershipBatch`                              | [numpy-batches, 代码块 1](numpy-batches.md)                                                                       |
 | `fuzzyroutines.batches.FuzzifyBatch`                                         | [numpy-batches, 代码块 1](numpy-batches.md)                                                                       |
 | `fuzzyroutines.batches.ScaleBatchResult`                                     | [numpy-batches, 代码块 1](numpy-batches.md)                                                                       |
+| `fuzzyroutines.configuration.AssembleModel`                                  | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.ConfigurationError`                             | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.DumpModel`                                      | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.LoadModel`                                      | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.MamdaniBinding`                                 | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.MamdaniCentroid`                                | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.ScaleRepresentatives`                           | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, 代码块 1](errors.md)                                                                                     |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
@@ -150,21 +160,21 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.inference.AllOf`                                              | [inference, 代码块 2](inference.md)                                                                               |
 | `fuzzyroutines.inference.Antecedent`                                         | [inference, 代码块 2](inference.md)                                                                               |
 | `fuzzyroutines.inference.AnyOf`                                              | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.inference.InferencePolicy`                                    | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.inference.InputGrade`                                         | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
-| `fuzzyroutines.inference.MamdaniModel`                                       | [inference, 代码块 1](inference.md)                                                                               |
-| `fuzzyroutines.inference.MamdaniModel.Evaluate`                              | [inference, 代码块 1](inference.md)                                                                               |
-| `fuzzyroutines.inference.MamdaniResult`                                      | [inference, 代码块 1](inference.md)                                                                               |
-| `fuzzyroutines.inference.MamdaniRule`                                        | [inference, 代码块 1](inference.md)                                                                               |
-| `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, 代码块 1](inference.md)                                                                               |
+| `fuzzyroutines.inference.MamdaniModel`                                       | [inference, 代码块 1](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniModel.Evaluate`                              | [inference, 代码块 1](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniResult`                                      | [inference, 代码块 1](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniRule`                                        | [inference, 代码块 1](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, 代码块 1](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.NotCondition`                                       | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.SugenoModel`                                        | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.SugenoResult`                                       | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.SugenoRule`                                         | [inference, 代码块 2](inference.md)                                                                               |
-| `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, 代码块 2](inference.md)                                                                               |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoResult`                                       | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [results, 代码块 4](results.md)                             |
@@ -204,7 +214,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.membership.MembershipCallable`                                | [membership, 代码块 1](../api/modern/membership.md); [custom, 代码块 1](custom.md)                                   |
 | `fuzzyroutines.membership.MembershipFunction`                                | [alarm, 代码块 1](alarm.md); [alpha-cuts, 代码块 1](alpha-cuts.md)                                                   |
 | `fuzzyroutines.membership.MembershipFunction.Evaluate`                       | [alarm, 代码块 1](alarm.md); [alpha-cuts, 代码块 1](alpha-cuts.md)                                                   |
-| `fuzzyroutines.membership.MembershipFunction.parameters`                     | [membership-families, 代码块 1](membership-families.md)                                                           |
+| `fuzzyroutines.membership.MembershipFunction.parameters`                     | [membership-families, 代码块 1](membership-families.md); [configuration, 代码块 1](../api/modern/configuration.md)   |
 | `fuzzyroutines.membership.MembershipScalar`                                  | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
 | `fuzzyroutines.membership.SShoulder`                                         | [alarm, 代码块 1](alarm.md); [linguistic-encoding, 代码块 1](linguistic-encoding.md)                                 |
 | `fuzzyroutines.membership.Trapezoid`                                         | [membership-families, 代码块 1](membership-families.md)                                                           |
