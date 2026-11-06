@@ -35,11 +35,13 @@ class PlotSeries:
         label: Legend text, retained even for a clipped series.
         paths: Separate ordered paths with established continuity.
         markers: Discrete samples and isolated actual grades.
+        openMarkers: Known limits at excluded edges or beside actual grades.
     """
 
     label: str
     paths: tuple[tuple[_Sample, ...], ...] = ()
     markers: tuple[_Sample, ...] = ()
+    openMarkers: tuple[_Sample, ...] = ()
 
 
 def RenderPlot(
@@ -81,7 +83,7 @@ def RenderPlot(
 
     jpegBackground = _RequireJpegBackground(background, transparent) if outputFormat == "jpeg" else None
 
-    if not any(item.markers or any(item.paths) for item in series):
+    if not any(item.markers or item.openMarkers or any(item.paths) for item in series):
         raise InvalidDomainError("The display window contains no renderable samples.")
 
     try:
@@ -183,6 +185,13 @@ def _DrawPlot(
         if markers:
             coordinates, grades = _PlotValues(tuple(markers))
             axis.scatter(coordinates, grades, color=color, marker=markerStyle, clip_on=False, gid=f"series-{seriesIndex}-markers")
+
+        if item.openMarkers:
+            coordinates, grades = _PlotValues(item.openMarkers)
+            axis.scatter(
+                coordinates, grades, facecolors="none", edgecolors=color, marker=markerStyle,
+                clip_on=False, gid=f"series-{seriesIndex}-open-markers",
+            )
 
         handles.append(lineClass(
             [], [], color=color, label=item.label, linestyle=lineStyle if hasPath else "None",
