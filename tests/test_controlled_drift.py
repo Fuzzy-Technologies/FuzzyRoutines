@@ -12,7 +12,9 @@ from research.controlled_drift import (
     REFIT_PERIOD,
     SAMPLE_COUNT,
     SEED,
+    GenerateChallengeStream,
     GenerateStream,
+    RunChallenge,
     RunEvidence,
     RunExperiment,
     RunPrequential,
@@ -86,10 +88,28 @@ def test_DriftRequiresTwoNonemptyRegimes(driftAt):
         RunExperiment(driftAt=driftAt)
 
 
-def test_ChangedLabelsCannotAffectCurrentOrEarlierPredictions():
+def test_GradualChallengeSeparatesAccuracyFromRecovery():
+    """Check the registered scoring boundary and candidate decision."""
+
+    report = RunChallenge()
+    assert report == RunChallenge(), "Challenge results must reproduce exactly"
+    assert report["driftAt"] == 84 and report["recoveryAt"] == 131, "Recovery must be scored from the full shift"
+    assert report["periodic"]["recoveryOffset"] == 13, "Periodic recovery must use the full-shift origin"
+    assert report["adaptive"]["recoveryOffset"] == 65, "Adaptive recovery must use the full-shift origin"
+    assert report["adaptiveGates"] == {
+        "zeroStableFalseAdaptations": True,
+        "shiftedMaeImprovementOverFixed": True,
+        "shiftedMaeNoHigherThanPeriodic": True,
+        "recoveryNoLaterThanPeriodic": False,
+    }, "Good average error must not conceal failed timely recovery"
+    assert report["decision"] == "no-go", "Every registered gate is required"
+
+
+@mark.parametrize("generate", (GenerateStream, GenerateChallengeStream))
+def test_ChangedLabelsCannotAffectCurrentOrEarlierPredictions(generate):
     """Perturb a refit-boundary label and its suffix without leaking into forecasts."""
 
-    stream = tuple(GenerateStream())
+    stream = tuple(generate())
     pivot = DRIFT_AT - 1
     changed = tuple((coordinate, target if index < pivot else target + 0.5) for index, (coordinate, target) in enumerate(stream))
     originalRows = tuple(RunPrequential(stream))

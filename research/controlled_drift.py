@@ -40,6 +40,10 @@ FALSE_ADAPTATION_STEP = 0.01
 UPDATE_TRIGGER = 0.08
 UPDATE_CAP = 0.025
 OFFSET_CAP = 0.30
+CHALLENGE_DRIFT_AT = 84
+CHALLENGE_RAMP_ROWS = 48
+CHALLENGE_NOISE = 0.04
+CHALLENGE_MIN_IMPROVEMENT = 0.10
 UNIT = ContinuousUniverse(0, 1, True, True)
 
 
@@ -102,12 +106,24 @@ def GenerateStream(*, seed: int = SEED, driftAt: int = DRIFT_AT) -> Iterator[tup
     if type(driftAt) is not int or not 0 < driftAt < SAMPLE_COUNT:
         raise ValueError(f"Drift index must be between 1 and {SAMPLE_COUNT - 1}.")
 
+    yield from _GenerateStream(seed, driftAt, rampRows=1, noise=0.015)
+
+
+def GenerateChallengeStream() -> Iterator[tuple[float, float]]:
+    """Yield the predeclared gradual, higher-noise drift challenge."""
+
+    yield from _GenerateStream(SEED, CHALLENGE_DRIFT_AT, CHALLENGE_RAMP_ROWS, CHALLENGE_NOISE)
+
+
+def _GenerateStream(seed: int, driftAt: int, rampRows: int, noise: float) -> Iterator[tuple[float, float]]:
+    """Draw coordinates and noise in fixed order across drift profiles."""
+
     random = Random(seed)
 
     for index in range(SAMPLE_COUNT):
         coordinate = random.random()
-        offset = 0.25 if index >= driftAt else 0
-        target = 0.2 + 0.4 * coordinate + offset + random.uniform(-0.015, 0.015)
+        shiftFraction = min(1, max(0, (index - driftAt + 1) / rampRows))
+        target = 0.2 + 0.4 * coordinate + 0.25 * shiftFraction + random.uniform(-noise, noise)
 
         yield coordinate, target
 
@@ -160,16 +176,18 @@ def _Metrics(
     targets: tuple[float, ...],
     updates: tuple[float, ...],
     driftAt: int,
+    recoveryAt: int,
 ) -> dict[str, float | int | None]:
     """Measure errors, substantial stable-phase updates and drift recovery."""
 
     errors = tuple(abs(prediction - target) for prediction, target in zip(predictions, targets, strict=True))
     stable = errors[:driftAt]
     shifted = errors[driftAt:]
+    recoveryErrors = errors[recoveryAt:]
     recovery = next((
         offset
-        for offset in range(len(shifted) - RECOVERY_WINDOW + 1)
-        if max(shifted[offset:offset + RECOVERY_WINDOW]) <= RECOVERY_ERROR
+        for offset in range(len(recoveryErrors) - RECOVERY_WINDOW + 1)
+        if max(recoveryErrors[offset:offset + RECOVERY_WINDOW]) <= RECOVERY_ERROR
     ), None)
 
     return {
@@ -185,6 +203,13 @@ def RunExperiment(*, seed: int = SEED, driftAt: int = DRIFT_AT) -> dict:
     """Return the comparison for a chosen seed and chronological regime split."""
 
     forecasts = tuple(RunPrequential(GenerateStream(seed=seed, driftAt=driftAt)))
+
+    return _Report(forecasts, seed, driftAt, recoveryAt=driftAt)
+
+
+def _Report(forecasts: tuple[Forecast, ...], seed: int, driftAt: int, recoveryAt: int) -> dict:
+    """Score shifted error from onset and recovery from the full shift."""
+
     targets = tuple(row.target for row in forecasts)
 
     return {
@@ -194,9 +219,36 @@ def RunExperiment(*, seed: int = SEED, driftAt: int = DRIFT_AT) -> dict:
         "falseAdaptationStep": FALSE_ADAPTATION_STEP,
         "recoveryError": RECOVERY_ERROR,
         "recoveryWindow": RECOVERY_WINDOW,
-        "fixed": _Metrics(tuple(row.fixed for row in forecasts), targets, (0.0,) * len(forecasts), driftAt),
-        "periodic": _Metrics(tuple(row.periodic for row in forecasts), targets, tuple(row.periodicUpdate for row in forecasts), driftAt),
-        "adaptive": _Metrics(tuple(row.adaptive for row in forecasts), targets, tuple(row.adaptiveUpdate for row in forecasts), driftAt),
+        "fixed": _Metrics(tuple(row.fixed for row in forecasts), targets, (0.0,) * len(forecasts), driftAt, recoveryAt),
+        "periodic": _Metrics(tuple(row.periodic for row in forecasts), targets, tuple(row.periodicUpdate for row in forecasts), driftAt, recoveryAt),
+        "adaptive": _Metrics(tuple(row.adaptive for row in forecasts), targets, tuple(row.adaptiveUpdate for row in forecasts), driftAt, recoveryAt),
+    }
+
+
+def RunChallenge() -> dict:
+    """Evaluate the bounded adaptive policy against the predeclared gates."""
+
+    recoveryAt = CHALLENGE_DRIFT_AT + CHALLENGE_RAMP_ROWS - 1
+    forecasts = tuple(RunPrequential(GenerateChallengeStream()))
+    report = _Report(forecasts, SEED, CHALLENGE_DRIFT_AT, recoveryAt)
+    fixed, periodic, adaptive = (report[name] for name in ("fixed", "periodic", "adaptive"))
+    adaptiveRecovery = adaptive["recoveryOffset"]
+    periodicRecovery = periodic["recoveryOffset"]
+    gates = {
+        "zeroStableFalseAdaptations": adaptive["falseAdaptations"] == 0,
+        "shiftedMaeImprovementOverFixed": adaptive["shiftedMae"] <= fixed["shiftedMae"] * (1 - CHALLENGE_MIN_IMPROVEMENT),
+        "shiftedMaeNoHigherThanPeriodic": adaptive["shiftedMae"] <= periodic["shiftedMae"],
+        "recoveryNoLaterThanPeriodic": adaptiveRecovery is not None and (periodicRecovery is None or adaptiveRecovery <= periodicRecovery),
+    }
+
+    return {
+        **report,
+        "rampRows": CHALLENGE_RAMP_ROWS,
+        "noiseAmplitude": CHALLENGE_NOISE,
+        "recoveryAt": recoveryAt,
+        "minimumFixedMaeImprovement": CHALLENGE_MIN_IMPROVEMENT,
+        "adaptiveGates": gates,
+        "decision": "go" if all(gates.values()) else "no-go",
     }
 
 
@@ -236,14 +288,25 @@ def Main() -> None:
     """Print the selected reproducible experiment as JSON."""
 
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument("--seed", type=int, default=SEED)
-    parser.add_argument("--drift-at", type=int, default=DRIFT_AT, dest="driftAt")
-    parser.add_argument("--evidence", action="store_true", help="print offset snapshots and operation counts")
+    parser.add_argument("--seed", type=int)
+    parser.add_argument("--drift-at", type=int, dest="driftAt")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--evidence", action="store_true", help="print offset snapshots and operation counts")
+    mode.add_argument("--challenge", action="store_true", help="run the fixed gradual drift challenge")
     options = parser.parse_args()
-    run = RunEvidence if options.evidence else RunExperiment
 
     try:
-        report = run(seed=options.seed, driftAt=options.driftAt)
+        if options.challenge:
+            if options.seed is not None or options.driftAt is not None:
+                parser.error("--challenge uses a fixed seed and drift index.")
+
+            report = RunChallenge()
+
+        else:
+            run = RunEvidence if options.evidence else RunExperiment
+            seed = SEED if options.seed is None else options.seed
+            driftAt = DRIFT_AT if options.driftAt is None else options.driftAt
+            report = run(seed=seed, driftAt=driftAt)
 
     except ValueError as error:
         parser.error(str(error))
