@@ -113,7 +113,9 @@ def test_AllPublishedPublicExamplesAndTheirIndexAreCurrent():
 
     assert report["symbolCount"] >= 190 and not report["missing"]
     COVERAGE["ValidateIndex"](report, COVERAGE["INDEX_PATH"].read_text())
-    assert report["omittedOptionalPages"] == ["api/modern/configuration.md", "guides/numpy-batches.md"]
+    assert report["omittedOptionalPages"] == [
+        "api/modern/configuration.md", "api/modern/yaml.md", "guides/numpy-batches.md",
+    ]
     assert sum(name.startswith("fuzzyroutines.configuration.") for name in report["omittedOptionalSymbols"]) == 10
 
 

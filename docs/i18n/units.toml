@@ -9993,18 +9993,18 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:8a196a8496c689931d8655c0be0e75f972b33d6607b32b022250af1ccb746c4f"
+sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:8a196a8496c689931d8655c0be0e75f972b33d6607b32b022250af1ccb746c4f"
+sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:8a196a8496c689931d8655c0be0e75f972b33d6607b32b022250af1ccb746c4f"
+sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -14094,6 +14094,62 @@ id = "symbol:fuzzyroutines.configuration.SugenoBinding"
 kind = "symbol"
 sourcePath = "fuzzyroutines/configuration.py"
 sourceHash = "sha256:bce9682cfa337b8e5c6b9117789682adadae21e6656a79cc8ceb5296e1c8c299"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "module:fuzzyroutines.yaml_configuration"
+kind = "module"
+sourceHash = "sha256:f0610856ddc0ef8bcd905506a3d8d2ce5a9becc36fadc51274a521576de94abe"
+sourcePath = "fuzzyroutines/yaml_configuration.py"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:api.modern.yaml"
+kind = "page"
+sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
+sourcePath = "docs/site/content/en/api/modern/yaml.md"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/api/modern/yaml.md"
+sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/yaml.md"
+sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
+
+[[units]]
+id = "symbol:fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml"
+kind = "symbol"
+sourceHash = "sha256:63a7b954c489b11d99134c9dad672ef37f6d27fc664a319c32595914012cf631"
+sourcePath = "fuzzyroutines/yaml_configuration.py"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.yaml_configuration.ConvertProjectYamlToJson"
+kind = "symbol"
+sourceHash = "sha256:fe70da1c44de46feaa9d5646f77114bded381e15e070e904e6d8e52b19391d6e"
+sourcePath = "fuzzyroutines/yaml_configuration.py"
 reviewClass = "technical"
 
 [units.translations.ru]

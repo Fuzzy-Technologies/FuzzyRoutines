@@ -71,3 +71,17 @@ passes the schema but must fail reference resolution. The expected error
 from `LoadModel` points to `/scales/score/terms/0/membership` because the model
 has no membership definition with ID `missing`. The two fixtures distinguish
 schema validation from semantic reference resolution.
+
+## YAML project verification
+
+The optional `fuzzyroutines[yaml]` extra provides the YAML reader backend.
+The installed project checks use `fuzzyroutines[config,yaml]` to exercise that
+reader together with the offline v1 schema and project validator. YAML uses
+the same project fields and scoped references as JSON. Tags, anchors, aliases,
+merge keys and duplicate keys are rejected. A project field such as `include`
+also fails the v1 schema. The tests check that conversion preserves numeric
+tokens, Unicode and array order.
+
+The public [YAML converters](../../site/content/en/api/modern/yaml.md) accept
+and return validated project bytes. The reusable project snapshot API is
+tracked separately in [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387).

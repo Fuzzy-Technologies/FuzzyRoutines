@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Указатель примеров публичного API {#public-api-example-index}
 
-Все 239 учтённых публичных символов связаны с выполненными примерами (38 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
+Все 241 учтённых публичных символов связаны с выполненными примерами (39 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
 
 Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют настоящей аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
 
@@ -119,7 +119,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.configuration.MamdaniBinding`                                 | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.MamdaniCentroid`                                | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, блок 1](../api/modern/configuration.md)                                                          |
-| `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, блок 1](../api/modern/configuration.md)                                                          |
+| `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, блок 1](../api/modern/configuration.md); [yaml, блок 1](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleRepresentatives`                           | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 5](api-recipes.md)                         |
@@ -252,3 +252,5 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
+| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, блок 1](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.yaml_configuration.ConvertProjectYamlToJson`                  | [yaml, блок 1](../api/modern/yaml.md)                                                                            |
