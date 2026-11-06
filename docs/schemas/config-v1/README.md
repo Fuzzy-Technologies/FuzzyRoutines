@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 [Русский](README.ru.md) · [简体中文](README.zh-CN.md)
 
 [ADR-0021](../../adr/0021-versioned-project-configuration.md) proposes
-the [version 1 schema](../config-v1.schema.json). These JSON files are design
+the [version 1 schema](../../../fuzzyroutines/config-v1.schema.json). These JSON files are design
 fixtures. They can be checked with a JSON Schema validator; FuzzyRoutines does
 not load them in this change.
 
@@ -48,12 +48,13 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 from referencing import Registry
 
-schema_root = Path("docs/schemas")
-schema = json.loads((schema_root / "config-v1.schema.json").read_text(encoding="utf-8"))
+fixtureRoot = Path("docs/schemas/config-v1/fixtures")
+schemaPath = Path("fuzzyroutines/config-v1.schema.json")
+schema = json.loads(schemaPath.read_text(encoding="utf-8"))
 Draft202012Validator.check_schema(schema)
 validator = Draft202012Validator(schema, registry=Registry())
 
-for path in sorted((schema_root / "config-v1" / "fixtures").glob("*.json")):
+for path in sorted(fixtureRoot.glob("*.json")):
     document = json.loads(path.read_text(encoding="utf-8"))
     expected = not path.name.startswith("invalid-schema-")
     assert validator.is_valid(document) == expected, f"Unexpected schema outcome: {path}"

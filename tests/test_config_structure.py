@@ -13,12 +13,13 @@ import pytest
 
 from fuzzyroutines._config_envelope import ConfigEnvelopeError
 from fuzzyroutines._config_json import DecodeConfigJson, JsonNumber
+from fuzzyroutines._config_schema import ReadConfigV1Schema
 from fuzzyroutines._config_structure import CheckConfigStructure
 
 pytest.importorskip("jsonschema")
 
 _SCHEMA_DIRECTORY = Path(__file__).resolve().parents[1] / "docs" / "schemas"
-_SCHEMA = loads((_SCHEMA_DIRECTORY / "config-v1.schema.json").read_bytes())
+_SCHEMA = ReadConfigV1Schema()
 _FIXTURES = _SCHEMA_DIRECTORY / "config-v1" / "fixtures"
 
 
@@ -119,7 +120,7 @@ def test_ValidatesBinary64WithoutRewritingSourceNumber():
 def test_OfflineRegistryRejectsAnExternalReference():
     """A broken local schema cannot initiate a remote reference lookup."""
 
-    schema = loads((_SCHEMA_DIRECTORY / "config-v1.schema.json").read_bytes())
+    schema = ReadConfigV1Schema()
     uri = "https://example.invalid/external-schema"
     schema["$defs"]["membership"] = {"$ref": uri}
     wire = DecodeConfigJson((_FIXTURES / "valid-historical-scale.json").read_bytes())

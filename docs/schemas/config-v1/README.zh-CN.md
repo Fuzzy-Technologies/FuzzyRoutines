@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 [English](README.md) · [Русский](README.ru.md)
 
 [ADR-0021](../../adr/0021-versioned-project-configuration.md) 提出了
-[版本 1 的 JSON Schema](../config-v1.schema.json)。这些 JSON 文件用于说明和检验
+[版本 1 的 JSON Schema](../../../fuzzyroutines/config-v1.schema.json)。这些 JSON 文件用于说明和检验
 拟议格式，可以用 JSON Schema 验证器检查。本次变更尚未为 FuzzyRoutines 添加加载接口。
 
 - [历史通用模糊标度](fixtures/valid-historical-scale.json) 保留了五个原始语言项、

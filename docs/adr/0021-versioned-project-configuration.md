@@ -24,11 +24,12 @@ without interpreting code or looking up configuration on the network.
 
 ## Decision
 
-Use the [version 1 JSON Schema](../schemas/config-v1.schema.json), using
+Use the [version 1 JSON Schema](../../fuzzyroutines/config-v1.schema.json), using
 [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation),
 with a separate semantic validation pass. The version is independent of the
-package version. This repository file is the schema source; its `$id` identifies
-the document and is not a URL that a configuration loader must fetch. All
+package version. The repository file is the canonical schema and is included in installed
+distributions. Its `$id` identifies the document; the loader reads its local
+package resource. All
 schema references are internal. A configuration cannot select its own schema.
 
 - A `model` contains named universes, named built-in membership definitions,

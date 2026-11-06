@@ -5,7 +5,6 @@
 
 """Exact v1 envelope dispatch and offline structural preflight."""
 
-from json import loads
 from math import copysign
 from pathlib import Path
 
@@ -13,9 +12,10 @@ import pytest
 
 from fuzzyroutines._config_envelope import CheckConfigEnvelope, ConfigEnvelopeError
 from fuzzyroutines._config_json import DecodeConfigJson, JsonNumber
+from fuzzyroutines._config_schema import ReadConfigV1Schema
 
 _SCHEMA_DIRECTORY = Path(__file__).resolve().parents[1] / "docs" / "schemas"
-_SCHEMA = loads((_SCHEMA_DIRECTORY / "config-v1.schema.json").read_bytes())
+_SCHEMA = ReadConfigV1Schema()
 _FIXTURES = _SCHEMA_DIRECTORY / "config-v1" / "fixtures"
 
 
@@ -107,3 +107,14 @@ def test_PreservesNumberTokensAndSignedZero():
     assert isinstance(coordinate, JsonNumber) and copysign(1.0, coordinate.binary64) < 0, (
         "Dispatch must preserve signed zero for downstream validation."
     )
+
+
+def test_LoadsPackagedSchemaOutsideTheWorkingTree(tmpPath, monkeypatch):
+    """Load fresh canonical schema data independently of the current directory."""
+
+    monkeypatch.chdir(tmpPath)
+    schema = ReadConfigV1Schema()
+
+    assert schema == _SCHEMA, "Schema resource selection must be independent of the working directory."
+    schema["$id"] = "unexpected"
+    assert ReadConfigV1Schema() == _SCHEMA, "Callers must not share mutable schema data."
