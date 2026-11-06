@@ -18,12 +18,31 @@ The current [package metadata](../../pyproject.toml) sets `Requires-Python` to
 3.14. The open-ended metadata bound does not establish support for a future
 interpreter, a free-threaded build, or an alternative implementation.
 
-| Consumer or evidence | Observed runtime boundary | Evidence limit |
-| --- | --- | --- |
-| TKSBrokerAPI at `b963c54039f013d432220186ae35a22359c5a773` | [Package declaration](https://github.com/Fuzzy-Technologies/TKSBrokerAPI/blob/b963c54039f013d432220186ae35a22359c5a773/setup.py) permits Python 3.9 and later. The [container recipe](https://github.com/Fuzzy-Technologies/TKSBrokerAPI/blob/b963c54039f013d432220186ae35a22359c5a773/deploy/Dockerfile) specifies Python 3.11. Its [requirements](https://github.com/Fuzzy-Technologies/TKSBrokerAPI/blob/b963c54039f013d432220186ae35a22359c5a773/requirements.txt) permit FuzzyRoutines 1.0.3 and later, subject to resolver compatibility. | These declarations establish a source-visible integration gap for 2.x on the container's Python 3.11. Actual deployment versions and a migration test on either supported Python are unknown. |
-| FuzzyRoutines public TKSBrokerAPI replay | The [pinned replay](../performance/public-consumer-batch-replay.md) ran on CPython 3.14.8 with NumPy 2.3.5 and matched all 30 upstream expected labels and rounded percentages. | It exercises extracted test inputs. It does not run TKSBrokerAPI or measure a production runtime. |
-| Private FMA and robot consumers | Runtime versions are unknown. The [migration record](../migration/consumer-scale-boundary.md) identifies the integration gap. | No private environment, dependency lock, or application-level result is available here. |
-| FuzzyClassificator lineage | Runtime versions are unknown. The [consumer inventory](../compatibility/legacy-consumers.md) records historical API use. | Current maintenance and installation evidence are unavailable. |
+### Consumer evidence
+
+- **TKSBrokerAPI.** At `b963c54039f013d432220186ae35a22359c5a773`, the
+  [package declaration](https://github.com/Fuzzy-Technologies/TKSBrokerAPI/blob/b963c54039f013d432220186ae35a22359c5a773/setup.py)
+  permits Python 3.9 and later. The
+  [container recipe](https://github.com/Fuzzy-Technologies/TKSBrokerAPI/blob/b963c54039f013d432220186ae35a22359c5a773/deploy/Dockerfile)
+  specifies Python 3.11. Its
+  [requirements](https://github.com/Fuzzy-Technologies/TKSBrokerAPI/blob/b963c54039f013d432220186ae35a22359c5a773/requirements.txt)
+  permit FuzzyRoutines 1.0.3 and later, subject to resolver compatibility.
+  FuzzyRoutines 2.x requires a newer interpreter than the container recipe
+  supplies. Deployment versions and migration results on either supported
+  Python remain unknown.
+- **FuzzyRoutines public TKSBrokerAPI replay.** The
+  [pinned replay](../performance/public-consumer-batch-replay.md) ran on
+  CPython 3.14.8 with NumPy 2.3.5 and matched all 30 upstream expected
+  labels and rounded percentages. It exercises extracted test inputs.
+  Production runtime and application-level behavior remain unknown.
+- **Private FMA and robot consumers.** The
+  [migration record](../migration/consumer-scale-boundary.md) identifies
+  the integration gap. Runtime versions, dependency locks, and
+  application-level results are unavailable.
+- **FuzzyClassificator lineage.** The
+  [consumer inventory](../compatibility/legacy-consumers.md) records
+  historical API use. Runtime versions, current maintenance, and
+  installation evidence remain unknown.
 
 ## Language and dependency constraints
 
