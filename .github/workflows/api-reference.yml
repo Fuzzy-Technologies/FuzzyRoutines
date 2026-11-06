@@ -23,7 +23,7 @@ concurrency:
 jobs:
   build-reference:
     name: Python 3.14 installed-package documentation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     steps:
@@ -69,13 +69,77 @@ jobs:
           python tools/compose_pages_site.py --locale-root _build/api-reference/locales
           --include-drafts --output _build/pages/review
 
-      - name: Install pinned browser review dependencies
+      - name: Install pinned browser review tooling
         if: steps.scope.outputs.documentation == 'true'
-        timeout-minutes: 10
+        timeout-minutes: 2
         run: |
-          npm install --prefix _build/browser-dependencies --no-audit --no-fund --ignore-scripts playwright@1.62.1 mathjax@3.2.2
-          _build/browser-dependencies/node_modules/.bin/playwright install --with-deps chromium
-          sudo apt-get install -y fonts-noto-cjk
+          timeout --kill-after=5s 90s npm install --prefix _build/browser-dependencies \
+            --registry=https://registry.npmjs.org --no-audit --no-fund --ignore-scripts \
+            playwright@1.62.1 mathjax@3.2.2
+
+      - name: Install Chromium system dependencies and CJK fonts
+        if: steps.scope.outputs.documentation == 'true'
+        timeout-minutes: 6
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          playwright="$PWD/_build/browser-dependencies/node_modules/.bin/playwright"
+          sourcesFile=/etc/apt/fuzzyroutines-browser.sources
+          aptConfig=/etc/apt/apt.conf.d/99fuzzyroutines-browser
+          sudo -n test ! -e "$sourcesFile"
+          sudo -n test ! -e "$aptConfig"
+          trap 'sudo -n rm -f -- "$aptConfig" "$sourcesFile"' EXIT
+
+          # Playwright runs APT through sudo, so use an override only for this step.
+          sudo -n tee "$aptConfig" >/dev/null <<'APT'
+          Dir::Etc::sourcelist "/etc/apt/fuzzyroutines-browser.sources";
+          Dir::Etc::sourceparts "-";
+          Acquire::Retries "1";
+          Acquire::https::Timeout "20";
+          APT::Update::Error-Mode "any";
+          DPkg::Lock::Timeout "5";
+          APT
+
+          InstallFromArchive() {
+            local archive=$1
+            printf 'Installing browser system dependencies from %s\n' "$archive"
+            sudo -n tee "$sourcesFile" >/dev/null <<APT || return
+          Types: deb
+          URIs: $archive
+          Suites: noble noble-updates
+          Components: main universe
+          Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+          Types: deb
+          URIs: https://security.ubuntu.com/ubuntu
+          Suites: noble-security
+          Components: main universe
+          Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+          APT
+
+            timeout --kill-after=5s 150s bash -euo pipefail -c '
+              "$1" install-deps chromium
+              sudo -n apt-get install -y --no-install-recommends "$2"
+            ' -- "$playwright" 'fonts-noto-cjk=1:20230817+repack1-3'
+          }
+
+          if ! InstallFromArchive https://archive.ubuntu.com/ubuntu; then
+            audit=$(sudo -n dpkg --audit)
+            if [[ -n "$audit" ]]; then
+              printf '%s\n' "$audit" >&2
+              exit 1
+            fi
+
+            InstallFromArchive https://us.archive.ubuntu.com/ubuntu
+          fi
+
+      - name: Install pinned Chromium headless shell
+        if: steps.scope.outputs.documentation == 'true'
+        timeout-minutes: 2
+        run: |
+          timeout --kill-after=5s 90s \
+            _build/browser-dependencies/node_modules/.bin/playwright install --only-shell chromium
 
       - name: Inspect desktop and mobile documentation in Chromium
         if: steps.scope.outputs.documentation == 'true'

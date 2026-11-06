@@ -342,3 +342,33 @@ def ConvertProjectJsonToYaml(encoded: bytes) -> bytes:
         raise ConfigExportError((), "YAML exceeds the 1,048,576-byte limit.")
 
     return yaml
+
+
+def _ProjectJsonText(value: JsonValue) -> str:
+    """Emit JSON wire values without reconstructing numbers from floats."""
+
+    if isinstance(value, JsonNumber):
+        return value.token
+
+    if isinstance(value, dict):
+        members = (dumps(key, ensure_ascii=False) + ":" + _ProjectJsonText(item) for key, item in sorted(value.items()))
+
+        return "{" + ",".join(members) + "}"
+
+    if isinstance(value, list):
+        return "[" + ",".join(_ProjectJsonText(item) for item in value) + "]"
+
+    return dumps(value, ensure_ascii=False)
+
+
+def ConvertProjectYamlToJson(encoded: bytes) -> bytes:
+    """Validate a YAML project and emit deterministic JSON with exact tokens."""
+
+    document = DecodeConfigYaml(encoded)
+    _DecodeProjectData(document)
+    json = (_ProjectJsonText(document) + "\n").encode("utf-8")
+
+    if len(json) > _MAX_BYTES:
+        raise ConfigExportError((), "JSON exceeds the 1,048,576-byte limit.")
+
+    return json

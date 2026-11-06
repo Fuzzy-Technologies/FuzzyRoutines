@@ -53,4 +53,6 @@ SPDX-License-Identifier: Apache-2.0
 Тесты сверяют числовые записи, Unicode и порядок элементов массивов после
 преобразования.
 
-Публичные точки входа для проектов отслеживаются в [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387).
+Публичные [функции преобразования YAML](../../site/content/ru/api/modern/yaml.md)
+принимают и возвращают проверенные байты проекта. Интерфейс для повторного
+использования загруженного проекта отслеживается в [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387).

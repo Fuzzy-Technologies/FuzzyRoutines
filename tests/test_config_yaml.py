@@ -171,3 +171,68 @@ def test_ReportsSharedProjectValidationFailuresAtTheirPaths():
 
         else:
             raise AssertionError(f"Expected {category!r} at {pointer!r}.")
+
+
+def test_PublicByteConvertersValidateBothDirections():
+    """Use one public bytes boundary without exposing project internals."""
+
+    _RequireProjectExtras()
+
+    from fuzzyroutines.configuration import ConfigurationError
+    from fuzzyroutines.yaml_configuration import ConvertProjectJsonToYaml, ConvertProjectYamlToJson
+
+    yaml = ConvertProjectJsonToYaml(_PROJECT_JSON)
+    json = ConvertProjectYamlToJson(yaml)
+    assert DecodeConfigJson(json) == DecodeConfigJson(_PROJECT_JSON), "Both converters must preserve the exact wire tree."
+    assert b'"left":-0' in json and b'"peak":5e-1' in json, "Binary64 zero and exact decimal spellings must be retained."
+    assert ConvertProjectJsonToYaml(json) == yaml, "The deterministic block output must survive a round trip."
+
+    for converter, invalid in (
+        (ConvertProjectJsonToYaml, b'{"kind":"project","schemaVersion":2,"models":{}}'),
+        (ConvertProjectYamlToJson, b"kind: project\nschemaVersion: 2\nmodels: {}\n"),
+    ):
+        try:
+            converter(invalid)
+
+        except ConfigurationError as error:
+            assert (error.category, error.pointer) == ("unsupported-version", "/schemaVersion"), (
+                "Both public conversions must apply version validation before writing bytes."
+            )
+
+        else:
+            raise AssertionError("The converters must reject an unsupported v1 version.")
+
+
+def test_PublicYamlModuleImportsWithoutOptionalDependencies():
+    """Keep YAML and schema dependencies lazy and report an absent backend."""
+
+    from pathlib import Path
+    from subprocess import run
+    from sys import executable
+
+    import fuzzyroutines
+
+    assert fuzzyroutines.__file__ is not None
+    packageParent = str(Path(fuzzyroutines.__file__).resolve().parents[1])
+    result = run(
+        [executable, "-S", "-c", """
+import sys
+from unittest.mock import patch
+
+sys.path.insert(0, sys.argv[1])
+from fuzzyroutines.yaml_configuration import ConvertProjectJsonToYaml
+
+assert {"yaml", "jsonschema", "referencing"}.isdisjoint(sys.modules)
+try:
+    with patch("fuzzyroutines.yaml_configuration.FindSpec", return_value=None):
+        ConvertProjectJsonToYaml(b"{}")
+except ImportError as error:
+    assert "fuzzyroutines[config,yaml]" in str(error)
+else:
+    raise AssertionError("A missing YAML backend must have actionable guidance.")
+""", packageParent],
+        capture_output=True,
+        check=False,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr

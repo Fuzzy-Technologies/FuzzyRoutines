@@ -44,4 +44,5 @@ YAML 与 JSON 使用相同的项目字段和引用作用域。标签、锚点、
 合并键和重复键都会被拒绝。`include` 等项目字段也无法通过 v1 架构验证。
 测试确认转换会保留数字写法、Unicode 字符和数组顺序。
 
-项目的公共入口由 [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387) 单独跟踪。
+公共 [YAML 转换函数](../../site/content/zh-CN/api/modern/yaml.md) 接收并返回经过
+验证的项目字节。可复用项目快照的公共接口由 [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387) 单独跟踪。

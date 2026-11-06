@@ -82,4 +82,6 @@ merge keys and duplicate keys are rejected. A project field such as `include`
 also fails the v1 schema. The tests check that conversion preserves numeric
 tokens, Unicode and array order.
 
-The public project entry points are tracked separately in [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387).
+The public [YAML converters](../../site/content/en/api/modern/yaml.md) accept
+and return validated project bytes. The reusable project snapshot API is
+tracked separately in [#387](https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues/387).
