@@ -13,6 +13,7 @@ import pytest
 
 from fuzzyroutines._plot_sampling import (
     PlotSamplingError,
+    SampleClippedPlotSegment,
     SampleClosedPlotSegment,
     SampleDiscretePlot,
 )
@@ -225,3 +226,81 @@ def test_RejectUnusableClosedGridBeforeEvaluation(window, sampleCount, exception
 
     with pytest.raises(exceptionType):
         SampleClosedPlotSegment(fuzzySet, "invalid", window, sampleCount=sampleCount)
+
+
+def test_ClipOpenTriangleWithoutEvaluatingItsBoundary():
+    """Sample the open endpoint ADR witness and retain the exact interior anchors."""
+
+    triangle = Triangle(-1, 0, 0)
+    evaluated = []
+
+    def Evaluate(coordinate: MembershipScalar) -> MembershipScalar:
+        """Record every evaluated coordinate before delegating to the scalar triangle."""
+
+        evaluated.append(coordinate)
+
+        return triangle.Evaluate(coordinate)
+
+    universe = ContinuousUniverse(-1, 1, rightClosed=True)
+    result = SampleClippedPlotSegment(
+        ScalarFuzzySet(universe, Evaluate), "jump", (-2, 2), sampleCount=3, extraCoordinates=(-1, -0.5, 0, 0.5, 1),
+    )
+
+    assert result is not None
+    assert result.window == (-1, 1)
+    assert evaluated[0] == nextafter(-1, 1)
+    assert evaluated[-1] == 1
+    assert -1 not in evaluated, "An open boundary must never reach the scalar callback."
+    grades = dict(result.samples)
+    assert (grades[-0.5], grades[0], grades[0.5]) == (0.5, 1, 0)
+
+
+def test_ClipFractionEdgesUsingNearestInteriorFloat():
+    """Preserve rational points closer to an open edge than the base grid."""
+
+    left = Fraction(1, 10)
+    right = Fraction(3, 10)
+    nearLeft = (left + Fraction.from_float(0.1)) / 2
+    nearRight = (right + Fraction.from_float(0.3)) / 2
+
+    def Evaluate(coordinate: MembershipScalar) -> MembershipScalar:
+        """Distinguish the exact declared coordinates from the base grid."""
+
+        return int(coordinate is nearLeft or coordinate is nearRight)
+
+    fuzzySet = ScalarFuzzySet(ContinuousUniverse(left, right), Evaluate)
+    result = SampleClippedPlotSegment(fuzzySet, "rational bounds", (0, 1), sampleCount=2, extraCoordinates=(nearLeft, nearRight))
+
+    assert result is not None
+    assert result.window == (left, right)
+    assert result.addedCoordinates == (nearLeft, nearRight)
+    assert result.samples == ((nearLeft, 1), (0.1, 0), (0.3, 0), (nearRight, 1))
+
+
+def test_ClipPreservesIncludedTouchAndRejectsEmptyIntersection():
+    """Expose a lone included touch without synthesizing marker positions."""
+
+    fuzzySet = ScalarFuzzySet(ContinuousUniverse(0, 1, rightClosed=True), Triangle(0, 1, 1))
+    result = SampleClippedPlotSegment(fuzzySet, "touch", (1, 2))
+
+    assert result is not None
+    assert result.window == (1, 1)
+    assert result.baseSampleCount == 1
+    assert result.samples == ((1, 1),)
+    assert SampleClippedPlotSegment(fuzzySet, "empty touch", (-1, 0)) is None
+    assert SampleClippedPlotSegment(fuzzySet, "disjoint", (2, 3)) is None
+
+
+def test_RejectOpenSegmentWithInsufficientInteriorGrid():
+    """Reject a segment whose open edges leave fewer than two binary64 points."""
+
+    def UnexpectedEvaluation(coordinate: MembershipScalar) -> MembershipScalar:
+        """Fail if unrepresentable sampling attempts membership evaluation."""
+
+        pytest.fail(f"Unexpected scalar evaluation at {coordinate!r}.")
+
+    right = nextafter(nextafter(0.5, 1), 1)
+    fuzzySet = ScalarFuzzySet(ContinuousUniverse(0.5, right), UnexpectedEvaluation)
+
+    with pytest.raises(InvalidDomainError, match="distinct grid coordinates"):
+        SampleClippedPlotSegment(fuzzySet, "collapsed", (0, 1), sampleCount=2)

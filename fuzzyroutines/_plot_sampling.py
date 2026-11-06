@@ -9,6 +9,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from fractions import Fraction
 from itertools import groupby, pairwise
+from math import inf, nextafter
 from numbers import Rational
 from typing import cast
 
@@ -77,11 +78,11 @@ def SampleDiscretePlot(
 
 
 @dataclass(frozen=True, slots=True)
-class ClosedPlotSamples:
-    """Scalar samples and provenance for a single closed display segment.
+class ContinuousPlotSamples:
+    """Scalar samples and provenance for a single continuous display segment.
 
     Attributes:
-        window: Exact endpoints supplied for the sampled segment.
+        window: Exact clipped geometric bounds before excluding open edges.
         baseSampleCount: Grid size before merging supplied coordinates.
         addedCoordinates: Visible coordinates that fell outside the base grid.
         samples: Ordered scalar coordinate and grade pairs.
@@ -100,7 +101,7 @@ def SampleClosedPlotSegment(
     *,
     sampleCount: int = 401,
     extraCoordinates: tuple[MembershipScalar, ...] = (),
-) -> ClosedPlotSamples:
+) -> ContinuousPlotSamples:
     """Sample one closed segment, preserving its endpoints and supplied coordinates.
 
     Args:
@@ -132,11 +133,7 @@ def SampleClosedPlotSegment(
     if not isinstance(universe, ContinuousUniverse):
         raise InvalidParameterTypeError("Closed plot sampling requires a ContinuousUniverse.")
 
-    if isinstance(sampleCount, bool) or not isinstance(sampleCount, int):
-        raise InvalidParameterTypeError("Plot sample count must be an integer.")
-
-    if sampleCount < 2:
-        raise InvalidParameterError("Plot sample count must be at least two.")
+    _CheckPlotSampleCount(sampleCount)
 
     left = _RequireFiniteReal(window[0], "left display limit")
     right = _RequireFiniteReal(window[1], "right display limit")
@@ -145,15 +142,116 @@ def SampleClosedPlotSegment(
         raise InvalidDomainError("The closed plot segment must have increasing endpoints inside the universe.")
 
     grid = _ClosedPlotGrid(left, right, sampleCount)
-    tagged = [(left, True), (right, True)]
+    return _SampleContinuousGrid(fuzzySet, seriesName, window, grid, extraCoordinates)
+
+
+def SampleClippedPlotSegment(
+    fuzzySet: ScalarFuzzySet,
+    seriesName: str,
+    window: tuple[MembershipScalar, MembershipScalar],
+    *,
+    sampleCount: int = 401,
+    extraCoordinates: tuple[MembershipScalar, ...] = (),
+) -> ContinuousPlotSamples | None:
+    """Sample the intersection of a continuous universe and a display window.
+
+    Args:
+        fuzzySet: Scalar set whose continuous universe clips the window.
+        seriesName: Plot series label included in evaluation failures.
+        window: Finite, increasing, inclusive display bounds.
+        sampleCount: Number of base grid points for a nondegenerate segment.
+        extraCoordinates: Declared coordinates to preserve in the
+            intersection, including values between an open edge and the
+            first representable binary64 grid point.
+
+    Returns:
+        Samples and the true clipped bounds, or `None` for an empty
+        intersection. A shared included boundary produces one sample.
+        Open bounds stay in the geometry while the grid starts or ends
+        inside them. The result supplies no continuity or artist topology.
+
+    Raises:
+        InvalidParameterTypeError: If the universe, count or coordinate type
+            is unsuitable.
+        InvalidParameterError: If the count is below two or a coordinate
+            is not finite.
+        InvalidDomainError: If the display window is unordered or there
+            are too few distinct display coordinates for the base grid.
+        PlotSamplingError: If scalar membership fails at a visible point.
+    """
+
+    universe = fuzzySet.universe
+
+    if not isinstance(universe, ContinuousUniverse):
+        raise InvalidParameterTypeError("Clipped plot sampling requires a ContinuousUniverse.")
+
+    _CheckPlotSampleCount(sampleCount)
+    left = _RequireFiniteReal(window[0], "left display limit")
+    right = _RequireFiniteReal(window[1], "right display limit")
+
+    if left >= right:
+        raise InvalidDomainError("Plot display limits must satisfy left < right.")
+
+    if universe.left is not None:
+        left = max(left, cast(float, universe.left))
+
+    if universe.right is not None:
+        right = min(right, cast(float, universe.right))
+
+    if left > right or (left == right and not universe.Contains(left)):
+        return None
+
+    if left == right:
+        return _SampleContinuousGrid(fuzzySet, seriesName, (left, right), (left,), extraCoordinates)
+
+    first = left if universe.Contains(left) else _InteriorFloat(left, inf)
+    last = right if universe.Contains(right) else _InteriorFloat(right, -inf)
+
+    if first >= last:
+        raise InvalidDomainError("Plot segment cannot supply the requested distinct grid coordinates.")
+
+    grid = _ClosedPlotGrid(first, last, sampleCount)
+    return _SampleContinuousGrid(fuzzySet, seriesName, (left, right), grid, extraCoordinates)
+
+
+def _CheckPlotSampleCount(sampleCount: int) -> None:
+    """Require an integer count for a nondegenerate plot grid."""
+
+    if isinstance(sampleCount, bool) or not isinstance(sampleCount, int):
+        raise InvalidParameterTypeError("Plot sample count must be an integer.")
+
+    if sampleCount < 2:
+        raise InvalidParameterError("Plot sample count must be at least two.")
+
+
+
+def _InteriorFloat(edge: float, direction: float) -> float:
+    """Find the closest binary64 value strictly toward the interval interior."""
+
+    rounded = float(edge)
+    inside = rounded > edge if direction > 0 else rounded < edge
+    return rounded if inside else nextafter(rounded, direction)
+
+
+def _SampleContinuousGrid(
+    fuzzySet: ScalarFuzzySet,
+    seriesName: str,
+    window: tuple[MembershipScalar, MembershipScalar],
+    grid: tuple[float, ...],
+    extraCoordinates: tuple[MembershipScalar, ...],
+) -> ContinuousPlotSamples:
+    """Merge exact declared coordinates and evaluate the visible grid in order."""
+
+    left, right = cast(tuple[float, float], window)
+    tagged = [(point, True) for point in (grid[0], grid[-1]) if point == left or point == right]
 
     for value in extraCoordinates:
         point = _RequireFiniteReal(value, "extra plot coordinate")
 
-        if left <= point <= right:
+        if left <= point <= right and fuzzySet.universe.Contains(point):
             tagged.append((point, False))
 
-    tagged.extend((point, True) for point in grid[1:-1])
+    tagged.extend((point, True) for point in grid)
     tagged.sort(key=lambda entry: entry[0])
     coordinates = []
     added = []
@@ -164,7 +262,7 @@ def SampleClosedPlotSegment(
         if not any(onGrid for _, onGrid in entries):
             added.append(point)
 
-    return ClosedPlotSamples(window, sampleCount, tuple(added), _SamplePoints(fuzzySet, seriesName, coordinates))
+    return ContinuousPlotSamples(window, len(grid), tuple(added), _SamplePoints(fuzzySet, seriesName, coordinates))
 
 
 def _ClosedPlotGrid(left: float, right: float, sampleCount: int) -> tuple[float, ...]:
