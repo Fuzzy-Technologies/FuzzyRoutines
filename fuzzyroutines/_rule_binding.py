@@ -17,6 +17,7 @@ from ._rule_parser import (
     _NegationDraft,
     _ParseRule,
     _PredicateDraft,
+    _RuleDraft,
     _RuleParseError,
     _TermDraft,
 )
@@ -111,13 +112,18 @@ def _BindRule(source: bytes, configuration: ModelConfiguration) -> _BoundRule:
             prevent the rule from being inserted into the selected model.
     """
 
-    draft = _ParseRule(source)
+    return _BindRuleDraft(_ParseRule(source), configuration)
+
+
+def _BindRuleDraft(draft: _RuleDraft, configuration: ModelConfiguration) -> _BoundRule:
+    """Resolve a parsed draft against one validated inference model."""
 
     try:
         _FormatRule(draft)
 
     except _RuleFormatError as error:
-        raise _RuleParseError("exceeded-limit", len(source), str(error)) from error
+        assert error.offset is not None, "Binding requires a draft with source offsets."
+        raise _RuleParseError("exceeded-limit", error.offset, str(error)) from error
 
     binding = configuration.inference
 
