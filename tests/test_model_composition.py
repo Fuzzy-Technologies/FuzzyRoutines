@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Contract checks for the private named model composition prototype."""
+"""Contract checks for the named model composition API."""
 
 from dataclasses import replace
 from fractions import Fraction
@@ -12,7 +12,8 @@ from unittest import TestCase
 
 from examples.inference import BuildModels
 from fuzzyroutines import IntegrationDomain, ScalarFuzzySet
-from fuzzyroutines._model_composition import (
+from fuzzyroutines import composition as compositionApi
+from fuzzyroutines.composition import (
     CompositionEvaluationError,
     ModelComposition,
     OutputBinding,
@@ -30,6 +31,19 @@ from fuzzyroutines.inference import MamdaniResult
 
 class ModelCompositionTests(TestCase):
     """Preserve scalar semantics and enforce explicit composition boundaries."""
+
+    def test_PublicModuleExportsCompositionContracts(self):
+        """Expose only named composition objects and their failure types."""
+
+        self.assertEqual(compositionApi.__all__, [
+            "CompositionEvaluationError",
+            "FailureCategory",
+            "FailurePolicy",
+            "ModelComposition",
+            "OutputBinding",
+            "OutputFailure",
+            "OutputRecord",
+        ])
 
     def test_MixedOutputsRetainScalarResultsAndOrder(self):
         """Compare all ordered numerical and trace evidence to scalar calls."""
