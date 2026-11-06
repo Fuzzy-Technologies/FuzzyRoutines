@@ -1,0 +1,42 @@
+{
+  "license": "SPDX-License-Identifier: Apache-2.0",
+  "scope": "Invented adapter-boundary inputs. Consumer labels identify scenarios, not observed application code or traces.",
+  "cases": [
+    {
+      "id": "pricegenerator-lower-tick",
+      "sample": 10000, "lower": 10000, "upper": 10100,
+      "coordinate": 0, "label": "Min", "confidence": 1,
+      "historical_case": "long-0"
+    },
+    {
+      "id": "pricegenerator-low-plateau-edge",
+      "sample": 10023, "lower": 10000, "upper": 10100,
+      "coordinate": 0.23, "label": "Low", "confidence": 1,
+      "historical_case": "long-0.23"
+    },
+    {
+      "id": "pricegenerator-upper-tick",
+      "sample": 10100, "lower": 10000, "upper": 10100,
+      "coordinate": 1, "label": "Max", "confidence": 1,
+      "historical_case": "long-1"
+    },
+    {
+      "id": "fma-signed-weak-boundary",
+      "sample": -33, "lower": -50, "upper": 50,
+      "coordinate": 0.17, "label": "Min", "confidence": 0.0021295898943666483,
+      "historical_case": "long-0.17"
+    },
+    {
+      "id": "fma-signed-neutral",
+      "sample": 0, "lower": -50, "upper": 50,
+      "coordinate": 0.5, "label": "Med", "confidence": 1,
+      "historical_case": "long-0.5"
+    },
+    {
+      "id": "fma-signed-high-plateau-edge",
+      "sample": 27, "lower": -50, "upper": 50,
+      "coordinate": 0.77, "label": "High", "confidence": 1,
+      "historical_case": "long-0.77"
+    }
+  ]
+}
