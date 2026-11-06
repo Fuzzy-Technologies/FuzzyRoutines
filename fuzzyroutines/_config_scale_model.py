@@ -35,7 +35,7 @@ type _Category = Literal[
 
 
 class ScaleModelDecodeError(ValueError):
-    """Semantic failure with a category and its original wire field pointer."""
+    """Model semantic failure with a category and original wire field pointer."""
 
     def __init__(self, category: _Category, path: ConfigPath, message: str) -> None:
         """Record actionable scale model diagnostics."""
@@ -247,6 +247,25 @@ def _DecodeScale(
     )
 
 
+def _DecodeDefinitions(document: _Object) -> _ScaleModel:
+    """Reconstruct the scale definitions shared by model variants."""
+
+    memberships = {
+        key: _DecodeMembership(cast(_Object, value), ("memberships", key))
+        for key, value in sorted(cast(_Object, document["memberships"]).items())
+    }
+    universes = {
+        key: _DecodeUniverse(cast(_Object, value), ("universes", key))
+        for key, value in sorted(cast(_Object, document["universes"]).items())
+    }
+    scales = {
+        key: _DecodeScale(cast(_Object, value), universes, memberships, ("scales", key))
+        for key, value in sorted(cast(_Object, document["scales"]).items())
+    }
+
+    return _ScaleModel(MappingProxyType(universes), MappingProxyType(memberships), MappingProxyType(scales))
+
+
 def DecodeScaleModel(encoded: bytes) -> _ScaleModel:
     """Decode one scale-only v1 model without invoking membership evaluators.
 
@@ -271,17 +290,4 @@ def DecodeScaleModel(encoded: bytes) -> _ScaleModel:
     if "inference" in document:
         raise ScaleModelDecodeError("unsupported-model", ("inference",), "A scale model cannot contain inference.")
 
-    memberships = {
-        key: _DecodeMembership(cast(_Object, value), ("memberships", key))
-        for key, value in sorted(cast(_Object, document["memberships"]).items())
-    }
-    universes = {
-        key: _DecodeUniverse(cast(_Object, value), ("universes", key))
-        for key, value in sorted(cast(_Object, document["universes"]).items())
-    }
-    scales = {
-        key: _DecodeScale(cast(_Object, value), universes, memberships, ("scales", key))
-        for key, value in sorted(cast(_Object, document["scales"]).items())
-    }
-
-    return _ScaleModel(MappingProxyType(universes), MappingProxyType(memberships), MappingProxyType(scales))
+    return _DecodeDefinitions(document)

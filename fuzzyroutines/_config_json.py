@@ -17,6 +17,7 @@ from re import compile
 
 _MAX_BYTES = 1_048_576
 _MAX_DEPTH = 96
+_MAX_ANTECEDENT_DEPTH = 64
 _MAX_NODES = 65_536
 _WHITESPACE = compile(r"[ \t\r\n]*")
 _NUMBER = compile(r"-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?")
@@ -51,6 +52,29 @@ def ConfigPointer(path: ConfigPath) -> str:
     """Encode a wire path as an RFC 6901 JSON Pointer."""
 
     return "".join("/" + str(part).replace("~", "~0").replace("/", "~1") for part in path)
+
+
+def _AntecedentDepth(path: ConfigPath) -> int:
+    """Count only rule-expression nodes on a standalone or inline model path."""
+
+    match path:
+        case (
+            ("inference", "rules", int(), "antecedent", *steps)
+            | ("models", str(), "inference", "rules", int(), "antecedent", *steps)
+        ):
+            depth = 1
+            remaining = iter(steps)
+
+            for step in remaining:
+                if step == "operand" or (step == "operands" and isinstance(next(remaining, None), int)):
+                    depth += 1
+
+                else:
+                    return 0
+
+            return depth
+        case _:
+            return 0
 
 
 class JsonConfigParseError(ValueError):
@@ -126,6 +150,9 @@ class _JsonReader:
             self.position += 1
 
             if character == "{":
+                if len(path) > _MAX_ANTECEDENT_DEPTH and _AntecedentDepth(path) > _MAX_ANTECEDENT_DEPTH:
+                    raise self.Error("JSON exceeds the 64-node antecedent depth limit.", path)
+
                 return self.ReadObject(path, depth + 1)
 
             return self.ReadArray(path, depth + 1)

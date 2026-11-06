@@ -102,3 +102,31 @@ def test_EnforcesNodeBudgetIncludingObjectKeys():
         DecodeConfigJson(b'{"key":[[], ' + values + b",null]}")
 
     assert failure.value.pointer == "/key/65533", "The node budget must count the object key and all containers."
+
+
+@pytest.mark.parametrize("inline", (False, True))
+def test_BoundsAntecedentDepthBeforeBuildingItsObject(inline):
+    """Count condition nodes through unary and array edges in both envelope paths."""
+
+    from json import dumps
+
+    expression = {"kind": "term", "input": "risk", "term": "high"}
+    current = expression
+
+    for _ in range(62):
+        current = {"kind": "not", "operand": current}
+
+    antecedent = {"kind": "all", "operands": [current, expression]}
+    model = {"inference": {"rules": [{"antecedent": antecedent}]}}
+    document = {"models": {"sample": model}} if inline else model
+    DecodeConfigJson(dumps(document).encode())
+
+    antecedent["operands"][0] = {"kind": "not", "operand": current}
+
+    with pytest.raises(JsonConfigParseError, match="64-node antecedent") as failure:
+        DecodeConfigJson(dumps(document).encode())
+
+    prefix = "/models/sample" if inline else ""
+    assert failure.value.pointer == prefix + "/inference/rules/0/antecedent/operands/0" + "/operand" * 63, (
+        "The parser must stop at the first condition deeper than 64 nodes."
+    )
