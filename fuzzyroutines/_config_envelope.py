@@ -13,13 +13,19 @@ validation and semantic reconstruction run in later stages.
 from collections.abc import Mapping
 from typing import Literal, cast
 
-from ._config_json import ConfigPath, ConfigPointer, JsonNumber, JsonValue
+from ._config_json import (
+    ConfigPath,
+    ConfigPointer,
+    ConfigurationError,
+    JsonNumber,
+    JsonValue,
+)
 
 type _EnvelopeKind = Literal["model", "project"]
 type _Category = Literal["invalid-shape", "unsupported-kind", "unsupported-version"]
 
 
-class ConfigEnvelopeError(ValueError):
+class ConfigEnvelopeError(ConfigurationError):
     """Configuration envelope rejection with stable category and JSON Pointer."""
 
     def __init__(self, category: _Category, path: ConfigPath, message: str) -> None:

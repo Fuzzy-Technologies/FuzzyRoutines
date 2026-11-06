@@ -77,7 +77,19 @@ def _AntecedentDepth(path: ConfigPath) -> int:
             return 0
 
 
-class JsonConfigParseError(ValueError):
+class ConfigurationError(ValueError):
+    """A rejected configuration with a stable category and JSON Pointer.
+
+    Attributes:
+        category: Machine-readable reason for rejecting the document or source.
+        pointer: RFC 6901 location, or an empty string for a document-wide error.
+    """
+
+    category: str
+    pointer: str
+
+
+class JsonConfigParseError(ConfigurationError):
     """Malformed or unsafe wire data with an RFC 6901 diagnostic pointer."""
 
     category = "malformed-document"

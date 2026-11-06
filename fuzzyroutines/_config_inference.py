@@ -11,8 +11,8 @@ from typing import cast
 
 from ._config_json import ConfigPath, DecodeConfigJson
 from ._config_scale_model import (
+    ScaleDefinition,
     ScaleModelDecodeError,
-    _ConfiguredScale,
     _Object,
     _Real,
     _ScaleModel,
@@ -63,7 +63,7 @@ def _DeclareIdentity(
     return identifier, name
 
 
-def _ResolveScale(scaleId: str, definitions: _ScaleModel, path: ConfigPath) -> _ConfiguredScale:
+def _ResolveScale(scaleId: str, definitions: _ScaleModel, path: ConfigPath) -> ScaleDefinition:
     """Resolve a scale by its exact local model ID."""
 
     if scaleId not in definitions.scales:
@@ -72,7 +72,7 @@ def _ResolveScale(scaleId: str, definitions: _ScaleModel, path: ConfigPath) -> _
     return definitions.scales[scaleId]
 
 
-def _TermNames(scale: _ConfiguredScale) -> dict[str, str]:
+def _TermNames(scale: ScaleDefinition) -> dict[str, str]:
     """Index exact runtime term names by the IDs of this scale only."""
 
     return {termId: term.name for termId, term in zip(scale.termIds, scale.scale.terms, strict=True)}

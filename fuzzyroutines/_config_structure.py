@@ -123,8 +123,12 @@ def CheckConfigStructure(document: JsonValue, schema: Mapping[str, object]) -> N
     selectedSchema["$ref"] = f"#/$defs/{kind}"
 
     # Use the same validator and offline registry as the schema design fixture.
-    jsonSchema = importlib.import_module("jsonschema")
-    registry = importlib.import_module("referencing").Registry()
+    try:
+        jsonSchema = importlib.import_module("jsonschema")
+        registry = importlib.import_module("referencing").Registry()
+
+    except ModuleNotFoundError as error:
+        raise ImportError("Install fuzzyroutines[config] to validate model configuration.") from error
     baseValidator = jsonSchema.Draft202012Validator
     checker = baseValidator.TYPE_CHECKER.redefine("integer", _IsExactSchemaInteger)
     validator = jsonSchema.validators.extend(baseValidator, type_checker=checker)

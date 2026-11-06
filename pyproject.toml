@@ -30,6 +30,7 @@ classifiers = [
 keywords = ["fuzzy", "fuzzylogic", "fuzzyset", "logic", "math", "research", "science"]
 
 [project.optional-dependencies]
+config = ["jsonschema>=4.26,<5", "referencing>=0.37,<1"]
 numpy = ["numpy>=2.3.5,<3"]
 
 [project.urls]

@@ -14,6 +14,7 @@ from typing import Literal, cast
 from ._config_json import (
     ConfigPath,
     ConfigPointer,
+    ConfigurationError,
     DecodeConfigJson,
     JsonNumber,
     JsonValue,
@@ -34,7 +35,7 @@ type _Category = Literal[
 ]
 
 
-class ScaleModelDecodeError(ValueError):
+class ScaleModelDecodeError(ConfigurationError):
     """Configuration semantic failure with a category and original wire pointer."""
 
     def __init__(self, category: _Category, path: ConfigPath, message: str) -> None:
@@ -46,23 +47,36 @@ class ScaleModelDecodeError(ValueError):
 
 
 @dataclass(frozen=True, slots=True)
-class _Representatives:
-    """Explicit closed windows in term order and their numerical policy."""
+class ScaleRepresentatives:
+    """Explicit closed windows in term order and their numerical policy.
+
+    Each domain corresponds to one declared scale term and lies within its
+    continuous universe. No representative is evaluated during loading.
+    """
 
     domains: tuple[IntegrationDomain, ...]
     policy: CentroidPolicy
 
 
 @dataclass(frozen=True, slots=True)
-class _ConfiguredScale:
-    """One scale with wire IDs and independently optional policies."""
+class ScaleDefinition:
+    """One scale with exact wire IDs and independently optional policies.
+
+    Attributes:
+        scale: Immutable runtime scale with terms in declaration order.
+        universeId: ID of the shared universe of all terms.
+        termIds: Exact IDs in the runtime term order.
+        membershipIds: IDs of the declared built-in families in term order.
+        fuzzification: Explicit tie and confidence policy when present.
+        representatives: Optional finite centroid window and policy settings.
+    """
 
     scale: LinguisticScale
     universeId: str
     termIds: tuple[str, ...]
     membershipIds: tuple[str, ...]
-    fuzzification: FuzzificationPolicy | None
-    representatives: _Representatives | None
+    fuzzification: FuzzificationPolicy | None = None
+    representatives: ScaleRepresentatives | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,7 +85,7 @@ class _ScaleModel:
 
     universes: Mapping[str, _Universe]
     memberships: Mapping[str, MembershipFunction]
-    scales: Mapping[str, _ConfiguredScale]
+    scales: Mapping[str, ScaleDefinition]
 
 
 def _Real(value: JsonValue) -> float:
@@ -142,7 +156,7 @@ def _DecodeWindow(definition: _Object, universe: ContinuousUniverse, path: Confi
 
 def _DecodeRepresentatives(
     definition: _Object, universe: _Universe, termIds: tuple[str, ...], path: ConfigPath,
-) -> _Representatives:
+) -> ScaleRepresentatives:
     """Bind exactly one integration window to every term ID in declared order."""
 
     if not isinstance(universe, ContinuousUniverse):
@@ -168,7 +182,7 @@ def _DecodeRepresentatives(
 
         domains.append(_DecodeWindow(cast(_Object, windows[termId]), universe, windowPath))
 
-    return _Representatives(tuple(domains), _DecodeCentroidPolicy(cast(_Object, definition["policy"])))
+    return ScaleRepresentatives(tuple(domains), _DecodeCentroidPolicy(cast(_Object, definition["policy"])))
 
 
 def _DecodeCentroidPolicy(policy: _Object) -> CentroidPolicy:
@@ -186,7 +200,7 @@ def _DecodeScale(
     universes: Mapping[str, _Universe],
     memberships: Mapping[str, MembershipFunction],
     path: ConfigPath,
-) -> _ConfiguredScale:
+) -> ScaleDefinition:
     """Resolve one scale's terms and preserve its explicit optional policies."""
 
     universeId = cast(str, definition["universe"])
@@ -245,7 +259,7 @@ def _DecodeScale(
             cast(_Object, definition["representatives"]), universe, tuple(termIds), (*path, "representatives"),
         )
 
-    return _ConfiguredScale(
+    return ScaleDefinition(
         LinguisticScale(tuple(terms)), universeId, tuple(termIds), tuple(membershipIds), fuzzification, representatives,
     )
 

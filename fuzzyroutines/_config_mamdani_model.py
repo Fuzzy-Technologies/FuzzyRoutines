@@ -34,7 +34,7 @@ from .operators import SNormPolicy, TNormPolicy
 
 
 @dataclass(frozen=True, slots=True)
-class _ConfiguredCentroid:
+class MamdaniCentroid:
     """An explicitly declared closed integration window and its policy."""
 
     domain: IntegrationDomain
@@ -52,7 +52,7 @@ class _ConfiguredMamdani:
     ruleIds: tuple[str, ...]
     outputId: str
     outputScaleId: str
-    centroid: _ConfiguredCentroid | None
+    centroid: MamdaniCentroid | None
 
 
 def DecodeMamdaniModel(encoded: bytes) -> _ConfiguredMamdani:
@@ -93,7 +93,7 @@ def _DecodeMamdani(document: _Object, inference: _Object, path: ConfigPath) -> _
 
     if "centroid" in inference:
         centroidDefinition = cast(_Object, inference["centroid"])
-        centroid = _ConfiguredCentroid(
+        centroid = MamdaniCentroid(
             _DecodeWindow(cast(_Object, centroidDefinition["domain"]), universe, (*inferencePath, "centroid", "domain")),
             _DecodeCentroidPolicy(cast(_Object, centroidDefinition["policy"])),
         )

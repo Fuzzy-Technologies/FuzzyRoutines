@@ -11,9 +11,15 @@ from json import dumps
 from math import isfinite
 from typing import cast
 
-from ._config_json import _MAX_ANTECEDENT_DEPTH, _SURROGATE, ConfigPath, ConfigPointer
+from ._config_json import (
+    _MAX_ANTECEDENT_DEPTH,
+    _SURROGATE,
+    ConfigPath,
+    ConfigPointer,
+    ConfigurationError,
+)
 from ._config_mamdani_model import DecodeMamdaniModel, _ConfiguredMamdani
-from ._config_scale_model import DecodeScaleModel, _ConfiguredScale, _ScaleModel
+from ._config_scale_model import DecodeScaleModel, ScaleDefinition, _ScaleModel
 from ._config_sugeno_model import DecodeSugenoModel, _ConfiguredSugeno
 from .defuzzification import CentroidPolicy
 from .domain import ContinuousUniverse, DiscreteUniverse, IntegrationDomain
@@ -44,7 +50,7 @@ type _Model = _ScaleModel | _ConfiguredMamdani | _ConfiguredSugeno
 _MAX_EXACT_DEPTH = (1 << 53) - 1
 
 
-class ConfigExportError(ValueError):
+class ConfigExportError(ConfigurationError):
     """Unsupported model source data identified by its prospective wire path."""
 
     category = "unsupported-source"
@@ -195,7 +201,7 @@ def _EncodeTerm(
     return {"id": termId, "membership": membershipId, "name": term.name}
 
 
-def _EncodeScale(configured: _ConfiguredScale, definitions: _ScaleModel, path: ConfigPath) -> _Object:
+def _EncodeScale(configured: ScaleDefinition, definitions: _ScaleModel, path: ConfigPath) -> _Object:
     """Preserve term declaration order and independently optional scale policies."""
 
     if type(configured.scale) is not LinguisticScale:
@@ -481,6 +487,24 @@ def _CheckUnicode(wire: _Wire, path: ConfigPath) -> None:
             _CheckUnicode(value, (*path, index))
 
 
+def _EncodeModelBytes(model: _Model) -> bytes:
+    """Encode canonical bytes for validation against the v1 model contract."""
+
+    definitions = model if isinstance(model, _ScaleModel) else model.definitions
+    wire = _EncodeDefinitions(definitions)
+
+    if not isinstance(model, _ScaleModel):
+        wire["inference"] = _EncodeInference(model)
+
+    try:
+        return (_JsonText(wire) + "\n").encode("utf-8")
+
+    except UnicodeEncodeError as error:
+        _CheckUnicode(wire, ())
+
+        raise ConfigExportError((), "Replace unpaired Unicode surrogates in source text.") from error
+
+
 def EncodeModel(model: _Model) -> bytes:
     """Encode one configured scale, Mamdani or Sugeno model without evaluation.
 
@@ -495,19 +519,7 @@ def EncodeModel(model: _Model) -> bytes:
             generated document violates the v1 parser, shape or semantic limits.
     """
 
-    definitions = model if isinstance(model, _ScaleModel) else model.definitions
-    wire = _EncodeDefinitions(definitions)
-
-    if not isinstance(model, _ScaleModel):
-        wire["inference"] = _EncodeInference(model)
-
-    try:
-        encoded = (_JsonText(wire) + "\n").encode("utf-8")
-
-    except UnicodeEncodeError as error:
-        _CheckUnicode(wire, ())
-
-        raise ConfigExportError((), "Replace unpaired Unicode surrogates in source text.") from error
+    encoded = _EncodeModelBytes(model)
 
     if isinstance(model, _ConfiguredMamdani):
         DecodeMamdaniModel(encoded)
