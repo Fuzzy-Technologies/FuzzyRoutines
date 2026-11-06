@@ -8,6 +8,11 @@ extra = "numpy"
 pages = ["guides/numpy-batches.md"]
 modules = ["fuzzyroutines.batches"]
 
+[[optionalExamples]]
+extra = "plot"
+pages = ["guides/plot-export.md"]
+modules = ["fuzzyroutines.plotting"]
+
 [[surfaces]]
 module = "fuzzyroutines"
 source = "fuzzyroutines/__init__.py"
@@ -69,6 +74,11 @@ source = "fuzzyroutines/relations.py"
 mode = "authored"
 
 [[surfaces]]
+module = "fuzzyroutines.plotting"
+source = "fuzzyroutines/plotting.py"
+mode = "authored"
+
+[[surfaces]]
 module = "fuzzyroutines.FuzzyRoutines"
 source = "fuzzyroutines/FuzzyRoutines.py"
 mode = "adapters"
@@ -76,6 +86,18 @@ mode = "adapters"
 [[exclusions]]
 symbol = "fuzzyroutines.numeric"
 reason = "Internal scalar validation helpers; public validation contracts are documented at the consuming API boundaries."
+
+[[exclusions]]
+symbol = "fuzzyroutines._plot_export"
+reason = "Private format validation and atomic publication helpers used through the public plotting module."
+
+[[exclusions]]
+symbol = "fuzzyroutines._plot_render"
+reason = "Private backend integration and figure artist data used through the public plotting module."
+
+[[exclusions]]
+symbol = "fuzzyroutines._plot_sampling"
+reason = "Private scalar sampling and path segmentation helpers; the public plotting reference documents PlotSamplingError."
 
 [[exclusions]]
 symbol = "fuzzyroutines.Examples"

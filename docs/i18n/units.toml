@@ -9993,13 +9993,13 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
+sourceHash = "sha256:ee1abd185935913720bae912a1de06363df554eaf677eb7e004d792861b11ee6"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "approved"
+state = "draft"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
+sourceHash = "sha256:ee1abd185935913720bae912a1de06363df554eaf677eb7e004d792861b11ee6"
 
 [[units.translations.ru.reviews]]
 role = "editorial"
@@ -10018,9 +10018,9 @@ reviewedAt = "2026-10-18T21:31:11Z"
 evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
 
 [units.translations.zh-CN]
-state = "approved"
+state = "draft"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
+sourceHash = "sha256:ee1abd185935913720bae912a1de06363df554eaf677eb7e004d792861b11ee6"
 
 [[units.translations.zh-CN.reviews]]
 role = "editorial"
@@ -13973,3 +13973,71 @@ reviewedTranslationHash = "sha256:69ab0164d560f8aaba876856337deee4f31c31305a1c40
 reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
 reviewedAt = "2026-10-14T19:15:12Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+
+[[units]]
+id = "module:fuzzyroutines.plotting"
+kind = "module"
+sourcePath = "fuzzyroutines/plotting.py"
+sourceHash = "sha256:1fbb7a0c2c125359577149aa470d7a97b53ca5106f8afc37fd93c0cd08725b27"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.plotting.md"
+sourceHash = "sha256:1fbb7a0c2c125359577149aa470d7a97b53ca5106f8afc37fd93c0cd08725b27"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.plotting.md"
+sourceHash = "sha256:1fbb7a0c2c125359577149aa470d7a97b53ca5106f8afc37fd93c0cd08725b27"
+
+[[units]]
+id = "page:api.modern.plotting"
+kind = "page"
+sourcePath = "docs/site/content/en/api/modern/plotting.md"
+sourceHash = "sha256:a998262992b590078c84e3d33d05c6d9474de9125672f462430b4dd18a0bab3f"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/api/modern/plotting.md"
+sourceHash = "sha256:a998262992b590078c84e3d33d05c6d9474de9125672f462430b4dd18a0bab3f"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/plotting.md"
+sourceHash = "sha256:a998262992b590078c84e3d33d05c6d9474de9125672f462430b4dd18a0bab3f"
+
+[[units]]
+id = "page:guides.plot-export"
+kind = "page"
+sourcePath = "docs/site/content/en/guides/plot-export.md"
+sourceHash = "sha256:92a9955180d472daa62875a1bbb4faf1ac81660ccd2fd0d7bfe35eddeb4e05dd"
+reviewClass = "mathematical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/guides/plot-export.md"
+sourceHash = "sha256:92a9955180d472daa62875a1bbb4faf1ac81660ccd2fd0d7bfe35eddeb4e05dd"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/guides/plot-export.md"
+sourceHash = "sha256:92a9955180d472daa62875a1bbb4faf1ac81660ccd2fd0d7bfe35eddeb4e05dd"
+
+[[units]]
+id = "symbol:fuzzyroutines.plotting.ExportMembershipPlot"
+kind = "symbol"
+sourcePath = "fuzzyroutines/plotting.py"
+sourceHash = "sha256:49ddcb0dda566be5674b71c5bcd94d7520ad3322fc9f2b7fd8952cd431b4e5a0"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.plotting.ExportMembershipPlot.md"
+sourceHash = "sha256:49ddcb0dda566be5674b71c5bcd94d7520ad3322fc9f2b7fd8952cd431b4e5a0"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.plotting.ExportMembershipPlot.md"
+sourceHash = "sha256:49ddcb0dda566be5674b71c5bcd94d7520ad3322fc9f2b7fd8952cd431b4e5a0"

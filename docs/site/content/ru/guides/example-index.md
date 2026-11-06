@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Указатель примеров публичного API {#public-api-example-index}
 
-Все 229 учтённых публичных символов связаны с выполненными примерами (37 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
+Все 230 учтённых публичных символов связаны с выполненными примерами (38 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
 
 Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют настоящей аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
 
@@ -215,6 +215,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.operators.SNormPolicy.Evaluate`                               | [alarm, блок 1](alarm.md); [api-recipes, блок 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy`                                        | [alarm, блок 1](alarm.md); [api-recipes, блок 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy.Evaluate`                               | [alarm, блок 1](alarm.md); [api-recipes, блок 3](api-recipes.md)                                                 |
+| `fuzzyroutines.plotting.ExportMembershipPlot`                                | [plot-export, блок 1](plot-export.md)                                                                            |
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
