@@ -36,7 +36,13 @@ class JsonNumber:
 
 
 type JsonValue = None | bool | str | JsonNumber | list[JsonValue] | dict[str, JsonValue]
-type _Path = tuple[str | int, ...]
+type ConfigPath = tuple[str | int, ...]
+
+
+def ConfigPointer(path: ConfigPath) -> str:
+    """Encode a wire path as an RFC 6901 JSON Pointer."""
+
+    return "".join("/" + str(part).replace("~", "~0").replace("/", "~1") for part in path)
 
 
 class JsonConfigParseError(ValueError):
@@ -61,14 +67,12 @@ class _JsonReader:
         self.position = 0
         self.nodes = 0
 
-    def Error(self, message: str, path: _Path) -> JsonConfigParseError:
+    def Error(self, message: str, path: ConfigPath) -> JsonConfigParseError:
         """Attach an escaped pointer to the current diagnostic."""
 
-        pointer = "".join("/" + str(part).replace("~", "~0").replace("/", "~1") for part in path)
+        return JsonConfigParseError(message, ConfigPointer(path))
 
-        return JsonConfigParseError(message, pointer)
-
-    def CountNode(self, path: _Path) -> None:
+    def CountNode(self, path: ConfigPath) -> None:
         """Reserve capacity for a JSON value or an object key."""
 
         self.nodes += 1
@@ -85,7 +89,7 @@ class _JsonReader:
 
         return self.source[self.position:self.position + 1]
 
-    def ReadString(self, path: _Path) -> str:
+    def ReadString(self, path: ConfigPath) -> str:
         """Decode one quoted string and reject unpaired surrogate escapes."""
 
         try:
@@ -101,7 +105,7 @@ class _JsonReader:
 
         return value
 
-    def ReadValue(self, path: _Path, depth: int) -> JsonValue:
+    def ReadValue(self, path: ConfigPath, depth: int) -> JsonValue:
         """Decode one value after reserving its node and container depth."""
 
         self.CountNode(path)
@@ -146,7 +150,7 @@ class _JsonReader:
 
         return JsonNumber(token, binary64)
 
-    def ReadObject(self, path: _Path, depth: int) -> dict[str, JsonValue]:
+    def ReadObject(self, path: ConfigPath, depth: int) -> dict[str, JsonValue]:
         """Decode unique string keys and their values within the node budget."""
 
         members: dict[str, JsonValue] = {}
@@ -182,7 +186,7 @@ class _JsonReader:
 
             self.position += 1
 
-    def ReadArray(self, path: _Path, depth: int) -> list[JsonValue]:
+    def ReadArray(self, path: ConfigPath, depth: int) -> list[JsonValue]:
         """Decode an ordered array without accepting a trailing comma."""
 
         values: list[JsonValue] = []
