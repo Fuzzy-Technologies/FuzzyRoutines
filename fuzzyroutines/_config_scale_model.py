@@ -30,12 +30,12 @@ from .membership import MembershipFunction
 type _Universe = ContinuousUniverse | DiscreteUniverse
 type _Object = dict[str, JsonValue]
 type _Category = Literal[
-    "duplicate-id", "duplicate-name", "invalid-value", "unresolved-reference", "unsupported-model",
+    "duplicate-id", "duplicate-name", "invalid-relationship", "invalid-value", "unresolved-reference", "unsupported-model",
 ]
 
 
 class ScaleModelDecodeError(ValueError):
-    """Model semantic failure with a category and original wire field pointer."""
+    """Configuration semantic failure with a category and original wire pointer."""
 
     def __init__(self, category: _Category, path: ConfigPath, message: str) -> None:
         """Record actionable scale model diagnostics."""
