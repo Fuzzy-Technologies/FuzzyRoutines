@@ -135,7 +135,7 @@ def _DecodeWindow(definition: _Object, universe: ContinuousUniverse, path: Confi
 
     for field, coordinate in (("left", left), ("right", right)):
         if not universe.Contains(coordinate):
-            raise ScaleModelDecodeError("invalid-value", (*path, field), "Window bound is outside the scale universe.")
+            raise ScaleModelDecodeError("invalid-value", (*path, field), "Window bound is outside the declared universe.")
 
     return IntegrationDomain(left, right)
 
@@ -168,14 +168,17 @@ def _DecodeRepresentatives(
 
         domains.append(_DecodeWindow(cast(_Object, windows[termId]), universe, windowPath))
 
-    policy = cast(_Object, definition["policy"])
-    centroidPolicy = CentroidPolicy(
+    return _Representatives(tuple(domains), _DecodeCentroidPolicy(cast(_Object, definition["policy"])))
+
+
+def _DecodeCentroidPolicy(policy: _Object) -> CentroidPolicy:
+    """Preserve explicit binary64 tolerances and exact integral depth."""
+
+    return CentroidPolicy(
         absoluteTolerance=_Real(policy["absoluteTolerance"]),
         relativeTolerance=_Real(policy["relativeTolerance"]),
         maximumDepth=int(cast(JsonNumber, policy["maximumDepth"]).ExactDecimal()),
     )
-
-    return _Representatives(tuple(domains), centroidPolicy)
 
 
 def _DecodeScale(
@@ -247,19 +250,19 @@ def _DecodeScale(
     )
 
 
-def _DecodeDefinitions(document: _Object) -> _ScaleModel:
+def _DecodeDefinitions(document: _Object, path: ConfigPath = ()) -> _ScaleModel:
     """Reconstruct the scale definitions shared by model variants."""
 
     memberships = {
-        key: _DecodeMembership(cast(_Object, value), ("memberships", key))
+        key: _DecodeMembership(cast(_Object, value), (*path, "memberships", key))
         for key, value in sorted(cast(_Object, document["memberships"]).items())
     }
     universes = {
-        key: _DecodeUniverse(cast(_Object, value), ("universes", key))
+        key: _DecodeUniverse(cast(_Object, value), (*path, "universes", key))
         for key, value in sorted(cast(_Object, document["universes"]).items())
     }
     scales = {
-        key: _DecodeScale(cast(_Object, value), universes, memberships, ("scales", key))
+        key: _DecodeScale(cast(_Object, value), universes, memberships, (*path, "scales", key))
         for key, value in sorted(cast(_Object, document["scales"]).items())
     }
 
