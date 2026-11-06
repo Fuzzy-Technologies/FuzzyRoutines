@@ -58,6 +58,9 @@ def _Lower(
         program.append(("not", 0))
 
     elif type(expression) is AllOf or type(expression) is AnyOf:
+        if type(expression.operands) is not tuple:
+            raise InvalidParameterTypeError("batch antecedent operands require a built-in tuple")
+
         operation: Literal["all", "any"] = "all" if type(expression) is AllOf else "any"
         _Lower(expression.operands[0], columns, program)
 
