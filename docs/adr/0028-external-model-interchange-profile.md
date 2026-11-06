@@ -14,10 +14,10 @@ SPDX-License-Identifier: Apache-2.0
 ## Decision
 
 Choose a bounded, import-only MATLAB-style text FIS profile for an
-interoperability spike. Defer implementation in #425 until an independent
-runtime evaluates the original fixture and a FuzzyRoutines consumer identifies
-a model they would migrate. This decision authorizes fixture validation only.
-The v1 JSON/YAML model remains the canonical representation.
+interoperability spike. FuzzyLite 6.0 reproduced the original fixture's three
+in-domain results with positive rule firing. The installed reader in #425
+remains a no-go until a FuzzyRoutines consumer identifies a model they would
+migrate. The v1 JSON/YAML model remains the canonical representation.
 
 ## Evidence and implementation cost
 
@@ -103,11 +103,20 @@ weight 0.5. At input 2 the grades are 0.5 and 0.5, the firing strengths
 are 0.5 and 0.25, and the result is 4. At 0 both terms have grade zero,
 which is a negative witness for the FuzzyRoutines no-fire contract.
 
-The fixture values are original to this ADR. The acceptance spike still
-needs a text FIS file emitted by a named tool and version, exact source
-provenance, and an independent evaluation at these two inputs. Add rejection
-fixtures for weighted sum, duplicate sections, and signed or zero rule
-indices before proposing an installed reader.
+The [original text fixture](evidence/0028/weighted-response.fis) and
+[reproduction record](evidence/0028/fis-reproduction.md) preserve the exact
+model bytes, evaluator version and five input/output cases. FuzzyLite 6.0
+returned 2, 4 and 8 at inputs 1, 2 and 3. At both endpoints it returned
+`nan`, whereas FuzzyRoutines raised `UndefinedResultError`. The positive
+cases establish fixture-level parity at those coordinates. The endpoint
+cases document a deliberate difference in no-fire handling.
+
+This fixture was authored in the repository and parsed by an independent
+engine. No MATLAB/Octave writer round trip, external trace parity, or consumer
+migration was demonstrated. If a migration is identified, obtain one model
+with documented provenance and independently reproduce its expected outputs.
+Before proposing an installed reader, add rejection fixtures for weighted
+sum, duplicate sections, and signed or zero rule indices.
 
 ## Licensing and next gate
 
