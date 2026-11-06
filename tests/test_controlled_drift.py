@@ -5,11 +5,13 @@
 
 """Determinism, causal label timing and metric anchors for the drift study."""
 
-from pytest import approx
+from pytest import approx, mark, raises
 
 from research.controlled_drift import (
     DRIFT_AT,
     REFIT_PERIOD,
+    SAMPLE_COUNT,
+    SEED,
     GenerateStream,
     RunExperiment,
     RunPrequential,
@@ -27,6 +29,42 @@ def test_SeededExperimentReproducesMetrics():
     assert report["adaptive"]["recoveryOffset"] is None, "The adaptive deadband can prevent recovery at the tighter threshold"
     assert report["adaptive"]["stableUpdates"] == 0, "Stable noise below the trigger must leave the intercept unchanged"
     assert report["periodic"]["stableUpdates"] > 0, "Scheduled refits must record even small stable-phase changes"
+
+
+def test_ShiftPhaseChangesRecoveryOnTheSameSeededStream():
+    """Hold coordinates and noise constant while moving the drift between refits."""
+
+    driftAt = DRIFT_AT - REFIT_PERIOD // 2
+    aligned = tuple(GenerateStream())
+    misaligned = tuple(GenerateStream(driftAt=driftAt))
+
+    for index, ((coordinate, target), (otherCoordinate, otherTarget)) in enumerate(zip(aligned, misaligned, strict=True)):
+        assert coordinate == otherCoordinate, "Changing drift phase must preserve coordinates"
+        expectedShift = 0.25 if driftAt <= index < DRIFT_AT else 0
+        assert otherTarget - target == approx(expectedShift), "Changing phase must only move the intercept step"
+
+    report = RunExperiment(driftAt=driftAt)
+    assert report["driftAt"] == driftAt, "The report must identify the evaluated split"
+    assert report["periodic"]["recoveryOffset"] == 36, "The mixed refit window must delay full recovery by half a period"
+    assert report["periodic"]["stableUpdates"] == 3, "Stable metrics must exclude refits after the moved drift"
+
+
+def test_ExplicitSeedReproducesItsOwnScenario():
+    """Keep the alternate seed deterministic and distinct from the default data."""
+
+    seed = SEED + 1
+    assert next(GenerateStream(seed=seed)) != next(GenerateStream()), "A new seed must change the generated stream"
+    report = RunExperiment(seed=seed, driftAt=84)
+    assert report == RunExperiment(seed=seed, driftAt=84), "An explicit seed and phase must reproduce the metrics"
+    assert report["seed"] == seed, "The report must identify the evaluated seed"
+
+
+@mark.parametrize("driftAt", (0, SAMPLE_COUNT))
+def test_DriftRequiresTwoNonemptyRegimes(driftAt):
+    """Reject a phase that leaves no stable or shifted observations."""
+
+    with raises(ValueError, match="Drift index must be between"):
+        RunExperiment(driftAt=driftAt)
 
 
 def test_ChangedLabelsCannotAffectCurrentOrEarlierPredictions():

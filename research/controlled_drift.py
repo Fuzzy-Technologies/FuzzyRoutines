@@ -5,6 +5,7 @@
 
 """Compare three intercept policies on one chronological synthetic Sugeno stream."""
 
+from argparse import ArgumentParser
 from collections import deque
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass
@@ -82,14 +83,26 @@ def _Baseline() -> SugenoModel:
     return SugenoModel((variable,), rules, policy, UNIT)
 
 
-def GenerateStream() -> Iterator[tuple[float, float]]:
-    """Yield unit coordinates with an intercept jump of 0.25 and bounded noise."""
+def GenerateStream(*, seed: int = SEED, driftAt: int = DRIFT_AT) -> Iterator[tuple[float, float]]:
+    """Yield a fixed-length stream with an intercept jump of 0.25.
 
-    random = Random(SEED)
+    Args:
+        seed: Seed for the coordinates and bounded observation noise.
+        driftAt: Zero-based index of the first shifted observation. Both
+            regimes must contain at least one observation.
+
+    Raises:
+        ValueError: If the drift index does not split the stream.
+    """
+
+    if type(driftAt) is not int or not 0 < driftAt < SAMPLE_COUNT:
+        raise ValueError(f"Drift index must be between 1 and {SAMPLE_COUNT - 1}.")
+
+    random = Random(seed)
 
     for index in range(SAMPLE_COUNT):
         coordinate = random.random()
-        offset = 0.25 if index >= DRIFT_AT else 0
+        offset = 0.25 if index >= driftAt else 0
         target = 0.2 + 0.4 * coordinate + offset + random.uniform(-0.015, 0.015)
 
         yield coordinate, target
@@ -136,12 +149,13 @@ def _Metrics(
     predictions: tuple[float, ...],
     targets: tuple[float, ...],
     updates: tuple[float, ...],
+    driftAt: int,
 ) -> dict[str, float | int | None]:
     """Measure errors, substantial stable-phase updates and drift recovery."""
 
     errors = tuple(abs(prediction - target) for prediction, target in zip(predictions, targets, strict=True))
-    stable = errors[:DRIFT_AT]
-    shifted = errors[DRIFT_AT:]
+    stable = errors[:driftAt]
+    shifted = errors[driftAt:]
     recovery = next((
         offset
         for offset in range(len(shifted) - RECOVERY_WINDOW + 1)
@@ -151,30 +165,47 @@ def _Metrics(
     return {
         "stableMae": fmean(stable),
         "shiftedMae": fmean(shifted),
-        "stableUpdates": sum(update != 0 for update in updates[:DRIFT_AT]),
-        "falseAdaptations": sum(abs(update) >= FALSE_ADAPTATION_STEP for update in updates[:DRIFT_AT]),
+        "stableUpdates": sum(update != 0 for update in updates[:driftAt]),
+        "falseAdaptations": sum(abs(update) >= FALSE_ADAPTATION_STEP for update in updates[:driftAt]),
         "recoveryOffset": recovery,
     }
 
 
-def RunExperiment() -> dict:
-    """Return the seeded comparison with explicit measurement thresholds."""
+def RunExperiment(*, seed: int = SEED, driftAt: int = DRIFT_AT) -> dict:
+    """Return the comparison for a chosen seed and chronological regime split."""
 
-    forecasts = tuple(RunPrequential(GenerateStream()))
+    forecasts = tuple(RunPrequential(GenerateStream(seed=seed, driftAt=driftAt)))
     targets = tuple(row.target for row in forecasts)
 
     return {
-        "seed": SEED,
+        "seed": seed,
         "sampleCount": SAMPLE_COUNT,
-        "driftAt": DRIFT_AT,
+        "driftAt": driftAt,
         "falseAdaptationStep": FALSE_ADAPTATION_STEP,
         "recoveryError": RECOVERY_ERROR,
         "recoveryWindow": RECOVERY_WINDOW,
-        "fixed": _Metrics(tuple(row.fixed for row in forecasts), targets, (0.0,) * len(forecasts)),
-        "periodic": _Metrics(tuple(row.periodic for row in forecasts), targets, tuple(row.periodicUpdate for row in forecasts)),
-        "adaptive": _Metrics(tuple(row.adaptive for row in forecasts), targets, tuple(row.adaptiveUpdate for row in forecasts)),
+        "fixed": _Metrics(tuple(row.fixed for row in forecasts), targets, (0.0,) * len(forecasts), driftAt),
+        "periodic": _Metrics(tuple(row.periodic for row in forecasts), targets, tuple(row.periodicUpdate for row in forecasts), driftAt),
+        "adaptive": _Metrics(tuple(row.adaptive for row in forecasts), targets, tuple(row.adaptiveUpdate for row in forecasts), driftAt),
     }
 
 
+def Main() -> None:
+    """Print the selected reproducible experiment as JSON."""
+
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--drift-at", type=int, default=DRIFT_AT, dest="driftAt")
+    options = parser.parse_args()
+
+    try:
+        report = RunExperiment(seed=options.seed, driftAt=options.driftAt)
+
+    except ValueError as error:
+        parser.error(str(error))
+
+    print(dumps(report, sort_keys=True, indent=2, allow_nan=False))
+
+
 if __name__ == "__main__":
-    print(dumps(RunExperiment(), sort_keys=True, indent=2, allow_nan=False))
+    Main()
