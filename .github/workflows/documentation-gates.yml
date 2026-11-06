@@ -98,6 +98,20 @@ jobs:
             --require-installed --extra numpy --check-index \
             --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples.json"
 
+          configEnvironment="$RUNNER_TEMP/fuzzyroutines-config-examples"
+          python -m venv "$configEnvironment"
+          configPython="$configEnvironment/bin/python"
+          "$configPython" -m pip install --disable-pip-version-check "${wheelPaths[0]}[config]"
+          "$configPython" -I -c 'import sys; import fuzzyroutines.configuration; assert not {"jsonschema", "referencing", "numpy"} & sys.modules.keys()'
+          "$configPython" -I "$GITHUB_WORKSPACE/tools/guide_example_coverage.py" \
+            --require-installed --extra config --check-index \
+            --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples-config.json"
+
+          "$configPython" -m pip install --disable-pip-version-check "${wheelPaths[0]}[numpy]"
+          "$configPython" -I "$GITHUB_WORKSPACE/tools/guide_example_coverage.py" \
+            --require-installed --extra config --extra numpy --check-index \
+            --output "$GITHUB_WORKSPACE/_build/documentation-gates/api-examples-all.json"
+
       - name: Verify reproducible figures with the installed scalar API
         if: steps.scope.outputs.documentation == 'true'
         shell: bash

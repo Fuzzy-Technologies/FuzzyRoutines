@@ -72,6 +72,7 @@ nav:
           - Package exports: api/modern/package.md
           - Alpha cuts: api/modern/alphacuts.md
           - Optional batches: api/modern/batches.md
+          - JSON configuration: api/modern/configuration.md
           - Defuzzification: api/modern/defuzzification.md
           - Domains: api/modern/domain.md
           - Exceptions: api/modern/exceptions.md

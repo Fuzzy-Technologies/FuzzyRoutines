@@ -30,6 +30,7 @@ classifiers = [
 keywords = ["fuzzy", "fuzzylogic", "fuzzyset", "logic", "math", "research", "science"]
 
 [project.optional-dependencies]
+config = ["jsonschema>=4.26,<5", "referencing>=0.37,<1"]
 numpy = ["numpy>=2.3.5,<3"]
 
 [project.urls]
@@ -38,7 +39,7 @@ Repository = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
 Issues = "https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues"
 
 [tool.setuptools.package-data]
-fuzzyroutines = ["py.typed"]
+fuzzyroutines = ["py.typed", "config-v1.schema.json"]
 
 [tool.setuptools.cmdclass]
 sdist = "tools.reproducible_artifacts.ReproducibleSdist"

@@ -5,3 +5,5 @@ pytest
 pytest-timeout
 pytest-xdist
 setuptools==84.0.0
+jsonschema==4.26.0
+referencing==0.37.0

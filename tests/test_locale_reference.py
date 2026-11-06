@@ -126,6 +126,7 @@ def test_TranslatedRealApiRetainsConstructorContracts(tmpPath):
     translations = {
         AuthoredSymbolPath(unit): (PROJECTROOT / records[unit.identifier]["translations"]["ru"]["path"]).read_text(encoding="utf-8")
         for unit in units if unit.kind != "page"
+        and records[unit.identifier]["translations"]["ru"].get("path")
     }
     translationMap = tmpPath / "translations.json"
     translationMap.write_text(json.dumps(translations), encoding="utf-8")

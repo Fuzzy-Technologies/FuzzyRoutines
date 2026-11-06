@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 229 inventoried public symbols are linked to executed examples (37 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
+All 239 inventoried public symbols are linked to executed examples (38 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
 
 Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. Typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
@@ -112,6 +112,16 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.batches.EvaluateMembershipBatch`                              | [numpy-batches, block 1](numpy-batches.md)                                                                         |
 | `fuzzyroutines.batches.FuzzifyBatch`                                         | [numpy-batches, block 1](numpy-batches.md)                                                                         |
 | `fuzzyroutines.batches.ScaleBatchResult`                                     | [numpy-batches, block 1](numpy-batches.md)                                                                         |
+| `fuzzyroutines.configuration.AssembleModel`                                  | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.ConfigurationError`                             | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.DumpModel`                                      | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.LoadModel`                                      | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.MamdaniBinding`                                 | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.MamdaniCentroid`                                | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.ScaleRepresentatives`                           | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, block 1](../api/modern/configuration.md)                                                           |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
@@ -150,21 +160,21 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.inference.AllOf`                                              | [inference, block 2](inference.md)                                                                                 |
 | `fuzzyroutines.inference.Antecedent`                                         | [inference, block 2](inference.md)                                                                                 |
 | `fuzzyroutines.inference.AnyOf`                                              | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.ConstantConsequent`                                 | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.FuzzyVariable`                                      | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.inference.InferencePolicy`                                    | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.inference.InputGrade`                                         | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
-| `fuzzyroutines.inference.MamdaniModel`                                       | [inference, block 1](inference.md)                                                                                 |
-| `fuzzyroutines.inference.MamdaniModel.Evaluate`                              | [inference, block 1](inference.md)                                                                                 |
-| `fuzzyroutines.inference.MamdaniResult`                                      | [inference, block 1](inference.md)                                                                                 |
-| `fuzzyroutines.inference.MamdaniRule`                                        | [inference, block 1](inference.md)                                                                                 |
-| `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, block 1](inference.md)                                                                                 |
+| `fuzzyroutines.inference.MamdaniModel`                                       | [inference, block 1](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniModel.Evaluate`                              | [inference, block 1](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniResult`                                      | [inference, block 1](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniRule`                                        | [inference, block 1](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.MamdaniRuleTrace`                                   | [inference, block 1](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.NotCondition`                                       | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.SugenoModel`                                        | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.SugenoResult`                                       | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.SugenoRule`                                         | [inference, block 2](inference.md)                                                                                 |
-| `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, block 2](inference.md)                                                                                 |
+| `fuzzyroutines.inference.SugenoModel`                                        | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoModel.Evaluate`                               | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoResult`                                       | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoRule`                                         | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
+| `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, block 2](inference.md); [configuration, block 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, block 1](inference.md); [inference, block 2](inference.md)                                             |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [linguistic-encoding, block 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, block 1](linguistic-encoding.md); [results, block 4](results.md)                             |
@@ -204,7 +214,7 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.membership.MembershipCallable`                                | [membership, block 1](../api/modern/membership.md); [custom, block 1](custom.md)                                   |
 | `fuzzyroutines.membership.MembershipFunction`                                | [alarm, block 1](alarm.md); [alpha-cuts, block 1](alpha-cuts.md)                                                   |
 | `fuzzyroutines.membership.MembershipFunction.Evaluate`                       | [alarm, block 1](alarm.md); [alpha-cuts, block 1](alpha-cuts.md)                                                   |
-| `fuzzyroutines.membership.MembershipFunction.parameters`                     | [membership-families, block 1](membership-families.md)                                                             |
+| `fuzzyroutines.membership.MembershipFunction.parameters`                     | [membership-families, block 1](membership-families.md); [configuration, block 1](../api/modern/configuration.md)   |
 | `fuzzyroutines.membership.MembershipScalar`                                  | [membership, block 1](../api/modern/membership.md); [alarm, block 1](alarm.md)                                     |
 | `fuzzyroutines.membership.SShoulder`                                         | [alarm, block 1](alarm.md); [linguistic-encoding, block 1](linguistic-encoding.md)                                 |
 | `fuzzyroutines.membership.Trapezoid`                                         | [membership-families, block 1](membership-families.md)                                                             |

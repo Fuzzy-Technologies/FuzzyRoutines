@@ -23,6 +23,7 @@ import tomllib
 from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
+from importlib.util import resolve_name as ResolveName
 from pathlib import Path
 
 PROJECTROOT = Path(__file__).resolve().parents[1]
@@ -444,27 +445,27 @@ def _ExportUnits(
     sourcePath: Path,
     projectRoot: Path,
 ) -> tuple[CanonicalUnit, ...]:
-    """Return root-package aliases bound to their authored English contracts."""
+    """Return explicit public exports bound to their authored English contracts."""
 
     syntax = ast.parse(_ReadCanonicalText(sourcePath), filename=str(sourcePath))
+    packageName = moduleName if sourcePath.name == "__init__.py" else moduleName.rpartition(".")[0]
     exportTargets = {}
 
     for node in syntax.body:
         if not isinstance(node, ast.ImportFrom) or not node.module:
             continue
 
+        targetModule = ResolveName("." * node.level + node.module, packageName)
+
         for importedName in node.names:
             publicName = importedName.asname or importedName.name
-            exportTargets[publicName] = (node.module, importedName.name)
+            exportTargets[publicName] = (targetModule, importedName.name)
 
     units = []
 
     for publicName in _LiteralExports(syntax, sourcePath):
-        if publicName not in exportTargets:
-            raise ValueError(f"{sourcePath}: export {publicName} has no static import target")
-
-        targetModule, targetName = exportTargets[publicName]
-        targetPath = _FindModulePath(targetModule, projectRoot)
+        targetModule, targetName = exportTargets.get(publicName, (moduleName, publicName))
+        targetPath = sourcePath if targetModule == moduleName else _FindModulePath(targetModule, projectRoot)
         targetNode = _FindTopLevelNode(targetPath, targetName)
         units.append(
             _NodeUnit(

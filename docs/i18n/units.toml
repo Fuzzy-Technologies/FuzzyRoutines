@@ -9993,50 +9993,18 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
+sourceHash = "sha256:8a196a8496c689931d8655c0be0e75f972b33d6607b32b022250af1ccb746c4f"
 reviewClass = "mathematical"
 
 [units.translations.ru]
-state = "approved"
+state = "draft"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-
-[[units.translations.ru.reviews]]
-role = "editorial"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:e8dd6c46198da8f64fa095829c084d8ac6c6b460d200fc4d06be9a3c3c33f8fc"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
-
-[[units.translations.ru.reviews]]
-role = "mathematical"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:e8dd6c46198da8f64fa095829c084d8ac6c6b460d200fc4d06be9a3c3c33f8fc"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
+sourceHash = "sha256:8a196a8496c689931d8655c0be0e75f972b33d6607b32b022250af1ccb746c4f"
 
 [units.translations.zh-CN]
-state = "approved"
+state = "draft"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-
-[[units.translations.zh-CN.reviews]]
-role = "editorial"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:bde6c16c3358b75e89a08c3c9fc84e0909c7e5bec411ea56a6e8f6d3c2b85eef"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
-
-[[units.translations.zh-CN.reviews]]
-role = "mathematical"
-reviewedSourceHash = "sha256:248c2e4c99f27e08abe489fae8e3a244cc93295a85c6ddafb644c9859611866a"
-reviewedTranslationHash = "sha256:bde6c16c3358b75e89a08c3c9fc84e0909c7e5bec411ea56a6e8f6d3c2b85eef"
-reviewer = "AIna-Dev (AI; independent review of regenerated 2.1 example-index references)"
-reviewedAt = "2026-10-18T21:31:11Z"
-evidence = "review21 read the current English, Russian and Chinese combined index introductions and verified identical symbol order, example link destinations and protected code/math/API identities. Source execution with --extra numpy --check-index covered 229 public symbols in 37 blocks with no omissions; default core --check-index covered 226 symbols in 36 blocks and explicitly omitted the NumPy guide and three optional symbols. The JSON reports identify the source worktree origin. All 23 inference unit records from reviewed base 7204eb4 and every other non-NumPy base record were preserved. Twenty focused NumPy integration, API reference and guide coverage tests passed after integration; complete API coverage, locale source links, Markdown table alignment, workflow YAML and shell syntax checks passed. This review establishes generated index and translation consistency, not independent proof of every numerical branch. Candidate installed-wheel and full CI remain pending."
+sourceHash = "sha256:8a196a8496c689931d8655c0be0e75f972b33d6607b32b022250af1ccb746c4f"
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -13973,3 +13941,163 @@ reviewedTranslationHash = "sha256:69ab0164d560f8aaba876856337deee4f31c31305a1c40
 reviewer = "review21 (AI; maintainer-delegated source and localization verification)"
 reviewedAt = "2026-10-14T19:15:12Z"
 evidence = "review21 independently reviewed NumPy source through 10b505d; current batches.py Git blob equals that revision. ci21 independently reviewed integration e6d0d09 and 4ea6241. review21 read current English/Russian/Chinese prose and verified code, math, API identities, array ownership, scalar parity limits, selection and error contracts. The NumPy guide assertions executed successfully; installed-wheel and full CI evidence remain pending."
+
+[[units]]
+id = "module:fuzzyroutines.configuration"
+kind = "module"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:b783a6b9e947c28b9c3c19366803990de72a222ad6fe352530c35df304bf53c9"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "page:api.modern.configuration"
+kind = "page"
+sourcePath = "docs/site/content/en/api/modern/configuration.md"
+sourceHash = "sha256:622a1c79548fa9fcde4d37fc76a21c3848a5a906130a768fd9787eff7345b72a"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/site/content/ru/api/modern/configuration.md"
+sourceHash = "sha256:622a1c79548fa9fcde4d37fc76a21c3848a5a906130a768fd9787eff7345b72a"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/site/content/zh-CN/api/modern/configuration.md"
+sourceHash = "sha256:622a1c79548fa9fcde4d37fc76a21c3848a5a906130a768fd9787eff7345b72a"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.AssembleModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:a1ea1c448abc053c2572610d409bd7324e46a9bec7cc2a309d5ebbf26a8377e8"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ConfigurationError"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_json.py"
+sourceHash = "sha256:f023b29f92d20d8def1e452fb37d6c8db6619b4c8526fc392c24570b99ee5dae"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.DumpModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:d5f4307d28566595896057d8238fea27bc23690471f9ea3116aa5e249e50fa23"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.LoadModel"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:2be02873c89d8a88b9d54794d3a1d299c9136603416e9668cbe4cfb769f422c4"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.MamdaniBinding"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:dc456037aab8f86f97b835db6b5830d1ad04cff2f5c4ce538b1dff0c79c1b83d"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.MamdaniCentroid"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_mamdani_model.py"
+sourceHash = "sha256:c2123d3e7f316ffac3cea9e150f94060dd767c461f93d93a5ee0b6a66a565d2a"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ModelConfiguration"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:4d94f358931c3ff6b853a67cb1c5a76cb66bb7866ad5c91d5b0ffed645a49e09"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ScaleDefinition"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_scale_model.py"
+sourceHash = "sha256:4f5551b4474d24ae3064ab119b8165971daf42691bc19de694ae6e4332e4d067"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.ScaleRepresentatives"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_config_scale_model.py"
+sourceHash = "sha256:9900de08d951b97356dd8c0ea3dfd3a42d4febd71a9fc63456af3d02f7daa02f"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
+
+[[units]]
+id = "symbol:fuzzyroutines.configuration.SugenoBinding"
+kind = "symbol"
+sourcePath = "fuzzyroutines/configuration.py"
+sourceHash = "sha256:bce9682cfa337b8e5c6b9117789682adadae21e6656a79cc8ceb5296e1c8c299"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "missing"
+
+[units.translations.zh-CN]
+state = "missing"
