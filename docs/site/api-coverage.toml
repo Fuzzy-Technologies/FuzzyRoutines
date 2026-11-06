@@ -171,6 +171,10 @@ symbol = "fuzzyroutines._config_sugeno_model"
 reason = "Internal Sugeno reconstruction used by the public configuration codec."
 
 [[exclusions]]
+symbol = "fuzzyroutines._rule_binding"
+reason = "Internal adapter resolving readable rule drafts against validated v1 model bindings."
+
+[[exclusions]]
 symbol = "fuzzyroutines._rule_formatter"
 reason = "Internal canonical text writer for validated readable rule drafts."
 
