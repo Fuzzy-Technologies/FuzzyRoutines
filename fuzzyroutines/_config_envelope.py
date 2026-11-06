@@ -11,7 +11,6 @@ validation and semantic reconstruction run in later stages.
 """
 
 from collections.abc import Mapping
-from decimal import Decimal
 from typing import Literal, cast
 
 from ._config_json import ConfigPath, ConfigPointer, JsonNumber, JsonValue
@@ -51,9 +50,7 @@ def _SelectEnvelope(document: JsonValue, path: ConfigPath, *, inline: bool) -> _
     if not isinstance(version, JsonNumber):
         raise ConfigEnvelopeError("invalid-shape", versionPath, "Expected an integral schema version.")
 
-    # The parser rejects nonzero underflow. Handle exact zero without asking
-    # Decimal to represent a potentially very large exponent on a zero token.
-    exactVersion = Decimal(0) if version.binary64 == 0.0 else Decimal(version.token)
+    exactVersion = version.ExactDecimal()
 
     if exactVersion != exactVersion.to_integral_value():
         raise ConfigEnvelopeError("invalid-shape", versionPath, "Expected an integral schema version.")

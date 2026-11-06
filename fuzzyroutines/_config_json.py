@@ -10,6 +10,7 @@ runtime object construction are separate stages.
 """
 
 from dataclasses import dataclass
+from decimal import Decimal
 from json import JSONDecodeError, JSONDecoder
 from math import isfinite
 from re import compile
@@ -33,6 +34,13 @@ class JsonNumber:
 
     token: str
     binary64: float
+
+    def ExactDecimal(self) -> Decimal:
+        """Return the exact decimal value for integer-field validation."""
+
+        # Nonzero underflow was rejected while reading the token. A zero
+        # mantissa may carry an exponent beyond Decimal's internal limit.
+        return Decimal(0) if self.binary64 == 0.0 else Decimal(self.token)
 
 
 type JsonValue = None | bool | str | JsonNumber | list[JsonValue] | dict[str, JsonValue]
