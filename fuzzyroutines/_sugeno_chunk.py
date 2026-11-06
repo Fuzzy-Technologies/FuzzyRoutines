@@ -22,6 +22,7 @@ from fuzzyroutines.membership import _AnalyticalSource
 if TYPE_CHECKING:
     from numpy import bool_ as Bool
     from numpy import float64 as Float64
+    from numpy import int64 as Int64
     from numpy import intp as Intp
     from numpy import uint8 as UInt8
     from numpy.typing import NDArray
@@ -70,6 +71,29 @@ class _ChunkResult:
     values: NDArray[Float64]
     status: NDArray[UInt8]
     failure: _RowFailure | None
+
+
+@dataclass(frozen=True, slots=True)
+class _FullTrace:
+    """Full rule and input evidence written at original observation indices."""
+
+    inputGrades: NDArray[Float64]
+    antecedents: NDArray[Float64]
+    firings: NDArray[Float64]
+    consequents: NDArray[Float64]
+    normalized: NDArray[Float64]
+    contributions: NDArray[Float64]
+    exactRatios: NDArray[Bool]
+    ruleWeights: NDArray[Float64]
+
+
+@dataclass(frozen=True, slots=True)
+class _Trace:
+    """Summary buffers and optional full trace buffers for a prepared batch."""
+
+    firedRuleCount: NDArray[Int64]
+    maxFiringStrength: NDArray[Float64]
+    full: _FullTrace | None
 
 
 def _DomainMask(
@@ -163,7 +187,13 @@ def _InputGrades(
     return grades
 
 
-def _EvaluateChunk(plan: _PreparedModel, coordinates: NDArray[Float64]) -> _ChunkResult:
+def _EvaluateChunk(
+    plan: _PreparedModel,
+    coordinates: NDArray[Float64],
+    *,
+    trace: _Trace | None = None,
+    offset: int = 0,
+) -> _ChunkResult:
     """Run the prepared stages for one binary64 coordinate chunk in model order.
 
     Earlier failures within a row take precedence over later stages. Across
@@ -175,13 +205,14 @@ def _EvaluateChunk(plan: _PreparedModel, coordinates: NDArray[Float64]) -> _Chun
     state = _ChunkState(np.zeros(rowCount, dtype=np.uint8))
     values: NDArray[Float64] = np.full(rowCount, np.nan, dtype=np.float64)
     grades = _InputGrades(np, plan, coordinates, state)
-    rows = np.flatnonzero(state.status == 0)
-    antecedents = _EvaluateAntecedents(plan.antecedents, grades[rows])
+    termRows = np.flatnonzero(state.status == 0)
+    antecedents = _EvaluateAntecedents(plan.antecedents, grades[termRows])
     firing, firingStatus = _ComputeFirings(antecedents, np.asarray(plan.weights, dtype=np.float64))
-    state.Mark(rows[firingStatus == 3], 3)
-    state.Mark(rows[firingStatus == 5], 5)
-    rows = rows[firingStatus == 0]
-    firing = firing[firingStatus == 0]
+    state.Mark(termRows[firingStatus == 3], 3)
+    state.Mark(termRows[firingStatus == 5], 5)
+    fired = firingStatus == 0
+    rows = termRows[fired]
+    firing = firing[fired]
     consequents, consequentStatus, failedRule = _EvaluateConsequents(plan.consequents, coordinates[rows])
 
     for position in np.flatnonzero(consequentStatus):
@@ -190,13 +221,33 @@ def _EvaluateChunk(plan: _PreparedModel, coordinates: NDArray[Float64]) -> _Chun
 
     accepted = consequentStatus == 0
     rows = rows[accepted]
-    reduced, _ = _ReduceConsequents(firing[accepted], consequents[accepted], fullTrace=False)
+    firing = firing[accepted]
+    consequents = consequents[accepted]
+    full = trace.full if trace is not None else None
+    reduced, weighted = _ReduceConsequents(firing, consequents, fullTrace=full is not None)
     finite = np.isfinite(reduced)
     state.Mark(rows[~finite], 5)
-    rows = rows[finite]
-    reduced = reduced[finite]
-    inside = _DomainMask(np, plan.consequents.outputUniverse, reduced)
-    state.Mark(rows[~inside], 4)
+    inside = np.zeros(finite.shape, dtype=np.bool_)
+    inside[finite] = _DomainMask(np, plan.consequents.outputUniverse, reduced[finite])
+    state.Mark(rows[finite & ~inside], 4)
     values[rows[inside]] = reduced[inside]
+
+    if trace is not None:
+        noFire = np.flatnonzero(state.status == 3) + offset
+        valid = rows[inside] + offset
+        validFirings = firing[inside]
+        trace.firedRuleCount[noFire] = 0
+        trace.maxFiringStrength[noFire] = 0.0
+        trace.firedRuleCount[valid] = np.count_nonzero(validFirings > 0.0, axis=1)
+        trace.maxFiringStrength[valid] = validFirings.max(axis=1)
+
+        if full is not None and weighted is not None:
+            full.inputGrades[valid] = grades[rows[inside]]
+            full.antecedents[valid] = antecedents[fired][accepted][inside]
+            full.firings[valid] = validFirings
+            full.consequents[valid] = consequents[inside]
+            full.normalized[valid] = weighted.normalized[inside]
+            full.contributions[valid] = weighted.contributions[inside]
+            full.exactRatios[valid] = weighted.exactRatio[inside]
 
     return _ChunkResult(values, state.status, state.failure)
