@@ -1,0 +1,33 @@
+% SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
+% SPDX-License-Identifier: Apache-2.0
+
+[System]
+Name='weighted_response'
+Type='sugeno'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=2
+AndMethod='min'
+OrMethod='max'
+ImpMethod='prod'
+AggMethod='sum'
+DefuzzMethod='wtaver'
+
+[Input1]
+Name='load'
+Range=[0 4]
+NumMFs=2
+MF1='low':'trimf',[0 1 3]
+MF2='high':'trimf',[1 3 4]
+
+[Output1]
+Name='response'
+Range=[0 10]
+NumMFs=2
+MF1='low_response':'constant',[2]
+MF2='high_response':'constant',[8]
+
+[Rules]
+1, 1 (1) : 1
+2, 2 (0.5) : 1
