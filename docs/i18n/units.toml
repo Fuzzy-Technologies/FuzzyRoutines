@@ -14118,19 +14118,19 @@ state = "missing"
 [[units]]
 id = "page:api.modern.yaml"
 kind = "page"
-sourceHash = "sha256:ec2078b5cfa1db9ecc22295ba14f74794e1f56b7965149e60043d133fa34bd82"
+sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
 sourcePath = "docs/site/content/en/api/modern/yaml.md"
 reviewClass = "technical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/api/modern/yaml.md"
-sourceHash = "sha256:ec2078b5cfa1db9ecc22295ba14f74794e1f56b7965149e60043d133fa34bd82"
+sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/site/content/zh-CN/api/modern/yaml.md"
-sourceHash = "sha256:ec2078b5cfa1db9ecc22295ba14f74794e1f56b7965149e60043d133fa34bd82"
+sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
 
 [[units]]
 id = "symbol:fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml"

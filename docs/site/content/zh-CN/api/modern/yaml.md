@@ -12,7 +12,7 @@ UTF-8 字节。文件由调用方打开和写入。转换会检查架构并解�
 
 YAML 接受一份键为字符串的数据文档。重复键、显式标签、锚点、别名及
 合并键会引发
-[`ConfigurationError`](configuration.md#fuzzyroutines.configuration.ConfigurationError)。
+[`ConfigurationError`](configuration.md)。
 未知版本或 `include` 字段无法通过验证。错误提供类别和 JSON Pointer。
 转换会保留数字写法及数组顺序，对映射键排序，原始文档保持原样。
 

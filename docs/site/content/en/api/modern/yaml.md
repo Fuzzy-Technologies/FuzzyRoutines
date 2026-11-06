@@ -13,7 +13,7 @@ project references without running inference or evaluating scenarios.
 
 YAML accepts a single data document with string keys. Duplicate keys, explicit
 tags, anchors, aliases and merge keys raise
-[`ConfigurationError`](configuration.md#fuzzyroutines.configuration.ConfigurationError).
+[`ConfigurationError`](configuration.md).
 An unknown version or a field such as `include` fails validation. The error
 provides a category and JSON Pointer. Conversion preserves number tokens and
 array order, sorts mappings, and leaves the original document untouched.

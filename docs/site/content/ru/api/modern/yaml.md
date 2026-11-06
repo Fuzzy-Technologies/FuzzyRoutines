@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
 
 YAML допускает один документ данных со строковыми ключами. Повторяющиеся
 ключи, явные теги, якоря, псевдонимы и ключи слияния вызывают
-[`ConfigurationError`](configuration.md#fuzzyroutines.configuration.ConfigurationError).
+[`ConfigurationError`](configuration.md).
 Неизвестная версия или поле `include` не проходят проверку. Ошибка содержит
 категорию и указатель JSON Pointer. Числовая запись и порядок элементов массивов
 сохраняются, ключи сортируются, исходный документ остаётся прежним.
