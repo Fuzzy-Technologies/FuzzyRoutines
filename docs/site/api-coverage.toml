@@ -169,3 +169,7 @@ reason = "Internal schema validator used by the public configuration codec."
 [[exclusions]]
 symbol = "fuzzyroutines._config_sugeno_model"
 reason = "Internal Sugeno reconstruction used by the public configuration codec."
+
+[[exclusions]]
+symbol = "fuzzyroutines._config_yaml"
+reason = "Internal bounded YAML reader for the separately scoped project API."

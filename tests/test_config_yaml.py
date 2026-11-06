@@ -5,7 +5,7 @@
 
 """Wire-level tests for the optional bounded YAML event reader."""
 
-from importlib.util import find_spec
+from importlib.util import find_spec as FindSpec
 from math import copysign
 from unittest import SkipTest
 
@@ -15,7 +15,7 @@ from fuzzyroutines._config_json import DecodeConfigJson, JsonConfigParseError, J
 def _DecodeYaml(encoded: bytes) -> JsonValue:
     """Use the optional backend when the test environment supplies it."""
 
-    if find_spec("yaml") is None:
+    if FindSpec("yaml") is None:
         raise SkipTest("The YAML parser checkpoint requires PyYAML.")
 
     from fuzzyroutines._config_yaml import DecodeConfigYaml

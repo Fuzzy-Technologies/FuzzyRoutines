@@ -9,7 +9,8 @@ The optional YAML backend supplies parsing events. No YAML objects are
 constructed and project semantics are validated separately.
 """
 
-from collections.abc import Iterator
+from collections.abc import Callable, Generator, Iterator
+from typing import cast
 
 from yaml import BaseLoader, YAMLError, parse
 from yaml.events import (
@@ -46,6 +47,9 @@ from ._config_json import (
 
 _JSON_LITERALS = {"null": None, "false": False, "true": True}
 _STRING_TAG = "tag:yaml.org,2002:str"
+# PyYAML's event interfaces are only partially annotated in the pinned stubs.
+_PARSE_EVENTS = cast(Callable[[str, type[BaseLoader]], Generator[Event, None, None]], parse)
+_RESOLVE_SCALAR = cast(Callable[[Resolver, type[ScalarNode], str, tuple[bool, bool]], str], Resolver.resolve)
 
 
 def _Error(message: str, path: ConfigPath) -> JsonConfigParseError:
@@ -86,6 +90,9 @@ class _YamlReader:
 
         token = event.value
 
+        if not isinstance(token, str):
+            raise _Error("Expected a YAML scalar string token.", path)
+
         if _SURROGATE.search(token):
             raise _Error("Unpaired Unicode surrogate in YAML scalar.", path)
 
@@ -104,7 +111,7 @@ class _YamlReader:
 
         # The backend resolver is used only to reject ambiguous plain
         # spellings. It never selects a constructor or converts a value.
-        if self.resolver.resolve(ScalarNode, token, (True, False)) != _STRING_TAG:
+        if _RESOLVE_SCALAR(self.resolver, ScalarNode, token, (True, False)) != _STRING_TAG:
             raise _Error("Quote non-JSON YAML scalars to use them as strings.", path)
 
         return token
@@ -131,15 +138,15 @@ class _YamlReader:
             if not isinstance(keyEvent, ScalarEvent):
                 raise _Error("YAML object keys must be strings.", path)
 
-            keyPath = (*path, keyEvent.value)
-
             if keyEvent.value == "<<":
-                raise _Error("YAML merge keys are not supported.", keyPath)
+                raise _Error("YAML merge keys are not supported.", (*path, "<<"))
 
             key = self.Scalar(keyEvent, path)
 
             if not isinstance(key, str):
                 raise _Error("YAML object keys must be strings.", path)
+
+            keyPath = (*path, key)
 
             if key in result:
                 raise _Error("Duplicate YAML object key.", keyPath)
@@ -234,7 +241,7 @@ def DecodeConfigYaml(encoded: bytes) -> JsonValue:
     if source.startswith("\ufeff"):
         raise _Error("Configuration YAML must not start with a byte-order mark.", ())
 
-    events = parse(source, Loader=BaseLoader)
+    events = _PARSE_EVENTS(source, BaseLoader)
 
     try:
         return _YamlReader(events).ReadDocument()
