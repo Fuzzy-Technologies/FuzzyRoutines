@@ -5,11 +5,17 @@
 
 """Deterministic scalar evidence for discrete scientific plot samples."""
 
+import sys
 from fractions import Fraction
+from math import nextafter
 
 import pytest
 
-from fuzzyroutines._plot_sampling import PlotSamplingError, SampleDiscretePlot
+from fuzzyroutines._plot_sampling import (
+    PlotSamplingError,
+    SampleClosedPlotSegment,
+    SampleDiscretePlot,
+)
 from fuzzyroutines.domain import ContinuousUniverse, DiscreteUniverse
 from fuzzyroutines.exceptions import (
     InvalidDomainError,
@@ -17,7 +23,7 @@ from fuzzyroutines.exceptions import (
     InvalidParameterTypeError,
 )
 from fuzzyroutines.fuzzysets import ScalarFuzzySet
-from fuzzyroutines.membership import MembershipScalar
+from fuzzyroutines.membership import MembershipScalar, Triangle
 
 
 def test_PreserveDeclaredPointsAndGradesExactly():
@@ -137,3 +143,85 @@ def test_InvalidScalarGradeReportsPointAndStopsSampling():
 
     assert isinstance(failure.value.__cause__, InvalidParameterError)
     assert evaluated == [0, 1], "A failed grade must stop the series rather than become zero."
+
+
+def test_SampleClosedTriangleAtOffGridKnotAndInput():
+    """Check independent analytical grades and separate grid from added samples."""
+
+    universe = ContinuousUniverse(0, 1, leftClosed=True, rightClosed=True)
+    fuzzySet = ScalarFuzzySet(universe, Triangle(0, 0.37, 1))
+    result = SampleClosedPlotSegment(fuzzySet, "triangle", (0, 1), sampleCount=4, extraCoordinates=(0.41, 0.37, 0.37))
+
+    assert result.baseSampleCount == 4
+    assert result.addedCoordinates == (0.37, 0.41)
+    assert tuple(point for point, _ in result.samples) == (0, 1 / 3, 0.37, 0.41, 2 / 3, 1)
+    grades = dict(result.samples)
+    assert grades[0.37] == 1
+    assert grades[0.41] == pytest.approx(0.59 / 0.63, rel=0, abs=1e-14)
+
+
+def test_UseExactCoordinatesInsideAnOpenUniverse():
+    """Evaluate a closed interior window while preserving supplied scalar types."""
+
+    left = Fraction(1, 4)
+    knot = Fraction(1, 2)
+    right = Fraction(3, 4)
+    evaluated = []
+
+    def Evaluate(coordinate: MembershipScalar) -> MembershipScalar:
+        """Record the original coordinates delivered to the scalar source."""
+
+        evaluated.append(coordinate)
+
+        return Fraction(1, 3)
+
+    fuzzySet = ScalarFuzzySet(ContinuousUniverse(0, 1), Evaluate)
+    result = SampleClosedPlotSegment(
+        fuzzySet, "interior", (left, right), sampleCount=3, extraCoordinates=(0, knot, 1),
+    )
+
+    assert result.window == (left, right)
+    assert result.addedCoordinates == ()
+    assert len(evaluated) == 3, "The declared knot must replace its equal base coordinate."
+    assert all(actual is declared for actual, declared in zip(evaluated, (left, knot, right), strict=True))
+    assert all(isinstance(grade, Fraction) for _, grade in result.samples)
+
+
+def test_GridHandlesOppositeExtremeEndpoints():
+    """Resolve the finite midpoint without overflowing the interval width."""
+
+    limit = sys.float_info.max
+
+    def Evaluate(coordinate: MembershipScalar) -> MembershipScalar:
+        """Use a unit grade only at the expected midpoint."""
+
+        return int(coordinate == 0)
+
+    universe = ContinuousUniverse(-limit, limit, leftClosed=True, rightClosed=True)
+    result = SampleClosedPlotSegment(ScalarFuzzySet(universe, Evaluate), "wide", (-limit, limit), sampleCount=3)
+
+    assert result.samples == ((-limit, 0), (0, 1), (limit, 0))
+
+
+@pytest.mark.parametrize(
+    ("window", "sampleCount", "exceptionType"),
+    [
+        ((0, 1), 3, InvalidDomainError),
+        ((0.5, nextafter(0.5, 1)), 3, InvalidDomainError),
+        ((Fraction(1, 10), nextafter(0.1, 1)), 3, InvalidDomainError),
+        ((0.25, 0.75), 1, InvalidParameterError),
+        ((0.25, 0.75), True, InvalidParameterTypeError),
+    ],
+)
+def test_RejectUnusableClosedGridBeforeEvaluation(window, sampleCount, exceptionType):
+    """Reject open edges, duplicate floating grid samples and invalid counts."""
+
+    def UnexpectedEvaluation(coordinate: MembershipScalar) -> MembershipScalar:
+        """Fail if validation attempts membership evaluation."""
+
+        pytest.fail(f"Unexpected scalar evaluation at {coordinate!r}.")
+
+    fuzzySet = ScalarFuzzySet(ContinuousUniverse(0, 1), UnexpectedEvaluation)
+
+    with pytest.raises(exceptionType):
+        SampleClosedPlotSegment(fuzzySet, "invalid", window, sampleCount=sampleCount)
