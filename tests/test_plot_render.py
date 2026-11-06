@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Headless PNG and SVG evidence for independent membership plot artists."""
+"""Headless image evidence for independent membership plot artists."""
 
 from io import BytesIO
 from xml.etree import ElementTree
@@ -88,6 +88,70 @@ def test_RenderPngDimensionsAlphaAndStableMetadata(transparent, alpha):
 
         assert raster.info["Software"] == "FuzzyRoutines"
         assert "date" not in raster.info
+
+
+def test_RenderJpegCompositesOpaqueBackgroundAndWritesDeterministicRgb(tmpPath):
+    """Check RGB encoding and alpha blending on the canvas and axes."""
+
+    matplotlib = pytest.importorskip("matplotlib")
+    imageModule = pytest.importorskip("PIL.Image")
+    jpegModule = pytest.importorskip("PIL.JpegImagePlugin")
+    backend = matplotlib.get_backend()
+    series = (PlotSeries("Min", markers=((0.5, 0.5),)),)
+    background = "#203040"
+    backgroundRgb = (32, 48, 64)
+
+    def Encode(outputFormat):
+        """Bind the validated color to an encoder independent of the filename."""
+
+        return RenderPlot(series, (0, 1), outputFormat, title="Raster", background=background)
+
+    first = WritePlotExport(tmpPath / "first.jpg", Encode, background=background)
+    with matplotlib.rc_context({"figure.facecolor": "yellow", "axes.facecolor": "green"}):
+        second = WritePlotExport(tmpPath / "second.JPEG", Encode, formatName="jpg", background=background)
+        assert matplotlib.rcParams["figure.facecolor"] == "yellow"
+        assert matplotlib.rcParams["axes.facecolor"] == "green"
+
+    assert matplotlib.get_backend() == backend
+    rendered = first.read_bytes()
+    assert rendered == second.read_bytes()
+    assert rendered.startswith(b"\xff\xd8")
+    assert b"first.jpg" not in rendered and b"second.JPEG" not in rendered
+
+    png = RenderPlot(series, (0, 1), "png", title="Raster", transparent=True)
+    with imageModule.open(BytesIO(rendered)) as raster, imageModule.open(BytesIO(png)) as rgba:
+        assert raster.size == (1728, 848)
+        assert raster.mode == "RGB"
+        assert raster.info["dpi"] == (160, 160)
+        assert jpegModule.get_sampling(raster) == 0
+        assert raster.quantization[0][:8] == [2, 1, 1, 2, 2, 4, 5, 6]
+        assert not raster.getexif() and set(raster.info) == {"jfif", "jfif_version", "dpi", "jfif_unit", "jfif_density"}
+
+        for position in ((0, 0), (340, 280)):
+            assert raster.getpixel(position) == pytest.approx(backgroundRgb, abs=2)
+
+        # The horizontal grid has partial alpha where it crosses this interior column.
+        gridPoint = max(((340, row) for row in range(320, 329)), key=lambda position: rgba.getpixel(position)[3])
+        red, green, blue, alpha = rgba.getpixel(gridPoint)
+        assert 0 < alpha < 255
+        blended = tuple(
+            round((channel * alpha + underlay * (255 - alpha)) / 255)
+            for channel, underlay in zip((red, green, blue), backgroundRgb, strict=True)
+        )
+        assert raster.getpixel(gridPoint) == pytest.approx(blended, abs=4)
+
+
+@pytest.mark.parametrize(("background", "transparent", "message"), [
+    (None, False, "explicit opaque"),
+    ("#20304080", False, "explicit opaque"),
+    ("#203040", True, "does not support transparency"),
+])
+def test_RenderJpegRejectsMissingOpaqueBackgroundOrTransparency(background, transparent, message):
+    """Validate JPEG settings at the rendering boundary."""
+
+    series = (PlotSeries("Min", markers=((0.5, 0.5),)),)
+    with pytest.raises(InvalidParameterError, match=message):
+        RenderPlot(series, (0, 1), "jpeg", title="Raster", background=background, transparent=transparent)
 
 
 def test_RenderSvgOutlinesAndRejectsUnsupportedGlyphs():

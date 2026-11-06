@@ -11,7 +11,7 @@ from io import BytesIO
 from threading import RLock
 from typing import Any
 
-from fuzzyroutines._plot_export import _PlotFormat
+from fuzzyroutines._plot_export import _PlotFormat, _RequireJpegBackground
 from fuzzyroutines.exceptions import InvalidDomainError, InvalidParameterError
 from fuzzyroutines.membership import MembershipScalar
 
@@ -50,6 +50,7 @@ def RenderPlot(
     title: str,
     coordinateLabel: str = "Coordinate",
     transparent: bool = False,
+    background: str | None = None,
     svgTextAsPaths: bool = False,
 ) -> bytes:
     """Encode a single-panel scientific figure using the optional backend.
@@ -58,24 +59,27 @@ def RenderPlot(
         series: Prepared data in palette and legend order. The caller must
             separate discontinuous paths and supply no paths for discrete data.
         window: Finite increasing display bounds, already validated.
-        outputFormat: PNG or SVG for this rendering stage.
+        outputFormat: PNG, JPEG or SVG.
         title: Literal figure title and SVG metadata title.
         coordinateLabel: Literal coordinate label including any declared units.
         transparent: Whether the canvas and axes backgrounds are clear.
+        background: Explicit opaque `#RRGGBB` color required for JPEG.
         svgTextAsPaths: Whether SVG text becomes outlines.
 
     Returns:
-        Complete PNG or UTF-8 SVG bytes with deterministic metadata and IDs.
+        Complete PNG, JPEG or UTF-8 SVG bytes with deterministic metadata.
 
     Raises:
-        InvalidParameterError: If the format is unsupported or DejaVu Sans
-            cannot represent the supplied labels.
+        InvalidParameterError: If the format or JPEG options are invalid, or
+            if DejaVu Sans cannot represent the supplied labels.
         InvalidDomainError: If there are no renderable samples in any series.
         ImportError: If the optional Matplotlib backend is unavailable.
     """
 
-    if outputFormat not in ("png", "svg"):
-        raise InvalidParameterError("This renderer supports PNG and SVG.")
+    if outputFormat not in ("png", "jpeg", "svg"):
+        raise InvalidParameterError("This renderer supports PNG, JPEG and SVG.")
+
+    jpegBackground = _RequireJpegBackground(background, transparent) if outputFormat == "jpeg" else None
 
     if not any(item.markers or any(item.paths) for item in series):
         raise InvalidDomainError("The display window contains no renderable samples.")
@@ -90,12 +94,13 @@ def RenderPlot(
         raise
 
     with _RENDER_LOCK:
+        faceColor = "none" if transparent or jpegBackground is not None else _CANVAS_COLOR
         style = {key: matplotlib.rcParamsDefault[key] for key in matplotlib.rcParamsDefault if key != "backend"}
         style.update({
             "font.family": "DejaVu Sans",
             "font.size": 11,
-            "figure.facecolor": "none" if transparent else _CANVAS_COLOR,
-            "axes.facecolor": "none" if transparent else _CANVAS_COLOR,
+            "figure.facecolor": faceColor,
+            "axes.facecolor": faceColor,
             "axes.edgecolor": _GRID_COLOR,
             "axes.formatter.use_locale": False,
             "axes.labelcolor": _TEXT_COLOR,
@@ -116,7 +121,7 @@ def RenderPlot(
 
             try:
                 _DrawPlot(figure, series, window, title, coordinateLabel)
-                return _EncodePlot(figure, outputFormat, title)
+                return _EncodePlot(figure, outputFormat, title, jpegBackground)
 
             finally:
                 figure.clear()
@@ -193,13 +198,16 @@ def _PlotValues(samples: tuple[_Sample, ...]) -> tuple[list[float], list[float]]
     return [float(point) for point, _ in samples], [float(grade) for _, grade in samples]
 
 
-def _EncodePlot(figure: Any, outputFormat: _PlotFormat, title: str) -> bytes:
+def _EncodePlot(figure: Any, outputFormat: _PlotFormat, title: str, jpegBackground: str | None) -> bytes:
     """Encode with an explicit local canvas and omit volatile metadata."""
 
     with BytesIO() as output:
         if outputFormat == "png":
             canvas = importlib.import_module("matplotlib.backends.backend_agg").FigureCanvasAgg(figure)
             canvas.print_png(output, metadata={"Software": "FuzzyRoutines"})
+
+        elif jpegBackground is not None:
+            _EncodeJpeg(figure, output, jpegBackground)
 
         else:
             canvas = importlib.import_module("matplotlib.backends.backend_svg").FigureCanvasSVG(figure)
@@ -211,3 +219,20 @@ def _EncodePlot(figure: Any, outputFormat: _PlotFormat, title: str) -> bytes:
             })
 
         return output.getvalue()
+
+
+def _EncodeJpeg(figure: Any, output: BytesIO, background: str) -> None:
+    """Composite the Agg canvas and axes on an opaque color before encoding."""
+
+    canvas = importlib.import_module("matplotlib.backends.backend_agg").FigureCanvasAgg(figure)
+    imageModule = importlib.import_module("PIL.Image")
+    canvas.draw()
+    size = canvas.get_width_height()
+
+    with (
+        imageModule.frombuffer("RGBA", size, canvas.buffer_rgba(), "raw", "RGBA", 0, 1) as rgba,
+        imageModule.new("RGBA", size, background) as opaque,
+        imageModule.alpha_composite(opaque, rgba) as composited,
+        composited.convert("RGB") as rgb,
+    ):
+        rgb.save(output, format="JPEG", quality=95, subsampling=0, dpi=(figure.dpi, figure.dpi))

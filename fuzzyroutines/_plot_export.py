@@ -40,13 +40,21 @@ def _ResolvePlotFormat(
         raise InvalidParameterError(f"Plot format {formatName!r} disagrees with output suffix: {destination}")
 
     if suffixFormat == "jpeg":
-        if transparent:
-            raise InvalidParameterError("JPEG does not support transparency.")
-
-        if background is None or re.fullmatch(r"#[0-9a-fA-F]{6}", background) is None:
-            raise InvalidParameterError("JPEG requires an explicit opaque #RRGGBB background.")
+        _RequireJpegBackground(background, transparent)
 
     return suffixFormat
+
+
+def _RequireJpegBackground(background: str | None, transparent: bool) -> str:
+    """Return the explicit opaque JPEG background after validating it."""
+
+    if transparent:
+        raise InvalidParameterError("JPEG does not support transparency.")
+
+    if background is None or re.fullmatch(r"#[0-9a-fA-F]{6}", background) is None:
+        raise InvalidParameterError("JPEG requires an explicit opaque #RRGGBB background.")
+
+    return background
 
 
 def _CheckDestination(destination: Path, overwrite: bool) -> None:
