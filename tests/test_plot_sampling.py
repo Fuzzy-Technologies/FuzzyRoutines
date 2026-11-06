@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Deterministic scalar evidence for discrete scientific plot samples."""
+"""Deterministic scalar evidence for scientific plot samples."""
 
 import sys
 from fractions import Fraction
@@ -16,6 +16,7 @@ from fuzzyroutines._plot_sampling import (
     SampleClippedPlotSegment,
     SampleClosedPlotSegment,
     SampleDiscretePlot,
+    SampleSegmentedPlot,
 )
 from fuzzyroutines.domain import ContinuousUniverse, DiscreteUniverse
 from fuzzyroutines.exceptions import (
@@ -304,3 +305,89 @@ def test_RejectOpenSegmentWithInsufficientInteriorGrid():
 
     with pytest.raises(InvalidDomainError, match="distinct grid coordinates"):
         SampleClippedPlotSegment(fuzzySet, "collapsed", (0, 1), sampleCount=2)
+
+
+def test_SegmentedTriangleSeparatesJumpFromBothPaths():
+    """Keep the ADR jump point as one marker while preserving one-sided samples."""
+
+    triangle = Triangle(-1, 0, 0)
+    evaluated = []
+
+    def Evaluate(coordinate: MembershipScalar) -> MembershipScalar:
+        """Capture evaluated coordinates without changing the scalar triangle."""
+
+        evaluated.append(coordinate)
+
+        return triangle.Evaluate(coordinate)
+
+    universe = ContinuousUniverse(-1, 1, rightClosed=True)
+    result = SampleSegmentedPlot(
+        ScalarFuzzySet(universe, Evaluate), "known jump", (-1, 1), breakCoordinates=(0,),
+        samplesPerSegment=2, extraCoordinates=(-1, -0.5, 0, 0.5),
+    )
+
+    left, right = result.segments
+    assert left.window == (-1, 0)
+    assert right.window == (0, 1)
+    assert left.samples[0][0] == nextafter(-1, 0)
+    assert left.samples[-1][0] == nextafter(0, -1)
+    assert right.samples[0][0] == nextafter(0, 1)
+    assert right.samples[-1] == (1, 0)
+    assert dict(left.samples)[-0.5] == 0.5
+    assert dict(right.samples)[0.5] == 0
+    assert result.breakMarkers == ((0, 1),)
+    assert evaluated.count(0) == 1
+    assert -1 not in evaluated
+    assert all(point < 0 for point, _ in left.samples), "The left artist must end before the jump."
+    assert all(point > 0 for point, _ in right.samples), "The right artist must start after the jump."
+
+
+def test_SegmentedPlotKeepsZeroBreakMarkersAndIgnoresExcludedEdges():
+    """Preserve exact, zero-grade breaks and open edges across sorted paths."""
+
+    firstBreak = Fraction(1, 4)
+    secondBreak = Fraction(1, 2)
+
+    def Evaluate(coordinate: MembershipScalar) -> MembershipScalar:
+        """Make declared break markers zero while preserving nonzero path grades."""
+
+        return 0 if coordinate in (firstBreak, secondBreak, 1) else 1
+
+    universe = ContinuousUniverse(0, 1, rightClosed=True)
+    result = SampleSegmentedPlot(
+        ScalarFuzzySet(universe, Evaluate), "multiple breaks", (0, 1),
+        breakCoordinates=(secondBreak, 1, 0, firstBreak, firstBreak, 2), samplesPerSegment=2,
+    )
+
+    assert tuple(segment.window for segment in result.segments) == ((0, firstBreak), (firstBreak, secondBreak), (secondBreak, 1))
+    assert result.breakMarkers == ((firstBreak, 0), (secondBreak, 0), (1, 0))
+    assert result.breakMarkers[0][0] is firstBreak
+    assert result.breakMarkers[1][0] is secondBreak
+    assert all(grade == 1 for segment in result.segments for _, grade in segment.samples)
+    assert all(0 < point < 1 for segment in result.segments for point, _ in segment.samples)
+
+
+def test_SegmentedPlotTreatsAnIncludedTouchAsAnIsolatedMarker():
+    """Represent a break at a singleton intersection without an artificial path."""
+
+    universe = ContinuousUniverse(0, 1, rightClosed=True)
+    fuzzySet = ScalarFuzzySet(universe, Triangle(0, 1, 1))
+    result = SampleSegmentedPlot(fuzzySet, "touch", (1, 2), breakCoordinates=(1,), samplesPerSegment=2)
+
+    assert result.segments == ()
+    assert result.breakMarkers == ((1, 1),)
+
+
+def test_SegmentedPlotRejectsInvalidBreakBeforeEvaluation():
+    """Validate declared break coordinates before sampling any path."""
+
+    def UnexpectedEvaluation(coordinate: MembershipScalar) -> MembershipScalar:
+        """Fail if an invalid break permits scalar evaluation."""
+
+        pytest.fail(f"Unexpected scalar evaluation at {coordinate!r}.")
+
+    universe = ContinuousUniverse(0, 1)
+    fuzzySet = ScalarFuzzySet(universe, UnexpectedEvaluation)
+
+    with pytest.raises(InvalidParameterError, match="plot break coordinate"):
+        SampleSegmentedPlot(fuzzySet, "invalid break", (0, 1), breakCoordinates=(float("nan"),), samplesPerSegment=2)
