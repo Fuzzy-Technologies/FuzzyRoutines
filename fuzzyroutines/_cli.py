@@ -11,12 +11,14 @@ import sys
 from collections.abc import Sequence
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
-from typing import Literal, TextIO
+from typing import Literal, NoReturn, TextIO
 
 from ._config_json import _MAX_BYTES, _NUMBER, DecodeConfigJson, JsonNumber
-from .configuration import ConfigurationError, LoadModel, MamdaniBinding, ModelConfiguration
+from .configuration import ConfigurationError, LoadModel, MamdaniBinding, ModelConfiguration, ScaleDefinition
+from .encoding import LinguisticCodec
 from .exceptions import FuzzyRoutinesError
-from .inference import SugenoResult
+from .inference import MamdaniResult, SugenoResult
+from .linguistic import FuzzificationPolicy
 
 type _ErrorCategory = Literal["usage", "configuration", "evaluation", "io", "capability"]
 
@@ -38,10 +40,13 @@ class _CommandError(Exception):
 class _ArgumentParser(argparse.ArgumentParser):
     """Report syntax failures through the machine diagnostic stream."""
 
-    def error(self, message: str) -> None:
+    def _Error(self, message: str) -> NoReturn:
         """Raise the syntax error for canonical stderr formatting."""
 
         raise _CommandError("usage", message)
+
+    # Preserve the hook name imposed by argparse.
+    error = _Error
 
 
 def _Write(stream: TextIO, record: dict[str, object]) -> None:
@@ -65,18 +70,21 @@ def _ParseNumber(token: str) -> float:
     return number.binary64
 
 
-def _InputOptions(options: Sequence[str]) -> dict[str, float]:
-    """Parse explicit wire IDs and numeric values before any file access."""
+def _InputOptions(
+    numberOptions: Sequence[str], termOptions: Sequence[str],
+) -> dict[str, float | str]:
+    """Parse explicit bindings and reject duplicates across both option types."""
 
-    values: dict[str, float] = {}
+    values: dict[str, float | str] = {}
 
-    for option in options:
-        name, separator, token = option.partition("=")
+    for options, operand in ((numberOptions, "NUMBER"), (termOptions, "TERM")):
+        for option in options:
+            name, separator, token = option.partition("=")
 
-        if not separator or not name or name in values:
-            raise _CommandError("usage", f"Expected a unique ID=NUMBER input: {option!r}.")
+            if not separator or not name or not token or name in values:
+                raise _CommandError("usage", f"Expected a unique ID={operand} input: {option!r}.")
 
-        values[name] = _ParseNumber(token)
+            values[name] = _ParseNumber(token) if operand == "NUMBER" else token
 
     return values
 
@@ -105,6 +113,8 @@ def _Arguments(arguments: Sequence[str]) -> argparse.Namespace:
         if name == "infer":
             command.add_argument("--evaluation")
             command.add_argument("--input", action="append", default=[])
+            command.add_argument("--term-input", dest="termInput", action="append", default=[])
+            command.add_argument("--encoding", choices=("representative-centroid",))
             command.add_argument("--explain", action="store_true")
 
     # argparse treats a negative exponent token as an option. Bind any valid
@@ -127,7 +137,10 @@ def _Arguments(arguments: Sequence[str]) -> argparse.Namespace:
         parsed.x = _ParseNumber(parsed.x)
 
     if parsed.command == "infer":
-        parsed.input = _InputOptions(parsed.input)
+        if bool(parsed.termInput) != (parsed.encoding is not None):
+            raise _CommandError("usage", "--term-input and --encoding representative-centroid require each other.")
+
+        parsed.input = _InputOptions(parsed.input, parsed.termInput)
 
     return parsed
 
@@ -193,8 +206,24 @@ def _ScaleResult(command: argparse.Namespace, model: ModelConfiguration) -> dict
     return result
 
 
+def _Representative(definition: ScaleDefinition, termName: str, inputId: str) -> float:
+    """Encode an exact label using its declared scale windows and centroid policy."""
+
+    representatives = definition.representatives
+
+    if representatives is None:
+        raise _CommandError("evaluation", f"Input {inputId!r} has no declared representative windows.")
+
+    codec = LinguisticCodec(
+        definition.scale, representatives.domains, definition.fuzzification or FuzzificationPolicy(),
+        representatives.policy,
+    )
+
+    return float(codec.EncodeLabel(termName))
+
+
 def _Infer(
-    model: ModelConfiguration, values: dict[str, float], explain: bool,
+    model: ModelConfiguration, values: dict[str, float | str], explain: bool,
 ) -> dict[str, object]:
     """Evaluate a standalone rule model and render its optional wire-ID trace."""
 
@@ -212,7 +241,29 @@ def _Infer(
         raise _CommandError("usage", f"Input IDs must match the model. Missing: {missing}; unknown: {unknown}.")
 
     variables = tuple(zip(binding.inputs, binding.model.inputs, strict=True))
-    inputs = {variable.name: values[inputId] for ((inputId, _), variable) in variables}
+    inputs: dict[str, float] = {}
+    termBindings: list[tuple[str, ScaleDefinition, str, str]] = []
+
+    for (inputId, scaleId), variable in variables:
+        value = values[inputId]
+
+        if isinstance(value, str):
+            definition = model.scales[scaleId]
+            termNames = {termId: term.name for termId, term in zip(definition.termIds, definition.scale.terms, strict=True)}
+            termName = termNames.get(value)
+
+            if termName is None:
+                raise _CommandError("usage", f"Unknown term ID {value!r} for input {inputId!r}.")
+
+            termBindings.append((variable.name, definition, termName, inputId))
+
+        else:
+            inputs[variable.name] = value
+
+    for variableName, definition, termName, inputId in termBindings:
+        inputs[variableName] = _Representative(definition, termName, inputId)
+
+    evaluated: MamdaniResult | SugenoResult
 
     if isinstance(binding, MamdaniBinding):
         centroid = binding.centroid

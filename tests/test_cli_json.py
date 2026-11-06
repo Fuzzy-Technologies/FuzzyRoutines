@@ -6,7 +6,8 @@
 """Check the standalone calculator's wire IDs and command-line streams."""
 
 import json
-from contextlib import redirect_stderr, redirect_stdout
+from contextlib import redirect_stderr as RedirectStderr
+from contextlib import redirect_stdout as RedirectStdout
 from io import StringIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -23,7 +24,7 @@ def _Run(*arguments: str) -> tuple[int, str, str]:
 
     stdout, stderr = StringIO(), StringIO()
 
-    with redirect_stdout(stdout), redirect_stderr(stderr):
+    with RedirectStdout(stdout), RedirectStderr(stderr):
         code = Main(arguments)
 
     return code, stdout.getvalue(), stderr.getvalue()
@@ -117,6 +118,65 @@ class StandaloneCalculatorTests(TestCase):
         error = json.loads(stderr)["error"]
         self.assertEqual((error["category"], error["detailCategory"], error["pointer"]),
                          ("configuration", "malformed-document", "/kind"))
+
+    def test_TermInputRequiresAnExplicitEncodingAndUniqueBindings(self) -> None:
+        """Reject malformed and duplicate term bindings before accessing the document."""
+
+        for options in (
+            ("--term-input", "risk=high"),
+            ("--encoding", "representative-centroid"),
+            ("--term-input", "risk=high", "--encoding", "unknown"),
+            ("--term-input", "risk=", "--encoding", "representative-centroid"),
+            ("--input", "risk=0.25", "--term-input", "risk=high", "--encoding", "representative-centroid"),
+            ("--term-input", "risk=high", "--term-input", "risk=high", "--encoding", "representative-centroid"),
+        ):
+            code, stdout, stderr = _Run("infer", "--project", "absent.json", *options)
+            self.assertEqual((code, stdout), (2, ""), f"{options!r} must fail before file access.")
+            self.assertEqual(json.loads(stderr)["error"]["category"], "usage")
+
+    def test_RepresentativeCentroidRetainsExactWireIds(self) -> None:
+        """Encode a wire term and preserve separate numeric bindings and failures."""
+
+        model = json.loads((_FIXTURES / "valid-project.json").read_bytes())["models"]["weighted"]
+        model["inference"]["inputs"].append({"id": "other", "name": "Other", "scale": "risk"})
+        model["memberships"]["rising"] = {"family": "triangle", "parameters": {"left": 0, "peak": 0.5, "right": 1}}
+        scale = model["scales"]["risk"]
+        scale["representatives"] = {
+            "windows": {"high": {"left": 0, "right": 1}},
+            "policy": {"absoluteTolerance": 1e-12, "relativeTolerance": 1e-10, "maximumDepth": 20},
+        }
+
+        with TemporaryDirectory() as directory, patch("fuzzyroutines.configuration.CheckConfigStructure"):
+            path = Path(directory) / "model.json"
+            path.write_text(json.dumps(model), encoding="utf-8")
+            arguments = ("infer", "--project", str(path), "--input", "other=0.25", "--explain")
+            encoding = ("--encoding", "representative-centroid")
+            numeric = _Run(*arguments, "--input", "risk=0.5")
+            term = _Run(*arguments, "--term-input", "risk=high", *encoding)
+            self.assertEqual((term[0], term[2]), (0, ""), "A declared representative must evaluate.")
+            self.assertEqual(term, numeric, "The symmetric triangle must encode to 0.5.")
+            self.assertEqual(json.loads(term[1])["result"]["value"], 0.75)
+
+            for binding in ("risk=High", "Risk=high"):
+                code, stdout, stderr = _Run(*arguments, "--term-input", binding, *encoding)
+                self.assertEqual((code, stdout), (2, ""), f"{binding!r} must match exact wire IDs.")
+                self.assertEqual(json.loads(stderr)["error"]["category"], "usage")
+
+            for rule in model["inference"]["rules"]:
+                rule["weight"] = 0
+
+            path.write_text(json.dumps(model), encoding="utf-8")
+            code, stdout, stderr = _Run(*arguments, "--term-input", "risk=high", *encoding)
+            self.assertEqual((code, stdout), (4, ""), "An encoded input with no firing must fail atomically.")
+            self.assertEqual(json.loads(stderr)["error"]["category"], "evaluation")
+
+            del scale["representatives"]
+            path.write_text(json.dumps(model), encoding="utf-8")
+            code, stdout, stderr = _Run(*arguments, "--term-input", "risk=high", *encoding)
+            self.assertEqual((code, stdout), (4, ""), "Missing representative windows must fail atomically.")
+            error = json.loads(stderr)["error"]
+            self.assertEqual(error["category"], "evaluation")
+            self.assertIn("representative windows", error["message"])
 
     def test_OptionalCodecFailureIsReportedAsCapability(self) -> None:
         """Use a stable capability diagnostic when the lazy validator is absent."""
