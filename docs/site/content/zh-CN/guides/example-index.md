@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 229 个已登记公共符号都链接到已执行的示例，共有 37 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
+全部 230 个已登记公共符号都链接到已执行的示例，共有 38 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
 
 函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
@@ -215,6 +215,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.operators.SNormPolicy.Evaluate`                               | [alarm, 代码块 1](alarm.md); [api-recipes, 代码块 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy`                                        | [alarm, 代码块 1](alarm.md); [api-recipes, 代码块 3](api-recipes.md)                                                 |
 | `fuzzyroutines.operators.TNormPolicy.Evaluate`                               | [alarm, 代码块 1](alarm.md); [api-recipes, 代码块 3](api-recipes.md)                                                 |
+| `fuzzyroutines.plotting.ExportMembershipPlot`                                | [plot-export, 代码块 1](plot-export.md)                                                                           |
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |

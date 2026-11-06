@@ -25,6 +25,7 @@ def test_CanonicalReferenceHasCompleteOrderedNavigation():
         "api/modern/package.md",
         "api/modern/alphacuts.md",
         "api/modern/batches.md",
+        "api/modern/plotting.md",
         "api/modern/defuzzification.md",
         "api/modern/domain.md",
         "api/modern/fuzzysets.md",
