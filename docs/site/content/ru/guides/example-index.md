@@ -228,12 +228,12 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
-| `fuzzyroutines.project_configuration.DumpProject`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.LoadProject`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectDefaults`                        | [yaml, блок 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectEvaluation`                      | [yaml, блок 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectPlot`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectSnapshot`                        | [yaml, блок 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.DumpProject`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.LoadProject`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectDefaults`                        | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectEvaluation`                      | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectPlot`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectSnapshot`                        | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties`                         | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties.isExact`                 | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousInterval`                                | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |

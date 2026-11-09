@@ -228,12 +228,12 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
-| `fuzzyroutines.project_configuration.DumpProject`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.LoadProject`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectDefaults`                        | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectEvaluation`                      | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectPlot`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
-| `fuzzyroutines.project_configuration.ProjectSnapshot`                        | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.DumpProject`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                           |
+| `fuzzyroutines.project_configuration.LoadProject`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                           |
+| `fuzzyroutines.project_configuration.ProjectDefaults`                        | [yaml, 代码块 2](../api/modern/yaml.md)                                                                           |
+| `fuzzyroutines.project_configuration.ProjectEvaluation`                      | [yaml, 代码块 2](../api/modern/yaml.md)                                                                           |
+| `fuzzyroutines.project_configuration.ProjectPlot`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                           |
+| `fuzzyroutines.project_configuration.ProjectSnapshot`                        | [yaml, 代码块 2](../api/modern/yaml.md)                                                                           |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties`                         | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties.isExact`                 | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousInterval`                                | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
