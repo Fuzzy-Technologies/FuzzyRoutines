@@ -183,3 +183,7 @@ reason = "Internal Sugeno reconstruction used by the public configuration codec.
 [[exclusions]]
 symbol = "fuzzyroutines._config_yaml"
 reason = "Internal bounded YAML reader for the separately scoped project API."
+
+[[exclusions]]
+symbol = "fuzzyroutines._project_snapshot"
+reason = "Internal typed snapshot reconstruction for the separately scoped public project API."
