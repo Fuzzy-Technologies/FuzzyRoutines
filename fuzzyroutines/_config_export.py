@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Deterministic JSON export for configured v1 scalar models."""
+"""Deterministic JSON export for configured v1 scalar model data."""
 
 from collections.abc import Mapping
 from fractions import Fraction
@@ -236,22 +236,22 @@ def _EncodeScale(configured: ScaleDefinition, definitions: _ScaleModel, path: Co
     return encoded
 
 
-def _EncodeDefinitions(definitions: _ScaleModel) -> _Object:
+def _EncodeDefinitions(definitions: _ScaleModel, path: ConfigPath) -> _Object:
     """Map runtime definitions to their explicit v1 IDs without deriving presets."""
 
     return {
         "kind": "model",
         "schemaVersion": 1,
         "memberships": {
-            key: _EncodeMembership(value, ("memberships", key))
+            key: _EncodeMembership(value, (*path, "memberships", key))
             for key, value in sorted(definitions.memberships.items())
         },
         "universes": {
-            key: _EncodeUniverse(value, ("universes", key))
+            key: _EncodeUniverse(value, (*path, "universes", key))
             for key, value in sorted(definitions.universes.items())
         },
         "scales": {
-            key: _EncodeScale(value, definitions, ("scales", key))
+            key: _EncodeScale(value, definitions, (*path, "scales", key))
             for key, value in sorted(definitions.scales.items())
         },
     }
@@ -375,12 +375,11 @@ def _EncodeSugenoConsequent(
     }
 
 
-def _EncodeInference(configured: _ConfiguredMamdani | _ConfiguredSugeno) -> _Object:
+def _EncodeInference(configured: _ConfiguredMamdani | _ConfiguredSugeno, path: ConfigPath) -> _Object:
     """Export ordered bindings and inference settings from one configured model."""
 
     model = configured.model
     definitions = configured.definitions
-    path = ("inference",)
 
     if type(model) not in (MamdaniModel, SugenoModel):
         raise ConfigExportError(path, "Choose an explicit built-in Mamdani or Sugeno model.")
@@ -486,14 +485,20 @@ def _CheckUnicode(wire: _Wire, path: ConfigPath) -> None:
             _CheckUnicode(value, (*path, index))
 
 
-def _EncodeModelBytes(model: _Model) -> bytes:
-    """Encode canonical bytes for validation against the v1 model contract."""
+def _EncodeModel(model: _Model, path: ConfigPath = ()) -> _Object:
+    """Build a v1 model envelope with paths scoped to its enclosing document."""
 
     definitions = model if isinstance(model, _ScaleModel) else model.definitions
-    wire = _EncodeDefinitions(definitions)
+    wire = _EncodeDefinitions(definitions, path)
 
     if not isinstance(model, _ScaleModel):
-        wire["inference"] = _EncodeInference(model)
+        wire["inference"] = _EncodeInference(model, (*path, "inference"))
+
+    return wire
+
+
+def _EncodeJsonBytes(wire: _Object) -> bytes:
+    """Serialize one canonical wire document and diagnose unencodable text."""
 
     try:
         return (_JsonText(wire) + "\n").encode("utf-8")
@@ -502,6 +507,12 @@ def _EncodeModelBytes(model: _Model) -> bytes:
         _CheckUnicode(wire, ())
 
         raise ConfigExportError((), "Replace unpaired Unicode surrogates in source text.") from error
+
+
+def _EncodeModelBytes(model: _Model) -> bytes:
+    """Encode canonical bytes for validation against the v1 model contract."""
+
+    return _EncodeJsonBytes(_EncodeModel(model))
 
 
 def EncodeModel(model: _Model) -> bytes:

@@ -6,15 +6,16 @@
 """Exercise the typed JSON and YAML project boundary with checked-in v1 fixtures."""
 
 import json
-from dataclasses import FrozenInstanceError
+from dataclasses import FrozenInstanceError, replace
+from math import copysign as CopySign
 from pathlib import Path
 from types import MappingProxyType
 
 import pytest
 
-from fuzzyroutines._project_snapshot import LoadProjectJson, LoadProjectYaml
 from fuzzyroutines.configuration import ConfigurationError, MamdaniBinding, SugenoBinding
 from fuzzyroutines.inference import MamdaniModel, SugenoModel
+from fuzzyroutines.project_configuration import DumpProject, LoadProject, ProjectDefaults, ProjectSnapshot
 from fuzzyroutines.yaml_configuration import ConvertProjectJsonToYaml
 
 pytest.importorskip("jsonschema")
@@ -24,17 +25,22 @@ _PROJECT = _FIXTURES / "valid-project.json"
 
 
 @pytest.mark.parametrize("formatName", ("json", "yaml"))
-def test_LoadProjectRetainsModelsAndReadOnlySettings(formatName):
-    """Wrap both inference kinds and preserve exact project presentation and scenarios."""
+def test_ProjectRoundTripRetainsModelsAndReadOnlySettings(formatName):
+    """Round-trip both inference kinds and preserve project settings deterministically."""
 
     encoded = _PROJECT.read_bytes()
 
     if formatName == "yaml":
         pytest.importorskip("yaml")
-        project = LoadProjectYaml(ConvertProjectJsonToYaml(encoded))
+        encoded = ConvertProjectJsonToYaml(encoded)
 
-    else:
-        project = LoadProjectJson(encoded)
+    original = LoadProject(encoded, formatName=formatName)
+    exported = DumpProject(original, formatName=formatName)
+    project = LoadProject(exported, formatName=formatName)
+    assert isinstance(project, ProjectSnapshot)
+    assert exported.endswith(b"\n")
+    assert DumpProject(project, formatName=formatName) == exported
+    assert DumpProject(project) == DumpProject(original)
 
     assert tuple(project.models) == ("centroid", "weighted")
     assert isinstance(project.SelectModel("centroid").inference, MamdaniBinding)
@@ -71,9 +77,10 @@ def test_LoadProjectNeverInfersASingletonDefault():
     """Require an explicit model ID while retaining the historical scale exactly."""
 
     historical = json.loads((_FIXTURES / "valid-historical-scale.json").read_bytes())
-    project = LoadProjectJson(json.dumps({
+    project = LoadProject(json.dumps({
         "kind": "project", "schemaVersion": 1, "models": {"legacy": historical},
     }).encode())
+    project = LoadProject(DumpProject(project))
     assert project.defaults is None
 
     with pytest.raises(KeyError, match="explicit project model ID"):
@@ -105,22 +112,59 @@ def test_LoadProjectRetainsTheExactDefaultDiagnostic(identifier, category, point
         del defaults["plot"]
 
     with pytest.raises(ConfigurationError) as failure:
-        LoadProjectJson(json.dumps(document).encode())
+        LoadProject(json.dumps(document).encode())
 
     assert failure.value.category == category
     assert failure.value.pointer == pointer
 
 
-def test_LoadProjectLeavesDeclaredScenariosUnevaluated(monkeypatch):
-    """Load and select all models without invoking an inference evaluator."""
+def test_ProjectCodecLeavesDeclaredScenariosUnevaluated(monkeypatch):
+    """Load and export every model without invoking an inference evaluator."""
 
     def RejectEvaluation(*arguments, **options):
         """Report an accidental eager evaluation."""
 
-        raise AssertionError("Project loading must not evaluate scenarios.")
+        raise AssertionError("Project codecs must not evaluate scenarios.")
 
     monkeypatch.setattr(MamdaniModel, "Evaluate", RejectEvaluation)
     monkeypatch.setattr(SugenoModel, "Evaluate", RejectEvaluation)
-    project = LoadProjectJson(_PROJECT.read_bytes())
+    project = LoadProject(DumpProject(LoadProject(_PROJECT.read_bytes())))
     assert project.evaluations["quarter"].modelId == "weighted"
     assert project.SelectModel() is project.models["weighted"]
+
+
+def test_ExportProjectValidatesDefaultReferences():
+    """Reject an inconsistent snapshot with the same wire diagnostic as loading."""
+
+    project = LoadProject(_PROJECT.read_bytes())
+    broken = replace(project, defaults=ProjectDefaults("centroid", "risk", "quarter"))
+
+    with pytest.raises(ConfigurationError) as failure:
+        DumpProject(broken)
+
+    assert (failure.value.category, failure.value.pointer) == ("invalid-relationship", "/defaults/evaluation")
+
+
+def test_ExportProjectPreservesSignedZeroAcrossCodecs():
+    """Keep signed zero as a binary64 coordinate across YAML and JSON export."""
+
+    pytest.importorskip("yaml")
+    document = json.loads(_PROJECT.read_bytes())
+    document["evaluations"]["quarter"]["inputs"]["risk"] = -0.0
+    project = LoadProject(json.dumps(document).encode())
+    restored = LoadProject(DumpProject(project, formatName="yaml"), formatName="yaml")
+    assert CopySign(1.0, restored.evaluations["quarter"].inputs["risk"]) == -1.0
+    assert DumpProject(restored) == DumpProject(project)
+
+
+def test_ProjectCodecRejectsUnsupportedFormat():
+    """Require a supported explicit format without sniffing the input bytes."""
+
+    encoded = _PROJECT.read_bytes()
+    project = LoadProject(encoded)
+
+    with pytest.raises(ValueError, match="Choose project format"):
+        LoadProject(encoded, formatName="toml")
+
+    with pytest.raises(ValueError, match="Choose project format"):
+        DumpProject(project, formatName="toml")

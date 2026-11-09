@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Public API example index
 
-All 241 inventoried public symbols are linked to executed examples (39 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
+All 247 inventoried public symbols are linked to executed examples (40 standalone Python blocks), with every declared optional extra enabled. Root exports are verified aliases of the corresponding module objects.
 
 Functions, constructors, methods and properties require actual execution; imports alone do not count. Result constructors also run when their producer returns them; see [result records](results.md) for explicit reconstruction. Typing contracts require a real annotation, and exception classes require constructed instances. Private helpers and generated dataclass methods remain outside the authored public inventory.
 
@@ -118,10 +118,10 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.configuration.LoadModel`                                      | [configuration, block 1](../api/modern/configuration.md)                                                           |
 | `fuzzyroutines.configuration.MamdaniBinding`                                 | [configuration, block 1](../api/modern/configuration.md)                                                           |
 | `fuzzyroutines.configuration.MamdaniCentroid`                                | [configuration, block 1](../api/modern/configuration.md)                                                           |
-| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, block 1](../api/modern/configuration.md); [yaml, block 2](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, block 1](../api/modern/configuration.md); [yaml, block 1](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleRepresentatives`                           | [configuration, block 1](../api/modern/configuration.md)                                                           |
-| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, block 1](../api/modern/configuration.md)                                                           |
+| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, block 1](../api/modern/configuration.md); [yaml, block 2](../api/modern/yaml.md)                   |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, block 1](errors.md)                                                                                       |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, block 1](../api/modern/membership.md); [api-recipes, block 5](api-recipes.md)                         |
@@ -228,6 +228,12 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, block 1](linguistic-encoding.md); [universal-fuzzy-scale, block 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.project_configuration.DumpProject`                            | [yaml, block 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.LoadProject`                            | [yaml, block 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectDefaults`                        | [yaml, block 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectEvaluation`                      | [yaml, block 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectPlot`                            | [yaml, block 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectSnapshot`                        | [yaml, block 2](../api/modern/yaml.md)                                                                             |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties`                         | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties.isExact`                 | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousInterval`                                | [alpha-cuts, block 1](alpha-cuts.md); [api-recipes, block 2](api-recipes.md)                                       |
@@ -252,5 +258,5 @@ This index establishes example availability, not independent proof of every math
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, block 4](api-recipes.md); [custom, block 1](custom.md)                                               |
-| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, block 1](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, block 1](../api/modern/yaml.md); [yaml, block 2](../api/modern/yaml.md)                                     |
 | `fuzzyroutines.yaml_configuration.ConvertProjectYamlToJson`                  | [yaml, block 1](../api/modern/yaml.md)                                                                             |

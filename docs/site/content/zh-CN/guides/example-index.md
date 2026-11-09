@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 241 个已登记公共符号都链接到已执行的示例，共有 39 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
+全部 247 个已登记公共符号都链接到已执行的示例，共有 40 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
 
 函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
@@ -118,10 +118,10 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.configuration.LoadModel`                                      | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
 | `fuzzyroutines.configuration.MamdaniBinding`                                 | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
 | `fuzzyroutines.configuration.MamdaniCentroid`                                | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
-| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, 代码块 1](../api/modern/configuration.md); [yaml, 代码块 2](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, 代码块 1](../api/modern/configuration.md); [yaml, 代码块 1](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleRepresentatives`                           | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
-| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, 代码块 1](../api/modern/configuration.md)                                                         |
+| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, 代码块 1](../api/modern/configuration.md); [yaml, 代码块 2](../api/modern/yaml.md)                   |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, 代码块 1](errors.md)                                                                                     |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
@@ -228,6 +228,12 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.project_configuration.DumpProject`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.LoadProject`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectDefaults`                        | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectEvaluation`                      | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectPlot`                            | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
+| `fuzzyroutines.project_configuration.ProjectSnapshot`                        | [yaml, 代码块 2](../api/modern/yaml.md)                                                                             |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties`                         | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties.isExact`                 | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousInterval`                                | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
@@ -252,5 +258,5 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, 代码块 4](api-recipes.md); [custom, 代码块 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, 代码块 4](api-recipes.md); [custom, 代码块 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, 代码块 4](api-recipes.md); [custom, 代码块 1](custom.md)                                               |
-| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, 代码块 1](../api/modern/yaml.md)                                                                           |
+| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, 代码块 1](../api/modern/yaml.md); [yaml, 代码块 2](../api/modern/yaml.md)                                     |
 | `fuzzyroutines.yaml_configuration.ConvertProjectYamlToJson`                  | [yaml, 代码块 1](../api/modern/yaml.md)                                                                           |

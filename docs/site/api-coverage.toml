@@ -16,7 +16,7 @@ modules = ["fuzzyroutines.configuration"]
 [[optionalExamples]]
 extra = "yaml"
 pages = ["api/modern/yaml.md"]
-modules = ["fuzzyroutines.yaml_configuration"]
+modules = ["fuzzyroutines.yaml_configuration", "fuzzyroutines.project_configuration"]
 
 [[surfaces]]
 module = "fuzzyroutines"
@@ -139,6 +139,11 @@ mode = "exports"
 module = "fuzzyroutines.yaml_configuration"
 source = "fuzzyroutines/yaml_configuration.py"
 mode = "authored"
+
+[[surfaces]]
+module = "fuzzyroutines.project_configuration"
+source = "fuzzyroutines/project_configuration.py"
+mode = "exports"
 
 [[exclusions]]
 symbol = "fuzzyroutines._config_envelope"
