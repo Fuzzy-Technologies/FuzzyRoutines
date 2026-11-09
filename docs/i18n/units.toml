@@ -14179,10 +14179,14 @@ sourceHash = "sha256:edb8f1120d75640916f984e1e1f6cd452131fb96c52f5d3740f392f4eaf
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.DumpProject.md"
+sourceHash = "sha256:edb8f1120d75640916f984e1e1f6cd452131fb96c52f5d3740f392f4eaf61cd7"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.DumpProject.md"
+sourceHash = "sha256:edb8f1120d75640916f984e1e1f6cd452131fb96c52f5d3740f392f4eaf61cd7"
 
 [[units]]
 id = "symbol:fuzzyroutines.project_configuration.LoadProject"
@@ -14192,10 +14196,14 @@ sourceHash = "sha256:8972b42cb66c05758a1e9fac7e069699dc920a97434c9235362d0dabcbd
 reviewClass = "technical"
 
 [units.translations.ru]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.LoadProject.md"
+sourceHash = "sha256:8972b42cb66c05758a1e9fac7e069699dc920a97434c9235362d0dabcbdab39a"
 
 [units.translations.zh-CN]
-state = "missing"
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.LoadProject.md"
+sourceHash = "sha256:8972b42cb66c05758a1e9fac7e069699dc920a97434c9235362d0dabcbdab39a"
 
 [[units]]
 id = "symbol:fuzzyroutines.project_configuration.ProjectDefaults"
