@@ -3,14 +3,15 @@
 <!-- SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 SPDX-License-Identifier: Apache-2.0 -->
 
-> Scalar fuzzy computing in Python. This source describes 2.1.0 on CPython 3.13 and 3.14. Install exactly `fuzzyroutines==2.1.0` when it is available on PyPI; otherwise use the reviewed matching CI wheel in the agent guide. The published 2.0.0 baseline remains available for reproducing earlier results. Installation instructions do not establish publication. Verify installed version and source revision before execution. The default scalar core has no external runtime dependencies.
+> Scalar fuzzy computing in Python. Install the [published FuzzyRoutines 2.1.0 package](https://pypi.org/project/fuzzyroutines/2.1.0/) with `python -m pip install fuzzyroutines==2.1.0` on CPython 3.13 or 3.14. Verify the installed version and use examples from the matching source tag. The scalar core has no external runtime dependencies.
 
 ## Start and verify
 
-- [Agent entrypoint and versioned capability map](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/): exact 2.1.0 installation, memberships, plots and JSON evidence; reviewed-wheel fallback before PyPI availability.
+- [Current agent guide and capability map](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/agent-quickstart/): exact installation, memberships, plots and JSON evidence.
 - [Русский](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/ru/agent-quickstart/): запрос помощнику, версии API и объяснение результатов.
 - [简体中文](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/zh-CN/agent-quickstart/): 智能体请求、API 版本与结果解释。
-- [API reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/api/): supported imports and contracts; `/latest/` is moving documentation, not an installed-version guarantee.
+- [Latest API reference](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/api/): supported imports and contracts for the approved default branch. This documentation can change.
+- [Documentation version guide](https://fuzzy-technologies.github.io/FuzzyRoutines/api/versions/) and [source tagged `v2.1.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/tree/v2.1.0): match the tag to the installed release when reproducing an example.
 - [Migration from 1.0.3](https://fuzzy-technologies.github.io/FuzzyRoutines/api/latest/en/migration/1.0.3-to-2.0.0/): compatibility and corrected numerical behavior.
 
 ## 2.1 capability map

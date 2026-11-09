@@ -7,23 +7,12 @@ SPDX-License-Identifier: Apache-2.0
 
 Пакетный API вычисляет значения функции принадлежности или степени принадлежности
 к термам шкалы сразу для множества координат. Обычные скалярные вызовы сохраняют
-независимость от NumPy. Этот API требует 2.1.0; в опубликованной базовой версии
-2.0.0 его нет. Когда 2.1.0 доступна в PyPI, установите точную версию с дополнением NumPy:
+независимость от NumPy. Пакетный API появился в 2.1.0. В новом окружении
+CPython 3.13 или 3.14 установите [опубликованную версию 2.1.0](https://pypi.org/project/fuzzyroutines/2.1.0/)
+с необязательным дополнением NumPy:
 
 ```bash
 python -m pip install 'fuzzyroutines[numpy]==2.1.0'
-```
-
-Если эта версия ещё недоступна в PyPI, получите соответствующий проверенный
-wheel из CI по [инструкции для помощника с проверкой версии](../agent-quickstart.md)
-и задайте его абсолютный локальный путь в `FUZZYROUTINES_WHEEL`. В новом окружении
-CPython 3.13 или 3.14 используйте следующий способ с проверенной версией NumPy:
-
-```bash
-: "${FUZZYROUTINES_WHEEL:?Set the absolute path to the reviewed 2.1.0 wheel}"
-python -m pip install --no-deps "$FUZZYROUTINES_WHEEL" &&
-python -I -c "from importlib.metadata import version; import sys; actual = version('fuzzyroutines'); sys.exit(0 if actual == '2.1.0' else f'Expected 2.1.0; found {actual}')" &&
-python -m pip install 'numpy==2.3.5'
 ```
 
 ```python
@@ -64,10 +53,10 @@ assert result.selected.argmax(axis=-1).tolist() == [0, 1, 2, 3, 4]
 
 Базовая проверяемая конфигурация — Python 3.13/3.14 и NumPy 2.3.5; дополнение
 допускает совместимые версии NumPy 2.x. Ошибки описаны в [API](../api/modern/batches.md),
-замеры и ограничения — в [отчёте](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/public-batch-comparison.md).
+замеры и ограничения — в [отчёте из тега `v2.1.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.1.0/docs/performance/public-batch-comparison.md).
 Малые пакеты могут работать медленнее. Подготовленный массив и список Python
 имеют разные затраты на преобразование; универсального порога переключения нет.
 
-В [отчёте о замерах установленного кандидата 2.1.0](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/develop/docs/performance/installed-batch-results.md) указаны хеш wheel, время выполнения, расход памяти и затраты на импорт и установку NumPy. Отдельно приведены результаты для небольших групп входов из публичных тестов потребителя.
+В [отчёте о дорелизных замерах из тега `v2.1.0`](https://github.com/Fuzzy-Technologies/FuzzyRoutines/blob/v2.1.0/docs/performance/installed-batch-results.md) указаны хеш wheel, время выполнения, расход памяти и затраты на импорт и установку NumPy. Отдельно приведены результаты для небольших групп входов из публичных тестов потребителя.
 
 [![Измеренное отношение времени скалярного и пакетного вычисления](../../en/assets/figures/numpy-batch-speed.svg)](../../en/assets/figures/numpy-batch-speed.svg)
