@@ -3,14 +3,15 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Typed snapshots of validated v1 JSON projects."""
+"""Typed snapshots of validated v1 JSON and YAML projects."""
 
 from collections.abc import Mapping
 from dataclasses import dataclass
 from types import MappingProxyType
 
-from ._config_project import DecodeProject
+from ._config_project import DecodeProject, _ConfiguredProject
 from .configuration import ModelConfiguration
+from .yaml_configuration import _RequireYaml
 
 
 @dataclass(frozen=True, slots=True)
@@ -82,7 +83,32 @@ def LoadProjectJson(encoded: bytes) -> ProjectSnapshot:
         ImportError: The optional configuration validator is unavailable.
     """
 
-    project = DecodeProject(encoded)
+    return _BuildProjectSnapshot(DecodeProject(encoded))
+
+
+def LoadProjectYaml(encoded: bytes) -> ProjectSnapshot:
+    """Load a complete v1 YAML project without accessing files or evaluating models.
+
+    Args:
+        encoded: One bounded UTF-8 project document in the strict YAML subset.
+
+    Returns:
+        A read-only snapshot of models, defaults, units, plots and evaluations.
+
+    Raises:
+        ConfigurationError: Project parsing or validation fails.
+        ImportError: The optional YAML parser or configuration validator is unavailable.
+    """
+
+    _RequireYaml()
+    from ._config_yaml import DecodeYamlProject
+
+    return _BuildProjectSnapshot(DecodeYamlProject(encoded))
+
+
+def _BuildProjectSnapshot(project: _ConfiguredProject) -> ProjectSnapshot:
+    """Wrap validated project bindings in the same snapshot for both codecs."""
+
     defaults = project.defaults
     selection = None if defaults is None else ProjectDefaults(
         defaults.modelId, defaults.plotId, defaults.evaluationId,

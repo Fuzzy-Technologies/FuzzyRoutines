@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: 2026 Timur Gilmullin and Fuzzy Technologies
 # SPDX-License-Identifier: Apache-2.0
 
-"""Exercise the typed JSON project boundary with checked-in v1 fixtures."""
+"""Exercise the typed JSON and YAML project boundary with checked-in v1 fixtures."""
 
 import json
 from dataclasses import FrozenInstanceError
@@ -12,9 +12,10 @@ from types import MappingProxyType
 
 import pytest
 
-from fuzzyroutines._project_snapshot import LoadProjectJson
+from fuzzyroutines._project_snapshot import LoadProjectJson, LoadProjectYaml
 from fuzzyroutines.configuration import ConfigurationError, MamdaniBinding, SugenoBinding
 from fuzzyroutines.inference import MamdaniModel, SugenoModel
+from fuzzyroutines.yaml_configuration import ConvertProjectJsonToYaml
 
 pytest.importorskip("jsonschema")
 
@@ -22,10 +23,19 @@ _FIXTURES = Path(__file__).resolve().parents[1] / "docs" / "schemas" / "config-v
 _PROJECT = _FIXTURES / "valid-project.json"
 
 
-def test_LoadProjectRetainsModelsAndReadOnlySettings():
+@pytest.mark.parametrize("formatName", ("json", "yaml"))
+def test_LoadProjectRetainsModelsAndReadOnlySettings(formatName):
     """Wrap both inference kinds and preserve exact project presentation and scenarios."""
 
-    project = LoadProjectJson(_PROJECT.read_bytes())
+    encoded = _PROJECT.read_bytes()
+
+    if formatName == "yaml":
+        pytest.importorskip("yaml")
+        project = LoadProjectYaml(ConvertProjectJsonToYaml(encoded))
+
+    else:
+        project = LoadProjectJson(encoded)
+
     assert tuple(project.models) == ("centroid", "weighted")
     assert isinstance(project.SelectModel("centroid").inference, MamdaniBinding)
     selected = project.SelectModel()
