@@ -65,6 +65,10 @@ jobs:
           cat dist/SHA256SUMS
           cat dist/reproducibility.json
 
+      - name: Smoke-test the installed distributions on Linux
+        if: steps.scope.outputs.package == 'true'
+        run: python tools/verify_installed_platform.py --artifacts dist --output dist/installed-platform-evidence.json
+
       - name: Clean-install wheel and verify installed package
         if: steps.scope.outputs.package == 'true'
         shell: bash
@@ -279,4 +283,49 @@ jobs:
         with:
           name: package-artifacts-python-${{ matrix.python-version }}
           path: dist
+          if-no-files-found: error
+
+  installed-platform:
+    name: ${{ matrix.os }} Python ${{ matrix.python-version }} installed smoke
+    needs: build-and-install
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+        python-version: ["3.13", "3.14"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Select full or reviewed focused validation
+        id: scope
+        uses: ./.github/actions/ci-policy
+
+      - name: Download the verified distributions for this Python version
+        if: steps.scope.outputs.package == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: package-artifacts-python-${{ matrix.python-version }}
+          path: dist
+
+      - name: Smoke-test the installed distributions
+        if: steps.scope.outputs.package == 'true'
+        run: python tools/verify_installed_platform.py --artifacts dist --output installed-platform-evidence.json
+
+      - name: Upload installed platform evidence
+        if: steps.scope.outputs.package == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: installed-package-evidence-${{ matrix.os }}-python-${{ matrix.python-version }}
+          path: installed-platform-evidence.json
           if-no-files-found: error
