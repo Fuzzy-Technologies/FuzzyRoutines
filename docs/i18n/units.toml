@@ -9993,18 +9993,18 @@ reviewedAt = "2026-10-10T08:14:59Z"
 id = "page:guides.example-index"
 kind = "page"
 sourcePath = "docs/site/content/en/guides/example-index.md"
-sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
+sourceHash = "sha256:44297d4f44febcbb81f0feb30be67065c03a5d032cd5a2765d4322bd75214051"
 reviewClass = "mathematical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/guides/example-index.md"
-sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
+sourceHash = "sha256:44297d4f44febcbb81f0feb30be67065c03a5d032cd5a2765d4322bd75214051"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/site/content/zh-CN/guides/example-index.md"
-sourceHash = "sha256:93933cbe1afd41396581335a34564bb6364d8e2972c3d88f4d6860678b197faf"
+sourceHash = "sha256:44297d4f44febcbb81f0feb30be67065c03a5d032cd5a2765d4322bd75214051"
 
 [[units]]
 id = "page:guides.historical-recipes"
@@ -14118,19 +14118,19 @@ state = "missing"
 [[units]]
 id = "page:api.modern.yaml"
 kind = "page"
-sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
+sourceHash = "sha256:1a68a2b76c9b72d0b68fe44a30e074e3e8de78924d47ab2ef00e53289a23e3d3"
 sourcePath = "docs/site/content/en/api/modern/yaml.md"
 reviewClass = "technical"
 
 [units.translations.ru]
 state = "draft"
 path = "docs/site/content/ru/api/modern/yaml.md"
-sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
+sourceHash = "sha256:1a68a2b76c9b72d0b68fe44a30e074e3e8de78924d47ab2ef00e53289a23e3d3"
 
 [units.translations.zh-CN]
 state = "draft"
 path = "docs/site/content/zh-CN/api/modern/yaml.md"
-sourceHash = "sha256:a1b7ba5140e550fc75555c2947cc0768c111ed7e894d59b5a17934d19aef2f91"
+sourceHash = "sha256:1a68a2b76c9b72d0b68fe44a30e074e3e8de78924d47ab2ef00e53289a23e3d3"
 
 [[units]]
 id = "symbol:fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml"
@@ -14157,3 +14157,122 @@ state = "missing"
 
 [units.translations.zh-CN]
 state = "missing"
+
+[[units]]
+id = "module:fuzzyroutines.project_configuration"
+kind = "module"
+sourcePath = "fuzzyroutines/project_configuration.py"
+sourceHash = "sha256:2967baa8357480419f35258eda7cd1d7bbf093215da4648236cdc32118e96fc5"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.md"
+sourceHash = "sha256:2967baa8357480419f35258eda7cd1d7bbf093215da4648236cdc32118e96fc5"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.md"
+sourceHash = "sha256:2967baa8357480419f35258eda7cd1d7bbf093215da4648236cdc32118e96fc5"
+
+[[units]]
+id = "symbol:fuzzyroutines.project_configuration.DumpProject"
+kind = "symbol"
+sourcePath = "fuzzyroutines/project_configuration.py"
+sourceHash = "sha256:edb8f1120d75640916f984e1e1f6cd452131fb96c52f5d3740f392f4eaf61cd7"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.DumpProject.md"
+sourceHash = "sha256:edb8f1120d75640916f984e1e1f6cd452131fb96c52f5d3740f392f4eaf61cd7"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.DumpProject.md"
+sourceHash = "sha256:edb8f1120d75640916f984e1e1f6cd452131fb96c52f5d3740f392f4eaf61cd7"
+
+[[units]]
+id = "symbol:fuzzyroutines.project_configuration.LoadProject"
+kind = "symbol"
+sourcePath = "fuzzyroutines/project_configuration.py"
+sourceHash = "sha256:8972b42cb66c05758a1e9fac7e069699dc920a97434c9235362d0dabcbdab39a"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.LoadProject.md"
+sourceHash = "sha256:8972b42cb66c05758a1e9fac7e069699dc920a97434c9235362d0dabcbdab39a"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.LoadProject.md"
+sourceHash = "sha256:8972b42cb66c05758a1e9fac7e069699dc920a97434c9235362d0dabcbdab39a"
+
+[[units]]
+id = "symbol:fuzzyroutines.project_configuration.ProjectDefaults"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_project_snapshot.py"
+sourceHash = "sha256:ad0a6216b5cc11ff6164c714af6cfb8d4030b800060a24afc0b827d00d8bbabb"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.ProjectDefaults.md"
+sourceHash = "sha256:ad0a6216b5cc11ff6164c714af6cfb8d4030b800060a24afc0b827d00d8bbabb"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.ProjectDefaults.md"
+sourceHash = "sha256:ad0a6216b5cc11ff6164c714af6cfb8d4030b800060a24afc0b827d00d8bbabb"
+
+[[units]]
+id = "symbol:fuzzyroutines.project_configuration.ProjectEvaluation"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_project_snapshot.py"
+sourceHash = "sha256:bfeeca4ba19b60054a81f55d5ad6136d35312ed1bc6749c1ba6a87b85763b9ce"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.ProjectEvaluation.md"
+sourceHash = "sha256:bfeeca4ba19b60054a81f55d5ad6136d35312ed1bc6749c1ba6a87b85763b9ce"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.ProjectEvaluation.md"
+sourceHash = "sha256:bfeeca4ba19b60054a81f55d5ad6136d35312ed1bc6749c1ba6a87b85763b9ce"
+
+[[units]]
+id = "symbol:fuzzyroutines.project_configuration.ProjectPlot"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_project_snapshot.py"
+sourceHash = "sha256:640b923aaf7d0ab8cd0e65a4e61eb03f7b8c2115327ab428a922c45e31f5b7e3"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.ProjectPlot.md"
+sourceHash = "sha256:640b923aaf7d0ab8cd0e65a4e61eb03f7b8c2115327ab428a922c45e31f5b7e3"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.ProjectPlot.md"
+sourceHash = "sha256:640b923aaf7d0ab8cd0e65a4e61eb03f7b8c2115327ab428a922c45e31f5b7e3"
+
+[[units]]
+id = "symbol:fuzzyroutines.project_configuration.ProjectSnapshot"
+kind = "symbol"
+sourcePath = "fuzzyroutines/_project_snapshot.py"
+sourceHash = "sha256:4c65e9f2452f73073814e28480c574b71c25bddf7b2a10adaaa5037b7a366d46"
+reviewClass = "technical"
+
+[units.translations.ru]
+state = "draft"
+path = "docs/i18n/symbols/ru/fuzzyroutines.project_configuration.ProjectSnapshot.md"
+sourceHash = "sha256:4c65e9f2452f73073814e28480c574b71c25bddf7b2a10adaaa5037b7a366d46"
+
+[units.translations.zh-CN]
+state = "draft"
+path = "docs/i18n/symbols/zh-CN/fuzzyroutines.project_configuration.ProjectSnapshot.md"
+sourceHash = "sha256:4c65e9f2452f73073814e28480c574b71c25bddf7b2a10adaaa5037b7a366d46"

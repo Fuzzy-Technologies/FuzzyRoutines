@@ -203,6 +203,58 @@ def test_PublicByteConvertersValidateBothDirections():
             raise AssertionError("The converters must reject an unsupported v1 version.")
 
 
+def test_ProjectSnapshotRoundTripsAcrossFreshProcesses():
+    """Save and restore a typed snapshot with the installed project API."""
+
+    _RequireProjectExtras()
+
+    from pathlib import Path
+    from subprocess import run
+    from sys import executable
+    from tempfile import TemporaryDirectory
+
+    import fuzzyroutines
+
+    assert fuzzyroutines.__file__ is not None
+    packageParent = str(Path(fuzzyroutines.__file__).resolve().parents[1])
+    prelude = """
+from pathlib import Path
+import sys
+
+sys.path.insert(0, sys.argv[1])
+from fuzzyroutines.project_configuration import DumpProject, LoadProject
+"""
+    export = """
+project = LoadProject(Path('source.json').read_bytes())
+Path('project.json').write_bytes(DumpProject(project))
+Path('project.yaml').write_bytes(DumpProject(project, formatName='yaml'))
+"""
+    restore = """
+canonicalJson = Path('project.json').read_bytes()
+canonicalYaml = Path('project.yaml').read_bytes()
+project = LoadProject(canonicalYaml, formatName='yaml')
+assert DumpProject(project) == canonicalJson
+assert DumpProject(project, formatName='yaml') == canonicalYaml
+assert b'\"left\":-0.0' in canonicalJson
+assert project.SelectModel().scales['score'].termIds == ('mid',)
+"""
+
+    with TemporaryDirectory(prefix="fuzzyroutines-project-") as directory:
+        projectRoot = Path(directory)
+        (projectRoot / "source.json").write_bytes(_PROJECT_JSON)
+
+        for program in (export, restore):
+            result = run(
+                [executable, "-I", "-c", prelude + program, packageParent],
+                cwd=projectRoot,
+                capture_output=True,
+                check=False,
+                text=True,
+                timeout=15,
+            )
+            assert result.returncode == 0, result.stderr
+
+
 def test_PublicYamlModuleImportsWithoutOptionalDependencies():
     """Keep YAML and schema dependencies lazy and report an absent backend."""
 

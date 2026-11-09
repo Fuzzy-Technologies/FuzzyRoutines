@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Указатель примеров публичного API {#public-api-example-index}
 
-Все 241 учтённых публичных символов связаны с выполненными примерами (39 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
+Все 247 учтённых публичных символов связаны с выполненными примерами (40 самостоятельных блоков Python), со всеми явно объявленными дополнениями. Корневые экспорты проверены как псевдонимы соответствующих объектов модулей.
 
 Для функций, конструкторов, методов и свойств требуется настоящее выполнение: одного импорта недостаточно. Конструкторы результатов также выполняются при возврате из производящей функции; явное восстановление показано в [записях результатов](results.md). Контракты типизации требуют настоящей аннотации, классы исключений — создания экземпляров. Закрытые вспомогательные объекты и автоматически созданные методы dataclass не входят в авторский публичный перечень.
 
@@ -118,10 +118,10 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.configuration.LoadModel`                                      | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.MamdaniBinding`                                 | [configuration, блок 1](../api/modern/configuration.md)                                                          |
 | `fuzzyroutines.configuration.MamdaniCentroid`                                | [configuration, блок 1](../api/modern/configuration.md)                                                          |
-| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, блок 1](../api/modern/configuration.md)                                                          |
+| `fuzzyroutines.configuration.ModelConfiguration`                             | [configuration, блок 1](../api/modern/configuration.md); [yaml, блок 2](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleDefinition`                                | [configuration, блок 1](../api/modern/configuration.md); [yaml, блок 1](../api/modern/yaml.md)                   |
 | `fuzzyroutines.configuration.ScaleRepresentatives`                           | [configuration, блок 1](../api/modern/configuration.md)                                                          |
-| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, блок 1](../api/modern/configuration.md)                                                          |
+| `fuzzyroutines.configuration.SugenoBinding`                                  | [configuration, блок 1](../api/modern/configuration.md); [yaml, блок 2](../api/modern/yaml.md)                   |
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, блок 1](errors.md)                                                                                      |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, блок 1](../api/modern/membership.md); [api-recipes, блок 5](api-recipes.md)                         |
@@ -228,6 +228,12 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.presets.CreateUniversalFuzzyScale`                            | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScaleDomains`                           | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.presets.UniversalFuzzyScalePolicy`                            | [linguistic-encoding, блок 1](linguistic-encoding.md); [universal-fuzzy-scale, блок 2](universal-fuzzy-scale.md) |
+| `fuzzyroutines.project_configuration.DumpProject`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.LoadProject`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectDefaults`                        | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectEvaluation`                      | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectPlot`                            | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.project_configuration.ProjectSnapshot`                        | [yaml, блок 2](../api/modern/yaml.md)                                                                            |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties`                         | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousFuzzyProperties.isExact`                 | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
 | `fuzzyroutines.properties.ContinuousInterval`                                | [alpha-cuts, блок 1](alpha-cuts.md); [api-recipes, блок 2](api-recipes.md)                                       |
@@ -252,5 +258,5 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.relations.ComparisonPolicy.Included`                          | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.EqualOnDomain`                                      | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
 | `fuzzyroutines.relations.IncludedOnDomain`                                   | [api-recipes, блок 4](api-recipes.md); [custom, блок 1](custom.md)                                               |
-| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, блок 1](../api/modern/yaml.md)                                                                            |
+| `fuzzyroutines.yaml_configuration.ConvertProjectJsonToYaml`                  | [yaml, блок 1](../api/modern/yaml.md); [yaml, блок 2](../api/modern/yaml.md)                                     |
 | `fuzzyroutines.yaml_configuration.ConvertProjectYamlToJson`                  | [yaml, блок 1](../api/modern/yaml.md)                                                                            |
