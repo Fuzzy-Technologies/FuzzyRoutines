@@ -141,6 +141,10 @@ source = "fuzzyroutines/yaml_configuration.py"
 mode = "authored"
 
 [[exclusions]]
+symbol = "fuzzyroutines._cli"
+reason = "Private Python dispatcher behind the installed fuzzyroutines command; the supported interface is the command contract in ADR-0025."
+
+[[exclusions]]
 symbol = "fuzzyroutines._config_envelope"
 reason = "Internal version and kind dispatch behind the public configuration codec."
 

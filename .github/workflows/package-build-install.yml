@@ -121,6 +121,13 @@ jobs:
           assert FuzzySet is not None
           print("wheel root-package and legacy import smoke: PASS")
           PY
+          "$venvPath/bin/python" -I "$GITHUB_WORKSPACE/tools/verify_installed_cli.py"
+
+          configVenv="$RUNNER_TEMP/fuzzyroutines-config-cli-${{ matrix.python-version }}"
+          python -m venv "$configVenv"
+          "$configVenv/bin/python" -m pip install --disable-pip-version-check "$wheelPath[config]"
+          "$configVenv/bin/python" -I "$GITHUB_WORKSPACE/tools/verify_installed_cli.py" --expect-config
+
           "$venvPath/bin/python" "$GITHUB_WORKSPACE/tools/verify_installed_executables.py" \
             --artifact-directory "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}"
           cp -a "$RUNNER_TEMP/wheel-executable-evidence-${{ matrix.python-version }}" \
