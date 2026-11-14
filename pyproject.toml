@@ -35,7 +35,8 @@ numpy = ["numpy>=2.3.5,<3"]
 yaml = ["PyYAML>=6.0.3,<7"]
 
 [project.urls]
-Homepage = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
+Homepage = "https://fuzzy-technologies.com/FuzzyRoutines/"
+Documentation = "https://fuzzy-technologies.com/FuzzyRoutines/api/latest/en/"
 Repository = "https://github.com/Fuzzy-Technologies/FuzzyRoutines"
 Issues = "https://github.com/Fuzzy-Technologies/FuzzyRoutines/issues"
 
