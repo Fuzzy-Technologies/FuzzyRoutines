@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # 公共 API 示例索引 {#public-api-example-index}
 
-全部 241 个已登记公共符号都链接到已执行的示例，共有 39 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
+全部 245 个已登记公共符号都链接到已执行的示例，共有 40 个独立 Python 代码块，已显式启用所有声明的可选依赖。根导出经过验证，确实是相应模块对象的别名。
 
 函数、构造函数、方法和属性要求真实执行，仅导入不算。产生结果的函数返回对象时，也会运行结果构造函数；显式重建见[结果记录](results.md)。类型约定要求真实注解，异常类要求构造实例。私有辅助对象和自动生成的 dataclass 方法不属于手写公共清单。
 
@@ -24,7 +24,7 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.ContinuousFuzzyProperties`                                    | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousInterval`                                           | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.ContinuousRegion`                                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
-| `fuzzyroutines.ContinuousUniverse`                                           | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
+| `fuzzyroutines.ContinuousUniverse`                                           | [input-mapping, 代码块 1](../api/modern/input-mapping.md); [membership, 代码块 1](../api/modern/membership.md)       |
 | `fuzzyroutines.CreateUniversalFuzzyScale`                                    | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [universal-fuzzy-scale, 代码块 2](universal-fuzzy-scale.md) |
 | `fuzzyroutines.DeriveProperties`                                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 2](api-recipes.md)                                       |
 | `fuzzyroutines.Difference`                                                   | [alarm, 代码块 1](alarm.md)                                                                                       |
@@ -125,9 +125,9 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.defuzzification.Centroid`                                     | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
 | `fuzzyroutines.defuzzification.CentroidConvergenceError`                     | [errors, 代码块 1](errors.md)                                                                                     |
 | `fuzzyroutines.defuzzification.CentroidPolicy`                               | [membership, 代码块 1](../api/modern/membership.md); [api-recipes, 代码块 5](api-recipes.md)                         |
-| `fuzzyroutines.domain.ContinuousUniverse`                                    | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [membership, 代码块 1](../api/modern/membership.md); [alarm, 代码块 1](alarm.md)                                     |
-| `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [api-recipes, 代码块 1](api-recipes.md)                                                                           |
+| `fuzzyroutines.domain.ContinuousUniverse`                                    | [input-mapping, 代码块 1](../api/modern/input-mapping.md); [membership, 代码块 1](../api/modern/membership.md)       |
+| `fuzzyroutines.domain.ContinuousUniverse.Contains`                           | [input-mapping, 代码块 1](../api/modern/input-mapping.md); [membership, 代码块 1](../api/modern/membership.md)       |
+| `fuzzyroutines.domain.ContinuousUniverse.isBounded`                          | [input-mapping, 代码块 1](../api/modern/input-mapping.md); [api-recipes, 代码块 1](api-recipes.md)                   |
 | `fuzzyroutines.domain.DiscreteUniverse`                                      | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.DiscreteUniverse.Contains`                             | [alpha-cuts, 代码块 1](alpha-cuts.md); [api-recipes, 代码块 1](api-recipes.md)                                       |
 | `fuzzyroutines.domain.IntegrationDomain`                                     | [exceptions, 代码块 1](../api/modern/exceptions.md); [membership, 代码块 1](../api/modern/membership.md)             |
@@ -176,6 +176,10 @@ SPDX-License-Identifier: Apache-2.0
 | `fuzzyroutines.inference.SugenoRule`                                         | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.SugenoRuleTrace`                                    | [inference, 代码块 2](inference.md); [configuration, 代码块 1](../api/modern/configuration.md)                       |
 | `fuzzyroutines.inference.TermCondition`                                      | [inference, 代码块 1](inference.md); [inference, 代码块 2](inference.md)                                             |
+| `fuzzyroutines.input_mapping.AffineInputMapping`                             | [input-mapping, 代码块 1](../api/modern/input-mapping.md)                                                         |
+| `fuzzyroutines.input_mapping.AffineInputMapping.Forward`                     | [input-mapping, 代码块 1](../api/modern/input-mapping.md)                                                         |
+| `fuzzyroutines.input_mapping.AffineInputMapping.Inverse`                     | [input-mapping, 代码块 1](../api/modern/input-mapping.md)                                                         |
+| `fuzzyroutines.input_mapping.MissingObservationError`                        | [input-mapping, 代码块 1](../api/modern/input-mapping.md)                                                         |
 | `fuzzyroutines.linguistic.FuzzificationPolicy`                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [linguistic-encoding, 代码块 2](linguistic-encoding.md)     |
 | `fuzzyroutines.linguistic.FuzzificationResult`                               | [linguistic-encoding, 代码块 1](linguistic-encoding.md); [results, 代码块 4](results.md)                             |
 | `fuzzyroutines.linguistic.FuzzificationResult.isMatch`                       | [results, 代码块 4](results.md); [risk, 代码块 1](risk.md)                                                           |
